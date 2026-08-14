@@ -1,0 +1,102 @@
+{
+  "project": "StockEdge100",
+  "stage": "STAGE_0_CONSTITUTION_VERIFICATION",
+  "generation": 1,
+  "timestamp_utc": "2026-08-08T10:15:40Z",
+  "verdict": "PASS \u2014 STAGE_0_CONSTITUTION_VERIFIED",
+  "gate_passed": true,
+  "constitution": {
+    "document_id": "SE100-GOV-0001",
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "declared_stage_0_verdict": "PASS \u2014 STAGE_0_CONSTITUTION_FROZEN",
+    "modified_by_this_stage": false,
+    "freeze_verification_working_directory": "stockedge100/governance",
+    "freeze_verification": {
+      "STAGE_0_CONSTITUTION.md": {
+        "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "match": "True"
+      },
+      "STAGE_0_CONSTITUTION.json": {
+        "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "match": "True"
+      }
+    }
+  },
+  "evidence": [
+    "All three Stage 0 artifacts present and non-empty.",
+    "sha256sum -c STAGE_0_FREEZE.sha256 executed from stockedge100/governance returned exit status 0; both files OK.",
+    "Digests independently recomputed and matched, and separately pinned inside tests/unit/test_stage0_governance.py.",
+    "STAGE_0_CONSTITUTION.json parses under a strict JSON parser; gates 0-9 present exactly once each.",
+    "All 33 quantitative rules shared by the Markdown and JSON documents compared field by field; no material conflict found.",
+    "Operating prompt compared against the constitution; 11 topics identified where the constitution is stricter, and the constitution's value adopted in each.",
+    "Gate numbering divergence between prompt and constitution resolved by a binding mapping table; prompt Stage 4 maps to two constitutional gates (4 and 5).",
+    "Constitution section 12 non-authorization clause examined against section 13; resolved as a scope disclaimer with conservative constraints recorded.",
+    "Live-trading state confirmed LOCKED: Gate 9 default is LIVE_TRADING_LOCKED, no approval artifact exists, no Alpaca credential env var present, no order-submitting code in repository.",
+    "27 executable governance tests pass, including two that would fail if the constitution and its freeze record were rewritten together."
+  ],
+  "artifacts": [
+    "governance/STAGE_0_VERIFICATION_REPORT.md",
+    "reports/stage0/STAGE_0_TEST_SUMMARY.md",
+    "reports/stage0/pytest_stage0_output.txt",
+    "reports/stage0/STAGE_0_VERIFICATION.json",
+    "reports/stage0/STAGE_0_ARTIFACT_MANIFEST.json"
+  ],
+  "frozen_inputs_read_only": [
+    "governance/STAGE_0_CONSTITUTION.md",
+    "governance/STAGE_0_CONSTITUTION.json",
+    "governance/STAGE_0_FREEZE.sha256"
+  ],
+  "tests": {
+    "passed": 27,
+    "failed": 0,
+    "skipped": 0
+  },
+  "limitations": [
+    "Hash verification proves byte-identity with the recorded freeze; it cannot prove the freeze predates any strategy result. That claim is accepted as declared in SE100-GOV-0001 section 9.",
+    "No detached signature or external timestamp authority exists; integrity is local-filesystem integrity only.",
+    "The JSON declares a $schema URL that was deliberately not fetched, so validation is structural rather than formal schema validation.",
+    "This working tree is not a git repository; repository identity is a content-derived repo_state_id rather than a commit id.",
+    "Alpaca tradability and fractional eligibility are unverified because no credential is configured; they are recorded as UNVERIFIED rather than assumed.",
+    "Environment probes performed before any Stage 1 freeze existed (toolchain inventory, exchange_calendars install, Stooq and Yahoo reachability checks including 8 SPY daily bars from January 2024) are disclosed in STAGE_0_VERIFICATION_REPORT.md section 11. No strategy, signal, parameter, or performance value was computed, and no final-holdout date was touched."
+  ],
+  "blockers": [],
+  "conflicts_found": [],
+  "gate_conditions": {
+    "required_artifacts_exist": true,
+    "hashes_verify": true,
+    "human_and_machine_rules_consistent": true,
+    "prompt_does_not_weaken_constitution": true,
+    "no_frozen_file_modified": true,
+    "live_trading_locked": true
+  },
+  "authorization_state": {
+    "strategy_research": "LOCKED",
+    "final_holdout": "LOCKED",
+    "alpaca_paper_trading": "LOCKED",
+    "shadow_live": "LOCKED",
+    "alpaca_live_trading": "LOCKED",
+    "capital_or_risk_expansion": "LOCKED"
+  },
+  "next_authorized_stage": "STAGE_1_DATA_FOUNDATION",
+  "live_trading_authorized": false,
+  "reproducibility": {
+    "run_id": "SE100-R-20260808T101540Z",
+    "repo_state_id": "6b426b6a8ff37757713849345bdd8bfccabb050329790f7fc244b39bec1bae26",
+    "package_version": "0.1.0",
+    "python": "3.10.6",
+    "dependency_versions": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "requests": "2.34.2",
+      "pytest": "8.4.2",
+      "yfinance": "1.4.1",
+      "exchange_calendars": "4.13.2",
+      "pyarrow": "MISSING"
+    },
+    "command": "PYTHONPATH=src python -m stockedge100.reporting.stage0_package",
+    "random_seed": null
+  }
+}

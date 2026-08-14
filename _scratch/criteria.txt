@@ -1,0 +1,211 @@
+=== verdict_token_derivation ===
+{
+  "pass_token": "STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+  "fail_token": "STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+  "pass_condition": "At least one pre-registered candidate satisfies EVERY hard condition of Gate 3.",
+  "fail_condition": "No pre-registered candidate satisfies every hard condition.",
+  "conjunctive_note": "Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Across candidates the stage verdict is a disjunction, because Gate 3 asks whether a candidate worth carrying forward exists, not whether every candidate tried is good.",
+  "other_tokens_available": "BLOCKED_BY_DATA, BLOCKED_BY_INFRASTRUCTURE, INSUFFICIENT_EVIDENCE, INVALIDATED, NOT_RUN, per constitution section 10. Missing evidence may never be converted to PASS or NOT_APPLICABLE merely for convenience.",
+  "fail_is_a_deliverable": "A stage verdict of FAIL \u2014 STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and does not license a seventh candidate in this session."
+}
+
+=== conditions: id / requirement ===
+  S3-C1: 
+     requirement: 
+     threshold:   
+  S3-C2: 
+     requirement: 
+     threshold:   
+  S3-C3: 
+     requirement: 
+     threshold:   
+  S3-C4: 
+     requirement: 
+     threshold:   
+  S3-C5: 
+     requirement: 
+     threshold:   
+  S3-C6: 
+     requirement: 
+     threshold:   
+  S3-C7: 
+     requirement: 
+     threshold:   
+
+=== binding.conditions_adopted ===
+[
+  {
+    "id": "S3-C1",
+    "subject": "total return is positive",
+    "adopted": "unchanged"
+  },
+  {
+    "id": "S3-C2",
+    "subject": "maximum drawdown is no worse than 15%",
+    "adopted": "unchanged"
+  },
+  {
+    "id": "S3-C3",
+    "subject": "profit factor is at least 1.10",
+    "adopted": "unchanged"
+  },
+  {
+    "id": "S3-C4",
+    "subject": "at least 30 closed trades exist",
+    "adopted": "unchanged"
+  },
+  {
+    "id": "S3-C5",
+    "subject": "performance is not dependent on one trade",
+    "adopted": "unchanged"
+  },
+  {
+    "id": "S3-C6",
+    "subject": "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy",
+    "adopted": "unchanged, applies_to enumeration re-derived - see rederivations"
+  },
+  {
+    "id": "S3-C7",
+    "subject": "reasonable neighbouring parameter values do not reverse the sign of net return",
+    "adopted": "unchanged, declaring-artifact reference re-derived - see rederivations"
+  }
+]
+
+=== binding.drawdown_ceiling_is_unchanged ===
+{
+  "value": "0.15",
+  "predicate": "max_drawdown <= 0.15",
+  "boundary": "inclusive - 'No worse than 15%' admits exactly 15%",
+  "source": "SE100-CFG-3002 conditions S3-C2, verbatim",
+  "verification": "The value is not stored in this file as an independent constant that could disagree with the sealed one. It is quoted here for a reader and is enforced from SE100-CFG-3002 at evaluation time, whose digest is pinned above. Any attempt to change the ceiling changes that digest and fails the loader.",
+  "attempt_2_position": "Unchanged. Attempt 2 lowers the risk taken to meet the ceiling; it does not raise the ceiling to meet the risk."
+}
+
+=== binding.rederivations ===
+[
+  {
+    "id": "A2-REDERIVE-1",
+    "condition": "S3-C6",
+    "sealed_field": "conditions[S3-C6].scope_interpretation.applies_to",
+    "sealed_text_quoted": "Candidates whose declared universe contains more than one instrument: SE100-S3-F5-ROTATION-DUALMOM and SE100-S3-F6-DEFENSIVE-SMA200-SHY.",
+    "why_rederivation_is_necessary": "The sealed field states a RULE and then applies it to the candidate set in front of it. The rule is 'candidates whose declared universe contains more than one instrument'. The two named ids are its output for Attempt 1. Read literally against Attempt 2's candidate set the enumeration is empty, which would silently make S3-C6 not-applicable for a candidate that declares two instruments - a weakening. Applying the sealed rule instead of the sealed output is the reading that changes nothing.",
+    "rule_applied": "declared_instrument_count > 1",
+    "attempt_2_applies_to": [
+      "SE100-S3A2-C3-DEFENSIVE-RA1"
+    ],
+    "attempt_2_not_applicable_to": [
+      {
+        "candidate": "SE100-S3A2-C1-PULLBACK-RA1",
+        "declared_instrument_count": 1,
+        "verdict": "NOT_APPLICABLE_BY_CONDITION_TEXT"
+      },
+      {
+        "candidate": "SE100-S3A2-C2-MEANREV-RA1",
+        "declared_instrument_count": 1,
+        "verdict": "NOT_APPLICABLE_BY_CONDITION_TEXT"
+      }
+    ],
+    "not_applicable_evidence_requirement": "Per the sealed single_instrument_treatment, a NOT_APPLICABLE_BY_CONDITION_TEXT verdict must record the declared instrument count as its evidence. It is not a blank pass.",
+    "unchanged": "threshold 0.50, predicate maximum single-instrument share of total closed-trade P&L <= 0.50, the requirement that total closed-trade P&L be strictly positive for the condition to be evaluable at all, the NOT_EVALUABLE treatment otherwise, and the rationale."
+  },
+  {
+    "id": "A2-REDERIVE-2",
+    "condition": "S3-C7",
+    "sealed_field": "conditions[S3-C7].measurement",
+    "sealed_text_quoted": "Each candidate declares exactly four robustness neighbours in SE100-CFG-3001, chosen before any result.",
+    "why_rederivation_is_necessary": "SE100-CFG-3001 is Attempt 1's sealed protocol and cannot declare neighbours for candidates that did not exist when it was sealed. The declaring artifact for Attempt 2 candidates is SE100-CFG-3003.",
+    "attempt_2_declaring_artifact": {
+      "artifact_id": "SE100-CFG-3003",
+      "path": "config/stage3_attempt2_strategy_protocol.json"
+    },
+    "unchanged": "The count is exactly four per candidate. The requirement that they be chosen before any result is unchanged. The predicate - the sign of net return must match the primary's for all four, and zero matches nothing - is unchanged. The NOT_RUN treatment of a neighbour that fails to run is unchanged and is not a pass. The selection prohibition is unchanged.",
+    "count_is_enforced_in_code": "The Gate 2 validated evaluator at src/stockedge100/strategies/gate.py raises when a candidate does not present exactly four sealed neighbours. Attempt 2 declares exactly four per candidate, so the sealed count is satisfied structurally rather than by intention.",
+    "selection_prohibition_restated": "No neighbour is ever promoted to primary. No primary is revised because a neighbour performed better. Doing either would be a material change under constitution section 11, creating a new candidate that restarts at Gate 3."
+  }
+]
+
+=== binding.admissible_candidate_exists ===
+{
+  "frozen_rule": "admissible_candidate_exists is TRUE if and only if there exists at least one pre-registered Attempt 2 candidate for which EVERY applicable Gate 3 hard condition is SATISFIED, where satisfied means the condition's verdict is MET or NOT_APPLICABLE_BY_CONDITION_TEXT.",
+  "source": "SE100-CFG-3002 verdict_token_derivation pass condition - 'At least one pre-registered candidate satisfies EVERY hard condition of Gate 3' - and its conjunctive_note. Adopted unchanged.",
+  "satisfied_definition": "verdict in (MET, NOT_APPLICABLE_BY_CONDITION_TEXT)",
+  "not_satisfied_values": [
+    "NOT_MET",
+    "NOT_EVALUABLE",
+    "NOT_RUN",
+    "UNKNOWN",
+    "MISSING_EVIDENCE",
+    "absent"
+  ],
+  "within_candidate": "CONJUNCTIVE. All seven conditions are evaluated for every candidate; all applicable ones must be satisfied by that same candidate.",
+  "across_candidates": "DISJUNCTIVE. One admissible candidate is enough to pass Gate 3.",
+  "how_many_admissible_candidates_are_required": {
+    "answer": "Exactly one.",
+    "evidence": "SE100-CFG-3002 verdict_token_derivation pass condition reads 'At least one pre-registered candidate satisfies EVERY hard condition of Gate 3'. Nothing in SE100-GOV-0001 section 9 gate 3 requires two or more.",
+    "and_no_more_than_one_is_needed": "If more than one candidate is admissible, all of them are recorded as admissible. Gate 3 does not rank them and does not name a winner; selection is a later-stage decision. Attempt 2 declares no preference order among its three candidates."
+  },
+  "per_condition_rollup_is_not_the_gate": {
+    "rule": "A per-condition rollup row aggregates SATISFACTION across candidates and therefore means only 'at least one candidate satisfied this condition'. It is not evidence that any candidate satisfied all of them, and it settles nothing on its own.",
+    "required_reporting_shape": "Each per-condition row must carry three separate lists - met_by, not_met_by, and not_applicable_for - so that a NOT_APPLICABLE_BY_CONDITION_TEXT verdict is visible as such rather than folded into a pass or a fail.",
+    "known_failure_mode_recorded": "Aggregating a per-condition row on verdict == MET rather than on satisfaction produced a false FAIL for S3-C6 in Attempt 1's first rollup. The rollup must aggregate on satisfaction. It is recorded here so the same defect is not reintroduced by a fresh implementation.",
+    "decisive_row": "The conditions table must carry the admissible_candidate_exists row, and that row alone decides the gate. A conditions table that omits it is misleading and is not an acceptable deliverable."
+  },
+  "verdict_mapping": {
+    "true": "PASS with the sealed pass token",
+    "false": "FAIL with the sealed fail token",
+    "token_source": "SE100-CFG-3002 verdict_token_derivation. The tokens are derived from that sealed field at build time, never restated as literals in a builder or a test.",
+    "pass_token": "STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "fail_token": "STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+    "quoted_here_for_a_reader_only": "The two tokens are written above so a human can read this file without opening another. A builder must still read them from the sealed derivation, and a test must assert them from the sealed derivation, so that a divergence between this file and the sealed one fails rather than silently prefers this file."
+  },
+  "incoherent_combinations_refused": [
+    "A PASS with zero admissible candidates.",
+    "A FAIL with at least one admissible candidate.",
+    "A PASS reached by treating NOT_EVALUABLE, NOT_RUN, UNKNOWN, or missing evidence as satisfied.",
+    "A PASS reached by aggregating per-condition rollup rows instead of evaluating conjunction within a candidate.",
+    "A verdict written into a decision package that is not the verdict the recorded evidence reaches."
+  ]
+}
+
+=== binding.neighbour_status ===
+{
+  "are_neighbours_diagnostic_or_independently_selectable": {
+    "answer": "Diagnostic only.",
+    "evidence": "SE100-CFG-3002 conditions S3-C7 selection_prohibition, adopted unchanged: no neighbour is ever promoted, and no primary is revised because a neighbour did better; such a revision is a material change under constitution section 11 that creates a new candidate restarting at Gate 3."
+  },
+  "can_a_neighbour_become_the_representative_of_its_candidate": {
+    "answer": "No. Never. Under no result.",
+    "consequence": "A candidate whose primary fails but whose four neighbours all pass is a FAILED candidate. It is recorded as failed, and its neighbour metrics are reported as diagnostics. Substituting the neighbour would be selection on an observed outcome."
+  },
+  "is_a_neighbour_separately_admissible_at_gate_3": {
+    "answer": "No. A neighbour is not a candidate. Only the three pre-registered primaries are candidates, and only a candidate can be admissible.",
+    "why_this_matters_numerically": "It keeps the number of admissibility trials at 3 for Attempt 2 rather than 15. The 15 gating variants still count as searches for the purpose of the cumulative multiple-testing disclosure in SE100-CFG-3003; they do not count as chances to pass."
+  },
+  "what_a_neighbour_contributes_to_the_gate": "One thing only: the sign of its net return, consumed by S3-C7 for its own candidate. Every other neighbour metric is reported and non-gating.",
+  "neighbour_that_fails_to_run": "NOT_RUN. Not a pass. S3-C7 fails for that candidate, and the candidate is therefore not admissible."
+}
+
+=== binding.conflicts_carried_forward ===
+[
+  {
+    "id": "S3-CONFLICT-1",
+    "summary": "The frozen constitution's Markdown states seven Gate 3 thresholds and its JSON companion carries five. The sealed resolution is that the Markdown is authoritative, all seven are evaluated, and the discrepancy is reported and not repaired.",
+    "attempt_2_position": "Carried forward unchanged. All seven conditions are evaluated for every Attempt 2 candidate. The discrepancy remains reported and unrepaired."
+  },
+  {
+    "id": "S3-CONFLICT-2",
+    "summary": "The constitution's JSON companion supplies a fail_result for gate 3 but no pass_result key. The sealed resolution derives the pass token by negation as STRATEGY_ADMITTED_IN_DEVELOPMENT.",
+    "attempt_2_position": "Carried forward unchanged. The pass token is derived from the sealed verdict_token_derivation, not invented."
+  },
+  {
+    "id": "S3-CONFLICT-3",
+    "summary": "The Gate 3 drawdown ceiling and the section 5.1 research shutdown are the same 15% on the same series.",
+    "attempt_2_position": "Carried forward unchanged, and adopted as the design target of Attempt 2's risk architecture. See shutdown_behaviour.relationship_to_S3_C2."
+  },
+  {
+    "id": "S3-CONFLICT-4-ATTEMPT-2",
+    "summary": "New, recorded by this attempt. SE100-CFG-3001 shared_rules.sizing_rule states that position size is not a research variable 'in this stage', which on a broad reading would prohibit Attempt 2's volatility-targeted sizing.",
+    "resolution": "Recorded, not repaired. SE100-CFG-3001 is not edited and remains permanently true of its own six candidates. The sentence is read as scoping itself to Attempt 1's sealed candidate set, and the constitutional route for Attempt 2 is section 11: a sizing change is material and creates a new candidate restarting at Gate 3. The rejected broad reading is recorded in full in SE100-CFG-3003 recorded_interpretations A2-INTERP-1 so that a reader can disagree with the resolution on the record rather than discover it by inference.",
+    "constitutional_exposure_ceiling": "unchanged at 95% gross with a 5% minimum cash buffer. Attempt 2 requests less."
+  }
+]

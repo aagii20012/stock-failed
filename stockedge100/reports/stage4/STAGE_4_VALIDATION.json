@@ -1,0 +1,2260 @@
+{
+  "project": "StockEdge100",
+  "stage": "STAGE_4_VALIDATION",
+  "generation": 1,
+  "timestamp_utc": "2026-08-14T15:24:39Z",
+  "verdict": "FAIL \u2014 STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+  "gate": {
+    "constitution_gate_id": 4,
+    "name": "validation_robustness"
+  },
+  "gate_passed": false,
+  "constitution": {
+    "document_id": "SE100-GOV-0001",
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "modified_by_this_stage": false,
+    "freeze_verification_working_directory": "stockedge100/governance",
+    "freeze_verified": true,
+    "freeze_verification": {
+      "STAGE_0_CONSTITUTION.md": {
+        "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "match": "True"
+      },
+      "STAGE_0_CONSTITUTION.json": {
+        "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "match": "True"
+      }
+    }
+  },
+  "session_type": "SEALED_VALIDATION_EXECUTION_AND_GATE_4_DECISION",
+  "gate_4_evaluated": true,
+  "gate_4_passed": false,
+  "representative": {
+    "experiment_id": "SE100-S3A2-C2-MEANREV-RA1",
+    "family": "mean reversion",
+    "declared_universe": [
+      "SPY"
+    ],
+    "declared_warmup_sessions": 101,
+    "parameters": {
+      "rsi_period": 2,
+      "rsi_entry_below": 10,
+      "exit_sma": 5,
+      "f_base": "0.50",
+      "vol_target": "0.10",
+      "vol_floor_fraction": "0.05",
+      "loss_control": "0.08",
+      "max_hold": 10,
+      "reentry_delay": 5,
+      "ladder_rungs": [
+        [
+          "0.08",
+          "0.25"
+        ],
+        [
+          "0.10",
+          "0.125"
+        ]
+      ]
+    },
+    "selection_rule": "SE100-CFG-4003",
+    "identifier_unchanged_from_gate_3": true
+  },
+  "protocol": {
+    "protocol_id": "SE100-CFG-4001",
+    "criteria_id": "SE100-CFG-4002",
+    "selection_id": "SE100-CFG-4003",
+    "selection_rule_id": "SE100-CFG-4003-R1",
+    "selection_rule_name": "Declared-variant research-shutdown screen",
+    "prohibited_after_the_selection_seal": [
+      "Changing the representative for any reason, including a Gate 4 FAIL.",
+      "Substituting SE100-S3A2-C1-PULLBACK-RA1 after a C2 validation result exists, or running it on validation as a comparison.",
+      "Substituting any robustness neighbour of C2. SE100-CFG-3004 neighbour_status: 'No. Never. Under no result.'",
+      "Changing any parameter of the sealed parameterisation.",
+      "Adding a risk overlay, a position-size cap, a regime filter, or any other rule not in the sealed specification.",
+      "Reinterpreting the selection rule, or applying a different return-blind rule, after a validation result exists.",
+      "Reconsidering SE100-S3A2-C3-DEFENSIVE-RA1."
+    ],
+    "seal_document_id": "SE100-GOV-0008",
+    "sealed_utc": "2026-08-13T14:01:21Z",
+    "sealing_run": "runs/SE100-R-20260813T140121Z.json",
+    "preregistration_package_run": "runs/SE100-R-20260814T111459Z.json",
+    "validation_evaluation_run": "runs/SE100-R-20260814T143226Z.json",
+    "authorized_for": "Exactly one evaluation of SE100-S3A2-C2-MEANREV-RA1 on the locked validation window, in a later separately authorized session, under config/stage4_validation_protocol.json and config/stage4_gate_criteria.json exactly as sealed here. Nothing else."
+  },
+  "verdict_derivation": {
+    "pass_token": "STAGE_4_STRATEGY_ADMITTED_IN_VALIDATION",
+    "fail_token": "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+    "source": "config/stage4_gate_criteria.json verdict_token_derivation",
+    "fail_condition": "The single sealed representative fails at least one hard condition of Gate 4, or any hard condition is NOT_EVALUABLE, NOT_RUN or UNKNOWN, or its evidence is missing.",
+    "token_emitted": "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+    "token_taken_from_disk_not_from_a_prompt": true,
+    "within_candidate": "CONJUNCTIVE",
+    "across_candidates": "NOT_APPLICABLE_EXACTLY_ONE_REPRESENTATIVE",
+    "conjunction": false
+  },
+  "independent_rederivation": {
+    "why": "The evaluator that produced the evidence recorded a verdict per condition. Trusting it here would make this package a copy rather than a check, so every comparison was redone from the raw measurements against thresholds parsed out of the sealed predicate strings, in Decimal, with no rounding before comparison.",
+    "all_seven_agree": true,
+    "per_condition": {
+      "S4-C1": {
+        "recorded_verdict": "MET",
+        "rederived_met": true,
+        "agrees": true
+      },
+      "S4-C2": {
+        "recorded_verdict": "NOT_MET",
+        "rederived_met": false,
+        "agrees": true
+      },
+      "S4-C3": {
+        "recorded_verdict": "MET",
+        "rederived_met": true,
+        "agrees": true
+      },
+      "S4-C4": {
+        "recorded_verdict": "MET",
+        "rederived_met": true,
+        "agrees": true
+      },
+      "S4-C5": {
+        "recorded_verdict": "MET",
+        "rederived_met": true,
+        "agrees": true
+      },
+      "S4-C6": {
+        "recorded_verdict": "NOT_MET",
+        "rederived_met": false,
+        "agrees": true
+      },
+      "S4-C7": {
+        "recorded_verdict": "MET",
+        "rederived_met": true,
+        "agrees": true
+      }
+    },
+    "rederived": {
+      "S4-C1": {
+        "measured": "0.0215",
+        "threshold": "0",
+        "comparison": "total_return > threshold",
+        "met": true
+      },
+      "S4-C2": {
+        "measured": "0.2025294206503088680547420121230750",
+        "threshold": "0.50",
+        "comparison": "sharpe >= threshold",
+        "met": false
+      },
+      "S4-C3": {
+        "measured": "0.03161389554784035323758760240844931",
+        "threshold": "0.15",
+        "comparison": "max_drawdown <= threshold",
+        "met": true
+      },
+      "S4-C4": {
+        "measured": "1.196526508226691042047531993",
+        "threshold": "1.15",
+        "comparison": "profit_factor >= threshold",
+        "met": true
+      },
+      "S4-C5": {
+        "measured": "0.0015",
+        "threshold": "0",
+        "comparison": "stressed_total_return > threshold",
+        "met": true
+      },
+      "S4-C6": {
+        "measured": "0.5833333333333333333333333333",
+        "threshold": "0.70",
+        "comparison": "positive_fold_count / completed_fold_count >= threshold",
+        "positive_fold_count": 7,
+        "completed_fold_count": 12,
+        "met": false
+      },
+      "S4-C7": {
+        "measured": null,
+        "threshold": "exact equality of every sealed digest; no tolerance",
+        "comparison": "all sealed digests equal AND exactly one validation evaluation run record AND engine runs == declared runs",
+        "all_digests_equal": true,
+        "digests_equal": 13,
+        "digests_total": 13,
+        "validation_evaluation_run_records": 1,
+        "validation_window_engine_runs": 2,
+        "declared_run_count": 2,
+        "met": true
+      }
+    }
+  },
+  "single_validation_read": {
+    "rule": "The validation partition is read exactly once, in exactly one authorized session, from exactly one dataset load, with both declared runs executed inside that session against that load.",
+    "validation_partition": {
+      "start": "2021-08-01",
+      "end": "2024-07-31"
+    },
+    "engine_visibility_window": {
+      "name": "validation+warmup101",
+      "start": "2021-03-09",
+      "end": "2024-07-31",
+      "note": "A visibility bound, not a run bound. The leading segment is the sealed 101-session development tail that partitions.development.use_in_the_evaluation_session authorises for indicator computation only; no order may be placed in it because the run does not begin until the validation start."
+    },
+    "run_bounds": {
+      "start": "2021-08-01",
+      "end": "2024-07-31"
+    },
+    "holdout_partition": {
+      "start": "2024-08-01",
+      "end": "2026-07-31",
+      "state": "SEALED",
+      "sessions_read": 0
+    },
+    "validation_dataset_loads": 1,
+    "validation_reading_sessions": 1,
+    "validation_window_engine_runs": 2,
+    "run_record": "SE100-R-20260814T143226Z",
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage4_evidence"
+  },
+  "run_evidence": {
+    "declared_run_count": 2,
+    "count_is_a_hard_limit": true,
+    "single_validation_read_rule": {
+      "rule": "The validation partition is read exactly once, in exactly one authorized session, from exactly one dataset load, with both declared runs executed inside that session against that load.",
+      "constitution_basis": "SE100-GOV-1005 binding_rules and constitution section 9's treatment of the locked validation period. The holdout's 'read exactly once' discipline is applied to the validation window as the stricter reading; nothing in the lock authorises repeated validation reads.",
+      "what_counts_as_one_read": "One session, one load, the two declared runs. See S4-INTERP-2.",
+      "what_is_prohibited": [
+        "A second session reading the validation window for any purpose.",
+        "An exploratory query against the validation partition, including a row count, a coverage check, a date-range probe, or a summary statistic, before or outside the declared runs.",
+        "A third engine run on validation observations, including a diagnostic run, a debug run, or a run with the shutdown disabled.",
+        "A re-run after a valid completed evaluation. SE100-CFG-3004 rerun_policy: 'No.' A re-run that produced a different number would be a determinism defect and a blocker, not a better result.",
+        "Reading validation rows to check that the data are suitable before running. Suitability is established by the frozen Stage 1 readiness evidence or not at all."
+      ],
+      "if_the_run_fails_mid_window": "See partial_or_failed_run_rule. A crash is not a read that must be spent; it is a run that produced no valid evidence. The remedy is bounded and recorded there rather than left to judgement."
+    },
+    "partial_or_failed_run_rule": {
+      "rule": "A run that crashes, is interrupted, or does not reach 2024-07-31 produces no valid evidence and is not scored. Its conditions are NOT_EVALUABLE, which per constitution section 9 is not a pass.",
+      "remedy": "The cause is diagnosed and fixed in code outside the validation window - using development data, synthetic data, or unit tests - and the full evaluation is then re-run from the start within the same authorized session. A crash-and-restart within one session on one load is one read, not two, because no result was extracted from the failed attempt.",
+      "hard_limit": "If the evaluation cannot be completed within the authorized session, the outcome is BLOCKED_BY_INFRASTRUCTURE. A second session is not self-authorized: it requires the same explicit authorization that opened the first.",
+      "no_partial_scoring": "Scoring a run on the folds it completed before crashing is prohibited. See config/stage4_gate_criteria.json walk_forward_fold_construction.completed_fold_definition.incomplete_run_is_not_a_pass.",
+      "no_silent_retry": "Every attempt, including a failed one, gets a runs/ record with its exit status. A failed attempt that leaves no record on disk is itself a governance failure."
+    },
+    "runs": [
+      {
+        "run_label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+        "scenario": "BASE",
+        "declared_order": 1,
+        "gates_conditions": [
+          "S4-C1",
+          "S4-C2",
+          "S4-C3",
+          "S4-C4",
+          "S4-C6"
+        ],
+        "cost_multiplier_declared": null,
+        "cost_model_in_force": {
+          "scenario": "BASE",
+          "stress_multiplier": "1",
+          "commission_per_order_usd": "0.00",
+          "half_spread_bps": "2.5",
+          "slippage_bps": "2.5",
+          "price_friction_bps_per_side": "5.0",
+          "sec_section_31_fee_rate": "0.0000278",
+          "finra_taf_per_share_usd": "0.000166",
+          "finra_taf_cap_usd": "8.30"
+        },
+        "measure": {
+          "variant_id": "SE100-S4-C2-MEANREV-RA1#VALIDATION",
+          "role": "primary",
+          "scenario": "BASE",
+          "gating": true,
+          "parameters": {
+            "rsi_period": 2,
+            "rsi_entry_below": 10,
+            "exit_sma": 5,
+            "f_base": "0.50",
+            "vol_target": "0.10",
+            "vol_floor_fraction": "0.05",
+            "loss_control": "0.08",
+            "max_hold": 10,
+            "reentry_delay": 5,
+            "ladder_rungs": [
+              [
+                "0.08",
+                "0.25"
+              ],
+              [
+                "0.10",
+                "0.125"
+              ]
+            ]
+          },
+          "symbols_loaded": [
+            "SPY"
+          ],
+          "ra1_parameters_in_force": {
+            "f_base": "0.50",
+            "vol_target": "0.10",
+            "vol_floor_fraction": "0.05",
+            "loss_control": "0.08",
+            "max_hold": 10,
+            "reentry_delay": 5,
+            "ladder_rungs": [
+              [
+                "0.08",
+                "0.25"
+              ],
+              [
+                "0.10",
+                "0.125"
+              ]
+            ],
+            "ladder_bands": [
+              "dd<0.08",
+              "0.08<=dd<0.10",
+              "dd>=0.10"
+            ]
+          },
+          "label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+          "start": "2021-08-01",
+          "end": "2024-07-31",
+          "sessions": 754,
+          "starting_equity": "100.00",
+          "final_equity": "102.15",
+          "final_cash": "102.15",
+          "total_return": "0.0215",
+          "cagr": "0.007127333702201046330123025404761",
+          "max_drawdown": "0.03161389554784035323758760240844931",
+          "daily_return_stdev": "0.002448903298362655805767459868707416",
+          "sharpe": "0.2025294206503088680547420121230750",
+          "sharpe_risk_free_annual": "0.00",
+          "profit_factor": "1.196526508226691042047531993",
+          "profit_factor_note": null,
+          "closed_trades": 41,
+          "exposure_fraction": "0.1883289124668435013262599469496021",
+          "win_rate": "0.5365853658536585365853658536585366",
+          "wins": 22,
+          "losses": 19,
+          "scratches": 0,
+          "average_win": "0.595",
+          "average_loss": "-0.5757894736842105263157894736842105",
+          "longest_flat_streak_sessions": 53,
+          "fills": 82,
+          "rejections": 0,
+          "rejection_reasons": {},
+          "dividend_events": 1,
+          "stale_marks": 0,
+          "shutdown_session": null,
+          "open_positions_at_end": 0,
+          "contribution_by_symbol": {
+            "SPY": "2.15"
+          },
+          "trades_digest": "977188f4d61a76f6a9208f8150b58d0fc363887648290c96ba1a1bfa13f03cdd",
+          "equity_digest": "e618416ca3c5f6163eecdc98867d972d8d7576fc95b24671eeda0611d81762c5",
+          "deepest_drawdown_4dp": "0.0316",
+          "ra1_diagnostics": {
+            "exits_by_reason": {
+              "EXIT_LOSS_CONTROL": 0,
+              "EXIT_MAX_HOLD": 0,
+              "EXIT_SIGNAL": 41
+            },
+            "blocked_entries_by_reason": {
+              "NO_ENTRY_ZERO_VOLATILITY": 0,
+              "NO_ENTRY_VOLATILITY_FLOOR": 0,
+              "NO_ENTRY_SIZE_FLOOR": 0,
+              "NO_ENTRY_LOCKOUT": 0,
+              "NO_ENTRY_INSUFFICIENT_HISTORY": 0
+            },
+            "entry_fractions_at_order_emission": [
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.4513489351921419482641995752106820",
+              "0.4216282657951437761982417646708217",
+              "0.50",
+              "0.50",
+              "0.3195173327850828798569643059699335",
+              "0.3401501001073577538578915295930258",
+              "0.4272932131181962654925162704605470",
+              "0.50",
+              "0.4864220669824234593473398470652736",
+              "0.4016960739151069671260373931678031",
+              "0.4103840216163418922762727319948138",
+              "0.3710837163035585549207429524208505",
+              "0.3623422850795584645569640725758172",
+              "0.4871249754993624250136826060953565",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50"
+            ],
+            "entry_fractions_realised": [
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.4513489351921419482641995752106820",
+              "0.4216282657951437761982417646708217",
+              "0.50",
+              "0.50",
+              "0.3195173327850828798569643059699335",
+              "0.3401501001073577538578915295930258",
+              "0.4272932131181962654925162704605470",
+              "0.50",
+              "0.4864220669824234593473398470652736",
+              "0.4016960739151069671260373931678031",
+              "0.4103840216163418922762727319948138",
+              "0.3710837163035585549207429524208505",
+              "0.3623422850795584645569640725758172",
+              "0.4871249754993624250136826060953565",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50"
+            ],
+            "entries_emitted": 41,
+            "entries_filled": 41,
+            "ladder_sessions": {
+              "dd<0.08": 753,
+              "0.08<=dd<0.10": 0,
+              "dd>=0.10": 0
+            },
+            "decision_sessions": 753,
+            "decision_sessions_shutdown_active": 0,
+            "exits_by_reason_shutdown": 0
+          }
+        }
+      },
+      {
+        "run_label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS",
+        "scenario": "STRESSED",
+        "declared_order": 2,
+        "gates_conditions": [
+          "S4-C5"
+        ],
+        "cost_multiplier_declared": null,
+        "cost_model_in_force": {
+          "scenario": "STRESSED",
+          "stress_multiplier": "2.0",
+          "commission_per_order_usd": "0.00",
+          "half_spread_bps": "5.00",
+          "slippage_bps": "5.00",
+          "price_friction_bps_per_side": "10.00",
+          "sec_section_31_fee_rate": "0.00005560",
+          "finra_taf_per_share_usd": "0.0003320",
+          "finra_taf_cap_usd": "16.60"
+        },
+        "measure": {
+          "variant_id": "SE100-S4-C2-MEANREV-RA1#VALIDATION",
+          "role": "primary",
+          "scenario": "STRESSED",
+          "gating": true,
+          "parameters": {
+            "rsi_period": 2,
+            "rsi_entry_below": 10,
+            "exit_sma": 5,
+            "f_base": "0.50",
+            "vol_target": "0.10",
+            "vol_floor_fraction": "0.05",
+            "loss_control": "0.08",
+            "max_hold": 10,
+            "reentry_delay": 5,
+            "ladder_rungs": [
+              [
+                "0.08",
+                "0.25"
+              ],
+              [
+                "0.10",
+                "0.125"
+              ]
+            ]
+          },
+          "symbols_loaded": [
+            "SPY"
+          ],
+          "ra1_parameters_in_force": {
+            "f_base": "0.50",
+            "vol_target": "0.10",
+            "vol_floor_fraction": "0.05",
+            "loss_control": "0.08",
+            "max_hold": 10,
+            "reentry_delay": 5,
+            "ladder_rungs": [
+              [
+                "0.08",
+                "0.25"
+              ],
+              [
+                "0.10",
+                "0.125"
+              ]
+            ],
+            "ladder_bands": [
+              "dd<0.08",
+              "0.08<=dd<0.10",
+              "dd>=0.10"
+            ]
+          },
+          "label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS",
+          "start": "2021-08-01",
+          "end": "2024-07-31",
+          "sessions": 754,
+          "starting_equity": "100.00",
+          "final_equity": "100.15",
+          "final_cash": "100.15",
+          "total_return": "0.0015",
+          "cagr": "0.000500549825775029442954250696252",
+          "max_drawdown": "0.03662984840179431696571743483371691",
+          "daily_return_stdev": "0.002459921470167783189502285356451387",
+          "sharpe": "0.03233812598518122956116657959336107",
+          "sharpe_risk_free_annual": "0.00",
+          "profit_factor": "1.012776831345826235093696763",
+          "profit_factor_note": null,
+          "closed_trades": 41,
+          "exposure_fraction": "0.1883289124668435013262599469496021",
+          "win_rate": "0.5365853658536585365853658536585366",
+          "wins": 22,
+          "losses": 19,
+          "scratches": 0,
+          "average_win": "0.5404545454545454545454545454545455",
+          "average_loss": "-0.6178947368421052631578947368421053",
+          "longest_flat_streak_sessions": 53,
+          "fills": 82,
+          "rejections": 0,
+          "rejection_reasons": {},
+          "dividend_events": 1,
+          "stale_marks": 0,
+          "shutdown_session": null,
+          "open_positions_at_end": 0,
+          "contribution_by_symbol": {
+            "SPY": "0.15"
+          },
+          "trades_digest": "7f24509e792b6e1bec1505c8d757541472d2e13c2a6620d15a7e7541abaf07a1",
+          "equity_digest": "499776a499dbb0dd69d851cade2c5b03b2a4ba2ea296c35f6cb84d64d8583205",
+          "deepest_drawdown_4dp": "0.0366",
+          "ra1_diagnostics": {
+            "exits_by_reason": {
+              "EXIT_LOSS_CONTROL": 0,
+              "EXIT_MAX_HOLD": 0,
+              "EXIT_SIGNAL": 41
+            },
+            "blocked_entries_by_reason": {
+              "NO_ENTRY_ZERO_VOLATILITY": 0,
+              "NO_ENTRY_VOLATILITY_FLOOR": 0,
+              "NO_ENTRY_SIZE_FLOOR": 0,
+              "NO_ENTRY_LOCKOUT": 0,
+              "NO_ENTRY_INSUFFICIENT_HISTORY": 0
+            },
+            "entry_fractions_at_order_emission": [
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.4513489351921419482641995752106820",
+              "0.4216282657951437761982417646708217",
+              "0.50",
+              "0.50",
+              "0.3195173327850828798569643059699335",
+              "0.3401501001073577538578915295930258",
+              "0.4272932131181962654925162704605470",
+              "0.50",
+              "0.4864220669824234593473398470652736",
+              "0.4016960739151069671260373931678031",
+              "0.4103840216163418922762727319948138",
+              "0.3710837163035585549207429524208505",
+              "0.3623422850795584645569640725758172",
+              "0.4871249754993624250136826060953565",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50"
+            ],
+            "entry_fractions_realised": [
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.4513489351921419482641995752106820",
+              "0.4216282657951437761982417646708217",
+              "0.50",
+              "0.50",
+              "0.3195173327850828798569643059699335",
+              "0.3401501001073577538578915295930258",
+              "0.4272932131181962654925162704605470",
+              "0.50",
+              "0.4864220669824234593473398470652736",
+              "0.4016960739151069671260373931678031",
+              "0.4103840216163418922762727319948138",
+              "0.3710837163035585549207429524208505",
+              "0.3623422850795584645569640725758172",
+              "0.4871249754993624250136826060953565",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50",
+              "0.50"
+            ],
+            "entries_emitted": 41,
+            "entries_filled": 41,
+            "ladder_sessions": {
+              "dd<0.08": 753,
+              "0.08<=dd<0.10": 0,
+              "dd>=0.10": 0
+            },
+            "decision_sessions": 753,
+            "decision_sessions_shutdown_active": 0,
+            "exits_by_reason_shutdown": 0
+          }
+        }
+      }
+    ],
+    "base": {
+      "run_label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+      "scenario": "BASE",
+      "gating_conditions": [
+        "S4-C1",
+        "S4-C2",
+        "S4-C3",
+        "S4-C4",
+        "S4-C6"
+      ],
+      "equity_points": 754,
+      "reached_window_end": true,
+      "starting_equity": "100.00",
+      "final_equity": "102.15",
+      "total_return": "0.0215",
+      "sharpe": "0.2025294206503088680547420121230750",
+      "sharpe_risk_free_annual": "0.00",
+      "daily_returns": 753,
+      "max_drawdown": "0.03161389554784035323758760240844931",
+      "max_drawdown_basis": "daily marked equity including cash, peak to trough",
+      "profit_factor": "1.196526508226691042047531993",
+      "profit_factor_note": null,
+      "closed_trades": 41,
+      "gross_profit": "13.09",
+      "gross_loss": "10.94",
+      "shutdown_session": null,
+      "shutdown_fraction": "0.15"
+    },
+    "stress": {
+      "run_label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS",
+      "scenario": "STRESSED",
+      "gating_conditions": [
+        "S4-C5"
+      ],
+      "equity_points": 754,
+      "reached_window_end": true,
+      "starting_equity": "100.00",
+      "final_equity": "100.15",
+      "total_return": "0.0015",
+      "stress_multiplier": "2.0",
+      "sealed_stress_multiplier": "2.0",
+      "shutdown_enforced": true,
+      "shutdown_session": null
+    },
+    "failed_or_partial_runs": 0,
+    "unregistered_runs": 0,
+    "repeated_runs": 0,
+    "rerun_policy_applied": "No run failed and no run was partial, so the sealed failed-run rule was not invoked. Both registered runs completed inside the single authorized load and reached the window end. After a valid completed run no rerun is permitted, and none was performed."
+  },
+  "folds": {
+    "construction_id": "SE100-CFG-4002-WF1",
+    "rule": "The validation window is partitioned into consecutive, non-overlapping, calendar-aligned blocks of exactly three calendar months each, beginning at the validation window start. The window spans 36 calendar months exactly, so twelve blocks tile it with no remainder and no discarded tail.",
+    "declared_test_folds": 12,
+    "declared_train_folds": 0,
+    "expected_completed_count": 12,
+    "rows": [
+      {
+        "fold": 1,
+        "start": "2021-08-01",
+        "end": "2021-10-31",
+        "calendar_sessions": 64,
+        "run_sessions": 64,
+        "last_trading_session": "2021-10-29",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "100.65",
+        "baseline_equity": "100.00",
+        "baseline_source": "sealed starting capital",
+        "completed": true,
+        "fold_return": "0.0065",
+        "positive": true
+      },
+      {
+        "fold": 2,
+        "start": "2021-11-01",
+        "end": "2022-01-31",
+        "calendar_sessions": 63,
+        "run_sessions": 63,
+        "last_trading_session": "2022-01-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "99.36",
+        "baseline_equity": "100.65",
+        "baseline_source": "fold 1 close",
+        "completed": true,
+        "fold_return": "-0.0128166915052160953800298063",
+        "positive": false
+      },
+      {
+        "fold": 3,
+        "start": "2022-02-01",
+        "end": "2022-04-30",
+        "calendar_sessions": 62,
+        "run_sessions": 62,
+        "last_trading_session": "2022-04-29",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "99.72",
+        "baseline_equity": "99.36",
+        "baseline_source": "fold 2 close",
+        "completed": true,
+        "fold_return": "0.003623188405797101449275362",
+        "positive": true
+      },
+      {
+        "fold": 4,
+        "start": "2022-05-01",
+        "end": "2022-07-31",
+        "calendar_sessions": 62,
+        "run_sessions": 62,
+        "last_trading_session": "2022-07-29",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "100.15",
+        "baseline_equity": "99.72",
+        "baseline_source": "fold 3 close",
+        "completed": true,
+        "fold_return": "0.004312073806658644203770558",
+        "positive": true
+      },
+      {
+        "fold": 5,
+        "start": "2022-08-01",
+        "end": "2022-10-31",
+        "calendar_sessions": 65,
+        "run_sessions": 65,
+        "last_trading_session": "2022-10-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "99.63",
+        "baseline_equity": "100.15",
+        "baseline_source": "fold 4 close",
+        "completed": true,
+        "fold_return": "-0.0051922116824762855716425362",
+        "positive": false
+      },
+      {
+        "fold": 6,
+        "start": "2022-11-01",
+        "end": "2023-01-31",
+        "calendar_sessions": 62,
+        "run_sessions": 62,
+        "last_trading_session": "2023-01-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "102.14",
+        "baseline_equity": "99.63",
+        "baseline_source": "fold 5 close",
+        "completed": true,
+        "fold_return": "0.025193214895111914082103784",
+        "positive": true
+      },
+      {
+        "fold": 7,
+        "start": "2023-02-01",
+        "end": "2023-04-30",
+        "calendar_sessions": 61,
+        "run_sessions": 61,
+        "last_trading_session": "2023-04-28",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "101.86",
+        "baseline_equity": "102.14",
+        "baseline_source": "fold 6 close",
+        "completed": true,
+        "fold_return": "-0.0027413354219698453103583317",
+        "positive": false
+      },
+      {
+        "fold": 8,
+        "start": "2023-05-01",
+        "end": "2023-07-31",
+        "calendar_sessions": 63,
+        "run_sessions": 63,
+        "last_trading_session": "2023-07-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "103.11",
+        "baseline_equity": "101.86",
+        "baseline_source": "fold 7 close",
+        "completed": true,
+        "fold_return": "0.012271745533084625957196152",
+        "positive": true
+      },
+      {
+        "fold": 9,
+        "start": "2023-08-01",
+        "end": "2023-10-31",
+        "calendar_sessions": 65,
+        "run_sessions": 65,
+        "last_trading_session": "2023-10-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "101.0882445391692330300",
+        "baseline_equity": "103.11",
+        "baseline_source": "fold 8 close",
+        "completed": true,
+        "fold_return": "-0.0196077534752280765202211231",
+        "positive": false
+      },
+      {
+        "fold": 10,
+        "start": "2023-11-01",
+        "end": "2024-01-31",
+        "calendar_sessions": 62,
+        "run_sessions": 62,
+        "last_trading_session": "2024-01-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "101.78",
+        "baseline_equity": "101.0882445391692330300",
+        "baseline_source": "fold 9 close",
+        "completed": true,
+        "fold_return": "0.006843085108305828525379588",
+        "positive": true
+      },
+      {
+        "fold": 11,
+        "start": "2024-02-01",
+        "end": "2024-04-30",
+        "calendar_sessions": 62,
+        "run_sessions": 62,
+        "last_trading_session": "2024-04-30",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "101.77",
+        "baseline_equity": "101.78",
+        "baseline_source": "fold 10 close",
+        "completed": true,
+        "fold_return": "-0.0000982511298879937119276872",
+        "positive": false
+      },
+      {
+        "fold": 12,
+        "start": "2024-05-01",
+        "end": "2024-07-31",
+        "calendar_sessions": 63,
+        "run_sessions": 63,
+        "last_trading_session": "2024-07-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "102.15",
+        "baseline_equity": "101.77",
+        "baseline_source": "fold 11 close",
+        "completed": true,
+        "fold_return": "0.003733909796600176869411418",
+        "positive": true
+      }
+    ],
+    "completed": 12,
+    "positive": 7
+  },
+  "strategy_invariance": {
+    "evaluator_measurement": {
+      "recheck_before_validation_load": [
+        {
+          "artifact": "config/stage2_cost_model.json",
+          "sealed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+          "recomputed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage2_engine_spec.json",
+          "sealed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+          "recomputed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage3_attempt2_gate_criteria_binding.json",
+          "sealed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+          "recomputed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage3_attempt2_strategy_protocol.json",
+          "sealed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+          "recomputed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage3_gate_criteria.json",
+          "sealed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+          "recomputed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage4_gate_criteria.json",
+          "sealed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+          "recomputed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage4_representative_selection.json",
+          "sealed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+          "recomputed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage4_validation_protocol.json",
+          "sealed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+          "recomputed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_1_HOLDOUT_LOCK.json",
+          "sealed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+          "recomputed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_1_UNIVERSE.json",
+          "sealed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+          "recomputed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_4_PREREGISTRATION.json",
+          "sealed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+          "recomputed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.sha256",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_4_PREREGISTRATION.md",
+          "sealed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+          "recomputed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "src/stockedge100/strategies/attempt2_candidates.py",
+          "sealed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+          "recomputed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": "the strategy module implementing SE100-S3A2-C2-MEANREV-RA1"
+        }
+      ],
+      "recheck_after_evaluation": [
+        {
+          "artifact": "config/stage2_cost_model.json",
+          "sealed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+          "recomputed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage2_engine_spec.json",
+          "sealed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+          "recomputed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage3_attempt2_gate_criteria_binding.json",
+          "sealed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+          "recomputed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage3_attempt2_strategy_protocol.json",
+          "sealed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+          "recomputed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage3_gate_criteria.json",
+          "sealed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+          "recomputed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage4_gate_criteria.json",
+          "sealed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+          "recomputed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage4_representative_selection.json",
+          "sealed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+          "recomputed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage4_validation_protocol.json",
+          "sealed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+          "recomputed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_1_HOLDOUT_LOCK.json",
+          "sealed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+          "recomputed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_1_UNIVERSE.json",
+          "sealed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+          "recomputed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_4_PREREGISTRATION.json",
+          "sealed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+          "recomputed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.sha256",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_4_PREREGISTRATION.md",
+          "sealed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+          "recomputed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "src/stockedge100/strategies/attempt2_candidates.py",
+          "sealed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+          "recomputed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": "the strategy module implementing SE100-S3A2-C2-MEANREV-RA1"
+        }
+      ],
+      "recheck_rule": "Recompute each digest after the evaluation and require equality with the value recorded in the Stage 4 pre-registration record. Any inequality is S4-C7 NOT_MET. There is no tolerance and no immaterial change.",
+      "gate_3_comparison": {
+        "representative": "SE100-S3A2-C2-MEANREV-RA1",
+        "identifier_unchanged_from_gate_3": true,
+        "parameters_equal_gate_3_primary": true,
+        "sealed_parameters": "{\"exit_sma\": 5, \"f_base\": \"0.50\", \"ladder_rungs\": [[\"0.08\", \"0.25\"], [\"0.10\", \"0.125\"]], \"loss_control\": \"0.08\", \"max_hold\": 10, \"reentry_delay\": 5, \"rsi_entry_below\": 10, \"rsi_period\": 2, \"vol_floor_fraction\": \"0.05\", \"vol_target\": \"0.10\"}",
+        "gate_3_primary_parameters": "{\"exit_sma\": 5, \"f_base\": \"0.50\", \"ladder_rungs\": [[\"0.08\", \"0.25\"], [\"0.10\", \"0.125\"]], \"loss_control\": \"0.08\", \"max_hold\": 10, \"reentry_delay\": 5, \"rsi_entry_below\": 10, \"rsi_period\": 2, \"vol_floor_fraction\": \"0.05\", \"vol_target\": \"0.10\"}",
+        "universe_equal_gate_3": true,
+        "declared_universe": [
+          "SPY"
+        ],
+        "family_equal_gate_3": true,
+        "warmup_equal_gate_3": true,
+        "declared_warmup_sessions": 101,
+        "largest_lookback_recomputed": 101,
+        "warmup_matches_largest_lookback": true,
+        "rsi_warmup_changes": 100,
+        "strategy_module": "src/stockedge100/strategies/attempt2_candidates.py",
+        "strategy_module_digest_equal": true,
+        "all_equal": true
+      }
+    },
+    "package_recheck": {
+      "declared_set_size": 13,
+      "rechecked": 13,
+      "all_equal": true,
+      "entries": {
+        "config/stage2_cost_model.json": {
+          "sealed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+          "recomputed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+          "equal": true
+        },
+        "config/stage2_engine_spec.json": {
+          "sealed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+          "recomputed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+          "equal": true
+        },
+        "config/stage3_attempt2_gate_criteria_binding.json": {
+          "sealed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+          "recomputed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+          "equal": true
+        },
+        "config/stage3_attempt2_strategy_protocol.json": {
+          "sealed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+          "recomputed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+          "equal": true
+        },
+        "config/stage3_gate_criteria.json": {
+          "sealed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+          "recomputed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+          "equal": true
+        },
+        "config/stage4_gate_criteria.json": {
+          "sealed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+          "recomputed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+          "equal": true
+        },
+        "config/stage4_representative_selection.json": {
+          "sealed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+          "recomputed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+          "equal": true
+        },
+        "config/stage4_validation_protocol.json": {
+          "sealed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+          "recomputed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+          "equal": true
+        },
+        "governance/STAGE_1_HOLDOUT_LOCK.json": {
+          "sealed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+          "recomputed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+          "equal": true
+        },
+        "governance/STAGE_1_UNIVERSE.json": {
+          "sealed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+          "recomputed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+          "equal": true
+        },
+        "governance/STAGE_4_PREREGISTRATION.md": {
+          "sealed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+          "recomputed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+          "equal": true
+        },
+        "src/stockedge100/strategies/attempt2_candidates.py": {
+          "sealed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+          "recomputed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+          "equal": true
+        },
+        "governance/STAGE_4_PREREGISTRATION.json": {
+          "sealed": "carried by governance/STAGE_4_PREREGISTRATION.sha256",
+          "recomputed": "verified via the checksum record",
+          "equal": true,
+          "note": "The thirteenth entry of the declared set is this record. Nothing hashes itself, so its digest is carried by governance/STAGE_4_PREREGISTRATION.sha256 instead."
+        }
+      },
+      "recheck_rule": "Recompute each digest after the evaluation and require equality with the value recorded in the Stage 4 pre-registration record. Any inequality is S4-C7 NOT_MET. There is no tolerance and no immaterial change."
+    },
+    "conflict_note": "S4-CONFLICT-6: the sealed clause names config/stage4_representative_selection.json as the home of the parameterisation; that file carries none and the values are in config/stage4_validation_protocol.json. Both are inside the thirteen-artifact digest set.",
+    "no_tolerance_rule": "Exact equality of every digest. There is no tolerance and no immaterial change. The set was rechecked before the validation load, again by the evaluator, and a third time here.",
+    "representative_not_modified_after_performance_was_observed": true
+  },
+  "integrity_verification": {
+    "checksum_records": {
+      "stage_0_freeze_verified": true,
+      "stage_0_freeze_detail": {
+        "STAGE_0_CONSTITUTION.md": {
+          "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+          "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+          "match": "True"
+        },
+        "STAGE_0_CONSTITUTION.json": {
+          "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+          "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+          "match": "True"
+        }
+      },
+      "records": {
+        "governance/STAGE_0_FREEZE.sha256": {
+          "verify_from": "stockedge100/governance",
+          "entries": 2,
+          "entries_expected": 2,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "governance/STAGE_1_FREEZE.sha256": {
+          "verify_from": "stockedge100/governance",
+          "entries": 2,
+          "entries_expected": 2,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "governance/STAGE_1_PREREGISTRATION.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 4,
+          "entries_expected": 4,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "governance/STAGE_2_PREREGISTRATION.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 4,
+          "entries_expected": 4,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "governance/STAGE_3_PREREGISTRATION.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 4,
+          "entries_expected": 4,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 4,
+          "entries_expected": 4,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "governance/STAGE_4_PREREGISTRATION.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 5,
+          "entries_expected": 5,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "reports/stage0/STAGE_0_VERIFICATION.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 8,
+          "entries_expected": 8,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "reports/stage1/STAGE_1_DATA_READINESS.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 19,
+          "entries_expected": 19,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "reports/stage2/STAGE_2_BACKTEST_ENGINE.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 20,
+          "entries_expected": 20,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "reports/stage3/STAGE_3_STRATEGY_RESEARCH.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 26,
+          "entries_expected": 26,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_DESIGN.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 31,
+          "entries_expected": 31,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 37,
+          "entries_expected": 37,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        },
+        "reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION.sha256": {
+          "verify_from": "stockedge100",
+          "entries": 26,
+          "entries_expected": 26,
+          "statuses": [
+            "OK"
+          ],
+          "all_ok": true
+        }
+      },
+      "records_verified": 14,
+      "all_ok": true,
+      "working_directory_note": "Two conventions are in use. STAGE_0_FREEZE.sha256 and STAGE_1_FREEZE.sha256 carry bare filenames and verify from stockedge100/governance; every other record carries project-root-relative paths and verifies from stockedge100. A failure from the wrong working directory would be an operator error, not an integrity failure."
+    },
+    "evidence_digest": {
+      "recorded": "3a2ea8d9875c150aef8346f507f75cde6c307da01bed8a24281e53195b2de7c2",
+      "recomputed": "3a2ea8d9875c150aef8346f507f75cde6c307da01bed8a24281e53195b2de7c2",
+      "equal": true,
+      "covers": "every field of this file except generated_utc and evidence_digest, as canonical JSON"
+    },
+    "repo_state_delta": {
+      "baselines": {
+        "sealing_run": "runs/SE100-R-20260813T140121Z.json",
+        "preregistration_package_run": "runs/SE100-R-20260814T111459Z.json",
+        "validation_evaluation_run": "runs/SE100-R-20260814T143226Z.json",
+        "which_one_the_report_reconciles": "runs/SE100-R-20260814T111459Z.json"
+      },
+      "seal_to_preregistration_package": {
+        "entries_before": 115,
+        "entries_after": 118,
+        "added": [
+          "governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md",
+          "src/stockedge100/reporting/stage4_package.py",
+          "tests/unit/test_stage4_preregistration.py"
+        ],
+        "changed": [
+          "README.md"
+        ],
+        "removed": [],
+        "added_count": 3,
+        "changed_count": 1,
+        "removed_count": 0,
+        "protected_paths_changed_or_removed": [],
+        "no_frozen_or_sealed_path_moved": true
+      },
+      "preregistration_package_to_evaluation": {
+        "entries_before": 118,
+        "entries_after": 123,
+        "added": [
+          "src/stockedge100/reporting/stage4_evidence.py",
+          "src/stockedge100/strategies/stage4_evaluation.py",
+          "src/stockedge100/strategies/stage4_gate.py",
+          "tests/unit/test_stage4_evaluation.py",
+          "tests/unit/test_stage4_evidence.py"
+        ],
+        "changed": [],
+        "removed": [],
+        "added_count": 5,
+        "changed_count": 0,
+        "removed_count": 0,
+        "protected_paths_changed_or_removed": [],
+        "no_frozen_or_sealed_path_moved": true
+      },
+      "evaluation_to_package_build": {
+        "entries_before": 123,
+        "entries_after": 125,
+        "added": [
+          "governance/STAGE_4_VALIDATION_REPORT.md",
+          "src/stockedge100/reporting/stage4_evaluation_package.py"
+        ],
+        "changed": [
+          "README.md"
+        ],
+        "removed": [],
+        "added_count": 2,
+        "changed_count": 1,
+        "removed_count": 0,
+        "protected_paths_changed_or_removed": [],
+        "no_frozen_or_sealed_path_moved": true
+      },
+      "seal_to_package_build": {
+        "entries_before": 115,
+        "entries_after": 125,
+        "added": [
+          "governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md",
+          "governance/STAGE_4_VALIDATION_REPORT.md",
+          "src/stockedge100/reporting/stage4_evaluation_package.py",
+          "src/stockedge100/reporting/stage4_evidence.py",
+          "src/stockedge100/reporting/stage4_package.py",
+          "src/stockedge100/strategies/stage4_evaluation.py",
+          "src/stockedge100/strategies/stage4_gate.py",
+          "tests/unit/test_stage4_evaluation.py",
+          "tests/unit/test_stage4_evidence.py",
+          "tests/unit/test_stage4_preregistration.py"
+        ],
+        "changed": [
+          "README.md"
+        ],
+        "removed": [],
+        "added_count": 10,
+        "changed_count": 1,
+        "removed_count": 0,
+        "protected_paths_changed_or_removed": [],
+        "no_frozen_or_sealed_path_moved": true
+      },
+      "why_they_differ": "The seal predates the pre-registration package that closed Stage 4's design session; both predate the evaluator they authorized; the evaluation predates this report and this builder. Equality across the four is neither expected nor required. What is required is that nothing under governance/ or config/ changed and nothing was removed, which is measured above rather than asserted.",
+      "identifiers_recorded_where": "The three repo_state_id values live in runs/ and in this decision record. None is written into a governance Markdown file, because repo_state_id covers governance/*.md and a tree digest recorded inside its own tree invalidates itself on write."
+    },
+    "frozen_artifacts_modified": false,
+    "sealed_artifacts_modified": false,
+    "self_reference_policy": "The manifest excludes its own entry and is covered by the checksum record. No repo_state_id is written into any governance Markdown; the validation report is searched for all three tree digests before this package is written, and the build refuses if one is present.",
+    "package_not_covered_by_tests": "tests/**/*.py is one of the repo_state_id patterns, so a test asserting this package's repo_state_id would invalidate the value it asserts. The package is verified by re-running the recomputation."
+  },
+  "contamination_predicates": {
+    "measured_before_this_package_wrote_anything": true,
+    "sealed_values_at_sealing": {
+      "stage_4_evaluator_or_result_modules": 0,
+      "modules_naming_a_stage_4_run_label": 0,
+      "stage_4_report_artifacts": 0,
+      "stage_4_run_records": 0,
+      "stage_4_modules_touching_restricted_data_or_a_broker": 0,
+      "gate_3_attempt_2_records_verify": true
+    },
+    "stage_4_evaluator_or_result_modules": {
+      "count": 5,
+      "files": [
+        "src/stockedge100/reporting/stage4_evaluation_package.py",
+        "src/stockedge100/reporting/stage4_evidence.py",
+        "src/stockedge100/reporting/stage4_package.py",
+        "src/stockedge100/strategies/stage4_evaluation.py",
+        "src/stockedge100/strategies/stage4_gate.py"
+      ],
+      "sealed_value": 0,
+      "expected_to_move": true,
+      "why": "The seal recorded 0 because no Stage 4 module existed. This session wrote the evaluator the seal authorized, and the pre-registration session wrote its own decision-package builder after the seal. Both legitimately count. The one file the predicate excludes by name, src/stockedge100/reporting/stage4_preregistration.py, is the sealing program itself."
+    },
+    "modules_naming_a_stage_4_run_label": {
+      "count": 0,
+      "files": [],
+      "sealed_value": 0,
+      "labels_searched": [
+        "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+        "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS"
+      ],
+      "note": "Still 0. The run labels are read from the sealed protocol at run time and are not restated as literals anywhere in src/."
+    },
+    "stage_4_report_artifacts": {
+      "count": 8,
+      "files": [
+        "reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json",
+        "reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION.json",
+        "reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION.sha256",
+        "reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION_ARTIFACT_MANIFEST.json",
+        "reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION_TEST_SUMMARY.md",
+        "reports/stage4/STAGE_4_VALIDATION_TEST_SUMMARY.md",
+        "reports/stage4/pytest_stage4_evaluation_output.txt",
+        "reports/stage4/pytest_stage4_output.txt"
+      ],
+      "sealed_value": 0,
+      "expected_to_move": true,
+      "mechanism": "reports/stage4/ gains this package's decision record, artifact manifest and checksum record, which are written after this measurement is taken. reports/ is overwritten in place per basename, not appended, so a re-measurement counts files present rather than writes performed."
+    },
+    "stage_4_run_records": {
+      "count": 3,
+      "files": [
+        "SE100-R-20260813T140121Z.json",
+        "SE100-R-20260814T111459Z.json",
+        "SE100-R-20260814T143226Z.json"
+      ],
+      "sealed_value": 0,
+      "expected_to_move": true,
+      "mechanism": "runs/ is append-only and gains exactly one record per session that writes one: the seal's, the pre-registration package's, the validation evaluation's, and this package's, the last of which is written after this measurement is taken."
+    },
+    "stage_4_modules_touching_restricted_data_or_a_broker": {
+      "reference_implementation": {
+        "source": "src/stockedge100/reporting/stage4_preregistration.py::_stage_4_modules_touching_restricted_data",
+        "count": 1,
+        "files": [
+          "src/stockedge100/strategies/stage4_evaluation.py"
+        ],
+        "hits": [
+          "src/stockedge100/strategies/stage4_evaluation.py: call load_dataset(), from stockedge100.backtest.dataset import load_dataset, from stockedge100.data.calendar import ..."
+        ],
+        "status": "FROZEN. This is the function the seal was written against and the function tests/unit/test_stage4_preregistration.py::test_no_stage_4_module_can_reach_restricted_data_or_a_broker asserts on, so its count is the one that appears in the failing-test line of the test summary."
+      },
+      "data_access_half": {
+        "count": 2,
+        "files": {
+          "src/stockedge100/reporting/stage4_evidence.py": [
+            "call load_validation_series"
+          ],
+          "src/stockedge100/strategies/stage4_evaluation.py": [
+            "call load_dataset",
+            "from stockedge100.backtest.dataset",
+            "from stockedge100.data.calendar"
+          ]
+        }
+      },
+      "broker_network_env_url_half": {
+        "count": 0,
+        "files": {}
+      },
+      "modules_matching_either_half": 2,
+      "resolution": {
+        "src/stockedge100/reporting/stage4_evidence.py": "AUTHORIZED_EVALUATION_PATH: dataset-loader and data-layer markers only (call load_validation_series). These are the reads the seal authorized this session to perform. No network, broker, environment-variable or URL marker is present.",
+        "src/stockedge100/strategies/stage4_evaluation.py": "AUTHORIZED_EVALUATION_PATH: dataset-loader and data-layer markers only (call load_dataset, from stockedge100.backtest.dataset, from stockedge100.data.calendar). These are the reads the seal authorized this session to perform. No network, broker, environment-variable or URL marker is present."
+      },
+      "unresolved": [],
+      "sealed_value": 0,
+      "conflict": "S4-CONFLICT-7",
+      "two_implementations_disagree": {
+        "reference_count": 1,
+        "this_package_count": 2,
+        "seen_only_by_this_package": [
+          "src/stockedge100/reporting/stage4_evidence.py"
+        ],
+        "seen_only_by_the_reference": [],
+        "cause": "The sealed prose says 'a call to a dataset loader'; it does not enumerate the loaders. The frozen implementation enumerates them in a literal frozenset, LOADER_CALLS = load_dataset, load_panel, load_prices, load_series, read_csv, read_parquet, which was written before the evaluator existed and therefore cannot name load_validation_series. Its data-layer tuple, DATA_LAYER_MODULES = stockedge100.data, stockedge100.datasets, is narrower than this module's for the same reason. Both counts are correct for what they measure: the reference measures the seal's frozen implementation, this package measures the seal's prose.",
+        "resolution_rule": "Neither is edited to agree with the other. The frozen implementation may not be changed, and widening it after a validation read would be exactly the post-seal edit post_seal_defect_rule forbids; narrowing this package's sweep to match would suppress a real loader call the sealed prose covers. The wider count is reported as the measurement and the frozen count as the reference, and the divergence is disclosed here and as part of S4-CONFLICT-7. Neither reading is zero, so the conflict's substance -- that the predicate cannot survive authorizing the work it gates -- is unaffected by which is used."
+      },
+      "why_the_data_half_cannot_be_zero": "The sealed predicate's stated purpose is the fail-closed proof that the PRE-REGISTRATION path cannot read a restricted observation or reach a broker. Its mechanical scope is every stage4-named module under src/. Once the evaluation the pre-registration authorized exists, the evaluator must call a dataset loader, so the predicate necessarily reads at least 1 and can never read 0 again. Reported, not repaired: renaming the evaluator out of the stage4 path would hide a real load from a predicate written to find it and would corrupt the first predicate too, weakening or deleting the marker test is forbidden, and editing the seal after a validation read is forbidden by post_seal_defect_rule regardless of intent.",
+      "why_the_broker_half_is_still_zero": "It reads 0. No stage4 module imports a network or broker package, reads an environment variable, opens a connection, or carries a URL scheme constant, so this half of the predicate survives the authorization intact and remains the fail-closed proof it was written to be. This module's own URL_SCHEMES marker table is composed at import time rather than written out, following the convention the sealer established for the same problem and the test that pins it: a scanning module must not trip its own scan. Every hit on either half is resolved by name above, and the guard refuses this package if any hit is UNRESOLVED.",
+      "no_network_or_broker_import_anywhere": true
+    },
+    "gate_3_attempt_2_records_verify": {
+      "value": true,
+      "sealed_value": true,
+      "records": {
+        "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256": [
+          "OK"
+        ],
+        "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256": [
+          "OK"
+        ]
+      },
+      "why_it_matters": "Both governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256 and reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256 verify entry-for-entry from the project root. This is the Gate 3 Attempt 2 immutability check: the representative was selected from that decision record, so it fails if the evidence behind the selection changed by a single byte. Must be true."
+    }
+  },
+  "holdout": {
+    "lock_artifact": "SE100-GOV-1005",
+    "lock_status": "LOCKED",
+    "start": "2024-08-01",
+    "end": "2026-07-31",
+    "state": "SEALED",
+    "sessions_read": 0,
+    "access_authorized": false,
+    "unreachability_proof": {
+      "holdout_start": "2024-08-01",
+      "holdout_end": "2026-07-31",
+      "window_end": "2024-07-31",
+      "run_end": "2024-07-31",
+      "window_end_precedes_holdout_start": true,
+      "run_end_precedes_holdout_start": true,
+      "mechanism": "MarketView.history returns bars filtered by window.contains(day) and day <= as_of; as_of is drawn from sessions_between(run_start, run_end). With both bounds before the holdout start no holdout bar is addressable by any probe."
+    },
+    "unchanged_by_this_stage": true
+  },
+  "defects_found_and_corrected": {
+    "rule": {
+      "rule": "If a defect is discovered in this protocol, in SE100-CFG-4002, or in SE100-CFG-4003 AFTER the seal but BEFORE any validation observation is read, the defect is recorded, this pre-registration is superseded by a new one with a new artifact id, and the supersession is recorded in the new runs/ record's notes. The sealed files are not edited in place.",
+      "after_a_validation_read": "If a defect is discovered after any validation observation has been read, it may not be repaired by changing a sealed specification: that would be a change made with validation results in hand, which S4-C7 forbids regardless of the researcher's intent. The outcome is INVALIDATED with the defect recorded, and the project's position is that no valid Gate 4 evaluation exists. It is not a fail and it is not a pass.",
+      "why_this_is_strict": "The alternative - allowing a 'clearly unrelated' repair after seeing the numbers - requires someone to judge relatedness while holding the result. That judgement cannot be made disinterestedly, so it is removed."
+    },
+    "all_corrected_before_the_validation_load": true,
+    "none_corrected_after_performance_was_visible": true,
+    "items": [
+      {
+        "defect": "unique_run_id: two records generated inside the same second would have overwritten an append-only runs/ record",
+        "correction": "re-read the clock and raise rather than overwrite",
+        "validation_loaded_at_the_time": false,
+        "performance_visible_at_the_time": false
+      },
+      {
+        "defect": "label_suffix_for failed OPEN on an unrecognised scenario, returning a usable run label instead of refusing",
+        "correction": "raise; covered in both directions",
+        "validation_loaded_at_the_time": false,
+        "performance_visible_at_the_time": false
+      },
+      {
+        "defect": "fold_construction emitted without its sealed method key",
+        "correction": "key added from the sealed construction record",
+        "validation_loaded_at_the_time": false,
+        "performance_visible_at_the_time": false
+      },
+      {
+        "defect": "ConditionVerdict.to_json() omitted its summary key",
+        "correction": "key added",
+        "validation_loaded_at_the_time": false,
+        "performance_visible_at_the_time": false
+      },
+      {
+        "defect": "Decimal values were not JSON-serialisable",
+        "correction": "_jsonable conversion preserving full precision as strings",
+        "validation_loaded_at_the_time": false,
+        "performance_visible_at_the_time": false
+      },
+      {
+        "defect": "threshold_cross_check duplicated in the emitted gate block",
+        "correction": "de-duplicated",
+        "validation_loaded_at_the_time": false,
+        "performance_visible_at_the_time": false
+      }
+    ],
+    "how_they_were_found": "An out-of-tree dry run under _scratch/ drove the evidence writer end to end against synthetic bars in two price scenarios, with the dataset loader and both output directories patched, before any real validation observation was loaded.",
+    "no_sealed_specification_was_altered": true
+  },
+  "terminal_consequence": {
+    "applies": true,
+    "binding_consequence": "A Gate 4 FAIL is a deliverable, not a reason to retune, substitute, promote a neighbour, relax a threshold, or read the window again. There is no Attempt 2 at Gate 4 in this design.",
+    "what_a_fail_does_not_authorize": [
+      "Retuning C2's parameters and re-reading validation.",
+      "Substituting C1, or any neighbour of either candidate.",
+      "Relaxing a threshold, re-cutting the folds, changing the cash rate, or reinterpreting 'positive'.",
+      "Reopening Gate 3 Attempt 2 to admit a different candidate.",
+      "Describing the fail as a defect in the protocol."
+    ],
+    "what_a_fail_does_authorize": "Recording the fail as a deliverable, and stopping. Any subsequent strategy work is a new candidate restarting at Gate 3, disclosed as adaptive, with the validation window's information now known to the researcher and therefore permanently compromised for that candidate.",
+    "there_is_no_attempt_2_at_gate_4": true
+  },
+  "scope": {
+    "candidates_evaluated": 1,
+    "candidates_evaluated_ids": [
+      "SE100-S3A2-C2-MEANREV-RA1"
+    ],
+    "other_gate_3_candidate_reconsidered": false,
+    "neighbours_promoted": 0,
+    "parameterisations_evaluated": 1,
+    "validation_dataset_loads": 1,
+    "validation_reading_sessions": 1,
+    "validation_window_engine_runs": 2,
+    "training_folds": 0,
+    "refits_on_validation_data": 0,
+    "retunes": 0,
+    "threshold_changes": 0,
+    "fold_boundary_changes": 0,
+    "cost_benchmark_or_metric_changes": 0,
+    "sensitivity_checks_run": 0,
+    "debugging_performance_runs": 0,
+    "alternative_metrics_computed": 0,
+    "external_data_acquired": "none",
+    "holdout_sessions_read": 0,
+    "stage_5_work_performed": "none",
+    "broker_connections": 0,
+    "credentials_used": "none",
+    "orders_generated": 0,
+    "money_spent_usd": 0,
+    "stage_5_remains_prohibited_conditions": [
+      "A Gate 4 PASS authorises exactly one thing: the constitutional holdout gate, and only after a separate explicit human authorization recorded at that gate. It authorises no holdout read by itself.",
+      "The holdout window remains SEALED regardless of the Gate 4 verdict. It is read exactly once, at the holdout gate, and never before.",
+      "Passing Gate 5 would mean only ELIGIBLE_FOR_PAPER_TRADING. Passing Gate 4 does not mean that, and Gate 4 may not emit that token.",
+      "paper_trading_authorized remains false regardless of any validation result.",
+      "shadow_live_authorized remains false regardless of any validation result.",
+      "live_trading_authorized remains false regardless of any validation result. No live order, cancel, replace, liquidation, or unattended scheduling is authorized.",
+      "capital_or_risk_expansion_authorized remains false regardless of any validation result.",
+      "No broker connection, credential read, or order submission is authorized at any point in Stage 4. No order-submitting code exists in this repository and none is written by this stage.",
+      "A validation PASS is not evidence of a trading edge and is not a claim about any future period. StockEdge100 is not trade-ready and may not be described as trade-ready at any point in Stage 4 or after it."
+    ],
+    "explicit_non_authorizations": [
+      "This protocol does not authorize reading the validation window in the session that wrote it.",
+      "This protocol does not authorize implementing the Stage 4 evaluator. The evaluator is written in the authorized evaluation session, before the dataset is loaded, and its code is hashed into that session's runs/ record.",
+      "This protocol does not authorize creating empty or placeholder Stage 4 evaluator or result files. A file that exists but contains no evidence is indistinguishable on a manifest from one that does.",
+      "This protocol does not authorize any development backtest, re-run, or re-measurement.",
+      "This protocol does not authorize acquiring any new data source, including a Treasury-bill series.",
+      "This protocol does not authorize any Alpaca or broker interaction, credential read, or network access.",
+      "This protocol does not authorize a second Gate 4 attempt. There is no Attempt 2 at Gate 4 in this design: the window can be read once."
+    ]
+  },
+  "trade_readiness_statement": "StockEdge100 is not trade-ready and is not described as trade-ready anywhere in this package. Gate 4 was not passed; even a pass would have conferred only the right to a separately authorized holdout gate, never ELIGIBLE_FOR_PAPER_TRADING, which is gate 5's token and which gate 4 may not emit.",
+  "evidence": [
+    "Representative SE100-S3A2-C2-MEANREV-RA1, selected by SE100-CFG-4003 rule SE100-CFG-4003-R1 (Declared-variant research-shutdown screen), evaluated once on the locked validation window 2021-08-01..2024-07-31.",
+    "Evidence file reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json (SE100-EVID-4001), self-digest 3a2ea8d9875c150aef8346f507f75cde6c307da01bed8a24281e53195b2de7c2, recomputed from the written file by this builder and equal.",
+    "Validation dataset loads 1; validation reading sessions 1; validation-window engine runs 2; declared run count 2, recorded as a hard limit. Run record SE100-R-20260814T143226Z.",
+    "Base-cost run: total return 0.0215, Sharpe 0.2025294206503088680547420121230750 at a documented cash rate of 0.00, maximum drawdown 0.03161389554784035323758760240844931, profit factor 1.196526508226691042047531993, 41 closed trades, section 5.1 shutdown session None.",
+    "Stressed-cost run at the sealed multiplier 2.0: total return 0.0015, shutdown enforced True, shutdown session None.",
+    "Folds: 12 declared test folds, 0 training folds, 12 completed, 7 positive. Smallest passing count at twelve completed folds is 9.",
+    "S4-C7 invariance: 13 of 13 sealed digests recomputed here and all equal; exactly one validation evaluation run record (SE100-R-20260814T143226Z); engine runs equal the declared count.",
+    "Every one of the seven sealed conditions was re-derived by this builder from the raw measurements against thresholds parsed out of the sealed predicate strings, in Decimal with no rounding before comparison, and all seven agree with the evaluator.",
+    "14 checksum records plus the Stage 0 freeze verified, each from the working directory its own convention requires; every entry OK.",
+    "Repository-state delta measured at build time rather than predicted: see repo_state_delta in this record for the seal-to-evaluation, evaluation-to-build and seal-to-build diffs and for the protected-path check.",
+    "Holdout 2024-08-01..2026-07-31 state SEALED, sessions read 0. Unreachability is proved mechanically in the evidence file, not asserted."
+  ],
+  "limitations": [
+    "The verdict is a fail. The five met conditions are met on a very small equity amplitude: 2.15% total return over three years on 41 closed trades. S4-C3 is met at 3.16% against a 15% ceiling because the curve barely moved, not because a drawdown was survived, and S4-C5 is met by 15 basis points.",
+    "The universe is one symbol, SPY. Every figure is a single-instrument result and carries no cross-sectional evidence.",
+    "One representative, one window, one read, one parameterisation. The gate says nothing about SE100-S3A2-C1-PULLBACK-RA1 and nothing about this candidate on any other period.",
+    "The documented cash rate is 0.00%, sealed and labelled conservative. Any positive cash rate would lower the measured Sharpe further, never raise it.",
+    "S4-CONFLICT-5 stands: 'walk-forward' degenerates to twelve contiguous out-of-sample quarters with no re-estimation, because the representative estimates nothing. The fold stability measurement is weaker than the constitutional phrase suggests.",
+    "The validation window is now spent. It has been read once, which is all the design permits, and it cannot be read again.",
+    "No test can cover this decision package: tests/**/*.py is one of the repo_state_id patterns, so a test asserting this package's repo_state_id would invalidate the value it asserts. The package is verified by re-running the recomputation.",
+    "The full suite ends 1 failed. That failure is the S4-CONFLICT-7 marker test and is left failing deliberately; it is a disclosure, not a defect. No test was weakened, skipped, xfailed or deleted to reach any verdict here."
+  ],
+  "blockers": [],
+  "conflicts_found": [
+    "S4-CONFLICT-1 through S4-CONFLICT-5 were found and resolved prospectively by the pre-registration and are recorded in config/stage4_gate_criteria.json conflicts_found. All five were applied here exactly as sealed and none was reopened.",
+    "S4-CONFLICT-6: the sealed invariance clause names config/stage4_representative_selection.json as the home of the representative's parameterisation; that file carries no parameter values and they are in config/stage4_validation_protocol.json sealed_representative. Both files are inside the thirteen-artifact digest set and both recompute equal, so the clause's purpose is satisfied whichever is read. Reported, not repaired. Nothing in the verdict turns on it.",
+    "S4-CONFLICT-7: the sealed P5 contamination predicate states its purpose as the fail-closed proof that the PRE-REGISTRATION path cannot reach restricted data or a broker, but its mechanical scope is every stage4-named module under src/. The evaluator the pre-registration authorized must call a dataset loader, so the data-access half can never read 0 again; it measures 2 here. The seal's own frozen implementation of the same predicate measures 1, because its literal LOADER_CALLS frozenset was written before the evaluator existed and cannot name load_validation_series. Both are reported and neither is edited to match the other; see contamination_predicates.stage_4_modules_touching_restricted_data_or_a_broker.two_implementations_disagree. Neither reading is 0, so nothing about this conflict turns on the choice. The broker, network, environment-variable and URL half measures 0 and remains the fail-closed proof it was written to be. Every hit on either half is resolved to a named cause in contamination_predicates.resolution, none is a network or broker reach, and the builder refuses to write if any hit is unresolved. Reported, not repaired: renaming the evaluator out of the stage4 path would hide a real dataset load from a predicate written to find it and would corrupt predicate P1 as well; weakening, skipping, xfailing or deleting the marker test is forbidden; and editing the seal after a validation read is forbidden by post_seal_defect_rule regardless of intent. The marker test is left failing as the disclosure mechanism."
+  ],
+  "gate_conditions": {
+    "S4-C1": {
+      "required": "after-cost total return is positive",
+      "verdict": "MET",
+      "satisfied": true,
+      "verdict_semantics": "MET means the sealed predicate evaluated true on the measured value. NOT_MET means it evaluated false. NOT_EVALUABLE, NOT_RUN, UNKNOWN and missing evidence are never a pass. NOT_APPLICABLE_BY_CONDITION_TEXT would be satisfied without being met; no condition reached it.",
+      "evidence": {
+        "sealed_predicate": "total_return > Decimal('0')",
+        "sealed_boundary": "Strict. Exactly zero is NOT positive. 'Positive' is not 'non-negative'; Gate 5 uses stressed_cost_return_nonnegative for a different quantity and the difference is preserved.",
+        "sealed_measurement": "Final marked equity of the BASE-cost validation run divided by starting equity, minus 1. Starting equity is the sealed USD 100.00. Measured over the validation window only; the indicator warmup segment carries no position and no equity change.",
+        "measured": "0.0215",
+        "independent_rederivation": {
+          "measured": "0.0215",
+          "threshold": "0",
+          "comparison": "total_return > threshold",
+          "met": true
+        },
+        "agrees_with_the_evaluator": true,
+        "condition_evidence": {
+          "starting_equity": "100.00",
+          "final_equity": "102.15",
+          "scenario": "BASE",
+          "sealed_predicate_literal": "0"
+        },
+        "source": "reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json gate.conditions"
+      }
+    },
+    "S4-C2": {
+      "required": "annualized Sharpe ratio is at least 0.50 using daily equity returns and a documented cash rate",
+      "verdict": "NOT_MET",
+      "satisfied": false,
+      "verdict_semantics": "MET means the sealed predicate evaluated true on the measured value. NOT_MET means it evaluated false. NOT_EVALUABLE, NOT_RUN, UNKNOWN and missing evidence are never a pass. NOT_APPLICABLE_BY_CONDITION_TEXT would be satisfied without being met; no condition reached it.",
+      "evidence": {
+        "sealed_predicate": "sharpe >= Decimal('0.50')",
+        "sealed_boundary": "Inclusive. 'At least 0.50' admits exactly 0.50.",
+        "sealed_measurement": "Mean daily equity return minus the daily equivalent of the documented cash rate, divided by the standard deviation of daily equity returns, annualised by multiplying by the square root of 252. Basis and annualisation factor from SE100-CFG-2001 metrics.sharpe_basis and metrics.trading_days_per_year.",
+        "measured": "0.2025294206503088680547420121230750",
+        "independent_rederivation": {
+          "measured": "0.2025294206503088680547420121230750",
+          "threshold": "0.50",
+          "comparison": "sharpe >= threshold",
+          "met": false
+        },
+        "agrees_with_the_evaluator": true,
+        "condition_evidence": {
+          "documented_cash_rate": {
+            "value": "0.00",
+            "source": "SE100-CFG-2001 metrics.sharpe_risk_free_annual_rate, whose metrics.sharpe_note reads: 'The documented cash rate required by constitution gate 4 is the 0% conservative proxy declared above.'",
+            "why_zero": "Constitution section 4 permits a 3-month US Treasury-bill proxy when reliable point-in-time data are available and otherwise 0% explicitly labeled conservative. Stage 1 acquired no T-bill series, so 0% is the documented rate and is labeled conservative. This was documented before Gate 3 was evaluated and is not chosen by this stage.",
+            "direction_of_bias": "A 0% cash rate cannot make this condition harder to pass. Any positive cash rate would reduce excess return and therefore reduce the measured Sharpe. A Sharpe of at least 0.50 measured at 0% is therefore weaker evidence than the same figure measured against a real short-rate series, and any Stage 4 pass must travel with that qualification. SE100-CFG-2001 benchmarks.cash_benchmark_note records the same direction for the cash return benchmark.",
+            "no_substitute_may_be_introduced_later": "A T-bill series may not be acquired and substituted after a validation result exists. Doing so would change the measurement in response to a result, which S4-C7 forbids."
+          },
+          "development_context": "This is the condition on which Gate 4 is most likely to be decided. Neither Gate 3 admitted candidate reached 0.50 on DEVELOPMENT data at the same 0% cash rate: SE100-S3A2-C1-PULLBACK-RA1 measured 0.1284700281897133148507047085010721 and SE100-S3A2-C2-MEANREV-RA1 measured 0.4202409206802080245242547261750272. Recording that now, before any validation number exists, is what stops a later session from discovering the threshold is demanding and arguing about the cash rate. The threshold is 0.50 and it is frozen.",
+          "sealed_predicate_literal": "0.50"
+        },
+        "source": "reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json gate.conditions"
+      }
+    },
+    "S4-C3": {
+      "required": "maximum drawdown is no worse than 15%",
+      "verdict": "MET",
+      "satisfied": true,
+      "verdict_semantics": "MET means the sealed predicate evaluated true on the measured value. NOT_MET means it evaluated false. NOT_EVALUABLE, NOT_RUN, UNKNOWN and missing evidence are never a pass. NOT_APPLICABLE_BY_CONDITION_TEXT would be satisfied without being met; no condition reached it.",
+      "evidence": {
+        "sealed_predicate": "max_drawdown <= Decimal('0.15')",
+        "sealed_boundary": "Inclusive. 'No worse than 15%' admits exactly 15%.",
+        "sealed_measurement": "Largest peak-to-trough decline of the daily closing marked equity series of the BASE-cost validation run, expressed as a non-negative fraction of the running peak. Session-close granularity; the project holds no intraday data and none is imputed. Basis from SE100-CFG-2001 metrics.max_drawdown_basis.",
+        "measured": "0.03161389554784035323758760240844931",
+        "independent_rederivation": {
+          "measured": "0.03161389554784035323758760240844931",
+          "threshold": "0.15",
+          "comparison": "max_drawdown <= threshold",
+          "met": true
+        },
+        "agrees_with_the_evaluator": true,
+        "condition_evidence": {
+          "research_shutdown_fired": false,
+          "shutdown_session": null,
+          "shutdown_fraction": "0.15",
+          "max_drawdown_basis": "daily marked equity including cash, peak to trough",
+          "sealed_predicate_literal": "0.15"
+        },
+        "source": "reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json gate.conditions"
+      }
+    },
+    "S4-C4": {
+      "required": "profit factor is at least 1.15",
+      "verdict": "MET",
+      "satisfied": true,
+      "verdict_semantics": "MET means the sealed predicate evaluated true on the measured value. NOT_MET means it evaluated false. NOT_EVALUABLE, NOT_RUN, UNKNOWN and missing evidence are never a pass. NOT_APPLICABLE_BY_CONDITION_TEXT would be satisfied without being met; no condition reached it.",
+      "evidence": {
+        "sealed_predicate": "profit_factor >= Decimal('1.15')",
+        "sealed_boundary": "Inclusive. 'At least 1.15' admits exactly 1.15.",
+        "sealed_measurement": "Gross profit divided by gross loss over CLOSED round trips of the BASE-cost validation run, after all costs. Trade P&L is exit cash plus dividends received while held, minus entry cash, with both legs' costs inside. Positions open at the validation window end are excluded from the numerator and the denominator alike. Basis and trade definition from SE100-CFG-2001 metrics.profit_factor_basis and metrics.trade_definition.",
+        "measured": "1.196526508226691042047531993",
+        "independent_rederivation": {
+          "measured": "1.196526508226691042047531993",
+          "threshold": "1.15",
+          "comparison": "profit_factor >= threshold",
+          "met": true
+        },
+        "agrees_with_the_evaluator": true,
+        "condition_evidence": {
+          "closed_trades": 41,
+          "gross_profit": "13.09",
+          "gross_loss": "10.94",
+          "no_closed_trade_floor_at_this_gate": "Gate 4 states no minimum closed-trade count. Gate 5 states 20. The count is reported for Gate 4 and does not gate it. Importing Gate 5's floor into Gate 4 would be a change to a frozen gate and is not done; the consequence - that a profit factor computed from very few validation trades could satisfy S4-C4 - is recorded as a limitation rather than repaired by adding an eighth condition.",
+          "sealed_predicate_literal": "1.15"
+        },
+        "source": "reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json gate.conditions"
+      }
+    },
+    "S4-C5": {
+      "required": "stressed-cost total return remains positive",
+      "verdict": "MET",
+      "satisfied": true,
+      "verdict_semantics": "MET means the sealed predicate evaluated true on the measured value. NOT_MET means it evaluated false. NOT_EVALUABLE, NOT_RUN, UNKNOWN and missing evidence are never a pass. NOT_APPLICABLE_BY_CONDITION_TEXT would be satisfied without being met; no condition reached it.",
+      "evidence": {
+        "sealed_predicate": "stressed_total_return > Decimal('0')",
+        "sealed_boundary": "Strict. Exactly zero is NOT positive. Gate 5's corresponding threshold is stressed_cost_return_nonnegative and is therefore looser on this one point; the difference is preserved and not harmonised.",
+        "sealed_measurement": "Final marked equity divided by starting equity, minus 1, for the STRESSED-cost validation run: the same sealed representative, the same frozen parameterisation, the same validation window, the same frozen calendar, with every component of the complete base friction assumption multiplied by 2.0 and the section 5.1 research shutdown enforced. Multiplier and coverage from SE100-CFG-2001 frictions.stress_multiplier and frictions.stress_applies_to, whose stress_note requires that every component be doubled including the FINRA TAF per-order cap.",
+        "measured": "0.0015",
+        "independent_rederivation": {
+          "measured": "0.0015",
+          "threshold": "0",
+          "comparison": "stressed_total_return > threshold",
+          "met": true
+        },
+        "agrees_with_the_evaluator": true,
+        "condition_evidence": {
+          "scenario": "STRESSED",
+          "stress_multiplier": "2.0",
+          "shutdown_enforced": true,
+          "status_change_from_gate_3": "GATING at Gate 4. See stressed_cost_status_change.",
+          "sealed_predicate_literal": "0"
+        },
+        "source": "reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json gate.conditions"
+      }
+    },
+    "S4-C6": {
+      "required": "at least 70% of completed walk-forward test folds have positive after-cost return",
+      "verdict": "NOT_MET",
+      "satisfied": false,
+      "verdict_semantics": "MET means the sealed predicate evaluated true on the measured value. NOT_MET means it evaluated false. NOT_EVALUABLE, NOT_RUN, UNKNOWN and missing evidence are never a pass. NOT_APPLICABLE_BY_CONDITION_TEXT would be satisfied without being met; no condition reached it.",
+      "evidence": {
+        "sealed_predicate": "positive_fold_count / completed_fold_count >= Decimal('0.70')",
+        "sealed_boundary": "Inclusive. With twelve completed folds the smallest passing count is 9.",
+        "sealed_measurement": "The twelve calendar-aligned three-month test folds declared in walk_forward_fold_construction, scored on the BASE-cost validation run's daily closing equity series. See that block for the fold boundaries, the fold return definition, the completion rule and the shutdown interaction.",
+        "measured": "0.5833333333333333333333333333",
+        "independent_rederivation": {
+          "measured": "0.5833333333333333333333333333",
+          "threshold": "0.70",
+          "comparison": "positive_fold_count / completed_fold_count >= threshold",
+          "positive_fold_count": 7,
+          "completed_fold_count": 12,
+          "met": false
+        },
+        "agrees_with_the_evaluator": true,
+        "condition_evidence": {
+          "declared_fold_count": 12,
+          "folds_scored": 12,
+          "completed_fold_count": 12,
+          "positive_fold_count": 7,
+          "positive_folds": [
+            1,
+            3,
+            4,
+            6,
+            8,
+            10,
+            12
+          ],
+          "non_positive_folds": [
+            2,
+            5,
+            7,
+            9,
+            11
+          ],
+          "incomplete_folds": [],
+          "smallest_passing_count_at_twelve_folds": 9,
+          "sealed_predicate_literal": "0.70"
+        },
+        "source": "reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json gate.conditions"
+      }
+    },
+    "S4-C7": {
+      "required": "no material rule, feature, universe, or parameter change is made in response to validation results",
+      "verdict": "MET",
+      "satisfied": true,
+      "verdict_semantics": "MET means the sealed predicate evaluated true on the measured value. NOT_MET means it evaluated false. NOT_EVALUABLE, NOT_RUN, UNKNOWN and missing evidence are never a pass. NOT_APPLICABLE_BY_CONDITION_TEXT would be satisfied without being met; no condition reached it.",
+      "evidence": {
+        "sealed_predicate": "every sealed digest recomputes to its sealed value AND exactly one validation evaluation run record exists in runs/ AND the number of validation-window engine runs equals the declared count of 2 AND no parameter recorded in the evaluation evidence differs from the parameterisation sealed in config/stage4_representative_selection.json",
+        "sealed_boundary": "Exact equality of every digest. There is no tolerance and no immaterial change: a whitespace edit to a sealed specification fails this condition, because the condition's purpose is to make the specification unchangeable rather than to adjudicate materiality after the fact.",
+        "sealed_measurement": "Mechanical, not asserted. After the validation evaluation completes, recompute the SHA-256 of every artifact that could carry a rule, feature, universe or parameter, and require each to equal the value sealed in the Stage 4 pre-registration record before any validation observation was read. The sealed set is: config/stage4_validation_protocol.json, config/stage4_gate_criteria.json, config/stage4_representative_selection.json, config/stage2_cost_model.json, config/stage2_engine_spec.json, config/stage3_attempt2_strategy_protocol.json, config/stage3_gate_criteria.json, config/stage3_attempt2_gate_criteria_binding.json, governance/STAGE_1_UNIVERSE.json, governance/STAGE_1_HOLDOUT_LOCK.json, the strategy module implementing the sealed representative, and both Stage 4 pre-registration files. This set is the same 13-item list as config/stage4_validation_protocol.json reproducibility_requirements.sealed_digests_to_recheck; the two must agree exactly, because S4-C7 is measured from it.",
+        "measured": null,
+        "independent_rederivation": {
+          "measured": null,
+          "threshold": "exact equality of every sealed digest; no tolerance",
+          "comparison": "all sealed digests equal AND exactly one validation evaluation run record AND engine runs == declared runs",
+          "all_digests_equal": true,
+          "digests_equal": 13,
+          "digests_total": 13,
+          "validation_evaluation_run_records": 1,
+          "validation_window_engine_runs": 2,
+          "declared_run_count": 2,
+          "met": true
+        },
+        "agrees_with_the_evaluator": true,
+        "condition_evidence": {
+          "clauses": {
+            "every_sealed_digest_recomputes": true,
+            "exactly_one_validation_evaluation_run_record": true,
+            "validation_window_engine_runs_equals_declared": true,
+            "no_parameter_differs_from_the_seal": true
+          },
+          "digest_rows": [
+            {
+              "artifact": "config/stage2_cost_model.json",
+              "sealed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+              "recomputed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage2_engine_spec.json",
+              "sealed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+              "recomputed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage3_attempt2_gate_criteria_binding.json",
+              "sealed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+              "recomputed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage3_attempt2_strategy_protocol.json",
+              "sealed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+              "recomputed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage3_gate_criteria.json",
+              "sealed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+              "recomputed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage4_gate_criteria.json",
+              "sealed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+              "recomputed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage4_representative_selection.json",
+              "sealed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+              "recomputed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage4_validation_protocol.json",
+              "sealed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+              "recomputed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "governance/STAGE_1_HOLDOUT_LOCK.json",
+              "sealed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+              "recomputed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "governance/STAGE_1_UNIVERSE.json",
+              "sealed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+              "recomputed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "governance/STAGE_4_PREREGISTRATION.json",
+              "sealed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+              "recomputed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.sha256",
+              "resolves_description": null
+            },
+            {
+              "artifact": "governance/STAGE_4_PREREGISTRATION.md",
+              "sealed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+              "recomputed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "src/stockedge100/strategies/attempt2_candidates.py",
+              "sealed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+              "recomputed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": "the strategy module implementing SE100-S3A2-C2-MEANREV-RA1"
+            }
+          ],
+          "digests_equal": 13,
+          "digests_total": 13,
+          "validation_evaluation_run_records": 1,
+          "validation_window_engine_runs": 2,
+          "declared_run_count": 2,
+          "parameter_comparison": {
+            "sealed_parameters": "{\"exit_sma\": 5, \"f_base\": \"0.50\", \"ladder_rungs\": [[\"0.08\", \"0.25\"], [\"0.10\", \"0.125\"]], \"loss_control\": \"0.08\", \"max_hold\": 10, \"reentry_delay\": 5, \"rsi_entry_below\": 10, \"rsi_period\": 2, \"vol_floor_fraction\": \"0.05\", \"vol_target\": \"0.10\"}",
+            "gate_3_primary_parameters": "{\"exit_sma\": 5, \"f_base\": \"0.50\", \"ladder_rungs\": [[\"0.08\", \"0.25\"], [\"0.10\", \"0.125\"]], \"loss_control\": \"0.08\", \"max_hold\": 10, \"reentry_delay\": 5, \"rsi_entry_below\": 10, \"rsi_period\": 2, \"vol_floor_fraction\": \"0.05\", \"vol_target\": \"0.10\"}",
+            "equal": true,
+            "source_of_the_sealed_parameterisation": "config/stage4_validation_protocol.json sealed_representative.parameters"
+          },
+          "strategy_invariance": {
+            "representative": "SE100-S3A2-C2-MEANREV-RA1",
+            "identifier_unchanged_from_gate_3": true,
+            "parameters_equal_gate_3_primary": true,
+            "universe_equal_gate_3": true,
+            "declared_universe": [
+              "SPY"
+            ],
+            "family_equal_gate_3": true,
+            "warmup_equal_gate_3": true,
+            "declared_warmup_sessions": 101,
+            "largest_lookback_recomputed": 101,
+            "warmup_matches_largest_lookback": true,
+            "rsi_warmup_changes": 100,
+            "strategy_module": "src/stockedge100/strategies/attempt2_candidates.py",
+            "strategy_module_digest_equal": true,
+            "all_equal": true
+          },
+          "conflict": "S4-CONFLICT-6: the sealed clause names config/stage4_representative_selection.json as the home of the parameterisation; that file carries none and the values are in config/stage4_validation_protocol.json. Both are inside the thirteen-artifact digest set.",
+          "boundary": "Exact equality of every digest. There is no tolerance and no immaterial change: a whitespace edit to a sealed specification fails this condition, because the condition's purpose is to make the specification unchangeable rather than to adjudicate materiality after the fact.",
+          "scope_note": "S4-C7 constrains changes made IN RESPONSE TO VALIDATION RESULTS. The selection of the representative and the authoring of the fold construction happened BEFORE any validation observation was read and are sealed by the pre-registration; they are within the condition's scope only in the sense that they may not change afterwards. That they were informed by Gate 3 DEVELOPMENT results is a separate and disclosed adaptation, recorded in config/stage4_representative_selection.json adaptation_disclosure.",
+          "sealed_predicate_literal": null
+        },
+        "source": "reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json gate.conditions"
+      }
+    },
+    "gate_4_representative_admitted_in_validation": {
+      "required": "The single sealed representative satisfies every hard condition of gate 4. Conjunctive within the candidate; the across-candidate disjunction of constitution section 9 is degenerate because exactly one representative was sealed.",
+      "verdict": "NOT_MET",
+      "satisfied": false,
+      "verdict_semantics": "MET means the sealed predicate evaluated true on the measured value. NOT_MET means it evaluated false. NOT_EVALUABLE, NOT_RUN, UNKNOWN and missing evidence are never a pass. NOT_APPLICABLE_BY_CONDITION_TEXT would be satisfied without being met; no condition reached it.",
+      "evidence": {
+        "representative": "SE100-S3A2-C2-MEANREV-RA1",
+        "condition_count": 7,
+        "met": [
+          "S4-C1",
+          "S4-C3",
+          "S4-C4",
+          "S4-C5",
+          "S4-C7"
+        ],
+        "not_met": [
+          "S4-C2",
+          "S4-C6"
+        ],
+        "not_evaluable": [],
+        "not_applicable_by_condition_text": [],
+        "within_candidate": "CONJUNCTIVE",
+        "across_candidates": "NOT_APPLICABLE_EXACTLY_ONE_REPRESENTATIVE",
+        "conjunction": false,
+        "no_admissible_candidate_exists_row": "Deliberate. That row belongs to a stage that ranks candidates across a disjunction. Gate 4 has one representative and takes no disjunction, so the row would be meaningless rather than merely unevaluated."
+      }
+    }
+  },
+  "artifacts": [
+    "governance/STAGE_4_VALIDATION_REPORT.md",
+    "reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json",
+    "reports/stage4/STAGE_4_VALIDATION.json",
+    "reports/stage4/STAGE_4_VALIDATION_ARTIFACT_MANIFEST.json",
+    "reports/stage4/STAGE_4_VALIDATION_TEST_SUMMARY.md",
+    "reports/stage4/pytest_stage4_evaluation_output.txt",
+    "src/stockedge100/strategies/stage4_evaluation.py",
+    "src/stockedge100/strategies/stage4_gate.py",
+    "src/stockedge100/reporting/stage4_evidence.py",
+    "src/stockedge100/reporting/stage4_evaluation_package.py",
+    "tests/unit/test_stage4_evaluation.py",
+    "tests/unit/test_stage4_evidence.py"
+  ],
+  "frozen_inputs_read_only": [
+    "governance/STAGE_0_CONSTITUTION.md",
+    "governance/STAGE_0_CONSTITUTION.json",
+    "governance/STAGE_0_FREEZE.sha256",
+    "governance/STAGE_1_DATA_FOUNDATION_REPORT.md",
+    "governance/STAGE_1_UNIVERSE.json",
+    "governance/STAGE_1_HOLDOUT_LOCK.json",
+    "governance/STAGE_1_FREEZE.sha256",
+    "governance/STAGE_1_PREREGISTRATION.json",
+    "governance/STAGE_1_PREREGISTRATION.sha256",
+    "governance/STAGE_2_BACKTEST_ENGINE_REPORT.md",
+    "governance/STAGE_2_PREREGISTRATION.json",
+    "governance/STAGE_2_PREREGISTRATION.sha256",
+    "config/stage2_cost_model.json",
+    "config/stage2_engine_spec.json",
+    "governance/STAGE_3_PREREGISTRATION.json",
+    "governance/STAGE_3_PREREGISTRATION.sha256",
+    "governance/STAGE_3_STRATEGY_RESEARCH_REPORT.md",
+    "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.json",
+    "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256",
+    "governance/STAGE_3_ATTEMPT_2_DESIGN_REPORT.md",
+    "governance/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH_REPORT.md",
+    "config/stage3_gate_criteria.json",
+    "config/stage3_attempt2_strategy_protocol.json",
+    "config/stage3_attempt2_gate_criteria_binding.json",
+    "src/stockedge100/strategies/attempt2_candidates.py",
+    "governance/STAGE_4_PREREGISTRATION.md",
+    "governance/STAGE_4_PREREGISTRATION.json",
+    "governance/STAGE_4_PREREGISTRATION.sha256",
+    "governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md",
+    "config/stage4_validation_protocol.json",
+    "config/stage4_gate_criteria.json",
+    "config/stage4_representative_selection.json"
+  ],
+  "tests": {
+    "passed": 836,
+    "failed": 1,
+    "skipped": 0,
+    "collected": 837
+  },
+  "authorization_state": {
+    "final_holdout": "SEALED",
+    "holdout_access": "NOT_AUTHORIZED",
+    "validation_window": "READ_ONCE_AND_SPENT",
+    "further_validation_reads": "NOT_AUTHORIZED",
+    "stage_5_paper_trading": "NOT_AUTHORIZED",
+    "constitutional_gate_5_holdout": "LOCKED_GATE_4_NOT_PASSED",
+    "alpaca_paper_trading": "LOCKED",
+    "shadow_live": "LOCKED",
+    "alpaca_live_trading": "LOCKED",
+    "capital_or_risk_expansion": "LOCKED",
+    "retune_or_substitute_the_representative": "PROHIBITED_BY_THE_SEALED_TERMINAL_CONSEQUENCE"
+  },
+  "next_authorized_stage": "None within this design. Gate 4 was not passed, so it authorizes no further stage: not the constitutional holdout gate, not Stage 5, not a retune, not a substitution of SE100-S3A2-C1-PULLBACK-RA1, and not a second validation read. config/stage4_validation_protocol.json no_retuning_rule states what a fail does authorize in one sentence: recording the fail as a deliverable, and stopping. Any subsequent strategy work is a new candidate restarting at constitutional gate 3, disclosed as adaptive, with the validation window's information now known to the researcher and therefore permanently compromised for that candidate.",
+  "live_trading_authorized": false,
+  "reproducibility": {
+    "run_id": "SE100-R-20260814T152439Z",
+    "repo_state_id": "60a927f5e8b8433887304c2977d3685dbc10a902743644c3431bd7c4bbea7160",
+    "package_version": "0.1.0",
+    "python": "3.10.6",
+    "dependency_versions": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "requests": "2.34.2",
+      "pytest": "8.4.2",
+      "yfinance": "1.4.1",
+      "exchange_calendars": "4.13.2",
+      "pyarrow": "MISSING",
+      "scipy": "MISSING"
+    },
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage4_evaluation_package",
+    "config_hash": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+    "random_seed": null
+  }
+}

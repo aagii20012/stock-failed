@@ -1,0 +1,352 @@
+{
+  "artifact_id": "SE100-CFG-4002",
+  "title": "Stage 4 gate criteria - Gate 4 validation robustness, evaluation methods fixed before any validation observation is read",
+  "version": "1.0.0",
+  "project": "StockEdge100",
+  "stage": 4,
+  "gate_id": 4,
+  "gate_name": "validation_robustness",
+  "constitution_ref": "SE100-GOV-0001 section 9 gate 4, sections 4, 5.1, 7, 8, 9, 10, 11",
+  "declared_before_any_validation_observation_was_read": true,
+
+  "serialisation": {
+    "encoding": "UTF-8, ASCII-only characters",
+    "note": "The frozen constitution's Gate 4 heading contains a non-ASCII em dash. It is frozen and is not repaired or re-encoded. Where this file quotes Gate 4 the heading is described rather than reproduced, and the quoted text below is the gate's body flattened to one ASCII line in the same style SE100-CFG-3002 used for Gate 3."
+  },
+
+  "declaration_note": "This file fixes how each Gate 4 condition is measured, not only what its threshold is. Six of the seven measurements already exist in sealed artifacts and are adopted by digest rather than restated, because a restatement can drift and a digest cannot. Exactly one measurement does not exist anywhere on disk - the construction of the walk-forward test folds - and it is specified here, prospectively, before any validation observation has been read. A fold count chosen after seeing a validation equity curve would be the fitting this gate exists to rule out.",
+
+  "frozen_gate_text_verbatim": "Pass only if, on the locked validation/walk-forward period: after-cost total return is positive; annualized Sharpe ratio is at least 0.50 using daily equity returns and a documented cash rate; maximum drawdown is no worse than 15%; profit factor is at least 1.15; stressed-cost total return remains positive; at least 70% of completed walk-forward test folds have positive after-cost return; no material rule, feature, universe, or parameter change is made in response to validation results. Fail verdict: STRATEGY_REJECTED_IN_VALIDATION.",
+
+  "frozen_gate_text_source": {
+    "path": "governance/STAGE_0_CONSTITUTION.md",
+    "sha256": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+    "lines": "193 to 203",
+    "flattening": "Line 193 supplies the lead-in, lines 195 to 201 supply the seven semicolon-separated conditions in file order, line 203 supplies the fail verdict. No word is added, removed, or reordered; only the Markdown bullet markers, bold markers and line breaks are dropped."
+  },
+
+  "frozen_gate_json_companion_verbatim": {
+    "id": 4,
+    "name": "validation_robustness",
+    "fail_result": "STRATEGY_REJECTED_IN_VALIDATION",
+    "thresholds": {
+      "net_return_positive": true,
+      "sharpe_min": 0.5,
+      "max_drawdown_pct": 15,
+      "profit_factor_min": 1.15,
+      "stressed_cost_return_positive": true,
+      "positive_walk_forward_folds_pct_min": 70
+    }
+  },
+
+  "frozen_gate_json_companion_source": {
+    "path": "governance/STAGE_0_CONSTITUTION.json",
+    "sha256": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+    "location": "gates[] element with id 4"
+  },
+
+  "conflicts_found": [
+    {
+      "id": "S4-CONFLICT-1",
+      "description": "The frozen constitution's Markdown states SEVEN Gate 4 conditions and its JSON companion carries SIX thresholds. The condition present in the Markdown and absent from the JSON is the last one: 'no material rule, feature, universe, or parameter change is made in response to validation results.' The other six correspond one-to-one.",
+      "resolution": "The Markdown is authoritative and is the more restrictive of the two, so all seven conditions are evaluated. This mirrors S4-CONFLICT-1's Gate 3 counterpart S3-CONFLICT-1, where the same discrepancy appeared with five JSON thresholds against seven Markdown conditions and was resolved the same way.",
+      "action_taken": "Reported, not repaired. The frozen artifacts are not edited. Seven conditions S4-C1 through S4-C7 are declared below and every one of them gates.",
+      "why_it_matters": "The omitted condition is the only one that constrains the RESEARCHER rather than the equity curve. Dropping it because a machine-readable companion omits it would remove the single condition that prevents Gate 4 from being passed on the second try."
+    },
+    {
+      "id": "S4-CONFLICT-2",
+      "description": "The constitution's JSON companion supplies fail_result for gate 4 but has NO pass_result key. Gate 3 had the same defect; gate 5 does not, and carries pass_result ELIGIBLE_FOR_PAPER_TRADING.",
+      "resolution": "The pass token is derived by negation of the stated fail_result, following the derivation already sealed for Gate 3 in SE100-CFG-3002: fail STRATEGY_REJECTED_IN_DEVELOPMENT yielded pass STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT, so fail STRATEGY_REJECTED_IN_VALIDATION yields pass STAGE_4_STRATEGY_ADMITTED_IN_VALIDATION. Both tokens are fixed in verdict_token_derivation below, before any validation observation exists, so neither can be shaped by an outcome.",
+      "action_taken": "Reported, not repaired. No token is invented beyond the mechanical negation, and the repository was searched for a pre-existing Gate 4 pass token before deriving one: none exists in governance/, config/, src/, tests/ or reports/.",
+      "explicitly_not_borrowed": "Gate 5's pass_result ELIGIBLE_FOR_PAPER_TRADING is NOT Gate 4's pass token. Passing Gate 4 authorises only the holdout gate. It does not make anything eligible for paper trading, and a Stage 4 package that emitted ELIGIBLE_FOR_PAPER_TRADING would be claiming a gate it did not evaluate."
+    },
+    {
+      "id": "S4-CONFLICT-3",
+      "description": "The Gate 4 drawdown ceiling and the section 5.1 research shutdown are the same number, 15%, measured against the running high-water mark of the same daily-closing equity series. Carried forward from S3-CONFLICT-3, where the same coincidence held at Gate 3.",
+      "resolution": "The equivalence is adopted unchanged: S4-C3 is MET if and only if the research shutdown never fires during the validation run. A candidate that trips the shutdown has by construction breached S4-C3.",
+      "action_taken": "Reported, not repaired. It also fixes the treatment of post-shutdown walk-forward folds - see conditions S4-C6 shutdown_interaction - because a shutdown flattens the equity curve for the remainder of the window and would otherwise silently shrink the fold denominator."
+    },
+    {
+      "id": "S4-CONFLICT-4",
+      "description": "New, recorded by this stage. The constitution requires 'at least 70% of completed walk-forward test folds' but nowhere defines a fold: no fold count, no fold length, no train/test split, and no definition of 'completed' exists in governance/, config/, or any prior report. A repository-wide search for walk_forward, walk-forward and walkforward returns only restatements of the constitution's own sentence.",
+      "resolution": "Constitution section 8 requires a signed specification created before execution containing the primary metric and all pass/fail gates. That is the authority under which the fold construction is fixed here, prospectively, rather than chosen at evaluation time. The construction is declared in walk_forward_fold_construction below and is derived only from the frozen partition boundaries in SE100-GOV-1005.",
+      "action_taken": "Specified prospectively, and recorded as the ONE Gate 4 measurement this stage authors rather than adopts. Every other measurement is bound by digest to an artifact sealed before Gate 3 was evaluated."
+    },
+    {
+      "id": "S4-CONFLICT-5",
+      "description": "New, recorded by this stage. The constitution's phrase 'walk-forward' implies periodic re-estimation of parameters on a training segment preceding each test segment. Gate 4's own seventh condition forbids any parameter change in response to validation results, and section 11 makes such a change a material change that creates a new candidate restarting at Gate 3. Re-fitting during validation is therefore prohibited by the same gate that names walk-forward folds.",
+      "resolution": "The gate text constrains only 'test folds'; it names no train fold and imposes no condition on one. With re-fitting prohibited, the walk-forward degenerates into a sequence of contiguous out-of-sample test folds evaluated under one frozen parameterisation. That is the reading adopted, and it is the more restrictive one: it gives the candidate no opportunity to adapt within the window.",
+      "action_taken": "Recorded, not repaired. train_folds is declared as the empty set in walk_forward_fold_construction, with the reason stated on the record rather than left to inference. A later reader who disagrees can see exactly which reading was taken and why."
+    }
+  ],
+
+  "verdict_token_derivation": {
+    "pass_token": "STAGE_4_STRATEGY_ADMITTED_IN_VALIDATION",
+    "fail_token": "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+    "pass_condition": "The single sealed representative satisfies EVERY hard condition of Gate 4.",
+    "fail_condition": "The single sealed representative fails at least one hard condition of Gate 4, or any hard condition is NOT_EVALUABLE, NOT_RUN or UNKNOWN, or its evidence is missing.",
+    "derivation_method": "fail_token is the constitution's gate 4 fail_result STRATEGY_REJECTED_IN_VALIDATION prefixed with the stage, exactly as SE100-CFG-3002 prefixed gate 3's. pass_token is its negation with REJECTED replaced by ADMITTED, exactly as SE100-CFG-3002 derived gate 3's absent pass_result. Neither token is invented and neither is taken from an operating prompt.",
+    "conjunctive_note": "Gates are conjunctive per constitution section 9: every hard condition must pass. At Gate 3 the stage verdict was additionally a disjunction ACROSS candidates, because Gate 3 asked whether a candidate worth carrying forward exists. Gate 4 has no disjunction: exactly one representative is evaluated, so conjunction within that candidate IS the stage verdict. There is no second candidate whose result could rescue it.",
+    "other_tokens_available": "BLOCKED_BY_DATA, BLOCKED_BY_INFRASTRUCTURE, INSUFFICIENT_EVIDENCE, INVALIDATED, NOT_RUN, per constitution section 10. Missing evidence may never be converted to PASS or NOT_APPLICABLE merely for convenience.",
+    "fail_is_a_deliverable": "A Gate 4 FAIL is a result and is kept on disk with the same rigour as a pass. It is not a reason to retune the representative, to substitute the other admitted Gate 3 candidate, to reopen Attempt 2, or to re-read the validation window. Constitution section 11 makes any such change a new candidate restarting at Gate 3.",
+    "single_representative_note": "Because exactly one candidate is evaluated, no admissible_candidate_exists disjunction row exists at Gate 4. The decisive row is the representative's own conjunction. This is a narrowing relative to Gate 3 and is deliberate: it is the consequence of the single-read rule, not a loosening of it."
+  },
+
+  "measurement_adopted_by_digest": {
+    "principle": "A measurement that already exists sealed is bound by digest, not copied. Binding makes the claim 'no Gate 4 measurement was chosen after Gate 3's results were known' verifiable by recomputing a hash instead of by comparing documents by eye.",
+    "bound_artifacts": [
+      {
+        "artifact_id": "SE100-CFG-2001",
+        "path": "config/stage2_cost_model.json",
+        "sha256": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+        "adoption": "ADOPTED_UNCHANGED",
+        "supplies": [
+          "metrics.trading_days_per_year = 252",
+          "metrics.sharpe_risk_free_annual_rate = 0.00, which its own sharpe_note identifies as 'The documented cash rate required by constitution gate 4 is the 0% conservative proxy declared above.' The documented cash rate Gate 4 demands was therefore already documented before Gate 3 was evaluated, and this stage does not choose it.",
+          "metrics.sharpe_basis = daily equity returns, annualised by the square root of 252",
+          "metrics.max_drawdown_basis = daily marked equity including cash, peak to trough",
+          "metrics.profit_factor_basis = gross profit divided by gross loss over closed round trips, after all costs",
+          "metrics.profit_factor_undefined_when_no_losses = reported as null, never as infinity and never silently as a large number",
+          "metrics.trade_definition = a round trip: one entry fill and the exit fill that closes it, costs on both legs attributed to it",
+          "frictions: commission 0.00, half_spread_bps 2.5, slippage_bps 2.5, SEC section 31 fee on sells, FINRA TAF on sells with a per-order cap, fees rounded up to the whole cent",
+          "frictions.stress_multiplier = 2.0 and frictions.stress_applies_to, whose stress_note states that the multiplier applies to the COMPLETE friction assumption so that every component is doubled including the TAF cap",
+          "risk.research_shutdown_drawdown_fraction = 0.15 and risk.research_shutdown_action = LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES",
+          "risk.negative_cash_permitted = false and risk.leverage_permitted = false",
+          "benchmarks.cash_benchmark_annual_rate = 0.00 and benchmarks.cash_benchmark_note, which records that a 0% cash rate makes the cash hurdle easier to beat and is therefore generous for judging a strategy"
+        ]
+      },
+      {
+        "artifact_id": "SE100-CFG-3002",
+        "path": "config/stage3_gate_criteria.json",
+        "sha256": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+        "adoption": "ADOPTED_FOR_DENOMINATORS_AND_INTEGRITY_RULES_ONLY",
+        "supplies": [
+          "The denominators and universes of measurement for total return, maximum drawdown, profit factor and closed-trade counting, which are the same quantities Gate 4 measures on a different window against different thresholds.",
+          "evaluation_integrity_rules: verdicts computed by program from recorded evidence; exactly four verdict values MET, NOT_MET, NOT_EVALUABLE, NOT_APPLICABLE_BY_CONDITION_TEXT; comparisons as exact Decimals with no rounding before comparison; the measured value recorded alongside every verdict."
+        ],
+        "explicitly_not_adopted": [
+          "Gate 3's thresholds. Gate 4's thresholds come from the constitution's gate 4 object and are strictly tighter where they overlap: profit factor rises from 1.10 to 1.15, and Sharpe and the fold condition and the stressed-cost condition are added.",
+          "Gate 3's condition ids and condition text. Gate 4 declares its own S4-C1 through S4-C7.",
+          "Gate 3's S3-C4 closed-trade floor of 30, S3-C5 best-trade-removal condition, S3-C6 concentration condition and S3-C7 neighbour-stability condition. None of the four is a Gate 4 condition. S3-C5 and a closed-trade floor of 20 reappear at Gate 5; neither is imported here, because importing a later gate's condition into an earlier one is as much a change as dropping one.",
+          "Gate 3's admissible_candidate_exists disjunction. See verdict_token_derivation.single_representative_note."
+        ]
+      },
+      {
+        "artifact_id": "SE100-GOV-1005",
+        "path": "governance/STAGE_1_HOLDOUT_LOCK.json",
+        "sha256": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+        "adoption": "ADOPTED_UNCHANGED",
+        "supplies": [
+          "The validation window boundaries 2021-08-01 to 2024-07-31 inclusive, which are the only validation-partition facts this stage reads.",
+          "The holdout window boundaries 2024-08-01 to 2026-07-31 and holdout_state SEALED.",
+          "The binding rule that these boundaries may not be recomputed, widened, narrowed, or shifted by any later stage."
+        ]
+      }
+    ],
+    "what_this_stage_authors": [
+      "walk_forward_fold_construction, in full. It exists nowhere on disk. See S4-CONFLICT-4.",
+      "The promotion of the stressed-cost run from non-gating to gating, which is not a new measurement but a change of status that the constitution's gate 4 text makes for us. See stressed_cost_status_change.",
+      "The seven condition ids, predicates, boundary treatments and not-evaluable treatments below, assembled from the frozen gate text and the adopted measurements."
+    ]
+  },
+
+  "walk_forward_fold_construction": {
+    "id": "SE100-CFG-4002-WF1",
+    "authority": "constitution SE100-GOV-0001 section 8, which requires a signed specification created before execution containing the primary metric and all pass/fail gates; and section 9 gate 4, which requires completed walk-forward test folds without defining them.",
+    "declared_before_any_validation_observation_was_read": true,
+    "derived_only_from": "The frozen validation window boundaries in SE100-GOV-1005. No trading-session count, no price, no indicator value and no coverage statistic from the validation partition was read to construct these folds.",
+
+    "train_folds": {
+      "count": 0,
+      "set": [],
+      "reason": "Re-estimating any parameter inside the validation window is prohibited by Gate 4's own seventh condition and by constitution section 11. With no re-fitting there is nothing to train, and the gate text imposes conditions on test folds only. See S4-CONFLICT-5."
+    },
+
+    "test_folds": {
+      "rule": "The validation window is partitioned into consecutive, non-overlapping, calendar-aligned blocks of exactly three calendar months each, beginning at the validation window start. The window spans 36 calendar months exactly, so twelve blocks tile it with no remainder and no discarded tail.",
+      "count": 12,
+      "block_length": "3 calendar months",
+      "alignment": "Anchored on the validation window start 2021-08-01, not on natural calendar quarters. 2021-08-01 is not a quarter boundary; anchoring on the frozen boundary keeps the construction a function of SE100-GOV-1005 alone and leaves no discretion.",
+      "boundaries_inclusive": true,
+      "folds": [
+        {"fold": 1, "start": "2021-08-01", "end": "2021-10-31"},
+        {"fold": 2, "start": "2021-11-01", "end": "2022-01-31"},
+        {"fold": 3, "start": "2022-02-01", "end": "2022-04-30"},
+        {"fold": 4, "start": "2022-05-01", "end": "2022-07-31"},
+        {"fold": 5, "start": "2022-08-01", "end": "2022-10-31"},
+        {"fold": 6, "start": "2022-11-01", "end": "2023-01-31"},
+        {"fold": 7, "start": "2023-02-01", "end": "2023-04-30"},
+        {"fold": 8, "start": "2023-05-01", "end": "2023-07-31"},
+        {"fold": 9, "start": "2023-08-01", "end": "2023-10-31"},
+        {"fold": 10, "start": "2023-11-01", "end": "2024-01-31"},
+        {"fold": 11, "start": "2024-02-01", "end": "2024-04-30"},
+        {"fold": 12, "start": "2024-05-01", "end": "2024-07-31"}
+      ],
+      "session_assignment": "A trading session belongs to fold k if and only if its date lies within fold k's inclusive bounds. Per-fold session counts are deliberately NOT recorded here: they are validation-partition coverage, and reading them now would be an inspection of the locked partition. They are computed at evaluation time from the frozen calendar and recorded in the evidence file then.",
+      "why_twelve_and_not_six_or_four": "Three reasons, all fixed before any result. First, three calendar months is the shortest block that tiles a 36-month window an integral number of times while still containing enough sessions for a round trip of the sealed maximum holding period. Second, twelve folds put the 70% threshold at 8.4 folds, so the pass boundary is unambiguous: nine positive folds pass and eight fail, with no tie at the threshold. Six folds would put it at 4.2 and four folds at 2.8, both of which make one fold worth more than a tenth of the gate. Third, a finer partition is the more demanding one: the more folds there are, the harder it is for a single strong sub-period to carry the condition."
+    },
+
+    "fold_return_definition": {
+      "series": "The daily closing marked equity series of the BASE-cost validation run, including cash and the mark-to-market value of any open position, as defined by SE100-CFG-2001 metrics.max_drawdown_basis. The stressed-cost run's equity curve is NOT used for the fold condition; the stressed run gates only S4-C5.",
+      "fold_1": "E(last session of fold 1) divided by the run's starting equity, minus 1. Starting equity is the sealed USD 100.00 at the run's first trading session.",
+      "fold_k_for_k_greater_than_1": "E(last session of fold k) divided by E(last session of fold k-1), minus 1.",
+      "continuity": "One continuous run, not twelve independent accounts. Positions are not force-closed at a fold boundary and no artificial trade is created by the partition. A fold return is therefore a marked-to-market interval return of a single continuing account, which is what makes the twelve returns compose to the window total return.",
+      "positive_means": "strictly greater than zero. Exactly zero is NOT positive. This follows SE100-CFG-3002's sign treatment, where zero matches nothing.",
+      "after_cost": "Every fold return is after the complete base friction assumption. There is no gross figure anywhere in the fold computation."
+    },
+
+    "completed_fold_definition": {
+      "rule": "A fold is COMPLETED if and only if all three hold: (a) the fold's inclusive bounds lie wholly inside the frozen validation window; (b) the fold contains at least one trading session of the frozen calendar; and (c) the validation run produced a daily closing equity value for the fold's last trading session.",
+      "expected_completed_count": 12,
+      "shutdown_does_not_reduce_the_count": "If the section 5.1 research shutdown fires during the validation run, the account is liquidated at the next open and entries are blocked permanently. Every later fold still satisfies all three completion tests - the sessions exist and the engine still marks equity - so every later fold is COMPLETED with a return of exactly 0, which is not positive. A shutdown therefore cannot shrink the denominator. This is the strict reading and it is chosen deliberately: the alternative would let a candidate trip the shutdown in fold 3 and pass the condition on two positive folds out of two.",
+      "incomplete_run_is_not_a_pass": "If fewer than twelve folds are COMPLETED, the run did not reach the validation window end. S4-C6 is then NOT_EVALUABLE, which per constitution section 9 is not a pass, and the run is re-run in full rather than scored on the folds it managed to finish."
+    },
+
+    "predicate": "count(folds with return strictly greater than 0) divided by count(COMPLETED folds) >= Decimal('0.70'), compared as exact Decimals with no rounding before comparison.",
+    "boundary": "Inclusive. 'At least 70%' admits exactly 0.70. With twelve completed folds the smallest passing count is 9, since 9/12 = 0.75 and 8/12 = 0.666... which is below 0.70.",
+    "immutability": "This construction is sealed by the Stage 4 pre-registration and may not be changed after any validation observation is read. Changing the fold count, length, alignment, return definition, completion rule or predicate after a result exists is a material change under constitution section 11 and creates a new candidate restarting at Gate 3. It is specifically not a repair."
+  },
+
+  "stressed_cost_status_change": {
+    "at_gate_3": "NON-GATING. SE100-CFG-3004 cost_stress_is_not_a_gate_3_condition states it explicitly: a STRESS_FRAGILE flag could not reject a candidate that satisfied every hard condition, and a clean stressed run could not admit one that failed a condition. The runs existed to satisfy constitution section 7 and to put the number on disk for a later gate.",
+    "at_gate_4": "GATING. The constitution's gate 4 text makes 'stressed-cost total return remains positive' one of the seven pass conditions, and its JSON companion carries stressed_cost_return_positive: true. This is not a decision of this stage; it is the frozen gate text.",
+    "consequence": "The later gate SE100-CFG-3004 was putting the number on disk for is this one. A representative whose stressed-cost validation return is not strictly positive fails Gate 4 outright, however good its base-cost figures are.",
+    "development_precedent_recorded": "On development data the two Gate 3 admitted candidates recorded stressed-cost total returns of 0.0018 for SE100-S3A2-C1-PULLBACK-RA1 and 0.3311 for SE100-S3A2-C2-MEANREV-RA1, and C1's stressed run tripped the section 5.1 shutdown on 2018-02-05. Had S4-C5 been a Gate 3 condition, C1 would have passed it only barely and only because the shutdown fired late enough to leave the return fractionally above zero. That is recorded here as context for why the stressed condition is treated as a real hurdle and not a formality; it is a development fact and says nothing about validation.",
+    "stress_multiplier_is_not_re_chosen": "2.0 applied to the COMPLETE friction assumption, bound by digest from SE100-CFG-2001 frictions.stress_multiplier and frictions.stress_applies_to. This stage does not select a stress level."
+  },
+
+  "conditions": [
+    {
+      "id": "S4-C1",
+      "required_verbatim": "after-cost total return is positive",
+      "measurement": "Final marked equity of the BASE-cost validation run divided by starting equity, minus 1. Starting equity is the sealed USD 100.00. Measured over the validation window only; the indicator warmup segment carries no position and no equity change.",
+      "predicate": "total_return > Decimal('0')",
+      "boundary": "Strict. Exactly zero is NOT positive. 'Positive' is not 'non-negative'; Gate 5 uses stressed_cost_return_nonnegative for a different quantity and the difference is preserved.",
+      "costs": "Complete base friction assumption per SE100-CFG-2001. No gross figure is admissible as evidence for this condition.",
+      "not_evaluable_treatment": "An equity series with fewer than two points, or a run that did not reach 2024-07-31, is NOT_EVALUABLE. Per constitution section 9 that is not a pass."
+    },
+    {
+      "id": "S4-C2",
+      "required_verbatim": "annualized Sharpe ratio is at least 0.50 using daily equity returns and a documented cash rate",
+      "measurement": "Mean daily equity return minus the daily equivalent of the documented cash rate, divided by the standard deviation of daily equity returns, annualised by multiplying by the square root of 252. Basis and annualisation factor from SE100-CFG-2001 metrics.sharpe_basis and metrics.trading_days_per_year.",
+      "documented_cash_rate": {
+        "value": "0.00",
+        "source": "SE100-CFG-2001 metrics.sharpe_risk_free_annual_rate, whose metrics.sharpe_note reads: 'The documented cash rate required by constitution gate 4 is the 0% conservative proxy declared above.'",
+        "why_zero": "Constitution section 4 permits a 3-month US Treasury-bill proxy when reliable point-in-time data are available and otherwise 0% explicitly labeled conservative. Stage 1 acquired no T-bill series, so 0% is the documented rate and is labeled conservative. This was documented before Gate 3 was evaluated and is not chosen by this stage.",
+        "direction_of_bias": "A 0% cash rate cannot make this condition harder to pass. Any positive cash rate would reduce excess return and therefore reduce the measured Sharpe. A Sharpe of at least 0.50 measured at 0% is therefore weaker evidence than the same figure measured against a real short-rate series, and any Stage 4 pass must travel with that qualification. SE100-CFG-2001 benchmarks.cash_benchmark_note records the same direction for the cash return benchmark.",
+        "no_substitute_may_be_introduced_later": "A T-bill series may not be acquired and substituted after a validation result exists. Doing so would change the measurement in response to a result, which S4-C7 forbids."
+      },
+      "predicate": "sharpe >= Decimal('0.50')",
+      "boundary": "Inclusive. 'At least 0.50' admits exactly 0.50.",
+      "not_evaluable_treatment": "Fewer than two daily returns, or a zero standard deviation of daily returns, makes the ratio undefined. It is reported as NOT_EVALUABLE, never as infinity and never as a large number, following SE100-CFG-2001's treatment of an undefined profit factor. NOT_EVALUABLE is not a pass.",
+      "development_context_recorded": "This is the condition on which Gate 4 is most likely to be decided. Neither Gate 3 admitted candidate reached 0.50 on DEVELOPMENT data at the same 0% cash rate: SE100-S3A2-C1-PULLBACK-RA1 measured 0.1284700281897133148507047085010721 and SE100-S3A2-C2-MEANREV-RA1 measured 0.4202409206802080245242547261750272. Recording that now, before any validation number exists, is what stops a later session from discovering the threshold is demanding and arguing about the cash rate. The threshold is 0.50 and it is frozen."
+    },
+    {
+      "id": "S4-C3",
+      "required_verbatim": "maximum drawdown is no worse than 15%",
+      "measurement": "Largest peak-to-trough decline of the daily closing marked equity series of the BASE-cost validation run, expressed as a non-negative fraction of the running peak. Session-close granularity; the project holds no intraday data and none is imputed. Basis from SE100-CFG-2001 metrics.max_drawdown_basis.",
+      "predicate": "max_drawdown <= Decimal('0.15')",
+      "boundary": "Inclusive. 'No worse than 15%' admits exactly 15%.",
+      "interaction": "S4-CONFLICT-3. The ceiling and the section 5.1 research shutdown are the same 15% on the same series, so S4-C3 is MET if and only if the shutdown never fires during the validation run. The shutdown is enforced for both declared validation runs and is never disabled.",
+      "not_evaluable_treatment": "An equity series with fewer than two points is NOT_EVALUABLE and is not a pass."
+    },
+    {
+      "id": "S4-C4",
+      "required_verbatim": "profit factor is at least 1.15",
+      "measurement": "Gross profit divided by gross loss over CLOSED round trips of the BASE-cost validation run, after all costs. Trade P&L is exit cash plus dividends received while held, minus entry cash, with both legs' costs inside. Positions open at the validation window end are excluded from the numerator and the denominator alike. Basis and trade definition from SE100-CFG-2001 metrics.profit_factor_basis and metrics.trade_definition.",
+      "predicate": "profit_factor >= Decimal('1.15')",
+      "boundary": "Inclusive. 'At least 1.15' admits exactly 1.15.",
+      "undefined_cases": "Zero gross loss makes the ratio undefined. Per SE100-CFG-2001 metrics.profit_factor_undefined_when_no_losses it is reported as null, never as infinity and never silently as a large number, and the condition is NOT_EVALUABLE. Zero closed trades is likewise NOT_EVALUABLE. Neither is a pass.",
+      "no_closed_trade_floor_at_this_gate": "Gate 4 states no minimum closed-trade count. Gate 5 states 20. The count is reported for Gate 4 and does not gate it. Importing Gate 5's floor into Gate 4 would be a change to a frozen gate and is not done; the consequence - that a profit factor computed from very few validation trades could satisfy S4-C4 - is recorded as a limitation rather than repaired by adding an eighth condition."
+    },
+    {
+      "id": "S4-C5",
+      "required_verbatim": "stressed-cost total return remains positive",
+      "measurement": "Final marked equity divided by starting equity, minus 1, for the STRESSED-cost validation run: the same sealed representative, the same frozen parameterisation, the same validation window, the same frozen calendar, with every component of the complete base friction assumption multiplied by 2.0 and the section 5.1 research shutdown enforced. Multiplier and coverage from SE100-CFG-2001 frictions.stress_multiplier and frictions.stress_applies_to, whose stress_note requires that every component be doubled including the FINRA TAF per-order cap.",
+      "predicate": "stressed_total_return > Decimal('0')",
+      "boundary": "Strict. Exactly zero is NOT positive. Gate 5's corresponding threshold is stressed_cost_return_nonnegative and is therefore looser on this one point; the difference is preserved and not harmonised.",
+      "status": "GATING at Gate 4. See stressed_cost_status_change.",
+      "flag_semantics_superseded": "The STRESS_FRAGILE flag recorded at Gate 3 was evidence only. At Gate 4 the underlying quantity is a hard condition, so no flag mediates it: a non-positive stressed return is NOT_MET, not a flag.",
+      "not_evaluable_treatment": "A stressed run that did not reach 2024-07-31 makes S4-C5 NOT_EVALUABLE, which is not a pass. The base run's figures may not substitute for a missing stressed run."
+    },
+    {
+      "id": "S4-C6",
+      "required_verbatim": "at least 70% of completed walk-forward test folds have positive after-cost return",
+      "measurement": "The twelve calendar-aligned three-month test folds declared in walk_forward_fold_construction, scored on the BASE-cost validation run's daily closing equity series. See that block for the fold boundaries, the fold return definition, the completion rule and the shutdown interaction.",
+      "predicate": "positive_fold_count / completed_fold_count >= Decimal('0.70')",
+      "boundary": "Inclusive. With twelve completed folds the smallest passing count is 9.",
+      "shutdown_interaction": "Folds after a research shutdown are COMPLETED with a return of exactly 0 and are counted in the denominator as non-positive. A shutdown cannot shrink the denominator. See walk_forward_fold_construction.completed_fold_definition.",
+      "not_evaluable_treatment": "Fewer than twelve completed folds means the run did not reach the window end: NOT_EVALUABLE, not a pass, and the run is re-run in full rather than scored partially.",
+      "per_fold_returns_are_reported": "All twelve fold returns are recorded in the evidence file with the fold bounds and session counts, so that the ratio can be recomputed by a reader without rerunning the engine."
+    },
+    {
+      "id": "S4-C7",
+      "required_verbatim": "no material rule, feature, universe, or parameter change is made in response to validation results",
+      "measurement": "Mechanical, not asserted. After the validation evaluation completes, recompute the SHA-256 of every artifact that could carry a rule, feature, universe or parameter, and require each to equal the value sealed in the Stage 4 pre-registration record before any validation observation was read. The sealed set is: config/stage4_validation_protocol.json, config/stage4_gate_criteria.json, config/stage4_representative_selection.json, config/stage2_cost_model.json, config/stage2_engine_spec.json, config/stage3_attempt2_strategy_protocol.json, config/stage3_gate_criteria.json, config/stage3_attempt2_gate_criteria_binding.json, governance/STAGE_1_UNIVERSE.json, governance/STAGE_1_HOLDOUT_LOCK.json, the strategy module implementing the sealed representative, and both Stage 4 pre-registration files. This set is the same 13-item list as config/stage4_validation_protocol.json reproducibility_requirements.sealed_digests_to_recheck; the two must agree exactly, because S4-C7 is measured from it.",
+      "predicate": "every sealed digest recomputes to its sealed value AND exactly one validation evaluation run record exists in runs/ AND the number of validation-window engine runs equals the declared count of 2 AND no parameter recorded in the evaluation evidence differs from the parameterisation sealed in config/stage4_representative_selection.json",
+      "boundary": "Exact equality of every digest. There is no tolerance and no immaterial change: a whitespace edit to a sealed specification fails this condition, because the condition's purpose is to make the specification unchangeable rather than to adjudicate materiality after the fact.",
+      "why_measured_this_way": "This is the only Gate 4 condition about the researcher rather than the equity curve, and an assertion that no change was made is exactly the kind of claim a report can carry while being false. Recomputing digests turns it into arithmetic. It is also the condition the JSON companion omits, so it would be the easiest of the seven to lose - see S4-CONFLICT-1.",
+      "not_evaluable_treatment": "A missing sealed digest, an absent pre-registration record, or more than one validation evaluation run record makes S4-C7 NOT_MET rather than NOT_EVALUABLE. The absence of the evidence that would prove no change occurred is not neutral: it is the state the condition exists to forbid.",
+      "scope_note": "S4-C7 constrains changes made IN RESPONSE TO VALIDATION RESULTS. The selection of the representative and the authoring of the fold construction happened BEFORE any validation observation was read and are sealed by the pre-registration; they are within the condition's scope only in the sense that they may not change afterwards. That they were informed by Gate 3 DEVELOPMENT results is a separate and disclosed adaptation, recorded in config/stage4_representative_selection.json adaptation_disclosure."
+    }
+  ],
+
+  "reported_but_not_gating": [
+    "CAGR, annualised volatility, exposure fraction, win rate, average win, average loss, longest flat streak, closed-trade count, fills, rejections, dividend events, stale marks, and exits by reason.",
+    "SPY total return and SPY tradable buy-and-hold over the validation window, with the research shutdown both enforced and disabled, the latter explicitly labelled a benchmark reference account.",
+    "Cash benchmark at 0.00% annual, labelled conservative, and the do-nothing benchmark.",
+    "The twelve individual fold returns. The ratio gates; no single fold does.",
+    "Removing the single best trade. This is a Gate 3 condition (S3-C5) and a Gate 5 threshold (best_trade_removed_return_positive). It is not a Gate 4 condition and is reported only so that a later gate reads it from evidence rather than re-deriving it.",
+    "Constitution section 4 requires better risk-adjusted performance than cash for a strategy to pass overall, and states that beating SPY is not mandatory where drawdown is materially reduced. Against the sealed 0% zero-volatility cash series, 'better risk-adjusted performance than cash' is satisfied by any strictly positive Sharpe, so S4-C2's floor of 0.50 subsumes it. It is recorded here as subsumed rather than added as an eighth condition. Beating SPY is reported and does not gate; neither Gate 3 admitted candidate beat SPY on either benchmark series in development."
+  ],
+
+  "evaluation_integrity_rules": [
+    "Adopted unchanged from SE100-CFG-3002 evaluation_integrity_rules and restated here for a reader.",
+    "Conditions are evaluated by a program that reads the engine's own outputs. No condition verdict is typed by hand into a report.",
+    "Every condition verdict is one of MET, NOT_MET, NOT_EVALUABLE, or NOT_APPLICABLE_BY_CONDITION_TEXT. There is no fifth value and no borderline value. No Gate 4 condition is expected to be NOT_APPLICABLE: all seven apply to a single-instrument single representative.",
+    "The stage verdict is the conjunction of the representative's seven conditions. NOT_EVALUABLE never counts as MET.",
+    "Thresholds are compared as exact Decimals. No comparison is made in floating point, and no result is rounded before comparison.",
+    "The evidence file records the measured value alongside every verdict, so that a reader can recompute every comparison without rerunning the engine.",
+    "The verdict written into the Stage 4 decision package must be the verdict the recorded evidence reaches. A package whose verdict disagrees with its own conditions table is refused by the builder rather than written."
+  ],
+
+  "incoherent_combinations_refused": [
+    "A PASS with any condition not MET.",
+    "A PASS reached by treating NOT_EVALUABLE, NOT_RUN, UNKNOWN, or missing evidence as satisfied.",
+    "A PASS emitted under Gate 5's token ELIGIBLE_FOR_PAPER_TRADING, which Gate 4 does not confer.",
+    "A FAIL followed by a retune, a substitution of the other Gate 3 admitted candidate, or a second validation read.",
+    "A verdict of any kind computed from more than the two declared validation runs.",
+    "A verdict reached after any sealed digest changed. That is S4-C7 NOT_MET, and it fails the gate regardless of the equity curve."
+  ],
+
+  "windows": {
+    "state_in_the_pre_registration_session": {
+      "authorized": ["development"],
+      "validation_window_state": "LOCKED",
+      "holdout_window_state": "SEALED",
+      "note": "No validation observation is read to write this file. The only validation-partition facts it contains are the window boundaries, which SE100-GOV-1005 publishes as frozen metadata, and the calendar arithmetic performed on them."
+    },
+    "state_in_the_authorized_evaluation_session": {
+      "authorized": ["validation"],
+      "development_read": "The indicator warmup segment immediately preceding the validation window start is read from the development partition, which is already authorized and already read. No new development search is performed and no development metric is recomputed.",
+      "validation_window_state": "AUTHORIZED_FOR_EXACTLY_ONE_READ",
+      "holdout_window_state": "SEALED",
+      "note": "The holdout remains sealed through Gate 4 regardless of the Gate 4 verdict. It is read exactly once, at Gate 5."
+    },
+    "enforcement": "stockedge100.backtest.window.ResearchWindow raises WindowViolation on any session outside the window authorized for the run, and MarketView raises LookAheadError on any read past the decision session. Both are structural; neither depends on a strategy behaving well.",
+    "boundaries_unchanged": "No boundary is moved, widened, narrowed, or re-cut by this stage. The fold partition is a partition OF the frozen validation window and does not alter it."
+  },
+
+  "gate_5_is_not_unlocked_by_this_file": {
+    "unlocked_by_a_gate_4_pass": "Only the constitutional holdout gate, per constitution section 9, and only after a separate authorization recorded at that gate.",
+    "not_unlocked": [
+      "Paper trading. Gate 5's pass_result ELIGIBLE_FOR_PAPER_TRADING is reachable only from Gate 5.",
+      "Shadow-live operation.",
+      "Live trading.",
+      "Any capital or risk expansion.",
+      "Any broker connection, credential read, or order submission."
+    ]
+  },
+
+  "live_trading_authorized": false
+}

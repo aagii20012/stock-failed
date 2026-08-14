@@ -1,0 +1,155 @@
+{
+  "config_id": "SE100-CFG-1002",
+  "title": "Stage 1 research universe specification (candidate list, eligibility rules, exclusions)",
+  "version": "1.0.0",
+  "status": "PREREGISTERED",
+  "constitution_ref": "SE100-GOV-0001",
+  "declared_before_any_data_acquired": true,
+  "note": "This file contains no timestamp by design; see governance/STAGE_1_PREREGISTRATION.json.",
+
+  "scope_decision": {
+    "research_universe_class": "ETF_ONLY",
+    "individual_stocks_permitted_in_generation_1": false,
+    "constitutional_basis": "SE100-GOV-0001 section 6: a static present-day stock list may not be used to make historical claims without an explicit survivorship-bias verdict, and a dataset that cannot support the required bias controls may still support ETF-only research if that narrower use is frozen before strategy results are viewed.",
+    "why_stocks_are_excluded": [
+      "The selected provider supplies no point-in-time index-membership history, so historical universe membership cannot be reconstructed.",
+      "The selected provider supplies no reliable delisted-security coverage, so companies that failed, merged, or were acquired are absent from any present-day list.",
+      "Backtesting a present-day stock list over history would therefore embed an uncontrolled and unquantifiable upward survivorship bias.",
+      "No paid data source is authorized, so the bias cannot be controlled by buying better data.",
+      "The constitution's own remedy for exactly this situation is to narrow prospectively to ETF-only research, which is what is done here."
+    ],
+    "stock_universe_survivorship_verdict": "SURVIVORSHIP_BIAS_UNCONTROLLED",
+    "stock_research_authorization": "PROHIBITED_IN_GENERATION_1_WITHOUT_A_NEW_DATA_SOURCE",
+    "narrowing_is_permitted": "This narrows scope relative to the constitution's Generation 1 securities definition. Narrowing is always permitted; only weakening is forbidden."
+  },
+
+  "etf_universe_bias_assessment": {
+    "verdict": "RESIDUAL_FUND_CLOSURE_BIAS_DISCLOSED_AND_UNQUANTIFIED",
+    "honest_statement": "The candidate list below was assembled in 2026 and therefore contains only funds that still exist in 2026. Exchange-traded funds that launched and later closed between the start of the development window and the data cutoff are absent from it. This is a real residual survivorship bias and it is not eliminated by the ETF narrowing.",
+    "why_the_residual_is_smaller_than_the_stock_case": [
+      "Every candidate is a large, broad, rules-based index fund from a major sponsor, a category in which closure over the sample period was rare rather than typical.",
+      "Fund closures overwhelmingly affect small, narrow, recently launched, or thematic products; the inception cutoff below excludes that entire population by construction.",
+      "The candidate list is fixed and small, so the selection cannot be quietly expanded later to add whatever happened to perform well."
+    ],
+    "what_would_be_required_to_quantify_it": "A delisted-fund database with point-in-time listing status. None is available at zero cost, so the bias is disclosed rather than measured.",
+    "binding_consequence": "Every downstream result carries this limitation in its report. No Stage 1 artifact may claim the ETF universe is survivorship-free."
+  },
+
+  "eligibility_rules": {
+    "evaluated": "mechanically, after acquisition, from the frozen rules below; no discretionary addition or removal is permitted",
+    "structural": [
+      {"id": "US_LISTED", "rule": "listed on a US national securities exchange"},
+      {"id": "UNLEVERAGED", "rule": "no leveraged exposure of any multiple"},
+      {"id": "NON_INVERSE", "rule": "no inverse or short exposure"},
+      {"id": "NOT_K1_PARTNERSHIP", "rule": "does not issue a Schedule K-1; commodity pools and partnerships are excluded"},
+      {"id": "NOT_COMMODITY_TRUST", "rule": "physical-commodity grantor trusts are excluded; see excluded_by_construction"},
+      {"id": "RULES_BASED_INDEX", "rule": "tracks a published rules-based index rather than a discretionary mandate"},
+      {"id": "INCEPTION_CUTOFF", "rule": "first available trading session on or before 2010-01-04"}
+    ],
+    "measured_on_development_window_only": [
+      {"id": "MIN_DEVELOPMENT_SESSIONS", "rule": "at least 1260 trading sessions inside the development window (about five years)"},
+      {"id": "MEDIAN_DOLLAR_VOLUME", "rule": "median of close * volume over the development window is at least USD 5000000"},
+      {"id": "MIN_CLOSE", "rule": "minimum close over the development window is at least USD 5.00"},
+      {"id": "DATA_QUALITY", "rule": "passes every FAIL-severity check in the validation battery"}
+    ],
+    "measurement_window_restriction": "No eligibility measurement may read validation-window or holdout-window data. This is a hard rule and is enforced by test, not by convention.",
+    "broker_eligibility": {
+      "alpaca_tradable": "UNVERIFIED",
+      "alpaca_fractionable": "UNVERIFIED",
+      "reason": "No credential access is authorized at Stage 1.",
+      "resolution_stage": "Stage 6 (constitution gate 7, Alpaca paper trading)",
+      "binding_consequence": "The realized universe is conditional. Any symbol later found non-tradable or non-fractionable at Alpaca must be removed and every affected gate re-run."
+    }
+  },
+
+  "excluded_by_construction": [
+    {
+      "class": "physical_commodity_grantor_trusts",
+      "examples": ["GLD", "SLV", "IAU"],
+      "reason": "Constitution section 3 defines the securities scope as US-listed common stocks and unleveraged ETFs. A physical-metal grantor trust is not a registered investment company and is not literally an ETF. Stage 1 declines to widen a frozen scope by interpretation. Adding this class would require a new constitution version, not a Stage 1 decision."
+    },
+    {
+      "class": "commodity_pools_issuing_k1",
+      "examples": ["DBC", "USO"],
+      "reason": "Prohibited by the NOT_K1_PARTNERSHIP rule and operationally unsuitable for a USD 100 cash account."
+    },
+    {
+      "class": "leveraged_and_inverse_products",
+      "reason": "Prohibited outright by constitution section 3."
+    },
+    {
+      "class": "individual_common_stocks",
+      "reason": "See scope_decision: survivorship bias is uncontrolled for this provider."
+    }
+  ],
+
+  "candidates": [
+    {"symbol": "SPY", "asset_class": "us_equity_broad",   "exposure": "S&P 500"},
+    {"symbol": "IVV", "asset_class": "us_equity_broad",   "exposure": "S&P 500"},
+    {"symbol": "VTI", "asset_class": "us_equity_broad",   "exposure": "US total market"},
+    {"symbol": "QQQ", "asset_class": "us_equity_broad",   "exposure": "Nasdaq-100"},
+    {"symbol": "IWM", "asset_class": "us_equity_broad",   "exposure": "Russell 2000 small cap"},
+    {"symbol": "DIA", "asset_class": "us_equity_broad",   "exposure": "Dow Jones Industrial Average"},
+    {"symbol": "MDY", "asset_class": "us_equity_broad",   "exposure": "S&P MidCap 400"},
+
+    {"symbol": "XLB", "asset_class": "us_equity_sector",  "exposure": "materials"},
+    {"symbol": "XLE", "asset_class": "us_equity_sector",  "exposure": "energy"},
+    {"symbol": "XLF", "asset_class": "us_equity_sector",  "exposure": "financials"},
+    {"symbol": "XLI", "asset_class": "us_equity_sector",  "exposure": "industrials"},
+    {"symbol": "XLK", "asset_class": "us_equity_sector",  "exposure": "technology"},
+    {"symbol": "XLP", "asset_class": "us_equity_sector",  "exposure": "consumer staples"},
+    {"symbol": "XLU", "asset_class": "us_equity_sector",  "exposure": "utilities"},
+    {"symbol": "XLV", "asset_class": "us_equity_sector",  "exposure": "health care"},
+    {"symbol": "XLY", "asset_class": "us_equity_sector",  "exposure": "consumer discretionary"},
+
+    {"symbol": "SHY", "asset_class": "fixed_income",      "exposure": "1-3y US Treasury"},
+    {"symbol": "IEF", "asset_class": "fixed_income",      "exposure": "7-10y US Treasury"},
+    {"symbol": "TLT", "asset_class": "fixed_income",      "exposure": "20y+ US Treasury"},
+    {"symbol": "LQD", "asset_class": "fixed_income",      "exposure": "investment grade credit"},
+    {"symbol": "HYG", "asset_class": "fixed_income",      "exposure": "high yield credit"},
+    {"symbol": "AGG", "asset_class": "fixed_income",      "exposure": "US aggregate bond"},
+    {"symbol": "BND", "asset_class": "fixed_income",      "exposure": "US total bond market"},
+    {"symbol": "TIP", "asset_class": "fixed_income",      "exposure": "TIPS"},
+
+    {"symbol": "EFA", "asset_class": "intl_equity",       "exposure": "developed ex-US"},
+    {"symbol": "VEA", "asset_class": "intl_equity",       "exposure": "developed ex-US"},
+    {"symbol": "VGK", "asset_class": "intl_equity",       "exposure": "Europe"},
+    {"symbol": "EEM", "asset_class": "intl_equity",       "exposure": "emerging markets"},
+    {"symbol": "VWO", "asset_class": "intl_equity",       "exposure": "emerging markets"},
+
+    {"symbol": "IYR", "asset_class": "real_estate",       "exposure": "US real estate"},
+    {"symbol": "VNQ", "asset_class": "real_estate",       "exposure": "US REITs"},
+
+    {"symbol": "DVY", "asset_class": "us_equity_factor",  "exposure": "dividend yield"},
+    {"symbol": "VIG", "asset_class": "us_equity_factor",  "exposure": "dividend growth"},
+    {"symbol": "VYM", "asset_class": "us_equity_factor",  "exposure": "high dividend yield"}
+  ],
+
+  "candidate_count": 34,
+
+  "candidate_selection_provenance": {
+    "how_chosen": "Asset-class coverage first, then the oldest and largest fund available for each exposure. Coverage spans US broad equity, the nine original US sector funds, the Treasury curve, credit, inflation-linked, developed and emerging international equity, real estate, and dividend factors.",
+    "chosen_on_performance": false,
+    "chosen_on_structure_and_longevity": true,
+    "no_return_series_was_inspected_before_this_list_was_frozen": true,
+    "duplication_is_intentional": "Several near-duplicate exposures are included on purpose (IVV/SPY, VEA/EFA, VWO/EEM, AGG/BND). They are a redundancy control: two funds tracking the same exposure from different sponsors give an independent cross-check on data quality that a single-provider feed otherwise cannot supply."
+  },
+
+  "reference_symbols": {
+    "purpose": "corporate-action arithmetic validation only",
+    "in_research_universe": false,
+    "may_be_used_for_any_signal_or_strategy": false,
+    "session_range_limit": {"start": "2010-01-01", "end": "2021-07-31"},
+    "range_rationale": "Restricted to the development window so that no validation-window or holdout-window data is touched by a data-quality fixture.",
+    "symbols": [
+      {
+        "symbol": "AAPL",
+        "expected_actions": [
+          {"session": "2014-06-09", "type": "split", "ratio": 7.0},
+          {"session": "2020-08-31", "type": "split", "ratio": 4.0}
+        ],
+        "why": "Two large, unambiguous, independently documented splits inside the development window. A split of this size makes an adjustment error impossible to miss."
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+# Byte-for-byte fidelity is a governance requirement, not a preference.
+#
+# Every artifact in stockedge100/ is hashed: the freeze records, the artifact manifests, the
+# per-stage .sha256 records, and the tree-wide repo_state_id. Git's Windows default
+# (core.autocrlf=true) rewrites LF to CRLF in the working tree on the next checkout, which would
+# change the SHA-256 of every tracked file and invalidate the entire chain from Stage 0 onward --
+# silently, and without any file having been "edited".
+#
+# `* -text` disables all end-of-line conversion in both directions. Clone, checkout, stash and
+# reset then reproduce the exact bytes that were hashed. Do not remove this.
+#
+# This file sits OUTSIDE stockedge100/, so it is not one of the repo_state_id patterns.
+
+* -text

@@ -1,0 +1,368 @@
+{
+  "artifact_id": "SE100-CFG-4003",
+  "title": "Stage 4 representative selection - the lawful rule that reduces two Gate 3 admitted candidates to one validation representative",
+  "version": "1.0.0",
+  "project": "StockEdge100",
+  "stage": 4,
+  "gate_id": 4,
+  "constitution_ref": "SE100-GOV-0001 sections 5.1, 7, 8, 9, 11",
+  "declared_before_any_validation_observation_was_read": true,
+
+  "serialisation": {
+    "encoding": "UTF-8, ASCII-only characters",
+    "decimal_representation": "Every fraction is a JSON string, parsed as an exact Decimal."
+  },
+
+  "why_a_selection_is_needed": {
+    "gate_3_outcome": "Gate 3 Attempt 2 admitted TWO candidates and ranked neither. reports/stage3_attempt2/STAGE_3_ATTEMPT_2_DEVELOPMENT_ADMISSIBILITY.json records selection_made false and ranking_computed false; the Gate 3 Attempt 2 research report states on the record that Gate 3 admitted both and ranked neither.",
+    "why_both_cannot_go_forward": "The validation window may be read once. Running both candidates on it would make the reported result a maximum over two draws, and the candidate carried to the holdout would then have been chosen on a validation outcome. That is selection on the out-of-sample window, which is the failure mode the three-partition design exists to prevent.",
+    "why_a_combination_is_not_the_answer": "Combining, averaging, or forming a portfolio of C1 and C2 creates a third strategy that no gate has evaluated. Under constitution section 11 it is a new candidate and restarts at Gate 3. It is also not authorized by the operating instruction for this stage.",
+    "conclusion": "Exactly one of the two admitted candidates must be selected, by a rule that is prospectively defensible and that does not read a validation observation."
+  },
+
+  "search_for_a_mandatory_constitutional_selection_rule": {
+    "question": "Does the constitution, or any frozen or sealed artifact, already mandate how to reduce multiple admitted candidates to one?",
+    "searched": [
+      "governance/STAGE_0_CONSTITUTION.md, all sections",
+      "governance/STAGE_0_CONSTITUTION.json, all gates and thresholds",
+      "governance/*.md and governance/*.json, all 25 files",
+      "config/*.json, all sealed configuration artifacts",
+      "reports/stage3_attempt2/*, both evidence files and the design and research reports"
+    ],
+    "result": "No mandatory selection rule exists. The constitution's section 9 defines gate conjunction within a candidate and says nothing about choosing among candidates that pass. No sealed artifact carries a ranking rule, a tie-break, or a primary-candidate designation.",
+    "consequence": "A rule must be constructed for this stage. Constitution section 8 permits it - it requires a signed specification created before execution - but the rule must be constructed from frozen and sealed material, must be prospectively defensible, and must not be a rationalisation of a preferred outcome.",
+    "constraint_that_did_apply": {
+      "source": "config/stage3_attempt2_gate_criteria_binding.json (SE100-CFG-3004) neighbour_status.can_a_neighbour_become_the_representative_of_its_candidate",
+      "answer_verbatim": "No. Never. Under no result.",
+      "effect": "The eligible set is exactly the two admitted PRIMARY candidates. No robustness neighbour of either is eligible, however it performed."
+    }
+  },
+
+  "eligible_set": {
+    "candidates": [
+      "SE100-S3A2-C1-PULLBACK-RA1",
+      "SE100-S3A2-C2-MEANREV-RA1"
+    ],
+    "excluded": [
+      {
+        "candidate": "SE100-S3A2-C3-DEFENSIVE-RA1",
+        "reason": "Rejected at Gate 3 on S3-C6. Ineligible and not reconsidered."
+      },
+      {
+        "candidate": "any robustness neighbour of C1 or C2",
+        "reason": "SE100-CFG-3004 neighbour_status: a neighbour may never become its candidate's representative, under any result."
+      },
+      {
+        "candidate": "any Gate 3 Attempt 1 candidate",
+        "reason": "All six were rejected at Gate 3 Attempt 1. Every one failed S3-C2 with a development maximum drawdown above 15%, as recorded in results.per_candidate_primary of reports/stage3/STAGE_3_STRATEGY_RESEARCH.json, and S3-C2's sealed interaction note states that triggering the section 5.1 research shutdown breaches that condition by construction. Not revisited."
+      },
+      {
+        "candidate": "any combination, average, portfolio or ensemble of C1 and C2",
+        "reason": "A new candidate under constitution section 11, restarting at Gate 3. Not authorized."
+      }
+    ]
+  },
+
+  "selection_rule": {
+    "id": "SE100-CFG-4003-R1",
+    "name": "Declared-variant research-shutdown screen",
+    "statement": "Eliminate any Gate 3 admitted candidate for which ANY of its declared runs - the PRIMARY parameterisation, any of its four declared robustness neighbours, or its section 7 required stressed-cost run - tripped the section 5.1 research shutdown on development data. If exactly one candidate survives, it is the representative. If both survive or neither survives, the rule does not decide and the stage stops for human selection.",
+    "applied_to": "Development-window evidence only, already authorized and already read.",
+    "reads_no_return": true,
+    "reads_no_risk_adjusted_metric": true,
+    "output_is_binary_per_variant": "Each declared run either tripped the shutdown or did not. The rule counts trips. It does not compare magnitudes, does not rank, and has no threshold of its own to choose.",
+
+    "provenance": {
+      "principle": "Every term of the rule is taken from a frozen or sealed artifact. Nothing in it is a number this stage picked.",
+      "terms": [
+        {
+          "term": "the set of declared runs over which the screen operates",
+          "source": "config/stage3_attempt2_strategy_protocol.json (SE100-CFG-3003), sha256 77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+          "note": "The one PRIMARY plus four robustness neighbours per candidate were declared before any Attempt 2 strategy code was written, and the stressed-cost run was required by constitution section 7. The screen therefore operates over a variant set that was fixed before any of the runs existed. It is not a set this stage assembled."
+        },
+        {
+          "term": "the 15% level",
+          "source": "governance/STAGE_0_CONSTITUTION.md section 5.1, sha256 b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5, and config/stage2_cost_model.json risk.research_shutdown_drawdown_fraction 0.15, sha256 f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+          "note": "Frozen constitutional text: 'A strategy enters a research shutdown state if simulated equity falls 15% below its running high-water mark.' The screen adopts it and does not choose a level."
+        },
+        {
+          "term": "the shutdown semantics and its consequences",
+          "source": "config/stage2_cost_model.json risk.research_shutdown_action LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES, and config/stage3_attempt2_gate_criteria_binding.json shutdown_behaviour, sha256 a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+          "note": "SE100-CFG-3004 shutdown_behaviour records that the one-session lag to the next open 'is real, is charged, and is not modelled away', and that deactivation is permanent: 'Yes. It never re-arms.'"
+        },
+        {
+          "term": "the stressed-cost run at 2x",
+          "source": "governance/STAGE_0_CONSTITUTION.md section 7, and config/stage2_cost_model.json frictions.stress_multiplier 2.0 with frictions.stress_applies_to",
+          "note": "Required by the constitution, not added by this stage."
+        },
+        {
+          "term": "the scope 'every run'",
+          "source": "config/stage3_attempt2_gate_criteria_binding.json shutdown_behaviour.enforced_for_every_run",
+          "note": "That sealed field states the shutdown was enforced for the primaries, for all four neighbours of each candidate individually, and for the three non-gating stressed runs, and was disabled only for the labelled SPY buy-and-hold reference account. The screen's scope is the scope the shutdown was already enforced at. It is not a scope this stage widened."
+        }
+      ]
+    },
+
+    "why_it_is_prospectively_defensible": [
+      "It is return-blind. The predicate never reads a total return, a Sharpe ratio, a profit factor, a drawdown magnitude, a trade count, or a benchmark comparison. It reads one boolean per declared run: did the sealed risk rule fire.",
+      "It has no free parameter. There is no threshold to tune, no weighting to choose, no window over which to measure, and no tie-break to invent. Every quantity comes from a frozen or sealed artifact.",
+      "It selects on a governance property rather than on performance. A candidate whose declared variant set contains a run that breached the project's own permanent risk rule is a candidate whose parameterisation sits on the boundary of what the project's risk architecture tolerates. Carrying that to a single-read out-of-sample window is the choice with the higher chance of producing an uninterpretable result, because a shutdown mid-validation truncates the window and forecloses the fold condition.",
+      "It is forward-looking in its justification. It answers 'which candidate can be evaluated on a once-readable window with the better chance of the evaluation being interpretable', not 'which candidate did better'.",
+      "It would have eliminated the same candidate under reversed returns. The predicate is a function of shutdown events only, so if C1's returns had exceeded C2's at every variant, C1 would still be eliminated and C2 would still be selected. This is the property that distinguishes a prospective rule from a retrospective one, and it is checkable by reading the predicate rather than by trusting the author.",
+      "It is stricter than a performance rule would be. A performance rule would have admitted C1 had its return been higher. This rule does not, because a shutdown is not offset by a return."
+    ],
+
+    "what_the_rule_is_not": [
+      "It is not a ranking. It produces a survivor set, not an order. Had both candidates survived it would have decided nothing, and the stage would have stopped for human selection rather than reaching for a second criterion.",
+      "It is not a claim that C1 is a bad strategy. C1 satisfied every hard Gate 3 condition and remains a Gate 3 admitted candidate on the record. It is not carried to validation.",
+      "It is not a repair of C1. Repairing C1's cost sensitivity or its neighbour breach would be a parameter change creating a new candidate under section 11, and is explicitly not authorized.",
+      "It is not a rule about magnitudes. C1's breaching drawdowns and C2's largest non-breaching drawdown are recorded below for completeness, but the predicate uses neither."
+    ],
+
+    "honest_limitation": "The rule was authored in a session in which Gate 3 development evidence was lawfully visible. Return-blindness makes the rule's OUTPUT independent of the returns; it does not make the CHOICE of predicate independent of the researcher's knowledge of the evidence. A different return-blind predicate - say, one screening on neighbour dispersion - might have selected differently. That residual freedom is disclosed here and in config/stage4_validation_protocol.json adaptive_research_disclosure rather than argued away. What limits it is that the predicate has no tunable part: once 'shutdown trip over the declared variant set' is chosen, the answer is fixed by the evidence and cannot be nudged."
+  },
+
+  "application": {
+    "evidence_source": {
+      "path": "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.json",
+      "sha256": "26eecacfe96420878ce647b86f68da8ed8a17fea1338d85ee982b190645ed466",
+      "fields_read": "results.all_registered_variants[label].shutdown_session and .max_drawdown, and results.stressed_cost_runs[candidate].stressed_shutdown_session and .stressed_max_drawdown. Development window only.",
+      "corroborated_by": {
+        "path": "governance/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH_REPORT.md",
+        "sha256": "21471f53b45b09ac990b849bd6ac8d3389232deb3393e0bba8bc97bd50ecb5a5",
+        "note": "Section 20 items 2 and 3 of that report state both C1 shutdown events on the record independently of the JSON evidence file."
+      }
+    },
+
+    "candidates": [
+      {
+        "candidate": "SE100-S3A2-C1-PULLBACK-RA1",
+        "family": "pullback",
+        "gate_3_verdict": "ADMITTED, 6 conditions met, S3-C6 not applicable by condition text",
+        "declared_runs": [
+          {
+            "run_label": "SE100-S3A2-C1-PULLBACK-RA1#PRIMARY",
+            "kind": "primary",
+            "shutdown_session": null,
+            "shutdown_tripped": false,
+            "max_drawdown": "0.1467059341675684739975927832247007",
+            "trade_digest": "95d9a60146ee8962e1f1ae2b74d771162c957634d5cfca66b1d183c70de35f64",
+            "equity_digest": "3757036560e060005d30a86a0d6a5ec60ce5351256b97079c52cd514f710bb20"
+          },
+          {
+            "run_label": "SE100-S3A2-C1-PULLBACK-RA1#N1",
+            "kind": "declared robustness neighbour",
+            "perturbation": "sma_long 200 -> 150",
+            "shutdown_session": "2020-02-27",
+            "shutdown_tripped": true,
+            "max_drawdown": "0.1544423283755300889934753836197993",
+            "trade_digest": "e170bb1d7121a4a81b2ca02decc073ea15b2d4c4fbf59ae790fb363c537dfe8f",
+            "equity_digest": "0ad255db1b98a4aa32fc522f9c6dd4419a3a72eaf0042ded051a344b26e2ebf0"
+          },
+          {
+            "run_label": "SE100-S3A2-C1-PULLBACK-RA1#N2",
+            "kind": "declared robustness neighbour",
+            "perturbation": "sma_short 10 -> 20",
+            "shutdown_session": null,
+            "shutdown_tripped": false,
+            "max_drawdown": "0.09967873009961486467001730246354124",
+            "trade_digest": "e67f1c58795c98abb5043dc18f27a74ef2bd5d0dd977e968bebdf841fa9b88bf",
+            "equity_digest": "9b71ff7b8a6219089ec1f44b4e874dcb6e645b5b80d00d0db36d47ec0db12722"
+          },
+          {
+            "run_label": "SE100-S3A2-C1-PULLBACK-RA1#N3",
+            "kind": "declared robustness neighbour",
+            "perturbation": "vol_target 0.10 -> 0.08",
+            "shutdown_session": null,
+            "shutdown_tripped": false,
+            "max_drawdown": "0.1293307174480339196216046897572447",
+            "trade_digest": "cfa4a4b606f8c704f5bf00a84152f64f5b1a1ce5eb25f5d472735eae3a0b1249",
+            "equity_digest": "724306cefd304b6fbb5a209866f318abc91000d94b7e16acffe9013fb2cb128f"
+          },
+          {
+            "run_label": "SE100-S3A2-C1-PULLBACK-RA1#N4",
+            "kind": "declared robustness neighbour",
+            "perturbation": "f_base 0.50 -> 0.35",
+            "shutdown_session": null,
+            "shutdown_tripped": false,
+            "max_drawdown": "0.09421669475624651358392320466571811",
+            "trade_digest": "1331bb6f611814d7812c581655cb73051105303ad58c39c8bb6cb8d5beca1a54",
+            "equity_digest": "c1f2b8bba154ec53c2d52ed22ddc6b967bd70380e475f3727f55723bc4039784"
+          },
+          {
+            "run_label": "SE100-S3A2-C1-PULLBACK-RA1#PRIMARY#STRESS",
+            "kind": "constitution section 7 stressed-cost run at 2x the complete base friction assumption",
+            "shutdown_session": "2018-02-05",
+            "shutdown_tripped": true,
+            "max_drawdown": "0.1530408648864865889186130474143505",
+            "trade_digest": "3f5cbdf268a9d9ddc3e5135fa2f2abfa527cb83c66108ab7ffce43064b835678",
+            "equity_digest": "5f121585daf40a258a79337439a4c06df0eeb1d104afdc22ae74730723949c44"
+          }
+        ],
+        "declared_run_count": 6,
+        "shutdown_trip_count": 2,
+        "trips_at": ["SE100-S3A2-C1-PULLBACK-RA1#N1 on 2020-02-27", "SE100-S3A2-C1-PULLBACK-RA1#PRIMARY#STRESS on 2018-02-05"],
+        "screen_result": "ELIMINATED",
+        "reason": "Two of six declared runs tripped the sealed section 5.1 research shutdown on development data. The screen eliminates on any trip."
+      },
+      {
+        "candidate": "SE100-S3A2-C2-MEANREV-RA1",
+        "family": "mean reversion",
+        "gate_3_verdict": "ADMITTED, 6 conditions met, S3-C6 not applicable by condition text",
+        "declared_runs": [
+          {
+            "run_label": "SE100-S3A2-C2-MEANREV-RA1#PRIMARY",
+            "kind": "primary",
+            "shutdown_session": null,
+            "shutdown_tripped": false,
+            "max_drawdown": "0.1260098725439263296638239081881548",
+            "trade_digest": "299dc2c4cec963668bc08c67601f431851695c78c5f1d7e056fa9f42e1e6112d",
+            "equity_digest": "e50d787ef2733034ab7a418823b255d785ff0038d0fa657a38e89b7d44ff67d8"
+          },
+          {
+            "run_label": "SE100-S3A2-C2-MEANREV-RA1#N1",
+            "kind": "declared robustness neighbour",
+            "perturbation": "rsi_entry_below 10 -> 5",
+            "shutdown_session": null,
+            "shutdown_tripped": false,
+            "max_drawdown": "0.1438752249862801387348381472146044",
+            "trade_digest": "f0c8b3845fe4a0e5dd227ef110af6a099978d7df556fff04feeeff8f4e099e3e",
+            "equity_digest": "e7811f0cfcf7320170b091b01a567d557e8823965ff58f253d93d6cdabcebbab"
+          },
+          {
+            "run_label": "SE100-S3A2-C2-MEANREV-RA1#N2",
+            "kind": "declared robustness neighbour",
+            "perturbation": "exit_sma 5 -> 10",
+            "shutdown_session": null,
+            "shutdown_tripped": false,
+            "max_drawdown": "0.1465979382684879116079616515992935",
+            "trade_digest": "030d2e2e743e07f0168f703ba727104c1ebeb0ed9f06a54b98cc5b542539ee91",
+            "equity_digest": "ee40b17ff56369ea11aca5cfa44534215c1afc1ae4de51ae716e7b69d3d0d7a3"
+          },
+          {
+            "run_label": "SE100-S3A2-C2-MEANREV-RA1#N3",
+            "kind": "declared robustness neighbour",
+            "perturbation": "vol_target 0.10 -> 0.08",
+            "shutdown_session": null,
+            "shutdown_tripped": false,
+            "max_drawdown": "0.1265120005820736435111270386150513",
+            "trade_digest": "86e3bdeaf4793f8137641691c8a53d4e96fa6e3441581419e6777c9e55be6226",
+            "equity_digest": "92c365970abc86696445af017efcc1682dc559eaa47d84814a8577b72dee2c6c"
+          },
+          {
+            "run_label": "SE100-S3A2-C2-MEANREV-RA1#N4",
+            "kind": "declared robustness neighbour",
+            "perturbation": "loss_control 0.08 -> 0.12",
+            "shutdown_session": null,
+            "shutdown_tripped": false,
+            "max_drawdown": "0.1331721725887208620262823772961242",
+            "trade_digest": "16423a4754e74d77eadc24e21cf1bb91c74cec8c3920ee5bc0e2838660858daf",
+            "equity_digest": "25f6e1d561e13b3038c33e14900fbed3d4a287ef3035dfc7b3c96925ab788898"
+          },
+          {
+            "run_label": "SE100-S3A2-C2-MEANREV-RA1#PRIMARY#STRESS",
+            "kind": "constitution section 7 stressed-cost run at 2x the complete base friction assumption",
+            "shutdown_session": null,
+            "shutdown_tripped": false,
+            "max_drawdown": "0.1269211877015036494681982047058701",
+            "trade_digest": "46c86efd21f26c62ad17c14e9430cf6b29010140788c5b7a0a9c37b4ee9a5715",
+            "equity_digest": "25cfd6700efc5ba34bd0c802fd5a18c9c694eb4b6bf1b3aafe37304e7f658f73"
+          }
+        ],
+        "declared_run_count": 6,
+        "shutdown_trip_count": 0,
+        "trips_at": [],
+        "screen_result": "SURVIVES",
+        "reason": "None of six declared runs tripped the sealed section 5.1 research shutdown on development data."
+      }
+    ],
+
+    "outcome": {
+      "survivors": ["SE100-S3A2-C2-MEANREV-RA1"],
+      "survivor_count": 1,
+      "rule_decides": true,
+      "selected_representative": "SE100-S3A2-C2-MEANREV-RA1",
+      "human_selection_required": false,
+      "if_the_rule_had_not_decided": "The stage would have stopped with a BLOCKED verdict and referred the selection to a human, rather than reaching for a second criterion. A tie-break invented after the first rule failed would be a retrospective rule wearing a prospective rule's clothes."
+    },
+
+    "honest_qualification_of_the_margin": {
+      "statement": "C2 survives the screen without a single trip, but not with wide margins on every variant. Its largest non-breaching development drawdown is SE100-S3A2-C2-MEANREV-RA1#N2 at 0.1465979382684879116079616515992935, which is 34 basis points below the 15% shutdown level, and #N1 at 0.1438752249862801387348381472146044 is 61 basis points below it.",
+      "why_it_is_recorded": "The screen is binary and those variants did not trip, so the rule's output is unaffected. But a reader entitled to know how close the surviving candidate came should not have to derive it. C2 is the survivor of this screen; it is not a candidate with comfortable risk headroom.",
+      "consequence_for_gate_4": "S4-C3's ceiling is the same 15% on the same series (S4-CONFLICT-3). A representative whose development neighbours sat 34 basis points from that level has no margin to spare on a fresh window, and the drawdown condition is a real risk of failure, not a formality. This is recorded before any validation observation exists."
+    }
+  },
+
+  "corroboration_not_used_in_the_decision": {
+    "purpose": "The screen decided on shutdown trips alone. These figures are recorded to show that the rule was not reverse-engineered from a preferred answer: every rule constructible from a FROZEN threshold points the same way, and none points at C1. If the screen had been built to reach a chosen answer, there would be no reason for the independent checks to agree with it.",
+    "status": "NOT_DECISIVE. None of these comparisons is part of selection_rule.statement, and none was needed to reach the outcome.",
+    "checks": [
+      {
+        "check": "Development profit factor against Gate 4's FROZEN threshold of 1.15",
+        "c1": "1.105782641347494903980259629, below 1.15",
+        "c2": "1.440207563487695573551379825, above 1.15",
+        "frozen_source": "governance/STAGE_0_CONSTITUTION.json gate 4 thresholds.profit_factor_min",
+        "note": "Gate 3's floor was 1.10, which C1 cleared. Gate 4 raises it to 1.15, which C1's development figure does not reach. This is a development figure and is not a prediction of C1's validation profit factor."
+      },
+      {
+        "check": "Development Sharpe at the sealed 0% cash rate against Gate 4's FROZEN threshold of 0.50",
+        "c1": "0.1284700281897133148507047085010721",
+        "c2": "0.4202409206802080245242547261750272",
+        "frozen_source": "governance/STAGE_0_CONSTITUTION.json gate 4 thresholds.sharpe_min",
+        "note": "NEITHER candidate reaches 0.50 on development data. The comparison favours C2 but does not favour a Gate 4 pass for either, and that is recorded as an expectation in config/stage4_validation_protocol.json adaptive_research_disclosure."
+      },
+      {
+        "check": "Stressed-cost development total return against Gate 4's FROZEN requirement that it remain positive",
+        "c1": "0.0018, positive by 18 basis points, with the shutdown having fired on 2018-02-05",
+        "c2": "0.3311",
+        "frozen_source": "governance/STAGE_0_CONSTITUTION.json gate 4 thresholds.stressed_cost_return_positive",
+        "note": "C1's stressed run technically remained positive. It did so while breaching the risk rule, which is why the screen eliminates on the trip rather than on the return."
+      },
+      {
+        "check": "Development maximum drawdown headroom against Gate 4's FROZEN ceiling of 15%",
+        "c1_primary": "0.1467059341675684739975927832247007, 33 basis points of headroom",
+        "c2_primary": "0.1260098725439263296638239081881548, 240 basis points of headroom",
+        "frozen_source": "governance/STAGE_0_CONSTITUTION.json gate 4 thresholds.max_drawdown_pct"
+      }
+    ],
+    "agreement_statement": "Every check agrees with the screen. None was consulted to build it, and none would change its output. The one check that does NOT flatter the selected candidate - the Sharpe comparison, where C2's 0.42 is itself below Gate 4's floor - is recorded in the same list rather than omitted."
+  },
+
+  "prohibited_after_this_seal": [
+    "Changing the representative for any reason, including a Gate 4 FAIL.",
+    "Substituting SE100-S3A2-C1-PULLBACK-RA1 after a C2 validation result exists, or running it on validation as a comparison.",
+    "Substituting any robustness neighbour of C2. SE100-CFG-3004 neighbour_status: 'No. Never. Under no result.'",
+    "Changing any parameter of the sealed parameterisation.",
+    "Adding a risk overlay, a position-size cap, a regime filter, or any other rule not in the sealed specification.",
+    "Reinterpreting the selection rule, or applying a different return-blind rule, after a validation result exists.",
+    "Reconsidering SE100-S3A2-C3-DEFENSIVE-RA1."
+  ],
+
+  "adaptation_disclosure": {
+    "statement": "This selection was made in a session that had lawful access to Gate 3 development evidence. It is an adaptive step, not an independent one.",
+    "what_is_independent": "The rule's output. Given the predicate, the answer is a function of shutdown booleans recorded in a sealed evidence file, and no return enters it.",
+    "what_is_not_independent": "The choice of predicate. It was chosen by a researcher who had read the development evidence, and a different return-blind predicate could in principle have selected differently.",
+    "how_it_is_mitigated": [
+      "The predicate has no tunable parameter, so it cannot be nudged toward an outcome once chosen.",
+      "The full application is recorded for BOTH candidates, including every variant that did not trip, so a reader can verify the count rather than trust it.",
+      "The independent frozen-threshold checks are recorded, including the one that does not flatter the selected candidate.",
+      "The surviving candidate's narrowest margin is recorded rather than left to be discovered.",
+      "The rule's return-blindness is stated as a checkable property of the predicate, not as an assurance about the author's state of mind."
+    ],
+    "not_concealed": "The representative keeps its Gate 3 identifier unchanged, so it is traceable to the evidence that admitted it and to the two-attempt search that produced it."
+  },
+
+  "validation_evaluation_authorized_for": {
+    "representative": "SE100-S3A2-C2-MEANREV-RA1",
+    "procedure": "config/stage4_validation_protocol.json (SE100-CFG-4001)",
+    "criteria": "config/stage4_gate_criteria.json (SE100-CFG-4002)",
+    "runs": 2,
+    "sessions": 1,
+    "holdout_access_authorized": false,
+    "paper_trading_authorized": false,
+    "shadow_live_authorized": false,
+    "capital_or_risk_expansion_authorized": false
+  },
+
+  "live_trading_authorized": false
+}

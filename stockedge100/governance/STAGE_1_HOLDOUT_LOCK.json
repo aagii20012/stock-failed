@@ -1,0 +1,43 @@
+{
+  "artifact_id": "SE100-GOV-1005",
+  "title": "Stage 1 time partition and final holdout lock",
+  "status": "LOCKED",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 1,
+  "locked_utc": "2026-08-08T10:55:32Z",
+  "constitution_ref": "SE100-GOV-0001 section 6.1",
+  "locked_before_any_strategy_result": true,
+  "holdout_state": "SEALED",
+  "partition": {
+    "usable_cutoff_session": "2026-08-07",
+    "cutoff_month": "2026-08",
+    "cutoff_month_complete": false,
+    "cutoff_month_last_session": "2026-08-31",
+    "last_complete_month": "2026-07",
+    "development_start": "1993-01-29",
+    "development_end": "2021-07-31",
+    "validation_start": "2021-08-01",
+    "validation_end": "2024-07-31",
+    "holdout_start": "2024-08-01",
+    "holdout_end": "2026-07-31",
+    "development_years": 28.501,
+    "minimum_development_years": 5,
+    "meets_minimum_development": true,
+    "holdout_months": 24,
+    "validation_months": 36
+  },
+  "inputs": {
+    "usable_cutoff_session": "2026-08-07",
+    "earliest_candidate_session": "1993-01-29",
+    "cutoff_derived_from": "the latest session present in the acquired candidate data, not the wall clock",
+    "universe_version": "SE100-U1-d4917c2f7f1cd834",
+    "universe_identity_sha256": "d4917c2f7f1cd8344728a39165929b352766fbe7193b3c64e71a971749dcbf38"
+  },
+  "binding_rules": [
+    "The holdout window is read exactly once, at the constitutional holdout gate, and never before.",
+    "No parameter, threshold, symbol, or rule may be chosen using any value inside the validation or holdout windows.",
+    "These boundaries may not be recomputed, widened, narrowed, or shifted by any later stage.",
+    "If the dataset is re-acquired and the cutoff moves, the existing lock still governs; a new lock requires a new stage and a recorded reason."
+  ]
+}

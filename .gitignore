@@ -1,0 +1,18 @@
+# Workspace-root ignores. This file sits OUTSIDE stockedge100/, so it is not one of the
+# repo_state_id patterns and creating it cannot perturb the sealed digest. The governed
+# tree carries its own stockedge100/.gitignore, which is a tracked Stage 0/1 artifact and
+# is left exactly as sealed.
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# secrets, belt and braces -- none exist in this tree today
+.env
+.env.*
+*.pem
+*.key
+credentials*
+.alpaca/

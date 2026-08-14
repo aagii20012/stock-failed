@@ -1,0 +1,483 @@
+{
+  "project": "StockEdge100",
+  "stage": "STAGE_2_BACKTEST_ENGINE",
+  "generation": 1,
+  "timestamp_utc": "2026-08-09T12:41:51Z",
+  "verdict": "PASS \u2014 STAGE_2_BACKTEST_ENGINE_VALIDATED",
+  "gate": {
+    "constitution_gate_id": 2,
+    "name": "backtest_engine_validity"
+  },
+  "gate_passed": true,
+  "constitution": {
+    "document_id": "SE100-GOV-0001",
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "modified_by_this_stage": false,
+    "freeze_verification_working_directory": "stockedge100/governance",
+    "freeze_verified": true,
+    "freeze_verification": {
+      "STAGE_0_CONSTITUTION.md": {
+        "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "match": "True"
+      },
+      "STAGE_0_CONSTITUTION.json": {
+        "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "match": "True"
+      }
+    }
+  },
+  "verdict_token_derivation": {
+    "constitution_json_gate_2": {
+      "fail_result": "BACKTEST_ENGINE_NOT_VALIDATED",
+      "pass_result": null
+    },
+    "chosen_pass_reason_code": "STAGE_2_BACKTEST_ENGINE_VALIDATED",
+    "why": "Section 10 fixes the primary verdict vocabulary and requires a stage-specific reason code alongside it. Gate 2 supplies no pass token, so the affirmative of its recorded fail token is used, carrying the stage prefix Stage 0 established and Stage 1 followed."
+  },
+  "preregistration": {
+    "document_id": "SE100-GOV-0005",
+    "declared_utc": "2026-08-08T15:12:15Z",
+    "run_id": "SE100-R-20260808T151215Z",
+    "sealed_before_any_engine_code": true,
+    "engine_modules_present_at_seal_time": 0,
+    "sealed_files": {
+      "config/stage2_cost_model.json": {
+        "sha256": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2"
+      },
+      "config/stage2_engine_spec.json": {
+        "sha256": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21"
+      },
+      "governance/STAGE_2_PREREGISTRATION.md": {
+        "sha256": "93c4c0ac0b1303bb645501fbbd6e62a72cd4c79b660122722933b03c422202c0"
+      }
+    },
+    "enforcement": "stockedge100.backtest.config.load_stage2_config recomputes both digests on every load and raises PreRegistrationViolation on drift, so a silently edited cost assumption stops the engine rather than changing a result"
+  },
+  "configs": {
+    "config/stage2_cost_model.json": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+    "config/stage2_engine_spec.json": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+    "config_hash_refers_to": "config/stage2_cost_model.json"
+  },
+  "engine_validation": {
+    "evidence_file": "reports/stage2/STAGE_2_ENGINE_VALIDATION.json",
+    "evidence_digest": "9af271e46b8f47602422e0159781e2e14f6b9dd8a854d5b7101b2fcd14c3317b",
+    "evidence_digest_covers": "every field of this file except generated_utc and evidence_digest, as canonical JSON",
+    "generated_utc": "2026-08-09T12:38:23Z",
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage2_evidence",
+    "window": {
+      "window": "development",
+      "start": "1993-01-29",
+      "end": "2021-07-31"
+    },
+    "symbols": [
+      "SPY"
+    ],
+    "engine_spec_version": "1.0.0",
+    "cost_model_version": "1.0.0",
+    "all_conditions_met": true,
+    "reproducibility_note": "the digest excludes generated_utc and its own entry, so a stable digest across runs at different timestamps is the statement that the findings depend on code and data only"
+  },
+  "scope": {
+    "strategy_exists": false,
+    "research_result_exists": false,
+    "validation_window_read": false,
+    "holdout_window_read": false,
+    "runs_confined_to": "development window, enforced by the engine window guard",
+    "reference_run_disposition": "PROBE_BUY_AND_HOLD_SPY is reported for completeness because a metrics module that has never produced a number is not evidence that it works. It is not a research result and nothing in this stage draws a conclusion from it.",
+    "money_spent_usd": 0,
+    "credentials_used": "none"
+  },
+  "stage1": {
+    "freeze_verification_working_directory": "stockedge100/governance",
+    "freeze_verification": {
+      "STAGE_1_HOLDOUT_LOCK.json": "OK",
+      "STAGE_1_UNIVERSE.json": "OK"
+    },
+    "universe_version": "SE100-U1-d4917c2f7f1cd834",
+    "holdout_state": "SEALED",
+    "development_window": [
+      "1993-01-29",
+      "2021-07-31"
+    ],
+    "disposition": "READ_ONLY_NOT_MODIFIED"
+  },
+  "integrity": {
+    "stage_2_preregistration_record_working_directory": "stockedge100",
+    "stage_2_preregistration_record_verification": {
+      "config/stage2_cost_model.json": "OK",
+      "config/stage2_engine_spec.json": "OK",
+      "governance/STAGE_2_PREREGISTRATION.json": "OK",
+      "governance/STAGE_2_PREREGISTRATION.md": "OK"
+    },
+    "stage_2_freeze_record_issued": false,
+    "stage_2_freeze_record_rationale": "Stage 1 issued a freeze record because it produced governance artifacts later stages consume. Stage 2 produces none: its durable inputs are already covered by STAGE_2_PREREGISTRATION.sha256 and its outputs by this package's own checksum record, while code identity is repo_state_id. A second record would restate digests already recorded and add a third place they could disagree. Recorded as a decision, not left as an omission."
+  },
+  "evidence": [
+    "Cost model and engine acceptance spec sealed at 2026-08-08T15:12:15Z with 0 engine modules present; sealed_before_any_engine_code=True.",
+    "Determinism: 5 cases rerun from cold, all_identical=True, compared on trade and equity digests that carry no run id, timestamp, label or path.",
+    "Look-ahead: run truncated at 2000-12-29 with 6437 bars removed; both digests unchanged (identical=True).",
+    "Defect detection: 12 sealed classes, each injected one at a time over 3 clean controls; every class confirmed to name tests that exist by AST parse of the adversarial test file.",
+    "Invariants: 12 asserted on every event, not once at the end; the portfolio reconciles cash against its ledger after every single movement.",
+    "Hand-calculated fixtures: instrument FIXT (synthetic; not a research instrument), all_match=True, BASE 20 checks, STRESSED 19 checks.",
+    "Benchmarks: SPY total return 15.99666381615945001616471638324911 by adjusted-close ratio and 15.99666027184343712208367222872284 by explicit share accumulation across 115 dividends; relative difference 2.215659498522246340035879336605371E-7 against a sealed tolerance of 0.000001.",
+    "Cash and do-nothing benchmarks return exactly \"0\" over the development window with zero trades; the tradable USD 100 buy-and-hold finishes strictly below the index under both readings of the section 5.1 research shutdown, with the shortfall fully accounted.",
+    "Stage 1 freeze record verifies from stockedge100/governance: {\"STAGE_1_HOLDOUT_LOCK.json\": \"OK\", \"STAGE_1_UNIVERSE.json\": \"OK\"}",
+    "Stage 2 pre-registration record verifies from stockedge100: {\"config/stage2_cost_model.json\": \"OK\", \"config/stage2_engine_spec.json\": \"OK\", \"governance/STAGE_2_PREREGISTRATION.json\": \"OK\", \"governance/STAGE_2_PREREGISTRATION.md\": \"OK\"}",
+    "Engine validation evidence is reproducible: evidence_digest 9af271e46b8f47602422e0159781e2e14f6b9dd8a854d5b7101b2fcd14c3317b was produced identically by two runs at different generated_utc values, so the findings are a function of code and data only.",
+    "273 tests pass: the 27 Stage 0 and 113 Stage 1 tests unmodified, plus 133 added by Stage 2 (54 unit, 42 adversarial, 37 integration).",
+    "A defect in the evidence writer was found by post-build verification and not by the suite: the field describing what evidence_digest covers was appended after the digest was taken, so the file asserted a coverage it did not have and a reader recomputing the digest as documented got a different value. No finding was affected. The writer now seals the description before hashing and three unit tests enforce it; this package supersedes the one built before the repair. See section 14.1 of the report."
+  ],
+  "limitations": [
+    "The spread is a declared constant, not a measurement. No historical quote data exists in the Stage 1 dataset, so 2.5 bps per side is charged on every symbol in every year: wider than a modern quoted spread for a large ETF, narrower than a 1990s one.",
+    "Slippage is a modelled constant, not drawn from any observed fill distribution.",
+    "Partial fills are not modelled. An order fills in full or not at all. A partial-fill distribution would have to be invented; it is a gate 7 paper-trading observable.",
+    "Market-on-next-open is the only order type modelled. No limit orders, no stops, no intraday timing. A strategy requiring them is outside what this engine has been validated for.",
+    "The SEC section 31 rate and the FINRA TAF per-share rate are single fixed values across 28 years of statutory rate changes.",
+    "The TAF is charged on adjusted share counts, because as-traded share counts are not recoverable from this provider. Adjusted counts are greater than or equal to as-traded counts, so this over-charges, by a margin that grows with the number of splits behind the fill.",
+    "The cash benchmark pays 0% because no T-bill series was acquired at Stage 1. This is conservative for judging cash and generous for judging a strategy that must beat it.",
+    "Every Stage 1 data limitation is inherited whole \u2014 single provider, unquantified residual ETF closure bias, split-adjusted-only price space, no as-traded prices, and the one disclosed adjustment-consistency failure. An engine cannot be more trustworthy than its inputs.",
+    "Delisting is enforced but has never been tested against a real delisting: the frozen universe contains no delisted symbol, so the guard is exercised on synthetic series only.",
+    "Validation is against the sealed acceptance spec, not against a second independent implementation. No cross-implementation comparison was performed; the independent check is hand arithmetic over one synthetic instrument and eight sessions.",
+    "The dividend model credits cash and never reinvests. Correct for an engine, and a real constraint on any strategy later built on it.",
+    "reference_run_metrics in the evidence file is a probe, not a research result. It is a single asset held by an agent that takes no decision, over the window strategies will later be developed on, and nothing downstream may cite it as evidence about anything."
+  ],
+  "blockers": [],
+  "conflicts_found": [
+    "STAGE_0_CONSTITUTION.json records no pass_result for gate 2, only fail_result BACKTEST_ENGINE_NOT_VALIDATED, while the Markdown gate table is complete. This is the same defect Stage 1 recorded for gate 1. The Markdown governs per the precedence rule. The pass token used here is the affirmative of the recorded fail token, prefixed as Stage 0 did with STAGE_0_CONSTITUTION_VERIFIED. No frozen artifact was edited to resolve this."
+  ],
+  "gate_conditions": {
+    "deterministic_reruns": {
+      "required": "deterministic reruns produce identical trades and equity curves",
+      "verdict": "PASS",
+      "evidence": {
+        "cases": [
+          "FIXT_BASE",
+          "FIXT_STRESSED",
+          "PROBE_BUY_AND_HOLD_SPY_development",
+          "PROBE_ALWAYS_CASH_development",
+          "PROBE_BUY_AND_HOLD_SPY_symbols_supplied_in_reverse_order"
+        ],
+        "case_count": 5,
+        "all_identical": true,
+        "digest_definition": "SHA-256 over canonical JSON of the trade list and of the equity curve, carrying no run id, no timestamp, no label and no path",
+        "falsifiability": "tests assert the digest carries no run identity, that base and stressed costs produce different digests, and that symbol insertion order does not change the result; without the second, equality would be unfalsifiable",
+        "per_case": [
+          {
+            "case": "FIXT_BASE",
+            "trades_digest_run_1": "8e1fd4a47d72520cbe016c9b231b65e27fd498c61816f8ee4939632f84ba03de",
+            "trades_digest_run_2": "8e1fd4a47d72520cbe016c9b231b65e27fd498c61816f8ee4939632f84ba03de",
+            "equity_digest_run_1": "27802d46ab52c47e23883ccb5036c9e7799dfbdd2456e0d43a4b40da56dc0756",
+            "equity_digest_run_2": "27802d46ab52c47e23883ccb5036c9e7799dfbdd2456e0d43a4b40da56dc0756",
+            "identical": true
+          },
+          {
+            "case": "FIXT_STRESSED",
+            "trades_digest_run_1": "4e3f98e28296979a34949592578457a0768ab056cedf5cd52b2ff9a2e8529dd2",
+            "trades_digest_run_2": "4e3f98e28296979a34949592578457a0768ab056cedf5cd52b2ff9a2e8529dd2",
+            "equity_digest_run_1": "f34b9d05363fc33f3337de8c4846819b0ff9b0e1f227a3addbd7cd103e0f78f2",
+            "equity_digest_run_2": "f34b9d05363fc33f3337de8c4846819b0ff9b0e1f227a3addbd7cd103e0f78f2",
+            "identical": true
+          },
+          {
+            "case": "PROBE_BUY_AND_HOLD_SPY_development",
+            "trades_digest_run_1": "29d4825c62d3914e97928c56e48dc9885fe5e9dbd10c96d33f72aee9520e0f7f",
+            "trades_digest_run_2": "29d4825c62d3914e97928c56e48dc9885fe5e9dbd10c96d33f72aee9520e0f7f",
+            "equity_digest_run_1": "b815bc275857bf738173867354e7288586715d8a2f5cd2ac19aed531c41ea99e",
+            "equity_digest_run_2": "b815bc275857bf738173867354e7288586715d8a2f5cd2ac19aed531c41ea99e",
+            "identical": true
+          },
+          {
+            "case": "PROBE_ALWAYS_CASH_development",
+            "trades_digest_run_1": "7214278438417990ead74ee5100d5b725abf22b0d9ff5617796f6ffd8212cbec",
+            "trades_digest_run_2": "7214278438417990ead74ee5100d5b725abf22b0d9ff5617796f6ffd8212cbec",
+            "equity_digest_run_1": "51c3aeedb2d7cb2fcb4a4ea653ab91ad9dd48c769f7f5df59210343c0a29a34e",
+            "equity_digest_run_2": "51c3aeedb2d7cb2fcb4a4ea653ab91ad9dd48c769f7f5df59210343c0a29a34e",
+            "identical": true
+          },
+          {
+            "case": "PROBE_BUY_AND_HOLD_SPY_symbols_supplied_in_reverse_order",
+            "trades_digest_run_1": "29d4825c62d3914e97928c56e48dc9885fe5e9dbd10c96d33f72aee9520e0f7f",
+            "trades_digest_run_2": "29d4825c62d3914e97928c56e48dc9885fe5e9dbd10c96d33f72aee9520e0f7f",
+            "equity_digest_run_1": "b815bc275857bf738173867354e7288586715d8a2f5cd2ac19aed531c41ea99e",
+            "equity_digest_run_2": "b815bc275857bf738173867354e7288586715d8a2f5cd2ac19aed531c41ea99e",
+            "identical": true
+          }
+        ]
+      }
+    },
+    "defect_classes_detected": {
+      "required": "tests detect look-ahead, same-close fill, split/dividend, delisting, stale-price, cash, rounding, fee, slippage, rejected-order, and duplicate-order errors",
+      "verdict": "PASS",
+      "evidence": {
+        "declared_class_count": 12,
+        "every_class_has_a_test": true,
+        "classes": [
+          {
+            "id": "LOOK_AHEAD",
+            "mutation": "a probe asks the market view for a bar at or after the session following the decision session",
+            "detector": "LookAheadError raised by the market view, which is constructed with a hard visibility bound and cannot be widened by the caller",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_look_ahead_a_probe_reading_tomorrows_bar_is_stopped_by_the_market_view",
+              "tests/adversarial/test_stage2_defects.py::test_look_ahead_the_bound_cannot_be_widened_by_the_caller"
+            ]
+          },
+          {
+            "id": "SAME_CLOSE_FILL",
+            "mutation": "a fill is submitted for the decision session itself rather than the next session",
+            "detector": "FillTimingError raised by the order book, which requires fill_session to be strictly after decision_session and to be the next eligible exchange session",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_same_close_fill_an_order_filling_at_its_own_decision_close_cannot_be_built",
+              "tests/adversarial/test_stage2_defects.py::test_same_close_fill_the_engine_refuses_to_execute_one_that_reached_it_anyway",
+              "tests/adversarial/test_stage2_defects.py::test_same_close_fill_the_real_entry_fills_at_the_next_sessions_open"
+            ]
+          },
+          {
+            "id": "SPLIT",
+            "mutation": "share count multiplied by the recorded split ratio on the split session",
+            "detector": "value-continuity invariant across every corporate-action session: marked position value may not jump by the split ratio; CorporateActionError",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_split_multiplying_the_share_count_on_a_split_session_is_caught",
+              "tests/adversarial/test_stage2_defects.py::test_split_a_series_that_is_not_actually_split_adjusted_is_caught"
+            ]
+          },
+          {
+            "id": "DIVIDEND",
+            "mutation": "credit the dividend on the session after the ex-date, and separately credit it twice",
+            "detector": "benchmark reconciliation between the provider adjustment factor and the explicit reinvestment model, plus a per-event cash-credit assertion in the fixture",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_dividend_the_ex_date_cash_credit_matches_the_hand_calculation",
+              "tests/adversarial/test_stage2_defects.py::test_dividend_crediting_on_the_session_after_the_ex_date_is_caught",
+              "tests/adversarial/test_stage2_defects.py::test_dividend_crediting_twice_is_caught_by_the_per_event_cash_assertion",
+              "tests/adversarial/test_stage2_defects.py::test_dividend_a_wrong_amount_shows_up_in_the_benchmark_reconciliation"
+            ]
+          },
+          {
+            "id": "DELISTING",
+            "mutation": "extend the run beyond a symbol's last session while holding it, without liquidating",
+            "detector": "the engine liquidates at the last available close and marks the symbol ineligible; DelistingError if a position survives its symbol's final session",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_delisting_the_engine_liquidates_at_the_last_available_close",
+              "tests/adversarial/test_stage2_defects.py::test_delisting_a_position_carried_past_its_own_final_bar_raises",
+              "tests/adversarial/test_stage2_defects.py::test_delisting_an_order_past_the_symbols_final_bar_is_rejected_as_delisted"
+            ]
+          },
+          {
+            "id": "STALE_PRICE",
+            "mutation": "remove a bar from the middle of a series while the calendar still reports a session",
+            "detector": "fills rejected with STALE_PRICE; the equity point flagged stale; a stale run longer than the declared limit raises DataIntegrityHalt",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_stale_price_a_fill_on_a_session_with_no_bar_is_rejected",
+              "tests/adversarial/test_stage2_defects.py::test_stale_price_an_equity_point_marked_on_an_old_close_is_flagged",
+              "tests/adversarial/test_stage2_defects.py::test_stale_price_a_stale_run_past_the_sealed_limit_halts_the_run"
+            ]
+          },
+          {
+            "id": "CASH",
+            "mutation": "fill an order larger than available cash; skip the cash debit on a fill",
+            "detector": "the cash-conservation invariant checked after every event: closing cash equals opening cash minus debits plus credits, exactly, in Decimal; and cash may never be negative",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_cash_an_order_larger_than_the_balance_cannot_create_a_position",
+              "tests/adversarial/test_stage2_defects.py::test_cash_a_debit_that_never_reached_the_ledger_is_caught",
+              "tests/adversarial/test_stage2_defects.py::test_cash_conservation_holds_across_the_whole_clean_run"
+            ]
+          },
+          {
+            "id": "ROUNDING",
+            "mutation": "round share quantity up instead of down; round a buy notional down instead of up",
+            "detector": "the adverse-rounding invariant: for a buy, charged notional is greater than or equal to quantity times effective price; for a sell and for dividend cash, credited amount is less than or equal to it; MIN_NOTIONAL rejection is asserted separately",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_rounding_a_quantity_rounded_up_buys_shares_the_budget_does_not_cover",
+              "tests/adversarial/test_stage2_defects.py::test_rounding_a_buy_notional_rounded_down_favours_the_account",
+              "tests/adversarial/test_stage2_defects.py::test_rounding_every_fill_in_the_clean_run_rounds_adversely",
+              "tests/adversarial/test_stage2_defects.py::test_rounding_an_order_below_the_minimum_notional_is_rejected_not_rounded_up"
+            ]
+          },
+          {
+            "id": "FEE",
+            "mutation": "set every fee to zero; apply the sell-side fees to a buy",
+            "detector": "hand-calculated fixture equality on each fee component, plus the invariant that every fill carries a strictly positive total cost",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_fee_each_component_matches_the_hand_calculation",
+              "tests/adversarial/test_stage2_defects.py::test_fee_zeroing_every_fee_changes_the_answer",
+              "tests/adversarial/test_stage2_defects.py::test_fee_the_sell_side_fees_are_never_charged_on_a_buy",
+              "tests/adversarial/test_stage2_defects.py::test_fee_every_fill_carries_a_strictly_positive_total_cost"
+            ]
+          },
+          {
+            "id": "SLIPPAGE",
+            "mutation": "fill a buy below the reference price and a sell above it",
+            "detector": "the adverse-price invariant asserted on every fill: effective buy price is strictly greater than the reference, effective sell price is strictly less",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_slippage_the_favourable_direction_is_refused_inside_the_price_function",
+              "tests/adversarial/test_stage2_defects.py::test_slippage_a_replaced_price_function_is_still_caught_at_the_fill",
+              "tests/adversarial/test_stage2_defects.py::test_slippage_omitting_it_entirely_changes_the_fill_price",
+              "tests/adversarial/test_stage2_defects.py::test_slippage_every_fill_in_the_clean_run_is_priced_adversely"
+            ]
+          },
+          {
+            "id": "REJECTED_ORDER",
+            "mutation": "apply the position and cash effect of an order that was rejected",
+            "detector": "rejections are recorded with a reason code and asserted to leave cash, position, and equity byte-identical to the pre-order state",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_rejected_order_a_rejection_leaves_cash_position_and_equity_untouched",
+              "tests/adversarial/test_stage2_defects.py::test_rejected_order_every_rejection_carries_a_declared_reason_code",
+              "tests/adversarial/test_stage2_defects.py::test_rejected_order_an_order_with_nowhere_to_fill_is_recorded_rather_than_dropped"
+            ]
+          },
+          {
+            "id": "DUPLICATE_ORDER",
+            "mutation": "submit an identical order twice on the same session",
+            "detector": "DuplicateOrderError from the order book, which rejects a repeated deterministic order id and a second live order in the same symbol on the same session",
+            "tests": [
+              "tests/adversarial/test_stage2_defects.py::test_duplicate_order_the_identical_order_submitted_twice_is_refused",
+              "tests/adversarial/test_stage2_defects.py::test_duplicate_order_a_probe_asking_twice_in_one_session_is_caught",
+              "tests/adversarial/test_stage2_defects.py::test_duplicate_order_two_live_orders_in_one_symbol_on_one_session_are_refused",
+              "tests/adversarial/test_stage2_defects.py::test_duplicate_order_the_clean_run_admits_no_duplicates"
+            ]
+          }
+        ],
+        "clean_controls": [
+          "tests/adversarial/test_stage2_defects.py::test_control_the_clean_fixture_run_matches_the_hand_calculation",
+          "tests/adversarial/test_stage2_defects.py::test_control_a_correctly_applied_split_leaves_the_share_count_alone",
+          "tests/adversarial/test_stage2_defects.py::test_control_a_correctly_applied_dividend_is_credited_once_on_its_ex_date"
+        ],
+        "control_note": "the sealed standard is that a class is satisfied only if the clean engine passes AND the mutated engine is caught, so the controls are part of the evidence",
+        "coverage_established_by": "the harness AST-parses tests/adversarial/test_stage2_defects.py and matches real test names; it does not compose node ids from a naming convention, which would report success for tests nobody wrote",
+        "standard": "two-sided: a class counts as covered only if the clean engine passes and the mutated engine is caught",
+        "look_ahead_empirical_check": {
+          "run_end": "2000-12-29",
+          "bars_removed": 6437,
+          "identical": true,
+          "note": "every bar after the run end was deleted and both digests were unchanged; a companion test asserts the truncation actually removed bars, because a truncation that deleted nothing would pass against an engine that peeks"
+        },
+        "invariants_asserted_on_every_event": 12
+      }
+    },
+    "hand_calculated_fixtures_match": {
+      "required": "independent hand-calculated fixtures match engine output",
+      "verdict": "PASS",
+      "evidence": {
+        "instrument": "FIXT (synthetic; not a research instrument)",
+        "all_match": true,
+        "checks_per_scenario": {
+          "BASE": 20,
+          "STRESSED": 19
+        },
+        "independence": "the arithmetic was written into config/stage2_engine_spec.json, with its derivation, before any engine module existed; engine_modules_present_at_seal_time was recorded as 0",
+        "granularity": "compared line by line rather than on final equity alone, which two compensating errors would satisfy"
+      }
+    },
+    "benchmarks_reconcile": {
+      "required": "benchmark calculations reconcile",
+      "verdict": "PASS",
+      "evidence": {
+        "spy_total_return_method_a": "15.99666381615945001616471638324911",
+        "spy_total_return_method_b": "15.99666027184343712208367222872284",
+        "relative_difference": "2.215659498522246340035879336605371E-7",
+        "relative_tolerance": "0.000001",
+        "dividend_count": 115,
+        "reconciles": true,
+        "why_the_two_methods_must_agree": "under the adjustment convention Stage 1 measured, adj_t = close_t * prod_{s>t}(1 - D_s/close_{s-1}), which forces reinvestment at close_{s-1} - D_s; the residual is accumulated decimal rounding over the dividend events, not a modelling disagreement",
+        "cash_benchmark_returns_exactly_zero": true,
+        "do_nothing_benchmark_returns_exactly_zero": true,
+        "always_cash_probe_equity_is_flat": true,
+        "tradable_spy_buy_and_hold": {
+          "note": "A real USD 100 cash account, not an index. Two variants are reported because constitution \u00a75.1 places the 15% research shutdown on a strategy and this run is a benchmark; the sealed check passes under both readings, so the ambiguity does not affect the gate.",
+          "with_research_shutdown": {
+            "label": "BENCHMARK_TRADABLE_SPY_BUY_AND_HOLD",
+            "total_return": "1.274",
+            "final_equity": "227.40",
+            "research_shutdown_session": "1998-08-31",
+            "fills": 2,
+            "strictly_less_than_index": true
+          },
+          "without_research_shutdown": {
+            "label": "BENCHMARK_TRADABLE_SPY_BUY_AND_HOLD_NO_SHUTDOWN",
+            "total_return": "10.1852271074553927876",
+            "final_equity": "1118.5227107455392787600",
+            "fills": 1,
+            "dividend_events": 115,
+            "open_positions": [
+              {
+                "symbol": "SPY",
+                "quantity": "2.159318350",
+                "cost_basis": "94.99",
+                "opened_session": "1993-02-01"
+              }
+            ],
+            "strictly_less_than_index": true,
+            "shortfall_explanation": [
+              "only 94.99 of the 100.00 is ever invested: the sealed 5% cash buffer and the budget safety margin are never deployed",
+              "dividends are credited to cash and never reinvested; a re-entry rule would be a strategy decision and Stage 2 has no authority to make one",
+              "execution friction: 5 bps each way plus adverse rounding and the sell-side fees"
+            ]
+          }
+        },
+        "additional_checks_all_pass": true
+      }
+    }
+  },
+  "artifacts": [
+    "governance/STAGE_2_BACKTEST_ENGINE_REPORT.md",
+    "reports/stage2/STAGE_2_ENGINE_VALIDATION.json",
+    "reports/stage2/STAGE_2_BACKTEST_ENGINE.json",
+    "reports/stage2/STAGE_2_ARTIFACT_MANIFEST.json",
+    "reports/stage2/STAGE_2_TEST_SUMMARY.md",
+    "reports/stage2/pytest_stage2_output.txt"
+  ],
+  "frozen_inputs_read_only": [
+    "governance/STAGE_0_CONSTITUTION.md",
+    "governance/STAGE_0_CONSTITUTION.json",
+    "governance/STAGE_0_FREEZE.sha256",
+    "governance/STAGE_1_DATA_FOUNDATION_REPORT.md",
+    "governance/STAGE_1_UNIVERSE.json",
+    "governance/STAGE_1_HOLDOUT_LOCK.json",
+    "governance/STAGE_1_FREEZE.sha256",
+    "governance/STAGE_1_PREREGISTRATION.json",
+    "governance/STAGE_1_PREREGISTRATION.sha256",
+    "governance/STAGE_2_PREREGISTRATION.md",
+    "governance/STAGE_2_PREREGISTRATION.json",
+    "governance/STAGE_2_PREREGISTRATION.sha256",
+    "config/stage2_cost_model.json",
+    "config/stage2_engine_spec.json"
+  ],
+  "tests": {
+    "passed": 273,
+    "failed": 0,
+    "skipped": 0
+  },
+  "authorization_state": {
+    "strategy_research": "UNLOCKED_ON_DEVELOPMENT_WINDOW_ONLY",
+    "backtesting": "UNLOCKED_ON_DEVELOPMENT_WINDOW_ONLY",
+    "validation_window": "LOCKED",
+    "final_holdout": "SEALED",
+    "alpaca_paper_trading": "LOCKED",
+    "shadow_live": "LOCKED",
+    "alpaca_live_trading": "LOCKED",
+    "capital_or_risk_expansion": "LOCKED"
+  },
+  "next_authorized_stage": "STAGE_3_STRATEGY_DEVELOPMENT",
+  "live_trading_authorized": false,
+  "reproducibility": {
+    "run_id": "SE100-R-20260809T124151Z",
+    "repo_state_id": "98b0c8b9b456a3199aa47302b562820602798c4e069b63559185544b89c3d49c",
+    "package_version": "0.1.0",
+    "python": "3.10.6",
+    "dependency_versions": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "requests": "2.34.2",
+      "pytest": "8.4.2",
+      "yfinance": "1.4.1",
+      "exchange_calendars": "4.13.2",
+      "pyarrow": "MISSING",
+      "scipy": "MISSING"
+    },
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage2_package",
+    "config_hash": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+    "random_seed": null
+  }
+}

@@ -1,0 +1,11 @@
+$ cd stockedge100 && python -m pytest tests/unit/test_stage0_governance.py tests/unit/test_stage1_preregistration.py tests/unit/test_stage3_attempt2_preregistration.py -q
+........................................................................ [ 62%]
+...........................................                              [100%]
+115 passed in 0.46s
+
+$ cd stockedge100 && python -m pytest tests/unit/test_stage3_attempt2_preregistration.py -q
+.......................................................................  [100%]
+71 passed in 0.22s
+
+$ cd stockedge100 && python -m pytest tests --collect-only -q | tail -1
+460 tests collected in 1.15s

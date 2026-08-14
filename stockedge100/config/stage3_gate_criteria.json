@@ -1,0 +1,156 @@
+{
+  "artifact_id": "SE100-CFG-3002",
+  "title": "Stage 3 gate criteria — Gate 3 development admissibility, evaluation methods fixed before results",
+  "version": "1.0.0",
+  "project": "StockEdge100",
+  "stage": 3,
+  "gate_id": 3,
+  "gate_name": "development_admissibility",
+  "constitution_ref": "SE100-GOV-0001 section 9 gate 3, sections 4, 5.1, 10, 11",
+  "declared_before_any_strategy_code": true,
+  "declaration_note": "This file fixes how each Gate 3 condition is measured, not only what its threshold is. A threshold with an unfixed measurement method is not a threshold: 'maximum drawdown' and 'profit factor' and 'removing the best trade' each admit several defensible definitions, and choosing among them after seeing six candidates' results would be the fitting this stage exists to rule out.",
+
+  "frozen_gate_text_verbatim": "This gate rejects obviously weak or fitted candidates before sealed evaluation. Pass only if, on development data after base costs: total return is positive; maximum drawdown is no worse than 15%; profit factor is at least 1.10; at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results; performance is not dependent on one trade: removing the single best trade leaves total return above 0%; no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy; reasonable neighboring parameter values do not reverse the sign of net return. Fail verdict: STRATEGY_REJECTED_IN_DEVELOPMENT.",
+
+  "frozen_gate_json_companion_verbatim": {
+    "id": 3,
+    "name": "development_admissibility",
+    "fail_result": "STRATEGY_REJECTED_IN_DEVELOPMENT",
+    "thresholds": {
+      "net_return_positive": true,
+      "max_drawdown_pct": 15,
+      "profit_factor_min": 1.1,
+      "closed_trades_min": 30,
+      "best_trade_removed_return_positive": true
+    }
+  },
+
+  "conflicts_found": [
+    {
+      "id": "S3-CONFLICT-1",
+      "description": "The frozen JSON companion for gate 3 carries five thresholds. The frozen Markdown carries seven conditions: the same five plus the profit-concentration condition and the neighbouring-parameter sign-stability condition.",
+      "resolution": "The Markdown is authoritative and is the more restrictive of the two. All seven conditions are evaluated and all seven must pass. The JSON companion is treated as an incomplete summary, not as a narrowing of the gate.",
+      "action_taken": "Reported, not repaired. The frozen artifact is not edited. This is the same defect class Stage 1 and Stage 2 recorded against their own gates."
+    },
+    {
+      "id": "S3-CONFLICT-2",
+      "description": "Gate 3 in the frozen JSON has no pass_result key, so the affirmative verdict token for a passing Gate 3 is not stated anywhere in the constitution.",
+      "resolution": "Derived by negation of the stated fail_result, which is how Stage 1 and Stage 2 derived theirs. fail_result STRATEGY_REJECTED_IN_DEVELOPMENT negates to STRATEGY_ADMITTED_IN_DEVELOPMENT. Both tokens are fixed here, before any result, so neither can be shaped by the outcome.",
+      "action_taken": "Reported, not repaired."
+    },
+    {
+      "id": "S3-CONFLICT-3",
+      "description": "Gate 3 requires maximum drawdown no worse than 15%. Constitution section 5.1 puts a research shutdown at exactly 15% below the running high-water mark, and the sealed cost model implements it as LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES. The two thresholds are the same number.",
+      "resolution": "Not a contradiction but a structural consequence worth stating before results: any candidate that trips the research shutdown has by construction breached the Gate 3 drawdown condition, and its equity curve is flat from the liquidation onward because entries are permanently blocked. The shutdown is enforced for every candidate run. It is not disabled, not relaxed, and not treated as an artefact.",
+      "action_taken": "Recorded. No change to any threshold."
+    }
+  ],
+
+  "verdict_token_derivation": {
+    "pass_token": "STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "fail_token": "STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+    "pass_condition": "At least one pre-registered candidate satisfies EVERY hard condition of Gate 3.",
+    "fail_condition": "No pre-registered candidate satisfies every hard condition.",
+    "conjunctive_note": "Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Across candidates the stage verdict is a disjunction, because Gate 3 asks whether a candidate worth carrying forward exists, not whether every candidate tried is good.",
+    "other_tokens_available": "BLOCKED_BY_DATA, BLOCKED_BY_INFRASTRUCTURE, INSUFFICIENT_EVIDENCE, INVALIDATED, NOT_RUN, per constitution section 10. Missing evidence may never be converted to PASS or NOT_APPLICABLE merely for convenience.",
+    "fail_is_a_deliverable": "A stage verdict of FAIL — STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and does not license a seventh candidate in this session."
+  },
+
+  "conditions": [
+    {
+      "id": "S3-C1",
+      "required_verbatim": "total return is positive",
+      "measurement": "total_return over the candidate's run, from stockedge100.backtest.metrics.total_return on the engine equity curve: final equity / starting equity - 1, exact Decimal.",
+      "predicate": "total_return > 0",
+      "costs": "base cost model, all costs already charged inside the equity curve",
+      "not_evaluable_treatment": "An equity curve with fewer than two points is NOT_EVALUABLE and fails."
+    },
+    {
+      "id": "S3-C2",
+      "required_verbatim": "maximum drawdown is no worse than 15%",
+      "measurement": "max_drawdown from stockedge100.backtest.metrics: the largest peak-to-trough decline of the daily closing equity curve, expressed as a non-negative fraction of the running peak. Session-close granularity; the project holds no intraday data and none is imputed.",
+      "predicate": "max_drawdown <= 0.15",
+      "boundary": "Inclusive. 'No worse than 15%' admits exactly 15%.",
+      "interaction": "See S3-CONFLICT-3. A candidate that triggers the section 5.1 research shutdown breaches this condition by construction."
+    },
+    {
+      "id": "S3-C3",
+      "required_verbatim": "profit factor is at least 1.10",
+      "measurement": "profit_factor from stockedge100.backtest.metrics over CLOSED trades only: gross profit divided by gross loss, where a trade's P&L is exit cash plus dividends received while held minus entry cash, with both legs' costs already inside those cash figures. The sealed cost model defines a trade as a round trip: one entry fill and the exit fill that closes it.",
+      "predicate": "profit_factor >= 1.10",
+      "undefined_cases": {
+        "no_closed_trades": "profit_factor is null. Recorded as NOT_EVALUABLE and the condition FAILS. It is not passed by default and not marked not-applicable.",
+        "no_losing_trades": "profit_factor is null because gross loss is zero. If closed trades exist and gross profit is positive, this is recorded as UNDEFINED_NO_LOSSES_TREATED_AS_MET, with the raw null preserved in the evidence rather than replaced by a number. The sealed cost model requires profit factor undefined when there are no losses to be reported as null, never as infinity. Treating a candidate with profits and zero losses as failing a profit-factor floor would be perverse; the reasoning is fixed here rather than invented on sight of such a candidate."
+      }
+    },
+    {
+      "id": "S3-C4",
+      "required_verbatim": "at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results",
+      "measurement": "Count of closed round-trip trades in the engine's trade log. A position still open on the final session is not closed and is not counted.",
+      "predicate": "closed_trades >= 30",
+      "exception_invoked": false,
+      "exception_note": "No candidate in this stage invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly so that a low-frequency candidate cannot later be argued into the exception after its trade count is known."
+    },
+    {
+      "id": "S3-C5",
+      "required_verbatim": "performance is not dependent on one trade: removing the single best trade leaves total return above 0%",
+      "measurement": {
+        "basis": "Closed trades only, in exit order. Because the sealed cost model permits at most one open risky position, trades are sequential and non-overlapping, so a compounded reconstruction is exact rather than an approximation.",
+        "procedure": [
+          "E[0] = starting equity = 100.00.",
+          "E[i] = E[i-1] + pnl[i] for the i-th closed trade in exit order.",
+          "Per-trade equity multiple r[i] = E[i] / E[i-1].",
+          "Realized total return = product of all r[i], minus 1.",
+          "Best-trade-removed return = product of r[i] for i not equal to j, minus 1."
+        ],
+        "which_trade_is_removed": "Two removals are computed and BOTH must leave a positive return. j1 is the trade with the largest equity multiple r[i]. j2 is the trade with the largest absolute P&L pnl[i]. These usually coincide and need not. Requiring both is the stricter reading, and it is fixed here so the stricter or looser reading cannot be chosen after seeing which one a candidate survives.",
+        "relation_to_headline_return": "The realized total return reconstructed from closed trades can differ slightly from the equity-curve total return when a position is open on the final session or when dividends are credited outside a trade. Both figures are reported; the condition is evaluated on the reconstruction, whose whole purpose is to be a like-for-like comparison against the same reconstruction with one trade removed."
+      },
+      "predicate": "best_trade_removed_return > 0 for BOTH removals",
+      "not_evaluable_treatment": "Fewer than two closed trades is NOT_EVALUABLE and fails; a candidate whose entire result is one trade is the exact dependence this condition tests for."
+    },
+    {
+      "id": "S3-C6",
+      "required_verbatim": "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy",
+      "measurement": "For each instrument, contribution = sum of pnl over that instrument's closed trades, divided by the sum of pnl over all closed trades. Evaluated only when total closed-trade P&L is strictly positive; when total P&L is zero or negative, the share is not a meaningful proportion and the case is recorded as NOT_EVALUABLE — which is moot, because S3-C1 has already failed such a candidate.",
+      "predicate": "max instrument contribution <= 0.50",
+      "scope_interpretation": {
+        "applies_to": "Candidates whose declared universe contains more than one instrument: SE100-S3-F5-ROTATION-DUALMOM and SE100-S3-F6-DEFENSIVE-SMA200-SHY.",
+        "single_instrument_treatment": "NOT_APPLICABLE_BY_CONDITION_TEXT, with the declared instrument count recorded as the evidence.",
+        "rationale": "The condition's own words are 'for a multi-instrument strategy'. A universal reading would make a single-instrument candidate contribute 100% of its own profit and fail automatically, which would render four of the six strategy families the constitution names in section 3 — trend/momentum, pullback, mean reversion, breakout — untestable at Gate 3. That cannot be the intent of a clause whose stated purpose is to detect concentration across instruments. The interpretation and its rationale are fixed here, before any result, and are surfaced in the stage report rather than buried."
+      }
+    },
+    {
+      "id": "S3-C7",
+      "required_verbatim": "reasonable neighboring parameter values do not reverse the sign of net return",
+      "measurement": "Each candidate declares exactly four robustness neighbours in SE100-CFG-3001, chosen before any result. Every neighbour is run over the SAME window as its primary, under the same base cost model, with the research shutdown enforced. Each neighbour's total return is recorded with its sign.",
+      "predicate": "sign(neighbour total_return) == sign(primary total_return) for all four neighbours, where sign is positive, negative, or zero and zero matches nothing",
+      "selection_prohibition": "Neighbour runs are evaluated for the sign of net return and nothing else. No neighbour is ever promoted to primary, and no primary parameterisation is revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3.",
+      "not_evaluable_treatment": "A neighbour that fails to run is NOT_RUN, which is not a pass; the condition fails."
+    }
+  ],
+
+  "reported_but_not_gating": [
+    "CAGR, annualised volatility, Sharpe ratio at a 0.00% risk-free rate, exposure fraction, win rate, average win, average loss, longest flat streak.",
+    "SPY total return and SPY tradable buy-and-hold over the candidate's own window, with the research shutdown both enforced and disabled, the latter explicitly labelled a benchmark reference account.",
+    "Cash benchmark at 0.00% annual, labelled conservative, and the do-nothing benchmark.",
+    "Constitution section 4 requires better risk-adjusted performance than cash for a strategy to pass overall, and beating SPY is not mandatory where drawdown is materially reduced. Neither is among the seven hard conditions of Gate 3, so neither gates this stage; both are reported for every candidate so that a later gate reads them from evidence rather than re-deriving them."
+  ],
+
+  "evaluation_integrity_rules": [
+    "Conditions are evaluated by a program that reads the engine's own outputs. No condition verdict is typed by hand into a report.",
+    "Every condition verdict is one of MET, NOT_MET, NOT_EVALUABLE, or NOT_APPLICABLE_BY_CONDITION_TEXT. There is no fifth value and no borderline value.",
+    "A candidate's overall admissibility is the conjunction of its applicable conditions. NOT_EVALUABLE never counts as MET.",
+    "Thresholds are compared as exact Decimals. No comparison is made in floating point, and no result is rounded before comparison.",
+    "The evidence file records the measured value alongside every verdict, so that a reader can recompute the comparison without rerunning the engine."
+  ],
+
+  "windows": {
+    "authorized": ["development"],
+    "validation_window_state": "LOCKED",
+    "holdout_window_state": "SEALED",
+    "enforcement": "stockedge100.backtest.window.ResearchWindow raises WindowViolation on any session outside the development window, and MarketView raises LookAheadError on any read past the decision session. Both are structural; neither depends on a strategy behaving well."
+  },
+
+  "live_trading_authorized": false
+}

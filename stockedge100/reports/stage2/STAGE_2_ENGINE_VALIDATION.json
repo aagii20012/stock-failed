@@ -1,0 +1,592 @@
+{
+  "artifact_id": "SE100-EVID-2001",
+  "title": "Stage 2 backtest engine validation evidence",
+  "stage": "STAGE_2_BACKTEST_ENGINE",
+  "constitution_gate": 2,
+  "window": {
+    "window": "development",
+    "start": "1993-01-29",
+    "end": "2021-07-31"
+  },
+  "symbols": [
+    "SPY"
+  ],
+  "engine_spec_version": "1.0.0",
+  "cost_model_version": "1.0.0",
+  "gate_2_conditions": {
+    "source": "constitution section 9, gate 2, quoted verbatim",
+    "conditions": [
+      "deterministic reruns produce identical trades and equity curves",
+      "tests detect look-ahead, same-close fill, split/dividend, delisting, stale-price, cash, rounding, fee, slippage, rejected-order, and duplicate-order errors",
+      "independent hand-calculated fixtures match engine output",
+      "benchmark calculations reconcile"
+    ],
+    "fail_result": "BACKTEST_ENGINE_NOT_VALIDATED",
+    "conjunctive": true
+  },
+  "determinism": {
+    "condition": "deterministic reruns produce identical trades and equity curves",
+    "declared_probes": [
+      "PROBE_FIXED_SCHEDULE",
+      "PROBE_BUY_AND_HOLD",
+      "PROBE_ALWAYS_CASH"
+    ],
+    "cases": [
+      {
+        "case": "FIXT_BASE",
+        "trades_digest_run_1": "8e1fd4a47d72520cbe016c9b231b65e27fd498c61816f8ee4939632f84ba03de",
+        "trades_digest_run_2": "8e1fd4a47d72520cbe016c9b231b65e27fd498c61816f8ee4939632f84ba03de",
+        "equity_digest_run_1": "27802d46ab52c47e23883ccb5036c9e7799dfbdd2456e0d43a4b40da56dc0756",
+        "equity_digest_run_2": "27802d46ab52c47e23883ccb5036c9e7799dfbdd2456e0d43a4b40da56dc0756",
+        "identical": true
+      },
+      {
+        "case": "FIXT_STRESSED",
+        "trades_digest_run_1": "4e3f98e28296979a34949592578457a0768ab056cedf5cd52b2ff9a2e8529dd2",
+        "trades_digest_run_2": "4e3f98e28296979a34949592578457a0768ab056cedf5cd52b2ff9a2e8529dd2",
+        "equity_digest_run_1": "f34b9d05363fc33f3337de8c4846819b0ff9b0e1f227a3addbd7cd103e0f78f2",
+        "equity_digest_run_2": "f34b9d05363fc33f3337de8c4846819b0ff9b0e1f227a3addbd7cd103e0f78f2",
+        "identical": true
+      },
+      {
+        "case": "PROBE_BUY_AND_HOLD_SPY_development",
+        "trades_digest_run_1": "29d4825c62d3914e97928c56e48dc9885fe5e9dbd10c96d33f72aee9520e0f7f",
+        "trades_digest_run_2": "29d4825c62d3914e97928c56e48dc9885fe5e9dbd10c96d33f72aee9520e0f7f",
+        "equity_digest_run_1": "b815bc275857bf738173867354e7288586715d8a2f5cd2ac19aed531c41ea99e",
+        "equity_digest_run_2": "b815bc275857bf738173867354e7288586715d8a2f5cd2ac19aed531c41ea99e",
+        "identical": true
+      },
+      {
+        "case": "PROBE_ALWAYS_CASH_development",
+        "trades_digest_run_1": "7214278438417990ead74ee5100d5b725abf22b0d9ff5617796f6ffd8212cbec",
+        "trades_digest_run_2": "7214278438417990ead74ee5100d5b725abf22b0d9ff5617796f6ffd8212cbec",
+        "equity_digest_run_1": "51c3aeedb2d7cb2fcb4a4ea653ab91ad9dd48c769f7f5df59210343c0a29a34e",
+        "equity_digest_run_2": "51c3aeedb2d7cb2fcb4a4ea653ab91ad9dd48c769f7f5df59210343c0a29a34e",
+        "identical": true
+      },
+      {
+        "case": "PROBE_BUY_AND_HOLD_SPY_symbols_supplied_in_reverse_order",
+        "trades_digest_run_1": "29d4825c62d3914e97928c56e48dc9885fe5e9dbd10c96d33f72aee9520e0f7f",
+        "trades_digest_run_2": "29d4825c62d3914e97928c56e48dc9885fe5e9dbd10c96d33f72aee9520e0f7f",
+        "equity_digest_run_1": "b815bc275857bf738173867354e7288586715d8a2f5cd2ac19aed531c41ea99e",
+        "equity_digest_run_2": "b815bc275857bf738173867354e7288586715d8a2f5cd2ac19aed531c41ea99e",
+        "identical": true
+      }
+    ],
+    "all_identical": true
+  },
+  "look_ahead_truncation": {
+    "check": "deleting every bar after the run end changes no result",
+    "run_end": "2000-12-29",
+    "bars_removed": 6437,
+    "trades_digest_full": "29d4825c62d3914e97928c56e48dc9885fe5e9dbd10c96d33f72aee9520e0f7f",
+    "trades_digest_truncated": "29d4825c62d3914e97928c56e48dc9885fe5e9dbd10c96d33f72aee9520e0f7f",
+    "equity_digest_full": "061e810e256bdef1e238951fda46b668e591c8d547f81e1eff05efa5c109bb53",
+    "equity_digest_truncated": "061e810e256bdef1e238951fda46b668e591c8d547f81e1eff05efa5c109bb53",
+    "identical": true
+  },
+  "defect_classes": {
+    "condition": "tests detect look-ahead, same-close fill, split/dividend, delisting, stale-price, cash, rounding, fee, slippage, rejected-order, and duplicate-order errors",
+    "declared_class_count": 12,
+    "classes": [
+      {
+        "id": "LOOK_AHEAD",
+        "mutation": "a probe asks the market view for a bar at or after the session following the decision session",
+        "detector": "LookAheadError raised by the market view, which is constructed with a hard visibility bound and cannot be widened by the caller",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_look_ahead_a_probe_reading_tomorrows_bar_is_stopped_by_the_market_view",
+          "tests/adversarial/test_stage2_defects.py::test_look_ahead_the_bound_cannot_be_widened_by_the_caller"
+        ]
+      },
+      {
+        "id": "SAME_CLOSE_FILL",
+        "mutation": "a fill is submitted for the decision session itself rather than the next session",
+        "detector": "FillTimingError raised by the order book, which requires fill_session to be strictly after decision_session and to be the next eligible exchange session",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_same_close_fill_an_order_filling_at_its_own_decision_close_cannot_be_built",
+          "tests/adversarial/test_stage2_defects.py::test_same_close_fill_the_engine_refuses_to_execute_one_that_reached_it_anyway",
+          "tests/adversarial/test_stage2_defects.py::test_same_close_fill_the_real_entry_fills_at_the_next_sessions_open"
+        ]
+      },
+      {
+        "id": "SPLIT",
+        "mutation": "share count multiplied by the recorded split ratio on the split session",
+        "detector": "value-continuity invariant across every corporate-action session: marked position value may not jump by the split ratio; CorporateActionError",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_split_multiplying_the_share_count_on_a_split_session_is_caught",
+          "tests/adversarial/test_stage2_defects.py::test_split_a_series_that_is_not_actually_split_adjusted_is_caught"
+        ]
+      },
+      {
+        "id": "DIVIDEND",
+        "mutation": "credit the dividend on the session after the ex-date, and separately credit it twice",
+        "detector": "benchmark reconciliation between the provider adjustment factor and the explicit reinvestment model, plus a per-event cash-credit assertion in the fixture",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_dividend_the_ex_date_cash_credit_matches_the_hand_calculation",
+          "tests/adversarial/test_stage2_defects.py::test_dividend_crediting_on_the_session_after_the_ex_date_is_caught",
+          "tests/adversarial/test_stage2_defects.py::test_dividend_crediting_twice_is_caught_by_the_per_event_cash_assertion",
+          "tests/adversarial/test_stage2_defects.py::test_dividend_a_wrong_amount_shows_up_in_the_benchmark_reconciliation"
+        ]
+      },
+      {
+        "id": "DELISTING",
+        "mutation": "extend the run beyond a symbol's last session while holding it, without liquidating",
+        "detector": "the engine liquidates at the last available close and marks the symbol ineligible; DelistingError if a position survives its symbol's final session",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_delisting_the_engine_liquidates_at_the_last_available_close",
+          "tests/adversarial/test_stage2_defects.py::test_delisting_a_position_carried_past_its_own_final_bar_raises",
+          "tests/adversarial/test_stage2_defects.py::test_delisting_an_order_past_the_symbols_final_bar_is_rejected_as_delisted"
+        ]
+      },
+      {
+        "id": "STALE_PRICE",
+        "mutation": "remove a bar from the middle of a series while the calendar still reports a session",
+        "detector": "fills rejected with STALE_PRICE; the equity point flagged stale; a stale run longer than the declared limit raises DataIntegrityHalt",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_stale_price_a_fill_on_a_session_with_no_bar_is_rejected",
+          "tests/adversarial/test_stage2_defects.py::test_stale_price_an_equity_point_marked_on_an_old_close_is_flagged",
+          "tests/adversarial/test_stage2_defects.py::test_stale_price_a_stale_run_past_the_sealed_limit_halts_the_run"
+        ]
+      },
+      {
+        "id": "CASH",
+        "mutation": "fill an order larger than available cash; skip the cash debit on a fill",
+        "detector": "the cash-conservation invariant checked after every event: closing cash equals opening cash minus debits plus credits, exactly, in Decimal; and cash may never be negative",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_cash_an_order_larger_than_the_balance_cannot_create_a_position",
+          "tests/adversarial/test_stage2_defects.py::test_cash_a_debit_that_never_reached_the_ledger_is_caught",
+          "tests/adversarial/test_stage2_defects.py::test_cash_conservation_holds_across_the_whole_clean_run"
+        ]
+      },
+      {
+        "id": "ROUNDING",
+        "mutation": "round share quantity up instead of down; round a buy notional down instead of up",
+        "detector": "the adverse-rounding invariant: for a buy, charged notional is greater than or equal to quantity times effective price; for a sell and for dividend cash, credited amount is less than or equal to it; MIN_NOTIONAL rejection is asserted separately",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_rounding_a_quantity_rounded_up_buys_shares_the_budget_does_not_cover",
+          "tests/adversarial/test_stage2_defects.py::test_rounding_a_buy_notional_rounded_down_favours_the_account",
+          "tests/adversarial/test_stage2_defects.py::test_rounding_every_fill_in_the_clean_run_rounds_adversely",
+          "tests/adversarial/test_stage2_defects.py::test_rounding_an_order_below_the_minimum_notional_is_rejected_not_rounded_up"
+        ]
+      },
+      {
+        "id": "FEE",
+        "mutation": "set every fee to zero; apply the sell-side fees to a buy",
+        "detector": "hand-calculated fixture equality on each fee component, plus the invariant that every fill carries a strictly positive total cost",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_fee_each_component_matches_the_hand_calculation",
+          "tests/adversarial/test_stage2_defects.py::test_fee_zeroing_every_fee_changes_the_answer",
+          "tests/adversarial/test_stage2_defects.py::test_fee_the_sell_side_fees_are_never_charged_on_a_buy",
+          "tests/adversarial/test_stage2_defects.py::test_fee_every_fill_carries_a_strictly_positive_total_cost"
+        ]
+      },
+      {
+        "id": "SLIPPAGE",
+        "mutation": "fill a buy below the reference price and a sell above it",
+        "detector": "the adverse-price invariant asserted on every fill: effective buy price is strictly greater than the reference, effective sell price is strictly less",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_slippage_the_favourable_direction_is_refused_inside_the_price_function",
+          "tests/adversarial/test_stage2_defects.py::test_slippage_a_replaced_price_function_is_still_caught_at_the_fill",
+          "tests/adversarial/test_stage2_defects.py::test_slippage_omitting_it_entirely_changes_the_fill_price",
+          "tests/adversarial/test_stage2_defects.py::test_slippage_every_fill_in_the_clean_run_is_priced_adversely"
+        ]
+      },
+      {
+        "id": "REJECTED_ORDER",
+        "mutation": "apply the position and cash effect of an order that was rejected",
+        "detector": "rejections are recorded with a reason code and asserted to leave cash, position, and equity byte-identical to the pre-order state",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_rejected_order_a_rejection_leaves_cash_position_and_equity_untouched",
+          "tests/adversarial/test_stage2_defects.py::test_rejected_order_every_rejection_carries_a_declared_reason_code",
+          "tests/adversarial/test_stage2_defects.py::test_rejected_order_an_order_with_nowhere_to_fill_is_recorded_rather_than_dropped"
+        ]
+      },
+      {
+        "id": "DUPLICATE_ORDER",
+        "mutation": "submit an identical order twice on the same session",
+        "detector": "DuplicateOrderError from the order book, which rejects a repeated deterministic order id and a second live order in the same symbol on the same session",
+        "tests": [
+          "tests/adversarial/test_stage2_defects.py::test_duplicate_order_the_identical_order_submitted_twice_is_refused",
+          "tests/adversarial/test_stage2_defects.py::test_duplicate_order_a_probe_asking_twice_in_one_session_is_caught",
+          "tests/adversarial/test_stage2_defects.py::test_duplicate_order_two_live_orders_in_one_symbol_on_one_session_are_refused",
+          "tests/adversarial/test_stage2_defects.py::test_duplicate_order_the_clean_run_admits_no_duplicates"
+        ]
+      }
+    ],
+    "clean_controls": [
+      "tests/adversarial/test_stage2_defects.py::test_control_the_clean_fixture_run_matches_the_hand_calculation",
+      "tests/adversarial/test_stage2_defects.py::test_control_a_correctly_applied_split_leaves_the_share_count_alone",
+      "tests/adversarial/test_stage2_defects.py::test_control_a_correctly_applied_dividend_is_credited_once_on_its_ex_date"
+    ],
+    "control_note": "the sealed standard is that a class is satisfied only if the clean engine passes AND the mutated engine is caught, so the controls are part of the evidence",
+    "every_class_has_a_test": true
+  },
+  "invariants": {
+    "declared_invariant_count": 12,
+    "invariants": [
+      "CASH_NON_NEGATIVE: cash is never negative at any point in any session",
+      "CASH_CONSERVATION: closing cash equals opening cash minus debits plus credits, exactly, in Decimal",
+      "CASH_IS_WHOLE_CENTS: cash always has at most two decimal places",
+      "NO_LEVERAGE: gross position value never exceeds the declared fraction of equity at the moment of sizing",
+      "LONG_ONLY: no position quantity is ever negative",
+      "MAX_ONE_RISKY_POSITION: at most one non-cash position is open at any time in Generation 1",
+      "ADVERSE_PRICE: every fill price is worse for the account than its reference price",
+      "ADVERSE_ROUNDING: every rounding step is adverse to the account",
+      "POSITIVE_COST: every fill carries a strictly positive total cost",
+      "FILL_AFTER_DECISION: every fill session is strictly later than its decision session",
+      "FILL_ON_SESSION: every fill session is an exchange session with a fresh bar for that symbol",
+      "NO_POSITION_PAST_LAST_BAR: no position is held past its symbol's final available session"
+    ],
+    "enforcement": "asserted inside the engine on every event, not checked once at the end; the portfolio reconciles its cash against its ledger after every single movement"
+  },
+  "hand_calculated_fixtures": {
+    "condition": "independent hand-calculated fixtures match engine output",
+    "instrument": "FIXT (synthetic; not a research instrument)",
+    "cases": [
+      {
+        "scenario": "BASE",
+        "checks": [
+          {
+            "value": "entry_fill_session",
+            "engine": "2015-01-07",
+            "sealed": "2015-01-07",
+            "matches": true
+          },
+          {
+            "value": "exit_fill_session",
+            "engine": "2015-01-09",
+            "sealed": "2015-01-09",
+            "matches": true
+          },
+          {
+            "value": "entry_effective_price",
+            "engine": "100.050000",
+            "sealed": "100.05",
+            "matches": true
+          },
+          {
+            "value": "entry_quantity",
+            "engine": "0.949425287",
+            "sealed": "0.949425287",
+            "matches": true
+          },
+          {
+            "value": "entry_charged_notional",
+            "engine": "94.99",
+            "sealed": "94.99",
+            "matches": true
+          },
+          {
+            "value": "cash_after_entry",
+            "engine": "5.01",
+            "sealed": "5.01",
+            "matches": true
+          },
+          {
+            "value": "equity_2015_01_07",
+            "engine": "109.44678157000",
+            "sealed": "109.44678157",
+            "matches": true
+          },
+          {
+            "value": "dividend_cash_credited",
+            "engine": "0.47",
+            "sealed": "0.47",
+            "matches": true
+          },
+          {
+            "value": "cash_after_dividend",
+            "engine": "5.48",
+            "sealed": "5.48",
+            "matches": true
+          },
+          {
+            "value": "equity_2015_01_08",
+            "engine": "109.91678157000",
+            "sealed": "109.91678157",
+            "matches": true
+          },
+          {
+            "value": "exit_effective_price",
+            "engine": "119.940000",
+            "sealed": "119.94",
+            "matches": true
+          },
+          {
+            "value": "exit_gross_proceeds",
+            "engine": "113.87",
+            "sealed": "113.87",
+            "matches": true
+          },
+          {
+            "value": "exit_sec_fee",
+            "engine": "0.01",
+            "sealed": "0.01",
+            "matches": true
+          },
+          {
+            "value": "exit_taf_fee",
+            "engine": "0.01",
+            "sealed": "0.01",
+            "matches": true
+          },
+          {
+            "value": "exit_net_proceeds",
+            "engine": "113.85",
+            "sealed": "113.85",
+            "matches": true
+          },
+          {
+            "value": "final_cash",
+            "engine": "119.33",
+            "sealed": "119.33",
+            "matches": true
+          },
+          {
+            "value": "final_equity",
+            "engine": "119.33",
+            "sealed": "119.33",
+            "matches": true
+          },
+          {
+            "value": "total_return",
+            "engine": "0.1933",
+            "sealed": "0.1933",
+            "matches": true
+          },
+          {
+            "value": "closed_trades",
+            "engine": "1",
+            "sealed": "1",
+            "matches": true
+          },
+          {
+            "value": "trade_pnl",
+            "engine": "19.33",
+            "sealed": "19.33",
+            "matches": true
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "scenario": "STRESSED",
+        "checks": [
+          {
+            "value": "entry_fill_session",
+            "engine": "2015-01-07",
+            "sealed": "2015-01-07",
+            "matches": true
+          },
+          {
+            "value": "exit_fill_session",
+            "engine": "2015-01-09",
+            "sealed": "2015-01-09",
+            "matches": true
+          },
+          {
+            "value": "entry_effective_price",
+            "engine": "100.10000",
+            "sealed": "100.10",
+            "matches": true
+          },
+          {
+            "value": "entry_quantity",
+            "engine": "0.948951048",
+            "sealed": "0.948951048",
+            "matches": true
+          },
+          {
+            "value": "entry_charged_notional",
+            "engine": "94.99",
+            "sealed": "94.99",
+            "matches": true
+          },
+          {
+            "value": "cash_after_entry",
+            "engine": "5.01",
+            "sealed": "5.01",
+            "matches": true
+          },
+          {
+            "value": "equity_2015_01_07",
+            "engine": "109.39461528000",
+            "sealed": "109.39461528",
+            "matches": true
+          },
+          {
+            "value": "dividend_cash_credited",
+            "engine": "0.47",
+            "sealed": "0.47",
+            "matches": true
+          },
+          {
+            "value": "cash_after_dividend",
+            "engine": "5.48",
+            "sealed": "5.48",
+            "matches": true
+          },
+          {
+            "value": "equity_2015_01_08",
+            "engine": "109.86461528000",
+            "sealed": "109.86461528",
+            "matches": true
+          },
+          {
+            "value": "exit_effective_price",
+            "engine": "119.88000",
+            "sealed": "119.88",
+            "matches": true
+          },
+          {
+            "value": "exit_gross_proceeds",
+            "engine": "113.76",
+            "sealed": "113.76",
+            "matches": true
+          },
+          {
+            "value": "exit_sec_fee",
+            "engine": "0.01",
+            "sealed": "0.01",
+            "matches": true
+          },
+          {
+            "value": "exit_taf_fee",
+            "engine": "0.01",
+            "sealed": "0.01",
+            "matches": true
+          },
+          {
+            "value": "exit_net_proceeds",
+            "engine": "113.74",
+            "sealed": "113.74",
+            "matches": true
+          },
+          {
+            "value": "final_cash",
+            "engine": "119.22",
+            "sealed": "119.22",
+            "matches": true
+          },
+          {
+            "value": "final_equity",
+            "engine": "119.22",
+            "sealed": "119.22",
+            "matches": true
+          },
+          {
+            "value": "total_return",
+            "engine": "0.1922",
+            "sealed": "0.1922",
+            "matches": true
+          },
+          {
+            "value": "closed_trades",
+            "engine": "1",
+            "sealed": "1",
+            "matches": true
+          }
+        ],
+        "all_match": true
+      }
+    ],
+    "all_match": true
+  },
+  "benchmarks": {
+    "condition": "benchmark calculations reconcile",
+    "spy_total_return": {
+      "symbol": "SPY",
+      "start_session": "1993-01-29",
+      "end_session": "2021-07-30",
+      "start_close": "43.9375000000",
+      "end_close": "438.5100097656",
+      "start_adj_close": "24.1132526398",
+      "end_adj_close": "409.8448486328",
+      "dividend_count": 115,
+      "final_shares_per_one_initial": "1.703018731757819187013733542788519",
+      "method_a_adj_close_ratio": "15.99666381615945001616471638324911",
+      "method_b_explicit_reinvestment": "15.99666027184343712208367222872284",
+      "relative_difference": "2.215659498522246340035879336605371E-7"
+    },
+    "relative_tolerance": "0.000001",
+    "reconciles": true,
+    "cash_benchmark": {
+      "benchmark": "CASH",
+      "annual_rate": "0.00",
+      "sessions": 7178,
+      "total_return": "0",
+      "trades": 0,
+      "note": "0% conservative proxy: no T-bill series was acquired in Stage 1. This makes the cash hurdle easier to beat, so it is conservative for judging cash and generous for judging a strategy."
+    },
+    "cash_benchmark_returns_exactly_zero": true,
+    "do_nothing_benchmark": {
+      "benchmark": "DO_NOTHING",
+      "annual_rate": "0",
+      "sessions": 7178,
+      "total_return": "0",
+      "trades": 0,
+      "note": "Flat equity at starting capital, zero trades, zero costs."
+    },
+    "do_nothing_benchmark_returns_exactly_zero": true,
+    "always_cash_probe_equity_is_flat": true,
+    "always_cash_probe_trades": 0,
+    "tradable_spy_buy_and_hold": {
+      "note": "A real USD 100 cash account, not an index. Two variants are reported because constitution \u00a75.1 places the 15% research shutdown on a strategy and this run is a benchmark; the sealed check passes under both readings, so the ambiguity does not affect the gate.",
+      "with_research_shutdown": {
+        "label": "BENCHMARK_TRADABLE_SPY_BUY_AND_HOLD",
+        "total_return": "1.274",
+        "final_equity": "227.40",
+        "research_shutdown_session": "1998-08-31",
+        "fills": 2,
+        "strictly_less_than_index": true
+      },
+      "without_research_shutdown": {
+        "label": "BENCHMARK_TRADABLE_SPY_BUY_AND_HOLD_NO_SHUTDOWN",
+        "total_return": "10.1852271074553927876",
+        "final_equity": "1118.5227107455392787600",
+        "fills": 1,
+        "dividend_events": 115,
+        "open_positions": [
+          {
+            "symbol": "SPY",
+            "quantity": "2.159318350",
+            "cost_basis": "94.99",
+            "opened_session": "1993-02-01"
+          }
+        ],
+        "strictly_less_than_index": true,
+        "shortfall_explanation": [
+          "only 94.99 of the 100.00 is ever invested: the sealed 5% cash buffer and the budget safety margin are never deployed",
+          "dividends are credited to cash and never reinvested; a re-entry rule would be a strategy decision and Stage 2 has no authority to make one",
+          "execution friction: 5 bps each way plus adverse rounding and the sell-side fees"
+        ]
+      }
+    },
+    "additional_checks_all_pass": true
+  },
+  "reference_run_metrics": {
+    "note": "A probe run reported for completeness. It is an engine exercise, not a research result, and nothing in this stage draws a conclusion from it.",
+    "label": "PROBE_BUY_AND_HOLD_SPY",
+    "sessions": 7178,
+    "start_session": "1993-01-29",
+    "end_session": "2021-07-30",
+    "start_equity": "100.00",
+    "end_equity": "227.40",
+    "total_return": "1.274",
+    "cagr": "0.029247249794352483000953668782749",
+    "max_drawdown": "0.1764473665988019363868513573836107",
+    "daily_return_stdev": "0.003584822461747176114949138151368412",
+    "sharpe": "0.5354958011700407899489065540215137",
+    "sharpe_risk_free_annual": "0.00",
+    "profit_factor": null,
+    "profit_factor_note": "undefined: no losing closed trade in this run",
+    "closed_trades": 1,
+    "exposure_fraction": "0.1965728615213151295625522429646141",
+    "research_shutdown_session": "1998-08-31"
+  },
+  "all_conditions_met": true,
+  "generated_utc": "2026-08-09T12:38:23Z",
+  "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage2_evidence",
+  "evidence_digest_covers": "every field of this file except generated_utc and evidence_digest, as canonical JSON",
+  "evidence_digest": "9af271e46b8f47602422e0159781e2e14f6b9dd8a854d5b7101b2fcd14c3317b"
+}

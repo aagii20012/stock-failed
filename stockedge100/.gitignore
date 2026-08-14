@@ -1,0 +1,47 @@
+# --- secrets: never commit, never stage -------------------------------------------------------
+.env
+.env.*
+*.pem
+*.key
+secrets/
+credentials*
+*_credentials*
+.alpaca/
+
+# --- generated data ---------------------------------------------------------------------------
+# Reproducible from data/manifests/ plus the acquisition protocol. Manifests, checksums and
+# quarantine explanations ARE tracked; payloads are not.
+data/raw/**
+data/normalized/**
+data/reference/**
+!data/**/.gitkeep
+!data/manifests/**
+!data/quarantine/**/*.md
+!data/quarantine/**/*.json
+
+# --- run and log output ------------------------------------------------------------------------
+# runs/*.json are reproducibility records and are kept; ad-hoc scratch output is not.
+logs/**
+!logs/.gitkeep
+runs/**/artifacts/
+*.log
+
+# --- python -------------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- editors and os -------------------------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

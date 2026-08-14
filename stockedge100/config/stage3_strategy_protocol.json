@@ -1,0 +1,261 @@
+{
+  "artifact_id": "SE100-CFG-3001",
+  "title": "Stage 3 strategy research protocol — six pre-registered candidate specifications",
+  "version": "1.0.0",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 3,
+  "constitution_ref": "SE100-GOV-0001 sections 3, 4, 5.1, 8, 9 gate 3, 11",
+  "declared_before_any_strategy_code": true,
+  "declaration_note": "Every symbol, parameter, threshold, lookback, entry rule, exit rule, sizing rule, eligibility rule, run start rule, benchmark, and robustness neighbour in this file was written before a single line of strategy code existed and before any strategy produced any number of any kind. Sealing it afterwards would allow a rule to be chosen because of the result it produced. The digests recorded in governance/STAGE_3_PREREGISTRATION.json bind these values; stockedge100.strategies.config refuses to load a file whose digest has drifted.",
+  "currency": "USD",
+
+  "inputs_bound": {
+    "universe": "SE100-U1-d4917c2f7f1cd834 (governance/STAGE_1_UNIVERSE.json, FROZEN, 34 ETFs)",
+    "cost_model": "SE100-CFG-2001 (config/stage2_cost_model.json), BASE scenario, unmodified",
+    "engine": "validated at Gate 2, PASS — STAGE_2_BACKTEST_ENGINE_VALIDATED",
+    "window": "development only, bounds read from governance/STAGE_1_HOLDOUT_LOCK.json and never restated here",
+    "validation_window_state": "LOCKED",
+    "holdout_window_state": "SEALED"
+  },
+
+  "excluded_symbols": {
+    "AAPL": "A price file for AAPL exists under data/normalized/daily/ because Stage 1 measured the split convention against two AAPL split events. AAPL is not a member of the frozen research universe and is not eligible for any candidate in this stage. Constitution section 3 records individual stocks as PROHIBITED for Generation 1."
+  },
+
+  "shared_rules": {
+    "one_decision_per_session": "At most one decision per strategy per session, per constitution section 3. A decision is taken at the close of session t from data at or before session t; the engine fills at the open of the next exchange session and refuses any earlier fill.",
+    "long_only": "No short sale, no leverage, no margin, no averaging down, no pyramiding. One open risky position at a time, per the sealed cost model max_open_risky_positions of 1.",
+    "sizing_rule": "A buy requests a budget of 95% of account equity measured at the decision close. The sealed exposure cap (95% of equity) and cash buffer (5% of equity) are applied independently by the engine and may reduce the executed notional further. No candidate sizes by volatility, conviction, or any other varying quantity: position size is not a research variable in this stage.",
+    "flat_first_rule": "A candidate never schedules an exit and an entry for the same fill session. If it holds H and its target is T with T not equal to H, it emits only SELL H. It emits BUY T only on a session on which the account is already flat. Reason: within one fill session the engine executes orders sorted by (symbol, side, order_id), so an entry whose symbol sorts before the exit's symbol would execute first and be rejected MAX_POSITIONS. Sequencing the exit strictly before the entry costs one session out of the market on every switch and is the conservative construction. This cost is charged to every candidate and is not modelled away.",
+    "insufficient_history_rule": "If any indicator a rule requires cannot be computed from the visible history, the target for that session is cash. A missing indicator never produces a hold, a guess, or a carried-forward value.",
+    "tie_break": "Where two symbols would rank equally, the lower symbol in ascending ASCII order is chosen. Deterministic by construction; no ranking in this stage is permitted to depend on dictionary or file order.",
+    "warmup_rule": "Each candidate declares warmup_sessions equal to the largest lookback used by its primary parameterisation OR by any of its robustness neighbours, so that every variant of a candidate is evaluable from the first session of that candidate's run and no variant is advantaged by a different start.",
+    "run_start_rule": "A candidate's run begins on the first development-window session on which EVERY symbol in its universe has at least warmup_sessions visible bars inside the development window, and ends at the development window end. This is a structural rule about data availability. It is fixed here, before any result, and may not be moved afterwards.",
+    "warmup_data_source": "Warm-up history is drawn only from sessions inside the development window. No candidate reads a bar outside it; MarketView enforces both the window bound and the as-of bound structurally.",
+    "no_intraday": "Every signal is computed from daily closes. No intraday data exists in this project and none is approximated.",
+    "no_machine_learning": "No machine learning of any kind is used, per constitution section 8. No model is fitted, trained, cross-validated, or optimised against any outcome in this stage.",
+    "no_combination": "No candidate combines another candidate. Each of the six is an independent specification with its own hypothesis and its own verdict, per constitution section 8: combining strategies is prohibited until each component has an independent verdict."
+  },
+
+  "indicator_definitions": {
+    "arithmetic": "All indicator arithmetic is exact Decimal under stockedge100.backtest.costs.ENGINE_CONTEXT (precision 34, ROUND_HALF_EVEN, trapping InvalidOperation, DivisionByZero and Overflow). No float appears anywhere in a signal path.",
+    "visible_bars": "A visible bar is one whose session is at or before the decision session and inside the development window. Ordering is oldest first.",
+    "SMA": "SMA(n) at session t is the arithmetic mean of the closes of the last n visible bars, the bar at t included. Undefined if fewer than n visible bars exist.",
+    "ROLLING_MAX": "MAXCLOSE(n) at t is the largest close among the last n visible bars, the bar at t included.",
+    "ROLLING_MIN": "MINCLOSE(n) at t is the smallest close among the last n visible bars, the bar at t included.",
+    "MOMENTUM": "MOM(n) at t is adj_close(t) / adj_close(t-n) - 1, where t-n is the n-th visible bar before t. adj_close is used rather than close because momentum is a total-return comparison across instruments with different dividend yields; Stage 1 established that adj_close carries the provider's dividend reinvestment. Undefined if fewer than n+1 visible bars exist.",
+    "RSI": {
+      "variant": "Wilder smoothing, seeded by a simple average, with an explicitly declared warm-up. Named in full here because 'RSI' alone is ambiguous and the ambiguity would otherwise be resolved after seeing a result.",
+      "warmup_changes": 100,
+      "procedure": [
+        "Take the last warmup_changes + 1 visible closes c[0..W] where W = warmup_changes; undefined if fewer exist.",
+        "For i = 1..W: gain[i] = max(c[i] - c[i-1], 0); loss[i] = max(c[i-1] - c[i], 0).",
+        "Seed: avgGain = mean(gain[1..p]); avgLoss = mean(loss[1..p]), where p is the RSI period.",
+        "For i = p+1..W: avgGain = (avgGain * (p-1) + gain[i]) / p; avgLoss = (avgLoss * (p-1) + loss[i]) / p.",
+        "If avgLoss == 0 and avgGain > 0 the value is 100. If avgLoss == 0 and avgGain == 0 the value is 50. Otherwise value = 100 - 100 / (1 + avgGain / avgLoss)."
+      ],
+      "seed_note": "A 100-change warm-up in front of a 2-period or 3-period Wilder average makes the seed contribution negligible, and fixing the warm-up length here makes the value reproducible to the last digit rather than dependent on how much history a caller happened to pass."
+    }
+  },
+
+  "experiments": [
+    {
+      "experiment_id": "SE100-S3-F1-TREND-SMA200",
+      "family": "trend/momentum",
+      "hypothesis": "Holding SPY only while its close is above its 200-session simple moving average earns a positive after-cost total return over the development window with a materially smaller maximum drawdown than holding SPY continuously.",
+      "universe": ["SPY"],
+      "universe_rationale": "The single largest and longest-lived member of the frozen universe. A single-instrument specification, so the Gate 3 profit-concentration condition does not apply by its own text.",
+      "exclusions": "Every other universe member. No substitution, no expansion.",
+      "warmup_sessions": 250,
+      "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+      "features": ["close", "SMA(200) of close"],
+      "primary_parameters": {"sma_long": 200},
+      "target_rule": "target = SPY if close(t) > SMA(200)(t), else cash.",
+      "entry_rule": "If flat and target is SPY, buy SPY.",
+      "exit_rule": "If holding SPY and target is cash, sell the whole position.",
+      "sizing_rule": "shared_rules.sizing_rule",
+      "ranking_rule": "Not applicable: one instrument.",
+      "conflict_rule": "shared_rules.flat_first_rule",
+      "permitted_parameter_grid": {"sma_long": [150, 175, 200, 225, 250]},
+      "robustness_neighbours": [
+        {"sma_long": 150},
+        {"sma_long": 175},
+        {"sma_long": 225},
+        {"sma_long": 250}
+      ],
+      "primary_metric": "total return after base costs over the candidate's development-window run",
+      "max_research_iterations": 1
+    },
+    {
+      "experiment_id": "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+      "family": "pullback",
+      "hypothesis": "Buying SPY only on short-term weakness inside a long-term uptrend — close below the 10-session average while above the 200-session average — earns a positive after-cost total return with less time at risk than holding the uptrend continuously.",
+      "universe": ["SPY"],
+      "universe_rationale": "Single instrument; the profit-concentration condition does not apply by its own text.",
+      "exclusions": "Every other universe member.",
+      "warmup_sessions": 250,
+      "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+      "features": ["close", "SMA(200) of close", "SMA(10) of close"],
+      "primary_parameters": {"sma_long": 200, "sma_short": 10},
+      "target_rule": "target = SPY if close(t) > SMA(200)(t) AND close(t) < SMA(10)(t), else cash.",
+      "entry_rule": "If flat and target is SPY, buy SPY.",
+      "exit_rule": "If holding SPY and target is cash — that is, the close has recovered above SMA(10) or the long-term regime has failed — sell the whole position.",
+      "sizing_rule": "shared_rules.sizing_rule",
+      "ranking_rule": "Not applicable: one instrument.",
+      "conflict_rule": "shared_rules.flat_first_rule",
+      "permitted_parameter_grid": {"sma_long": [150, 200, 250], "sma_short": [5, 10, 20]},
+      "robustness_neighbours": [
+        {"sma_long": 150, "sma_short": 10},
+        {"sma_long": 250, "sma_short": 10},
+        {"sma_long": 200, "sma_short": 5},
+        {"sma_long": 200, "sma_short": 20}
+      ],
+      "primary_metric": "total return after base costs over the candidate's development-window run",
+      "max_research_iterations": 1
+    },
+    {
+      "experiment_id": "SE100-S3-F3-MEANREV-RSI2",
+      "family": "mean reversion",
+      "hypothesis": "SPY reverts over a two-to-five session horizon: entering after a 2-period Wilder RSI below 10 and exiting once the close is back above its 5-session average earns a positive after-cost total return.",
+      "universe": ["SPY"],
+      "universe_rationale": "Single instrument; the profit-concentration condition does not apply by its own text.",
+      "exclusions": "Every other universe member.",
+      "warmup_sessions": 101,
+      "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+      "features": ["close", "RSI(2) Wilder as defined in indicator_definitions", "SMA(5) of close"],
+      "primary_parameters": {"rsi_period": 2, "rsi_entry_below": 10, "exit_sma": 5},
+      "target_rule": "If flat: target = SPY if RSI(rsi_period)(t) < rsi_entry_below, else cash. If holding SPY: target = cash if close(t) > SMA(exit_sma)(t), else SPY. This is the one candidate whose entry and exit rules differ in form; the account's own position, supplied by the engine's DecisionContext, is the only thing that selects between them, and it is not future information.",
+      "entry_rule": "If flat and target is SPY, buy SPY.",
+      "exit_rule": "If holding SPY and close(t) > SMA(exit_sma)(t), sell the whole position. There is no stop, no time exit, and no profit target: adding one would be a rule chosen after the fact.",
+      "sizing_rule": "shared_rules.sizing_rule",
+      "ranking_rule": "Not applicable: one instrument.",
+      "conflict_rule": "shared_rules.flat_first_rule",
+      "permitted_parameter_grid": {"rsi_period": [2, 3], "rsi_entry_below": [5, 10, 15], "exit_sma": [5, 10]},
+      "robustness_neighbours": [
+        {"rsi_period": 2, "rsi_entry_below": 5, "exit_sma": 5},
+        {"rsi_period": 2, "rsi_entry_below": 15, "exit_sma": 5},
+        {"rsi_period": 3, "rsi_entry_below": 10, "exit_sma": 5},
+        {"rsi_period": 2, "rsi_entry_below": 10, "exit_sma": 10}
+      ],
+      "primary_metric": "total return after base costs over the candidate's development-window run",
+      "max_research_iterations": 1
+    },
+    {
+      "experiment_id": "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+      "family": "breakout",
+      "hypothesis": "SPY closing at a 50-session high continues upward often enough, and far enough, to pay for the whipsaw losses that a 25-session closing-low exit incurs, leaving a positive after-cost total return.",
+      "universe": ["SPY"],
+      "universe_rationale": "Single instrument; the profit-concentration condition does not apply by its own text.",
+      "exclusions": "Every other universe member.",
+      "warmup_sessions": 100,
+      "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+      "features": ["close", "MAXCLOSE(entry_lookback)", "MINCLOSE(exit_lookback)"],
+      "primary_parameters": {"entry_lookback": 50, "exit_lookback": 25},
+      "target_rule": "If flat: target = SPY if close(t) >= MAXCLOSE(entry_lookback)(t), else cash. If holding SPY: target = cash if close(t) <= MINCLOSE(exit_lookback)(t), else SPY. The comparisons are inclusive because the current close is inside both windows by definition, so a strict inequality could never fire.",
+      "entry_rule": "If flat and target is SPY, buy SPY.",
+      "exit_rule": "If holding SPY and close(t) <= MINCLOSE(exit_lookback)(t), sell the whole position.",
+      "sizing_rule": "shared_rules.sizing_rule",
+      "ranking_rule": "Not applicable: one instrument.",
+      "conflict_rule": "shared_rules.flat_first_rule",
+      "permitted_parameter_grid": {"entry_lookback": [20, 50, 100], "exit_lookback": [10, 25, 50]},
+      "robustness_neighbours": [
+        {"entry_lookback": 20, "exit_lookback": 10},
+        {"entry_lookback": 100, "exit_lookback": 50},
+        {"entry_lookback": 50, "exit_lookback": 10},
+        {"entry_lookback": 50, "exit_lookback": 50}
+      ],
+      "primary_metric": "total return after base costs over the candidate's development-window run",
+      "max_research_iterations": 1
+    },
+    {
+      "experiment_id": "SE100-S3-F5-ROTATION-DUALMOM",
+      "family": "ETF rotation",
+      "hypothesis": "Rotating monthly into whichever of four broad ETFs has the strongest trailing 252-session total return, and holding cash whenever none of them is positive, earns a positive after-cost total return with a smaller maximum drawdown than any single member.",
+      "universe": ["SPY", "MDY", "EFA", "IEF"],
+      "universe_rationale": "US large cap, US mid cap, developed international, and intermediate Treasuries: four frozen-universe members spanning the asset classes a dual-momentum rotation is normally specified over. IEF is the defensive leg. The set is fixed here and is not enlarged, reduced, or substituted after any result.",
+      "exclusions": "Every other universe member. In particular no sector ETF, no emerging-market fund, and no credit fund is admitted, because adding members after seeing a result is the selection this pre-registration exists to prevent.",
+      "warmup_sessions": 316,
+      "signal_timing": "Ranked at the close of the last XNYS session of each calendar month; earliest fill is the next session's open.",
+      "features": ["adj_close", "MOM(momentum_lookback)"],
+      "primary_parameters": {"momentum_lookback": 252, "rebalance": "last XNYS session of each calendar month", "top_n": 1},
+      "target_rule": "On a rebalance session: eligible members are those with at least momentum_lookback + 1 visible bars. Rank eligible members by MOM(momentum_lookback) descending, ties broken by ascending symbol. target = the top-ranked member if its momentum is strictly greater than 0, else cash. On a non-rebalance session no ranking is performed.",
+      "entry_rule": "If flat on a rebalance session and target is a symbol, buy it. If the rebalance required an exit, the entry is deferred: the candidate records the target as pending_target, emits only the exit, and issues the buy on the next session on which the account is flat. pending_target holds no future information — it is the decision already taken at the rebalance close — and it is cleared at the next rebalance session whether or not it was ever issued.",
+      "exit_rule": "On a rebalance session, if the held symbol is not the target, sell the whole position.",
+      "sizing_rule": "shared_rules.sizing_rule",
+      "ranking_rule": "MOM(momentum_lookback) descending over eligible members; ties by ascending symbol; top_n = 1, which is also the maximum the sealed cost model permits.",
+      "conflict_rule": "shared_rules.flat_first_rule, implemented through pending_target as described in entry_rule.",
+      "permitted_parameter_grid": {"momentum_lookback": [126, 189, 252, 315], "top_n": [1]},
+      "robustness_neighbours": [
+        {"momentum_lookback": 126},
+        {"momentum_lookback": 189},
+        {"momentum_lookback": 315},
+        {"momentum_lookback": 252, "universe": ["SPY", "MDY", "IEF"]}
+      ],
+      "neighbour_note": "The fourth neighbour drops EFA rather than changing a number. A rotation whose sign depends on the presence of one member is as fragile as one whose sign depends on a lookback, and the constitution's condition is about the sign of net return under reasonable neighbouring values, not about lookbacks alone.",
+      "primary_metric": "total return after base costs over the candidate's development-window run",
+      "max_research_iterations": 1
+    },
+    {
+      "experiment_id": "SE100-S3-F6-DEFENSIVE-SMA200-SHY",
+      "family": "defensive regime logic",
+      "hypothesis": "Replacing the cash leg of a 200-session trend rule with short-duration Treasuries earns a higher after-cost total return than the same rule sitting in cash, without raising maximum drawdown.",
+      "universe": ["SPY", "SHY"],
+      "universe_rationale": "One risk asset and one defensive asset. SHY is the shortest-duration Treasury fund in the frozen universe, so the defensive leg carries the least interest-rate risk available. Multi-instrument, so the Gate 3 profit-concentration condition applies.",
+      "exclusions": "Every other universe member.",
+      "warmup_sessions": 250,
+      "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+      "features": ["close of SPY", "SMA(sma_long) of SPY close"],
+      "primary_parameters": {"sma_long": 200, "risk_symbol": "SPY", "defensive_symbol": "SHY"},
+      "target_rule": "target = SPY if close(SPY, t) > SMA(sma_long)(SPY, t); else the defensive symbol if it has a visible bar at t; else cash. The regime is read from SPY only: the defensive leg is a destination, never a signal.",
+      "entry_rule": "If flat, buy the target.",
+      "exit_rule": "If the held symbol is not the target, sell the whole position; the entry follows on the next flat session under the shared flat-first rule.",
+      "sizing_rule": "shared_rules.sizing_rule",
+      "ranking_rule": "Not applicable: the target is determined by the regime, not by a comparison between the two instruments.",
+      "conflict_rule": "shared_rules.flat_first_rule",
+      "permitted_parameter_grid": {"sma_long": [150, 200, 250], "defensive_symbol": ["SHY", "IEF", null]},
+      "robustness_neighbours": [
+        {"sma_long": 150, "defensive_symbol": "SHY"},
+        {"sma_long": 250, "defensive_symbol": "SHY"},
+        {"sma_long": 200, "defensive_symbol": "IEF"},
+        {"sma_long": 200, "defensive_symbol": null}
+      ],
+      "neighbour_note": "A null defensive_symbol means the defensive leg is cash. That neighbour is deliberately the same rule as F1 run over F6's shorter window; if the two disagree on anything other than the window, one of them is wrong and the discrepancy is a finding rather than a curiosity.",
+      "primary_metric": "total return after base costs over the candidate's development-window run",
+      "max_research_iterations": 1
+    }
+  ],
+
+  "iteration_budget": {
+    "candidates": 6,
+    "runs_per_candidate": "one primary run plus four robustness-neighbour runs",
+    "total_declared_runs": 30,
+    "revisions_permitted": 0,
+    "meaning": "Each candidate is run once at its primary parameterisation. No parameter is changed, no rule is amended, no symbol is added or removed, and no candidate is re-run after any result is seen. A candidate that fails is reported as failed. Constitution section 11: a change to universe, timing, cost, signal, parameter range, metric, threshold, or data partition is material, and a material change creates a NEW candidate that restarts at Gate 3 — it does not repair this one.",
+    "neighbour_runs_are_not_iterations": "The four neighbour runs per candidate exist solely to evaluate the Gate 3 condition on sign stability under reasonable neighbouring parameter values. They are never used to select a parameterisation, are never promoted to primary, and their metrics other than the sign of net return are reported but carry no gate weight."
+  },
+
+  "no_selection_in_this_stage": "Gate 3 is admissibility, not selection. Every candidate that satisfies every hard condition is recorded as admitted; the stage does not rank admitted candidates, does not name a winner, and does not carry a preference forward. Choosing which admitted candidate proceeds is a later-stage decision under the constitution's own rules.",
+
+  "multiple_comparisons_disclosure": "Six candidates are tested against the same development data. A per-candidate criterion is therefore not a family-wise one, and the probability that at least one of six passes by chance exceeds the probability that any single specified one does. This is disclosed here, before any result, rather than after. Nothing in this stage corrects for it numerically; the correction the constitution actually relies on is that an admitted candidate must still survive Gate 4 robustness and a single sealed holdout read.",
+
+  "benchmarks": {
+    "constitution_ref": "section 4",
+    "spy_total_return": "SPY total return over each candidate's own run window, computed by the Gate 2 validated benchmark calculation. The opportunity-cost benchmark.",
+    "spy_tradable_buy_and_hold": "A SPY buy-and-hold account under the same base cost model over each candidate's own run window, reported both with the research shutdown enforced and with it disabled and explicitly labelled a benchmark reference account, exactly as Stage 2 reported it.",
+    "cash": "0.00% annual. Constitution section 4 permits a 3-month Treasury-bill proxy where reliable point-in-time data exist, otherwise 0% explicitly labelled conservative for return comparison. No T-bill series was acquired in Stage 1, so 0% is used. It makes the cash hurdle easier to beat, which is generous to a strategy and conservative for judging cash; the direction is recorded.",
+    "do_nothing": "Flat equity at USD 100.00, zero trades, used to expose a candidate whose activity destroys capital.",
+    "beating_spy_not_mandatory": "Constitution section 4: beating SPY is not mandatory if a strategy materially reduces drawdown, but passing requires positive after-cost performance and better risk-adjusted performance than cash. Neither benchmark is a Gate 3 hard condition; both are reported for every candidate."
+  },
+
+  "explicit_non_authorizations": [
+    "No data of any kind is downloaded, purchased, or acquired in this stage. Every price comes from the Stage 1 normalized dataset already on disk.",
+    "No validation-window or holdout-window data is read. The window guard raises WindowViolation structurally rather than relying on discipline.",
+    "No paper order, no live order, no cancel, no replace, no liquidation, no broker call, and no unattended scheduling.",
+    "No Alpaca credential is read, and no credential presence is even tested in this stage.",
+    "No machine learning, no optimiser, no search over the parameter grid, and no fit of any kind.",
+    "No candidate is combined with any other candidate.",
+    "No strategy is selected as a winner, and no expected income, profit, or return is claimed for any future period.",
+    "live_trading_authorized remains false."
+  ]
+}

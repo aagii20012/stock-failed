@@ -1,0 +1,38 @@
+{
+  "artifact_id": "SE100-EVID-3002",
+  "iteration_budget": {
+    "runs_executed": 18
+  },
+  "determinism": {
+    "all_identical": false
+  },
+  "gate_summary": [
+    {
+      "experiment_id": "SE100-S3A2-C1-PULLBACK-RA1",
+      "admitted": false,
+      "conditions_not_met": [
+        "S3-C2"
+      ],
+      "conditions_not_evaluable": []
+    },
+    {
+      "experiment_id": "SE100-S3A2-C2-MEANREV-RA1",
+      "admitted": true,
+      "conditions_not_met": [],
+      "conditions_not_evaluable": []
+    }
+  ],
+  "per_condition_rollup": {
+    "decisive_row": {
+      "value": true,
+      "gate_verdict_token": "TOKEN-PASS"
+    }
+  },
+  "stage_verdict": {
+    "verdict": "PASS"
+  },
+  "generated_utc": "2026-08-12T13:13:06Z",
+  "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.attempt2_evidence",
+  "evidence_digest_covers": "every field of this file except generated_utc and evidence_digest, as canonical JSON",
+  "evidence_digest": "42209549c6173f50d5f06ce4290e3e637e0f15aa72ff4799b91a86618e754524"
+}

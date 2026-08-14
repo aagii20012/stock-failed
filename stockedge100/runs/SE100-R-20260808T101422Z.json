@@ -1,0 +1,50 @@
+{
+  "code_hashes": {
+    ".gitignore": "b3404984fba828a70105fd34915932b6a0863ae1ebfcb5e186d699477dff8875",
+    "README.md": "1ced164e3f16c2eb4ca4cae04185cdbabd4b0e3aa35216d0f0438a373af2e4e8",
+    "governance/STAGE_0_CONSTITUTION.json": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+    "governance/STAGE_0_CONSTITUTION.md": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+    "governance/STAGE_0_FREEZE.sha256": "6b9fe70005216188b1fde53195a962633e777f41bc345ee93af36d0c00bd8416",
+    "governance/STAGE_0_VERIFICATION_REPORT.md": "e027eccaf9ccea3a557bafac38f0552c17f1aa528f08ed3db0f13a6248b996e6",
+    "pyproject.toml": "2816a9772f3c020984cb2daa75be12a424dc1bfc61d8101e65ca339ad948cc07",
+    "src/stockedge100/__init__.py": "00389738b7e2a2be38d77e5f9d380f84150d46c4f72fa486fe5db3f2c3797fd2",
+    "src/stockedge100/audit.py": "0e510890a8250e98a4af52d0f57dff876b2cd7553b8adbaa8d65486f42049c53",
+    "src/stockedge100/reporting/__init__.py": "3ffd9e858fd295acceca08ec5e7bd69220e9575f1e8aaa264e1db9e859d0aa18",
+    "src/stockedge100/reporting/stage0_package.py": "bce0a7adc0a83a89bb0f91db7e354d192f4d28823a83d19b302492615678f094",
+    "tests/conftest.py": "1e689f048fea793bbdb0cb2d474e98151f70500b4b639094f716cfd2f173e1ea",
+    "tests/unit/test_stage0_governance.py": "bfe574fc8bbcd5f775f1fa62aeca676f58bfc5a61e00c52a1dd1c07f0a81c245"
+  },
+  "command": "PYTHONPATH=src python -m stockedge100.reporting.stage0_package",
+  "config_hash": null,
+  "dataset_hashes": {},
+  "date_range": null,
+  "dependency_versions": {
+    "exchange_calendars": "4.13.2",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "pyarrow": "MISSING",
+    "pytest": "8.4.2",
+    "requests": "2.34.2",
+    "yfinance": "1.4.1"
+  },
+  "exit_status": "OK",
+  "holdout_state": "LOCKED",
+  "notes": [
+    "No frozen artifact was opened for writing.",
+    "No network access. No credential access. No strategy computation."
+  ],
+  "output_artifact_hashes": {
+    "reports/stage0/STAGE_0_ARTIFACT_MANIFEST.json": "9cc9c34fb32dc068e5ea16f8e95bf907aa72ad609bd66f5740f9e0d11bc4450b",
+    "reports/stage0/STAGE_0_VERIFICATION.json": "1bc11cc7c366baa818c8ef4eb4f81152dd391f8ed4aaa01e644999db83161755",
+    "reports/stage0/STAGE_0_VERIFICATION.sha256": "9552f6482a3baf8ea5d5cb40fc623b7b872aac2b279b6ffcb16040e673082124"
+  },
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python_version": "3.10.6",
+  "random_seed": null,
+  "repo_state_id": "161ddf5fc08955188dadc9750c7e5c84ada80bb2d95ab0d6c7492091cdb03c1c",
+  "run_id": "SE100-R-20260808T101422Z",
+  "stage": "STAGE_0_CONSTITUTION_VERIFICATION",
+  "strategy_id": null,
+  "timestamp_utc": "2026-08-08T10:14:25Z",
+  "universe_version": null
+}

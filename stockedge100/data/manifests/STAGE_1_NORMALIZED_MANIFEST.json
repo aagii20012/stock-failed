@@ -1,0 +1,978 @@
+{
+  "manifest_id": "SE100-DATA-1002",
+  "manifest_type": "NORMALIZED",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 1,
+  "generated_utc": "2026-08-08T10:49:47Z",
+  "source_manifest": {
+    "path": "data/manifests/STAGE_1_RAW_MANIFEST.json",
+    "sha256": "ac7e18d77d8b0701f36150413be89925f6b6edefd57470db9cd0a0401e8eff9c"
+  },
+  "preregistration": {
+    "declared_utc": "2026-08-08T10:40:10Z",
+    "config_sha256": "7c6273ca501e3aaceafd006b0902ce4f329f83a67c4a9e5190155e8edf83064f"
+  },
+  "schema": {
+    "columns": [
+      "session",
+      "open",
+      "high",
+      "low",
+      "close",
+      "adj_close",
+      "volume",
+      "dividend",
+      "split_ratio"
+    ],
+    "session_key": "calendar date of the provider instant expressed in America/New_York",
+    "session_key_timezone_naive": true,
+    "float_format": "%.10f",
+    "line_terminator": "\\n",
+    "storage_format": "csv",
+    "storage_format_note": "pyproject declares an optional parquet path, but pyarrow is not installed in this environment, so CSV is used. Recorded as a deviation, not left implicit."
+  },
+  "adjustment_semantics": {
+    "determination": "MEASURED",
+    "ohlc_split_adjusted": true,
+    "adj_close_split_and_dividend_adjusted": true,
+    "method": "close-to-close step across a known split in the reference fixture, compared against the 1/ratio step an as-traded series would show",
+    "probes": [
+      {
+        "symbol": "AAPL",
+        "session": "2014-06-09",
+        "declared_split_ratio": 7.0,
+        "recorded_split_ratio": 7.0,
+        "unadjusted_close_step": 1.01600138,
+        "adjusted_close_step": 1.01600148,
+        "step_if_series_were_as_traded": 0.14285714,
+        "ohlc_appears_split_adjusted": true
+      },
+      {
+        "symbol": "AAPL",
+        "session": "2020-08-31",
+        "declared_split_ratio": 4.0,
+        "recorded_split_ratio": 4.0,
+        "unadjusted_close_step": 1.03391215,
+        "adjusted_close_step": 1.03391199,
+        "step_if_series_were_as_traded": 0.25,
+        "ohlc_appears_split_adjusted": true
+      }
+    ],
+    "consequence_for_split_reconciliation": "expected adjustment-factor step at a split is 1.0 (splits are already in both series)",
+    "constitution_6_note": "A truly as-traded (split-unadjusted) price series is not obtainable from this provider when OHLC is already back-adjusted. Constitution section 6 is satisfied by retaining the immutable raw payload plus a measured, documented transformation between the two retained series, and the unavailability of as-traded price levels is recorded as a limitation rather than papered over."
+  },
+  "symbol_count": 35,
+  "symbols": {
+    "SPY": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "a814e2804133b57ec0bc9e014cec11fce9f47d26c307038fc86bac37f2d26621",
+      "rows": 8438,
+      "first_session": "1993-01-29",
+      "last_session": "2026-08-07",
+      "dividend_events": 135,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 8438,
+        "rows_out": 8438,
+        "local_midnight_rows": 8438,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/SPY.csv",
+      "sha256": "42c202dad76f60e34a35d45514539dc8e7e4b3bccd7945875b845eb1bed6963c",
+      "bytes": 1008920
+    },
+    "IVV": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "257ad56b51f02263dd1536d48f97ae8dac6dfaad2a0286e717dad3361c487cbe",
+      "rows": 6593,
+      "first_session": "2000-05-19",
+      "last_session": "2026-08-07",
+      "dividend_events": 107,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 6593,
+        "rows_out": 6593,
+        "local_midnight_rows": 6593,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/IVV.csv",
+      "sha256": "a8ae2e06a9c708259f97c7e8afe766e965a55bcb2e7e53559d90fa724a94bfa7",
+      "bytes": 785274
+    },
+    "VTI": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "c6bb9350cc2a6313ff17e1179e0015917c5b07b9915932def97d036f182b70c5",
+      "rows": 6323,
+      "first_session": "2001-06-15",
+      "last_session": "2026-08-07",
+      "dividend_events": 101,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6323,
+        "rows_out": 6323,
+        "local_midnight_rows": 6323,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/VTI.csv",
+      "sha256": "e3f95b0f3b9e9d14347e7fe2eca301dca98b9070bee8754d4c49b1956de4f7e0",
+      "bytes": 739919
+    },
+    "QQQ": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "b7bd0bc65a6d930b227bdf791d87f60abf032e0c9f3c83eea74b2d5f4d55eec0",
+      "rows": 6896,
+      "first_session": "1999-03-10",
+      "last_session": "2026-08-07",
+      "dividend_events": 89,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6896,
+        "rows_out": 6896,
+        "local_midnight_rows": 6896,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/QQQ.csv",
+      "sha256": "7062773e6f30b04ad34b0deb3929b1c8cf3468a945b7be4eb11b6577cfe17ba3",
+      "bytes": 815765
+    },
+    "IWM": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "0bfafd24d9e6e49f05e4680aaf6f5dbc6d5f190b8d987bf4a0687b5b6902960e",
+      "rows": 6588,
+      "first_session": "2000-05-26",
+      "last_session": "2026-08-07",
+      "dividend_events": 106,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6588,
+        "rows_out": 6588,
+        "local_midnight_rows": 6588,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/IWM.csv",
+      "sha256": "48c8af06b13653bad05c349983319782f48fded3ab2a033f0bcf4de08f19b301",
+      "bytes": 778992
+    },
+    "DIA": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "688b185bd77618cf9faa8c1f20c3d5f50ae1c1c00344ff8263f9ab4fcade2589",
+      "rows": 7182,
+      "first_session": "1998-01-20",
+      "last_session": "2026-08-07",
+      "dividend_events": 338,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 7182,
+        "rows_out": 7182,
+        "local_midnight_rows": 7182,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/DIA.csv",
+      "sha256": "e356ba463502e1cfb4f790f8f24b080aa297e21a1d71175a92a35e90a7477a58",
+      "bytes": 854218
+    },
+    "MDY": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "ba35b3fcd8dc08e70f1ddf560a035c22e7a6cdd4358fe4dbbde755c9a3318f2b",
+      "rows": 7867,
+      "first_session": "1995-05-04",
+      "last_session": "2026-08-07",
+      "dividend_events": 126,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 7867,
+        "rows_out": 7867,
+        "local_midnight_rows": 7867,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/MDY.csv",
+      "sha256": "90912030e6875884dc1499801379d60ee42f0cb863953c16521bcf16a1cb730e",
+      "bytes": 928281
+    },
+    "XLB": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "181232876a059af852b335f4af2d494aacbea7052d8eefea82559c966c2f7f58",
+      "rows": 6948,
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07",
+      "dividend_events": 110,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6948,
+        "rows_out": 6948,
+        "local_midnight_rows": 6948,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/XLB.csv",
+      "sha256": "cbab9a12789b483cde1847c3a93849238779c30f712d50dfce66e7dde378ae5f",
+      "bytes": 797605
+    },
+    "XLE": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "06ef7c962691476b003e3140237d9a70bc08112e0ed77275bf12fb59d5932028",
+      "rows": 6948,
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07",
+      "dividend_events": 111,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6948,
+        "rows_out": 6948,
+        "local_midnight_rows": 6948,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/XLE.csv",
+      "sha256": "df983ff4634f969ca220e904e1b183a766684c3037183e188afab5f7771ce378",
+      "bytes": 801901
+    },
+    "XLF": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "4fc4521e8513c24e10d8d87641f93bb54c65be9b1ac09459227057c236e35f55",
+      "rows": 6948,
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07",
+      "dividend_events": 110,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6948,
+        "rows_out": 6948,
+        "local_midnight_rows": 6948,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/XLF.csv",
+      "sha256": "67ac690fbc89412b8d12012853e7cf25989900e675ba9a7c4addef22f9d30d56",
+      "bytes": 802645
+    },
+    "XLI": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "eef59039c2df3deb8feda3fcb071bb4f963166184d4e848e1d536dad6f284dc6",
+      "rows": 6948,
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07",
+      "dividend_events": 109,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 6948,
+        "rows_out": 6948,
+        "local_midnight_rows": 6948,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/XLI.csv",
+      "sha256": "74db61089fda2d627233b6f87293b0cd4289a2ebe4c5336837a021a0d691e8f3",
+      "bytes": 803746
+    },
+    "XLK": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "530489219eb5ae3d6cd6f32729d98ae0d1cf2c4a45d9d5ebe91d56680e569cbc",
+      "rows": 6948,
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07",
+      "dividend_events": 84,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6948,
+        "rows_out": 6948,
+        "local_midnight_rows": 6948,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/XLK.csv",
+      "sha256": "6a26509737070713163c121ac3bb07f32baf0b63c9845c26dedebcff2bbd7c5a",
+      "bytes": 799683
+    },
+    "XLP": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "f103a2cbbde81592be80f9d270aa78097bb437278cdd1e9c219882d503cbef81",
+      "rows": 6948,
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07",
+      "dividend_events": 110,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 6948,
+        "rows_out": 6948,
+        "local_midnight_rows": 6948,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/XLP.csv",
+      "sha256": "1f894c7493b911eea70a21eb7e3ac1e9981b5effcdd6c1cf24fc69a5a2038f62",
+      "bytes": 798570
+    },
+    "XLU": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "2b7b3763edda2466fa95f72f939873125db84792eac60af3393094ca73accb57",
+      "rows": 6948,
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07",
+      "dividend_events": 111,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6948,
+        "rows_out": 6948,
+        "local_midnight_rows": 6948,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/XLU.csv",
+      "sha256": "64aa0217c1e22ebb98498690a10e3fab87382b78f856cce7047f290b9406c912",
+      "bytes": 798207
+    },
+    "XLV": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "f9348f4d4259c16998a3475c43ba36aaaa1614a9cba94fde3c9f458267482089",
+      "rows": 6948,
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07",
+      "dividend_events": 105,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 6948,
+        "rows_out": 6948,
+        "local_midnight_rows": 6948,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/XLV.csv",
+      "sha256": "ba084bbba708156801f94869ee2016bc174cff606de7ef99fbf8dfc11ff234ec",
+      "bytes": 805234
+    },
+    "XLY": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "556584725fbc5d1bb4fa16230dff0cf679686646597e854ab87a689e31c7c1a4",
+      "rows": 6948,
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07",
+      "dividend_events": 110,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6948,
+        "rows_out": 6948,
+        "local_midnight_rows": 6948,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/XLY.csv",
+      "sha256": "338e6a9fd952b80383539619bc08e9c9cb88c24647279f218e8f989e501aee28",
+      "bytes": 800442
+    },
+    "SHY": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "9cf4acf0b1a77e13f3a5b27b1712f10376dd47ca6e0d8d62df8143c0c547d0ce",
+      "rows": 6045,
+      "first_session": "2002-07-30",
+      "last_session": "2026-08-07",
+      "dividend_events": 288,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 6045,
+        "rows_out": 6045,
+        "local_midnight_rows": 6045,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/SHY.csv",
+      "sha256": "2c9a7b7295be41bdc107a693aed3d89758355884d2176b56938d2adf0eed105a",
+      "bytes": 692406
+    },
+    "IEF": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "2efc4c5f145bd57af28c4fbbc1fdffea67e30331dc0ef691b306ed965105fefc",
+      "rows": 6045,
+      "first_session": "2002-07-30",
+      "last_session": "2026-08-07",
+      "dividend_events": 289,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 6045,
+        "rows_out": 6045,
+        "local_midnight_rows": 6045,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/IEF.csv",
+      "sha256": "ad6b8ddddef9318ff9056b9aaf36850b0aea1647b4aed5339f24750b495a2f53",
+      "bytes": 703856
+    },
+    "TLT": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "52f6b971435ec70791c2eff26abeaa377187203f046dc77db3b1909832016059",
+      "rows": 6045,
+      "first_session": "2002-07-30",
+      "last_session": "2026-08-07",
+      "dividend_events": 287,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 6045,
+        "rows_out": 6045,
+        "local_midnight_rows": 6045,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/TLT.csv",
+      "sha256": "648baa08d0e98efaa77aec0a55c454de80d2b915b481da2df6ece2d04429edba",
+      "bytes": 710038
+    },
+    "LQD": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "369c20a8b47b11682247a481fbf60637e8dc04f4cd4147b7465082d5f3494ac8",
+      "rows": 6045,
+      "first_session": "2002-07-30",
+      "last_session": "2026-08-07",
+      "dividend_events": 288,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 6045,
+        "rows_out": 6045,
+        "local_midnight_rows": 6045,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/LQD.csv",
+      "sha256": "5deb5bc39b301203d98e0e931a8d8da7d4cbb7c5d065f1e633bef4b51e01d656",
+      "bytes": 718542
+    },
+    "HYG": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "ec33bb99179f729c5ca72eef37c7964d891f82ccdc57bbdc9142ed6865c9a671",
+      "rows": 4863,
+      "first_session": "2007-04-11",
+      "last_session": "2026-08-07",
+      "dividend_events": 231,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 4863,
+        "rows_out": 4863,
+        "local_midnight_rows": 4863,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/HYG.csv",
+      "sha256": "7ec0e8ff258f956698a2eb434cee79d08a25878848a5c8abca20187bee3bcd77",
+      "bytes": 561259
+    },
+    "AGG": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "a8851fb1568be34efb3554261bb3f6473a9af6b1e00c0066d6965af79b3f3587",
+      "rows": 5751,
+      "first_session": "2003-09-29",
+      "last_session": "2026-08-07",
+      "dividend_events": 274,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 5751,
+        "rows_out": 5751,
+        "local_midnight_rows": 5751,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/AGG.csv",
+      "sha256": "d2f541c3958bb8ad08493bc80017de9f5c3e7ff74a8868a23455d0520c6adb8a",
+      "bytes": 677042
+    },
+    "BND": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "d42146a13cb2b659ef5850be76e9e8a610b469dcdc5b6331a2d955c1b6e0ce97",
+      "rows": 4864,
+      "first_session": "2007-04-10",
+      "last_session": "2026-08-07",
+      "dividend_events": 230,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 4864,
+        "rows_out": 4864,
+        "local_midnight_rows": 4864,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/BND.csv",
+      "sha256": "bd1078d791dc9da294e5c0a5ff02939b749cf2de5958841de4d14d46c786d653",
+      "bytes": 558067
+    },
+    "TIP": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "b4343f8636e43e4e32cfb1efaaf70639d844d78242db774bd9559cfdf7625700",
+      "rows": 5703,
+      "first_session": "2003-12-05",
+      "last_session": "2026-08-07",
+      "dividend_events": 202,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 5703,
+        "rows_out": 5703,
+        "local_midnight_rows": 5703,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/TIP.csv",
+      "sha256": "d3cb7558a7b8a004d40f288a1f549ee62eab18d56ff1ca251eba5a4bf274f689",
+      "bytes": 675235
+    },
+    "EFA": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "2db06436d1abe4909d6b4fced92ace2db98449d404d2babed6f5bebc45de3672",
+      "rows": 6273,
+      "first_session": "2001-08-27",
+      "last_session": "2026-08-07",
+      "dividend_events": 47,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6273,
+        "rows_out": 6273,
+        "local_midnight_rows": 6273,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/EFA.csv",
+      "sha256": "e28888814a8b895468b38eda4afeb6b7ff090e3ae4da3387314d0fc9f701cc96",
+      "bytes": 726031
+    },
+    "VEA": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "9bcf96467f336302be513446a7e0f7c9e55a368a748d491f1fdaf793351d7c0a",
+      "rows": 4789,
+      "first_session": "2007-07-26",
+      "last_session": "2026-08-07",
+      "dividend_events": 66,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 4789,
+        "rows_out": 4789,
+        "local_midnight_rows": 4789,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/VEA.csv",
+      "sha256": "3089c785ae03da1844a83ecad03fe889ce706bc05d0a79139134196d3eb9265b",
+      "bytes": 551474
+    },
+    "VGK": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "36fcb0a75036c0bf7f16e664ebe1562128a4bdd7aa49ce4f6863a3fd808c5efd",
+      "rows": 5387,
+      "first_session": "2005-03-10",
+      "last_session": "2026-08-07",
+      "dividend_events": 64,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 5387,
+        "rows_out": 5387,
+        "local_midnight_rows": 5387,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/VGK.csv",
+      "sha256": "c837dc2bb3160bb1e95abf026ab787a08c6252e58cc28959b94df95ad201312b",
+      "bytes": 617858
+    },
+    "EEM": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "f70a9756294f6d55ee02ec680941826fd9bf1045674788af391b9f559ceb3e1e",
+      "rows": 5867,
+      "first_session": "2003-04-14",
+      "last_session": "2026-08-07",
+      "dividend_events": 47,
+      "split_events": 2,
+      "observations": {
+        "rows_in": 5867,
+        "rows_out": 5867,
+        "local_midnight_rows": 5867,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/EEM.csv",
+      "sha256": "472c7eff870db54f58f2694797707408298d178ce024031c2d8f4c8760d30bbf",
+      "bytes": 679945
+    },
+    "VWO": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "6184a8eb1472c7a1afc8030d43439742219e521fc816c865d9947925373dd75d",
+      "rows": 5387,
+      "first_session": "2005-03-10",
+      "last_session": "2026-08-07",
+      "dividend_events": 62,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 5387,
+        "rows_out": 5387,
+        "local_midnight_rows": 5387,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/VWO.csv",
+      "sha256": "5535caae9a4766671a07a9b44ebdda8e8fbf98bb4dca80a035f4cc8e761feea8",
+      "bytes": 621744
+    },
+    "IYR": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "5551a3fcc2b5aaa401c93afe4cfb53fef200af74d4018c614774736e1f323e12",
+      "rows": 6573,
+      "first_session": "2000-06-19",
+      "last_session": "2026-08-07",
+      "dividend_events": 105,
+      "split_events": 1,
+      "observations": {
+        "rows_in": 6573,
+        "rows_out": 6573,
+        "local_midnight_rows": 6573,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/IYR.csv",
+      "sha256": "d67e6a2d57b6d55f537ca74bd19b665ab0e7c718e374c1cf8c0bc2aa73f67f5c",
+      "bytes": 756996
+    },
+    "VNQ": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "d6c240149bfabb2253f8bca421c75ac0dc9de4eea05a142db25c70526f0f342b",
+      "rows": 5499,
+      "first_session": "2004-09-29",
+      "last_session": "2026-08-07",
+      "dividend_events": 87,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 5499,
+        "rows_out": 5499,
+        "local_midnight_rows": 5499,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/VNQ.csv",
+      "sha256": "f07cf9b8fd44c2839cec73c61fb76a81deac74cf141a195614d8cdd2ebaf37a5",
+      "bytes": 632034
+    },
+    "DVY": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "60aa0b24bfcb7b3471adb5b3aaa4bf36f2205d995be068ac132144b30d13ced2",
+      "rows": 5722,
+      "first_session": "2003-11-07",
+      "last_session": "2026-08-07",
+      "dividend_events": 91,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 5722,
+        "rows_out": 5722,
+        "local_midnight_rows": 5722,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/DVY.csv",
+      "sha256": "9627e3063b63aa680411dca511f5d11af6a77ffce5ae0ce00eb00a7d690a169d",
+      "bytes": 661033
+    },
+    "VIG": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "d482a3ae002779b10bfbf362c8e968cb59200eb4e978af3f7c098ac4d9b8e7a2",
+      "rows": 5099,
+      "first_session": "2006-05-02",
+      "last_session": "2026-08-07",
+      "dividend_events": 81,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 5099,
+        "rows_out": 5099,
+        "local_midnight_rows": 5099,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/VIG.csv",
+      "sha256": "9eb3921400b9fd2a7f13832f5eeda61e20898c16401fe486b8f49342098cdf90",
+      "bytes": 592721
+    },
+    "VYM": {
+      "role": "candidate",
+      "status": "NORMALIZED",
+      "raw_sha256": "28a129280b5264c12212bf34f9d22c8ef1c3701eae3201c60bfc576410c3bd5a",
+      "rows": 4960,
+      "first_session": "2006-11-16",
+      "last_session": "2026-08-07",
+      "dividend_events": 79,
+      "split_events": 0,
+      "observations": {
+        "rows_in": 4960,
+        "rows_out": 4960,
+        "local_midnight_rows": 4960,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": true,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/VYM.csv",
+      "sha256": "db643c38f3376587d9e354801f15ebebf6192f89f17c22fbafe72b041b5fe96c",
+      "bytes": 572320
+    },
+    "AAPL": {
+      "role": "reference",
+      "status": "NORMALIZED",
+      "raw_sha256": "d38c5200ba9a126f31ae3f94182aec1eb667e3353e849ec894287da1f7ffda39",
+      "rows": 2914,
+      "first_session": "2010-01-04",
+      "last_session": "2021-07-30",
+      "dividend_events": 36,
+      "split_events": 2,
+      "observations": {
+        "rows_in": 2914,
+        "rows_out": 2914,
+        "local_midnight_rows": 2914,
+        "non_midnight_rows": 0,
+        "non_midnight_examples": [],
+        "distinct_utc_offsets": [
+          "-0400",
+          "-0500"
+        ],
+        "capital_gains_column_present": false,
+        "capital_gains_total": 0.0
+      },
+      "path": "data/normalized/daily/AAPL.csv",
+      "sha256": "f64bd3420ede7cd9505763b21449d54c8247b2d6aba1c40f915db530375c003d",
+      "bytes": 340806
+    }
+  }
+}

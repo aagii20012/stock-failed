@@ -1,0 +1,607 @@
+{
+  "project": "StockEdge100",
+  "stage": "STAGE_1_DATA_FOUNDATION",
+  "generation": 1,
+  "timestamp_utc": "2026-08-08T13:32:08Z",
+  "verdict": "PASS \u2014 STAGE_1_DATA_FIT_FOR_RESEARCH",
+  "gate": {
+    "constitution_gate_id": 1,
+    "name": "data_readiness"
+  },
+  "gate_passed": true,
+  "constitution": {
+    "document_id": "SE100-GOV-0001",
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "modified_by_this_stage": false,
+    "freeze_verification_working_directory": "stockedge100/governance",
+    "freeze_verified": true,
+    "freeze_verification": {
+      "STAGE_0_CONSTITUTION.md": {
+        "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "match": "True"
+      },
+      "STAGE_0_CONSTITUTION.json": {
+        "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "match": "True"
+      }
+    }
+  },
+  "verdict_token_derivation": {
+    "constitution_json_gate_1": {
+      "fail_result": "DATA_NOT_FIT_FOR_RESEARCH",
+      "pass_result": null
+    },
+    "chosen_pass_reason_code": "STAGE_1_DATA_FIT_FOR_RESEARCH",
+    "why": "Section 10 fixes the primary verdict vocabulary and requires a stage-specific reason code alongside it. Gate 1 supplies no pass token, so the affirmative of its recorded fail token is used, carrying the stage prefix Stage 0 established."
+  },
+  "preregistration": {
+    "declared_utc": "2026-08-08T10:40:10Z",
+    "sealed_before_any_data_acquired": true,
+    "raw_data_files_present_at_seal_time": 0,
+    "first_provider_request_utc": "2026-08-08T10:45:49Z",
+    "sealed_files": {
+      "config/stage1_data_source.json": {
+        "sha256": "7c6273ca501e3aaceafd006b0902ce4f329f83a67c4a9e5190155e8edf83064f"
+      },
+      "config/stage1_universe_spec.json": {
+        "sha256": "0583ef00fb5907feaedab561b13b4056c7e07e7c9ce1aae03d8ae197245f4057"
+      },
+      "governance/STAGE_1_PREREGISTRATION.md": {
+        "sha256": "53cea32ff202a4763378a5ecedc360c7e2fa1ccf1ce969d329c2e36b1cb5caee"
+      }
+    }
+  },
+  "data_source": {
+    "provider": "yahoo_finance",
+    "client": "yfinance 1.4.1",
+    "endpoint_mode": "unofficial public chart endpoint via the yfinance client",
+    "license": "Yahoo Finance data, personal and non-commercial use only, no redistribution. Stored locally, git-ignored, never committed or published.",
+    "raw_definition": "The client does not expose the underlying HTTP payload, so 'raw' here means the frame the client returned, serialised to CSV with no value altered, rounded, reordered, or dropped. This is recorded rather than glossed over.",
+    "request_parameters": {
+      "auto_adjust": false,
+      "back_adjust": false,
+      "actions": true,
+      "repair": false,
+      "rounding": false,
+      "prepost": false,
+      "timeout_seconds": 60,
+      "interval": "1d"
+    },
+    "cost_usd": 0,
+    "credentials_used": "none"
+  },
+  "validation": {
+    "battery_source": {
+      "path": "config/stage1_data_source.json",
+      "sha256": "7c6273ca501e3aaceafd006b0902ce4f329f83a67c4a9e5190155e8edf83064f",
+      "declared_before_data_seen": true,
+      "check_count": 16
+    },
+    "check_totals": {
+      "SESSION_IN_CALENDAR": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "NO_DUPLICATE_SESSIONS": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "SESSIONS_STRICTLY_INCREASING": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "NO_FUTURE_SESSIONS": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "OHLC_CONSISTENT": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "VOLUME_VALID": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "ADJ_CLOSE_POSITIVE": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "TERMINAL_FACTOR_IS_ONE": {
+        "PASS": 34,
+        "FAIL": 1,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "FACTOR_NON_DECREASING": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "SPLIT_RECONCILES": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "DIVIDEND_RECONCILES": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "CORPORATE_ACTION_FIXTURE": {
+        "PASS": 1,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 34
+      },
+      "MISSING_SESSION_FRACTION": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "MISSING_SESSION_RUN": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "EXTREME_MOVE_EXPLAINED": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "PRICE_NOT_PENNY": {
+        "PASS": 35,
+        "FAIL": 0,
+        "WARN": 0,
+        "NOT_APPLICABLE": 0
+      }
+    },
+    "battery_passed_all_symbols": false,
+    "research_universe_battery_passed": true,
+    "symbols_with_failures": [
+      "AAPL"
+    ],
+    "symbols_with_warnings": [],
+    "preregistration_scope_gaps": [
+      {
+        "symbol": "AAPL",
+        "check_id": "TERMINAL_FACTOR_IS_ONE",
+        "classification": "PREREGISTRATION_SCOPE_GAP",
+        "premise_of_the_check": "the final row is the provider's terminal session",
+        "why_the_premise_is_false": "the raw manifest records requested_window ['2010-01-01', '2021-07-31'] for this symbol, a truncation declared in the sealed universe spec so that a data-quality fixture never touches validation or holdout data",
+        "in_research_universe": false,
+        "sealed_check_amended": false,
+        "disposition": "recorded as a defect in the Stage 1 pre-registration, which failed to scope this check to untruncated series"
+      }
+    ],
+    "unclassified_failures": [],
+    "quarantine_records": [],
+    "scope_rules": {
+      "integrity_checks_cover_full_series_including_holdout": true,
+      "why": "Confirming a session key or a split reconciliation is not a research result. Gate 1 requires complete manifests; what is forbidden is using holdout values to make a decision.",
+      "value_threshold_checks_restricted_to_development_window": [
+        "PRICE_NOT_PENNY"
+      ]
+    },
+    "calendar": {
+      "source": "exchange_calendars",
+      "name": "XNYS",
+      "independent_of_price_provider": true,
+      "bounds": [
+        "1990-01-02",
+        "2027-08-06"
+      ]
+    }
+  },
+  "universe": {
+    "universe_version": "SE100-U1-d4917c2f7f1cd834",
+    "universe_identity_sha256": "d4917c2f7f1cd8344728a39165929b352766fbe7193b3c64e71a971749dcbf38",
+    "frozen_utc": "2026-08-08T10:55:32Z",
+    "research_universe_class": "ETF_ONLY",
+    "member_count": 34,
+    "members": [
+      "AGG",
+      "BND",
+      "DIA",
+      "DVY",
+      "EEM",
+      "EFA",
+      "HYG",
+      "IEF",
+      "IVV",
+      "IWM",
+      "IYR",
+      "LQD",
+      "MDY",
+      "QQQ",
+      "SHY",
+      "SPY",
+      "TIP",
+      "TLT",
+      "VEA",
+      "VGK",
+      "VIG",
+      "VNQ",
+      "VTI",
+      "VWO",
+      "VYM",
+      "XLB",
+      "XLE",
+      "XLF",
+      "XLI",
+      "XLK",
+      "XLP",
+      "XLU",
+      "XLV",
+      "XLY"
+    ],
+    "rejected": [],
+    "not_acquired": [],
+    "survivorship_bias": {
+      "stock_universe_verdict": "SURVIVORSHIP_BIAS_UNCONTROLLED",
+      "stock_research_authorization": "PROHIBITED_IN_GENERATION_1_WITHOUT_A_NEW_DATA_SOURCE",
+      "etf_universe_verdict": "RESIDUAL_FUND_CLOSURE_BIAS_DISCLOSED_AND_UNQUANTIFIED",
+      "honest_statement": "The candidate list below was assembled in 2026 and therefore contains only funds that still exist in 2026. Exchange-traded funds that launched and later closed between the start of the development window and the data cutoff are absent from it. This is a real residual survivorship bias and it is not eliminated by the ETF narrowing.",
+      "quantified": false,
+      "binding_consequence": "Every downstream result carries this limitation in its report. No Stage 1 artifact may claim the ETF universe is survivorship-free."
+    },
+    "broker_eligibility": {
+      "alpaca_tradable": "UNVERIFIED",
+      "alpaca_fractionable": "UNVERIFIED",
+      "reason": "No credential access is authorized at Stage 1.",
+      "resolution_stage": "Stage 6 (constitution gate 7, Alpaca paper trading)",
+      "binding_consequence": "The realized universe is conditional. Any symbol later found non-tradable or non-fractionable at Alpaca must be removed and every affected gate re-run."
+    },
+    "structural_rules_not_verifiable_from_price_data": [
+      "US_LISTED",
+      "UNLEVERAGED",
+      "NON_INVERSE",
+      "NOT_K1_PARTNERSHIP",
+      "NOT_COMMODITY_TRUST",
+      "RULES_BASED_INDEX"
+    ]
+  },
+  "holdout_lock": {
+    "locked_utc": "2026-08-08T10:55:32Z",
+    "holdout_state": "SEALED",
+    "partition": {
+      "usable_cutoff_session": "2026-08-07",
+      "cutoff_month": "2026-08",
+      "cutoff_month_complete": false,
+      "cutoff_month_last_session": "2026-08-31",
+      "last_complete_month": "2026-07",
+      "development_start": "1993-01-29",
+      "development_end": "2021-07-31",
+      "validation_start": "2021-08-01",
+      "validation_end": "2024-07-31",
+      "holdout_start": "2024-08-01",
+      "holdout_end": "2026-07-31",
+      "development_years": 28.501,
+      "minimum_development_years": 5,
+      "meets_minimum_development": true,
+      "holdout_months": 24,
+      "validation_months": 36
+    },
+    "inputs": {
+      "usable_cutoff_session": "2026-08-07",
+      "earliest_candidate_session": "1993-01-29",
+      "cutoff_derived_from": "the latest session present in the acquired candidate data, not the wall clock",
+      "universe_version": "SE100-U1-d4917c2f7f1cd834",
+      "universe_identity_sha256": "d4917c2f7f1cd8344728a39165929b352766fbe7193b3c64e71a971749dcbf38"
+    },
+    "binding_rules": [
+      "The holdout window is read exactly once, at the constitutional holdout gate, and never before.",
+      "No parameter, threshold, symbol, or rule may be chosen using any value inside the validation or holdout windows.",
+      "These boundaries may not be recomputed, widened, narrowed, or shifted by any later stage.",
+      "If the dataset is re-acquired and the cutoff moves, the existing lock still governs; a new lock requires a new stage and a recorded reason."
+    ]
+  },
+  "integrity": {
+    "stage_1_freeze_record_working_directory": "stockedge100/governance",
+    "stage_1_freeze_record_verification": {
+      "STAGE_1_HOLDOUT_LOCK.json": "OK",
+      "STAGE_1_UNIVERSE.json": "OK"
+    },
+    "stage_1_preregistration_record_working_directory": "stockedge100",
+    "stage_1_preregistration_record_verification": {
+      "config/stage1_data_source.json": "OK",
+      "config/stage1_universe_spec.json": "OK",
+      "governance/STAGE_1_PREREGISTRATION.json": "OK",
+      "governance/STAGE_1_PREREGISTRATION.md": "OK"
+    }
+  },
+  "evidence": [
+    "Rules sealed at 2026-08-08T10:40:10Z with 0 raw data files present; first provider request at 2026-08-08T10:45:49Z.",
+    "34 candidates and 1 reference symbol acquired from yahoo_finance via yfinance 1.4.1; acquisition failure fraction 0.0 against a blocking threshold of 0.2.",
+    "Adjustment semantics MEASURED, not assumed, from 2 known corporate-action fixtures.",
+    "Sealed battery of 16 checks run over 35 symbols; research-universe failures []; unclassified failures [].",
+    "Trading calendar XNYS from exchange_calendars, independent of the price provider, bounds ['1990-01-02', '2027-08-06'].",
+    "Universe SE100-U1-d4917c2f7f1cd834 frozen at 2026-08-08T10:55:32Z with 34 members, 0 rejected, 0 not acquired.",
+    "Holdout SEALED at 2026-08-08T10:55:32Z: development 1993-01-29..2021-07-31, validation 2021-08-01..2024-07-31, holdout 2024-08-01..2026-07-31.",
+    "Stage 1 freeze record verifies from stockedge100/governance: {\"STAGE_1_HOLDOUT_LOCK.json\": \"OK\", \"STAGE_1_UNIVERSE.json\": \"OK\"}",
+    "Stage 1 pre-registration record verifies from stockedge100: {\"config/stage1_data_source.json\": \"OK\", \"config/stage1_universe_spec.json\": \"OK\", \"governance/STAGE_1_PREREGISTRATION.json\": \"OK\", \"governance/STAGE_1_PREREGISTRATION.md\": \"OK\"}",
+    "140 tests pass: the 27 Stage 0 regression tests unmodified, plus 113 added by Stage 1."
+  ],
+  "limitations": [
+    "Single provider. Every price in this stage comes from one unofficial public endpoint via yfinance. There is no second source to cross-check it against, so a systematic provider error would pass every check in the battery undetected.",
+    "The provider licence is personal and non-commercial with no redistribution. The data is stored locally and git-ignored. It is not a licence for any commercial use, and a later stage that needs one must acquire it.",
+    "Residual ETF closure bias is disclosed and unquantified. The candidate list was assembled in 2026 and therefore contains only funds that still existed in 2026; funds that launched and closed inside the development window are absent. Prospective narrowing reduces this bias, it does not remove it.",
+    "Individual stocks carry uncontrolled survivorship bias with this data source and are prohibited for Generation 1 research without a new, point-in-time constituent source.",
+    "AAPL:TERMINAL_FACTOR_IS_ONE fails. The sealed check assumed every series ends at the provider's terminal session; AAPL's was deliberately truncated at 2021-07-31. This is a defect in the Stage 1 pre-registration, recorded and classified rather than fixed by amending a sealed check. AAPL is not in the research universe.",
+    "As-traded price levels are unavailable. The provider returns split-adjusted OHLC, so the historical price a share actually traded at cannot be recovered. Any later stage modelling per-share minimum tick, whole-share position sizing, or a price-level rule must treat this as missing input, not approximate it from adjusted prices.",
+    "Storage is CSV, not parquet. pyproject declares an optional parquet path but pyarrow is not installed in this environment. Recorded as a deviation from the declared preference rather than left implicit.",
+    "The acquisition code passes raise_errors=True to yfinance, which emits a DeprecationWarning in version 1.4.1. It was left as it was rather than changed after the fact, so the recorded code state is exactly what produced the data. A future client version may remove it and break re-acquisition.",
+    "Alpaca tradability and fractionability are UNVERIFIED for all 34 members, because no credential access is authorized at Stage 1. The realized universe is conditional: any member later found non-tradable or non-fractionable must be removed and every affected gate re-run.",
+    "Structural eligibility rules (US-listed, unleveraged, non-inverse, not a K-1 partnership, not a commodity trust, rules-based index) are asserted at candidate construction and are not verifiable from price data. They are labelled as asserted, not as measured."
+  ],
+  "blockers": [],
+  "conflicts_found": [
+    "STAGE_0_CONSTITUTION.json records no pass_result for gate 1, only fail_result DATA_NOT_FIT_FOR_RESEARCH, while the Markdown gate table is complete. The Markdown governs per the precedence rule. The pass token used here is the affirmative of the recorded fail token, prefixed as Stage 0 did with STAGE_0_CONSTITUTION_VERIFIED. No frozen artifact was edited to resolve this."
+  ],
+  "gate_conditions": {
+    "manifests_complete_and_hash_verified": {
+      "required": "raw and normalized manifests are complete and hash-verified",
+      "verdict": "PASS",
+      "evidence": {
+        "candidates_requested": 34,
+        "reference_symbols_requested": 1,
+        "acquisition_failures": [],
+        "acquisition_failure_fraction": 0.0,
+        "blocking_threshold": 0.2,
+        "normalized_symbol_count": 35,
+        "normalized_manifest_chains_to_raw_manifest": true,
+        "every_digest_recomputed_by_test": "tests/integration/test_stage1_data_foundation.py recomputes the SHA-256 of all 35 raw and all 35 normalized files against the manifests"
+      }
+    },
+    "structural_tests_pass": {
+      "required": "session, timestamp, OHLCV, split, dividend, missing-data, and duplication tests pass",
+      "verdict": "PASS",
+      "evidence": {
+        "checks_in_sealed_battery": 16,
+        "symbols_checked": 35,
+        "enumerated_families_all_pass_on_all_symbols": {
+          "SESSION_IN_CALENDAR": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          },
+          "NO_FUTURE_SESSIONS": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          },
+          "OHLC_CONSISTENT": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          },
+          "VOLUME_VALID": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          },
+          "ADJ_CLOSE_POSITIVE": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          },
+          "SPLIT_RECONCILES": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          },
+          "DIVIDEND_RECONCILES": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          },
+          "MISSING_SESSION_FRACTION": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          },
+          "MISSING_SESSION_RUN": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          },
+          "NO_DUPLICATE_SESSIONS": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          },
+          "SESSIONS_STRICTLY_INCREASING": {
+            "PASS": 35,
+            "FAIL": 0,
+            "WARN": 0,
+            "NOT_APPLICABLE": 0
+          }
+        },
+        "research_universe_battery_passed": true,
+        "research_universe_failures": [],
+        "unclassified_failures": [],
+        "note": "The one FAIL in the whole battery is AAPL:TERMINAL_FACTOR_IS_ONE, an adjustment-consistency check rather than one of the families enumerated in this condition. It is disclosed under the next condition and in limitations."
+      }
+    },
+    "adjustment_independently_checked_on_known_corporate_actions": {
+      "required": "adjustment behavior is independently checked on known corporate-action examples",
+      "verdict": "PASS",
+      "evidence": {
+        "determination": "MEASURED",
+        "method": "close-to-close step across a known split in the reference fixture, compared against the 1/ratio step an as-traded series would show",
+        "fixtures": [
+          {
+            "symbol": "AAPL",
+            "session": "2014-06-09",
+            "declared_split_ratio": 7.0,
+            "recorded_split_ratio": 7.0,
+            "unadjusted_close_step": 1.01600138,
+            "step_if_series_were_as_traded": 0.14285714
+          },
+          {
+            "symbol": "AAPL",
+            "session": "2020-08-31",
+            "declared_split_ratio": 4.0,
+            "recorded_split_ratio": 4.0,
+            "unadjusted_close_step": 1.03391215,
+            "step_if_series_were_as_traded": 0.25
+          }
+        ],
+        "corporate_action_fixture_check": {
+          "PASS": 1,
+          "FAIL": 0,
+          "WARN": 0,
+          "NOT_APPLICABLE": 34
+        },
+        "known_defect": [
+          {
+            "symbol": "AAPL",
+            "check_id": "TERMINAL_FACTOR_IS_ONE",
+            "classification": "PREREGISTRATION_SCOPE_GAP",
+            "premise_of_the_check": "the final row is the provider's terminal session",
+            "why_the_premise_is_false": "the raw manifest records requested_window ['2010-01-01', '2021-07-31'] for this symbol, a truncation declared in the sealed universe spec so that a data-quality fixture never touches validation or holdout data",
+            "in_research_universe": false,
+            "sealed_check_amended": false,
+            "disposition": "recorded as a defect in the Stage 1 pre-registration, which failed to scope this check to untruncated series"
+          }
+        ],
+        "defect_disposition": "AAPL is a reference fixture, not a research symbol. Its window was truncated at 2021-07-31 by the sealed spec so that a data-quality fixture can never touch validation or holdout data, which makes the terminal factor unequal to one by construction. The sealed check was not amended, weakened, or removed; the failure is recorded and classified. Every fixture comparison is a ratio, so a constant scale factor does not affect it."
+      }
+    },
+    "universe_bias_controlled_or_prospectively_narrowed": {
+      "required": "universe bias is controlled or the research universe is prospectively narrowed",
+      "verdict": "PASS",
+      "satisfied_by": "the second disjunct \u2014 prospective narrowing",
+      "evidence": {
+        "research_universe_class": "ETF_ONLY",
+        "member_count": 34,
+        "stock_universe_verdict": "SURVIVORSHIP_BIAS_UNCONTROLLED",
+        "stock_research_authorization": "PROHIBITED_IN_GENERATION_1_WITHOUT_A_NEW_DATA_SOURCE",
+        "etf_universe_verdict": "RESIDUAL_FUND_CLOSURE_BIAS_DISCLOSED_AND_UNQUANTIFIED",
+        "bias_quantified": false,
+        "narrowing_was_prospective": true,
+        "not_claimed": "The first disjunct is explicitly NOT claimed. Bias is not controlled; it is narrowed and the residual is disclosed and unquantified."
+      }
+    },
+    "partitions_and_holdout_locked_before_results": {
+      "required": "time partitions and final holdout are locked before results",
+      "verdict": "PASS",
+      "evidence": {
+        "locked_utc": "2026-08-08T10:55:32Z",
+        "holdout_state": "SEALED",
+        "locked_before_any_strategy_result": true,
+        "partition": {
+          "usable_cutoff_session": "2026-08-07",
+          "cutoff_month": "2026-08",
+          "cutoff_month_complete": false,
+          "cutoff_month_last_session": "2026-08-31",
+          "last_complete_month": "2026-07",
+          "development_start": "1993-01-29",
+          "development_end": "2021-07-31",
+          "validation_start": "2021-08-01",
+          "validation_end": "2024-07-31",
+          "holdout_start": "2024-08-01",
+          "holdout_end": "2026-07-31",
+          "development_years": 28.501,
+          "minimum_development_years": 5,
+          "meets_minimum_development": true,
+          "holdout_months": 24,
+          "validation_months": 36
+        },
+        "cutoff_derived_from": "the latest session present in the acquired candidate data, not the wall clock",
+        "no_strategy_exists_yet": "Generation 1 has no strategy, no backtest engine, and no result of any kind at the time of this lock; constitution gate 2 has not been attempted.",
+        "enforced_by": "stockedge100.universe.build.measure raises WindowViolation"
+      }
+    }
+  },
+  "artifacts": [
+    "governance/STAGE_1_DATA_FOUNDATION_REPORT.md",
+    "governance/STAGE_1_UNIVERSE.json",
+    "governance/STAGE_1_HOLDOUT_LOCK.json",
+    "governance/STAGE_1_FREEZE.sha256",
+    "data/manifests/STAGE_1_RAW_MANIFEST.json",
+    "data/manifests/STAGE_1_NORMALIZED_MANIFEST.json",
+    "data/manifests/STAGE_1_VALIDATION_REPORT.json",
+    "reports/stage1/STAGE_1_DATA_READINESS.json",
+    "reports/stage1/STAGE_1_ARTIFACT_MANIFEST.json",
+    "reports/stage1/STAGE_1_TEST_SUMMARY.md",
+    "reports/stage1/pytest_stage1_output.txt"
+  ],
+  "frozen_inputs_read_only": [
+    "governance/STAGE_0_CONSTITUTION.md",
+    "governance/STAGE_0_CONSTITUTION.json",
+    "governance/STAGE_0_FREEZE.sha256",
+    "governance/STAGE_1_PREREGISTRATION.md",
+    "governance/STAGE_1_PREREGISTRATION.json",
+    "governance/STAGE_1_PREREGISTRATION.sha256",
+    "config/stage1_data_source.json",
+    "config/stage1_universe_spec.json"
+  ],
+  "tests": {
+    "passed": 140,
+    "failed": 0,
+    "skipped": 0
+  },
+  "authorization_state": {
+    "strategy_research": "UNLOCKED_ON_DEVELOPMENT_WINDOW_ONLY",
+    "validation_window": "LOCKED",
+    "final_holdout": "SEALED",
+    "alpaca_paper_trading": "LOCKED",
+    "shadow_live": "LOCKED",
+    "alpaca_live_trading": "LOCKED",
+    "capital_or_risk_expansion": "LOCKED"
+  },
+  "next_authorized_stage": "STAGE_2_BACKTEST_ENGINE",
+  "live_trading_authorized": false,
+  "reproducibility": {
+    "run_id": "SE100-R-20260808T133208Z",
+    "repo_state_id": "df7214c3b014b87b8d5b55c34049c2b2840b39d1a2e748f75904a2e45c71e387",
+    "package_version": "0.1.0",
+    "python": "3.10.6",
+    "dependency_versions": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "requests": "2.34.2",
+      "pytest": "8.4.2",
+      "yfinance": "1.4.1",
+      "exchange_calendars": "4.13.2",
+      "pyarrow": "MISSING",
+      "scipy": "MISSING"
+    },
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage1_package",
+    "config_hash": "7c6273ca501e3aaceafd006b0902ce4f329f83a67c4a9e5190155e8edf83064f",
+    "random_seed": null
+  }
+}

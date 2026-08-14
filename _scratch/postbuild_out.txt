@@ -1,0 +1,93 @@
+OK   [01] repo_state_id recomputes from the patterns :: 60a927f5e8b84338 vs recorded 60a927f5e8b84338
+OK   [01] run record and manifest carry the same repo_state_id
+OK   [01] repo_state_files count matches the recomputation :: 125 vs 125
+OK   [01] no file covered by the digest carries the digest :: []
+OK   [02] all 15 checksum records verify, each from its own convention's directory :: []
+OK   [02] this package's own record is among them and verifies
+OK   [03] all 32 frozen inputs match their recorded digests :: []
+OK   [03] every frozen input is READ_ONLY_NOT_MODIFIED :: ['READ_ONLY_NOT_MODIFIED']
+OK   [03] the five sealed Stage 4 inputs are byte-for-byte unchanged :: []
+OK   [03] the package records no frozen or sealed artifact as modified :: False / False
+OK   [04] the Markdown report and the JSON decision agree on every headline value :: absent from the report: []
+OK   [04] the report carries no tree digest :: 4 hex64 present, none of them the tree digest
+OK   [04] gate_passed is False in both
+OK   [04] the report states the same conjunction result
+OK   [05] exactly one candidate evaluated, and it is the sealed representative :: ['SE100-S3A2-C2-MEANREV-RA1']
+OK   [05] the representative matches the sealed selection record :: selection record keys: ['artifact_id', 'title', 'version', 'project', 'stage', 'gate_id', 'constitution_ref', 'declared_before_any_validation_o
+OK   [05] no other Gate 3 candidate reconsidered, no neighbour promoted
+OK   [05] exactly one parameterisation
+OK   [05] C1 and C3 appear only where the record says they were not evaluated :: ['SE100-S3A2-C1-PULLBACK-RA1', 'SE100-S3A2-C3-DEFENSIVE-RA1']
+OK   [06] exactly two runs, in the sealed order, with the sealed labels :: actual ['SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE', 'SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS'] sealed ['SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE', 'SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS']
+OK   [06] declared_run_count is 2 and is recorded as a hard limit
+OK   [06] base run is declared_order 1 and stress is 2 :: [1, 2]
+OK   [06] the stress run used the sealed multiplier :: 2.0 vs sealed 2.0
+OK   [06] engine runs on the validation window == 2
+OK   [07] unregistered runs 0, repeated runs 0, failed or partial runs 0 :: (0, 0, 0)
+OK   [07] exactly one validation-evaluation run record exists on disk :: ['SE100-R-20260814T143226Z.json']
+OK   [07] no sensitivity check, debugging performance run or alternative metric
+OK   [07] no external data acquired
+OK   [08] twelve folds, boundaries re-derived from the sealed rule, all identical :: first divergence: []
+OK   [08] the last fold ends exactly at the validation window end
+OK   [08] every fold lies inside the validation window and has at least one session
+OK   [08] folds are contiguous and non-overlapping
+OK   [08] twelve completed, seven positive, recounted from the rows :: (12, 7)
+OK   [08] the fold construction id is the sealed one :: SE100-CFG-4002-WF1
+OK   [09] declared training folds 0 and scope training folds 0
+OK   [09] no refit, no retune, no threshold change, no fold boundary change, no cost/metric change :: [0, 0, 0, 0, 0]
+OK   [09] the parameterisation is byte-identical to the Gate 3 sealed values on all 10 shared keys :: shared=['exit_sma', 'f_base', 'ladder_rungs', 'loss_control', 'max_hold', 'reentry_delay', 'rsi_entry_below', 'rsi_period', 'vol_floor_fraction', 'vol_target'] mismatch=[]
+OK   [09] the frozen candidate module is unchanged, so the implementation is the Gate 3 one
+OK   [10] one dataset load, one reading session, two engine runs :: (1, 1, 2)
+OK   [10] the scope block agrees with the read block
+OK   [10] run bounds never leave the validation partition
+OK   [10] the evaluation run record's date_range is the validation window :: ['2021-08-01', '2024-07-31']
+OK   [10] further validation reads are recorded as NOT_AUTHORIZED
+OK   [11] the sealed recheck set declares 13 and records 12, the thirteenth being itself :: (13, 12)
+OK   [11] the thirteenth entry verifies through its own checksum record instead :: {'config/stage4_gate_criteria.json': 'OK', 'config/stage4_representative_selection.json': 'OK', 'config/stage4_validation_protocol.json': 'OK', 'governance/STAGE_4_PREREGISTRATION.json': 'OK', 'governance/STAGE_4_PREREGISTRATION.md': 'OK'}
+OK   [11] the evaluator rechecked all thirteen before the validation load :: []
+OK   [11] all thirteen still recompute equal to their sealed digests now, after the build :: []
+OK   [11] the package's own recheck agrees: 13 of 13, all equal :: (13, 13, True)
+OK   [11] S4-C7 is MET on that evidence
+OK   [12] seven hard conditions, all present :: ['S4-C1', 'S4-C2', 'S4-C3', 'S4-C4', 'S4-C5', 'S4-C6', 'S4-C7']
+OK   [12] the conjunction is the AND of the seven, recomputed here :: recomputed False row False gate_passed False
+OK   [12] the two not-met conditions are exactly S4-C2 and S4-C6 :: ['S4-C2', 'S4-C6']
+OK   [12] no across-candidate disjunction was taken
+OK   [12] nothing is NOT_EVALUABLE, NOT_RUN or UNKNOWN :: []
+OK   [12] all seven independent re-derivations agree with the evaluator
+OK   [13] the emitted token is the sealed FAIL token, character for character :: STAGE_4_STRATEGY_REJECTED_IN_VALIDATION vs STAGE_4_STRATEGY_REJECTED_IN_VALIDATION
+OK   [13] it is not the sealed PASS token
+OK   [13] the fail branch is the one the seal describes for this evidence :: recorded: The single sealed representative fails at least one hard con
+OK   [13] the package records the token as taken from disk
+OK   [13] no prompt-invented token appears in the package
+OK   [13] gate_4_evaluated True and gate_4_passed False
+OK   [14] holdout SEALED, 0 sessions read, access not authorized :: ('SEALED', 0, False)
+OK   [14] the holdout lock artifact still verifies as LOCKED
+OK   [14] the run end precedes the holdout start, proved by date arithmetic here :: 2024-07-31 < 2024-08-01
+OK   [14] the evaluation run record declares holdout_state SEALED :: SEALED
+OK   [14] no evidence artifact carries a date inside the holdout window :: ['2026-07-31']
+OK   [15] AST sweep of every module under src/: no forbidden import, attribute or URL constant :: []
+OK   [15] the package records zero broker connections, credentials, orders and dollars :: (0, 'none', 0, 0)
+OK   [15] live_trading_authorized is False at the top level of the decision record
+OK   [15] every trading authorization remains LOCKED or NOT_AUTHORIZED :: {'final_holdout': 'SEALED', 'holdout_access': 'NOT_AUTHORIZED', 'validation_window': 'READ_ONCE_AND_SPENT', 'further_validation_reads': 'NOT_AUTHORIZED', 'stage_5_paper_trading': 'NOT_AUTHORIZED', 'constitutional_gate_5_holdout': 'LOCKED_GATE_4_NOT_PASSED', 'alpaca_paper_trading': 'LOCKED', 'shadow_live': 'LOCKED', 'alpaca_live_trading': 'LOCKED', 'capital_or_risk_expansion': 'LOCKED', 'retune_or_substitute_the_representative': 'PROHIBITED_BY_THE_SEALED_TERMINAL_CONSEQUENCE'}
+OK   [15] no trade-ready claim :: [' StockEdge100 is not trade-ready and may not be described as trade-ready at any point in Sta', '"]}, "trade_readiness_statement": "StockEdge100 is not trade-ready and is not described as trade-ready
+OK   [16] the manifest excludes its own entry
+OK   [16] every one of the 131 manifest digests matches disk :: []
+OK   [16] every manifest path exists :: []
+OK   [16] the checksum record does not name itself
+OK   [16] the checksum record covers the manifest
+OK   [16] the checksum record covers exactly the frozen inputs plus the produced artifacts :: missing=[] extra=[]
+OK   [16] every declared artifact exists on disk :: []
+OK   [16] the run record's output digests match disk :: []
+OK   [17] only the report and the package builder were added since the validation run :: added ['governance/STAGE_4_VALIDATION_REPORT.md', 'src/stockedge100/reporting/stage4_evaluation_package.py']
+OK   [17] only README.md changed since the validation run :: changed ['README.md']
+OK   [17] nothing was removed :: []
+OK   [17] no protected path changed or was removed in any recorded diff :: {'seal_to_preregistration_package': [], 'preregistration_package_to_evaluation': [], 'evaluation_to_package_build': [], 'seal_to_package_build': []}
+OK   [17] runs/ is append-only and holds both this session's records :: 18 records
+OK   [17] the package's tests block matches the test summary on disk :: {'passed': 836, 'failed': 1, 'skipped': 0, 'collected': 837}
+OK   [17] blockers empty, conflicts and limitations recorded :: conflicts 3 limitations 8
+
+ALL CHECKS PASS
+
+86 ok / 0 failed
+repo_state_id 60a927f5e8b8433887304c2977d3685dbc10a902743644c3431bd7c4bbea7160
+package run  SE100-R-20260814T152439Z
+validation run SE100-R-20260814T143226Z

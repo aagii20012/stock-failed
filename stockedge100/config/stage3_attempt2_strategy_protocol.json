@@ -1,0 +1,813 @@
+{
+  "artifact_id": "SE100-CFG-3003",
+  "title": "Stage 3 Attempt 2 strategy research protocol - three pre-registered candidate specifications sharing one structural risk architecture",
+  "version": "1.0.0",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 3,
+  "gate_id": 3,
+  "attempt": 2,
+  "attempt_id": "SE100-S3-A2",
+  "constitution_ref": "SE100-GOV-0001 sections 2, 3, 4, 5.1, 5.2, 7, 8, 9 gate 3, 10, 11, 12",
+  "declared_before_any_strategy_code": true,
+  "declaration_note": "Every symbol, parameter, threshold, lookback, entry rule, exit rule, sizing rule, risk rule, re-entry rule, run start rule, benchmark, and robustness neighbour in this file was written before a single line of Attempt 2 strategy code existed and before any Attempt 2 candidate produced any number of any kind. The seal record governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.json measures that claim rather than asserting it. This file is serialised ASCII-only so that its digest is stable under any reader's codec.",
+  "serialisation": {
+    "encoding": "UTF-8, ASCII-only characters",
+    "note": "Attempt 1's SE100-CFG-3001 contains non-ASCII em dashes. It is frozen and is not repaired, corrected, reformatted, or re-encoded by this attempt. This file avoids non-ASCII characters so that no comparable ambiguity is introduced."
+  },
+  "currency": "USD",
+
+  "research_question": "Can structurally lower-risk, economically intelligible strategies remain meaningfully profitable after costs while satisfying the unchanged 15% maximum-drawdown ceiling of Gate 3 and every other frozen Gate 3 condition?",
+
+  "known_prior_evidence": {
+    "source": "Already-exposed Attempt 1 evidence: governance/STAGE_3_PREREGISTRATION.md, governance/STAGE_3_STRATEGY_RESEARCH_REPORT.md, reports/stage3/, runs/SE100-R-20260810T101622Z.json. No new performance result was generated, loaded, or computed to write this file.",
+    "attempt_1_verdict": "FAIL - STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+    "attempt_1_run_id": "SE100-R-20260810T101622Z",
+    "attempt_1_candidates": 6,
+    "attempt_1_admitted": 0,
+    "attempt_1_headline_fact": "All six candidates produced positive after-cost total return and all six passed neighbour sign stability, and all six breached the 15% maximum-drawdown ceiling of S3-C2. Three additionally missed the 30-closed-trade floor of S3-C4, two failed the profit-concentration condition S3-C6, and one failed the best-trade-removal condition S3-C5.",
+    "attempt_1_closed_trade_counts": {
+      "SE100-S3-F1-TREND-SMA200": 15,
+      "SE100-S3-F2-PULLBACK-SMA200-SMA10": 141,
+      "SE100-S3-F3-MEANREV-RSI2": 109,
+      "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": 13,
+      "SE100-S3-F5-ROTATION-DUALMOM": 6,
+      "SE100-S3-F6-DEFENSIVE-SMA200-SHY": 48,
+      "use_in_this_file": "These counts are used for one purpose only: to exclude, prospectively, families whose specification form cannot plausibly reach the unchanged 30-closed-trade floor. Trade frequency is a structural property of a specification, not a profitability result. The use is an adaptation and is disclosed as one in adaptive_research_disclosure.",
+      "not_used_for": "No parameter, threshold, lookback, exposure fraction, loss limit, or holding period in this file was selected by reference to any Attempt 1 return, drawdown path, equity curve, profit factor, or trade-level outcome."
+    },
+    "attempt_1_most_useful_finding_quoted": "STAGE_3_STRATEGY_RESEARCH_REPORT.md: 'The observation in section 7 - that the risk control and the quality gate are the same number, so any candidate volatile enough to trip one has failed the other - is the most useful thing this stage produced, and it belongs to whoever writes the next pre-registration.'",
+    "design_target_derived_from_it": "S3-C2 is satisfied if and only if the constitution section 5.1 research shutdown never fires, because both are 15% below the running high-water mark of the same session-close equity series and the sealed action is LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES. Attempt 2 therefore treats never tripping the shutdown as the design target rather than as a side effect."
+  },
+
+  "adaptive_research_disclosure": {
+    "constitution_ref": "SE100-GOV-0001 sections 2 and 11",
+    "items": [
+      "Attempt 1's results are known to the researcher who wrote this file. This is an adaptive second attempt at Gate 3, not an independent first look.",
+      "All six Attempt 1 candidates breached the 15% maximum-drawdown ceiling. Some also failed the closed-trade-count floor, the profit-concentration condition, and the best-trade-removal condition.",
+      "The development data are no longer pristine with respect to at least the broad fact that the first candidate set produced excessive drawdown, and with respect to the per-candidate closed-trade counts recorded above. Attempt 2's design is conditioned on those facts.",
+      "Researcher degrees of freedom are higher in Attempt 2 than in Attempt 1, and false-discovery risk is correspondingly higher, because the design space was narrowed using an observed outcome.",
+      "The total experiment count for any later statistical interpretation is the cumulative count across both attempts, not Attempt 2's count alone. See cumulative_experiment_count.",
+      "No Attempt 2 result may be described as independent confirmation of anything merely because the code that produced it is new. The candidates share development data, a researcher, and a known prior outcome with Attempt 1.",
+      "Three of the three Attempt 2 candidates hold the entry and exit signal in the same rule FORM as a rejected Attempt 1 candidate. That is deliberate - the research question is about risk structure, so the return source is held fixed and the risk architecture is varied - and it means Attempt 2 is a second look at the same signals on the same data, not a new hypothesis about what predicts returns.",
+      "Validation-window and holdout-window protections are unchanged by this attempt. The validation window remains LOCKED and the holdout window remains SEALED.",
+      "A passing development result authorises only the next frozen evaluation step. It is not evidence of a trading edge, and it is not a claim about any future period.",
+      "This adaptation is not concealed behind a new strategy identifier. Each candidate id carries the RA1 suffix naming the shared risk architecture, and each candidate block states in distinction_from_attempt_1 exactly which rejected Attempt 1 candidate it shares its signal form with."
+    ]
+  },
+
+  "authorization_determination": {
+    "question": "Does frozen on-disk governance permit a second Stage 3 attempt after a failed first attempt?",
+    "answer": "Yes, by a new pre-registration declaring new candidates, sealed before any code for them exists. No erratum, no new project generation, and no separate human written approval is required at this gate.",
+    "evidence": [
+      "SE100-GOV-0001 section 11, lines 290-291: 'A change that affects universe, timing, cost, signal, parameter range, metric, threshold, or data partition is material.' and 'A material change after seeing validation results creates a new candidate and restarts at Gate 3.' A new candidate restarting at Gate 3 is the mechanism this attempt uses. The scope gap is stated rather than glossed: the second sentence's trigger is 'after seeing VALIDATION results', and Attempt 1's results are development-only, so the clause does not literally cover this case. It is relied on a fortiori - if a material change made after seeing the more strongly protected validation results is permitted and costs no more than restarting at Gate 3, a material change made after seeing only development results cannot require more, and Gate 3 is where Attempt 2 begins. The constitution nowhere states a stricter consequence for the development case, and this attempt does not read the silence as permission for anything beyond restarting at Gate 3.",
+   "SE100-GOV-0001 section 11, line 293, the most directly on-point clause: 'Safety thresholds may be tightened without promoting a failed strategy, but the change must still be versioned.' Attempt 2 tightens safety - lower fixed exposure, entry-only volatility targeting, a per-position loss control, an account-level de-risking ladder - and promotes no failed strategy: F1 through F6 are not re-run, not edited, not superseded, and not carried forward. The versioning requirement is met by a new artifact id at version 1.0.0 rather than an edit to SE100-CFG-3001.",
+      "SE100-GOV-0001 section 2: 'Negative results are deliverables. Rejected strategies are recorded and not silently recycled.' Attempt 1 remains on disk, unmodified, and is cited rather than recycled.",
+      "SE100-GOV-0001 section 2: 'No result-driven rule changes. A failed gate cannot be weakened after results are observed.' No Gate 3 condition, threshold, denominator, predicate, boundary, or measurement is changed by this attempt.",
+      "STAGE_0_CONSTITUTION.json gates entry with id 3 carries a fail_result and no once-only clause, no attempt limit, and no manual_written_approval_required flag. The only gate carrying manual_written_approval_required true is gate 9.",
+      "governance/STAGE_3_STRATEGY_RESEARCH_REPORT.md section 19, lines 511-514: 'A further attempt at Gate 3 requires a new pre-registration declaring new candidates, sealed before any code for them exists, under the same prohibition on revising a specification because of a result it produced.' Quoted as prose; the source emphasises the word new with markdown bold, which is not reproduced here.",
+   "governance/STAGE_3_STRATEGY_RESEARCH_REPORT.md section 15, lines 405-409: 'A future generation of candidates is a new pre-registration and a new Gate 3, not an amendment to this one.' Attempt 2 is a new pre-registration and a new Gate 3, and amends nothing. The same passage hands forward the section 7 observation that the risk control and the quality gate are the same number, and states that it 'belongs to whoever writes the next pre-registration'. This file is that pre-registration, and risk_architecture RA1 is what it does with the observation.",
+      "STAGE_3_PREREGISTRATION.md section 7.8 bars a seventh candidate 'in this session'. That bar is scoped to the Attempt 1 session and does not reach this one. Attempt 2 does not add a seventh candidate to Attempt 1; it declares a new candidate set under a new pre-registration."
+    ],
+    "not_relied_on": "This determination rests on frozen on-disk governance. The operating prompt for this session was not treated as authority for it, and no frozen rule was reinterpreted or weakened to reach it.",
+    "families_requirement": {
+      "question": "Does the constitution require all six strategy families to be researched again in a second attempt?",
+      "answer": "No.",
+      "evidence": "SE100-GOV-0001 section 3, the scope table, reads 'Trend/momentum, pullback, mean reversion, breakout, ETF rotation, and defensive regime logic may be researched separately'. The modal verb is 'may', which is permissive and not a requirement to research all six; the quotation reproduces the source's lower-case 'may' rather than emphasising it. Section 8's sentence 'Strategy families must first be tested independently' is a precondition on COMBINING strategies, not a requirement to test all six in every attempt; its own next sentence is 'Combining strategies is prohibited until each component has an independent verdict.' Attempt 2 combines nothing.",
+      "consequence": "Attempt 2 declares three candidates, which is the smallest set that can answer the research question while keeping one multi-instrument candidate so that S3-C6 is live rather than not-applicable for every candidate."
+    }
+  },
+
+  "recorded_interpretations": [
+    {
+      "id": "A2-INTERP-1",
+      "subject": "Attempt 1's sealed shared sizing rule and Attempt 2's volatility-targeted sizing.",
+      "frozen_text_quoted": "SE100-CFG-3001 shared_rules.sizing_rule: 'A buy requests a budget of 95% of account equity measured at the decision close. The sealed exposure cap (95% of equity) and cash buffer (5% of equity) are applied independently by the engine and may reduce the executed notional further. No candidate sizes by volatility, conviction, or any other varying quantity: position size is not a research variable in this stage.'",
+      "interpretation": "That sentence scopes itself to Attempt 1's six candidates. The same document declares candidates 6, total_declared_runs 30, and revisions_permitted 0, so 'this stage' names that sealed research, and the sentence remains permanently true of those six candidates. It is not a standing prohibition on position sizing for all future Gate 3 attempts.",
+      "rejected_alternative_reading": "The broader reading is that no candidate at Gate 3 may ever size by volatility. It is recorded here rather than omitted. Two things count against it. First, it would make Attempt 2 impossible in any form that answers the research question, while Attempt 1's own decision report affirmatively contemplates a further Gate 3 attempt. Second, it would read a sentence in a candidate-set protocol as an amendment to the constitution, which SE100-GOV-0001 section 1 precedence does not permit a config file to be.",
+      "constitutional_route": "SE100-GOV-0001 section 11 makes a change to sizing material, and a material change creates a new candidate that restarts at Gate 3. That is exactly what each Attempt 2 candidate is.",
+      "effect_on_attempt_1": "None. SE100-CFG-3001 is not edited, not superseded, and not reinterpreted as applied to its own six candidates.",
+      "constitutional_ceiling_unchanged": "SE100-GOV-0001 section 3 gross exposure maximum 95% of current equity with a minimum 5% cash buffer is unchanged and is enforced by the engine independently of anything a candidate requests. Attempt 2 requests LESS exposure than the ceiling; it never requests more."
+    },
+    {
+      "id": "A2-INTERP-2",
+      "subject": "S3-C7's reference to the artifact that holds the declared neighbours.",
+      "frozen_text_quoted": "SE100-CFG-3002 conditions S3-C7 measurement: 'Each candidate declares exactly four robustness neighbours in SE100-CFG-3001, chosen before any result.'",
+      "interpretation": "For Attempt 2 candidates the declaring artifact is SE100-CFG-3003, this file. The rule is unchanged: exactly four neighbours per candidate, declared before any result, run over the same window as their primary, under the same base cost model, with the research shutdown enforced, evaluated for the sign of net return and nothing else.",
+      "changed": "Nothing. No threshold, predicate, count, measurement, boundary, undefined case, or not-evaluable treatment is altered. Only the file name in which the neighbours are found differs, because Attempt 1's file cannot declare candidates that did not exist when it was sealed."
+    },
+    {
+      "id": "A2-INTERP-3",
+      "subject": "S3-C6's applies_to enumeration.",
+      "frozen_text_quoted": "SE100-CFG-3002 conditions S3-C6 scope_interpretation.applies_to: 'Candidates whose declared universe contains more than one instrument: SE100-S3-F5-ROTATION-DUALMOM and SE100-S3-F6-DEFENSIVE-SMA200-SHY.'",
+      "interpretation": "The rule is 'candidates whose declared universe contains more than one instrument'. The two named ids are that rule applied to Attempt 1's candidate set. Applying the same rule to Attempt 2's candidate set yields exactly one candidate: SE100-S3A2-C3-DEFENSIVE-RA1. SE100-S3A2-C1-PULLBACK-RA1 and SE100-S3A2-C2-MEANREV-RA1 declare single-instrument universes and are NOT_APPLICABLE_BY_CONDITION_TEXT with the declared instrument count recorded as the evidence, exactly as the sealed single_instrument_treatment prescribes.",
+      "changed": "Nothing. The predicate, the threshold of 0.50, the measurement, the not-evaluable treatment, and the rationale are all unchanged. The enumeration is re-derived by the sealed rule, not replaced.",
+      "recorded_in": "config/stage3_attempt2_gate_criteria_binding.json"
+    },
+    {
+      "id": "A2-INTERP-4",
+      "subject": "S3-C4's lower-frequency exception.",
+      "frozen_text_quoted": "SE100-CFG-3002 conditions S3-C4 exception_note: 'No candidate in this stage invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly so that a low-frequency candidate cannot later be argued into the exception after its trade count is known.'",
+      "interpretation": "No Attempt 2 candidate invokes it either. The 30-closed-trade floor applies unchanged to all three candidates. Invoking the exception now, after Attempt 1's per-candidate trade counts are known, would be the precise move the sealed note exists to forbid.",
+      "consequence": "Families whose specification form cannot plausibly reach 30 closed trades are excluded prospectively rather than excused after the fact. See families_excluded."
+    }
+  ],
+
+  "inputs_bound": {
+    "universe": "SE100-U1-d4917c2f7f1cd834 (governance/STAGE_1_UNIVERSE.json, FROZEN, 34 ETFs), sha256 01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+    "window_bounds_source": "governance/STAGE_1_HOLDOUT_LOCK.json, sha256 9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3. Boundary dates are read from that file and are deliberately not restated here.",
+    "cost_model": "SE100-CFG-2001 (config/stage2_cost_model.json), sha256 f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2, BASE scenario, unmodified",
+    "gate_criteria": "SE100-CFG-3002 (config/stage3_gate_criteria.json), sha256 310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d, adopted unchanged. Binding this file by digest rather than copying it is what makes 'the 15% ceiling is unchanged' checkable by arithmetic instead of by reading.",
+    "attempt_1_protocol": "SE100-CFG-3001 (config/stage3_strategy_protocol.json), sha256 04dbe3fa8c6b2a9e725a66d24f5dc0a3a7e3567e70d38bfd2e96869cc6e169b6, read-only. Cited for shared rules and indicator definitions adopted unchanged, and for the one rule Attempt 2 replaces.",
+    "engine": "validated at Gate 2, PASS - STAGE_2_BACKTEST_ENGINE_VALIDATED. No engine change is authorised by this attempt.",
+    "dataset": "the Stage 1 normalized dataset already on disk. No data is downloaded, purchased, or acquired.",
+    "development_window_state": "AUTHORIZED",
+    "validation_window_state": "LOCKED",
+    "holdout_window_state": "SEALED"
+  },
+
+  "partitions": {
+    "permitted": [
+      "development window only, bounds read from governance/STAGE_1_HOLDOUT_LOCK.json"
+    ],
+    "prohibited": [
+      "validation window - LOCKED, no observation read, no metric computed, no boundary moved",
+      "holdout window - SEALED, no observation read; only previously permitted integrity metadata may be inspected",
+      "any symbol outside the frozen universe, including AAPL"
+    ],
+    "enforcement": "stockedge100.backtest.window.ResearchWindow raises WindowViolation on any session outside the development window, and MarketView raises LookAheadError on any read past the decision session. Both are structural; neither depends on a candidate behaving well. Attempt 2 adds no code path that could bypass them.",
+    "boundary_changes": "None. Attempt 2 does not move, widen, narrow, or re-cut any partition boundary."
+  },
+
+  "excluded_symbols": {
+    "AAPL": "A price file for AAPL exists under data/normalized/daily/ because Stage 1 measured the split convention against two AAPL split events. AAPL is not a member of the frozen research universe and is not eligible for any Attempt 2 candidate. Constitution section 3 records individual stocks as PROHIBITED for Generation 1."
+  },
+
+  "iteration_budget": {
+    "candidates": 3,
+    "runs_per_candidate": "one primary run plus four robustness-neighbour runs, plus one non-gating stressed-cost run of the primary",
+    "gating_variants_per_candidate": 5,
+    "max_variants_per_candidate": 5,
+    "total_declared_gating_variants": 15,
+    "total_declared_non_gating_stress_runs": 3,
+    "total_declared_runs": 18,
+    "revisions_permitted": 0,
+    "meaning": "Each candidate is run once at its primary parameterisation. No parameter is changed, no rule is amended, no symbol is added or removed, and no candidate is re-run after any result is seen. A candidate that fails is reported as failed. Constitution section 11: a change to universe, timing, cost, signal, parameter range, metric, threshold, or data partition is material, and a material change creates a NEW candidate that restarts at Gate 3 - it does not repair this one.",
+    "neighbour_runs_are_not_iterations": "The four neighbour runs per candidate exist solely to evaluate S3-C7 on the sign of net return. They are never used to select a parameterisation, are never promoted to primary, and their metrics other than the sign of net return are reported but carry no gate weight.",
+    "stress_runs_are_not_iterations": "The three stressed-cost runs are diagnostics required by constitution section 7. They are non-gating at Gate 3 and cannot admit or reject any candidate. See cost_stress_treatment."
+  },
+
+  "cumulative_experiment_count": {
+    "attempt_1_candidates": 6,
+    "attempt_2_candidates": 3,
+    "cumulative_candidates": 9,
+    "attempt_1_gating_variants": 30,
+    "attempt_2_gating_variants": 15,
+    "cumulative_gating_variants": 45,
+    "attempt_1_total_runs": 30,
+    "attempt_2_total_runs": 18,
+    "cumulative_total_runs": 48,
+    "binding_number_for_interpretation": "9 candidates and 45 gating variants against the same development window. Any later statistical statement about Gate 3 evidence uses the cumulative figure, not Attempt 2's figure.",
+    "distinct_signal_forms": "Attempt 2 introduces no new signal form. Its three signals share rule form with three of Attempt 1's six candidates, so the cumulative count of distinct signal forms tested at Gate 3 remains 6, while the cumulative count of distinct SPECIFICATIONS tested is 9."
+  },
+
+  "multiple_comparisons_disclosure": "Three candidates are tested against the same development data that six candidates were already tested against, by a researcher who knows how those six failed. A per-candidate criterion is not a family-wise one, and the probability that at least one of nine specifications passes by chance exceeds the probability that any single pre-specified one does. Because the Attempt 2 design space was narrowed by an observed Attempt 1 outcome, the effective search is wider than nine independent draws and cannot be bounded by counting runs. Nothing in this attempt corrects for it numerically. The correction the constitution relies on is that an admitted candidate must still survive Gate 4 robustness, Gate 5's single sealed holdout read, and the duration-based paper and shadow gates. Attempt 2 weakens none of those and earns no relief from any of them.",
+
+  "no_selection_in_this_stage": "Gate 3 is admissibility, not selection. Every candidate that satisfies every hard condition is recorded as admitted; the stage does not rank admitted candidates, does not name a winner, and does not carry a preference forward. Choosing which admitted candidate proceeds is a later-stage decision under the constitution's own rules.",
+
+  "permitted_parameter_grid_semantics": {
+    "purpose": "Each candidate declares a permitted_parameter_grid. This field states exactly what that grid means, once, so that three per-candidate prose notes cannot drift into three different rules and so that the invariant is machine-checkable.",
+    "invariant": [
+      "For every key present in a candidate's permitted_parameter_grid, the declared value list is exactly the set formed by that candidate's primary value for the key together with every value the four declared neighbours give that key. Nothing else is permitted for that key.",
+      "Every key that at least one declared neighbour varies is present in the grid. A neighbour cannot vary a parameter the grid does not admit.",
+      "A key whose list holds a single value is a PIN, not a search axis: it records that the parameter exists, is fixed, and is deliberately not probed by any neighbour of this candidate."
+    ],
+    "the_grid_is_not_the_full_parameter_set": "The grid enumerates only the parameters this candidate's neighbours touch, plus any pin it names explicitly. Parameters of the primary that no neighbour varies and that the grid does not pin - max_hold, reentry_delay, ladder_rungs, vol_floor_fraction - are single-valued by their appearance in the primary parameterisation and are not restated in the grid. They are no less fixed for being absent from it.",
+    "no_search": "No search, sweep, or optimisation over any grid is performed at any point. The grid is a declared boundary on what could legitimately be run, and the runs that are actually run are the primary and its four neighbours - five per candidate, fifteen in total. A value inside the grid is not thereby authorised as an additional run.",
+    "why_declare_a_boundary_that_is_not_searched": "So that a later session cannot run a sixth variant, find it inside a broad grid, and call it pre-registered. The grid is deliberately narrower than Attempt 1's, which listed values no variant used."
+  },
+
+  "shared_rules": {
+    "adopted_unchanged_from": "SE100-CFG-3001 shared_rules, sha256 04dbe3fa8c6b2a9e725a66d24f5dc0a3a7e3567e70d38bfd2e96869cc6e169b6",
+    "adopted_unchanged": [
+      "one_decision_per_session",
+      "long_only",
+      "flat_first_rule",
+      "insufficient_history_rule",
+      "tie_break",
+      "warmup_rule",
+      "run_start_rule",
+      "warmup_data_source",
+      "no_intraday",
+      "no_machine_learning",
+      "no_combination"
+    ],
+    "adopted_text_restated_for_readability": {
+      "one_decision_per_session": "At most one decision per strategy per session, per constitution section 3. A decision is taken at the close of session t from data at or before session t; the engine fills at the open of the next exchange session and refuses any earlier fill.",
+      "long_only": "No short sale, no leverage, no margin, no averaging down, no pyramiding. One open risky position at a time, per the sealed cost model max_open_risky_positions of 1.",
+      "flat_first_rule": "A candidate never schedules an exit and an entry for the same fill session. If it holds H and its target is T with T not equal to H, it emits only SELL H. It emits BUY T only on a session on which the account is already flat. Sequencing the exit strictly before the entry costs one session out of the market on every switch and is the conservative construction. This cost is charged to every candidate and is not modelled away.",
+      "insufficient_history_rule": "If any indicator a rule requires cannot be computed from the visible history, the target for that session is cash. A missing indicator never produces a hold, a guess, or a carried-forward value.",
+      "tie_break": "Where two symbols would rank equally, the lower symbol in ascending ASCII order is chosen.",
+      "warmup_rule": "Each candidate declares warmup_sessions equal to the largest lookback used by its primary parameterisation OR by any of its robustness neighbours, so that every variant of a candidate is evaluable from the first session of that candidate's run and no variant is advantaged by a different start.",
+      "run_start_rule": "A candidate's run begins on the first development-window session on which EVERY symbol in its DECLARED universe has at least warmup_sessions visible bars inside the development window, and ends at the development window end. The declared universe governs, so a neighbour that drops a symbol still runs over the same window as its primary.",
+      "warmup_data_source": "Warm-up history is drawn only from sessions inside the development window.",
+      "no_intraday": "Every signal is computed from daily closes. No intraday data exists in this project and none is approximated.",
+      "no_machine_learning": "No machine learning of any kind is used, per constitution section 8. No model is fitted, trained, cross-validated, or optimised against any outcome.",
+      "no_combination": "No candidate combines another candidate. Each of the three is an independent specification with its own hypothesis and its own verdict, per constitution section 8."
+    },
+    "replaced": {
+      "sizing_rule": {
+        "attempt_1_rule": "SE100-CFG-3001 shared_rules.sizing_rule - a fixed budget of 95% of account equity, position size not a research variable.",
+        "attempt_2_rule": "risk_architecture RA1-1, RA1-2, and RA1-5. Position size is a declared structural rule, not a fitted variable and not a per-result choice.",
+        "authority": "recorded_interpretations A2-INTERP-1 and constitution section 11.",
+        "direction_of_change": "Downward only. Every Attempt 2 candidate requests strictly less exposure than Attempt 1's candidates did, and the engine's own 95% cap and 5% cash buffer continue to apply on top."
+      }
+    },
+    "window_comparability_warning": "Attempt 2's warm-up lengths follow mechanically from the adopted warmup_rule applied to Attempt 2's own neighbour sets, and they differ from those of the Attempt 1 candidates whose signal form each Attempt 2 candidate shares. C1 declares 200 where F2 declared 250; C3 declares 200 where F6 declared 250. Run windows therefore differ. No Attempt 2 candidate is a matched-window controlled comparison against any Attempt 1 candidate, no Gate 3 condition is a comparison between attempts, and no number produced by Attempt 2 may be differenced against an Attempt 1 number and reported as the effect of the risk architecture."
+  },
+
+  "indicator_definitions": {
+    "adopted_unchanged_from": "SE100-CFG-3001 indicator_definitions, sha256 04dbe3fa8c6b2a9e725a66d24f5dc0a3a7e3567e70d38bfd2e96869cc6e169b6",
+    "adopted_unchanged": ["arithmetic", "visible_bars", "SMA", "RSI"],
+    "adopted_text_restated_for_readability": {
+      "arithmetic": "All indicator arithmetic is exact Decimal under stockedge100.backtest.costs.ENGINE_CONTEXT (precision 34, ROUND_HALF_EVEN, trapping InvalidOperation, DivisionByZero and Overflow). No float appears anywhere in a signal path.",
+      "visible_bars": "A visible bar is one whose session is at or before the decision session and inside the development window. Ordering is oldest first.",
+      "SMA": "SMA(n) at session t is the arithmetic mean of the closes of the last n visible bars, the bar at t included. Undefined if fewer than n visible bars exist.",
+      "RSI": "Wilder smoothing seeded by a simple average, with warmup_changes 100, exactly as defined in SE100-CFG-3001 indicator_definitions.RSI. The procedure, the seeding, the avgLoss == 0 cases, and the warm-up length are adopted verbatim and unchanged."
+    },
+    "not_used_by_attempt_2": {
+      "ROLLING_MAX": "no Attempt 2 candidate uses a breakout channel",
+      "ROLLING_MIN": "no Attempt 2 candidate uses a breakout channel",
+      "MOMENTUM": "no Attempt 2 candidate ranks instruments by momentum"
+    },
+    "added": {
+      "VOL20": {
+        "purpose": "The single new indicator Attempt 2 introduces. It is an input to position sizing only. It never selects a symbol, never generates an entry, and never generates an exit.",
+        "definition": "VOL20(s) at session t is the annualised standard deviation of the 20 most recent simple daily total returns of symbol s.",
+        "procedure": [
+          "Take the last 21 visible adj_close values of s, a[0..20], oldest first. Undefined if fewer than 21 visible bars exist.",
+          "For i = 1..20: r[i] = a[i] / a[i-1] - 1.",
+          "mean = (sum of r[1..20]) / 20.",
+          "var = (sum over i = 1..20 of (r[i] - mean) squared) / 19.",
+          "sigma_daily = var.sqrt().",
+          "VOL20 = sigma_daily * Decimal(252).sqrt()."
+        ],
+        "denominator_note": "The sample variance denominator is 19, fixed here so that the choice between 19 and 20 cannot be made after seeing a result. The difference is a factor of about 1.026 on sigma and is immaterial to the mechanism; the point is that it is declared.",
+        "price_series_note": "adj_close is used, not close, because VOL20 estimates a total-return volatility and the sealed Stage 1 finding is that adj_close carries the provider's dividend reinvestment. This is the same reason SE100-CFG-3001 gives for MOMENTUM using adj_close.",
+        "zero_case": "If VOL20 == 0 the sizing division is undefined and no entry is emitted, with reason code NO_ENTRY_ZERO_VOLATILITY. The value is not floored, clipped, or replaced by a constant, and ENGINE_CONTEXT traps DivisionByZero rather than producing an infinity.",
+        "insufficient_history_case": "If fewer than 21 visible bars exist, VOL20 is undefined and the shared insufficient_history_rule applies: the target for that session is cash.",
+        "lookback_contribution_to_warmup": "21 bars. It is dominated by every candidate's signal lookback and therefore lengthens no candidate's warm-up."
+      }
+    }
+  },
+
+  "risk_architecture": {
+    "id": "RA1",
+    "name": "Structural exposure and loss architecture, shared identically by all three Attempt 2 candidates",
+    "why_shared": "Declaring one architecture once, identically across candidates, means its degrees of freedom are counted once rather than three times. If RA1 were tuned per candidate, three candidates would carry three independent sets of risk parameters and the search would be three times wider than it appears.",
+    "design_intent": "S3-C2 is satisfied if and only if the constitution section 5.1 research shutdown never fires. RA1 is the structural answer to that: it lowers exposure, caps single-position loss, reduces size as account drawdown grows, and bounds time at risk. Every constant below is either taken from a frozen artifact or derived arithmetically from constants that are, and none was selected by inspecting an Attempt 1 equity path.",
+    "prohibition_on_mechanical_targeting": "RA1 is not a device for stopping at 14.99%. No rule references the 15% ceiling, no rule references a drawdown level between 10% and 15%, and no rule is conditioned on proximity to the shutdown. The deepest level RA1 reacts to is 10%, which is the constitution's own section 5.2 hard risk halt, declared for live trading and adopted here as a research-side de-risking trigger.",
+
+    "RA1-1": {
+      "name": "Exposure ceiling",
+      "rule": "f_base = 0.50. No entry may request a budget above f_base multiplied by account equity measured at the decision close.",
+      "derivation": "Not fitted. The constitution's section 5.2 live soft risk halt is 8% below the high-water mark and its hard risk halt is 10%. RA1-3 caps a single position's nominal decline at L = 0.08. With f_base = 0.50 the worst nominal single-position cost to the account is f_base * L = 0.040, which is half the soft-halt distance and 40% of the hard-halt distance. No single position can, at its declared limit, carry the account through a halt rung on its own.",
+      "relation_to_constitutional_cap": "The constitution section 3 ceiling is 95% gross exposure with a 5% minimum cash buffer, and the sealed cost model enforces it. RA1-1 requests less. It never requests more and cannot.",
+      "applies_to_defensive_leg": true,
+      "defensive_leg_note": "RA1-1 applies uniformly, including to a defensive Treasury leg. A candidate holding SHY therefore holds about 50% SHY and about 50% cash, which reduces the defensive leg's return contribution relative to Attempt 1's F6. This is a disclosed cost of the architecture, not an oversight. No instrument-specific carve-out is granted, because a per-instrument exposure exemption would be a discretionary rule and the whole point of RA1 is that its rules are not discretionary."
+    },
+
+    "RA1-2": {
+      "name": "Volatility-targeted entry sizing",
+      "applies": "at entry only",
+      "entry_only_reason": "The sealed portfolio accounting appends a closed trade only when a position is fully closed, so a position is all-or-nothing. Re-sizing an open position would require a partial exit the accounting does not model. Sizing is therefore decided once, at entry, and never adjusted while the position is open.",
+      "rule": [
+        "sigma_target = 0.10, annualised.",
+        "sigma = VOL20 of the symbol being entered, measured at the decision close.",
+        "f_vol = sigma_target / sigma.",
+        "f_cap = the RA1-5 ladder value for the decision session.",
+        "f = min(f_cap, f_vol).",
+        "If sigma == 0: no entry, reason NO_ENTRY_ZERO_VOLATILITY.",
+        "If f < f_floor = 0.05: no entry that session, reason NO_ENTRY_VOLATILITY_FLOOR.",
+        "budget = f * equity at the decision close.",
+        "If budget < min_order_notional_usd = 1.00 from SE100-CFG-2001 sizing: no entry, reason NO_ENTRY_SIZE_FLOOR.",
+        "Otherwise emit BUY with that budget. The engine applies its own exposure cap, cash buffer, one-cent budget safety margin, and share rounding on top, and may reduce the executed notional further."
+      ],
+      "sigma_target_rationale": "0.10 annualised is a deliberately low volatility target: below the long-run realised volatility of every equity ETF in the frozen universe, so the target binds rather than decorates, and above zero by enough that a position of economically meaningful size is still taken in calm regimes. It is one round number declared once and probed by a neighbour at 0.08 in every candidate.",
+      "f_floor_rationale": "f_floor = 0.05 mirrors the constitution's 5% minimum cash buffer read as a smallest-meaningful-fraction. It is a safety rail against an absurdly small position in an extreme volatility regime, not a filter: it binds only when sigma exceeds sigma_target / f_floor = 2.00, that is 200% annualised, which is far above any level the frozen universe has exhibited. Declared so that the case is decided in advance rather than on sight.",
+      "cannot_increase_exposure": "f = min(f_cap, f_vol), so volatility targeting can only reduce exposure below the RA1-1 ceiling. It can never raise it."
+    },
+
+    "RA1-3": {
+      "name": "Per-position loss control",
+      "rule": [
+        "L = 0.08.",
+        "P_ref = close of the DECISION session on which the entry order was scheduled.",
+        "On any later decision session t at which the symbol is in context.open_symbols: if close(symbol, t) <= P_ref * (1 - L), emit a full exit, reason EXIT_LOSS_CONTROL.",
+        "A pending P_ref is discarded if the symbol is absent from context.open_symbols at the next decision session, because the entry was not filled."
+      ],
+      "why_decision_close_and_not_fill_price": "The fill price is the next session's open and is not exposed to the candidate at decision time. Referencing the decision close keeps the rule computable from information the candidate is allowed to see, and structurally prevents a look-ahead read of the fill. The difference between the decision close and the fill open is one overnight gap and is disclosed as such rather than modelled away.",
+      "L_rationale": "0.08 is the constitution's own section 5.2 live soft risk halt distance, adopted at the position level. Taking the number from a frozen artifact rather than choosing one keeps it out of the search space.",
+      "not_a_stop_order": "This is a close-referenced exit that fills at the next open under MARKET_ON_NEXT_OPEN. It is not a stop order, not a stop-limit, and not an intraday trigger. The project holds no intraday data, so no intraday trigger could be evaluated.",
+      "not_a_bound": "RA1-3 does not bound loss at 8%. The trigger is evaluated at a close and filled at the next open, so one overnight gap and one session of exposure sit between the trigger and the exit. Constitution section 5.2: 'Stops are risk tools, not guarantees; overnight gaps may exceed intended losses.' A position that declines faster than the rule can react loses more than L, and the account loses f times that larger amount."
+    },
+
+    "RA1-4": {
+      "name": "Maximum holding period",
+      "rule": [
+        "H is declared per candidate.",
+        "sessions_held counts the decision sessions on which the symbol has appeared in context.open_symbols, the current session included.",
+        "If sessions_held >= H, emit a full exit, reason EXIT_MAX_HOLD."
+      ],
+      "purpose": "Bounds time at risk and forces every thesis to be re-underwritten. A position that has not resolved within its candidate's declared horizon is closed rather than held indefinitely.",
+      "per_candidate_H_is_not_a_trade_count_dial": "Each H is set from its candidate's own stated thesis horizon, and in every case H is longer than the horizon the thesis names, so H is the outer bound rather than the operative exit. The values are stated with their reasoning in each candidate block and are not adjusted to reach any gate threshold."
+    },
+
+    "RA1-5": {
+      "name": "Account de-risk ladder",
+      "read": "at entry only, to set f_cap for the RA1-2 computation",
+      "rule": [
+        "hwm is the running maximum of context.equity over the decision sessions of the run, seeded at the first decision session's equity and updated on every decision session whether the account is flat or not.",
+        "dd = (hwm - equity) / hwm at the decision close.",
+        "dd < 0.08: f_cap = 0.50.",
+        "0.08 <= dd < 0.10: f_cap = 0.25.",
+        "dd >= 0.10: f_cap = 0.125."
+      ],
+      "equity_series_identity": "context.equity is the same value the engine records before it evaluates the section 5.1 shutdown, so RA1-5's drawdown series is byte-identical to the shutdown's own. The ladder and the shutdown read one series, not two approximations of one.",
+      "never_blocks_entry": "The ladder reduces size. It never blocks an entry and never sets f_cap to zero. This is deliberate and is the correction of a rejected earlier formulation.",
+      "rejected_alternative": "An earlier formulation blocked new entries once dd reached 0.08 until equity recovered above the high-water mark. It is recorded here because it is fatally defective and the defect is instructive: a flat account's equity is constant, so equity can never recover, so the block can never re-arm. That rule would produce a permanently dead strategy - which is the failure mode the constitution's own shutdown already represents, reintroduced by the risk overlay meant to avoid it. It is also what the operating constraint against making a strategy incapable of meaningful trading solely to suppress drawdown forbids.",
+      "rung_rationale": "0.08 and 0.10 are the constitution's section 5.2 live soft and hard risk halt distances, verbatim. The multipliers halve and then halve again. Nothing here is a new number chosen by the researcher except the choice to halve, which is declared and is probed indirectly by the f_base neighbour in every candidate."
+    },
+
+    "RA1-6": {
+      "name": "Re-entry rule after a risk exit",
+      "rule": "After an exit with reason EXIT_LOSS_CONTROL or EXIT_MAX_HOLD, the candidate may not re-enter that same symbol for R = 5 decision sessions counted from the decision session that scheduled the exit. A blocked entry is recorded with reason NO_ENTRY_LOCKOUT. An exit with reason EXIT_SIGNAL creates no lockout.",
+      "R_rationale": "One exchange week. A cooling-off period after a risk-driven exit prevents the loss control from converting a single adverse move into an immediate sequence of identical entries into the same condition. Five sessions is the shortest period that spans a full weekly cycle.",
+      "rejected_alternative": "The lockout was first specified as lasting until the candidate's entry condition evaluated false at least once. That is defective for the same reason as the rejected RA1-5 formulation: a regime condition can remain true for years, so the lockout could fail to expire and would leave the account in cash indefinitely. A fixed number of sessions always expires.",
+      "not_load_bearing_for_the_drawdown_arithmetic": "The drawdown arithmetic below assumes back-to-back maximum losses with no lockout at all, so RA1-6 can only improve on it. It is an economic sensibility rule, not part of the bound."
+    },
+
+    "RA1-7": {
+      "name": "Conflict resolution",
+      "rule": "The shared flat_first_rule, adopted unchanged. A candidate never schedules an exit and an entry for the same fill session, so every symbol switch costs one full session out of the market. Combined with RA1-6, a switch that follows a risk exit costs at least six sessions out of the market."
+    },
+
+    "RA1-8": {
+      "name": "All-or-nothing positions",
+      "rule": "Entries and exits are for the full position. No partial entry, no partial exit, no scaling in, no scaling out, no averaging down, no pyramiding.",
+      "reason": "Constitution section 5.1 prohibits averaging down without an explicit predeclared rule, and the sealed portfolio accounting appends a closed trade only when a position is fully closed. Partial exits would make the closed-trade series - the basis of S3-C3, S3-C4, S3-C5, and S3-C6 - ambiguous."
+    },
+
+    "exit_precedence": {
+      "order": ["EXIT_LOSS_CONTROL", "EXIT_MAX_HOLD", "EXIT_SIGNAL"],
+      "rule": "At most one exit is emitted per session because positions are all-or-nothing. When more than one exit condition is true on the same decision session, the position is closed once and the attributed reason is the highest-precedence condition in the order above.",
+      "purpose": "Reason attribution only. The precedence changes no exit decision - the position closes either way - so it cannot affect any metric. It exists so that the evidence can report how many exits each mechanism caused, which is how RA1-3 and RA1-4 are diagnosed instead of being probed by a neighbour."
+    },
+
+    "engine_shutdown_relationship": {
+      "enforcement": "The section 5.1 research shutdown is enforced by the engine for every run, primary and neighbour and stressed alike. It is not disabled, not relaxed, and not treated as an artefact.",
+      "candidate_behaviour": "A candidate emits no order on any decision session where context.shutdown_active is true. This is belt-and-braces; the engine already forces liquidation and blocks entries.",
+      "no_candidate_reads_the_ceiling": "No RA1 rule and no candidate rule references 0.15, the shutdown state, or the distance to it as an input to sizing or signalling."
+    },
+
+    "drawdown_arithmetic": {
+      "claim": "This is an arithmetic property of the declared constants, computed by hand from RA1-1, RA1-3, and RA1-5 before any Attempt 2 code exists. It is NOT a prediction, NOT a guarantee, and NOT a claim that S3-C2 will be met.",
+      "worst_case_sequence": "Consecutive round trips each losing exactly the RA1-3 limit, starting from the high-water mark with equity 1.0. Loss per trade = f_cap * L.",
+      "steps": [
+        "trade 1: dd = 0.0000, f_cap = 0.500, loss 4.000%, equity 0.960000, dd after = 4.0000%",
+        "trade 2: dd = 4.0000%, f_cap = 0.500, loss 4.000%, equity 0.921600, dd after = 7.8400%",
+        "trade 3: dd = 7.8400%, f_cap = 0.500, loss 4.000%, equity 0.884736, dd after = 11.5264%",
+        "trade 4: dd = 11.5264%, f_cap = 0.125, loss 1.000%, equity 0.875889, dd after = 12.4111%",
+        "trade 5: dd = 12.4111%, f_cap = 0.125, loss 1.000%, equity 0.867130, dd after = 13.2870%",
+        "trade 6: dd = 13.2870%, f_cap = 0.125, loss 1.000%, equity 0.858459, dd after = 14.1541%",
+        "trade 7: dd = 14.1541%, f_cap = 0.125, loss 1.000%, equity 0.849874, dd after = 15.0126% - BREACH"
+      ],
+      "result": "Seven consecutive maximum-loss round trips are required to breach the 15% ceiling. Six leave drawdown at 14.15%.",
+      "middle_rung_note": "The 0.25 rung is skipped on this particular path, because trade 3 carries drawdown from 7.84% straight to 11.53%. The middle rung is reached by paths made of smaller individual losses, not by the maximum-loss path.",
+      "caveats": [
+        "RA1-3 is not a bound. The trigger is a close and the fill is the next open, so a gap can exceed L and the per-trade loss can exceed f_cap * L. Constitution section 5.2 says so in terms.",
+        "A position that declines without ever printing a close at or below the trigger, then gaps through it, loses more than L.",
+        "Drawdown is measured at session closes because the project holds no intraday data. Every measured drawdown is a lower bound on the true intraday figure, and this is an Attempt 1 limitation that Attempt 2 inherits unchanged.",
+        "Losses need not be consecutive. Interleaved gains raise the high-water mark and reset the ladder, which helps; interleaved small losses can walk the account down through the rungs more slowly than this path, which does not.",
+        "This arithmetic says nothing about profitability. A structure that never breaches the ceiling and never makes money fails S3-C1 and S3-C3, and that is a real and anticipated way for Attempt 2 to fail."
+      ]
+    },
+
+    "disclosed_costs_of_the_architecture": [
+      "Sell-side regulatory fees in SE100-CFG-2001 round UP to the cent, so a sale costs about two cents regardless of size. On a 95%-of-equity position that is roughly 2 bps; on a 50% position roughly 4 bps; on a 12.5% position roughly 16 bps. Lowering exposure therefore RAISES cost per unit of exposure. RA1 pays this drag on every trade and it is not modelled away.",
+      "RA1-1 halves exposure, so it also roughly halves the strategy's participation in the returns that made every Attempt 1 candidate profitable. Attempt 2's research question is precisely whether what remains is still meaningful after costs.",
+      "RA1-1 applies to a defensive Treasury leg as well, reducing its carry contribution.",
+      "RA1-4 forces an exit and a later re-entry on any position held to its horizon; with RA1-7 and RA1-6 that costs at least six sessions out of the market and two round-trip cost charges per cycle.",
+      "RA1-6 keeps the account in cash for five decision sessions after every risk exit, forgoing any recovery that occurs inside that window."
+    ]
+  },
+
+  "families_excluded": {
+    "rule_applied": "A family is excluded prospectively if its specification FORM cannot plausibly produce the 30 closed round trips that S3-C4 requires, unchanged, over a development-window run. Trade frequency is a structural property of a rule, not a performance result.",
+    "disclosure": "This test was applied using Attempt 1's per-candidate closed-trade counts, which are already-exposed evidence. Using them is an adaptation and is disclosed as one. It concerns frequency, not profitability: no excluded family was excluded for making or losing money.",
+    "excluded": [
+      {
+        "family": "trend/momentum",
+        "attempt_1_reference": "SE100-S3-F1-TREND-SMA200, 15 closed trades",
+        "reason": "A single 200-session moving-average crossing rule changes state a small number of times per decade by construction. RA1-3 and RA1-4 would add exits, but the form starts roughly half the required count short and the added exits are themselves what RA1-6 then delays."
+      },
+      {
+        "family": "breakout",
+        "attempt_1_reference": "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25, 13 closed trades",
+        "reason": "A 50-session closing-high entry with a 25-session closing-low exit is a low-frequency channel rule. Same argument as trend/momentum, and S3-C4's lower-frequency exception is not invoked - see A2-INTERP-4."
+      },
+      {
+        "family": "ETF rotation",
+        "attempt_1_reference": "SE100-S3-F5-ROTATION-DUALMOM, 6 closed trades",
+        "reason": "A monthly top-one rotation over four broad ETFs changes its selection rarely. RA1-4 at a one-year horizon would convert a multi-year hold into annual round trips, which is still far short of 30 over the run available once the shortest-lived universe member's inception is respected. Excluding it is the same structural argument applied consistently rather than selectively; keeping it would spend a candidate slot on a specification that is likely to fail S3-C4 whatever its risk architecture does."
+      }
+    ],
+    "consequence_accepted": "Excluding rotation costs Attempt 2 its most naturally diversified candidate. The defensive regime candidate C3 carries the multi-instrument role instead: a risk leg and a Treasury leg, with a genuine third state in cash, and a demonstrated specification frequency well above the floor.",
+    "families_retained": ["pullback", "mean reversion", "defensive regime logic"]
+  },
+
+  "primary_decision_rule": {
+    "gate": "Gate 3, development_admissibility",
+    "criteria_source": "SE100-CFG-3002, sha256 310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d, adopted unchanged, all seven conditions S3-C1 through S3-C7.",
+    "binding_file": "config/stage3_attempt2_gate_criteria_binding.json, which supplies only the S3-C6 applies_to enumeration re-derived for Attempt 2's candidate ids and freezes the admissible_candidate_exists rule. It changes no threshold, predicate, measurement, denominator, boundary, undefined case, or not-evaluable treatment.",
+    "within_candidate": "conjunctive. Every applicable condition must be satisfied, where satisfied means the verdict is MET or NOT_APPLICABLE_BY_CONDITION_TEXT. NOT_MET, NOT_EVALUABLE, NOT_RUN, UNKNOWN, and missing evidence are never satisfied.",
+    "across_candidates": "disjunctive. The stage passes if at least one candidate is admissible.",
+    "per_condition_rows_settle_nothing": "A per-condition rollup row means only that at least one candidate satisfied that condition. It is not a statement that any candidate satisfied all of them. The gate is decided by the admissible_candidate_exists row alone.",
+    "pass_token": "STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "fail_token": "STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+    "token_source": "SE100-CFG-3002 verdict_token_derivation, adopted unchanged. The tokens are derived from the sealed derivation, not restated as literals.",
+    "fail_is_a_deliverable": "A second FAIL is a legitimate outcome of the implementation session and is recorded and kept on disk. Attempt 2's design does not assume it will pass."
+  },
+
+  "secondary_metrics": {
+    "reported_never_gating": [
+      "CAGR, annualised volatility, Sharpe ratio at a 0.00% risk-free rate, exposure fraction, win rate, average win, average loss, longest flat streak",
+      "count of exits by reason: EXIT_LOSS_CONTROL, EXIT_MAX_HOLD, EXIT_SIGNAL, EXIT_SHUTDOWN",
+      "count of blocked entries by reason: NO_ENTRY_ZERO_VOLATILITY, NO_ENTRY_VOLATILITY_FLOOR, NO_ENTRY_SIZE_FLOOR, NO_ENTRY_LOCKOUT, NO_ENTRY_INSUFFICIENT_HISTORY",
+      "realised exposure fraction distribution: the f actually used at each entry, so that RA1-2's effect is visible rather than assumed",
+      "number of decision sessions spent at each RA1-5 ladder rung",
+      "deepest drawdown reached, reported to four decimal places, so that a near-miss is visible as a near-miss"
+    ],
+    "note": "SE100-CFG-3002 reported_but_not_gating is adopted unchanged and extended only with RA1 diagnostics. Extending the non-gating report cannot affect admission."
+  },
+
+  "cost_stress_treatment": {
+    "constitution_ref": "SE100-GOV-0001 section 7: a stressed-cost run at 2x the complete base trading-friction assumption.",
+    "attempt_1_status": "Deferred and recorded as a limitation in the Attempt 1 research report.",
+    "attempt_2_rule": "Each candidate's PRIMARY parameterisation is additionally run at 2x the complete base trading-friction assumption, over the same window, with the research shutdown enforced. Three such runs in total.",
+    "gating": false,
+    "gating_note": "Gate 3's seven hard conditions contain no stressed-cost condition. The stressed run is reported and flagged, never gating. A candidate whose stressed run turns its total return non-positive is recorded with a STRESS_FRAGILE flag in the evidence and is neither rejected nor admitted on that basis at Gate 3.",
+    "why_add_it_at_all": "It satisfies a frozen constitutional requirement that Attempt 1 left open, and it puts the number on disk so that Gate 4 reads it from evidence instead of re-deriving it. Adding non-gating evidence is strictly more disclosure; it adds no acceptance condition and removes none.",
+    "prohibition": "The STRESS_FRAGILE flag may not be used at Gate 3 to admit a candidate that failed a hard condition, nor to reject a candidate that satisfied all of them."
+  },
+
+  "attempt_level_abandonment_rule": "If the implementation session finds that a sealed rule in this file cannot be implemented as written - because it is ambiguous, self-contradictory, or requires information a candidate is not permitted to see - the session stops, records the defect, and issues BLOCKED_BY_INFRASTRUCTURE or INSUFFICIENT_EVIDENCE. It does not choose an interpretation and proceed. A rule that must be interpreted at implementation time is a rule that was not pre-registered, and repairing it after any Attempt 2 number exists would make the specification retrospective.",
+
+  "missing_or_invalid_data_rule": {
+    "missing_indicator": "shared insufficient_history_rule: the target for that session is cash. Never a hold, never a guess, never a carried-forward value.",
+    "missing_bar_for_a_target": "If a target symbol has no visible bar at the decision session, it cannot be the target. C3's defensive leg falls through to cash by its own target_rule when SHY has no visible bar.",
+    "stale_or_delisted": "Handled by the Gate 2 validated engine's existing staleness tracking and delisting handling, unchanged. No Attempt 2 rule overrides them.",
+    "non_positive_adjusted_close": "Not reachable in the Stage 1 normalized dataset, which validated positivity. If it were reachable, VOL20 would be undefined under ENGINE_CONTEXT trapping and the insufficient_history_rule would apply.",
+    "data_repair_prohibited": "No price is imputed, interpolated, back-filled, forward-filled, winsorised, or corrected by this attempt."
+  },
+
+  "post_seal_defect_rule": {
+    "in_this_protocol": "See attempt_level_abandonment_rule. A defect in this file is a blocker, not a patch.",
+    "in_attempt_2_strategy_code": "A defect found in Attempt 2 strategy code BEFORE any result exists is fixed and the fix is recorded. A defect found AFTER a result exists invalidates that result: the result is recorded as INVALIDATED per constitution section 10, the fix is recorded, and the affected runs are re-run in full. Selectively re-running only the runs whose numbers were disliked is prohibited.",
+    "in_frozen_upstream_artifacts": "Reported as a blocker. Never repaired. Constitution and Stage 0 through Stage 2 artifacts are opened read-only.",
+    "no_specification_change": "In no case does a code defect authorise a change to this file. A change to this file after any Attempt 2 result exists creates a new candidate under a new pre-registration and restarts at Gate 3."
+  },
+
+  "partial_or_failed_run_rule": {
+    "neighbour_fails_to_run": "NOT_RUN, which is not a pass. S3-C7 fails for that candidate, adopted unchanged from SE100-CFG-3002.",
+    "primary_fails_to_run": "The candidate is NOT_EVALUABLE and is not admissible. It is not dropped from the report and not replaced.",
+    "stress_run_fails": "Recorded as NOT_RUN in the non-gating evidence. It cannot affect admission in either direction.",
+    "partial_completion": "A run that did not reach the development window end is not a result. It is recorded as NOT_RUN with its failure reason and is re-run in full, never patched or extended.",
+    "no_substitution": "A candidate that cannot be evaluated is never replaced by a different candidate, a different parameterisation, or one of its own neighbours."
+  },
+
+  "reproducibility_requirements": {
+    "determinism": "Every rule in this file is deterministic given the sealed dataset, the sealed cost model, and the sealed calendar. Two runs of the same variant must produce byte-identical equity curves, trade logs, and metrics.",
+    "no_randomness": "No candidate, indicator, sizing rule, or risk rule in this attempt uses randomness of any kind.",
+    "random_seeds": null,
+    "random_seeds_note": "There are none to declare. The field is present and null rather than absent, so that its absence cannot later be read as an omission.",
+    "arithmetic": "Exact Decimal under ENGINE_CONTEXT throughout. No float in any signal, sizing, or risk path. No comparison in floating point and no rounding before a threshold comparison.",
+    "ordering": "Ties broken by ascending ASCII symbol order. No rule depends on dictionary, file, or filesystem order.",
+    "run_record": "Each implementation run appends a record under runs/ carrying its run id, command, repo_state_id, code hashes, config hash, dataset hashes, universe version, date range, holdout state, and exit status."
+  },
+
+  "no_retuning_rule": "No parameter value, threshold, lookback, exposure fraction, volatility target, loss limit, holding period, re-entry delay, ladder rung, universe, or rule in this file may be changed for any reason once this file is sealed. A neighbour is never promoted to primary. A primary is never revised because a neighbour did better. No candidate is re-run at a different parameterisation. Under constitution section 11 any such change is material and creates a NEW candidate that restarts at Gate 3 under a NEW pre-registration; it does not repair a candidate declared here. Safety thresholds may be TIGHTENED without promoting a failed strategy, per section 11, but any such tightening must be versioned and may not be applied to a candidate whose result is already known.",
+
+  "stage_4_remains_prohibited_conditions": [
+    "Stage 4 remains prohibited unless and until Gate 3 is passed by at least one Attempt 2 candidate under the admissible_candidate_exists rule frozen in config/stage3_attempt2_gate_criteria_binding.json.",
+    "A per-condition rollup showing every condition satisfied by SOME candidate does not pass Gate 3 and does not unlock Stage 4.",
+    "A candidate admitted only by treating NOT_EVALUABLE, NOT_RUN, UNKNOWN, or missing evidence as a pass does not pass Gate 3.",
+    "A candidate admitted only after a change to this file, to SE100-CFG-3002, or to any threshold, does not pass Gate 3.",
+    "A STRESS_FRAGILE flag does not block Stage 4 at Gate 3, and a clean stressed run does not unlock it.",
+    "Validation-window access remains prohibited until the frozen gate that authorises it, regardless of any development result.",
+    "The holdout remains SEALED regardless of any development result.",
+    "live_trading_authorized remains false regardless of any development result."
+  ],
+
+  "experiments": [
+    {
+      "experiment_id": "SE100-S3A2-C1-PULLBACK-RA1",
+      "family": "pullback",
+      "family_authorised_by": "SE100-GOV-0001 section 3, which names pullback among the families that may be researched separately in Generation 1.",
+      "hypothesis": "Buying SPY only on short-term weakness inside a long-term uptrend, at half the exposure a fixed-budget rule would take, scaled down further when recent volatility exceeds a 10% annualised target, with an 8% per-position loss control, a 20-session horizon, and an account-level size ladder, earns a positive after-cost total return over the development window without account equity ever falling 15% below its running high-water mark.",
+      "economic_rationale": "A pullback inside an uptrend is a short-horizon liquidity-provision trade: the buyer accepts inventory risk from sellers who are exiting on short-term weakness while the longer trend still holds. Its edge, if any, is small and per-trade, so the number of trades matters more than the size of any one. That makes it the family least damaged by halving exposure, and the one where a per-position loss control is most economically natural: the thesis has a horizon of days, so a position that keeps falling has already falsified the thesis.",
+      "distinction_from_attempt_1": {
+        "shares_signal_form_with": "SE100-S3-F2-PULLBACK-SMA200-SMA10, rejected in Attempt 1",
+        "signal_form_held_fixed_deliberately": "The entry and exit signal is the same rule form. This is the risk-architecture control of Attempt 2: if the return source is held fixed, any difference in risk behaviour is attributable to RA1 rather than to a new signal. It also means C1 is emphatically NOT an independent test of the pullback hypothesis.",
+        "what_is_materially_different": [
+          "Position size: F2 requested a fixed 95% of equity. C1 requests min(f_cap, 0.10 / VOL20) * equity with f_cap from the RA1-5 ladder, ceiling 0.50.",
+          "Per-position loss control: F2 had none. C1 exits at an 8% decline from its entry decision close.",
+          "Maximum holding period: F2 had none. C1 exits after 20 decision sessions held.",
+          "Account de-risk ladder: F2 had none. C1 quarters its exposure ceiling once account drawdown reaches 10%.",
+          "Re-entry delay: F2 had none. C1 waits five decision sessions after a risk exit.",
+          "Robustness neighbours: F2 probed only sma_long and sma_short. C1 spends two of its four neighbours on the new risk machinery."
+        ],
+        "why_this_is_not_a_post_result_parameter_repair": "No signal parameter is changed at all: sma_long stays 200 and sma_short stays 10, the values F2 declared before any result. Nothing about F2's parameterisation is repaired, retuned, or nudged. What changes is the sizing and risk structure, which constitution section 11 makes material and which therefore creates a new candidate restarting at Gate 3.",
+        "counter_argument_recorded": "A reader may reasonably say that reusing a rejected signal and bolting risk controls onto it is a repair of F2 by another name. The response is that the research question is about risk structure, not about signals, and answering it requires holding the signal fixed; and that if this counts as a repair then so would any second attempt at Gate 3, which Attempt 1's own decision report contemplates. The argument is recorded rather than settled, because the honest position is that C1's result is a second look at the same signal on the same data by the same researcher."
+      },
+      "required_inputs": ["SPY daily close", "SPY daily adj_close"],
+      "universe": ["SPY"],
+      "universe_rationale": "The single largest and longest-lived member of the frozen universe. A single-instrument specification, so S3-C6 does not apply by its own text.",
+      "declared_instrument_count": 1,
+      "exclusions": "Every other universe member. No substitution, no expansion.",
+      "eligibility_rules": "Membership of the frozen universe SE100-U1-d4917c2f7f1cd834 and a visible bar at the decision session. No eligibility measurement reads validation-window or holdout-window data.",
+      "warmup_sessions": 200,
+      "warmup_derivation": "Largest lookback across the primary parameterisation and all four neighbours: SMA(200) requires 200 visible bars; the sma_long 150 neighbour requires 150; SMA(10) and the sma_short 20 neighbour require at most 20; VOL20 requires 21. Maximum is 200.",
+      "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+      "features": ["close", "adj_close", "SMA(sma_long) of close", "SMA(sma_short) of close", "VOL20 of adj_close returns"],
+      "primary_parameters": {
+        "sma_long": 200,
+        "sma_short": 10,
+        "f_base": "0.50",
+        "vol_target": "0.10",
+        "vol_floor_fraction": "0.05",
+        "loss_control": "0.08",
+        "max_hold": 20,
+        "reentry_delay": 5,
+        "ladder_rungs": [["0.08", "0.25"], ["0.10", "0.125"]]
+      },
+      "signal_target_rule": "signal_target = SPY if close(t) > SMA(sma_long)(t) AND close(t) < SMA(sma_short)(t), else cash.",
+      "entry_rule": "If the account is flat, no entry is pending, SPY is not in RA1-6 lockout, and signal_target is SPY: emit BUY SPY with the RA1-2 budget. If the RA1-2 budget cannot be formed, emit nothing and record the reason code.",
+      "exit_rule": "If holding SPY, evaluate in RA1 exit_precedence order and emit one full exit: RA1-3 if close(t) <= P_ref * 0.92; else RA1-4 if sessions_held >= max_hold; else EXIT_SIGNAL if signal_target is cash, that is the close has recovered above SMA(sma_short) or the long-term regime has failed.",
+      "maximum_holding_period": 20,
+      "maximum_holding_period_rationale": "One exchange month. The sealed F2 hypothesis describes a pullback resolving inside a long-term uptrend, and F2's own signal exit fires quickly. Twenty sessions is therefore an outer bound that rarely binds rather than the operative exit, and it is not set to reach any trade count.",
+      "position_sizing_rule": "risk_architecture RA1-2, with f_cap from RA1-5 and ceiling f_base from RA1-1.",
+      "maximum_exposure": "f_base = 0.50 of equity at the decision close, reduced by RA1-2 and RA1-5, and further capped by the engine's own 95% exposure cap and 5% cash buffer.",
+      "cash_allocation_rule": "Whatever is not invested is cash. The account is fully in cash whenever flat, in lockout, blocked by a sizing floor, or the signal target is cash. Cash earns 0.00%, which is the sealed conservative assumption.",
+      "stop_or_shutdown_rule": "RA1-3 at the position level and RA1-5 at the account level. The constitution section 5.1 research shutdown at 15% is enforced by the engine and is not referenced by any candidate rule.",
+      "reentry_rule_after_a_stop": "RA1-6: five decision sessions of lockout on SPY after an EXIT_LOSS_CONTROL or EXIT_MAX_HOLD exit.",
+      "conflict_rule": "RA1-7, the shared flat_first_rule.",
+      "permitted_parameter_grid": {
+        "sma_long": [150, 200],
+        "sma_short": [10, 20],
+        "vol_target": ["0.08", "0.10"],
+        "f_base": ["0.35", "0.50"]
+      },
+      "grid_note": "Read under permitted_parameter_grid_semantics: each key's list is exactly the primary value plus the neighbour values for that key, and the four keys present are exactly the four the neighbours vary. No search is performed.",
+      "robustness_neighbours": [
+        {"sma_long": 150},
+        {"sma_short": 20},
+        {"vol_target": "0.08"},
+        {"f_base": "0.35"}
+      ],
+      "neighbour_note": "Exactly four, as S3-C7 requires. Two probe the signal and two probe the new risk machinery, because the risk machinery is what Attempt 2 changed and is therefore what a sign-stability test most needs to cover. loss_control and max_hold are not probed by a neighbour; they are diagnosed instead by the exit-reason counts in secondary_metrics, which report directly how often each fired. The allocation is declared here, before any result, so it cannot be rearranged afterwards.",
+      "max_variants": 5,
+      "primary_metric": "total return after base costs over the candidate's development-window run",
+      "secondary_metrics": "the shared secondary_metrics block",
+      "gate_3_conditions_applied": {
+        "S3-C1_total_return": "positive, predicate total_return > 0, unchanged",
+        "S3-C2_maximum_drawdown": "no worse than 15%, predicate max_drawdown <= 0.15, inclusive boundary, unchanged",
+        "S3-C3_profit_factor": "at least 1.10, predicate profit_factor >= 1.10, unchanged",
+        "S3-C4_minimum_trade_count": "at least 30 closed trades, predicate closed_trades >= 30, unchanged, lower-frequency exception NOT invoked",
+        "S3-C5_best_trade_removal": "both removals - largest equity multiple and largest absolute P&L - must leave total return above 0%, unchanged",
+        "S3-C6_concentration": "NOT_APPLICABLE_BY_CONDITION_TEXT, declared instrument count 1, per the sealed single_instrument_treatment",
+        "S3-C7_neighbour_stability": "sign of net return equal to the primary's for all four neighbours, zero matches nothing, unchanged"
+      },
+      "rejection_conditions": "Any applicable condition returning NOT_MET, NOT_EVALUABLE, or NOT_RUN. Admission requires all applicable conditions satisfied within this candidate.",
+      "not_evaluable_conditions": [
+        "equity curve with fewer than two points - S3-C1",
+        "no closed trades - S3-C3 null profit factor, NOT_EVALUABLE and fails",
+        "fewer than two closed trades - S3-C5",
+        "any neighbour that fails to run - S3-C7 NOT_RUN and fails",
+        "primary run that fails or does not reach the development window end - candidate NOT_EVALUABLE"
+      ],
+      "retrospective_change_prohibited": "No rule, parameter, or threshold above may be changed after this file is sealed. See no_retuning_rule."
+    },
+
+    {
+      "experiment_id": "SE100-S3A2-C2-MEANREV-RA1",
+      "family": "mean reversion",
+      "family_authorised_by": "SE100-GOV-0001 section 3, which names mean reversion among the families that may be researched separately in Generation 1.",
+      "hypothesis": "SPY reverts over a two-to-five session horizon, and entering after a 2-period Wilder RSI below 10 at volatility-scaled exposure no greater than half of equity, exiting once the close is back above its 5-session average or at an 8% loss or after 10 sessions held, earns a positive after-cost total return over the development window without account equity ever falling 15% below its running high-water mark.",
+      "economic_rationale": "Short-horizon mean reversion in a broad index ETF is compensation for absorbing forced selling. The compensation is small per trade and arrives quickly, so the strategy's exposure to a sustained decline is a function of how long it is willing to hold, not of how strong its signal was. That makes it the family where a time exit is most economically natural, and the one that spends the least time in the market - the structurally lowest-risk way to seek a positive return that Attempt 2 declares.",
+      "distinction_from_attempt_1": {
+        "shares_signal_form_with": "SE100-S3-F3-MEANREV-RSI2, rejected in Attempt 1",
+        "signal_form_held_fixed_deliberately": "Same reason as C1: the research question is about risk structure. C2 is not an independent test of the mean-reversion hypothesis.",
+        "what_is_materially_different": [
+          "Position size: F3 requested a fixed 95% of equity. C2 requests min(f_cap, 0.10 / VOL20) * equity with ceiling 0.50.",
+          "Per-position loss control: F3 had none, explicitly. C2 exits at an 8% decline from its entry decision close.",
+          "Maximum holding period: F3 had none, explicitly. C2 exits after 10 decision sessions held.",
+          "Account de-risk ladder and re-entry delay: F3 had neither.",
+          "Robustness neighbours: two of C2's four probe the risk machinery."
+        ],
+        "the_sealed_sentence_this_candidate_must_answer": "SE100-CFG-3001 experiment SE100-S3-F3-MEANREV-RSI2 exit_rule states: 'There is no stop, no time exit, and no profit target: adding one would be a rule chosen after the fact.'",
+        "answer": "That sentence is correct about F3 and remains correct about F3 permanently. Adding a stop or a time exit TO F3 after seeing F3's drawdown would be exactly the prohibited post-result repair. Declaring a stop and a time exit prospectively in a NEW candidate that restarts at Gate 3 under a new pre-registration is the route constitution section 11 provides, and it is the route taken. F3 is not edited, not superseded, and not re-run. The distinction is real but it is thin, and it is recorded here rather than glossed: the reason a stop and a time exit are being declared at all is that Attempt 1 showed unstopped, untimed mean reversion breached the ceiling. That is an adaptation, and it is disclosed as one.",
+        "why_this_is_not_a_post_result_parameter_repair": "No signal parameter is changed: rsi_period stays 2, rsi_entry_below stays 10, exit_sma stays 5, the values F3 declared before any result.",
+        "counter_argument_recorded": "The same counter-argument as C1 applies with more force here, because F3's sealed text names the exact additions C2 makes. A reader should treat C2's result as the second look it is."
+      },
+      "required_inputs": ["SPY daily close", "SPY daily adj_close"],
+      "universe": ["SPY"],
+      "universe_rationale": "Single instrument; S3-C6 does not apply by its own text.",
+      "declared_instrument_count": 1,
+      "exclusions": "Every other universe member.",
+      "eligibility_rules": "Membership of the frozen universe and a visible bar at the decision session. No eligibility measurement reads validation-window or holdout-window data.",
+      "warmup_sessions": 101,
+      "warmup_derivation": "The sealed RSI definition declares warmup_changes 100, so it requires 101 visible closes; the rsi_period 2 primary and any neighbour within the grid require no more. SMA(exit_sma) requires at most 10 under the exit_sma 10 neighbour. VOL20 requires 21. Maximum is 101.",
+      "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+      "features": ["close", "adj_close", "RSI(rsi_period) Wilder as defined in indicator_definitions", "SMA(exit_sma) of close", "VOL20 of adj_close returns"],
+      "primary_parameters": {
+        "rsi_period": 2,
+        "rsi_entry_below": 10,
+        "exit_sma": 5,
+        "f_base": "0.50",
+        "vol_target": "0.10",
+        "vol_floor_fraction": "0.05",
+        "loss_control": "0.08",
+        "max_hold": 10,
+        "reentry_delay": 5,
+        "ladder_rungs": [["0.08", "0.25"], ["0.10", "0.125"]]
+      },
+      "signal_target_rule": "If flat: signal_target = SPY if RSI(rsi_period)(t) < rsi_entry_below, else cash. If holding SPY: signal_target = cash if close(t) > SMA(exit_sma)(t), else SPY. The account's own position, supplied by the engine's DecisionContext, is the only thing that selects between the two forms, and it is not future information.",
+      "entry_rule": "If the account is flat, no entry is pending, SPY is not in RA1-6 lockout, and signal_target is SPY: emit BUY SPY with the RA1-2 budget.",
+      "exit_rule": "If holding SPY, evaluate in RA1 exit_precedence order and emit one full exit: RA1-3 if close(t) <= P_ref * 0.92; else RA1-4 if sessions_held >= max_hold; else EXIT_SIGNAL if close(t) > SMA(exit_sma)(t).",
+      "maximum_holding_period": 10,
+      "maximum_holding_period_rationale": "Two exchange weeks. The sealed F3 hypothesis states a two-to-five session reversion horizon, so 10 sessions is double the upper end of the thesis's own horizon: an outer bound that does not bind in the thesis's terms. It is not set to reach any trade count.",
+      "position_sizing_rule": "risk_architecture RA1-2, with f_cap from RA1-5 and ceiling f_base from RA1-1.",
+      "maximum_exposure": "f_base = 0.50 of equity at the decision close, reduced by RA1-2 and RA1-5, and further capped by the engine.",
+      "cash_allocation_rule": "Whatever is not invested is cash, at 0.00%. This candidate is expected to be in cash most of the time by construction; that is the point of it and not a defect.",
+      "stop_or_shutdown_rule": "RA1-3 at the position level, RA1-5 at the account level, the engine-enforced section 5.1 shutdown at 15% unreferenced by any candidate rule.",
+      "reentry_rule_after_a_stop": "RA1-6: five decision sessions of lockout on SPY after an EXIT_LOSS_CONTROL or EXIT_MAX_HOLD exit. Because this candidate's entry condition is transient by construction, the lockout expires long before the condition necessarily recurs.",
+      "conflict_rule": "RA1-7, the shared flat_first_rule.",
+      "permitted_parameter_grid": {
+        "rsi_period": [2],
+        "rsi_entry_below": [5, 10],
+        "exit_sma": [5, 10],
+        "vol_target": ["0.08", "0.10"],
+        "f_base": ["0.50"],
+        "loss_control": ["0.08", "0.12"]
+      },
+      "grid_note": "Read under permitted_parameter_grid_semantics. Six keys appear: four are the keys the neighbours vary, and two - rsi_period and f_base - are single-value PINS recording that this candidate deliberately does not probe them. f_base is pinned here and probed in C1 and C3; loss_control is probed here and single-valued there. That asymmetry is the neighbour choice described in neighbour_note, declared before any result.",
+      "robustness_neighbours": [
+        {"rsi_entry_below": 5},
+        {"exit_sma": 10},
+        {"vol_target": "0.08"},
+        {"loss_control": "0.12"}
+      ],
+      "neighbour_note": "Exactly four, as S3-C7 requires. Two probe the signal - a stricter entry threshold and a slower exit average - and two probe the risk machinery. The risk pair differs from C1's and C3's deliberately: this is the candidate whose sealed Attempt 1 counterpart explicitly declared it had no stop, so the loss control is the single most consequential addition here and a sign-stability test that did not probe it would be testing the wrong thing. loss_control 0.12 loosens the control rather than tightening it, so the neighbour tests whether the candidate's sign depends on the specific loss limit rather than on a level that flatters it. Declared before any result.",
+      "max_variants": 5,
+      "primary_metric": "total return after base costs over the candidate's development-window run",
+      "secondary_metrics": "the shared secondary_metrics block",
+      "gate_3_conditions_applied": {
+        "S3-C1_total_return": "positive, unchanged",
+        "S3-C2_maximum_drawdown": "no worse than 15%, inclusive, unchanged",
+        "S3-C3_profit_factor": "at least 1.10, unchanged",
+        "S3-C4_minimum_trade_count": "at least 30 closed trades, unchanged, exception NOT invoked",
+        "S3-C5_best_trade_removal": "both removals must leave total return above 0%, unchanged",
+        "S3-C6_concentration": "NOT_APPLICABLE_BY_CONDITION_TEXT, declared instrument count 1",
+        "S3-C7_neighbour_stability": "sign equal to the primary's for all four neighbours, unchanged"
+      },
+      "rejection_conditions": "Any applicable condition returning NOT_MET, NOT_EVALUABLE, or NOT_RUN.",
+      "not_evaluable_conditions": [
+        "equity curve with fewer than two points - S3-C1",
+        "no closed trades - S3-C3",
+        "fewer than two closed trades - S3-C5",
+        "any neighbour that fails to run - S3-C7",
+        "primary run that fails or does not reach the development window end - candidate NOT_EVALUABLE"
+      ],
+      "retrospective_change_prohibited": "No rule, parameter, or threshold above may be changed after this file is sealed."
+    },
+
+    {
+      "experiment_id": "SE100-S3A2-C3-DEFENSIVE-RA1",
+      "family": "defensive regime logic",
+      "family_authorised_by": "SE100-GOV-0001 section 3, which names defensive regime logic among the families that may be researched separately in Generation 1.",
+      "hypothesis": "A 200-session regime rule on SPY that routes to short-duration Treasuries rather than to cash when the regime fails, run at volatility-scaled exposure no greater than half of equity with an 8% per-position loss control, an annual re-underwriting horizon, and an account-level size ladder, earns a positive after-cost total return over the development window without account equity ever falling 15% below its running high-water mark, and does so without either instrument contributing more than half of total profit.",
+      "economic_rationale": "A regime rule reduces risk by leaving the risk asset, and a defensive leg makes the time out of the risk asset productive rather than idle. Under RA1 the defensive leg does something additional and more interesting: it is the one holding whose volatility is far below the 10% target, so RA1-2's ceiling rather than its volatility term binds, which makes the exposure ladder and not the volatility estimate the operative constraint on the defensive side. That is a genuine structural difference in how the same architecture behaves on two instruments, and it is why this candidate is worth a slot.",
+      "distinction_from_attempt_1": {
+        "shares_signal_form_with": "SE100-S3-F6-DEFENSIVE-SMA200-SHY, rejected in Attempt 1",
+        "signal_form_held_fixed_deliberately": "Same reason as C1 and C2. C3 is not an independent test of the defensive regime hypothesis.",
+        "what_is_materially_different": [
+          "Position size: F6 requested a fixed 95% of equity for both legs. C3 requests min(f_cap, 0.10 / VOL20) * equity with ceiling 0.50, measured on the TARGET symbol.",
+          "Per-position loss control, maximum holding period, account de-risk ladder, and re-entry delay: F6 had none of the four.",
+          "Robustness neighbours: F6 spent all four on sma_long and defensive_symbol. C3 spends two on the risk machinery and keeps two of F6's, including the cash-leg neighbour.",
+          "Warm-up and therefore run window: F6 declared 250 because of a 250-lookback neighbour; C3 declares 200 because its neighbour set tops out at 200. The windows differ and the two candidates are not a matched comparison."
+        ],
+        "why_this_is_not_a_post_result_parameter_repair": "No signal parameter is changed: sma_long stays 200, risk_symbol stays SPY, defensive_symbol stays SHY, the values F6 declared before any result. In particular the defensive leg is NOT switched to IEF, which would be a signal-source change unrelated to the risk thesis and would make the comparison of architectures less clean.",
+        "counter_argument_recorded": "As for C1 and C2. C3's result is a second look at F6's signal on the same data by the same researcher."
+      },
+      "required_inputs": ["SPY daily close", "SPY daily adj_close", "SHY daily close", "SHY daily adj_close"],
+      "universe": ["SPY", "SHY"],
+      "universe_rationale": "One risk asset and one defensive asset. SHY is the shortest-duration Treasury fund in the frozen universe, so the defensive leg carries the least interest-rate risk available. Multi-instrument, so S3-C6 applies. This is the only Attempt 2 candidate for which it does, which is why a multi-instrument candidate was kept in a three-candidate set.",
+      "declared_instrument_count": 2,
+      "exclusions": "Every other universe member.",
+      "eligibility_rules": "Membership of the frozen universe and a visible bar at the decision session. The run start rule requires BOTH declared symbols to have at least warmup_sessions visible bars inside the development window, so this candidate's run begins later than C1's and C2's, governed by SHY's inception. No eligibility measurement reads validation-window or holdout-window data.",
+      "warmup_sessions": 200,
+      "warmup_derivation": "Largest lookback across primary and neighbours: SMA(200) requires 200; the sma_long 150 neighbour requires 150; VOL20 requires 21. Maximum is 200. The declared universe governs the run start for every variant, so the defensive_symbol null neighbour runs over the same window as the primary rather than over the longer window a SPY-only universe would allow.",
+      "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+      "features": ["close of SPY", "SMA(sma_long) of SPY close", "adj_close of the target symbol", "VOL20 of the target symbol's adj_close returns"],
+      "primary_parameters": {
+        "sma_long": 200,
+        "risk_symbol": "SPY",
+        "defensive_symbol": "SHY",
+        "f_base": "0.50",
+        "vol_target": "0.10",
+        "vol_floor_fraction": "0.05",
+        "loss_control": "0.08",
+        "max_hold": 252,
+        "reentry_delay": 5,
+        "ladder_rungs": [["0.08", "0.25"], ["0.10", "0.125"]]
+      },
+      "signal_target_rule": "signal_target = risk_symbol if close(risk_symbol, t) > SMA(sma_long)(risk_symbol, t); else the defensive_symbol if it is non-null and has a visible bar at t; else cash. The regime is read from the risk symbol only: the defensive leg is a destination, never a signal.",
+      "entry_rule": "If the account is flat, no entry is pending, the signal_target symbol is not in RA1-6 lockout, and signal_target is a symbol rather than cash: emit BUY that symbol with the RA1-2 budget, where VOL20 is measured on THAT symbol. If the target symbol is in lockout, emit nothing with reason NO_ENTRY_LOCKOUT; the candidate does not substitute the other leg, because substituting would let a lockout on one instrument silently change the strategy's asset allocation.",
+      "exit_rule": "If holding a symbol, evaluate in RA1 exit_precedence order and emit one full exit: RA1-3 if close(held, t) <= P_ref * 0.92; else RA1-4 if sessions_held >= max_hold; else EXIT_SIGNAL if the held symbol is not the signal_target. The entry into the new target follows on a later session under RA1-7.",
+      "maximum_holding_period": 252,
+      "maximum_holding_period_rationale": "One exchange year, the natural re-underwriting horizon for a regime thesis whose signal lookback is 200 sessions: the position is reviewed after a period longer than the lookback that selected it. It is the mildest holding bound of the three candidates and is declared as an outer bound, not as a trade generator.",
+      "maximum_holding_period_disclosed_cost": "A position held to 252 sessions exits, waits five sessions in lockout, and re-enters, so a continuously-held leg pays two round-trip cost charges and at least six sessions out of the market per year. On a defensive Treasury leg that drag is a meaningful fraction of the leg's carry, and it is charged rather than modelled away.",
+      "position_sizing_rule": "risk_architecture RA1-2, with VOL20 measured on the target symbol, f_cap from RA1-5, and ceiling f_base from RA1-1. RA1-1 applies to the defensive leg as well; see RA1-1 defensive_leg_note.",
+      "maximum_exposure": "f_base = 0.50 of equity at the decision close for either leg, reduced by RA1-2 and RA1-5, and further capped by the engine.",
+      "cash_allocation_rule": "Whatever is not invested is cash at 0.00%. Under RA1-1 the account holds about half cash even when fully allocated to a leg, and it is entirely in cash whenever flat, in lockout, blocked by a sizing floor, or when the regime has failed and the defensive symbol has no visible bar.",
+      "stop_or_shutdown_rule": "RA1-3 at the position level - and it applies to the defensive leg too, where it is expected almost never to fire, which is a fact the exit-reason counts will show rather than assert. RA1-5 at the account level. The engine-enforced section 5.1 shutdown at 15%, unreferenced by any candidate rule.",
+      "reentry_rule_after_a_stop": "RA1-6: five decision sessions of lockout on the exited symbol after an EXIT_LOSS_CONTROL or EXIT_MAX_HOLD exit. The lockout is per symbol and does not transfer to the other leg, but the candidate does not substitute the other leg for a locked-out target either.",
+      "conflict_rule": "RA1-7, the shared flat_first_rule. Every regime switch costs one full session out of the market.",
+      "permitted_parameter_grid": {
+        "sma_long": [150, 200],
+        "defensive_symbol": ["SHY", null],
+        "vol_target": ["0.08", "0.10"],
+        "f_base": ["0.35", "0.50"]
+      },
+      "grid_note": "Read under permitted_parameter_grid_semantics: four keys, exactly the four the neighbours vary. IEF is NOT in the grid: F6 probed it, and adding a second Treasury duration here would probe the signal source rather than the risk architecture. The defensive_symbol neighbour is null, which degenerates the candidate to cash on regime failure; that is the comparison worth having and a third symbol is not.",
+      "robustness_neighbours": [
+        {"sma_long": 150},
+        {"defensive_symbol": null},
+        {"vol_target": "0.08"},
+        {"f_base": "0.35"}
+      ],
+      "neighbour_note": "Exactly four, as S3-C7 requires. Two probe the signal and two probe the risk machinery. A null defensive_symbol means the defensive leg is cash, adopted from F6's neighbour set for the same reason F6 gave: it isolates whether the defensive leg contributes anything, and under RA1 the question is sharper because RA1-1 already holds half the account in cash. That neighbour still runs over the primary's window because the run start rule reads the DECLARED universe.",
+      "max_variants": 5,
+      "primary_metric": "total return after base costs over the candidate's development-window run",
+      "secondary_metrics": "the shared secondary_metrics block, plus per-instrument closed-trade P&L, which S3-C6 requires as evidence for this candidate",
+      "gate_3_conditions_applied": {
+        "S3-C1_total_return": "positive, unchanged",
+        "S3-C2_maximum_drawdown": "no worse than 15%, inclusive, unchanged",
+        "S3-C3_profit_factor": "at least 1.10, unchanged",
+        "S3-C4_minimum_trade_count": "at least 30 closed trades, unchanged, exception NOT invoked",
+        "S3-C5_best_trade_removal": "both removals must leave total return above 0%, unchanged",
+        "S3-C6_concentration": "APPLIES. Declared instrument count 2. Predicate: maximum single-instrument share of total closed-trade P&L <= 0.50, evaluated only when total closed-trade P&L is strictly positive; otherwise NOT_EVALUABLE. Unchanged from SE100-CFG-3002.",
+        "S3-C7_neighbour_stability": "sign equal to the primary's for all four neighbours, unchanged"
+      },
+      "s3_c6_disclosed_risk": "This is the condition most likely to reject C3 even if the risk architecture works. A regime strategy whose risk leg is an equity index and whose defensive leg is a short-duration Treasury fund has no reason to split profit evenly between them, and F6 failed this condition in Attempt 1. It is declared here, before any result, that C3 was kept in the candidate set with that failure mode understood and accepted, because a three-candidate set with no multi-instrument candidate would leave S3-C6 not-applicable for every candidate and would answer less of the research question.",
+      "rejection_conditions": "Any applicable condition returning NOT_MET, NOT_EVALUABLE, or NOT_RUN.",
+      "not_evaluable_conditions": [
+        "equity curve with fewer than two points - S3-C1",
+        "no closed trades - S3-C3",
+        "fewer than two closed trades - S3-C5",
+        "total closed-trade P&L zero or negative - S3-C6 NOT_EVALUABLE, moot because S3-C1 has already failed such a candidate",
+        "any neighbour that fails to run - S3-C7",
+        "primary run that fails or does not reach the development window end - candidate NOT_EVALUABLE"
+      ],
+      "retrospective_change_prohibited": "No rule, parameter, or threshold above may be changed after this file is sealed."
+    }
+  ],
+
+  "benchmarks": {
+    "constitution_ref": "section 4",
+    "spy_total_return": "SPY total return over each candidate's own run window, computed by the Gate 2 validated benchmark calculation. The opportunity-cost benchmark.",
+    "spy_tradable_buy_and_hold": "A SPY buy-and-hold account under the same base cost model over each candidate's own run window, reported both with the research shutdown enforced and with it disabled and explicitly labelled a benchmark reference account, exactly as Stage 2 and Attempt 1 reported it.",
+    "cash": "0.00% annual. Constitution section 4 permits a 3-month Treasury-bill proxy where reliable point-in-time data exist, otherwise 0% explicitly labelled conservative. No T-bill series was acquired in Stage 1, so 0% is used. It makes the cash hurdle easier to beat, which is generous to a strategy and conservative for judging cash; the direction is recorded.",
+    "do_nothing": "Flat equity at USD 100.00, zero trades.",
+    "beating_spy_not_mandatory": "Constitution section 4: 'Beating SPY is not mandatory if a strategy materially reduces drawdown, but passing requires positive after-cost performance and better risk-adjusted performance than cash.' This is the clause under which Attempt 2's thesis is constitutionally coherent: a structurally lower-risk strategy is permitted to earn less than SPY. Neither benchmark is a Gate 3 hard condition; both are reported for every candidate and every neighbour so that a later gate reads them from evidence rather than re-deriving them.",
+    "no_benchmark_becomes_a_gate": "Adding no benchmark and altering no benchmark changes Gate 3's seven conditions. Nothing in this block gates anything."
+  },
+
+  "explicit_non_authorizations": [
+    "No data of any kind is downloaded, purchased, or acquired by this attempt. Every price comes from the Stage 1 normalized dataset already on disk.",
+    "No validation-window or holdout-window data is read. The window guard raises WindowViolation structurally rather than relying on discipline.",
+    "No frozen artifact is edited, regenerated, replaced, superseded, or re-encoded. Attempt 1's SE100-CFG-3001, SE100-CFG-3002, its pre-registration, its decision record, its manifest, its checksum records, and its run record are read-only and byte-for-byte unchanged.",
+    "No Attempt 1 candidate is re-run, re-parameterised, repaired, or combined with an Attempt 2 candidate.",
+    "No Gate 3 condition, threshold, denominator, predicate, boundary, undefined case, or not-evaluable treatment is changed. The 15% maximum-drawdown ceiling is unchanged.",
+    "No candidate is combined with any other candidate. Constitution section 8 prohibits combination until each component has an independent verdict, and no Attempt 2 component has one.",
+    "No machine learning, no optimiser, no search over any parameter grid, and no fit of any kind.",
+    "No fundamental, earnings, or intraday data is introduced. None exists in this project.",
+    "No paper order, no live order, no cancel, no replace, no liquidation, no broker call, and no unattended scheduling.",
+    "No Alpaca credential is read, and no credential presence is tested by this attempt.",
+    "No strategy is selected as a winner, and no expected income, profit, or return is claimed for any period, past or future.",
+    "live_trading_authorized remains false."
+  ],
+
+  "live_trading_authorized": false
+}

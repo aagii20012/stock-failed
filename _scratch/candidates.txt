@@ -1,0 +1,244 @@
+====== SE100-S3A2-C1-PULLBACK-RA1 ======
+{
+  "experiment_id": "SE100-S3A2-C1-PULLBACK-RA1",
+  "family": "pullback",
+  "hypothesis": "Buying SPY only on short-term weakness inside a long-term uptrend, at half the exposure a fixed-budget rule would take, scaled down further when recent volatility exceeds a 10% annualised target, with an 8% per-position loss control, a 20-session horizon, and an account-level size ladder, earns a positive after-cost total return over the development window without account equity ever falling 15% below its running high-water mark.",
+  "distinction_from_attempt_1": {
+    "shares_signal_form_with": "SE100-S3-F2-PULLBACK-SMA200-SMA10, rejected in Attempt 1",
+    "signal_form_held_fixed_deliberately": "The entry and exit signal is the same rule form. This is the risk-architecture control of Attempt 2: if the return source is held fixed, any difference in risk behaviour is attributable to RA1 rather than to a new signal. It also means C1 is emphatically NOT an independent test of the pullback hypothesis.",
+    "what_is_materially_different": [
+      "Position size: F2 requested a fixed 95% of equity. C1 requests min(f_cap, 0.10 / VOL20) * equity with f_cap from the RA1-5 ladder, ceiling 0.50.",
+      "Per-position loss control: F2 had none. C1 exits at an 8% decline from its entry decision close.",
+      "Maximum holding period: F2 had none. C1 exits after 20 decision sessions held.",
+      "Account de-risk ladder: F2 had none. C1 quarters its exposure ceiling once account drawdown reaches 10%.",
+      "Re-entry delay: F2 had none. C1 waits five decision sessions after a risk exit.",
+      "Robustness neighbours: F2 probed only sma_long and sma_short. C1 spends two of its four neighbours on the new risk machinery."
+    ],
+    "why_this_is_not_a_post_result_parameter_repair": "No signal parameter is changed at all: sma_long stays 200 and sma_short stays 10, the values F2 declared before any result. Nothing about F2's parameterisation is repaired, retuned, or nudged. What changes is the sizing and risk structure, which constitution section 11 makes material and which therefore creates a new candidate restarting at Gate 3.",
+    "counter_argument_recorded": "A reader may reasonably say that reusing a rejected signal and bolting risk controls onto it is a repair of F2 by another name. The response is that the research question is about risk structure, not about signals, and answering it requires holding the signal fixed; and that if this counts as a repair then so would any second attempt at Gate 3, which Attempt 1's own decision report contemplates. The argument is recorded rather than settled, because the honest position is that C1's result is a second look at the same signal on the same data by the same researcher."
+  },
+  "universe": [
+    "SPY"
+  ],
+  "warmup_sessions": 200,
+  "warmup_derivation": "Largest lookback across the primary parameterisation and all four neighbours: SMA(200) requires 200 visible bars; the sma_long 150 neighbour requires 150; SMA(10) and the sma_short 20 neighbour require at most 20; VOL20 requires 21. Maximum is 200.",
+  "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+  "features": [
+    "close",
+    "adj_close",
+    "SMA(sma_long) of close",
+    "SMA(sma_short) of close",
+    "VOL20 of adj_close returns"
+  ],
+  "primary_parameters": {
+    "sma_long": 200,
+    "sma_short": 10,
+    "f_base": "0.50",
+    "vol_target": "0.10",
+    "vol_floor_fraction": "0.05",
+    "loss_control": "0.08",
+    "max_hold": 20,
+    "reentry_delay": 5,
+    "ladder_rungs": [
+      [
+        "0.08",
+        "0.25"
+      ],
+      [
+        "0.10",
+        "0.125"
+      ]
+    ]
+  },
+  "entry_rule": "If the account is flat, no entry is pending, SPY is not in RA1-6 lockout, and signal_target is SPY: emit BUY SPY with the RA1-2 budget. If the RA1-2 budget cannot be formed, emit nothing and record the reason code.",
+  "exit_rule": "If holding SPY, evaluate in RA1 exit_precedence order and emit one full exit: RA1-3 if close(t) <= P_ref * 0.92; else RA1-4 if sessions_held >= max_hold; else EXIT_SIGNAL if signal_target is cash, that is the close has recovered above SMA(sma_short) or the long-term regime has failed.",
+  "maximum_holding_period": 20,
+  "maximum_holding_period_rationale": "One exchange month. The sealed F2 hypothesis describes a pullback resolving inside a long-term uptrend, and F2's own signal exit fires quickly. Twenty sessions is therefore an outer bound that rarely binds rather than the operative exit, and it is not set to reach any trade count.",
+  "robustness_neighbours": [
+    {
+      "sma_long": 150
+    },
+    {
+      "sma_short": 20
+    },
+    {
+      "vol_target": "0.08"
+    },
+    {
+      "f_base": "0.35"
+    }
+  ],
+  "neighbour_note": "Exactly four, as S3-C7 requires. Two probe the signal and two probe the new risk machinery, because the risk machinery is what Attempt 2 changed and is therefore what a sign-stability test most needs to cover. loss_control and max_hold are not probed by a neighbour; they are diagnosed instead by the exit-reason counts in secondary_metrics, which report directly how often each fired. The allocation is declared here, before any result, so it cannot be rearranged afterwards.",
+  "not_evaluable_conditions": [
+    "equity curve with fewer than two points - S3-C1",
+    "no closed trades - S3-C3 null profit factor, NOT_EVALUABLE and fails",
+    "fewer than two closed trades - S3-C5",
+    "any neighbour that fails to run - S3-C7 NOT_RUN and fails",
+    "primary run that fails or does not reach the development window end - candidate NOT_EVALUABLE"
+  ]
+}
+
+====== SE100-S3A2-C2-MEANREV-RA1 ======
+{
+  "experiment_id": "SE100-S3A2-C2-MEANREV-RA1",
+  "family": "mean reversion",
+  "hypothesis": "SPY reverts over a two-to-five session horizon, and entering after a 2-period Wilder RSI below 10 at volatility-scaled exposure no greater than half of equity, exiting once the close is back above its 5-session average or at an 8% loss or after 10 sessions held, earns a positive after-cost total return over the development window without account equity ever falling 15% below its running high-water mark.",
+  "distinction_from_attempt_1": {
+    "shares_signal_form_with": "SE100-S3-F3-MEANREV-RSI2, rejected in Attempt 1",
+    "signal_form_held_fixed_deliberately": "Same reason as C1: the research question is about risk structure. C2 is not an independent test of the mean-reversion hypothesis.",
+    "what_is_materially_different": [
+      "Position size: F3 requested a fixed 95% of equity. C2 requests min(f_cap, 0.10 / VOL20) * equity with ceiling 0.50.",
+      "Per-position loss control: F3 had none, explicitly. C2 exits at an 8% decline from its entry decision close.",
+      "Maximum holding period: F3 had none, explicitly. C2 exits after 10 decision sessions held.",
+      "Account de-risk ladder and re-entry delay: F3 had neither.",
+      "Robustness neighbours: two of C2's four probe the risk machinery."
+    ],
+    "the_sealed_sentence_this_candidate_must_answer": "SE100-CFG-3001 experiment SE100-S3-F3-MEANREV-RSI2 exit_rule states: 'There is no stop, no time exit, and no profit target: adding one would be a rule chosen after the fact.'",
+    "answer": "That sentence is correct about F3 and remains correct about F3 permanently. Adding a stop or a time exit TO F3 after seeing F3's drawdown would be exactly the prohibited post-result repair. Declaring a stop and a time exit prospectively in a NEW candidate that restarts at Gate 3 under a new pre-registration is the route constitution section 11 provides, and it is the route taken. F3 is not edited, not superseded, and not re-run. The distinction is real but it is thin, and it is recorded here rather than glossed: the reason a stop and a time exit are being declared at all is that Attempt 1 showed unstopped, untimed mean reversion breached the ceiling. That is an adaptation, and it is disclosed as one.",
+    "why_this_is_not_a_post_result_parameter_repair": "No signal parameter is changed: rsi_period stays 2, rsi_entry_below stays 10, exit_sma stays 5, the values F3 declared before any result.",
+    "counter_argument_recorded": "The same counter-argument as C1 applies with more force here, because F3's sealed text names the exact additions C2 makes. A reader should treat C2's result as the second look it is."
+  },
+  "universe": [
+    "SPY"
+  ],
+  "warmup_sessions": 101,
+  "warmup_derivation": "The sealed RSI definition declares warmup_changes 100, so it requires 101 visible closes; the rsi_period 2 primary and any neighbour within the grid require no more. SMA(exit_sma) requires at most 10 under the exit_sma 10 neighbour. VOL20 requires 21. Maximum is 101.",
+  "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+  "features": [
+    "close",
+    "adj_close",
+    "RSI(rsi_period) Wilder as defined in indicator_definitions",
+    "SMA(exit_sma) of close",
+    "VOL20 of adj_close returns"
+  ],
+  "primary_parameters": {
+    "rsi_period": 2,
+    "rsi_entry_below": 10,
+    "exit_sma": 5,
+    "f_base": "0.50",
+    "vol_target": "0.10",
+    "vol_floor_fraction": "0.05",
+    "loss_control": "0.08",
+    "max_hold": 10,
+    "reentry_delay": 5,
+    "ladder_rungs": [
+      [
+        "0.08",
+        "0.25"
+      ],
+      [
+        "0.10",
+        "0.125"
+      ]
+    ]
+  },
+  "entry_rule": "If the account is flat, no entry is pending, SPY is not in RA1-6 lockout, and signal_target is SPY: emit BUY SPY with the RA1-2 budget.",
+  "exit_rule": "If holding SPY, evaluate in RA1 exit_precedence order and emit one full exit: RA1-3 if close(t) <= P_ref * 0.92; else RA1-4 if sessions_held >= max_hold; else EXIT_SIGNAL if close(t) > SMA(exit_sma)(t).",
+  "maximum_holding_period": 10,
+  "maximum_holding_period_rationale": "Two exchange weeks. The sealed F3 hypothesis states a two-to-five session reversion horizon, so 10 sessions is double the upper end of the thesis's own horizon: an outer bound that does not bind in the thesis's terms. It is not set to reach any trade count.",
+  "robustness_neighbours": [
+    {
+      "rsi_entry_below": 5
+    },
+    {
+      "exit_sma": 10
+    },
+    {
+      "vol_target": "0.08"
+    },
+    {
+      "loss_control": "0.12"
+    }
+  ],
+  "neighbour_note": "Exactly four, as S3-C7 requires. Two probe the signal - a stricter entry threshold and a slower exit average - and two probe the risk machinery. The risk pair differs from C1's and C3's deliberately: this is the candidate whose sealed Attempt 1 counterpart explicitly declared it had no stop, so the loss control is the single most consequential addition here and a sign-stability test that did not probe it would be testing the wrong thing. loss_control 0.12 loosens the control rather than tightening it, so the neighbour tests whether the candidate's sign depends on the specific loss limit rather than on a level that flatters it. Declared before any result.",
+  "not_evaluable_conditions": [
+    "equity curve with fewer than two points - S3-C1",
+    "no closed trades - S3-C3",
+    "fewer than two closed trades - S3-C5",
+    "any neighbour that fails to run - S3-C7",
+    "primary run that fails or does not reach the development window end - candidate NOT_EVALUABLE"
+  ]
+}
+
+====== SE100-S3A2-C3-DEFENSIVE-RA1 ======
+{
+  "experiment_id": "SE100-S3A2-C3-DEFENSIVE-RA1",
+  "family": "defensive regime logic",
+  "hypothesis": "A 200-session regime rule on SPY that routes to short-duration Treasuries rather than to cash when the regime fails, run at volatility-scaled exposure no greater than half of equity with an 8% per-position loss control, an annual re-underwriting horizon, and an account-level size ladder, earns a positive after-cost total return over the development window without account equity ever falling 15% below its running high-water mark, and does so without either instrument contributing more than half of total profit.",
+  "distinction_from_attempt_1": {
+    "shares_signal_form_with": "SE100-S3-F6-DEFENSIVE-SMA200-SHY, rejected in Attempt 1",
+    "signal_form_held_fixed_deliberately": "Same reason as C1 and C2. C3 is not an independent test of the defensive regime hypothesis.",
+    "what_is_materially_different": [
+      "Position size: F6 requested a fixed 95% of equity for both legs. C3 requests min(f_cap, 0.10 / VOL20) * equity with ceiling 0.50, measured on the TARGET symbol.",
+      "Per-position loss control, maximum holding period, account de-risk ladder, and re-entry delay: F6 had none of the four.",
+      "Robustness neighbours: F6 spent all four on sma_long and defensive_symbol. C3 spends two on the risk machinery and keeps two of F6's, including the cash-leg neighbour.",
+      "Warm-up and therefore run window: F6 declared 250 because of a 250-lookback neighbour; C3 declares 200 because its neighbour set tops out at 200. The windows differ and the two candidates are not a matched comparison."
+    ],
+    "why_this_is_not_a_post_result_parameter_repair": "No signal parameter is changed: sma_long stays 200, risk_symbol stays SPY, defensive_symbol stays SHY, the values F6 declared before any result. In particular the defensive leg is NOT switched to IEF, which would be a signal-source change unrelated to the risk thesis and would make the comparison of architectures less clean.",
+    "counter_argument_recorded": "As for C1 and C2. C3's result is a second look at F6's signal on the same data by the same researcher."
+  },
+  "universe": [
+    "SPY",
+    "SHY"
+  ],
+  "warmup_sessions": 200,
+  "warmup_derivation": "Largest lookback across primary and neighbours: SMA(200) requires 200; the sma_long 150 neighbour requires 150; VOL20 requires 21. Maximum is 200. The declared universe governs the run start for every variant, so the defensive_symbol null neighbour runs over the same window as the primary rather than over the longer window a SPY-only universe would allow.",
+  "signal_timing": "Computed from closes at or before the decision session; earliest fill is the next session's open.",
+  "features": [
+    "close of SPY",
+    "SMA(sma_long) of SPY close",
+    "adj_close of the target symbol",
+    "VOL20 of the target symbol's adj_close returns"
+  ],
+  "primary_parameters": {
+    "sma_long": 200,
+    "risk_symbol": "SPY",
+    "defensive_symbol": "SHY",
+    "f_base": "0.50",
+    "vol_target": "0.10",
+    "vol_floor_fraction": "0.05",
+    "loss_control": "0.08",
+    "max_hold": 252,
+    "reentry_delay": 5,
+    "ladder_rungs": [
+      [
+        "0.08",
+        "0.25"
+      ],
+      [
+        "0.10",
+        "0.125"
+      ]
+    ]
+  },
+  "entry_rule": "If the account is flat, no entry is pending, the signal_target symbol is not in RA1-6 lockout, and signal_target is a symbol rather than cash: emit BUY that symbol with the RA1-2 budget, where VOL20 is measured on THAT symbol. If the target symbol is in lockout, emit nothing with reason NO_ENTRY_LOCKOUT; the candidate does not substitute the other leg, because substituting would let a lockout on one instrument silently change the strategy's asset allocation.",
+  "exit_rule": "If holding a symbol, evaluate in RA1 exit_precedence order and emit one full exit: RA1-3 if close(held, t) <= P_ref * 0.92; else RA1-4 if sessions_held >= max_hold; else EXIT_SIGNAL if the held symbol is not the signal_target. The entry into the new target follows on a later session under RA1-7.",
+  "maximum_holding_period": 252,
+  "maximum_holding_period_rationale": "One exchange year, the natural re-underwriting horizon for a regime thesis whose signal lookback is 200 sessions: the position is reviewed after a period longer than the lookback that selected it. It is the mildest holding bound of the three candidates and is declared as an outer bound, not as a trade generator.",
+  "maximum_holding_period_disclosed_cost": "A position held to 252 sessions exits, waits five sessions in lockout, and re-enters, so a continuously-held leg pays two round-trip cost charges and at least six sessions out of the market per year. On a defensive Treasury leg that drag is a meaningful fraction of the leg's carry, and it is charged rather than modelled away.",
+  "robustness_neighbours": [
+    {
+      "sma_long": 150
+    },
+    {
+      "defensive_symbol": null
+    },
+    {
+      "vol_target": "0.08"
+    },
+    {
+      "f_base": "0.35"
+    }
+  ],
+  "neighbour_note": "Exactly four, as S3-C7 requires. Two probe the signal and two probe the risk machinery. A null defensive_symbol means the defensive leg is cash, adopted from F6's neighbour set for the same reason F6 gave: it isolates whether the defensive leg contributes anything, and under RA1 the question is sharper because RA1-1 already holds half the account in cash. That neighbour still runs over the primary's window because the run start rule reads the DECLARED universe.",
+  "s3_c6_disclosed_risk": "This is the condition most likely to reject C3 even if the risk architecture works. A regime strategy whose risk leg is an equity index and whose defensive leg is a short-duration Treasury fund has no reason to split profit evenly between them, and F6 failed this condition in Attempt 1. It is declared here, before any result, that C3 was kept in the candidate set with that failure mode understood and accepted, because a three-candidate set with no multi-instrument candidate would leave S3-C6 not-applicable for every candidate and would answer less of the research question.",
+  "not_evaluable_conditions": [
+    "equity curve with fewer than two points - S3-C1",
+    "no closed trades - S3-C3",
+    "fewer than two closed trades - S3-C5",
+    "total closed-trade P&L zero or negative - S3-C6 NOT_EVALUABLE, moot because S3-C1 has already failed such a candidate",
+    "any neighbour that fails to run - S3-C7",
+    "primary run that fails or does not reach the development window end - candidate NOT_EVALUABLE"
+  ]
+}
+

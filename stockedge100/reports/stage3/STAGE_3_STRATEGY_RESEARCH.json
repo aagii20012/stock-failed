@@ -1,0 +1,1018 @@
+{
+  "project": "StockEdge100",
+  "stage": "STAGE_3_STRATEGY_RESEARCH",
+  "generation": 1,
+  "timestamp_utc": "2026-08-10T10:16:22Z",
+  "verdict": "FAIL \u2014 STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+  "gate": {
+    "constitution_gate_id": 3,
+    "name": "development_admissibility"
+  },
+  "gate_passed": false,
+  "constitution": {
+    "document_id": "SE100-GOV-0001",
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "modified_by_this_stage": false,
+    "freeze_verification_working_directory": "stockedge100/governance",
+    "freeze_verified": true,
+    "freeze_verification": {
+      "STAGE_0_CONSTITUTION.md": {
+        "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "match": "True"
+      },
+      "STAGE_0_CONSTITUTION.json": {
+        "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "match": "True"
+      }
+    }
+  },
+  "verdict_token_derivation": {
+    "constitution_json_gate_3": {
+      "fail_result": "STRATEGY_REJECTED_IN_DEVELOPMENT",
+      "pass_result": null
+    },
+    "chosen_fail_reason_code": "STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+    "unused_pass_reason_code": "STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "why": "Section 10 fixes the primary verdict vocabulary and requires a stage-specific reason code alongside it. Gate 3 supplies only a fail token; both tokens were sealed in config/stage3_gate_criteria.json before any candidate was run and are read from the evidence here rather than written as literals.",
+    "issued": "FAIL \u2014 STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT"
+  },
+  "preregistration": {
+    "document_id": "SE100-GOV-0006",
+    "declared_utc": "2026-08-09T13:25:21Z",
+    "run_id": "SE100-R-20260809T132521Z",
+    "sealed_before_any_strategy_code": true,
+    "strategy_modules_present_at_seal_time": 0,
+    "strategy_output_files_present_at_seal_time": 0,
+    "candidates_declared": 6,
+    "candidate_ids": [
+      "SE100-S3-F1-TREND-SMA200",
+      "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+      "SE100-S3-F3-MEANREV-RSI2",
+      "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+      "SE100-S3-F5-ROTATION-DUALMOM",
+      "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+    ],
+    "declared_runs": 30,
+    "revisions_permitted": 0,
+    "sealed_files": {
+      "config/stage3_strategy_protocol.json": {
+        "sha256": "04dbe3fa8c6b2a9e725a66d24f5dc0a3a7e3567e70d38bfd2e96869cc6e169b6"
+      },
+      "config/stage3_gate_criteria.json": {
+        "sha256": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d"
+      },
+      "governance/STAGE_3_PREREGISTRATION.md": {
+        "sha256": "a257e862377938d42584147d3aedb1a2ba493b0f9f1f22f079745b953314526f"
+      }
+    },
+    "enforcement": "stockedge100.strategies.config.load_stage3_config recomputes all three digests on every load and raises ConfigViolation on drift, so a silently edited threshold stops the harness rather than changing a verdict; the harness also counts executed runs against the sealed declared_runs and refuses a mismatch"
+  },
+  "configs": {
+    "config/stage3_strategy_protocol.json": "04dbe3fa8c6b2a9e725a66d24f5dc0a3a7e3567e70d38bfd2e96869cc6e169b6",
+    "config/stage3_gate_criteria.json": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+    "config/stage2_cost_model.json": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+    "config_hash_refers_to": "config/stage3_strategy_protocol.json"
+  },
+  "admissibility_evidence": {
+    "evidence_file": "reports/stage3/STAGE_3_DEVELOPMENT_ADMISSIBILITY.json",
+    "artifact_id": "SE100-EVID-3001",
+    "evidence_digest": "561628d2f058d162c785bd30803df5b1762a4168af5037ee95d8b58bce896874",
+    "evidence_digest_covers": "every field of this file except generated_utc and evidence_digest, as canonical JSON",
+    "generated_utc": "2026-08-09T14:37:30Z",
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage3_evidence",
+    "window": {
+      "window": "development",
+      "start": "1993-01-29",
+      "end": "2021-07-31",
+      "declared": {
+        "universe": "SE100-U1-d4917c2f7f1cd834 (governance/STAGE_1_UNIVERSE.json, FROZEN, 34 ETFs)",
+        "cost_model": "SE100-CFG-2001 (config/stage2_cost_model.json), BASE scenario, unmodified",
+        "engine": "validated at Gate 2, PASS \u2014 STAGE_2_BACKTEST_ENGINE_VALIDATED",
+        "window": "development only, bounds read from governance/STAGE_1_HOLDOUT_LOCK.json and never restated here",
+        "validation_window_state": "LOCKED",
+        "holdout_window_state": "SEALED"
+      },
+      "validation_and_holdout_read": false,
+      "note": "Every run below is bounded by the Stage 1 holdout lock through ResearchWindow.check; a read outside this window raises WindowViolation rather than returning a price."
+    },
+    "cost_model": {
+      "note": "Base costs only. The sealed protocol runs Stage 3 under the base scenario; the stressed scenario belongs to the Gate 4 robustness work.",
+      "scenario": "BASE",
+      "stress_multiplier": "1",
+      "commission_per_order_usd": "0.00",
+      "half_spread_bps": "2.5",
+      "slippage_bps": "2.5",
+      "price_friction_bps_per_side": "5.0",
+      "sec_section_31_fee_rate": "0.0000278",
+      "finra_taf_per_share_usd": "0.000166",
+      "finra_taf_cap_usd": "8.30",
+      "starting_equity_usd": "100.00",
+      "max_gross_exposure_fraction": "0.95",
+      "research_shutdown_drawdown": "0.15"
+    },
+    "iteration_budget": {
+      "candidates": 6,
+      "runs_per_candidate": "one primary run plus four robustness-neighbour runs",
+      "total_declared_runs": 30,
+      "revisions_permitted": 0,
+      "meaning": "Each candidate is run once at its primary parameterisation. No parameter is changed, no rule is amended, no symbol is added or removed, and no candidate is re-run after any result is seen. A candidate that fails is reported as failed. Constitution section 11: a change to universe, timing, cost, signal, parameter range, metric, threshold, or data partition is material, and a material change creates a NEW candidate that restarts at Gate 3 \u2014 it does not repair this one.",
+      "neighbour_runs_are_not_iterations": "The four neighbour runs per candidate exist solely to evaluate the Gate 3 condition on sign stability under reasonable neighbouring parameter values. They are never used to select a parameterisation, are never promoted to primary, and their metrics other than the sign of net return are reported but carry no gate weight.",
+      "runs_executed": 30,
+      "candidates_evaluated": 6,
+      "revisions_made": 0,
+      "candidates_rerun_after_seeing_a_result": 0
+    },
+    "multiple_comparisons_disclosure": "Six candidates are tested against the same development data. A per-candidate criterion is therefore not a family-wise one, and the probability that at least one of six passes by chance exceeds the probability that any single specified one does. This is disclosed here, before any result, rather than after. Nothing in this stage corrects for it numerically; the correction the constitution actually relies on is that an admitted candidate must still survive Gate 4 robustness and a single sealed holdout read.",
+    "determinism_all_identical": true,
+    "stage_verdict": {
+      "verdict": "FAIL",
+      "condition_token": "No pre-registered candidate satisfies every hard condition.",
+      "pass_token": "STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+      "fail_token": "STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+      "admitted_candidates": [],
+      "candidates_evaluated": 6,
+      "combination_rule": "Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Across candidates the stage verdict is a disjunction, because Gate 3 asks whether a candidate worth carrying forward exists, not whether every candidate tried is good."
+    },
+    "no_selection_in_this_stage": "Gate 3 is admissibility, not selection. Every candidate that satisfies every hard condition is recorded as admitted; the stage does not rank admitted candidates, does not name a winner, and does not carry a preference forward. Choosing which admitted candidate proceeds is a later-stage decision under the constitution's own rules.",
+    "self_digest_verification": {
+      "recomputed_as_documented": "MATCHES",
+      "negative_control_including_generated_utc": "DIFFERS, so the exclusion is not vacuous",
+      "second_run_at_a_different_timestamp": "IDENTICAL",
+      "why_both": "two-run stability alone would not detect a digest whose coverage description is wrong but consistent, which is the defect that cost Stage 2 a full regeneration"
+    }
+  },
+  "results": {
+    "per_candidate_primary": {
+      "SE100-S3-F1-TREND-SMA200": {
+        "family": "trend/momentum",
+        "run_start": "1994-01-24",
+        "run_end": "2021-07-31",
+        "sessions": 6929,
+        "total_return": "0.9488",
+        "max_drawdown": "0.1537337836559499534026472597899454",
+        "profit_factor": "5.283521444695259593679458239",
+        "closed_trades": 15,
+        "admitted": false,
+        "conditions_not_met": [
+          "S3-C2",
+          "S3-C4"
+        ]
+      },
+      "SE100-S3-F2-PULLBACK-SMA200-SMA10": {
+        "family": "pullback",
+        "run_start": "1994-01-24",
+        "run_end": "2021-07-31",
+        "sessions": 6929,
+        "total_return": "0.5037",
+        "max_drawdown": "0.1508742780197267511219678463898199",
+        "profit_factor": "1.500695825049701789264413519",
+        "closed_trades": 141,
+        "admitted": false,
+        "conditions_not_met": [
+          "S3-C2"
+        ]
+      },
+      "SE100-S3-F3-MEANREV-RSI2": {
+        "family": "mean reversion",
+        "run_start": "1993-06-23",
+        "run_end": "2021-07-31",
+        "sessions": 7078,
+        "total_return": "0.7122",
+        "max_drawdown": "0.1577059979811910488421282894883343",
+        "profit_factor": "1.954052243804420629604822505",
+        "closed_trades": 109,
+        "admitted": false,
+        "conditions_not_met": [
+          "S3-C2"
+        ]
+      },
+      "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": {
+        "family": "breakout",
+        "run_start": "1993-06-22",
+        "run_end": "2021-07-31",
+        "sessions": 7079,
+        "total_return": "0.2326",
+        "max_drawdown": "0.1780394187838302287450834113396059",
+        "profit_factor": "1.972814721873693015474696780",
+        "closed_trades": 13,
+        "admitted": false,
+        "conditions_not_met": [
+          "S3-C2",
+          "S3-C4",
+          "S3-C5"
+        ]
+      },
+      "SE100-S3-F5-ROTATION-DUALMOM": {
+        "family": "ETF rotation",
+        "run_start": "2003-10-28",
+        "run_end": "2021-07-31",
+        "sessions": 4470,
+        "total_return": "0.2094",
+        "max_drawdown": "0.1506034082956375807558794208144320",
+        "profit_factor": "7.776699029126213592233009709",
+        "closed_trades": 6,
+        "admitted": false,
+        "conditions_not_met": [
+          "S3-C2",
+          "S3-C4",
+          "S3-C6"
+        ]
+      },
+      "SE100-S3-F6-DEFENSIVE-SMA200-SHY": {
+        "family": "defensive regime logic",
+        "run_start": "2003-07-25",
+        "run_end": "2021-07-31",
+        "sessions": 4536,
+        "total_return": "0.3323",
+        "max_drawdown": "0.1772915213015021969806392262146835",
+        "profit_factor": "2.010644768856447688564476886",
+        "closed_trades": 48,
+        "admitted": false,
+        "conditions_not_met": [
+          "S3-C2",
+          "S3-C6"
+        ]
+      }
+    },
+    "benchmarks_gate_nothing": true,
+    "benchmark_note": "reported for every candidate under constitution section 4; no candidate beats the SPY index or the tradable SPY buy-and-hold, and all six beat 0% cash and doing nothing"
+  },
+  "scope": {
+    "candidate_selected": false,
+    "candidate_admitted": false,
+    "validation_window_read": false,
+    "holdout_window_read": false,
+    "runs_confined_to": "development window, enforced by the engine window guard",
+    "revisions_after_seeing_a_result": 0,
+    "explicit_non_authorizations": [
+      "No data of any kind is downloaded, purchased, or acquired in this stage. Every price comes from the Stage 1 normalized dataset already on disk.",
+      "No validation-window or holdout-window data is read. The window guard raises WindowViolation structurally rather than relying on discipline.",
+      "No paper order, no live order, no cancel, no replace, no liquidation, no broker call, and no unattended scheduling.",
+      "No Alpaca credential is read, and no credential presence is even tested in this stage.",
+      "No machine learning, no optimiser, no search over the parameter grid, and no fit of any kind.",
+      "No candidate is combined with any other candidate.",
+      "No strategy is selected as a winner, and no expected income, profit, or return is claimed for any future period.",
+      "live_trading_authorized remains false."
+    ],
+    "money_spent_usd": 0,
+    "credentials_used": "none",
+    "data_acquired": "none; every price came from the Stage 1 normalized dataset"
+  },
+  "stage1": {
+    "freeze_verification_working_directory": "stockedge100/governance",
+    "freeze_verification": {
+      "STAGE_1_HOLDOUT_LOCK.json": "OK",
+      "STAGE_1_UNIVERSE.json": "OK"
+    },
+    "universe_version": "SE100-U1-d4917c2f7f1cd834",
+    "holdout_state": "SEALED",
+    "development_window": [
+      "1993-01-29",
+      "2021-07-31"
+    ],
+    "disposition": "READ_ONLY_NOT_MODIFIED"
+  },
+  "stage2": {
+    "gate_2_verdict": "PASS \u2014 STAGE_2_BACKTEST_ENGINE_VALIDATED",
+    "preregistration_record_verification": {
+      "config/stage2_cost_model.json": "OK",
+      "config/stage2_engine_spec.json": "OK",
+      "governance/STAGE_2_PREREGISTRATION.json": "OK",
+      "governance/STAGE_2_PREREGISTRATION.md": "OK"
+    },
+    "decision_record_verification": {
+      "config/stage2_cost_model.json": "OK",
+      "config/stage2_engine_spec.json": "OK",
+      "governance/STAGE_0_CONSTITUTION.json": "OK",
+      "governance/STAGE_0_CONSTITUTION.md": "OK",
+      "governance/STAGE_0_FREEZE.sha256": "OK",
+      "governance/STAGE_1_DATA_FOUNDATION_REPORT.md": "OK",
+      "governance/STAGE_1_FREEZE.sha256": "OK",
+      "governance/STAGE_1_HOLDOUT_LOCK.json": "OK",
+      "governance/STAGE_1_PREREGISTRATION.json": "OK",
+      "governance/STAGE_1_PREREGISTRATION.sha256": "OK",
+      "governance/STAGE_1_UNIVERSE.json": "OK",
+      "governance/STAGE_2_BACKTEST_ENGINE_REPORT.md": "OK",
+      "governance/STAGE_2_PREREGISTRATION.json": "OK",
+      "governance/STAGE_2_PREREGISTRATION.md": "OK",
+      "governance/STAGE_2_PREREGISTRATION.sha256": "OK",
+      "reports/stage2/STAGE_2_ARTIFACT_MANIFEST.json": "OK",
+      "reports/stage2/STAGE_2_BACKTEST_ENGINE.json": "OK",
+      "reports/stage2/STAGE_2_ENGINE_VALIDATION.json": "OK",
+      "reports/stage2/STAGE_2_TEST_SUMMARY.md": "OK",
+      "reports/stage2/pytest_stage2_output.txt": "OK"
+    },
+    "disposition": "READ_ONLY_NOT_MODIFIED"
+  },
+  "integrity": {
+    "stage_3_preregistration_record_working_directory": "stockedge100",
+    "stage_3_preregistration_record_verification": {
+      "config/stage3_gate_criteria.json": "OK",
+      "config/stage3_strategy_protocol.json": "OK",
+      "governance/STAGE_3_PREREGISTRATION.json": "OK",
+      "governance/STAGE_3_PREREGISTRATION.md": "OK"
+    },
+    "stage_3_freeze_record_issued": false,
+    "stage_3_freeze_record_rationale": "Stage 1 issued a freeze record because it produced governance artifacts later stages consume. Stage 3 produces none: no candidate was admitted, so nothing here becomes a downstream input. Its sealed inputs are covered by STAGE_3_PREREGISTRATION.sha256 and its outputs by this package's own checksum record, while code identity is repo_state_id. Recorded as a decision, not left as an omission.",
+    "package_not_covered_by_tests": "tests/**/*.py is one of the repo_state_id patterns, so a test asserting this package's repo_state_id would invalidate the value it asserts the moment it was written. The package is verified by re-running the recomputation."
+  },
+  "evidence": [
+    "Strategy protocol and gate criteria sealed at 2026-08-09T13:25:21Z with 0 strategy modules and 0 strategy output files present; sealed_before_any_strategy_code=True. The two counts are what make that claim falsifiable rather than self-reported.",
+    "6 candidates were declared, one per family the constitution authorises for Generation 1, each with 4 robustness neighbours: 30 runs declared in advance, 0 revisions permitted. The harness counts the runs it executed against the sealed number and raises rather than reporting a mismatch.",
+    "Every candidate is rejected. SE100-S3-F1-TREND-SMA200 fails S3-C2, S3-C4; SE100-S3-F2-PULLBACK-SMA200-SMA10 fails S3-C2; SE100-S3-F3-MEANREV-RSI2 fails S3-C2; SE100-S3-F4-BREAKOUT-DONCHIAN-50-25 fails S3-C2, S3-C4, S3-C5; SE100-S3-F5-ROTATION-DUALMOM fails S3-C2, S3-C4, S3-C6; SE100-S3-F6-DEFENSIVE-SMA200-SHY fails S3-C2, S3-C6.",
+    "All six fail S3-C2, the 15% maximum-drawdown condition: SE100-S3-F1-TREND-SMA200 0.15373, SE100-S3-F2-PULLBACK-SMA200-SMA10 0.15087, SE100-S3-F3-MEANREV-RSI2 0.15770, SE100-S3-F4-BREAKOUT-DONCHIAN-50-25 0.17803, SE100-S3-F5-ROTATION-DUALMOM 0.15060, SE100-S3-F6-DEFENSIVE-SMA200-SHY 0.17729. Every one of them tripped the section 5.1 research shutdown, which is the same 15% threshold, and was liquidated and permanently switched off mid-window.",
+    "All six pass S3-C1 after base costs: SE100-S3-F1-TREND-SMA200 0.9488, SE100-S3-F2-PULLBACK-SMA200-SMA10 0.5037, SE100-S3-F3-MEANREV-RSI2 0.7122, SE100-S3-F4-BREAKOUT-DONCHIAN-50-25 0.2326, SE100-S3-F5-ROTATION-DUALMOM 0.2094, SE100-S3-F6-DEFENSIVE-SMA200-SHY 0.3323. No candidate lost money over its window; every one breached the risk ceiling getting there.",
+    "S3-C7 holds for all six: every one of the 24 pre-declared neighbour runs matches the sign of its primary's net return, and each was run over the same window as its primary under the same base cost model with the research shutdown enforced.",
+    "Determinism: 6 primaries rerun from cold on fresh candidate objects, all_identical=True, compared on trade and equity digests.",
+    "Benchmarks are reported for every candidate and gate nothing at this stage. No candidate beats the SPY index or the tradable SPY buy-and-hold under the same shutdown; all six beat 0% cash and doing nothing. The constitution section 4 carve-out for materially reduced drawdown is not reached, because no candidate satisfies the drawdown condition in the first place.",
+    "Stage 1 freeze record verifies from stockedge100/governance: {\"STAGE_1_HOLDOUT_LOCK.json\": \"OK\", \"STAGE_1_UNIVERSE.json\": \"OK\"}",
+    "Stage 2 pre-registration record verifies from stockedge100: {\"config/stage2_cost_model.json\": \"OK\", \"config/stage2_engine_spec.json\": \"OK\", \"governance/STAGE_2_PREREGISTRATION.json\": \"OK\", \"governance/STAGE_2_PREREGISTRATION.md\": \"OK\"}",
+    "Stage 2 decision record verifies from stockedge100: {\"config/stage2_cost_model.json\": \"OK\", \"config/stage2_engine_spec.json\": \"OK\", \"governance/STAGE_0_CONSTITUTION.json\": \"OK\", \"governance/STAGE_0_CONSTITUTION.md\": \"OK\", \"governance/STAGE_0_FREEZE.sha256\": \"OK\", \"governance/STAGE_1_DATA_FOUNDATION_REPORT.md\": \"OK\", \"governance/STAGE_1_FREEZE.sha256\": \"OK\", \"governance/STAGE_1_HOLDOUT_LOCK.json\": \"OK\", \"governance/STAGE_1_PREREGISTRATION.json\": \"OK\", \"governance/STAGE_1_PREREGISTRATION.sha256\": \"OK\", \"governance/STAGE_1_UNIVERSE.json\": \"OK\", \"governance/STAGE_2_BACKTEST_ENGINE_REPORT.md\": \"OK\", \"governance/STAGE_2_PREREGISTRATION.json\": \"OK\", \"governance/STAGE_2_PREREGISTRATION.md\": \"OK\", \"governance/STAGE_2_PREREGISTRATION.sha256\": \"OK\", \"reports/stage2/STAGE_2_ARTIFACT_MANIFEST.json\": \"OK\", \"reports/stage2/STAGE_2_BACKTEST_ENGINE.json\": \"OK\", \"reports/stage2/STAGE_2_ENGINE_VALIDATION.json\": \"OK\", \"reports/stage2/STAGE_2_TEST_SUMMARY.md\": \"OK\", \"reports/stage2/pytest_stage2_output.txt\": \"OK\"}",
+    "Stage 3 pre-registration record verifies from stockedge100: {\"config/stage3_gate_criteria.json\": \"OK\", \"config/stage3_strategy_protocol.json\": \"OK\", \"governance/STAGE_3_PREREGISTRATION.json\": \"OK\", \"governance/STAGE_3_PREREGISTRATION.md\": \"OK\"}",
+    "Admissibility evidence is reproducible and its self-digest was verified in both directions the project rule requires: recomputing 561628d2f058d162c785bd30803df5b1762a4168af5037ee95d8b58bce896874 from the written file following its own evidence_digest_covers sentence literally reproduces it; recomputing with generated_utc included gives a different value, so the exclusion is not vacuous; and a fresh in-process run at a different timestamp produced the identical digest.",
+    "389 tests pass: the 273 standing at pre-registration \u2014 27 Stage 0, 113 Stage 1, 133 Stage 2 \u2014 unmodified, plus 116 added by Stage 3 (69 unit, 47 adversarial). Four clean controls establish that the evaluator can say yes, which a failing stage has to prove and a passing one does not."
+  ],
+  "limitations": [
+    "One parameterisation per family is not a test of the family. Six candidates were run; six families were not evaluated. F6's neighbours alone span 0.27 to 3.04 total return, which is how much of a result belongs to the particular number chosen rather than to the rule.",
+    "The results are not comparable across candidates. F5 and F6 run over roughly 18 years and F1-F4 over roughly 28, on different market regimes. No ranking is implied and none was computed.",
+    "Every candidate was switched off before its window ended, between 1997 and 2010, by the section 5.1 research shutdown. Metrics computed over the full window \u2014 CAGR, Sharpe, exposure \u2014 describe a live period followed by a long dead one and are not properties of the rule.",
+    "Base costs only. The stressed scenario belongs to the Gate 4 robustness work and was not run here, so every result is the optimistic case.",
+    "The cost model remains a proxy, not a measurement, and cannot be validated before paper trading at gate 7.",
+    "Single-provider price data with unquantified residual fund-closure bias, split-adjusted prices only, and no as-traded price levels. A systematic provider error would pass every check in this stage undetected.",
+    "Drawdown is measured at session closes because the project holds no intraday data and none was imputed, so an intraday excursion past 15% that closed above it is invisible to S3-C2 and every measured figure is a lower bound.",
+    "No statistical significance test was performed on any result and none was pre-registered. The gate is a set of minimum-quality thresholds, not an inference procedure.",
+    "Every Stage 1 data limitation and every Stage 2 engine limitation is inherited whole. A research result cannot be more trustworthy than the engine, and the engine cannot be more trustworthy than its inputs."
+  ],
+  "blockers": [],
+  "conflicts_found": [
+    "S3-CONFLICT-1 \u2014 the JSON companion for gate 3 carries five thresholds while the frozen Markdown carries seven conditions, omitting profit concentration and neighbouring parameter stability. The Markdown is authoritative and more restrictive, so all seven were evaluated and all seven had to pass. Same defect class Stages 1 and 2 each recorded against their own gates. No frozen artifact was edited.",
+    "S3-CONFLICT-2 \u2014 gate 3 states no pass_result. The affirmative token was derived by negating the stated fail_result STRATEGY_REJECTED_IN_DEVELOPMENT, carrying the stage prefix Stage 0 established with STAGE_0_CONSTITUTION_VERIFIED. Both tokens were fixed in the sealed criteria before any candidate was run, which is what makes it defensible for this stage to issue the fail one.",
+    "S3-CONFLICT-3 \u2014 the S3-C2 drawdown ceiling and the section 5.1 research shutdown are the same 15%. Not a contradiction but a coupling, recorded in the sealed criteria before any result. It turned out to be the mechanism behind every rejection in this stage: a candidate volatile enough to trip the risk control has already failed the quality gate."
+  ],
+  "gate_conditions": {
+    "S3-C1": {
+      "required": "total return is positive",
+      "predicate": "total_return > 0",
+      "verdict": "PASS",
+      "verdict_semantics": "PASS here means at least one candidate satisfied this condition \u2014 it is NOT a gate pass. Conjunction applies within a candidate, so the gate is settled by admissible_candidate_exists, not by this field. Satisfaction includes NOT_APPLICABLE_BY_CONDITION_TEXT, which is satisfied without being met; read satisfied_by against met_by and not_applicable_for before drawing anything from a PASS.",
+      "satisfied_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+        "SE100-S3-F5-ROTATION-DUALMOM",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "met_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+        "SE100-S3-F5-ROTATION-DUALMOM",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "not_met_by": [],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "candidates_evaluated": 6,
+      "evidence": {
+        "per_candidate": {
+          "SE100-S3-F1-TREND-SMA200": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "0.9488",
+            "threshold": "> 0"
+          },
+          "SE100-S3-F2-PULLBACK-SMA200-SMA10": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "0.5037",
+            "threshold": "> 0"
+          },
+          "SE100-S3-F3-MEANREV-RSI2": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "0.7122",
+            "threshold": "> 0"
+          },
+          "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "0.2326",
+            "threshold": "> 0"
+          },
+          "SE100-S3-F5-ROTATION-DUALMOM": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "0.2094",
+            "threshold": "> 0"
+          },
+          "SE100-S3-F6-DEFENSIVE-SMA200-SHY": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "0.3323",
+            "threshold": "> 0"
+          }
+        },
+        "costs": "base cost model, all costs already charged inside the equity curve"
+      }
+    },
+    "S3-C2": {
+      "required": "maximum drawdown is no worse than 15%",
+      "predicate": "max_drawdown <= 0.15",
+      "verdict": "FAIL",
+      "verdict_semantics": "PASS here means at least one candidate satisfied this condition \u2014 it is NOT a gate pass. Conjunction applies within a candidate, so the gate is settled by admissible_candidate_exists, not by this field. Satisfaction includes NOT_APPLICABLE_BY_CONDITION_TEXT, which is satisfied without being met; read satisfied_by against met_by and not_applicable_for before drawing anything from a PASS.",
+      "satisfied_by": [],
+      "met_by": [],
+      "not_met_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+        "SE100-S3-F5-ROTATION-DUALMOM",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "candidates_evaluated": 6,
+      "evidence": {
+        "per_candidate": {
+          "SE100-S3-F1-TREND-SMA200": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "0.1537337836559499534026472597899454",
+            "threshold": "<= 0.15",
+            "note": "Inclusive. 'No worse than 15%' admits exactly 15%."
+          },
+          "SE100-S3-F2-PULLBACK-SMA200-SMA10": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "0.1508742780197267511219678463898199",
+            "threshold": "<= 0.15",
+            "note": "Inclusive. 'No worse than 15%' admits exactly 15%."
+          },
+          "SE100-S3-F3-MEANREV-RSI2": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "0.1577059979811910488421282894883343",
+            "threshold": "<= 0.15",
+            "note": "Inclusive. 'No worse than 15%' admits exactly 15%."
+          },
+          "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "0.1780394187838302287450834113396059",
+            "threshold": "<= 0.15",
+            "note": "Inclusive. 'No worse than 15%' admits exactly 15%."
+          },
+          "SE100-S3-F5-ROTATION-DUALMOM": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "0.1506034082956375807558794208144320",
+            "threshold": "<= 0.15",
+            "note": "Inclusive. 'No worse than 15%' admits exactly 15%."
+          },
+          "SE100-S3-F6-DEFENSIVE-SMA200-SHY": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "0.1772915213015021969806392262146835",
+            "threshold": "<= 0.15",
+            "note": "Inclusive. 'No worse than 15%' admits exactly 15%."
+          }
+        },
+        "boundary": "Inclusive. 'No worse than 15%' admits exactly 15%.",
+        "granularity": "session close; the project holds no intraday data and none was imputed, so every measured drawdown is a lower bound on the true one",
+        "coupling": "See S3-CONFLICT-3. A candidate that triggers the section 5.1 research shutdown breaches this condition by construction."
+      }
+    },
+    "S3-C3": {
+      "required": "profit factor is at least 1.10",
+      "predicate": "profit_factor >= 1.10",
+      "verdict": "PASS",
+      "verdict_semantics": "PASS here means at least one candidate satisfied this condition \u2014 it is NOT a gate pass. Conjunction applies within a candidate, so the gate is settled by admissible_candidate_exists, not by this field. Satisfaction includes NOT_APPLICABLE_BY_CONDITION_TEXT, which is satisfied without being met; read satisfied_by against met_by and not_applicable_for before drawing anything from a PASS.",
+      "satisfied_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+        "SE100-S3-F5-ROTATION-DUALMOM",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "met_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+        "SE100-S3-F5-ROTATION-DUALMOM",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "not_met_by": [],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "candidates_evaluated": 6,
+      "evidence": {
+        "per_candidate": {
+          "SE100-S3-F1-TREND-SMA200": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "5.283521444695259593679458239277652",
+            "threshold": ">= 1.1"
+          },
+          "SE100-S3-F2-PULLBACK-SMA200-SMA10": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "1.500695825049701789264413518886680",
+            "threshold": ">= 1.1"
+          },
+          "SE100-S3-F3-MEANREV-RSI2": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "1.954052243804420629604822505023443",
+            "threshold": ">= 1.1"
+          },
+          "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "1.972814721873693015474696779590130",
+            "threshold": ">= 1.1"
+          },
+          "SE100-S3-F5-ROTATION-DUALMOM": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "7.776699029126213592233009708737864",
+            "threshold": ">= 1.1"
+          },
+          "SE100-S3-F6-DEFENSIVE-SMA200-SHY": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "2.010644768856447688564476885644769",
+            "threshold": ">= 1.1"
+          }
+        },
+        "undefined_cases": {
+          "no_closed_trades": "profit_factor is null. Recorded as NOT_EVALUABLE and the condition FAILS. It is not passed by default and not marked not-applicable.",
+          "no_losing_trades": "profit_factor is null because gross loss is zero. If closed trades exist and gross profit is positive, this is recorded as UNDEFINED_NO_LOSSES_TREATED_AS_MET, with the raw null preserved in the evidence rather than replaced by a number. The sealed cost model requires profit factor undefined when there are no losses to be reported as null, never as infinity. Treating a candidate with profits and zero losses as failing a profit-factor floor would be perverse; the reasoning is fixed here rather than invented on sight of such a candidate."
+        }
+      }
+    },
+    "S3-C4": {
+      "required": "at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results",
+      "predicate": "closed_trades >= 30",
+      "verdict": "PASS",
+      "verdict_semantics": "PASS here means at least one candidate satisfied this condition \u2014 it is NOT a gate pass. Conjunction applies within a candidate, so the gate is settled by admissible_candidate_exists, not by this field. Satisfaction includes NOT_APPLICABLE_BY_CONDITION_TEXT, which is satisfied without being met; read satisfied_by against met_by and not_applicable_for before drawing anything from a PASS.",
+      "satisfied_by": [
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "met_by": [
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "not_met_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+        "SE100-S3-F5-ROTATION-DUALMOM"
+      ],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "candidates_evaluated": 6,
+      "evidence": {
+        "per_candidate": {
+          "SE100-S3-F1-TREND-SMA200": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "15",
+            "threshold": ">= 30",
+            "note": "No candidate in this stage invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly so that a low-frequency candidate cannot later be argued into the exception after its trade count is known."
+          },
+          "SE100-S3-F2-PULLBACK-SMA200-SMA10": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "141",
+            "threshold": ">= 30",
+            "note": "No candidate in this stage invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly so that a low-frequency candidate cannot later be argued into the exception after its trade count is known."
+          },
+          "SE100-S3-F3-MEANREV-RSI2": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "109",
+            "threshold": ">= 30",
+            "note": "No candidate in this stage invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly so that a low-frequency candidate cannot later be argued into the exception after its trade count is known."
+          },
+          "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "13",
+            "threshold": ">= 30",
+            "note": "No candidate in this stage invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly so that a low-frequency candidate cannot later be argued into the exception after its trade count is known."
+          },
+          "SE100-S3-F5-ROTATION-DUALMOM": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "6",
+            "threshold": ">= 30",
+            "note": "No candidate in this stage invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly so that a low-frequency candidate cannot later be argued into the exception after its trade count is known."
+          },
+          "SE100-S3-F6-DEFENSIVE-SMA200-SHY": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "48",
+            "threshold": ">= 30",
+            "note": "No candidate in this stage invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly so that a low-frequency candidate cannot later be argued into the exception after its trade count is known."
+          }
+        },
+        "exception_invoked": false,
+        "exception_note": "No candidate in this stage invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly so that a low-frequency candidate cannot later be argued into the exception after its trade count is known."
+      }
+    },
+    "S3-C5": {
+      "required": "performance is not dependent on one trade: removing the single best trade leaves total return above 0%",
+      "predicate": "best_trade_removed_return > 0 for BOTH removals",
+      "verdict": "PASS",
+      "verdict_semantics": "PASS here means at least one candidate satisfied this condition \u2014 it is NOT a gate pass. Conjunction applies within a candidate, so the gate is settled by admissible_candidate_exists, not by this field. Satisfaction includes NOT_APPLICABLE_BY_CONDITION_TEXT, which is satisfied without being met; read satisfied_by against met_by and not_applicable_for before drawing anything from a PASS.",
+      "satisfied_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F5-ROTATION-DUALMOM",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "met_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F5-ROTATION-DUALMOM",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "not_met_by": [
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25"
+      ],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "candidates_evaluated": 6,
+      "evidence": {
+        "per_candidate": {
+          "SE100-S3-F1-TREND-SMA200": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "min(0.177358419897585954645208485735187, 0.177358419897585954645208485735187)",
+            "threshold": "> 0 for BOTH removals",
+            "note": "The realized total return reconstructed from closed trades can differ slightly from the equity-curve total return when a position is open on the final session or when dividends are credited outside a trade. Both figures are reported; the condition is evaluated on the reconstruction, whose whole purpose is to be a like-for-like comparison against the same reconstruction with one trade removed."
+          },
+          "SE100-S3-F2-PULLBACK-SMA200-SMA10": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "min(0.433653034482758620689655172413805, 0.433653034482758620689655172413805)",
+            "threshold": "> 0 for BOTH removals",
+            "note": "The realized total return reconstructed from closed trades can differ slightly from the equity-curve total return when a position is open on the final session or when dividends are credited outside a trade. Both figures are reported; the condition is evaluated on the reconstruction, whose whole purpose is to be a like-for-like comparison against the same reconstruction with one trade removed."
+          },
+          "SE100-S3-F3-MEANREV-RSI2": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "min(0.559442210915173903952045723844701, 0.559442210915173903952045723844701)",
+            "threshold": "> 0 for BOTH removals",
+            "note": "The realized total return reconstructed from closed trades can differ slightly from the equity-curve total return when a position is open on the final session or when dividends are credited outside a trade. Both figures are reported; the condition is evaluated on the reconstruction, whose whole purpose is to be a like-for-like comparison against the same reconstruction with one trade removed."
+          },
+          "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "min(-0.0014805318786225707466757586089324, -0.0014805318786225707466757586089324)",
+            "threshold": "> 0 for BOTH removals",
+            "note": "The realized total return reconstructed from closed trades can differ slightly from the equity-curve total return when a position is open on the final session or when dividends are credited outside a trade. Both figures are reported; the condition is evaluated on the reconstruction, whose whole purpose is to be a like-for-like comparison against the same reconstruction with one trade removed."
+          },
+          "SE100-S3-F5-ROTATION-DUALMOM": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "min(0.060334891541953926349419875567513, 0.060334891541953926349419875567513)",
+            "threshold": "> 0 for BOTH removals",
+            "note": "The realized total return reconstructed from closed trades can differ slightly from the equity-curve total return when a position is open on the final session or when dividends are credited outside a trade. Both figures are reported; the condition is evaluated on the reconstruction, whose whole purpose is to be a like-for-like comparison against the same reconstruction with one trade removed."
+          },
+          "SE100-S3-F6-DEFENSIVE-SMA200-SHY": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "min(0.147730824575015870776610002116105, 0.147730824575015870776610002116105)",
+            "threshold": "> 0 for BOTH removals",
+            "note": "The realized total return reconstructed from closed trades can differ slightly from the equity-curve total return when a position is open on the final session or when dividends are credited outside a trade. Both figures are reported; the condition is evaluated on the reconstruction, whose whole purpose is to be a like-for-like comparison against the same reconstruction with one trade removed."
+          }
+        },
+        "procedure": {
+          "basis": "Closed trades only, in exit order. Because the sealed cost model permits at most one open risky position, trades are sequential and non-overlapping, so a compounded reconstruction is exact rather than an approximation.",
+          "procedure": [
+            "E[0] = starting equity = 100.00.",
+            "E[i] = E[i-1] + pnl[i] for the i-th closed trade in exit order.",
+            "Per-trade equity multiple r[i] = E[i] / E[i-1].",
+            "Realized total return = product of all r[i], minus 1.",
+            "Best-trade-removed return = product of r[i] for i not equal to j, minus 1."
+          ],
+          "which_trade_is_removed": "Two removals are computed and BOTH must leave a positive return. j1 is the trade with the largest equity multiple r[i]. j2 is the trade with the largest absolute P&L pnl[i]. These usually coincide and need not. Requiring both is the stricter reading, and it is fixed here so the stricter or looser reading cannot be chosen after seeing which one a candidate survives.",
+          "relation_to_headline_return": "The realized total return reconstructed from closed trades can differ slightly from the equity-curve total return when a position is open on the final session or when dividends are credited outside a trade. Both figures are reported; the condition is evaluated on the reconstruction, whose whole purpose is to be a like-for-like comparison against the same reconstruction with one trade removed."
+        },
+        "both_removals_selected_the_same_trade": {
+          "SE100-S3-F1-TREND-SMA200": true,
+          "SE100-S3-F2-PULLBACK-SMA200-SMA10": true,
+          "SE100-S3-F3-MEANREV-RSI2": true,
+          "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": true,
+          "SE100-S3-F5-ROTATION-DUALMOM": true,
+          "SE100-S3-F6-DEFENSIVE-SMA200-SHY": true
+        }
+      }
+    },
+    "S3-C6": {
+      "required": "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy",
+      "predicate": "max instrument contribution <= 0.50",
+      "verdict": "PASS",
+      "verdict_semantics": "PASS here means at least one candidate satisfied this condition \u2014 it is NOT a gate pass. Conjunction applies within a candidate, so the gate is settled by admissible_candidate_exists, not by this field. Satisfaction includes NOT_APPLICABLE_BY_CONDITION_TEXT, which is satisfied without being met; read satisfied_by against met_by and not_applicable_for before drawing anything from a PASS.",
+      "satisfied_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25"
+      ],
+      "met_by": [],
+      "not_met_by": [
+        "SE100-S3-F5-ROTATION-DUALMOM",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "not_evaluable_for": [],
+      "not_applicable_for": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25"
+      ],
+      "candidates_evaluated": 6,
+      "evidence": {
+        "per_candidate": {
+          "SE100-S3-F1-TREND-SMA200": {
+            "verdict": "NOT_APPLICABLE_BY_CONDITION_TEXT",
+            "satisfied": true,
+            "measured": null,
+            "threshold": null,
+            "note": "The condition's own words are 'for a multi-instrument strategy'. A universal reading would make a single-instrument candidate contribute 100% of its own profit and fail automatically, which would render four of the six strategy families the constitution names in section 3 \u2014 trend/momentum, pullback, mean reversion, breakout \u2014 untestable at Gate 3. That cannot be the intent of a clause whose stated purpose is to detect concentration across instruments. The interpretation and its rationale are fixed here, before any result, and are surfaced in the stage report rather than buried."
+          },
+          "SE100-S3-F2-PULLBACK-SMA200-SMA10": {
+            "verdict": "NOT_APPLICABLE_BY_CONDITION_TEXT",
+            "satisfied": true,
+            "measured": null,
+            "threshold": null,
+            "note": "The condition's own words are 'for a multi-instrument strategy'. A universal reading would make a single-instrument candidate contribute 100% of its own profit and fail automatically, which would render four of the six strategy families the constitution names in section 3 \u2014 trend/momentum, pullback, mean reversion, breakout \u2014 untestable at Gate 3. That cannot be the intent of a clause whose stated purpose is to detect concentration across instruments. The interpretation and its rationale are fixed here, before any result, and are surfaced in the stage report rather than buried."
+          },
+          "SE100-S3-F3-MEANREV-RSI2": {
+            "verdict": "NOT_APPLICABLE_BY_CONDITION_TEXT",
+            "satisfied": true,
+            "measured": null,
+            "threshold": null,
+            "note": "The condition's own words are 'for a multi-instrument strategy'. A universal reading would make a single-instrument candidate contribute 100% of its own profit and fail automatically, which would render four of the six strategy families the constitution names in section 3 \u2014 trend/momentum, pullback, mean reversion, breakout \u2014 untestable at Gate 3. That cannot be the intent of a clause whose stated purpose is to detect concentration across instruments. The interpretation and its rationale are fixed here, before any result, and are surfaced in the stage report rather than buried."
+          },
+          "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": {
+            "verdict": "NOT_APPLICABLE_BY_CONDITION_TEXT",
+            "satisfied": true,
+            "measured": null,
+            "threshold": null,
+            "note": "The condition's own words are 'for a multi-instrument strategy'. A universal reading would make a single-instrument candidate contribute 100% of its own profit and fail automatically, which would render four of the six strategy families the constitution names in section 3 \u2014 trend/momentum, pullback, mean reversion, breakout \u2014 untestable at Gate 3. That cannot be the intent of a clause whose stated purpose is to detect concentration across instruments. The interpretation and its rationale are fixed here, before any result, and are surfaced in the stage report rather than buried."
+          },
+          "SE100-S3-F5-ROTATION-DUALMOM": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "0.5912129894937917860553963705826170",
+            "threshold": "<= 0.50"
+          },
+          "SE100-S3-F6-DEFENSIVE-SMA200-SHY": {
+            "verdict": "NOT_MET",
+            "satisfied": false,
+            "measured": "0.7959674992476677700872705386698766",
+            "threshold": "<= 0.50"
+          }
+        },
+        "single_instrument_interpretation": "For each instrument, contribution = sum of pnl over that instrument's closed trades, divided by the sum of pnl over all closed trades. Evaluated only when total closed-trade P&L is strictly positive; when total P&L is zero or negative, the share is not a meaningful proportion and the case is recorded as NOT_EVALUABLE \u2014 which is moot, because S3-C1 has already failed such a candidate."
+      }
+    },
+    "S3-C7": {
+      "required": "reasonable neighboring parameter values do not reverse the sign of net return",
+      "predicate": "sign(neighbour total_return) == sign(primary total_return) for all four neighbours, where sign is positive, negative, or zero and zero matches nothing",
+      "verdict": "PASS",
+      "verdict_semantics": "PASS here means at least one candidate satisfied this condition \u2014 it is NOT a gate pass. Conjunction applies within a candidate, so the gate is settled by admissible_candidate_exists, not by this field. Satisfaction includes NOT_APPLICABLE_BY_CONDITION_TEXT, which is satisfied without being met; read satisfied_by against met_by and not_applicable_for before drawing anything from a PASS.",
+      "satisfied_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+        "SE100-S3-F5-ROTATION-DUALMOM",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "met_by": [
+        "SE100-S3-F1-TREND-SMA200",
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+        "SE100-S3-F3-MEANREV-RSI2",
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+        "SE100-S3-F5-ROTATION-DUALMOM",
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+      ],
+      "not_met_by": [],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "candidates_evaluated": 6,
+      "evidence": {
+        "per_candidate": {
+          "SE100-S3-F1-TREND-SMA200": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "4/4 neighbours match",
+            "threshold": "all four match, zero matches nothing",
+            "note": "Neighbour runs are evaluated for the sign of net return and nothing else. No neighbour is ever promoted to primary, and no primary parameterisation is revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3."
+          },
+          "SE100-S3-F2-PULLBACK-SMA200-SMA10": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "4/4 neighbours match",
+            "threshold": "all four match, zero matches nothing",
+            "note": "Neighbour runs are evaluated for the sign of net return and nothing else. No neighbour is ever promoted to primary, and no primary parameterisation is revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3."
+          },
+          "SE100-S3-F3-MEANREV-RSI2": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "4/4 neighbours match",
+            "threshold": "all four match, zero matches nothing",
+            "note": "Neighbour runs are evaluated for the sign of net return and nothing else. No neighbour is ever promoted to primary, and no primary parameterisation is revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3."
+          },
+          "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "4/4 neighbours match",
+            "threshold": "all four match, zero matches nothing",
+            "note": "Neighbour runs are evaluated for the sign of net return and nothing else. No neighbour is ever promoted to primary, and no primary parameterisation is revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3."
+          },
+          "SE100-S3-F5-ROTATION-DUALMOM": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "4/4 neighbours match",
+            "threshold": "all four match, zero matches nothing",
+            "note": "Neighbour runs are evaluated for the sign of net return and nothing else. No neighbour is ever promoted to primary, and no primary parameterisation is revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3."
+          },
+          "SE100-S3-F6-DEFENSIVE-SMA200-SHY": {
+            "verdict": "MET",
+            "satisfied": true,
+            "measured": "4/4 neighbours match",
+            "threshold": "all four match, zero matches nothing",
+            "note": "Neighbour runs are evaluated for the sign of net return and nothing else. No neighbour is ever promoted to primary, and no primary parameterisation is revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3."
+          }
+        },
+        "neighbours_per_candidate": "one primary run plus four robustness-neighbour runs",
+        "falsifiability": "the four neighbours were declared in the sealed protocol before any result, and every one was run over the same window as its primary under the same base costs; a neighbour that did not run is a refusal, not a pass"
+      }
+    },
+    "admissible_candidate_exists": {
+      "required": "gate 3 is settled by the conjunction of every hard condition within a single candidate; the stage verdict is the disjunction of that conjunction over candidates",
+      "verdict": "FAIL",
+      "verdict_semantics": "This entry, and only this entry, is the gate determination.",
+      "evidence": {
+        "candidates_evaluated": 6,
+        "admitted_candidates": [],
+        "combination_rule": "Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Across candidates the stage verdict is a disjunction, because Gate 3 asks whether a candidate worth carrying forward exists, not whether every candidate tried is good.",
+        "condition_token": "No pre-registered candidate satisfies every hard condition.",
+        "per_candidate": {
+          "SE100-S3-F1-TREND-SMA200": {
+            "family": "trend/momentum",
+            "admitted": false,
+            "conditions_not_met": [
+              "S3-C2",
+              "S3-C4"
+            ],
+            "conditions_not_evaluable": [],
+            "conditions_not_applicable": [
+              "S3-C6"
+            ]
+          },
+          "SE100-S3-F2-PULLBACK-SMA200-SMA10": {
+            "family": "pullback",
+            "admitted": false,
+            "conditions_not_met": [
+              "S3-C2"
+            ],
+            "conditions_not_evaluable": [],
+            "conditions_not_applicable": [
+              "S3-C6"
+            ]
+          },
+          "SE100-S3-F3-MEANREV-RSI2": {
+            "family": "mean reversion",
+            "admitted": false,
+            "conditions_not_met": [
+              "S3-C2"
+            ],
+            "conditions_not_evaluable": [],
+            "conditions_not_applicable": [
+              "S3-C6"
+            ]
+          },
+          "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": {
+            "family": "breakout",
+            "admitted": false,
+            "conditions_not_met": [
+              "S3-C2",
+              "S3-C4",
+              "S3-C5"
+            ],
+            "conditions_not_evaluable": [],
+            "conditions_not_applicable": [
+              "S3-C6"
+            ]
+          },
+          "SE100-S3-F5-ROTATION-DUALMOM": {
+            "family": "ETF rotation",
+            "admitted": false,
+            "conditions_not_met": [
+              "S3-C2",
+              "S3-C4",
+              "S3-C6"
+            ],
+            "conditions_not_evaluable": [],
+            "conditions_not_applicable": []
+          },
+          "SE100-S3-F6-DEFENSIVE-SMA200-SHY": {
+            "family": "defensive regime logic",
+            "admitted": false,
+            "conditions_not_met": [
+              "S3-C2",
+              "S3-C6"
+            ],
+            "conditions_not_evaluable": [],
+            "conditions_not_applicable": []
+          }
+        }
+      }
+    }
+  },
+  "artifacts": [
+    "governance/STAGE_3_STRATEGY_RESEARCH_REPORT.md",
+    "reports/stage3/STAGE_3_DEVELOPMENT_ADMISSIBILITY.json",
+    "reports/stage3/STAGE_3_STRATEGY_RESEARCH.json",
+    "reports/stage3/STAGE_3_ARTIFACT_MANIFEST.json",
+    "reports/stage3/STAGE_3_TEST_SUMMARY.md",
+    "reports/stage3/pytest_stage3_output.txt"
+  ],
+  "frozen_inputs_read_only": [
+    "governance/STAGE_0_CONSTITUTION.md",
+    "governance/STAGE_0_CONSTITUTION.json",
+    "governance/STAGE_0_FREEZE.sha256",
+    "governance/STAGE_1_DATA_FOUNDATION_REPORT.md",
+    "governance/STAGE_1_UNIVERSE.json",
+    "governance/STAGE_1_HOLDOUT_LOCK.json",
+    "governance/STAGE_1_FREEZE.sha256",
+    "governance/STAGE_1_PREREGISTRATION.json",
+    "governance/STAGE_1_PREREGISTRATION.sha256",
+    "governance/STAGE_2_BACKTEST_ENGINE_REPORT.md",
+    "governance/STAGE_2_PREREGISTRATION.md",
+    "governance/STAGE_2_PREREGISTRATION.json",
+    "governance/STAGE_2_PREREGISTRATION.sha256",
+    "config/stage2_cost_model.json",
+    "config/stage2_engine_spec.json",
+    "governance/STAGE_3_PREREGISTRATION.md",
+    "governance/STAGE_3_PREREGISTRATION.json",
+    "governance/STAGE_3_PREREGISTRATION.sha256",
+    "config/stage3_strategy_protocol.json",
+    "config/stage3_gate_criteria.json"
+  ],
+  "tests": {
+    "passed": 389,
+    "failed": 0,
+    "skipped": 0
+  },
+  "authorization_state": {
+    "strategy_research": "UNLOCKED_ON_DEVELOPMENT_WINDOW_ONLY",
+    "backtesting": "UNLOCKED_ON_DEVELOPMENT_WINDOW_ONLY",
+    "gate_4_robustness": "NOT_REACHED_NO_ADMITTED_CANDIDATE",
+    "validation_window": "LOCKED",
+    "final_holdout": "SEALED",
+    "alpaca_paper_trading": "LOCKED",
+    "shadow_live": "LOCKED",
+    "alpaca_live_trading": "LOCKED",
+    "capital_or_risk_expansion": "LOCKED"
+  },
+  "next_authorized_stage": "NONE_ON_THE_CURRENT_LINE_OF_WORK",
+  "live_trading_authorized": false,
+  "reproducibility": {
+    "run_id": "SE100-R-20260810T101622Z",
+    "repo_state_id": "177184559d1eccf289f6dc04b6128bc364fd7b25c2ee53b46644c3340d3fcad8",
+    "package_version": "0.1.0",
+    "python": "3.10.6",
+    "dependency_versions": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "requests": "2.34.2",
+      "pytest": "8.4.2",
+      "yfinance": "1.4.1",
+      "exchange_calendars": "4.13.2",
+      "pyarrow": "MISSING",
+      "scipy": "MISSING"
+    },
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage3_package",
+    "config_hash": "04dbe3fa8c6b2a9e725a66d24f5dc0a3a7e3567e70d38bfd2e96869cc6e169b6",
+    "random_seed": null
+  }
+}

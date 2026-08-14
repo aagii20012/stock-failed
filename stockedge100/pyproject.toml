@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stockedge100"
+version = "0.1.0"
+description = "Governed research and execution system for a USD 100 US equity/ETF cash account (Generation 1)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+
+# Kept deliberately small. Every added dependency is a reproducibility liability and must be
+# justified in the stage report that introduces it.
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+# Stage 1 data foundation.
+data = [
+    "yfinance>=0.2.40",          # provider client; the provider decision itself is frozen in Stage 1
+    "exchange_calendars>=4.5",   # independent XNYS session calendar for missing-session validation
+    "pyarrow>=14.0",             # parquet for normalized datasets
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra --strict-markers"
+markers = [
+    "adversarial: tests that must fail if a governance or leakage control is broken",
+    "network: tests that require outbound network access",
+    "slow: long-running tests",
+]
+
+[tool.stockedge100.governance]
+# Mirrored from the frozen constitution for tooling convenience only.
+# governance/STAGE_0_CONSTITUTION.{md,json} remains authoritative; tests/unit/test_stage0_governance.py
+# fails if these drift.
+constitution_id = "SE100-GOV-0001"
+constitution_version = "1.0.0"
+generation = 1
+live_trading_authorized = false
+live_trading_state = "LIVE_TRADING_LOCKED"

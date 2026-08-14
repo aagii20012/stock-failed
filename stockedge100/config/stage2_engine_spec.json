@@ -1,0 +1,317 @@
+{
+  "artifact_id": "SE100-CFG-2002",
+  "title": "Stage 2 backtest-engine acceptance specification",
+  "version": "1.0.0",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 2,
+  "constitution_ref": "SE100-GOV-0001 section 9, gate 2",
+  "declared_before_any_engine_output": true,
+  "declaration_note": "This file states what the engine must do and what counts as detecting a defect, including every expected number in the hand-calculated fixtures. It was written before any backtest engine code existed. Sealing the acceptance criteria after the engine could run would let the engine define correctness for itself, which is the exact failure gate 2 exists to prevent.",
+
+  "gate_2_conditions": {
+    "source": "constitution section 9, gate 2, quoted verbatim",
+    "conditions": [
+      "deterministic reruns produce identical trades and equity curves",
+      "tests detect look-ahead, same-close fill, split/dividend, delisting, stale-price, cash, rounding, fee, slippage, rejected-order, and duplicate-order errors",
+      "independent hand-calculated fixtures match engine output",
+      "benchmark calculations reconcile"
+    ],
+    "fail_result": "BACKTEST_ENGINE_NOT_VALIDATED",
+    "conjunctive": true
+  },
+
+  "determinism": {
+    "requirement": "two runs of the same probe over the same window with the same config produce byte-identical serialised trade lists and equity curves",
+    "comparison_method": "SHA-256 of the canonical-JSON serialisation of the trade list and of the equity curve",
+    "arithmetic": "all cash, quantity, price, and fee arithmetic uses decimal.Decimal; no floating-point value enters a cash or quantity computation",
+    "arithmetic_rationale": "Decimal removes binary rounding drift as a source of run-to-run difference and makes every fixture value reproducible by hand.",
+    "iteration_order": "symbols are iterated in sorted order at every step; no set or dict iteration order is ever relied on",
+    "no_wall_clock_in_results": "no timestamp, run id, or path appears inside the hashed trade list or equity curve"
+  },
+
+  "defect_classes": {
+    "note": "One entry per error class named in gate 2. 'split/dividend' is one phrase but two independent errors, so it is split into two entries. Each entry names the mutation a test must inject and the mechanism that must catch it. A class is only satisfied if the clean engine passes AND the mutated engine is caught.",
+    "classes": [
+      {
+        "id": "LOOK_AHEAD",
+        "error": "a decision uses information not available before its simulated decision time",
+        "mutation": "a probe asks the market view for a bar at or after the session following the decision session",
+        "detector": "LookAheadError raised by the market view, which is constructed with a hard visibility bound and cannot be widened by the caller",
+        "constitution_ref": "section 2 principle 6, no future leakage"
+      },
+      {
+        "id": "SAME_CLOSE_FILL",
+        "error": "an order generated from a session's close is filled at that same close",
+        "mutation": "a fill is submitted for the decision session itself rather than the next session",
+        "detector": "FillTimingError raised by the order book, which requires fill_session to be strictly after decision_session and to be the next eligible exchange session",
+        "constitution_ref": "section 3 execution assumption"
+      },
+      {
+        "id": "SPLIT",
+        "error": "a split is applied to the share count of an already split-adjusted series, applying the same event twice",
+        "mutation": "share count multiplied by the recorded split ratio on the split session",
+        "detector": "value-continuity invariant across every corporate-action session: marked position value may not jump by the split ratio; CorporateActionError"
+      },
+      {
+        "id": "DIVIDEND",
+        "error": "a dividend is credited on the wrong session, at the wrong amount, or twice",
+        "mutation": "credit the dividend on the session after the ex-date, and separately credit it twice",
+        "detector": "benchmark reconciliation between the provider adjustment factor and the explicit reinvestment model, plus a per-event cash-credit assertion in the fixture"
+      },
+      {
+        "id": "DELISTING",
+        "error": "a position is carried, and valued, past the end of the symbol's price series",
+        "mutation": "extend the run beyond a symbol's last session while holding it, without liquidating",
+        "detector": "the engine liquidates at the last available close and marks the symbol ineligible; DelistingError if a position survives its symbol's final session"
+      },
+      {
+        "id": "STALE_PRICE",
+        "error": "an order fills, or a mark is taken as fresh, using a bar older than the session it is attributed to",
+        "mutation": "remove a bar from the middle of a series while the calendar still reports a session",
+        "detector": "fills rejected with STALE_PRICE; the equity point flagged stale; a stale run longer than the declared limit raises DataIntegrityHalt"
+      },
+      {
+        "id": "CASH",
+        "error": "cash is created, destroyed, or driven negative",
+        "mutation": "fill an order larger than available cash; skip the cash debit on a fill",
+        "detector": "the cash-conservation invariant checked after every event: closing cash equals opening cash minus debits plus credits, exactly, in Decimal; and cash may never be negative",
+        "constitution_ref": "section 5.1, no order may create negative cash or leverage"
+      },
+      {
+        "id": "ROUNDING",
+        "error": "a rounding step favours the account, or an order below the minimum notional is silently rounded up instead of rejected",
+        "mutation": "round share quantity up instead of down; round a buy notional down instead of up",
+        "detector": "the adverse-rounding invariant: for a buy, charged notional is greater than or equal to quantity times effective price; for a sell and for dividend cash, credited amount is less than or equal to it; MIN_NOTIONAL rejection is asserted separately"
+      },
+      {
+        "id": "FEE",
+        "error": "a regulatory fee or commission is omitted, applied to the wrong side, or applied at the wrong rate",
+        "mutation": "set every fee to zero; apply the sell-side fees to a buy",
+        "detector": "hand-calculated fixture equality on each fee component, plus the invariant that every fill carries a strictly positive total cost"
+      },
+      {
+        "id": "SLIPPAGE",
+        "error": "slippage or spread is omitted or applied in the favourable direction",
+        "mutation": "fill a buy below the reference price and a sell above it",
+        "detector": "the adverse-price invariant asserted on every fill: effective buy price is strictly greater than the reference, effective sell price is strictly less"
+      },
+      {
+        "id": "REJECTED_ORDER",
+        "error": "a rejected order changes cash or positions, or disappears without being recorded",
+        "mutation": "apply the position and cash effect of an order that was rejected",
+        "detector": "rejections are recorded with a reason code and asserted to leave cash, position, and equity byte-identical to the pre-order state"
+      },
+      {
+        "id": "DUPLICATE_ORDER",
+        "error": "the same order is admitted twice, or two orders for one symbol are live on one session",
+        "mutation": "submit an identical order twice on the same session",
+        "detector": "DuplicateOrderError from the order book, which rejects a repeated deterministic order id and a second live order in the same symbol on the same session",
+        "constitution_ref": "section 9 gate 7, zero duplicate orders"
+      }
+    ]
+  },
+
+  "invariants": {
+    "note": "Checked by the engine itself at every event, not only by tests. A violated invariant halts the run; it is never logged and stepped over.",
+    "list": [
+      "CASH_NON_NEGATIVE: cash is never negative at any point in any session",
+      "CASH_CONSERVATION: closing cash equals opening cash minus debits plus credits, exactly, in Decimal",
+      "CASH_IS_WHOLE_CENTS: cash always has at most two decimal places",
+      "NO_LEVERAGE: gross position value never exceeds the declared fraction of equity at the moment of sizing",
+      "LONG_ONLY: no position quantity is ever negative",
+      "MAX_ONE_RISKY_POSITION: at most one non-cash position is open at any time in Generation 1",
+      "ADVERSE_PRICE: every fill price is worse for the account than its reference price",
+      "ADVERSE_ROUNDING: every rounding step is adverse to the account",
+      "POSITIVE_COST: every fill carries a strictly positive total cost",
+      "FILL_AFTER_DECISION: every fill session is strictly later than its decision session",
+      "FILL_ON_SESSION: every fill session is an exchange session with a fresh bar for that symbol",
+      "NO_POSITION_PAST_LAST_BAR: no position is held past its symbol's final available session"
+    ]
+  },
+
+  "hand_calculated_fixtures": {
+    "note": "Computed by explicit arithmetic before the engine existed, and sealed here. The test asserts engine output equals these values. If the engine disagrees, either the engine or this arithmetic is wrong, and the discrepancy is reported rather than resolved by editing this file.",
+    "instrument": {
+      "symbol": "FIXT",
+      "kind": "SYNTHETIC_ENGINE_FIXTURE",
+      "not_a_research_instrument": true,
+      "sessions": [
+        {"session": "2015-01-02", "open": "100.00", "high": "101.00", "low": "99.00", "close": "100.00", "dividend": "0.00", "split_ratio": "0.00"},
+        {"session": "2015-01-05", "open": "100.00", "high": "101.00", "low": "99.00", "close": "100.00", "dividend": "0.00", "split_ratio": "0.00"},
+        {"session": "2015-01-06", "open": "100.00", "high": "101.00", "low": "99.00", "close": "100.00", "dividend": "0.00", "split_ratio": "0.00"},
+        {"session": "2015-01-07", "open": "100.00", "high": "112.00", "low": "99.00", "close": "110.00", "dividend": "0.00", "split_ratio": "0.00"},
+        {"session": "2015-01-08", "open": "110.00", "high": "112.00", "low": "109.00", "close": "110.00", "dividend": "0.50", "split_ratio": "0.00"},
+        {"session": "2015-01-09", "open": "120.00", "high": "122.00", "low": "119.00", "close": "120.00", "dividend": "0.00", "split_ratio": "0.00"},
+        {"session": "2015-01-12", "open": "120.00", "high": "121.00", "low": "119.00", "close": "120.00", "dividend": "0.00", "split_ratio": "0.00"},
+        {"session": "2015-01-13", "open": "120.00", "high": "121.00", "low": "119.00", "close": "120.00", "dividend": "0.00", "split_ratio": "0.00"}
+      ],
+      "probe": "enter on the decision at the close of 2015-01-06, exit on the decision at the close of 2015-01-08",
+      "expected_entry_fill_session": "2015-01-07",
+      "expected_exit_fill_session": "2015-01-09"
+    },
+
+    "FIXT_BASE_COSTS": {
+      "cost_scenario": "BASE",
+      "starting_equity": "100.00",
+      "entry": {
+        "reference_price": "100.00",
+        "effective_price": "100.05",
+        "effective_price_derivation": "100.00 * (1 + 0.00025 + 0.00025)",
+        "budget": "95.00",
+        "budget_derivation": "min(0.95 * 100.00 exposure cap, 100.00 - 5.00 cash buffer)",
+        "budget_after_safety_margin": "94.99",
+        "quantity": "0.949425287",
+        "quantity_derivation": "ROUND_DOWN to 9 dp of 94.99 / 100.05 = 0.949425287356...",
+        "gross_notional_unrounded": "94.98999996435",
+        "charged_notional": "94.99",
+        "charged_notional_derivation": "ROUND_UP to the cent",
+        "commission": "0.00",
+        "regulatory_fees": "0.00",
+        "regulatory_fees_note": "SEC section 31 and FINRA TAF are sell-side only",
+        "cash_after": "5.01"
+      },
+      "mark_2015_01_07_close": {
+        "position_value": "104.43678157",
+        "equity": "109.44678157"
+      },
+      "dividend_2015_01_08": {
+        "amount_per_share": "0.50",
+        "cash_unrounded": "0.4747126435",
+        "cash_credited": "0.47",
+        "cash_after": "5.48"
+      },
+      "mark_2015_01_08_close": {
+        "position_value": "104.43678157",
+        "equity": "109.91678157"
+      },
+      "exit": {
+        "reference_price": "120.00",
+        "effective_price": "119.94",
+        "effective_price_derivation": "120.00 * (1 - 0.00025 - 0.00025)",
+        "quantity": "0.949425287",
+        "gross_proceeds_unrounded": "113.87406892278",
+        "gross_proceeds": "113.87",
+        "gross_proceeds_derivation": "ROUND_DOWN to the cent",
+        "sec_section_31_fee": "0.01",
+        "sec_fee_derivation": "ROUND_UP to the cent of 113.87 * 0.0000278 = 0.003165586",
+        "finra_taf": "0.01",
+        "taf_derivation": "ROUND_UP to the cent of min(0.949425287 * 0.000166, 8.30) = 0.000157604...",
+        "commission": "0.00",
+        "net_proceeds": "113.85",
+        "cash_after": "119.33"
+      },
+      "final": {
+        "final_cash": "119.33",
+        "final_equity": "119.33",
+        "closed_trades": 1,
+        "trade_pnl": "19.33",
+        "trade_pnl_derivation": "113.85 net proceeds + 0.47 dividend - 94.99 entry cost",
+        "total_return": "0.1933"
+      }
+    },
+
+    "FIXT_STRESSED_COSTS": {
+      "cost_scenario": "STRESSED",
+      "stress_multiplier": "2.0",
+      "starting_equity": "100.00",
+      "entry": {
+        "reference_price": "100.00",
+        "effective_price": "100.10",
+        "budget_after_safety_margin": "94.99",
+        "quantity": "0.948951048",
+        "quantity_derivation": "ROUND_DOWN to 9 dp of 94.99 / 100.10 = 0.948951048951...",
+        "gross_notional_unrounded": "94.9899999048",
+        "charged_notional": "94.99",
+        "cash_after": "5.01"
+      },
+      "mark_2015_01_07_close": {
+        "position_value": "104.38461528",
+        "equity": "109.39461528"
+      },
+      "dividend_2015_01_08": {
+        "cash_unrounded": "0.474475524",
+        "cash_credited": "0.47",
+        "cash_after": "5.48"
+      },
+      "mark_2015_01_08_close": {
+        "position_value": "104.38461528",
+        "equity": "109.86461528"
+      },
+      "exit": {
+        "reference_price": "120.00",
+        "effective_price": "119.88",
+        "gross_proceeds_unrounded": "113.76025163424",
+        "gross_proceeds": "113.76",
+        "sec_section_31_fee": "0.01",
+        "sec_fee_derivation": "ROUND_UP to the cent of 113.76 * 0.0000556 = 0.006325056",
+        "finra_taf": "0.01",
+        "taf_derivation": "ROUND_UP to the cent of min(0.948951048 * 0.000332, 16.60) = 0.000315051...",
+        "net_proceeds": "113.74",
+        "cash_after": "119.22"
+      },
+      "final": {
+        "final_cash": "119.22",
+        "final_equity": "119.22",
+        "closed_trades": 1,
+        "total_return": "0.1922"
+      }
+    },
+
+    "FIXT_REJECTIONS": {
+      "note": "Reason codes, not amounts. Each case must leave cash, position, and equity exactly unchanged.",
+      "cases": [
+        {"case": "order notional below the declared minimum", "expected_reason": "MIN_NOTIONAL"},
+        {"case": "order requiring more cash than is available", "expected_reason": "INSUFFICIENT_CASH"},
+        {"case": "second order for the same symbol on the same decision session", "expected_reason": "DUPLICATE_ORDER"},
+        {"case": "fill session has no bar for the symbol", "expected_reason": "STALE_PRICE"},
+        {"case": "order that would open a second simultaneous risky position", "expected_reason": "MAX_POSITIONS"},
+        {"case": "sell of more shares than are held", "expected_reason": "INSUFFICIENT_POSITION"},
+        {"case": "entry submitted while the research drawdown shutdown is active", "expected_reason": "RESEARCH_SHUTDOWN"}
+      ]
+    },
+
+    "FIXT_SPLIT_CONTINUITY": {
+      "note": "A recorded split on an already split-adjusted series must not change the share count and must not move marked value.",
+      "expected_quantity_change": "none",
+      "expected_marked_value_jump": "none beyond the ordinary price step"
+    }
+  },
+
+  "benchmark_reconciliation": {
+    "symbol": "SPY",
+    "window": "development window only, 1993-01-29 to 2021-07-31",
+    "window_rule": "validation and holdout data are not read by this stage under any circumstance",
+    "method_a": "ADJ_CLOSE_RATIO: adj_close at the window end divided by adj_close at the window start, minus one",
+    "method_b": "EXPLICIT_DIVIDEND_REINVESTMENT: one share at the window start, each dividend buying additional shares at the close of the session before the ex-date less the dividend amount, valued at the window-end close",
+    "identity_claim": "the two methods are algebraically identical given the provider adjustment convention Stage 1 measured, so any disagreement is a defect and not a modelling choice",
+    "relative_tolerance": "0.000001",
+    "additional_checks": [
+      "the cash benchmark at 0% returns exactly zero over any window",
+      "the do-nothing benchmark returns exactly zero and records zero trades",
+      "a tradable SPY buy-and-hold run under the full base cost model returns strictly less than the frictionless index figure"
+    ]
+  },
+
+  "window_policy": {
+    "authorized_windows_for_stage_2": ["development"],
+    "validation_window": "LOCKED",
+    "holdout_window": "SEALED",
+    "enforcement": "stockedge100.backtest.window raises WindowViolation on any attempt to load or read a session outside the authorized window, and the boundaries are read from governance/STAGE_1_HOLDOUT_LOCK.json rather than restated",
+    "rationale": "Gate 2 validates an engine. It does not need, and is not authorised to read, validation or holdout data. The restriction is enforced in code and asserted by test rather than left to discipline."
+  },
+
+  "probes": {
+    "note": "Engine test instruments, not strategies. Each is a fixed mechanical schedule with no signal, no parameter, no fitting, and no selection. Constitution section 8 governs strategies; none of these is one, and none produces a research result.",
+    "declared": [
+      {"id": "PROBE_FIXED_SCHEDULE", "behaviour": "enter on a named decision session, exit on a named decision session"},
+      {"id": "PROBE_BUY_AND_HOLD", "behaviour": "enter on the first eligible decision session, never exit"},
+      {"id": "PROBE_ALWAYS_CASH", "behaviour": "never submit an order"}
+    ],
+    "prohibited_at_stage_2": [
+      "any rule conditioned on a price, an indicator, or a return",
+      "any parameter chosen by looking at an outcome",
+      "any comparison of probe results used to prefer one rule over another"
+    ]
+  }
+}

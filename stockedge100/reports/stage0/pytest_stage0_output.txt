@@ -1,0 +1,37 @@
+============================= test session starts =============================
+platform win32 -- Python 3.10.6, pytest-8.4.2, pluggy-1.6.0 -- C:\Users\aagii\AppData\Local\Programs\Python\Python310\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Product\stock-trade-alpaca\stockedge100
+configfile: pyproject.toml
+plugins: anyio-4.14.1
+collecting ... collected 27 items
+
+tests/unit/test_stage0_governance.py::test_required_stage0_artifact_exists[STAGE_0_CONSTITUTION.md] PASSED [  3%]
+tests/unit/test_stage0_governance.py::test_required_stage0_artifact_exists[STAGE_0_CONSTITUTION.json] PASSED [  7%]
+tests/unit/test_stage0_governance.py::test_required_stage0_artifact_exists[STAGE_0_FREEZE.sha256] PASSED [ 11%]
+tests/unit/test_stage0_governance.py::test_freeze_record_covers_both_constitution_files PASSED [ 14%]
+tests/unit/test_stage0_governance.py::test_freeze_record_paths_are_relative_to_governance_dir PASSED [ 18%]
+tests/unit/test_stage0_governance.py::test_file_matches_freeze_record[STAGE_0_CONSTITUTION.md] PASSED [ 22%]
+tests/unit/test_stage0_governance.py::test_file_matches_freeze_record[STAGE_0_CONSTITUTION.json] PASSED [ 25%]
+tests/unit/test_stage0_governance.py::test_file_matches_independently_pinned_digest[STAGE_0_CONSTITUTION.md] PASSED [ 29%]
+tests/unit/test_stage0_governance.py::test_file_matches_independently_pinned_digest[STAGE_0_CONSTITUTION.json] PASSED [ 33%]
+tests/unit/test_stage0_governance.py::test_constitution_json_is_valid_and_identifies_itself PASSED [ 37%]
+tests/unit/test_stage0_governance.py::test_gate_ids_are_complete_and_unique PASSED [ 40%]
+tests/unit/test_stage0_governance.py::test_every_gate_declares_a_failure_or_default_result PASSED [ 44%]
+tests/unit/test_stage0_governance.py::test_scope_rules_agree PASSED      [ 48%]
+tests/unit/test_stage0_governance.py::test_prohibited_product_list_agrees PASSED [ 51%]
+tests/unit/test_stage0_governance.py::test_risk_thresholds_agree PASSED  [ 55%]
+tests/unit/test_stage0_governance.py::test_time_partition_agrees PASSED  [ 59%]
+tests/unit/test_stage0_governance.py::test_cost_policy_agrees PASSED     [ 62%]
+tests/unit/test_stage0_governance.py::test_gate3_development_thresholds_agree PASSED [ 66%]
+tests/unit/test_stage0_governance.py::test_gate4_validation_thresholds_agree PASSED [ 70%]
+tests/unit/test_stage0_governance.py::test_gate5_holdout_thresholds_agree PASSED [ 74%]
+tests/unit/test_stage0_governance.py::test_gate7_paper_thresholds_agree PASSED [ 77%]
+tests/unit/test_stage0_governance.py::test_gate8_shadow_thresholds_agree PASSED [ 81%]
+tests/unit/test_stage0_governance.py::test_live_trading_default_is_locked PASSED [ 85%]
+tests/unit/test_stage0_governance.py::test_no_live_authorization_artifact_exists PASSED [ 88%]
+tests/unit/test_stage0_governance.py::test_constitution_declares_stage0_pass PASSED [ 92%]
+tests/unit/test_stage0_governance.py::test_next_authorized_activity_is_stage1 PASSED [ 96%]
+tests/unit/test_stage0_governance.py::test_no_secret_material_in_governance_or_source PASSED [100%]
+
+============================= 27 passed in 0.10s ==============================

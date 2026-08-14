@@ -1,0 +1,5 @@
+$ cd stockedge100 && python -m pytest tests --collect-only -q | tail -1
+560 tests collected in 1.21s
+
+$ cd stockedge100 && python -m pytest tests -q
+560 passed in 13.88s

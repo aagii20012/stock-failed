@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "document_id": "SE100-GOV-0001",
+  "project": "StockEdge100",
+  "stage": 0,
+  "version": "1.0.0",
+  "status": "FROZEN",
+  "effective_date": "2026-08-08",
+  "timezone": "Asia/Ulaanbaatar",
+  "capital_usd": 100.0,
+  "broker_target": "Alpaca",
+  "generation_1": {
+    "market": "US-listed stocks and ETFs",
+    "long_only": true,
+    "cash_account_only": true,
+    "daily_data": true,
+    "max_risky_positions": 1,
+    "max_gross_exposure_pct": 95,
+    "fractional_shares_required": true,
+    "prohibited": [
+      "options",
+      "futures",
+      "CFDs",
+      "short_sales",
+      "margin",
+      "leveraged_ETFs",
+      "inverse_ETFs",
+      "OTC_securities",
+      "penny_stocks",
+      "crypto"
+    ]
+  },
+  "risk": {
+    "research_max_drawdown_pct": 15,
+    "live_soft_halt_drawdown_pct": 8,
+    "live_hard_halt_drawdown_pct": 10
+  },
+  "time_partition": {
+    "exclude_incomplete_cutoff_month": true,
+    "holdout_complete_months": 24,
+    "validation_complete_months": 36,
+    "minimum_development_years": 5,
+    "calculate_before_strategy_results": true
+  },
+  "costs": {
+    "base_costs_required": true,
+    "spread_required": true,
+    "slippage_required": true,
+    "fees_required": true,
+    "stressed_cost_multiplier": 2.0
+  },
+  "gates": [
+    {"id": 0, "name": "constitution_freeze", "pass_result": "STAGE_0_CONSTITUTION_FROZEN", "fail_result": "STAGE_0_NOT_FROZEN"},
+    {"id": 1, "name": "data_readiness", "fail_result": "DATA_NOT_FIT_FOR_RESEARCH"},
+    {"id": 2, "name": "backtest_engine_validity", "fail_result": "BACKTEST_ENGINE_NOT_VALIDATED"},
+    {"id": 3, "name": "development_admissibility", "fail_result": "STRATEGY_REJECTED_IN_DEVELOPMENT", "thresholds": {"net_return_positive": true, "max_drawdown_pct": 15, "profit_factor_min": 1.10, "closed_trades_min": 30, "best_trade_removed_return_positive": true}},
+    {"id": 4, "name": "validation_robustness", "fail_result": "STRATEGY_REJECTED_IN_VALIDATION", "thresholds": {"net_return_positive": true, "sharpe_min": 0.50, "max_drawdown_pct": 15, "profit_factor_min": 1.15, "stressed_cost_return_positive": true, "positive_walk_forward_folds_pct_min": 70}},
+    {"id": 5, "name": "final_holdout", "pass_result": "ELIGIBLE_FOR_PAPER_TRADING", "fail_result": "STRATEGY_REJECTED_ON_HOLDOUT", "insufficient_result": "INSUFFICIENT_HOLDOUT_EVIDENCE", "thresholds": {"net_return_positive": true, "beats_cash": true, "sharpe_min": 0.50, "max_drawdown_pct": 12, "profit_factor_min": 1.15, "stressed_cost_return_nonnegative": true, "best_trade_removed_return_positive": true, "closed_trades_min": 20}},
+    {"id": 6, "name": "portfolio_controller", "fail_result": "PORTFOLIO_CONTROLLER_REJECTED", "thresholds": {"max_drawdown_pct": 12}},
+    {"id": 7, "name": "alpaca_paper_trading", "fail_result": "PAPER_TRADING_NOT_VALIDATED", "insufficient_result": "INSUFFICIENT_PAPER_EVIDENCE", "thresholds": {"calendar_days_min": 90, "calendar_days_max_if_trade_shortfall": 180, "closed_trades_min": 30, "net_return_positive": true, "max_drawdown_pct": 10, "profit_factor_min": 1.10}},
+    {"id": 8, "name": "shadow_live_readiness", "fail_result": "SHADOW_LIVE_NOT_VALIDATED", "thresholds": {"calendar_days_min": 60, "intended_round_trips_min": 20, "observation_rule": "whichever_is_longer"}},
+    {"id": 9, "name": "limited_live_authorization", "default_result": "LIVE_TRADING_LOCKED", "manual_written_approval_required": true}
+  ],
+  "stage_0_verdict": "PASS",
+  "stage_0_reason": "STAGE_0_CONSTITUTION_FROZEN",
+  "next_authorized_activity": "Stage 1 data-source decision, universe freeze, acquisition protocol, and holdout-lock calculation"
+}

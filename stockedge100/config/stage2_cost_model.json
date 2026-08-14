@@ -1,0 +1,157 @@
+{
+  "artifact_id": "SE100-CFG-2001",
+  "title": "Stage 2 base cost, execution, and accounting model",
+  "version": "1.0.0",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 2,
+  "constitution_ref": "SE100-GOV-0001 sections 3, 5.1, 6, 7",
+  "declared_before_any_engine_output": true,
+  "declaration_note": "Every number in this file was chosen before a single line of backtest engine code was written and before any engine output of any kind existed. Sealing it afterwards would allow a cost assumption to be selected because of the result it produced. The digests recorded in governance/STAGE_2_PREREGISTRATION.json bind these values; stockedge100.backtest.config refuses to load a file whose digest has drifted.",
+  "currency": "USD",
+
+  "account": {
+    "starting_equity_usd": "100.00",
+    "cash_account": true,
+    "margin_permitted": false,
+    "long_only": true,
+    "short_sales_permitted": false,
+    "max_open_risky_positions": 1,
+    "max_gross_exposure_fraction": "0.95",
+    "min_cash_buffer_fraction": "0.05",
+    "constitution_ref": "section 3 portfolio breadth and gross exposure, section 5.1 capital limits"
+  },
+
+  "execution": {
+    "decision_point": "the close of session t",
+    "earliest_fill": "the open of session t+1",
+    "fill_reference_price": "open",
+    "no_same_close_execution": true,
+    "no_same_session_fill": true,
+    "fills_only_on_exchange_sessions": true,
+    "session_calendar": "XNYS via exchange_calendars, the same independent calendar Stage 1 validated against",
+    "order_type_modelled": "MARKET_ON_NEXT_OPEN",
+    "partial_fills_modelled": false,
+    "partial_fill_note": "A market order for a fractional quantity of a large ETF at the open is modelled as filling in full or not at all. Partial fills are a Gate 7 paper-trading observable, not a research assumption; modelling them here would invent a fill distribution no evidence supports. Recorded as a limitation rather than approximated.",
+    "order_lifetime": "one session; an order not filled on its scheduled session is cancelled, never carried forward",
+    "unfilled_order_disposition": "recorded as a rejection with a reason code; it never silently disappears and never changes cash or positions"
+  },
+
+  "frictions": {
+    "commission_per_order_usd": "0.00",
+    "commission_note": "Alpaca charges no commission on US equity and ETF orders. Zero commission is not zero cost: the spread, slippage, and regulatory components below are charged regardless, per constitution section 7.",
+    "half_spread_bps": "2.5",
+    "spread_source": "PROXY_CONSERVATIVE_CONSTANT",
+    "spread_note": "No historical quote data is available from the Stage 1 provider, so constitution section 7 requires a conservative documented proxy. 2.5 bps per side (5.0 bps full spread) is charged on every fill of every symbol in every year. For the large, liquid ETFs in the frozen universe this is wider than a typical modern quoted spread and narrower than a 1990s one; it is a single constant applied uniformly rather than a per-symbol or per-era estimate, because no evidence in this project supports a finer one.",
+    "slippage_bps": "2.5",
+    "slippage_note": "Charged beyond the half spread, per constitution section 7, which requires slippage as a component distinct from the spread. Total base friction on the price is therefore 5.0 bps per side, 10.0 bps round trip, always adverse.",
+    "price_friction_direction": "always adverse: a buy fills above the reference price, a sell fills below it, never the reverse",
+
+    "regulatory": {
+      "sec_section_31_fee_rate": "0.0000278",
+      "sec_section_31_applies_to": "SELL",
+      "sec_section_31_note": "USD 27.80 per USD 1,000,000 of sale principal, charged on sales only. The statutory rate is reset by the SEC periodically and has ranged widely across the development window; a single fixed rate is a predeclared proxy, and the direction of its error is recorded in the limitations of the stage report rather than hidden.",
+      "finra_taf_per_share_usd": "0.000166",
+      "finra_taf_cap_usd": "8.30",
+      "finra_taf_applies_to": "SELL",
+      "finra_taf_note": "The Trading Activity Fee is levied per share. Stage 1 established that as-traded price levels and therefore as-traded share counts are not recoverable from this provider, so the fee is charged on the adjusted share count. Adjusted shares are greater than or equal to as-traded shares for any split-adjusted series, so this over-charges rather than under-charges. The direction is conservative and is recorded as a limitation.",
+      "fee_basis": "the rounded gross notional of the fill, not the unrounded product of quantity and price",
+      "rounding": "each regulatory fee is rounded UP to the whole cent"
+    },
+
+    "stress_multiplier": "2.0",
+    "stress_multiplier_ref": "constitution section 7: a stressed-cost run at 2x the complete base trading-friction assumption",
+    "stress_applies_to": [
+      "commission_per_order_usd",
+      "half_spread_bps",
+      "slippage_bps",
+      "sec_section_31_fee_rate",
+      "finra_taf_per_share_usd",
+      "finra_taf_cap_usd"
+    ],
+    "stress_note": "The multiplier applies to the COMPLETE friction assumption, so every component above is doubled, including the TAF cap. Doubling the rate while leaving the cap fixed would silently make the stress run cheaper than 2x for large orders."
+  },
+
+  "sizing": {
+    "fractional_shares_permitted": true,
+    "share_decimals": 9,
+    "share_rounding": "ROUND_DOWN",
+    "share_rounding_note": "Quantity is always rounded down, so a rounding step can never spend more cash than the budget allows or create exposure above the cap.",
+    "money_decimals": 2,
+    "buy_notional_rounding": "ROUND_UP to the cent",
+    "sell_notional_rounding": "ROUND_DOWN to the cent",
+    "money_rounding_note": "Cash moves in whole cents and every rounding step is adverse to the account: a buy costs the extra fraction of a cent, a sale forfeits it. This makes rounding a cost rather than a source of free money.",
+    "budget_safety_margin_usd": "0.01",
+    "budget_safety_margin_note": "One cent is withheld from the sizing budget before the quantity is solved, so that rounding the resulting notional UP to the cent can never exceed the budget. Without it a one-cent overshoot could breach the exposure cap or the cash buffer.",
+    "min_order_notional_usd": "1.00",
+    "min_order_notional_note": "Alpaca's minimum notional for a fractional order. An order below it is rejected with MIN_NOTIONAL, not silently rounded up to the minimum, because rounding it up would spend cash the strategy never asked to spend.",
+    "min_order_shares": "0.000000001",
+    "cash_precision": "cash is always a whole number of cents",
+    "equity_precision": "equity and position marks are carried at full decimal precision and are never rounded, because a mark is not a cash movement; only cash movements round"
+  },
+
+  "corporate_actions": {
+    "price_space": "SPLIT_ADJUSTED",
+    "price_space_evidence": "data/manifests/STAGE_1_VALIDATION_REPORT.json adjustment_semantics: ohlc_split_adjusted true, MEASURED from two AAPL split fixtures, not assumed",
+    "share_unit": "ADJUSTED_SHARE",
+    "share_unit_note": "One adjusted share is one share of the back-adjusted series. It is not the number of certificates an account would have held on that date. Because Stage 1 recorded that as-traded price levels are unrecoverable, this is the only self-consistent unit available.",
+    "split_handling": "NO_SHARE_COUNT_CHANGE",
+    "split_rationale": "The OHLC series is already back-adjusted for splits, so the price never gaps at a split. Multiplying the share count at a split as well would apply the same event twice and manufacture value out of nothing. The engine asserts value continuity across every split instead.",
+    "dividend_handling": "CASH_CREDIT_ON_EX_DATE",
+    "dividend_amount_basis": "the recorded dividend column, per adjusted share held at the ex-date open",
+    "dividend_amount_evidence": "Stage 1's DIVIDEND_RECONCILES check reconciled the recorded amount against the split-adjusted prior close for every symbol, which establishes that the dividend column is denominated in the same price space as close",
+    "dividend_cash_rounding": "ROUND_DOWN to the cent",
+    "dividend_cash_rounding_note": "Cash received is rounded down, matching the sell side: every rounding step in the engine is adverse to the account.",
+    "dividend_reinvestment_in_strategy_account": "NONE",
+    "dividend_reinvestment_note": "A dividend is credited to cash and stays there until a rule spends it. Automatic reinvestment would be an untested, undeclared trading rule.",
+    "delisting_handling": "LIQUIDATE_AT_LAST_AVAILABLE_CLOSE",
+    "delisting_note": "When a held symbol's series ends before the end of the run, the position is liquidated at that final close with full costs and the symbol becomes ineligible. Carrying the last known price forward would value a position that could not be sold."
+  },
+
+  "data_integrity": {
+    "max_stale_sessions_for_fill": 0,
+    "stale_fill_policy": "REJECT",
+    "stale_fill_note": "A fill requires a bar on the fill session itself. If the calendar says a session exists and the symbol has no bar for it, the order is rejected with STALE_PRICE. The system fails closed rather than filling at yesterday's price.",
+    "stale_mark_policy": "MARK_AT_LAST_KNOWN_CLOSE_AND_FLAG",
+    "stale_mark_note": "Equity must still be computed on a session with a missing bar, so the last known close is used and the equity point is flagged stale. The flag is counted and reported; it is never dropped.",
+    "max_consecutive_stale_sessions": 5,
+    "max_consecutive_stale_exceeded": "DATA_INTEGRITY_HALT",
+    "halt_note": "A stale run longer than the Stage 1 MISSING_SESSION_RUN limit halts the run outright. Continuing past it would produce an equity curve nobody can defend."
+  },
+
+  "risk": {
+    "research_shutdown_drawdown_fraction": "0.15",
+    "research_shutdown_ref": "constitution section 5.1: a strategy enters a research shutdown state if simulated equity falls 15% below its running high-water mark",
+    "research_shutdown_action": "LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES",
+    "research_shutdown_note": "The constitution names the state but not the action. Liquidating and blocking further entries is the strictest reading and is therefore the one adopted; a looser reading would let a shut-down strategy keep trading.",
+    "negative_cash_permitted": false,
+    "leverage_permitted": false
+  },
+
+  "benchmarks": {
+    "primary": "SPY_TOTAL_RETURN",
+    "spy_total_return_methods": [
+      "ADJ_CLOSE_RATIO",
+      "EXPLICIT_DIVIDEND_REINVESTMENT"
+    ],
+    "reinvestment_price_rule": "close of the session before the ex-date, less the dividend amount",
+    "reinvestment_price_derivation": "Stage 1 measured the provider convention adj_t = close_t * product over later ex-dates s of (1 - D_s / close_{s-1}). Requiring an explicit share-accumulation model to reproduce that ratio forces the reinvestment price to be close_{s-1} - D_s, by algebra and not by fitting. The two methods are therefore an arithmetic identity, and any disagreement between them is a defect in the engine or in the data.",
+    "reconciliation_relative_tolerance": "0.000001",
+    "benchmark_costs": "NONE",
+    "benchmark_costs_note": "The reconciliation benchmark is an index calculation, not a tradable account: no costs, no rounding, no minimum notional. A separately reported tradable SPY buy-and-hold run carries the full base cost model and is not expected to equal the index figure.",
+    "cash_benchmark_annual_rate": "0.00",
+    "cash_benchmark_note": "Constitution section 4 permits a 3-month Treasury-bill proxy when reliable point-in-time data are available, otherwise 0% labelled conservative. No T-bill series was acquired in Stage 1, so 0% is used and labelled conservative for return comparison. It makes the cash hurdle easier to beat, so it is conservative for judging cash and generous for judging a strategy; this direction is recorded.",
+    "do_nothing_benchmark": "flat equity at starting capital, zero trades"
+  },
+
+  "metrics": {
+    "trading_days_per_year": 252,
+    "sharpe_risk_free_annual_rate": "0.00",
+    "sharpe_basis": "daily equity returns, annualised by the square root of 252",
+    "sharpe_note": "The documented cash rate required by constitution gate 4 is the 0% conservative proxy declared above.",
+    "max_drawdown_basis": "daily marked equity including cash, peak to trough",
+    "profit_factor_basis": "gross profit divided by gross loss over closed round trips, after all costs",
+    "profit_factor_undefined_when_no_losses": "reported as null, never as infinity and never silently as a large number",
+    "trade_definition": "a round trip: one entry fill and the exit fill that closes it, costs on both legs attributed to it"
+  }
+}

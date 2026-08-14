@@ -1,0 +1,1182 @@
+{
+  "project": "StockEdge100",
+  "stage": "STAGE_4_VALIDATION_PREREGISTRATION",
+  "generation": 1,
+  "timestamp_utc": "2026-08-14T11:14:59Z",
+  "verdict": "PASS \u2014 STAGE_4_VALIDATION_PREREGISTRATION_FROZEN",
+  "gate": {
+    "constitutional_gate": 4,
+    "name": "validation_robustness",
+    "prompt_stage": 4,
+    "conditions_evaluated": 7,
+    "condition_ids": [
+      "S4-C1",
+      "S4-C2",
+      "S4-C3",
+      "S4-C4",
+      "S4-C5",
+      "S4-C6",
+      "S4-C7"
+    ],
+    "within_candidate": "CONJUNCTIVE",
+    "across_candidates": "NOT_APPLICABLE_EXACTLY_ONE_REPRESENTATIVE",
+    "pass_token": "STAGE_4_STRATEGY_ADMITTED_IN_VALIDATION",
+    "fail_token": "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+    "token_source": "config/stage4_gate_criteria.json verdict_token_derivation",
+    "gate_4_evaluated": false,
+    "gate_4_passed": false,
+    "conflicts_recorded": [
+      "S4-CONFLICT-1",
+      "S4-CONFLICT-2",
+      "S4-CONFLICT-3",
+      "S4-CONFLICT-4",
+      "S4-CONFLICT-5"
+    ]
+  },
+  "gate_passed": false,
+  "constitution": {
+    "document_id": "SE100-GOV-0001",
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "modified_by_this_stage": false,
+    "freeze_verification_working_directory": "stockedge100/governance",
+    "freeze_verified": true,
+    "freeze_verification": {
+      "STAGE_0_CONSTITUTION.md": {
+        "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "match": "True"
+      },
+      "STAGE_0_CONSTITUTION.json": {
+        "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "match": "True"
+      }
+    }
+  },
+  "session_type": "Representative selection and prospective validation pre-registration. No validation read, no engine run, no evaluator code, no broker contact.",
+  "gate_4_evaluated": false,
+  "gate_4_passed": false,
+  "gate_3_passed": true,
+  "validation_evaluation_authorized": true,
+  "validation_evaluation_authorized_for": "Exactly one evaluation of SE100-S3A2-C2-MEANREV-RA1 on the locked validation window, in a later separately authorized session, under config/stage4_validation_protocol.json and config/stage4_gate_criteria.json exactly as sealed here. Nothing else.",
+  "validation_access_authorized_in_this_session": false,
+  "holdout_access_authorized": false,
+  "stage_5_authorized": false,
+  "paper_trading_authorized": false,
+  "shadow_live_authorized": false,
+  "capital_or_risk_expansion_authorized": false,
+  "verdict_meaning": "One representative was selected from the two Gate 3 admitted candidates by a return-blind, parameter-free rule applied in full to both and recorded with its limitation; the seven frozen gate 4 conditions were extracted from frozen text, adopted by digest where they already existed and specified prospectively in the one place where they did not; and the whole procedure was sealed before any validation observation was read, which is measured rather than asserted. It is not a gate 4 pass, not a gate 4 evaluation, not a prediction that the representative will be admitted, and not an authorization for holdout access, stage 5, paper trading, shadow-live or live trading.",
+  "verdict_token_is_not_a_gate_4_token": {
+    "gate_4_pass_token": "STAGE_4_STRATEGY_ADMITTED_IN_VALIDATION",
+    "gate_4_fail_token": "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+    "this_session_issued": "PASS \u2014 STAGE_4_VALIDATION_PREREGISTRATION_FROZEN",
+    "why": "PASS is one of the seven primary verdicts in constitution section 10. STAGE_4_VALIDATION_PREREGISTRATION_FROZEN is a design-session reason code following the precedent of STAGE_3_ATTEMPT_2_PREREGISTRATION_FROZEN. Emitting the gate's pass token would claim a gate this session did not evaluate, and emitting its fail token would record a rejection on evidence that does not exist. Both belong to the evaluation session and to no other, and the builder refuses to write a package whose verdict borrows either."
+  },
+  "preregistration": {
+    "document_id": "SE100-GOV-0008",
+    "status": "SEALED",
+    "declared_utc": "2026-08-13T14:01:21Z",
+    "run_id": "SE100-R-20260813T140121Z",
+    "declared_before_any_validation_observation_was_read": true,
+    "checksum_record": {
+      "path": "governance/STAGE_4_PREREGISTRATION.sha256",
+      "path_convention": "project-root-relative",
+      "verify_from": "stockedge100/",
+      "command": "cd stockedge100 && sha256sum -c governance/STAGE_4_PREREGISTRATION.sha256"
+    },
+    "simultaneous_seal_note": "Four files are sealed at this timestamp: config/stage4_validation_protocol.json, config/stage4_gate_criteria.json, config/stage4_representative_selection.json, governance/STAGE_4_PREREGISTRATION.md. None carries the digest of another, because a file cannot contain the digest of a file that contains its own. They reference each other by artifact id and path; governance/STAGE_4_PREREGISTRATION.sha256 carries every digest.",
+    "binding_consequences": 11,
+    "artifacts": {
+      "SE100-CFG-4001": "config/stage4_validation_protocol.json",
+      "SE100-CFG-4002": "config/stage4_gate_criteria.json",
+      "SE100-CFG-4003": "config/stage4_representative_selection.json",
+      "SE100-GOV-0008": "governance/STAGE_4_PREREGISTRATION.json",
+      "SE100-GOV-4000": "governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md"
+    }
+  },
+  "representative": {
+    "experiment_id": "SE100-S3A2-C2-MEANREV-RA1",
+    "selection_rule_id": "SE100-CFG-4003-R1",
+    "selection_rule_name": "Declared-variant research-shutdown screen",
+    "survivor_count": 1,
+    "human_selection_required": false,
+    "eliminated_by_the_rule": [
+      "SE100-S3A2-C1-PULLBACK-RA1"
+    ],
+    "screen_results": {
+      "SE100-S3A2-C1-PULLBACK-RA1": {
+        "declared_run_count": 6,
+        "shutdown_trip_count": 2,
+        "screen_result": "ELIMINATED"
+      },
+      "SE100-S3A2-C2-MEANREV-RA1": {
+        "declared_run_count": 6,
+        "shutdown_trip_count": 0,
+        "screen_result": "SURVIVES"
+      }
+    },
+    "strategy_module": "src/stockedge100/strategies/attempt2_candidates.py",
+    "strategy_module_resolution": "Resolved by content: exactly one module under src/stockedge100/strategies/ names the sealed representative. Not named by hand, so it cannot silently point at the wrong file.",
+    "eligible_set": [
+      "SE100-S3A2-C1-PULLBACK-RA1",
+      "SE100-S3A2-C2-MEANREV-RA1"
+    ],
+    "ineligible": [
+      "SE100-S3A2-C3-DEFENSIVE-RA1",
+      "any robustness neighbour of C1 or C2",
+      "any Gate 3 Attempt 1 candidate",
+      "any combination, average, portfolio or ensemble of C1 and C2"
+    ]
+  },
+  "walk_forward_fold_construction": {
+    "id": "SE100-CFG-4002-WF1",
+    "test_folds": 12,
+    "train_folds": 0,
+    "first_fold": {
+      "fold": 1,
+      "start": "2021-08-01",
+      "end": "2021-10-31"
+    },
+    "last_fold": {
+      "fold": 12,
+      "start": "2024-05-01",
+      "end": "2024-07-31"
+    },
+    "authored_in_this_session": true,
+    "why_authored_here": "No fold definition exists anywhere on disk, so S4-C6 is unmeasurable without one. Constitution section 8's requirement of a signed specification created before execution is the authority to write it prospectively. Recorded as S4-CONFLICT-4."
+  },
+  "runs_declared": {
+    "count": 2,
+    "count_is_a_hard_limit": true,
+    "run_labels": [
+      "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+      "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS"
+    ],
+    "sessions_reading_validation": 1,
+    "re_runs_permitted_after_a_valid_completed_run": 0
+  },
+  "iteration_budget": {
+    "parameterisations": 1,
+    "runs": 2,
+    "sessions_reading_validation": 1,
+    "re_runs_permitted_after_a_valid_completed_run": 0,
+    "note": "There is no search at Gate 4. The budget is not a limit on exploration; it is the statement that no exploration is authorized."
+  },
+  "cumulative_experiment_count": {
+    "gate_3_attempt_1": "6 primary parameterisations, one per declared candidate family, as recorded in results.per_candidate_primary of reports/stage3/STAGE_3_STRATEGY_RESEARCH.json. That evidence file records no robustness-neighbour and no stressed-cost variant, because all six failed S3-C2 on the primary run.",
+    "gate_3_attempt_2": "15 gating variants across three candidates - one primary and four declared robustness neighbours each - plus three non-gating stressed-cost runs, 18 development runs in total. Counted from results.all_registered_variants (15 keys) and results.stressed_cost_runs (3 keys) of reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.json, sha256 26eecacfe96420878ce647b86f68da8ed8a17fea1338d85ee982b190645ed466.",
+    "gate_3_total_across_both_attempts": "24 development runs.",
+    "stage_4": 2,
+    "rule": "Any later statistical interpretation uses the cumulative count across all attempts and stages. This stage does not reset it, and two runs of one frozen parameterisation on a fresh window do not undo the multiplicity accumulated in development."
+  },
+  "multiple_comparisons_disclosure": [
+    "The representative was chosen from two development-admitted candidates, which were themselves chosen from a larger set across two Gate 3 attempts. A validation pass therefore carries the selection history of everything that came before it.",
+    "Gate 4 applies no multiplicity correction, and this protocol does not invent one. What it does instead is hold the validation exposure to the minimum the gate requires: one candidate, one parameterisation, two runs, one read.",
+    "A single out-of-sample window evaluated once is the strongest evidence this project's design can produce at this stage. It is still one window, three years long, of one instrument, over one macro regime. It is not a demonstration that an edge exists."
+  ],
+  "adaptation_disclosure": {
+    "statement": "This selection was made in a session that had lawful access to Gate 3 development evidence. It is an adaptive step, not an independent one.",
+    "what_is_independent": "The rule's output. Given the predicate, the answer is a function of shutdown booleans recorded in a sealed evidence file, and no return enters it.",
+    "what_is_not_independent": "The choice of predicate. It was chosen by a researcher who had read the development evidence, and a different return-blind predicate could in principle have selected differently.",
+    "how_it_is_mitigated": [
+      "The predicate has no tunable parameter, so it cannot be nudged toward an outcome once chosen.",
+      "The full application is recorded for BOTH candidates, including every variant that did not trip, so a reader can verify the count rather than trust it.",
+      "The independent frozen-threshold checks are recorded, including the one that does not flatter the selected candidate.",
+      "The surviving candidate's narrowest margin is recorded rather than left to be discovered.",
+      "The rule's return-blindness is stated as a checkable property of the predicate, not as an assurance about the author's state of mind."
+    ],
+    "not_concealed": "The representative keeps its Gate 3 identifier unchanged, so it is traceable to the evidence that admitted it and to the two-attempt search that produced it."
+  },
+  "no_selection_in_this_stage": {
+    "statement": "The selection is already made and sealed. This stage's evaluation session selects nothing: it runs one candidate and reports one verdict.",
+    "consequence_of_a_fail": "See no_retuning_rule and stage_5_remains_prohibited_conditions. A fail is recorded and the project stops at Gate 4. It does not fall back to C1."
+  },
+  "windows": {
+    "development": {
+      "start": "1993-01-29",
+      "end": "2021-07-31",
+      "state": "AUTHORIZED_AND_ALREADY_READ",
+      "use_in_the_evaluation_session": "The 101-session warmup tail immediately preceding 2021-08-01, indicator computation only, no orders, equity constant. See S4-INTERP-3."
+    },
+    "validation": {
+      "start": "2021-08-01",
+      "end": "2024-07-31",
+      "calendar_months": 36,
+      "state_now": "LOCKED",
+      "state_in_the_authorized_evaluation_session": "AUTHORIZED_FOR_EXACTLY_ONE_READ",
+      "source": "governance/STAGE_1_HOLDOUT_LOCK.json, sha256 9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3"
+    },
+    "holdout": {
+      "start": "2024-08-01",
+      "end": "2026-07-31",
+      "state": "SEALED",
+      "state_after_a_gate_4_pass": "SEALED. A Gate 4 pass does not open the holdout. It is read exactly once, at the constitutional holdout gate, after a separate authorization recorded at that gate."
+    },
+    "authorized_in_this_session": [],
+    "enforcement": "stockedge100.backtest.window.ResearchWindow raises WindowViolation on any session outside the window authorized for the run, and MarketView raises LookAheadError on any read past the decision session. Both are structural; neither depends on a strategy behaving well."
+  },
+  "contamination": {
+    "predicates_recomputed_at_build_time": true,
+    "must_stay_zero": [
+      "modules_naming_a_stage_4_run_label",
+      "stage_4_modules_touching_restricted_data_or_a_broker"
+    ],
+    "moved_after_the_seal": [
+      "stage_4_evaluator_or_result_modules",
+      "stage_4_report_artifacts",
+      "stage_4_run_records"
+    ],
+    "files_making_the_moved_predicates_non_zero": "Enumerated with a classification each in the S4D-C3 evidence and in section 18 of the report. None is strategy code, a Stage 4 evaluator, or a performance result.",
+    "no_broker_or_credential_access": "An AST finding, not a grep finding: no forbidden import root, no dataset loader call, no credential attribute and no string constant containing a URL scheme in any Stage 4 module, this builder included."
+  },
+  "scope": {
+    "what_this_session_did": [
+      "Selected one representative from the two Gate 3 admitted candidates.",
+      "Wrote and sealed the prospective Stage 4 validation pre-registration.",
+      "Built and verified this decision package."
+    ],
+    "what_this_session_did_not_do": [
+      "Read a validation row or price.",
+      "Compute a validation-period indicator or count a validation-period trade.",
+      "Run the representative, or anything else, on validation data.",
+      "Inspect the holdout.",
+      "Run another development backtest.",
+      "Implement any part of the Stage 4 evaluator.",
+      "Contact a broker, read a credential, or reach the network."
+    ]
+  },
+  "integrity": {
+    "upstream_records_verified": 12,
+    "adopted_artifacts_recomputed": 9,
+    "gate_3_attempt_2_immutability_records": [
+      "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256",
+      "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256"
+    ],
+    "nothing_repaired": "No frozen artifact was opened for writing. A failing record would have been reported as a blocker."
+  },
+  "evidence": [
+    "Stage 0 freeze verified digest-for-digest on both halves; 12 upstream checksum records verified entry-for-entry from their intended working directories before any Stage 4 artifact was authored, plus this stage's own record at 5 entries.",
+    "No mandatory constitutional selection rule exists: 5 locations searched and the result recorded. The one constraint that did apply is SE100-CFG-3004's neighbour prohibition, which fixes the eligible set at the two admitted PRIMARY candidates.",
+    "The selection rule SE100-CFG-4003-R1 (Declared-variant research-shutdown screen) reads no return and no risk-adjusted metric. Re-derived from declared_runs rather than read back from screen_results: C1 tripped the section 5.1 research shutdown on 2 of 6 declared runs and is ELIMINATED; the survivor tripped it on 0 of 6. Survivor count 1.",
+    "The sealed representative is SE100-S3A2-C2-MEANREV-RA1, resolved to exactly one strategy module by content rather than named by hand: src/stockedge100/strategies/attempt2_candidates.py.",
+    "Gate 4 was extracted, not invented: 7 conditions whose required text is located in the frozen constitution's gate 4 paragraph, 6 thresholds taken from the constitution's JSON companion, and both verdict tokens derived from its fail_result rather than from the operating prompt.",
+    "3 measurement artifacts adopted by digest and recomputed at build time; the single measurement this stage authors is the walk-forward fold construction, and its 12 folds were recomputed here from the frozen validation boundaries alone.",
+    "5 conflicts recorded, including the operating prompt's gate 4 tokens, which exist in no artifact on disk.",
+    "The seal's checksum record verifies 5/5 from the project root; all four preregistered digests recompute; all four JSON artifacts are ASCII-only in fact; the S4-C7 recheck set is 13 declared and 12 recorded, the omission being the record itself, because nothing hashes itself.",
+    "Six sealing predicates recomputed at build time. The two that must stay zero are zero, including the AST predicate whose scope covers both the sealing program and this package builder; three moved after the seal and each moved file is classified in the S4D-C3 evidence, two of the three moves having been anticipated in the sealed definitions.",
+    "Restricted-data posture is zero on all six counters and structural rather than asserted: no module on the pre-registration path imports the data layer or calls a dataset loader.",
+    "The test floor rose from 560 to 708 collected. Because the whole suite may not be executed in this session, 'unmodified' is asserted by recomputing every tests/ digest in both Gate 3 Attempt 2 run records against disk."
+  ],
+  "limitations": [
+    "Gate 4 is not passed and not evaluated. A sealed pre-registration is a specification, not evidence.",
+    "A Gate 4 FAIL is a live and arguably likely outcome, and it is recorded as an expectation before any validation observation exists: neither Gate 3 admitted candidate reached the frozen Sharpe floor of 0.50 on development data at the same sealed 0% cash rate.",
+    "The selected representative has little drawdown headroom. Its largest non-breaching development neighbour sat 34 basis points below the 15% level that is simultaneously the section 5.1 shutdown and S4-C3's ceiling.",
+    "The selection is adaptive. Return-blindness constrains the rule's output, not the choice of predicate; a different return-blind predicate might have selected differently. Five mitigations are recorded and none of them removes that freedom.",
+    "The 0% documented cash rate makes S4-C2 easier to pass than a real short-rate series would. It was sealed in SE100-CFG-2001 before Gate 3 was evaluated and is not chosen here, but any Gate 4 pass must travel with that qualification.",
+    "The fold construction is authored in this session. It is derived from frozen boundaries and fixed before any fold return exists, but it is the one Gate 4 measurement not adopted by digest from a pre-existing artifact.",
+    "No multiplicity correction is applied. The cumulative count for any later statistical interpretation is 24 development runs across both Gate 3 attempts plus this stage's 2.",
+    "One validation window is one window: three years, one instrument, one macro regime, evaluated once.",
+    "Drawdown is measured at session closes. The project holds no intraday data, so every measured drawdown is a lower bound on the true intraday figure.",
+    "The whole test suite was not executed, so 'unmodified' for the 15 pre-existing test files is asserted by digest recomputation rather than by a green run.",
+    "scipy and pyarrow are not installed, and no Stage 4 rule requires either.",
+    "No test covers this decision package and none can: tests/**/*.py is one of the patterns repo_state_id is computed over, so a test asserting that digest would invalidate the value it asserts. The package is verified by rerunning the recomputation."
+  ],
+  "blockers": [],
+  "conflicts_found": [
+    "S4-CONFLICT-1: The frozen constitution's Markdown states SEVEN Gate 4 conditions and its JSON companion carries SIX thresholds. The condition present in the Markdown and absent from the JSON is the last one: 'no material rule, feature, universe, or parameter change is made in response to validation results.' The other six correspond one-to-one. Resolution: The Markdown is authoritative and is the more restrictive of the two, so all seven conditions are evaluated. This mirrors S4-CONFLICT-1's Gate 3 counterpart S3-CONFLICT-1, where the same discrepancy appeared with five JSON thresholds against seven Markdown conditions and was resolved the same way.",
+    "S4-CONFLICT-2: The constitution's JSON companion supplies fail_result for gate 4 but has NO pass_result key. Gate 3 had the same defect; gate 5 does not, and carries pass_result ELIGIBLE_FOR_PAPER_TRADING. Resolution: The pass token is derived by negation of the stated fail_result, following the derivation already sealed for Gate 3 in SE100-CFG-3002: fail STRATEGY_REJECTED_IN_DEVELOPMENT yielded pass STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT, so fail STRATEGY_REJECTED_IN_VALIDATION yields pass STAGE_4_STRATEGY_ADMITTED_IN_VALIDATION. Both tokens are fixed in verdict_token_derivation below, before any validation observation exists, so neither can be shaped by an outcome.",
+    "S4-CONFLICT-3: The Gate 4 drawdown ceiling and the section 5.1 research shutdown are the same number, 15%, measured against the running high-water mark of the same daily-closing equity series. Carried forward from S3-CONFLICT-3, where the same coincidence held at Gate 3. Resolution: The equivalence is adopted unchanged: S4-C3 is MET if and only if the research shutdown never fires during the validation run. A candidate that trips the shutdown has by construction breached S4-C3.",
+    "S4-CONFLICT-4: New, recorded by this stage. The constitution requires 'at least 70% of completed walk-forward test folds' but nowhere defines a fold: no fold count, no fold length, no train/test split, and no definition of 'completed' exists in governance/, config/, or any prior report. A repository-wide search for walk_forward, walk-forward and walkforward returns only restatements of the constitution's own sentence. Resolution: Constitution section 8 requires a signed specification created before execution containing the primary metric and all pass/fail gates. That is the authority under which the fold construction is fixed here, prospectively, rather than chosen at evaluation time. The construction is declared in walk_forward_fold_construction below and is derived only from the frozen partition boundaries in SE100-GOV-1005.",
+    "S4-CONFLICT-5: New, recorded by this stage. The constitution's phrase 'walk-forward' implies periodic re-estimation of parameters on a training segment preceding each test segment. Gate 4's own seventh condition forbids any parameter change in response to validation results, and section 11 makes such a change a material change that creates a new candidate restarting at Gate 3. Re-fitting during validation is therefore prohibited by the same gate that names walk-forward folds. Resolution: The gate text constrains only 'test folds'; it names no train fold and imposes no condition on one. With re-fitting prohibited, the walk-forward degenerates into a sequence of contiguous out-of-sample test folds evaluated under one frozen parameterisation. That is the reading adopted, and it is the more restrictive one: it gives the candidate no opportunity to adapt within the window."
+  ],
+  "gate_conditions": {
+    "S4D-C1": {
+      "required": "Stage 0 freeze verified digest-for-digest on both halves; twelve upstream checksum records verify entry-for-entry from their intended working directories, before any Stage 4 artifact was authored",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "stage_0_freeze_verified_digest_for_digest": true,
+        "stage_0_freeze_detail": {
+          "STAGE_0_CONSTITUTION.md": {
+            "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+            "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+            "match": "True"
+          },
+          "STAGE_0_CONSTITUTION.json": {
+            "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+            "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+            "match": "True"
+          }
+        },
+        "upstream_records_checked": 12,
+        "records": {
+          "governance/STAGE_0_FREEZE.sha256": {
+            "verify_from": "governance",
+            "entries": 2,
+            "entries_expected": 2,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "governance/STAGE_1_FREEZE.sha256": {
+            "verify_from": "governance",
+            "entries": 2,
+            "entries_expected": 2,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "governance/STAGE_1_PREREGISTRATION.sha256": {
+            "verify_from": "root",
+            "entries": 4,
+            "entries_expected": 4,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "governance/STAGE_2_PREREGISTRATION.sha256": {
+            "verify_from": "root",
+            "entries": 4,
+            "entries_expected": 4,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "governance/STAGE_3_PREREGISTRATION.sha256": {
+            "verify_from": "root",
+            "entries": 4,
+            "entries_expected": 4,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256": {
+            "verify_from": "root",
+            "entries": 4,
+            "entries_expected": 4,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "reports/stage0/STAGE_0_VERIFICATION.sha256": {
+            "verify_from": "root",
+            "entries": 8,
+            "entries_expected": 8,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "reports/stage1/STAGE_1_DATA_READINESS.sha256": {
+            "verify_from": "root",
+            "entries": 19,
+            "entries_expected": 19,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "reports/stage2/STAGE_2_BACKTEST_ENGINE.sha256": {
+            "verify_from": "root",
+            "entries": 20,
+            "entries_expected": 20,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "reports/stage3/STAGE_3_STRATEGY_RESEARCH.sha256": {
+            "verify_from": "root",
+            "entries": 26,
+            "entries_expected": 26,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_DESIGN.sha256": {
+            "verify_from": "root",
+            "entries": 31,
+            "entries_expected": 31,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256": {
+            "verify_from": "root",
+            "entries": 37,
+            "entries_expected": 37,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          },
+          "governance/STAGE_4_PREREGISTRATION.sha256": {
+            "verify_from": "root",
+            "entries": 5,
+            "entries_expected": 5,
+            "statuses": [
+              "OK"
+            ],
+            "result": "OK"
+          }
+        },
+        "working_directory_note": "Freeze records list bare filenames and verify from stockedge100/governance/; every other record here uses project-root-relative paths and verifies from stockedge100/. A failure reported from the other directory is an operator error.",
+        "nothing_repaired": "No frozen artifact was opened for writing at any point in this session. A record that failed would be a blocker, not a defect to fix."
+      }
+    },
+    "S4D-C2": {
+      "required": "Frozen on-disk governance authorises a prospective Stage 4 pre-registration and nothing executable, with the determination resting on quoted frozen text rather than on the operating prompt",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "question": "Is a Stage 4 validation evaluation authorized, and by what?",
+        "frozen_gate_text_source": {
+          "path": "governance/STAGE_0_CONSTITUTION.md",
+          "lines": "193 to 203",
+          "digest_recomputed": true,
+          "flattening": "Line 193 supplies the lead-in, lines 195 to 201 supply the seven semicolon-separated conditions in file order, line 203 supplies the fail verdict. No word is added, removed, or reordered; only the Markdown bullet markers, bold markers and line breaks are dropped.",
+          "quote_reconstructed_from_lines": [
+            193,
+            203
+          ],
+          "reconstruction_equals_the_quoted_text": true,
+          "why_reconstruction_and_not_search": "Reapplying the described flattening to exactly those constitution lines and requiring the result to equal the quote proves no word was added, dropped or reordered. Searching for fragments would pass on a quote that lost a clause."
+        },
+        "gate_3_authorizes": "The writing and sealing of a prospective Stage 4 validation pre-registration, and nothing else. Gate 3's own artifacts say so: config/stage3_attempt2_strategy_protocol.json stage_4_remains_prohibited_conditions states that validation-window access remains prohibited until the frozen gate that authorises it, regardless of any development result.",
+        "this_session_authorizes": "Nothing to be executed. This session writes and seals a specification. It performs no validation read and no engine run.",
+        "validation_evaluation_authorized": true,
+        "validation_evaluation_authorized_scope": "Exactly the two runs declared in runs_declared below, of exactly the representative sealed in config/stage4_representative_selection.json, under exactly the procedure frozen by this protocol, in exactly one future session, once this pre-registration is sealed.",
+        "validation_access_authorized_in_this_session": false,
+        "holdout_access_authorized": false,
+        "what_would_void_the_authorization": [
+          "Any change to a sealed digest listed in reproducibility_requirements.sealed_digests_to_recheck.",
+          "Any run beyond the two declared.",
+          "Any second session reading the validation window.",
+          "Any parameter, rule, feature or universe change to the representative.",
+          "Substituting the other Gate 3 admitted candidate, a robustness neighbour, or a combination of candidates."
+        ],
+        "not_from_the_prompt": "The determination cites constitution section 9 gate 4 and the frozen partition lock. The operating prompt is not an authority and is not cited as one."
+      }
+    },
+    "S4D-C3": {
+      "required": "Zeroed restricted-data posture across all six counters, established structurally by an AST predicate whose scope includes every Stage 4 module - the sealing program and this package builder both - recomputed at build time and empty; no declared run label anywhere in src/; Gate 3 Attempt 2 records still verify; the three predicates that moved after the seal reported with the files that moved them",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "restricted_data_counters_recorded_in_the_seal": {
+          "validation_rows_read": 0,
+          "validation_prices_read": 0,
+          "validation_indicators_computed": 0,
+          "validation_trades_counted": 0,
+          "holdout_observations_read": 0,
+          "dataset_loads_in_this_session": 0
+        },
+        "how_this_is_known": "Structural, not asserted. No module on the pre-registration path imports the data layer or calls a dataset loader, which is the AST predicate stage_4_modules_touching_restricted_data_or_a_broker, recorded above as 0 and exercised by tests/unit/test_stage4_preregistration.py on dates alone.",
+        "must_stay_zero_recomputed_now": {
+          "modules_naming_a_stage_4_run_label": [],
+          "stage_4_modules_touching_restricted_data_or_a_broker": [],
+          "ast_predicate_scope": [
+            "src/stockedge100/reporting/stage4_package.py",
+            "src/stockedge100/reporting/stage4_preregistration.py"
+          ],
+          "ast_predicate_definition": "Count of files under src/stockedge100/ with suffix .py whose relative path contains 'stage4' - this sealing program INCLUDED - whose parsed syntax tree contains an import of the data-access layer, a call to a dataset loader, an import of a network or broker package, an attribute access used to read an environment variable or open a connection, or a string constant containing a URL scheme. This is an AST question, not a text search: a text search would match the words of this very definition. It is the fail-closed proof that the pre-registration path cannot read a validation or holdout observation and cannot reach a broker. Must be 0.",
+          "why_ast_and_not_grep": "A text search over either module would match the words of the predicate's own definition. The predicate walks the parsed syntax tree instead: no forbidden import root, no dataset-loader call, no credential attribute, no string constant containing a URL scheme."
+        },
+        "gate_3_attempt_2_immutability": {
+          "records": {
+            "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256": [
+              "OK"
+            ],
+            "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256": [
+              "OK"
+            ]
+          },
+          "verify": true,
+          "why": "The representative was selected from that decision record, so the check fails if the evidence behind the selection changed by a single byte."
+        },
+        "moved_after_the_seal": {
+          "measured_at": "Every count here is recomputed before this build writes anything, so the decision record, the artifact manifest, the checksum record and this build's own run record do not yet exist and are not counted. Each of the three will rise by one artifact more once the build completes; the two that must stay zero are unaffected, because none of those files is a module.",
+          "stage_4_evaluator_or_result_modules": {
+            "value_at_sealing": 0,
+            "value_now": 1,
+            "files": [
+              "src/stockedge100/reporting/stage4_package.py"
+            ],
+            "anticipated_in_the_sealed_definition": false,
+            "classification": "Design-session decision-package builder. It reads governance artifacts, recomputes digests and writes a decision record; it computes no return, no metric and no fold, and it is not a Stage 4 evaluator. The sealed definition excludes one named file - the sealing program - so this builder is counted. It keeps the name its stage implies rather than being renamed to duck a path marker, because a marker evaded by renaming is not a marker. Section 16 of the report records this.",
+            "independent_checks_behind_that_classification": "stage_4_modules_touching_restricted_data_or_a_broker includes this builder in its own scope by construction and reads empty; modules_naming_a_stage_4_run_label stays 0, so no declared Stage 4 run label appears anywhere in src/."
+          },
+          "stage_4_report_artifacts": {
+            "value_at_sealing": 0,
+            "value_now": 2,
+            "files": [
+              "reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION_TEST_SUMMARY.md",
+              "reports/stage4/pytest_stage4_output.txt"
+            ],
+            "anticipated_in_the_sealed_definition": true,
+            "classification": "This session's own design-session package. The test summary and the pytest output exist at measurement time; the decision record, artifact manifest and checksum record are written by this build immediately afterwards. The sealed definition states that the recorded value is the count that existed before the seal, which was zero."
+          },
+          "stage_4_run_records": {
+            "value_at_sealing": 0,
+            "value_now": 1,
+            "files": [
+              "runs/SE100-R-20260813T140121Z.json"
+            ],
+            "anticipated_in_the_sealed_definition": true,
+            "classification": "The seal's own reproducibility record, which carries the stage token by construction. This build appends a second immediately afterwards. Neither contains a declared Stage 4 run label, which is the predicate that would indicate an evaluation had been run."
+          }
+        },
+        "none_of_the_moved_files_is": "strategy code, a Stage 4 evaluator, a performance result, or a file containing a return, drawdown, trade count, fold return or equity value for the validation window - no such value exists."
+      }
+    },
+    "S4D-C4": {
+      "required": "Mandatory-rule search recorded and empty; eligible set exactly the two admitted PRIMARY candidates; rule return-blind, parameter-free, applied in full to both candidates; survivor count 1; the stop-for-human alternative recorded before application",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "mandatory_rule_search": {
+          "question": "Does the constitution, or any frozen or sealed artifact, already mandate how to reduce multiple admitted candidates to one?",
+          "locations_searched": [
+            "governance/STAGE_0_CONSTITUTION.md, all sections",
+            "governance/STAGE_0_CONSTITUTION.json, all gates and thresholds",
+            "governance/*.md and governance/*.json, all 25 files",
+            "config/*.json, all sealed configuration artifacts",
+            "reports/stage3_attempt2/*, both evidence files and the design and research reports"
+          ],
+          "result": "No mandatory selection rule exists. The constitution's section 9 defines gate conjunction within a candidate and says nothing about choosing among candidates that pass. No sealed artifact carries a ranking rule, a tie-break, or a primary-candidate designation.",
+          "constraint_that_did_apply": {
+            "source": "config/stage3_attempt2_gate_criteria_binding.json (SE100-CFG-3004) neighbour_status.can_a_neighbour_become_the_representative_of_its_candidate",
+            "answer_verbatim": "No. Never. Under no result.",
+            "effect": "The eligible set is exactly the two admitted PRIMARY candidates. No robustness neighbour of either is eligible, however it performed."
+          }
+        },
+        "eligible_set": [
+          "SE100-S3A2-C1-PULLBACK-RA1",
+          "SE100-S3A2-C2-MEANREV-RA1"
+        ],
+        "excluded": [
+          "SE100-S3A2-C3-DEFENSIVE-RA1",
+          "any robustness neighbour of C1 or C2",
+          "any Gate 3 Attempt 1 candidate",
+          "any combination, average, portfolio or ensemble of C1 and C2"
+        ],
+        "c3_not_reconsidered": true,
+        "rule": {
+          "id": "SE100-CFG-4003-R1",
+          "name": "Declared-variant research-shutdown screen",
+          "statement": "Eliminate any Gate 3 admitted candidate for which ANY of its declared runs - the PRIMARY parameterisation, any of its four declared robustness neighbours, or its section 7 required stressed-cost run - tripped the section 5.1 research shutdown on development data. If exactly one candidate survives, it is the representative. If both survive or neither survives, the rule does not decide and the stage stops for human selection.",
+          "reads_no_return": true,
+          "reads_no_risk_adjusted_metric": true,
+          "output_is_binary_per_variant": "Each declared run either tripped the shutdown or did not. The rule counts trips. It does not compare magnitudes, does not rank, and has no threshold of its own to choose.",
+          "provenance_terms": 5,
+          "provenance_digests_resolved_to_files": {
+            "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433": [
+              "config/stage3_attempt2_strategy_protocol.json"
+            ],
+            "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5": [
+              "governance/STAGE_0_CONSTITUTION.md"
+            ],
+            "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2": [
+              "config/stage2_cost_model.json"
+            ],
+            "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e": [
+              "config/stage3_attempt2_gate_criteria_binding.json"
+            ]
+          }
+        },
+        "evidence_source": {
+          "path": "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.json",
+          "digest_recomputed": true
+        },
+        "screen_rederived_from_declared_runs": {
+          "SE100-S3A2-C1-PULLBACK-RA1": {
+            "declared_run_count": 6,
+            "shutdown_trip_count": 2,
+            "tripping_runs": [
+              "SE100-S3A2-C1-PULLBACK-RA1#N1",
+              "SE100-S3A2-C1-PULLBACK-RA1#PRIMARY#STRESS"
+            ],
+            "screen_result": "ELIMINATED"
+          },
+          "SE100-S3A2-C2-MEANREV-RA1": {
+            "declared_run_count": 6,
+            "shutdown_trip_count": 0,
+            "tripping_runs": [],
+            "screen_result": "SURVIVES"
+          }
+        },
+        "screen_agrees_with_the_seal": true,
+        "applied_to_both_candidates_in_full": true,
+        "survivors": [
+          "SE100-S3A2-C2-MEANREV-RA1"
+        ],
+        "survivor_count": 1,
+        "human_selection_required": false,
+        "stop_for_human_alternative_recorded": "The stage would have stopped with a BLOCKED verdict and referred the selection to a human, rather than reaching for a second criterion. A tie-break invented after the first rule failed would be a retrospective rule wearing a prospective rule's clothes.",
+        "what_the_rule_is_not": [
+          "It is not a ranking. It produces a survivor set, not an order. Had both candidates survived it would have decided nothing, and the stage would have stopped for human selection rather than reaching for a second criterion.",
+          "It is not a claim that C1 is a bad strategy. C1 satisfied every hard Gate 3 condition and remains a Gate 3 admitted candidate on the record. It is not carried to validation.",
+          "It is not a repair of C1. Repairing C1's cost sensitivity or its neighbour breach would be a parameter change creating a new candidate under section 11, and is explicitly not authorized.",
+          "It is not a rule about magnitudes. C1's breaching drawdowns and C2's largest non-breaching drawdown are recorded below for completeness, but the predicate uses neither."
+        ]
+      }
+    },
+    "S4D-C5": {
+      "required": "Seven conditions from the frozen Markdown; six thresholds derived from the constitution's JSON companion; both tokens derived from the sealed derivation with neither taken from a prompt; six of seven measurements adopted by digest",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "conditions_declared": 7,
+        "condition_ids": [
+          "S4-C1",
+          "S4-C2",
+          "S4-C3",
+          "S4-C4",
+          "S4-C5",
+          "S4-C6",
+          "S4-C7"
+        ],
+        "conditions_whose_required_text_is_located_in_the_frozen_gate_text": [
+          "S4-C1",
+          "S4-C2",
+          "S4-C3",
+          "S4-C4",
+          "S4-C5",
+          "S4-C6",
+          "S4-C7"
+        ],
+        "frozen_gate_json_companion_source": "governance/STAGE_0_CONSTITUTION.json",
+        "frozen_gate_json_companion_digest_recomputed": true,
+        "companion_matches_the_frozen_gate_on_disk": true,
+        "companion_thresholds": 6,
+        "companion_carries_no_pass_result": true,
+        "tokens": {
+          "pass_token": "STAGE_4_STRATEGY_ADMITTED_IN_VALIDATION",
+          "fail_token": "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+          "derived_from_the_frozen_fail_result": true,
+          "derivation_method": "fail_token is the constitution's gate 4 fail_result STRATEGY_REJECTED_IN_VALIDATION prefixed with the stage, exactly as SE100-CFG-3002 prefixed gate 3's. pass_token is its negation with REJECTED replaced by ADMITTED, exactly as SE100-CFG-3002 derived gate 3's absent pass_result. Neither token is invented and neither is taken from an operating prompt.",
+          "conjunctive_note": "Gates are conjunctive per constitution section 9: every hard condition must pass. At Gate 3 the stage verdict was additionally a disjunction ACROSS candidates, because Gate 3 asked whether a candidate worth carrying forward exists. Gate 4 has no disjunction: exactly one representative is evaluated, so conjunction within that candidate IS the stage verdict. There is no second candidate whose result could rescue it.",
+          "single_representative_note": "Because exactly one candidate is evaluated, no admissible_candidate_exists disjunction row exists at Gate 4. The decisive row is the representative's own conjunction. This is a narrowing relative to Gate 3 and is deliberate: it is the consequence of the single-read rule, not a loosening of it."
+        },
+        "measurements_adopted_by_digest": {
+          "config/stage2_cost_model.json": true,
+          "config/stage3_gate_criteria.json": true,
+          "governance/STAGE_1_HOLDOUT_LOCK.json": true
+        },
+        "measurements_this_stage_authors": [
+          "walk_forward_fold_construction, in full. It exists nowhere on disk. See S4-CONFLICT-4.",
+          "The promotion of the stressed-cost run from non-gating to gating, which is not a new measurement but a change of status that the constitution's gate 4 text makes for us. See stressed_cost_status_change.",
+          "The seven condition ids, predicates, boundary treatments and not-evaluable treatments below, assembled from the frozen gate text and the adopted measurements."
+        ],
+        "six_of_seven_adopted": "Six of the seven conditions are measured by definitions adopted unchanged from artifacts sealed before Gate 3 was evaluated. The seventh, S4-C6, needs a fold construction that exists nowhere on disk; see S4D-C6."
+      }
+    },
+    "S4D-C6": {
+      "required": "The fold construction is the single measurement this stage authors; derived from the frozen partition boundaries alone; recorded as S4-CONFLICT-4 with its section 8 authority; train_folds empty per S4-CONFLICT-5",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "id": "SE100-CFG-4002-WF1",
+        "authority": "constitution SE100-GOV-0001 section 8, which requires a signed specification created before execution containing the primary metric and all pass/fail gates; and section 9 gate 4, which requires completed walk-forward test folds without defining them.",
+        "derived_only_from": "The frozen validation window boundaries in SE100-GOV-1005. No trading-session count, no price, no indicator value and no coverage statistic from the validation partition was read to construct these folds.",
+        "validation_window_read_from_the_frozen_lock": [
+          "2021-08-01",
+          "2024-07-31"
+        ],
+        "validation_calendar_months": 36,
+        "test_folds_declared": 12,
+        "test_folds_recomputed": 12,
+        "folds_match_the_recomputation": true,
+        "folds_tile_the_validation_window_with_no_remainder": true,
+        "folds_are_contiguous_and_non_overlapping": true,
+        "first_fold": {
+          "fold": 1,
+          "start": "2021-08-01",
+          "end": "2021-10-31"
+        },
+        "last_fold": {
+          "fold": 12,
+          "start": "2024-05-01",
+          "end": "2024-07-31"
+        },
+        "train_folds": {
+          "count": 0,
+          "set": [],
+          "reason": "Re-estimating any parameter inside the validation window is prohibited by Gate 4's own seventh condition and by constitution section 11. With no re-fitting there is nothing to train, and the gate text imposes conditions on test folds only. See S4-CONFLICT-5."
+        },
+        "conflicts": {
+          "S4-CONFLICT-4": "New, recorded by this stage. The constitution requires 'at least 70% of completed walk-forward test folds' but nowhere defines a fold: no fold count, no fold length, no train/test split, and no definition of 'completed' exists in governance/, config/, or any prior report. A repository-wide search for walk_forward, walk-forward and walkforward returns only restatements of the constitution's own sentence.",
+          "S4-CONFLICT-5": "New, recorded by this stage. The constitution's phrase 'walk-forward' implies periodic re-estimation of parameters on a training segment preceding each test segment. Gate 4's own seventh condition forbids any parameter change in response to validation results, and section 11 makes such a change a material change that creates a new candidate restarting at Gate 3. Re-fitting during validation is therefore prohibited by the same gate that names walk-forward folds."
+        },
+        "no_validation_observation_was_used": "The construction is calendar arithmetic on the two frozen boundary dates. No trading-session count, price, indicator value or coverage statistic from the validation partition was read to build it."
+      }
+    },
+    "S4D-C7": {
+      "required": "The selection is disclosed as adaptive, with the residual freedom stated and five mitigations recorded; the narrowest margin of the survivor recorded; the cumulative development experiment count not reset - 24 development runs across both Gate 3 attempts, plus this stage's 2",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "statement": "This selection was made in a session that had lawful access to Gate 3 development evidence. It is an adaptive step, not an independent one.",
+        "what_is_independent": "The rule's output. Given the predicate, the answer is a function of shutdown booleans recorded in a sealed evidence file, and no return enters it.",
+        "what_is_not_independent": "The choice of predicate. It was chosen by a researcher who had read the development evidence, and a different return-blind predicate could in principle have selected differently.",
+        "mitigations": [
+          "The predicate has no tunable parameter, so it cannot be nudged toward an outcome once chosen.",
+          "The full application is recorded for BOTH candidates, including every variant that did not trip, so a reader can verify the count rather than trust it.",
+          "The independent frozen-threshold checks are recorded, including the one that does not flatter the selected candidate.",
+          "The surviving candidate's narrowest margin is recorded rather than left to be discovered.",
+          "The rule's return-blindness is stated as a checkable property of the predicate, not as an assurance about the author's state of mind."
+        ],
+        "not_concealed": "The representative keeps its Gate 3 identifier unchanged, so it is traceable to the evidence that admitted it and to the two-attempt search that produced it.",
+        "narrowest_margin_of_the_survivor": {
+          "statement": "C2 survives the screen without a single trip, but not with wide margins on every variant. Its largest non-breaching development drawdown is SE100-S3A2-C2-MEANREV-RA1#N2 at 0.1465979382684879116079616515992935, which is 34 basis points below the 15% shutdown level, and #N1 at 0.1438752249862801387348381472146044 is 61 basis points below it.",
+          "why_it_is_recorded": "The screen is binary and those variants did not trip, so the rule's output is unaffected. But a reader entitled to know how close the surviving candidate came should not have to derive it. C2 is the survivor of this screen; it is not a candidate with comfortable risk headroom.",
+          "consequence_for_gate_4": "S4-C3's ceiling is the same 15% on the same series (S4-CONFLICT-3). A representative whose development neighbours sat 34 basis points from that level has no margin to spare on a fresh window, and the drawdown condition is a real risk of failure, not a formality. This is recorded before any validation observation exists."
+        },
+        "cumulative_experiment_count": {
+          "gate_3_attempt_1": "6 primary parameterisations, one per declared candidate family, as recorded in results.per_candidate_primary of reports/stage3/STAGE_3_STRATEGY_RESEARCH.json. That evidence file records no robustness-neighbour and no stressed-cost variant, because all six failed S3-C2 on the primary run.",
+          "gate_3_attempt_2": "15 gating variants across three candidates - one primary and four declared robustness neighbours each - plus three non-gating stressed-cost runs, 18 development runs in total. Counted from results.all_registered_variants (15 keys) and results.stressed_cost_runs (3 keys) of reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.json, sha256 26eecacfe96420878ce647b86f68da8ed8a17fea1338d85ee982b190645ed466.",
+          "gate_3_total_across_both_attempts": "24 development runs.",
+          "stage_4": 2,
+          "rule": "Any later statistical interpretation uses the cumulative count across all attempts and stages. This stage does not reset it, and two runs of one frozen parameterisation on a fresh window do not undo the multiplicity accumulated in development."
+        },
+        "adaptive_research_disclosure_items": 10,
+        "multiple_comparisons_disclosure": [
+          "The representative was chosen from two development-admitted candidates, which were themselves chosen from a larger set across two Gate 3 attempts. A validation pass therefore carries the selection history of everything that came before it.",
+          "Gate 4 applies no multiplicity correction, and this protocol does not invent one. What it does instead is hold the validation exposure to the minimum the gate requires: one candidate, one parameterisation, two runs, one read.",
+          "A single out-of-sample window evaluated once is the strongest evidence this project's design can produce at this stage. It is still one window, three years long, of one instrument, over one macro regime. It is not a demonstration that an edge exists."
+        ],
+        "no_multiplicity_correction_is_applied": "Gate 4 specifies none and this protocol invents none. The cumulative count is carried forward for any later statistical interpretation instead."
+      }
+    },
+    "S4D-C8": {
+      "required": "Two runs declared with a hard limit, one parameterisation, zero re-runs; every condition assigned to a run or to S4-C7; failure, defect, and unusable-data outcomes pre-committed; no discretionary choice left to the evaluation session",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "runs_declared": 2,
+        "run_count_is_a_hard_limit": true,
+        "run_labels": [
+          "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+          "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS"
+        ],
+        "every_declared_run_is_gating": [
+          true,
+          true
+        ],
+        "no_neighbour_runs": {
+          "declared": false,
+          "reason": "Gate 4 states no neighbour-stability condition. Gate 3's S3-C7 required four robustness neighbours per candidate; Gate 4 requires none. Declaring neighbour runs on the validation window would be four additional searches over a window that may be read once, and the results would gate nothing. Their absence is therefore not a gap in the evidence; adding them would be an unauthorised expansion of the search.",
+          "consequence_recorded": "Gate 4 will produce no validation-window robustness evidence. That is a limitation of the gate as frozen, not of this protocol, and it travels with the result."
+        },
+        "iteration_budget": {
+          "parameterisations": 1,
+          "runs": 2,
+          "sessions_reading_validation": 1,
+          "re_runs_permitted_after_a_valid_completed_run": 0,
+          "note": "There is no search at Gate 4. The budget is not a limit on exploration; it is the statement that no exploration is authorized."
+        },
+        "gate_conditions": [
+          "S4-C1",
+          "S4-C2",
+          "S4-C3",
+          "S4-C4",
+          "S4-C5",
+          "S4-C6",
+          "S4-C7"
+        ],
+        "conditions_assigned_to_a_declared_run": [
+          "S4-C1",
+          "S4-C2",
+          "S4-C3",
+          "S4-C4",
+          "S4-C5",
+          "S4-C6"
+        ],
+        "conditions_assigned_elsewhere": {
+          "S4-C7": "Scored by recomputing the sealed digest set, not by a run."
+        },
+        "conditions_unassigned": [],
+        "pre_committed_outcomes": {
+          "missing_or_invalid_data": "The frozen Stage 1 data-readiness evidence and the sealed engine specification govern. A missing session, a stale mark, or a non-positive price is handled exactly as SE100-CFG-2002 specifies, with no stage-specific exception.",
+          "post_seal_defect": "If a defect is discovered in this protocol, in SE100-CFG-4002, or in SE100-CFG-4003 AFTER the seal but BEFORE any validation observation is read, the defect is recorded, this pre-registration is superseded by a new one with a new artifact id, and the supersession is recorded in the new runs/ record's notes. The sealed files are not edited in place.",
+          "partial_or_failed_run": "A run that crashes, is interrupted, or does not reach 2024-07-31 produces no valid evidence and is not scored. Its conditions are NOT_EVALUABLE, which per constitution section 9 is not a pass.",
+          "no_retuning": "No rule, feature, universe, parameter, cost assumption, risk setting, indicator definition, fold construction, threshold or measurement method may be changed in response to any validation result. This is S4-C7 and it is measured mechanically by digest recomputation, not asserted.",
+          "fail_is_a_deliverable": "A Gate 4 FAIL is a result and is kept on disk with the same rigour as a pass. It is not a reason to retune the representative, to substitute the other admitted Gate 3 candidate, to reopen Attempt 2, or to re-read the validation window. Constitution section 11 makes any such change a new candidate restarting at Gate 3."
+        },
+        "incoherent_combinations_refused": 6,
+        "evaluation_integrity_rules": 7,
+        "explicit_non_authorizations": 7,
+        "stage_5_remains_prohibited_conditions": 9,
+        "no_discretion_left": "One parameterisation, two runs, one session, zero re-runs, every condition assigned, every failure mode pre-committed. The evaluation session executes; it does not choose."
+      }
+    },
+    "S4D-C9": {
+      "required": "Checksum record verifies 5/5 from the project root; Markdown and JSON materially agree; all four JSON artifacts ASCII-only in fact; S4-C7 set 13 declared / 12 recorded with the omission being the record itself; no tree digest written inside a covered file; the sealer refuses a second run",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "checksum_record": {
+          "path": "governance/STAGE_4_PREREGISTRATION.sha256",
+          "path_convention": "project-root-relative",
+          "verify_from": "stockedge100/",
+          "entries": 5,
+          "statuses": [
+            "OK"
+          ],
+          "does_not_name_itself": true
+        },
+        "preregistered_file_digests_recomputed": {
+          "config/stage4_validation_protocol.json": {
+            "recorded": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+            "recomputed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+            "match": true
+          },
+          "config/stage4_gate_criteria.json": {
+            "recorded": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+            "recomputed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+            "match": true
+          },
+          "config/stage4_representative_selection.json": {
+            "recorded": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+            "recomputed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+            "match": true
+          },
+          "governance/STAGE_4_PREREGISTRATION.md": {
+            "recorded": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+            "recomputed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+            "match": true
+          }
+        },
+        "markdown_json_agreement_tokens": {
+          "SE100-GOV-0008": {
+            "in_json": true,
+            "in_markdown": true
+          },
+          "SE100-S3A2-C2-MEANREV-RA1": {
+            "in_json": true,
+            "in_markdown": true
+          },
+          "SE100-CFG-4003-R1": {
+            "in_json": true,
+            "in_markdown": true
+          },
+          "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION": {
+            "in_json": true,
+            "in_markdown": true
+          },
+          "LOCKED": {
+            "in_json": true,
+            "in_markdown": true
+          },
+          "SEALED": {
+            "in_json": true,
+            "in_markdown": true
+          }
+        },
+        "json_artifacts_ascii_only_in_fact": {
+          "governance/STAGE_4_PREREGISTRATION.json": true,
+          "config/stage4_validation_protocol.json": true,
+          "config/stage4_gate_criteria.json": true,
+          "config/stage4_representative_selection.json": true
+        },
+        "markdown_encoding": "governance/STAGE_4_PREREGISTRATION.md is UTF-8; its digest is pinned in the seal, so its encoding cannot drift silently.",
+        "s4_c7_digest_set": {
+          "declared_set_size": 13,
+          "recorded_in_the_seal": 12,
+          "own_digest_excluded": "governance/STAGE_4_PREREGISTRATION.json",
+          "own_digest_location": "The thirteenth entry of the declared set is this record. Nothing hashes itself, so its digest is carried by governance/STAGE_4_PREREGISTRATION.sha256 instead.",
+          "recomputed": {
+            "config/stage4_validation_protocol.json": true,
+            "config/stage4_gate_criteria.json": true,
+            "config/stage4_representative_selection.json": true,
+            "config/stage2_cost_model.json": true,
+            "config/stage2_engine_spec.json": true,
+            "config/stage3_attempt2_strategy_protocol.json": true,
+            "config/stage3_gate_criteria.json": true,
+            "config/stage3_attempt2_gate_criteria_binding.json": true,
+            "governance/STAGE_1_UNIVERSE.json": true,
+            "governance/STAGE_1_HOLDOUT_LOCK.json": true,
+            "governance/STAGE_4_PREREGISTRATION.md": true,
+            "src/stockedge100/strategies/attempt2_candidates.py": true
+          }
+        },
+        "no_tree_digest_inside_a_covered_file": {
+          "repo_state_id_present_in": {
+            "governance/STAGE_4_PREREGISTRATION.json": false,
+            "governance/STAGE_4_PREREGISTRATION.md": false,
+            "config/stage4_validation_protocol.json": false,
+            "config/stage4_gate_criteria.json": false,
+            "config/stage4_representative_selection.json": false,
+            "governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md": false
+          },
+          "per_file_resolution": {
+            "governance/STAGE_4_PREREGISTRATION.json": {
+              "hex64_strings": 14,
+              "resolve_to_a_tracked_file": 14,
+              "not_a_file_digest_but_accounted_for": [],
+              "unaccounted_for": [],
+              "own_digest_present": []
+            },
+            "governance/STAGE_4_PREREGISTRATION.md": {
+              "hex64_strings": 12,
+              "resolve_to_a_tracked_file": 12,
+              "not_a_file_digest_but_accounted_for": [],
+              "unaccounted_for": [],
+              "own_digest_present": []
+            },
+            "config/stage4_validation_protocol.json": {
+              "hex64_strings": 15,
+              "resolve_to_a_tracked_file": 11,
+              "not_a_file_digest_but_accounted_for": [
+                "25cfd6700efc5ba34bd0c802fd5a18c9c694eb4b6bf1b3aafe37304e7f658f73",
+                "299dc2c4cec963668bc08c67601f431851695c78c5f1d7e056fa9f42e1e6112d",
+                "46c86efd21f26c62ad17c14e9430cf6b29010140788c5b7a0a9c37b4ee9a5715",
+                "e50d787ef2733034ab7a418823b255d785ff0038d0fa657a38e89b7d44ff67d8"
+              ],
+              "unaccounted_for": [],
+              "own_digest_present": []
+            },
+            "config/stage4_gate_criteria.json": {
+              "hex64_strings": 5,
+              "resolve_to_a_tracked_file": 5,
+              "not_a_file_digest_but_accounted_for": [],
+              "unaccounted_for": [],
+              "own_digest_present": []
+            },
+            "config/stage4_representative_selection.json": {
+              "hex64_strings": 30,
+              "resolve_to_a_tracked_file": 6,
+              "not_a_file_digest_but_accounted_for": [
+                "030d2e2e743e07f0168f703ba727104c1ebeb0ed9f06a54b98cc5b542539ee91",
+                "0ad255db1b98a4aa32fc522f9c6dd4419a3a72eaf0042ded051a344b26e2ebf0",
+                "1331bb6f611814d7812c581655cb73051105303ad58c39c8bb6cb8d5beca1a54",
+                "16423a4754e74d77eadc24e21cf1bb91c74cec8c3920ee5bc0e2838660858daf",
+                "25cfd6700efc5ba34bd0c802fd5a18c9c694eb4b6bf1b3aafe37304e7f658f73",
+                "25f6e1d561e13b3038c33e14900fbed3d4a287ef3035dfc7b3c96925ab788898",
+                "299dc2c4cec963668bc08c67601f431851695c78c5f1d7e056fa9f42e1e6112d",
+                "3757036560e060005d30a86a0d6a5ec60ce5351256b97079c52cd514f710bb20",
+                "3f5cbdf268a9d9ddc3e5135fa2f2abfa527cb83c66108ab7ffce43064b835678",
+                "46c86efd21f26c62ad17c14e9430cf6b29010140788c5b7a0a9c37b4ee9a5715",
+                "5f121585daf40a258a79337439a4c06df0eeb1d104afdc22ae74730723949c44",
+                "724306cefd304b6fbb5a209866f318abc91000d94b7e16acffe9013fb2cb128f",
+                "86e3bdeaf4793f8137641691c8a53d4e96fa6e3441581419e6777c9e55be6226",
+                "92c365970abc86696445af017efcc1682dc559eaa47d84814a8577b72dee2c6c",
+                "95d9a60146ee8962e1f1ae2b74d771162c957634d5cfca66b1d183c70de35f64",
+                "9b71ff7b8a6219089ec1f44b4e874dcb6e645b5b80d00d0db36d47ec0db12722",
+                "c1f2b8bba154ec53c2d52ed22ddc6b967bd70380e475f3727f55723bc4039784",
+                "cfa4a4b606f8c704f5bf00a84152f64f5b1a1ce5eb25f5d472735eae3a0b1249",
+                "e170bb1d7121a4a81b2ca02decc073ea15b2d4c4fbf59ae790fb363c537dfe8f",
+                "e50d787ef2733034ab7a418823b255d785ff0038d0fa657a38e89b7d44ff67d8",
+                "e67f1c58795c98abb5043dc18f27a74ef2bd5d0dd977e968bebdf841fa9b88bf",
+                "e7811f0cfcf7320170b091b01a567d557e8823965ff58f253d93d6cdabcebbab",
+                "ee40b17ff56369ea11aca5cfa44534215c1afc1ae4de51ae716e7b69d3d0d7a3",
+                "f0c8b3845fe4a0e5dd227ef110af6a099978d7df556fff04feeeff8f4e099e3e"
+              ],
+              "unaccounted_for": [],
+              "own_digest_present": []
+            },
+            "governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md": {
+              "hex64_strings": 16,
+              "resolve_to_a_tracked_file": 16,
+              "not_a_file_digest_but_accounted_for": [],
+              "unaccounted_for": [],
+              "own_digest_present": []
+            }
+          },
+          "files_with_an_unaccounted_for_digest": {},
+          "files_carrying_their_own_digest": {},
+          "non_file_digest_keys_accepted": [
+            "trade_digest",
+            "equity_digest"
+          ],
+          "note": "Every 64-hex string in every covered file is either the digest of a tracked file on disk or the content digest of a Gate 3 development run's trades or equity curve, held under a key named for what it is. None is a tree digest and none is the file's own. A bare count would prove nothing; the resolution is the check."
+        },
+        "sealing_is_unrepeatable": {
+          "record_exists": true,
+          "consequence": "Re-invoking the sealing program returns exit 2 because the record already exists. A pre-registration is sealed once; regenerating it would destroy its meaning."
+        }
+      }
+    },
+    "S4D-C10": {
+      "required": "No window authorized in this session; validation LOCKED; holdout SEALED; enforcement structural through ResearchWindow / MarketView; the folds partition the validation window without redefining it; no boundary moved",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "authorized_windows_in_this_session": [],
+        "validation_window_state": "LOCKED",
+        "holdout_window_state": "SEALED",
+        "holdout_lock_digest_matches_the_adopted_value": true,
+        "boundaries_match_the_frozen_lock": true,
+        "boundaries": {
+          "development": [
+            "1993-01-29",
+            "2021-07-31"
+          ],
+          "validation": [
+            "2021-08-01",
+            "2024-07-31"
+          ],
+          "holdout": [
+            "2024-08-01",
+            "2026-07-31"
+          ]
+        },
+        "boundaries_not_recomputed": "The boundaries are read from the frozen lock and are not recomputed, widened, narrowed, or shifted. The twelve folds partition the validation window; they do not redefine it.",
+        "enforcement": "stockedge100.backtest.window.ResearchWindow raises WindowViolation on any session outside the window authorized for the run, and MarketView raises LookAheadError on any read past the decision session. Both are structural; neither depends on a strategy behaving well.",
+        "state_in_the_pre_registration_session": {
+          "authorized": [
+            "development"
+          ],
+          "validation_window_state": "LOCKED",
+          "holdout_window_state": "SEALED",
+          "note": "No validation observation is read to write this file. The only validation-partition facts it contains are the window boundaries, which SE100-GOV-1005 publishes as frozen metadata, and the calendar arithmetic performed on them."
+        },
+        "state_in_the_authorized_evaluation_session": {
+          "authorized": [
+            "validation"
+          ],
+          "development_read": "The indicator warmup segment immediately preceding the validation window start is read from the development partition, which is already authorized and already read. No new development search is performed and no development metric is recomputed.",
+          "validation_window_state": "AUTHORIZED_FOR_EXACTLY_ONE_READ",
+          "holdout_window_state": "SEALED",
+          "note": "The holdout remains sealed through Gate 4 regardless of the Gate 4 verdict. It is read exactly once, at Gate 5."
+        },
+        "folds_do_not_redefine_the_window": "The twelve folds partition the validation window into consecutive three-month blocks anchored on its frozen start. They tile it exactly; they do not move either boundary and they are not a new window."
+      }
+    },
+    "S4D-C11": {
+      "required": "708 collected, up from 560; four-file selection 263 passed / 0 failed / 0 skipped, the new module 148; 15 of 15 recorded test-file digests unchanged; nothing weakened, skipped, xfailed, or deleted",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about behaviour on the validation window. It means the condition for a legitimate pre-registration was recomputed from the written artifacts and holds. No S4D condition is evidence about gate 4.",
+      "evidence": {
+        "collected_before": 560,
+        "collected_now": 708,
+        "collected_command": "cd stockedge100 && python -m pytest tests --collect-only -q",
+        "executed_selection": "cd stockedge100 && python -m pytest tests/unit/test_stage0_governance.py tests/unit/test_stage1_preregistration.py tests/unit/test_stage3_attempt2_preregistration.py tests/unit/test_stage4_preregistration.py -q",
+        "executed_selection_result": {
+          "passed": 263,
+          "failed": 0,
+          "skipped": 0
+        },
+        "new_module_result": {
+          "passed": 148,
+          "failed": 0,
+          "skipped": 0
+        },
+        "why_the_whole_suite_was_not_run": "Two integration modules read the normalised dataset and drive the engine over it, which a pre-registration session may not do. Collection imports every module but executes no body, so the floor count is safe to take that way.",
+        "floor_asserted_by_digest": {
+          "source_run_records": [
+            "runs/SE100-R-20260813T120406Z.json",
+            "runs/SE100-R-20260813T140121Z.json"
+          ],
+          "recorded": 15,
+          "unchanged": 15,
+          "changed": [],
+          "missing": [],
+          "live_test_files": 16,
+          "added_since": [
+            "tests/unit/test_stage4_preregistration.py"
+          ],
+          "conftest_verified_and_untouched": true
+        },
+        "nothing_subtracted": "No test was weakened, skipped, xfailed or deleted. A weakened or deleted test would appear above as changed or missing."
+      }
+    },
+    "gate_4_admissible_candidate_exists": {
+      "required": "Whether the representative satisfies all seven Gate 4 conditions on the validation window. The single sealed representative satisfies EVERY hard condition of Gate 4.",
+      "verdict": "NOT_RUN",
+      "verdict_semantics": "This entry, and only this entry, is the gate 4 determination. NOT_RUN is not a pass and is not a fail: no validation observation was read, no Stage 4 evaluator exists, and no fold return, drawdown or Sharpe ratio for the validation window has ever been computed. This entry exists so that this package cannot be read as a gate 4 result.",
+      "evidence": {
+        "gate_4_evaluated": false,
+        "gate_4_passed": false,
+        "validation_rows_read": 0,
+        "dataset_loads_in_this_session": 0,
+        "across_candidates": "NOT_APPLICABLE_EXACTLY_ONE_REPRESENTATIVE",
+        "single_representative_note": "Because exactly one candidate is evaluated, no admissible_candidate_exists disjunction row exists at Gate 4. The decisive row is the representative's own conjunction. This is a narrowing relative to Gate 3 and is deliberate: it is the consequence of the single-read rule, not a loosening of it.",
+        "decided_by": "A later, separately authorized session that runs exactly the two declared runs of the sealed representative on the locked validation window and emits one of the two sealed gate 4 tokens."
+      }
+    }
+  },
+  "artifacts": [
+    "governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md",
+    "governance/STAGE_4_PREREGISTRATION.md",
+    "governance/STAGE_4_PREREGISTRATION.json",
+    "governance/STAGE_4_PREREGISTRATION.sha256",
+    "config/stage4_validation_protocol.json",
+    "config/stage4_gate_criteria.json",
+    "config/stage4_representative_selection.json",
+    "src/stockedge100/reporting/stage4_preregistration.py",
+    "src/stockedge100/reporting/stage4_package.py",
+    "tests/unit/test_stage4_preregistration.py",
+    "reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION_TEST_SUMMARY.md",
+    "reports/stage4/pytest_stage4_output.txt",
+    "reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION.json",
+    "reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION_ARTIFACT_MANIFEST.json"
+  ],
+  "frozen_inputs_read_only": [
+    "governance/STAGE_0_CONSTITUTION.md",
+    "governance/STAGE_0_CONSTITUTION.json",
+    "governance/STAGE_0_FREEZE.sha256",
+    "governance/STAGE_1_HOLDOUT_LOCK.json",
+    "governance/STAGE_1_UNIVERSE.json",
+    "config/stage2_cost_model.json",
+    "config/stage2_engine_spec.json",
+    "config/stage3_gate_criteria.json",
+    "config/stage3_attempt2_strategy_protocol.json",
+    "config/stage3_attempt2_gate_criteria_binding.json",
+    "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.json",
+    "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.json"
+  ],
+  "tests": {
+    "passed": 263,
+    "failed": 0,
+    "skipped": 0,
+    "collected": 708
+  },
+  "authorization_state": {
+    "gate_3_passed": "true",
+    "gate_4_evaluated": "false",
+    "gate_4_passed": "false",
+    "validation_evaluation_authorized": "true \u2014 for the sealed representative under the frozen procedure only, in a later separately authorized session",
+    "validation_access_authorized_in_this_session": "false",
+    "holdout_access_authorized": "false",
+    "stage_5_authorized": "false",
+    "paper_trading_authorized": "false",
+    "shadow_live_authorized": "false",
+    "capital_or_risk_expansion_authorized": "false",
+    "live_trading_authorized": "false",
+    "alpaca_paper_endpoint": "LOCKED",
+    "alpaca_live_endpoint": "LOCKED",
+    "order_submitting_code_in_this_repository": "none exists and none was written",
+    "trade_ready": "no \u2014 StockEdge100 is not trade-ready and may not be described as such"
+  },
+  "next_authorized_stage": "STAGE_4_VALIDATION_EVALUATION \u2014 a separate session that evaluates only SE100-S3A2-C2-MEANREV-RA1, only on the locked validation window 2021-08-01 to 2024-07-31, in exactly the two runs declared in SE100-GOV-0008, from one dataset load, at the sealed parameterisation, scored against the seven sealed Gate 4 conditions and the twelve sealed folds, emitting one of the two sealed Gate 4 tokens. Nothing else is authorized: no parameter change, no neighbour run, no run of the other admitted candidate, no re-run after a valid completed run, and no second session.",
+  "live_trading_authorized": false,
+  "reproducibility": {
+    "run_id": "SE100-R-20260814T111459Z",
+    "repo_state_id": "718be05526c62e1d7dd20aeeef547a7e0388af6a2d622688df34c382054a0686",
+    "package_version": "0.1.0",
+    "python": "3.10.6",
+    "dependency_versions": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "requests": "2.34.2",
+      "pytest": "8.4.2",
+      "yfinance": "1.4.1",
+      "exchange_calendars": "4.13.2",
+      "pyarrow": "MISSING",
+      "scipy": "MISSING"
+    },
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage4_package",
+    "config_hash": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+    "random_seed": null
+  }
+}

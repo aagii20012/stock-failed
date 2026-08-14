@@ -1,0 +1,57 @@
+{
+  "code_hashes": {
+    ".gitignore": "b3404984fba828a70105fd34915932b6a0863ae1ebfcb5e186d699477dff8875",
+    "README.md": "1ced164e3f16c2eb4ca4cae04185cdbabd4b0e3aa35216d0f0438a373af2e4e8",
+    "config/stage1_data_source.json": "7c6273ca501e3aaceafd006b0902ce4f329f83a67c4a9e5190155e8edf83064f",
+    "config/stage1_universe_spec.json": "0583ef00fb5907feaedab561b13b4056c7e07e7c9ce1aae03d8ae197245f4057",
+    "governance/STAGE_0_CONSTITUTION.json": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+    "governance/STAGE_0_CONSTITUTION.md": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+    "governance/STAGE_0_FREEZE.sha256": "6b9fe70005216188b1fde53195a962633e777f41bc345ee93af36d0c00bd8416",
+    "governance/STAGE_0_VERIFICATION_REPORT.md": "f108d2bf6cb179759692c9712cb52b0a2b51c104e144851714307cb2bacc047b",
+    "governance/STAGE_1_PREREGISTRATION.json": "d03b88cbe84e12733070e419066fc1f389ed95dd675746da2ee4477a2f8c15e1",
+    "governance/STAGE_1_PREREGISTRATION.md": "53cea32ff202a4763378a5ecedc360c7e2fa1ccf1ce969d329c2e36b1cb5caee",
+    "governance/STAGE_1_PREREGISTRATION.sha256": "fabf6a061fcc933b9e2def84ebf307e0e0704670ad16c74ea61f269756cc80cd",
+    "pyproject.toml": "2816a9772f3c020984cb2daa75be12a424dc1bfc61d8101e65ca339ad948cc07",
+    "src/stockedge100/__init__.py": "00389738b7e2a2be38d77e5f9d380f84150d46c4f72fa486fe5db3f2c3797fd2",
+    "src/stockedge100/audit.py": "0e510890a8250e98a4af52d0f57dff876b2cd7553b8adbaa8d65486f42049c53",
+    "src/stockedge100/reporting/__init__.py": "3ffd9e858fd295acceca08ec5e7bd69220e9575f1e8aaa264e1db9e859d0aa18",
+    "src/stockedge100/reporting/stage0_package.py": "bce0a7adc0a83a89bb0f91db7e354d192f4d28823a83d19b302492615678f094",
+    "src/stockedge100/reporting/stage1_preregistration.py": "a2a345ae93f0a86d1337ae81cb0efb6b0ac4a26084298f6eeb98d5b24743de2e",
+    "src/stockedge100/reporting/stage_package.py": "c73ffcdffbc8c0d90af0c8740819e7b2001e5a35dc11b0fd84f275106b79f40b",
+    "tests/conftest.py": "1e689f048fea793bbdb0cb2d474e98151f70500b4b639094f716cfd2f173e1ea",
+    "tests/unit/test_stage0_governance.py": "bfe574fc8bbcd5f775f1fa62aeca676f58bfc5a61e00c52a1dd1c07f0a81c245"
+  },
+  "command": "python -m stockedge100.reporting.stage1_preregistration",
+  "config_hash": "7c6273ca501e3aaceafd006b0902ce4f329f83a67c4a9e5190155e8edf83064f",
+  "dataset_hashes": {},
+  "date_range": null,
+  "dependency_versions": {
+    "exchange_calendars": "4.13.2",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "pyarrow": "MISSING",
+    "pytest": "8.4.2",
+    "requests": "2.34.2",
+    "scipy": "MISSING",
+    "yfinance": "1.4.1"
+  },
+  "exit_status": "OK",
+  "holdout_state": "NOT_YET_COMPUTED",
+  "notes": [
+    "Pre-registration sealed before any market data was acquired.",
+    "No credential access. No order. No strategy computation."
+  ],
+  "output_artifact_hashes": {
+    "governance/STAGE_1_PREREGISTRATION.json": "d03b88cbe84e12733070e419066fc1f389ed95dd675746da2ee4477a2f8c15e1",
+    "governance/STAGE_1_PREREGISTRATION.sha256": "fabf6a061fcc933b9e2def84ebf307e0e0704670ad16c74ea61f269756cc80cd"
+  },
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python_version": "3.10.6",
+  "random_seed": null,
+  "repo_state_id": "bfeddf2bbc34ca4175f76c4f993d1d00a32473852054b8a04101fefe03b710d9",
+  "run_id": "SE100-R-20260808T104010Z",
+  "stage": "STAGE_1_PRE_REGISTRATION",
+  "strategy_id": null,
+  "timestamp_utc": "2026-08-08T10:40:10Z",
+  "universe_version": "SE100-CFG-1002@1.0.0"
+}

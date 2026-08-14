@@ -1,0 +1,100 @@
+{
+  "document_id": "SE100-GOV-0006",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 3,
+  "record_type": "PRE_REGISTRATION",
+  "status": "SEALED",
+  "declared_utc": "2026-08-09T13:25:21Z",
+  "run_id": "SE100-R-20260809T132521Z",
+  "constitution_ref": "SE100-GOV-0001",
+  "gate": {
+    "constitutional_gate": 3,
+    "name": "development_admissibility",
+    "pass_conditions": [
+      "total return is positive",
+      "maximum drawdown is no worse than 15%",
+      "profit factor is at least 1.10",
+      "at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results",
+      "performance is not dependent on one trade: removing the single best trade leaves total return above 0%",
+      "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy",
+      "reasonable neighboring parameter values do not reverse the sign of net return"
+    ],
+    "fail_result": "STRATEGY_REJECTED_IN_DEVELOPMENT",
+    "pass_result_source": "Not stated in the frozen artifact. Derived by negation of fail_result and fixed before any result: STRATEGY_ADMITTED_IN_DEVELOPMENT. See config/stage3_gate_criteria.json verdict_token_derivation.",
+    "conditions_in_frozen_json_companion": 5,
+    "conditions_in_frozen_markdown": 7,
+    "conditions_evaluated": 7,
+    "condition_count_note": "The frozen Markdown is authoritative and more restrictive than its JSON companion, which omits the profit-concentration and neighboring-parameter conditions. All seven are evaluated. Reported, not repaired; the frozen artifact is not edited."
+  },
+  "stage_0_freeze_verified": true,
+  "stage_0_freeze_verification": {
+    "STAGE_0_CONSTITUTION.md": {
+      "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "match": "True"
+    },
+    "STAGE_0_CONSTITUTION.json": {
+      "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+      "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+      "match": "True"
+    }
+  },
+  "stage_1_freeze_verified": true,
+  "stage_1_freeze_files": [
+    "STAGE_1_HOLDOUT_LOCK.json",
+    "STAGE_1_UNIVERSE.json"
+  ],
+  "stage_2_preregistration_verified": true,
+  "stage_2_decision_record_verified": true,
+  "sealed_before_any_strategy_code": true,
+  "strategy_modules_present_at_seal_time": 0,
+  "strategy_output_files_present_at_seal_time": 0,
+  "candidates_declared": 6,
+  "candidate_ids": [
+    "SE100-S3-F1-TREND-SMA200",
+    "SE100-S3-F2-PULLBACK-SMA200-SMA10",
+    "SE100-S3-F3-MEANREV-RSI2",
+    "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25",
+    "SE100-S3-F5-ROTATION-DUALMOM",
+    "SE100-S3-F6-DEFENSIVE-SMA200-SHY"
+  ],
+  "robustness_neighbours_per_candidate": 4,
+  "declared_runs": 30,
+  "revisions_permitted": 0,
+  "preregistered_files": {
+    "config/stage3_strategy_protocol.json": {
+      "sha256": "04dbe3fa8c6b2a9e725a66d24f5dc0a3a7e3567e70d38bfd2e96869cc6e169b6"
+    },
+    "config/stage3_gate_criteria.json": {
+      "sha256": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d"
+    },
+    "governance/STAGE_3_PREREGISTRATION.md": {
+      "sha256": "a257e862377938d42584147d3aedb1a2ba493b0f9f1f22f079745b953314526f"
+    }
+  },
+  "checksum_record": {
+    "path": "governance/STAGE_3_PREREGISTRATION.sha256",
+    "path_convention": "project-root-relative",
+    "verify_from": "stockedge100/",
+    "command": "cd stockedge100 && sha256sum -c governance/STAGE_3_PREREGISTRATION.sha256"
+  },
+  "repo_state_id_location": "Deliberately omitted here. This file lives in governance/ and is one of the inputs to repo_state_id, so any value written into it would be stale on write. The binding value is the repo_state_id field of runs/SE100-R-20260809T132521Z.json.",
+  "binding_consequences": [
+    "Every hypothesis, universe, exclusion, lookback, threshold, entry rule, exit rule, sizing rule, ranking rule, conflict rule, rebalance date, warm-up length, and run-start rule for all six candidates is fixed as of this timestamp and may not be revised because of a result it produced.",
+    "The iteration budget is one primary run per candidate and zero revisions. A candidate that fails is reported as failed. Under constitution section 11 a material change creates a new candidate that restarts at gate 3; it does not repair this one.",
+    "The four robustness neighbours per candidate are read for the sign of net return only. No neighbour is ever promoted to primary and no parameterisation is selected from them.",
+    "How each of the seven gate conditions is measured \u2014 not merely its threshold \u2014 is fixed in config/stage3_gate_criteria.json, including the undefined and not-evaluable treatments and the scope of the multi-instrument concentration condition.",
+    "No machine learning of any kind is used, per constitution section 8. No candidate is combined with any other candidate.",
+    "Stage 3 reads development-window data only. Validation stays LOCKED and holdout stays SEALED.",
+    "Gate 3 is admissibility, not selection. No candidate is ranked, preferred, or named a winner, and no expected income, profit, or return is claimed for any period.",
+    "AAPL is present on disk as a Stage 1 split fixture, is not a member of the frozen universe, and is excluded from every candidate.",
+    "live_trading_authorized remains false."
+  ],
+  "authorized_windows": [
+    "development"
+  ],
+  "validation_window_state": "LOCKED",
+  "holdout_window_state": "SEALED",
+  "live_trading_authorized": false
+}

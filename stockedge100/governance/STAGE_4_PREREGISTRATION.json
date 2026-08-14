@@ -1,0 +1,270 @@
+{
+  "document_id": "SE100-GOV-0008",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 4,
+  "record_type": "PRE_REGISTRATION",
+  "status": "SEALED",
+  "declared_utc": "2026-08-13T14:01:21Z",
+  "run_id": "SE100-R-20260813T140121Z",
+  "constitution_ref": "SE100-GOV-0001",
+  "document_id_note": "SE100-GOV-0004 is unused across the tree. This record takes 0008, the next number after the highest in use, rather than filling a gap whose reason is not recorded anywhere on disk.",
+  "supersedes": null,
+  "declared_before_any_validation_observation_was_read": true,
+  "gate": {
+    "constitutional_gate": 4,
+    "name": "validation_robustness",
+    "prompt_stage": 4,
+    "conditions_evaluated": 7,
+    "condition_ids": [
+      "S4-C1",
+      "S4-C2",
+      "S4-C3",
+      "S4-C4",
+      "S4-C5",
+      "S4-C6",
+      "S4-C7"
+    ],
+    "within_candidate": "CONJUNCTIVE",
+    "across_candidates": "NOT_APPLICABLE_EXACTLY_ONE_REPRESENTATIVE",
+    "pass_token": "STAGE_4_STRATEGY_ADMITTED_IN_VALIDATION",
+    "fail_token": "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+    "token_source": "config/stage4_gate_criteria.json verdict_token_derivation",
+    "gate_4_evaluated": false,
+    "gate_4_passed": false,
+    "conflicts_recorded": [
+      "S4-CONFLICT-1",
+      "S4-CONFLICT-2",
+      "S4-CONFLICT-3",
+      "S4-CONFLICT-4",
+      "S4-CONFLICT-5"
+    ]
+  },
+  "sealed_representative": {
+    "experiment_id": "SE100-S3A2-C2-MEANREV-RA1",
+    "selection_rule_id": "SE100-CFG-4003-R1",
+    "selection_rule_name": "Declared-variant research-shutdown screen",
+    "survivor_count": 1,
+    "human_selection_required": false,
+    "eliminated_by_the_rule": [
+      "SE100-S3A2-C1-PULLBACK-RA1"
+    ],
+    "screen_results": {
+      "SE100-S3A2-C1-PULLBACK-RA1": {
+        "declared_run_count": 6,
+        "shutdown_trip_count": 2,
+        "screen_result": "ELIMINATED"
+      },
+      "SE100-S3A2-C2-MEANREV-RA1": {
+        "declared_run_count": 6,
+        "shutdown_trip_count": 0,
+        "screen_result": "SURVIVES"
+      }
+    },
+    "strategy_module": "src/stockedge100/strategies/attempt2_candidates.py",
+    "strategy_module_sha256": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+    "strategy_module_resolution": "Resolved by content: exactly one module under src/stockedge100/strategies/ names the sealed representative. Not named by hand, so it cannot silently point at the wrong file."
+  },
+  "walk_forward_fold_construction": {
+    "id": "SE100-CFG-4002-WF1",
+    "test_folds": 12,
+    "train_folds": 0,
+    "first_fold": {
+      "fold": 1,
+      "start": "2021-08-01",
+      "end": "2021-10-31"
+    },
+    "last_fold": {
+      "fold": 12,
+      "start": "2024-05-01",
+      "end": "2024-07-31"
+    },
+    "authored_in_this_session": true,
+    "why_authored_here": "No fold definition exists anywhere on disk, so S4-C6 is unmeasurable without one. Constitution section 8's requirement of a signed specification created before execution is the authority to write it prospectively. Recorded as S4-CONFLICT-4."
+  },
+  "runs_declared": {
+    "count": 2,
+    "count_is_a_hard_limit": true,
+    "run_labels": [
+      "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+      "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS"
+    ],
+    "sessions_reading_validation": 1,
+    "re_runs_permitted_after_a_valid_completed_run": 0
+  },
+  "stage_0_freeze_verified": true,
+  "stage_0_freeze_verification": {
+    "STAGE_0_CONSTITUTION.md": {
+      "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "match": "True"
+    },
+    "STAGE_0_CONSTITUTION.json": {
+      "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+      "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+      "match": "True"
+    }
+  },
+  "upstream_records_verified": {
+    "governance/STAGE_1_FREEZE.sha256": 2,
+    "governance/STAGE_1_PREREGISTRATION.sha256": 4,
+    "governance/STAGE_2_PREREGISTRATION.sha256": 4,
+    "governance/STAGE_3_PREREGISTRATION.sha256": 4,
+    "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256": 4,
+    "reports/stage0/STAGE_0_VERIFICATION.sha256": 8,
+    "reports/stage1/STAGE_1_DATA_READINESS.sha256": 19,
+    "reports/stage2/STAGE_2_BACKTEST_ENGINE.sha256": 20,
+    "reports/stage3/STAGE_3_STRATEGY_RESEARCH.sha256": 26,
+    "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_DESIGN.sha256": 31,
+    "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256": 37
+  },
+  "gate_3_attempt_2_immutability_records": [
+    "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256",
+    "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256"
+  ],
+  "inputs_bound_recomputed": {
+    "governance/STAGE_0_CONSTITUTION.md": {
+      "artifact_id": "SE100-GOV-0001",
+      "sha256": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "bound_by": "config/stage4_validation_protocol.json"
+    },
+    "governance/STAGE_0_CONSTITUTION.json": {
+      "artifact_id": "SE100-GOV-0001",
+      "sha256": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+      "bound_by": "config/stage4_validation_protocol.json"
+    },
+    "governance/STAGE_1_HOLDOUT_LOCK.json": {
+      "artifact_id": "SE100-GOV-1005",
+      "sha256": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+      "bound_by": "config/stage4_gate_criteria.json"
+    },
+    "governance/STAGE_1_UNIVERSE.json": {
+      "artifact_id": "SE100-GOV-1004",
+      "sha256": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+      "bound_by": "config/stage4_validation_protocol.json"
+    },
+    "config/stage2_cost_model.json": {
+      "artifact_id": "SE100-CFG-2001",
+      "sha256": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+      "bound_by": "config/stage4_gate_criteria.json"
+    },
+    "config/stage2_engine_spec.json": {
+      "artifact_id": "SE100-CFG-2002",
+      "sha256": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+      "bound_by": "config/stage4_validation_protocol.json"
+    },
+    "config/stage3_attempt2_strategy_protocol.json": {
+      "artifact_id": "SE100-CFG-3003",
+      "sha256": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+      "bound_by": "config/stage4_validation_protocol.json"
+    },
+    "config/stage3_gate_criteria.json": {
+      "artifact_id": "SE100-CFG-3002",
+      "sha256": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+      "bound_by": "config/stage4_gate_criteria.json"
+    },
+    "config/stage3_attempt2_gate_criteria_binding.json": {
+      "artifact_id": "SE100-CFG-3004",
+      "sha256": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+      "bound_by": "config/stage4_validation_protocol.json"
+    }
+  },
+  "sealed_before_any_stage_4_evaluator_code": true,
+  "contamination_predicates": {
+    "definitions": {
+      "stage_4_evaluator_or_result_modules": "Count of files under src/stockedge100/ with suffix .py whose path relative to the project root, lowercased with backslashes normalised to forward slashes, contains 'stage4', EXCLUDING exactly src/stockedge100/reporting/stage4_preregistration.py. The exclusion is this sealing program itself, which would otherwise count itself; it is one named file rather than a whole directory, so a Stage 4 evaluator placed anywhere - including under reporting/ - is still counted. Must be 0.",
+      "modules_naming_a_stage_4_run_label": "Count of files under src/stockedge100/ with suffix .py whose decoded text contains any run label declared in config/stage4_validation_protocol.json runs_declared. Catches a Stage 4 evaluator added to an existing module, which the path-based predicate above would miss. Must be 0.",
+      "stage_4_report_artifacts": "Count of files anywhere under reports/ whose project-root-relative path, lowercased and slash-normalised, contains 'stage4'. Any Stage 4 result, metric, fold table, or evidence artifact would appear here. Must be 0 at sealing. The Stage 4 decision package written later in this same session is a design-session package and lands under reports/stage4/ AFTER this seal; a re-verification then legitimately counts more than zero, and the value recorded here is the count that existed before this seal.",
+      "stage_4_run_records": "Count of files under runs/ whose decoded text contains 'STAGE_4' or any run label declared in config/stage4_validation_protocol.json runs_declared. Measured BEFORE this seal writes its own run record, which carries stage STAGE_4_VALIDATION_PRE_REGISTRATION and therefore contains the token by construction. Must be 0.",
+      "stage_4_modules_touching_restricted_data_or_a_broker": "Count of files under src/stockedge100/ with suffix .py whose relative path contains 'stage4' - this sealing program INCLUDED - whose parsed syntax tree contains an import of the data-access layer, a call to a dataset loader, an import of a network or broker package, an attribute access used to read an environment variable or open a connection, or a string constant containing a URL scheme. This is an AST question, not a text search: a text search would match the words of this very definition. It is the fail-closed proof that the pre-registration path cannot read a validation or holdout observation and cannot reach a broker. Must be 0.",
+      "gate_3_attempt_2_records_verify": "Both governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256 and reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256 verify entry-for-entry from the project root. This is the Gate 3 Attempt 2 immutability check: the representative was selected from that decision record, so it fails if the evidence behind the selection changed by a single byte. Must be true."
+    },
+    "stage_4_evaluator_or_result_modules": 0,
+    "modules_naming_a_stage_4_run_label": 0,
+    "stage_4_report_artifacts": 0,
+    "stage_4_run_records": 0,
+    "stage_4_modules_touching_restricted_data_or_a_broker": 0,
+    "gate_3_attempt_2_records_verify": true,
+    "why_not_stage_3_predicates": "Stage 3 Attempt 2 counted modules and artifacts carrying the marker 'attempt2'. That marker is now legitimately all over src/stockedge100/strategies/ and reports/stage3_attempt2/, and those files may not be deleted, so it says nothing about Stage 4. Two of the six predicates here are AST questions rather than text searches, because a text search over the sealing program would match the words of its own predicate definitions."
+  },
+  "restricted_data_posture": {
+    "validation_rows_read": 0,
+    "validation_prices_read": 0,
+    "validation_indicators_computed": 0,
+    "validation_trades_counted": 0,
+    "holdout_observations_read": 0,
+    "dataset_loads_in_this_session": 0,
+    "how_this_is_known": "Structural, not asserted. No module on the pre-registration path imports the data layer or calls a dataset loader, which is the AST predicate stage_4_modules_touching_restricted_data_or_a_broker, recorded above as 0 and exercised by tests/unit/test_stage4_preregistration.py on dates alone."
+  },
+  "preregistered_files": {
+    "config/stage4_validation_protocol.json": {
+      "sha256": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea"
+    },
+    "config/stage4_gate_criteria.json": {
+      "sha256": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d"
+    },
+    "config/stage4_representative_selection.json": {
+      "sha256": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc"
+    },
+    "governance/STAGE_4_PREREGISTRATION.md": {
+      "sha256": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1"
+    }
+  },
+  "sealed_digests_for_s4_c7": {
+    "entries": {
+      "config/stage4_validation_protocol.json": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+      "config/stage4_gate_criteria.json": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+      "config/stage4_representative_selection.json": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+      "config/stage2_cost_model.json": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+      "config/stage2_engine_spec.json": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+      "config/stage3_attempt2_strategy_protocol.json": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+      "config/stage3_gate_criteria.json": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+      "config/stage3_attempt2_gate_criteria_binding.json": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+      "governance/STAGE_1_UNIVERSE.json": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+      "governance/STAGE_1_HOLDOUT_LOCK.json": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+      "governance/STAGE_4_PREREGISTRATION.md": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+      "src/stockedge100/strategies/attempt2_candidates.py": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d"
+    },
+    "declared_set_size": 13,
+    "recorded_here": 12,
+    "own_digest_excluded": "governance/STAGE_4_PREREGISTRATION.json",
+    "own_digest_location": "The thirteenth entry of the declared set is this record. Nothing hashes itself, so its digest is carried by governance/STAGE_4_PREREGISTRATION.sha256 instead.",
+    "recheck_rule": "Recompute each digest after the evaluation and require equality with the value recorded in the Stage 4 pre-registration record. Any inequality is S4-C7 NOT_MET. There is no tolerance and no immaterial change."
+  },
+  "checksum_record": {
+    "path": "governance/STAGE_4_PREREGISTRATION.sha256",
+    "path_convention": "project-root-relative",
+    "verify_from": "stockedge100/",
+    "command": "cd stockedge100 && sha256sum -c governance/STAGE_4_PREREGISTRATION.sha256"
+  },
+  "repo_state_id_location": "Deliberately omitted here. This file lives in governance/ and is one of the inputs to repo_state_id, so any value written into it would be stale on write. The binding value is the repo_state_id field of runs/SE100-R-20260813T140121Z.json.",
+  "simultaneous_seal_note": "Four files are sealed at this timestamp: config/stage4_validation_protocol.json, config/stage4_gate_criteria.json, config/stage4_representative_selection.json, governance/STAGE_4_PREREGISTRATION.md. None carries the digest of another, because a file cannot contain the digest of a file that contains its own. They reference each other by artifact id and path; governance/STAGE_4_PREREGISTRATION.sha256 carries every digest.",
+  "binding_consequences": [
+    "The representative is SE100-S3A2-C2-MEANREV-RA1 and may not change for any reason, including a Gate 4 FAIL. No robustness neighbour may be substituted for it, no parameter may be altered, and no risk overlay may be added.",
+    "The other Gate 3 admitted candidate is not evaluated on validation, is not run for comparison, and is not repaired. C3 remains rejected and is not reconsidered.",
+    "The validation partition is read exactly once, in exactly one authorized session, from exactly one dataset load, with both declared runs executed inside that session against that load. Two runs over one load is one read.",
+    "Two runs, one parameterisation, zero re-runs after a valid completed run, and no neighbour runs. There is no search at Gate 4.",
+    "Gate 4's seven conditions, their thresholds, and the 0% documented cash rate are extracted from frozen artifacts and adopted by digest, not chosen here. The one measurement authored in this session is the walk-forward fold construction, and it is derived from the frozen window boundaries alone.",
+    "The stressed-cost run changes status from non-gating at Gate 3 to gating at Gate 4. The multiplier is the 2.0 already sealed in SE100-CFG-2001.",
+    "S4-C3's drawdown ceiling and the section 5.1 research shutdown are the same 15% on the same series, so S4-C3 is met if and only if the shutdown never fires.",
+    "A Gate 4 FAIL is a deliverable, not a reason to retune, substitute, promote a neighbour, relax a threshold, or read the window again. There is no Attempt 2 at Gate 4 in this design.",
+    "The selection is an adaptive step taken with knowledge of Gate 3 development results. The rule is return-blind and parameter-free, the disclosure is in config/stage4_representative_selection.json adaptation_disclosure, and the cumulative development experiment count is not reset by this stage.",
+    "Validation stays LOCKED until the separately authorized evaluation session. The holdout stays SEALED regardless of the Gate 4 outcome.",
+    "live_trading_authorized remains false."
+  ],
+  "authorized_windows_in_this_session": [],
+  "validation_window_state": "LOCKED",
+  "holdout_window_state": "SEALED",
+  "validation_evaluation_authorized": true,
+  "validation_evaluation_authorized_for": "Exactly one evaluation of SE100-S3A2-C2-MEANREV-RA1 on the locked validation window, in a later separately authorized session, under config/stage4_validation_protocol.json and config/stage4_gate_criteria.json exactly as sealed here. Nothing else.",
+  "validation_access_authorized_in_this_session": false,
+  "holdout_access_authorized": false,
+  "gate_3_passed": true,
+  "gate_4_evaluated": false,
+  "gate_4_passed": false,
+  "stage_5_authorized": false,
+  "paper_trading_authorized": false,
+  "shadow_live_authorized": false,
+  "capital_or_risk_expansion_authorized": false,
+  "live_trading_authorized": false
+}

@@ -1,0 +1,146 @@
+{
+  "id": "RA1",
+  "name": "Structural exposure and loss architecture, shared identically by all three Attempt 2 candidates",
+  "design_intent": "S3-C2 is satisfied if and only if the constitution section 5.1 research shutdown never fires. RA1 is the structural answer to that: it lowers exposure, caps single-position loss, reduces size as account drawdown grows, and bounds time at risk. Every constant below is either taken from a frozen artifact or derived arithmetically from constants that are, and none was selected by inspecting an Attempt 1 equity path.",
+  "prohibition_on_mechanical_targeting": "RA1 is not a device for stopping at 14.99%. No rule references the 15% ceiling, no rule references a drawdown level between 10% and 15%, and no rule is conditioned on proximity to the shutdown. The deepest level RA1 reacts to is 10%, which is the constitution's own section 5.2 hard risk halt, declared for live trading and adopted here as a research-side de-risking trigger."
+}
+
+--- RA1-1 ---
+{
+  "name": "Exposure ceiling",
+  "rule": "f_base = 0.50. No entry may request a budget above f_base multiplied by account equity measured at the decision close.",
+  "derivation": "Not fitted. The constitution's section 5.2 live soft risk halt is 8% below the high-water mark and its hard risk halt is 10%. RA1-3 caps a single position's nominal decline at L = 0.08. With f_base = 0.50 the worst nominal single-position cost to the account is f_base * L = 0.040, which is half the soft-halt distance and 40% of the hard-halt distance. No single position can, at its declared limit, carry the account through a halt rung on its own.",
+  "relation_to_constitutional_cap": "The constitution section 3 ceiling is 95% gross exposure with a 5% minimum cash buffer, and the sealed cost model enforces it. RA1-1 requests less. It never requests more and cannot.",
+  "applies_to_defensive_leg": true,
+  "defensive_leg_note": "RA1-1 applies uniformly, including to a defensive Treasury leg. A candidate holding SHY therefore holds about 50% SHY and about 50% cash, which reduces the defensive leg's return contribution relative to Attempt 1's F6. This is a disclosed cost of the architecture, not an oversight. No instrument-specific carve-out is granted, because a per-instrument exposure exemption would be a discretionary rule and the whole point of RA1 is that its rules are not discretionary."
+}
+
+--- RA1-2 ---
+{
+  "name": "Volatility-targeted entry sizing",
+  "applies": "at entry only",
+  "entry_only_reason": "The sealed portfolio accounting appends a closed trade only when a position is fully closed, so a position is all-or-nothing. Re-sizing an open position would require a partial exit the accounting does not model. Sizing is therefore decided once, at entry, and never adjusted while the position is open.",
+  "rule": [
+    "sigma_target = 0.10, annualised.",
+    "sigma = VOL20 of the symbol being entered, measured at the decision close.",
+    "f_vol = sigma_target / sigma.",
+    "f_cap = the RA1-5 ladder value for the decision session.",
+    "f = min(f_cap, f_vol).",
+    "If sigma == 0: no entry, reason NO_ENTRY_ZERO_VOLATILITY.",
+    "If f < f_floor = 0.05: no entry that session, reason NO_ENTRY_VOLATILITY_FLOOR.",
+    "budget = f * equity at the decision close.",
+    "If budget < min_order_notional_usd = 1.00 from SE100-CFG-2001 sizing: no entry, reason NO_ENTRY_SIZE_FLOOR.",
+    "Otherwise emit BUY with that budget. The engine applies its own exposure cap, cash buffer, one-cent budget safety margin, and share rounding on top, and may reduce the executed notional further."
+  ],
+  "sigma_target_rationale": "0.10 annualised is a deliberately low volatility target: below the long-run realised volatility of every equity ETF in the frozen universe, so the target binds rather than decorates, and above zero by enough that a position of economically meaningful size is still taken in calm regimes. It is one round number declared once and probed by a neighbour at 0.08 in every candidate.",
+  "f_floor_rationale": "f_floor = 0.05 mirrors the constitution's 5% minimum cash buffer read as a smallest-meaningful-fraction. It is a safety rail against an absurdly small position in an extreme volatility regime, not a filter: it binds only when sigma exceeds sigma_target / f_floor = 2.00, that is 200% annualised, which is far above any level the frozen universe has exhibited. Declared so that the case is decided in advance rather than on sight.",
+  "cannot_increase_exposure": "f = min(f_cap, f_vol), so volatility targeting can only reduce exposure below the RA1-1 ceiling. It can never raise it."
+}
+
+--- RA1-3 ---
+{
+  "name": "Per-position loss control",
+  "rule": [
+    "L = 0.08.",
+    "P_ref = close of the DECISION session on which the entry order was scheduled.",
+    "On any later decision session t at which the symbol is in context.open_symbols: if close(symbol, t) <= P_ref * (1 - L), emit a full exit, reason EXIT_LOSS_CONTROL.",
+    "A pending P_ref is discarded if the symbol is absent from context.open_symbols at the next decision session, because the entry was not filled."
+  ],
+  "why_decision_close_and_not_fill_price": "The fill price is the next session's open and is not exposed to the candidate at decision time. Referencing the decision close keeps the rule computable from information the candidate is allowed to see, and structurally prevents a look-ahead read of the fill. The difference between the decision close and the fill open is one overnight gap and is disclosed as such rather than modelled away.",
+  "L_rationale": "0.08 is the constitution's own section 5.2 live soft risk halt distance, adopted at the position level. Taking the number from a frozen artifact rather than choosing one keeps it out of the search space.",
+  "not_a_stop_order": "This is a close-referenced exit that fills at the next open under MARKET_ON_NEXT_OPEN. It is not a stop order, not a stop-limit, and not an intraday trigger. The project holds no intraday data, so no intraday trigger could be evaluated.",
+  "not_a_bound": "RA1-3 does not bound loss at 8%. The trigger is evaluated at a close and filled at the next open, so one overnight gap and one session of exposure sit between the trigger and the exit. Constitution section 5.2: 'Stops are risk tools, not guarantees; overnight gaps may exceed intended losses.' A position that declines faster than the rule can react loses more than L, and the account loses f times that larger amount."
+}
+
+--- RA1-4 ---
+{
+  "name": "Maximum holding period",
+  "rule": [
+    "H is declared per candidate.",
+    "sessions_held counts the decision sessions on which the symbol has appeared in context.open_symbols, the current session included.",
+    "If sessions_held >= H, emit a full exit, reason EXIT_MAX_HOLD."
+  ],
+  "purpose": "Bounds time at risk and forces every thesis to be re-underwritten. A position that has not resolved within its candidate's declared horizon is closed rather than held indefinitely.",
+  "per_candidate_H_is_not_a_trade_count_dial": "Each H is set from its candidate's own stated thesis horizon, and in every case H is longer than the horizon the thesis names, so H is the outer bound rather than the operative exit. The values are stated with their reasoning in each candidate block and are not adjusted to reach any gate threshold."
+}
+
+--- RA1-5 ---
+{
+  "name": "Account de-risk ladder",
+  "read": "at entry only, to set f_cap for the RA1-2 computation",
+  "rule": [
+    "hwm is the running maximum of context.equity over the decision sessions of the run, seeded at the first decision session's equity and updated on every decision session whether the account is flat or not.",
+    "dd = (hwm - equity) / hwm at the decision close.",
+    "dd < 0.08: f_cap = 0.50.",
+    "0.08 <= dd < 0.10: f_cap = 0.25.",
+    "dd >= 0.10: f_cap = 0.125."
+  ],
+  "equity_series_identity": "context.equity is the same value the engine records before it evaluates the section 5.1 shutdown, so RA1-5's drawdown series is byte-identical to the shutdown's own. The ladder and the shutdown read one series, not two approximations of one.",
+  "never_blocks_entry": "The ladder reduces size. It never blocks an entry and never sets f_cap to zero. This is deliberate and is the correction of a rejected earlier formulation.",
+  "rejected_alternative": "An earlier formulation blocked new entries once dd reached 0.08 until equity recovered above the high-water mark. It is recorded here because it is fatally defective and the defect is instructive: a flat account's equity is constant, so equity can never recover, so the block can never re-arm. That rule would produce a permanently dead strategy - which is the failure mode the constitution's own shutdown already represents, reintroduced by the risk overlay meant to avoid it. It is also what the operating constraint against making a strategy incapable of meaningful trading solely to suppress drawdown forbids.",
+  "rung_rationale": "0.08 and 0.10 are the constitution's section 5.2 live soft and hard risk halt distances, verbatim. The multipliers halve and then halve again. Nothing here is a new number chosen by the researcher except the choice to halve, which is declared and is probed indirectly by the f_base neighbour in every candidate."
+}
+
+--- RA1-6 ---
+{
+  "name": "Re-entry rule after a risk exit",
+  "rule": "After an exit with reason EXIT_LOSS_CONTROL or EXIT_MAX_HOLD, the candidate may not re-enter that same symbol for R = 5 decision sessions counted from the decision session that scheduled the exit. A blocked entry is recorded with reason NO_ENTRY_LOCKOUT. An exit with reason EXIT_SIGNAL creates no lockout.",
+  "R_rationale": "One exchange week. A cooling-off period after a risk-driven exit prevents the loss control from converting a single adverse move into an immediate sequence of identical entries into the same condition. Five sessions is the shortest period that spans a full weekly cycle.",
+  "rejected_alternative": "The lockout was first specified as lasting until the candidate's entry condition evaluated false at least once. That is defective for the same reason as the rejected RA1-5 formulation: a regime condition can remain true for years, so the lockout could fail to expire and would leave the account in cash indefinitely. A fixed number of sessions always expires.",
+  "not_load_bearing_for_the_drawdown_arithmetic": "The drawdown arithmetic below assumes back-to-back maximum losses with no lockout at all, so RA1-6 can only improve on it. It is an economic sensibility rule, not part of the bound."
+}
+
+--- RA1-7 ---
+{
+  "name": "Conflict resolution",
+  "rule": "The shared flat_first_rule, adopted unchanged. A candidate never schedules an exit and an entry for the same fill session, so every symbol switch costs one full session out of the market. Combined with RA1-6, a switch that follows a risk exit costs at least six sessions out of the market."
+}
+
+--- RA1-8 ---
+{
+  "name": "All-or-nothing positions",
+  "rule": "Entries and exits are for the full position. No partial entry, no partial exit, no scaling in, no scaling out, no averaging down, no pyramiding.",
+  "reason": "Constitution section 5.1 prohibits averaging down without an explicit predeclared rule, and the sealed portfolio accounting appends a closed trade only when a position is fully closed. Partial exits would make the closed-trade series - the basis of S3-C3, S3-C4, S3-C5, and S3-C6 - ambiguous."
+}
+
+--- exit_precedence ---
+{
+  "order": [
+    "EXIT_LOSS_CONTROL",
+    "EXIT_MAX_HOLD",
+    "EXIT_SIGNAL"
+  ],
+  "rule": "At most one exit is emitted per session because positions are all-or-nothing. When more than one exit condition is true on the same decision session, the position is closed once and the attributed reason is the highest-precedence condition in the order above.",
+  "purpose": "Reason attribution only. The precedence changes no exit decision - the position closes either way - so it cannot affect any metric. It exists so that the evidence can report how many exits each mechanism caused, which is how RA1-3 and RA1-4 are diagnosed instead of being probed by a neighbour."
+}
+
+--- engine_shutdown_relationship ---
+{
+  "enforcement": "The section 5.1 research shutdown is enforced by the engine for every run, primary and neighbour and stressed alike. It is not disabled, not relaxed, and not treated as an artefact.",
+  "candidate_behaviour": "A candidate emits no order on any decision session where context.shutdown_active is true. This is belt-and-braces; the engine already forces liquidation and blocks entries.",
+  "no_candidate_reads_the_ceiling": "No RA1 rule and no candidate rule references 0.15, the shutdown state, or the distance to it as an input to sizing or signalling."
+}
+
+--- drawdown_arithmetic ---
+{
+  "claim": "This is an arithmetic property of the declared constants, computed by hand from RA1-1, RA1-3, and RA1-5 before any Attempt 2 code exists. It is NOT a prediction, NOT a guarantee, and NOT a claim that S3-C2 will be met.",
+  "worst_case_sequence": "Consecutive round trips each losing exactly the RA1-3 limit, starting from the high-water mark with equity 1.0. Loss per trade = f_cap * L.",
+  "steps": [
+    "trade 1: dd = 0.0000, f_cap = 0.500, loss 4.000%, equity 0.960000, dd after = 4.0000%",
+    "trade 2: dd = 4.0000%, f_cap = 0.500, loss 4.000%, equity 0.921600, dd after = 7.8400%",
+    "trade 3: dd = 7.8400%, f_cap = 0.500, loss 4.000%, equity 0.884736, dd after = 11.5264%",
+    "trade 4: dd = 11.5264%, f_cap = 0.125, loss 1.000%, equity 0.875889, dd after = 12.4111%",
+    "trade 5: dd = 12.4111%, f_cap = 0.125, loss 1.000%, equity 0.867130, dd after = 13.2870%",
+    "trade 6: dd = 13.2870%, f_cap = 0.125, loss 1.000%, equity 0.858459, dd after = 14.1541%",
+    "trade 7: dd = 14.1541%, f_cap = 0.125, loss 1.000%, equity 0.849874, dd after = 15.0126% - BREACH"
+  ],
+  "result": "Seven consecutive maximum-loss round trips are required to breach the 15% ceiling. Six leave drawdown at 14.15%.",
+  "middle_rung_note": "The 0.25 rung is skipped on this particular path, because trade 3 carries drawdown from 7.84% straight to 11.53%. The middle rung is reached by paths made of smaller individual losses, not by the maximum-loss path.",
+  "caveats": [
+    "RA1-3 is not a bound. The trigger is a close and the fill is the next open, so a gap can exceed L and the per-trade loss can exceed f_cap * L. Constitution section 5.2 says so in terms.",
+    "A position that declines without ever printing a close at or below the trigger, then gaps through it, loses more than L.",
+    "Drawdown is measured at session closes because the project holds no intraday data. Every measured drawdown is a lower bound on the true intraday figure, and this is an Attempt 1 limitation that Attempt 2 inherits unchanged.",
+    "Losses need not be consecutive. Interleaved gains raise the high-water mark and reset the ladder, which helps; interleaved small losses can walk the account down through the rungs more slowly than this path, which does not.",
+    "This arithmetic says nothing about profitability. A structure that never breaches the ceiling and never makes money fails S3-C1 and S3-C3, and that is a real and anticipated way for Attempt 2 to fail."
+  ]
+}

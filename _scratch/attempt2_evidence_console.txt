@@ -1,0 +1,10 @@
+generated_utc     2026-08-12T13:19:21Z
+evidence_digest   82660b572a3ad886de3bffc44292cfae90b15f76efb243b865f653154155b3bd
+runs_executed     18
+determinism       True
+  SE100-S3A2-C1-PULLBACK-RA1       admitted=True  failed=-
+  SE100-S3A2-C2-MEANREV-RA1        admitted=True  failed=-
+  SE100-S3A2-C3-DEFENSIVE-RA1      admitted=False failed=S3-C6
+admissible_exists True
+stage_verdict     PASS STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT
+wrote             reports/stage3_attempt2/STAGE_3_ATTEMPT_2_DEVELOPMENT_ADMISSIBILITY.json

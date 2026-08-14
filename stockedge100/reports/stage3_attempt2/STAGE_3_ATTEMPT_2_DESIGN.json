@@ -1,0 +1,1484 @@
+{
+  "project": "StockEdge100",
+  "stage": "STAGE_3_ATTEMPT_2_DESIGN",
+  "generation": 1,
+  "timestamp_utc": "2026-08-10T13:11:07Z",
+  "verdict": "PASS \u2014 STAGE_3_ATTEMPT_2_PREREGISTRATION_FROZEN",
+  "gate": {
+    "constitution_gate_id": 3,
+    "name": "development_admissibility"
+  },
+  "gate_passed": false,
+  "constitution": {
+    "document_id": "SE100-GOV-0001",
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "modified_by_this_stage": false,
+    "freeze_verification_working_directory": "stockedge100/governance",
+    "freeze_verified": true,
+    "freeze_verification": {
+      "STAGE_0_CONSTITUTION.md": {
+        "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "match": "True"
+      },
+      "STAGE_0_CONSTITUTION.json": {
+        "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "match": "True"
+      }
+    }
+  },
+  "session_type": "DESIGN_AND_PREREGISTRATION_ONLY",
+  "gate_3_evaluated": false,
+  "strategy_research_authorized": true,
+  "strategy_research_authorized_for": "Implementation and development-window evaluation of exactly the three candidates sealed here, in a later separately authorized session. Nothing else.",
+  "validation_access_authorized": false,
+  "holdout_access_authorized": false,
+  "paper_trading_authorized": false,
+  "shadow_live_authorized": false,
+  "stage_4_authorized": false,
+  "verdict_meaning": "A prospective, complete, internally consistent specification for a second gate 3 attempt has been sealed before any code for it exists, its adaptation to a known prior outcome is disclosed, and the frozen gate 3 criteria including the 15% maximum-drawdown ceiling are adopted unchanged. Implementation may therefore begin in a later, separately authorized session. It is not a gate 3 pass, not a statement that any candidate will be admitted, and not a performance claim.",
+  "verdict_token_is_not_a_gate_3_token": {
+    "gate_3_pass_token": "STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "gate_3_fail_token": "STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+    "this_session_issued": "PASS \u2014 STAGE_3_ATTEMPT_2_PREREGISTRATION_FROZEN",
+    "why": "no candidate was implemented, so this session can neither admit nor reject one. Both gate 3 tokens are read from the sealed verdict_token_derivation and asserted to differ from this session's before anything is written."
+  },
+  "attempt": {
+    "attempt_id": "SE100-S3-A2",
+    "attempt": 2,
+    "status": "SEALED",
+    "sealed_utc": "2026-08-10T11:59:33Z",
+    "sealing_run_id": "SE100-R-20260810T115933Z",
+    "research_question": "Can structurally lower-risk, economically intelligible strategies remain meaningfully profitable after costs while satisfying the unchanged 15% maximum-drawdown ceiling of Gate 3 and every other frozen Gate 3 condition?",
+    "shared_risk_architecture": "RA1",
+    "families_retained": [
+      "pullback",
+      "mean reversion",
+      "defensive regime logic"
+    ],
+    "families_excluded": [
+      "trend/momentum",
+      "breakout",
+      "ETF rotation"
+    ],
+    "families_excluded_reasoning": {
+      "rule_applied": "A family is excluded prospectively if its specification FORM cannot plausibly produce the 30 closed round trips that S3-C4 requires, unchanged, over a development-window run. Trade frequency is a structural property of a rule, not a performance result.",
+      "disclosure": "This test was applied using Attempt 1's per-candidate closed-trade counts, which are already-exposed evidence. Using them is an adaptation and is disclosed as one. It concerns frequency, not profitability: no excluded family was excluded for making or losing money.",
+      "excluded": [
+        {
+          "family": "trend/momentum",
+          "attempt_1_reference": "SE100-S3-F1-TREND-SMA200, 15 closed trades",
+          "reason": "A single 200-session moving-average crossing rule changes state a small number of times per decade by construction. RA1-3 and RA1-4 would add exits, but the form starts roughly half the required count short and the added exits are themselves what RA1-6 then delays."
+        },
+        {
+          "family": "breakout",
+          "attempt_1_reference": "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25, 13 closed trades",
+          "reason": "A 50-session closing-high entry with a 25-session closing-low exit is a low-frequency channel rule. Same argument as trend/momentum, and S3-C4's lower-frequency exception is not invoked - see A2-INTERP-4."
+        },
+        {
+          "family": "ETF rotation",
+          "attempt_1_reference": "SE100-S3-F5-ROTATION-DUALMOM, 6 closed trades",
+          "reason": "A monthly top-one rotation over four broad ETFs changes its selection rarely. RA1-4 at a one-year horizon would convert a multi-year hold into annual round trips, which is still far short of 30 over the run available once the shortest-lived universe member's inception is respected. Excluding it is the same structural argument applied consistently rather than selectively; keeping it would spend a candidate slot on a specification that is likely to fail S3-C4 whatever its risk architecture does."
+        }
+      ],
+      "consequence_accepted": "Excluding rotation costs Attempt 2 its most naturally diversified candidate. The defensive regime candidate C3 carries the multi-instrument role instead: a risk leg and a Treasury leg, with a genuine third state in cash, and a demonstrated specification frequency well above the floor.",
+      "families_retained": [
+        "pullback",
+        "mean reversion",
+        "defensive regime logic"
+      ]
+    },
+    "attempt_1_status": "closed, unmodified, and superseded by nothing: Attempt 1's verdict FAIL \u2014 STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT stands on disk exactly as issued",
+    "attempt_1_evidence_known": {
+      "source": "Already-exposed Attempt 1 evidence: governance/STAGE_3_PREREGISTRATION.md, governance/STAGE_3_STRATEGY_RESEARCH_REPORT.md, reports/stage3/, runs/SE100-R-20260810T101622Z.json. No new performance result was generated, loaded, or computed to write this file.",
+      "attempt_1_verdict": "FAIL - STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+      "attempt_1_run_id": "SE100-R-20260810T101622Z",
+      "attempt_1_candidates": 6,
+      "attempt_1_admitted": 0,
+      "attempt_1_headline_fact": "All six candidates produced positive after-cost total return and all six passed neighbour sign stability, and all six breached the 15% maximum-drawdown ceiling of S3-C2. Three additionally missed the 30-closed-trade floor of S3-C4, two failed the profit-concentration condition S3-C6, and one failed the best-trade-removal condition S3-C5.",
+      "attempt_1_closed_trade_counts": {
+        "SE100-S3-F1-TREND-SMA200": 15,
+        "SE100-S3-F2-PULLBACK-SMA200-SMA10": 141,
+        "SE100-S3-F3-MEANREV-RSI2": 109,
+        "SE100-S3-F4-BREAKOUT-DONCHIAN-50-25": 13,
+        "SE100-S3-F5-ROTATION-DUALMOM": 6,
+        "SE100-S3-F6-DEFENSIVE-SMA200-SHY": 48,
+        "use_in_this_file": "These counts are used for one purpose only: to exclude, prospectively, families whose specification form cannot plausibly reach the unchanged 30-closed-trade floor. Trade frequency is a structural property of a specification, not a profitability result. The use is an adaptation and is disclosed as one in adaptive_research_disclosure.",
+        "not_used_for": "No parameter, threshold, lookback, exposure fraction, loss limit, or holding period in this file was selected by reference to any Attempt 1 return, drawdown path, equity curve, profit factor, or trade-level outcome."
+      },
+      "attempt_1_most_useful_finding_quoted": "STAGE_3_STRATEGY_RESEARCH_REPORT.md: 'The observation in section 7 - that the risk control and the quality gate are the same number, so any candidate volatile enough to trip one has failed the other - is the most useful thing this stage produced, and it belongs to whoever writes the next pre-registration.'",
+      "design_target_derived_from_it": "S3-C2 is satisfied if and only if the constitution section 5.1 research shutdown never fires, because both are 15% below the running high-water mark of the same session-close equity series and the sealed action is LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES. Attempt 2 therefore treats never tripping the shutdown as the design target rather than as a side effect."
+    }
+  },
+  "preregistration": {
+    "markdown": "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.md",
+    "json_seal": "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.json",
+    "protocol": "config/stage3_attempt2_strategy_protocol.json",
+    "gate_criteria_binding": "config/stage3_attempt2_gate_criteria_binding.json",
+    "checksum_record": "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256",
+    "preregistered_file_digests": {
+      "config/stage3_attempt2_strategy_protocol.json": {
+        "sha256": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433"
+      },
+      "config/stage3_attempt2_gate_criteria_binding.json": {
+        "sha256": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e"
+      },
+      "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.md": {
+        "sha256": "d9e34b3ce61f5998fe91c0b7b551a29a778fdb410330e60d6919c0a94ec447c6"
+      }
+    },
+    "artifact_ids": {
+      "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.md": "SE100-GOV-0007",
+      "config/stage3_attempt2_strategy_protocol.json": "SE100-CFG-3003",
+      "config/stage3_attempt2_gate_criteria_binding.json": "SE100-CFG-3004"
+    },
+    "design_report": {
+      "path": "governance/STAGE_3_ATTEMPT_2_DESIGN_REPORT.md",
+      "sha256": "03f706d847f6220c8b0a497bdd4a763ac9798901f1b6a2a84dfd1bab32a11b21"
+    },
+    "disposition": "SEALED_NOT_MODIFIED_BY_THIS_PACKAGE"
+  },
+  "candidates": {
+    "SE100-S3A2-C1-PULLBACK-RA1": {
+      "family": "pullback",
+      "family_authorised_by": "SE100-GOV-0001 section 3, which names pullback among the families that may be researched separately in Generation 1.",
+      "hypothesis": "Buying SPY only on short-term weakness inside a long-term uptrend, at half the exposure a fixed-budget rule would take, scaled down further when recent volatility exceeds a 10% annualised target, with an 8% per-position loss control, a 20-session horizon, and an account-level size ladder, earns a positive after-cost total return over the development window without account equity ever falling 15% below its running high-water mark.",
+      "distinction_from_attempt_1": {
+        "shares_signal_form_with": "SE100-S3-F2-PULLBACK-SMA200-SMA10, rejected in Attempt 1",
+        "signal_form_held_fixed_deliberately": "The entry and exit signal is the same rule form. This is the risk-architecture control of Attempt 2: if the return source is held fixed, any difference in risk behaviour is attributable to RA1 rather than to a new signal. It also means C1 is emphatically NOT an independent test of the pullback hypothesis.",
+        "what_is_materially_different": [
+          "Position size: F2 requested a fixed 95% of equity. C1 requests min(f_cap, 0.10 / VOL20) * equity with f_cap from the RA1-5 ladder, ceiling 0.50.",
+          "Per-position loss control: F2 had none. C1 exits at an 8% decline from its entry decision close.",
+          "Maximum holding period: F2 had none. C1 exits after 20 decision sessions held.",
+          "Account de-risk ladder: F2 had none. C1 quarters its exposure ceiling once account drawdown reaches 10%.",
+          "Re-entry delay: F2 had none. C1 waits five decision sessions after a risk exit.",
+          "Robustness neighbours: F2 probed only sma_long and sma_short. C1 spends two of its four neighbours on the new risk machinery."
+        ],
+        "why_this_is_not_a_post_result_parameter_repair": "No signal parameter is changed at all: sma_long stays 200 and sma_short stays 10, the values F2 declared before any result. Nothing about F2's parameterisation is repaired, retuned, or nudged. What changes is the sizing and risk structure, which constitution section 11 makes material and which therefore creates a new candidate restarting at Gate 3.",
+        "counter_argument_recorded": "A reader may reasonably say that reusing a rejected signal and bolting risk controls onto it is a repair of F2 by another name. The response is that the research question is about risk structure, not about signals, and answering it requires holding the signal fixed; and that if this counts as a repair then so would any second attempt at Gate 3, which Attempt 1's own decision report contemplates. The argument is recorded rather than settled, because the honest position is that C1's result is a second look at the same signal on the same data by the same researcher."
+      },
+      "primary_parameters": {
+        "sma_long": 200,
+        "sma_short": 10,
+        "f_base": "0.50",
+        "vol_target": "0.10",
+        "vol_floor_fraction": "0.05",
+        "loss_control": "0.08",
+        "max_hold": 20,
+        "reentry_delay": 5,
+        "ladder_rungs": [
+          [
+            "0.08",
+            "0.25"
+          ],
+          [
+            "0.10",
+            "0.125"
+          ]
+        ]
+      },
+      "maximum_exposure": "f_base = 0.50 of equity at the decision close, reduced by RA1-2 and RA1-5, and further capped by the engine's own 95% exposure cap and 5% cash buffer.",
+      "stop_or_shutdown_rule": "RA1-3 at the position level and RA1-5 at the account level. The constitution section 5.1 research shutdown at 15% is enforced by the engine and is not referenced by any candidate rule.",
+      "max_variants": 5,
+      "robustness_neighbours": [
+        {
+          "sma_long": 150
+        },
+        {
+          "sma_short": 20
+        },
+        {
+          "vol_target": "0.08"
+        },
+        {
+          "f_base": "0.35"
+        }
+      ],
+      "gate_3_conditions_applied": {
+        "S3-C1_total_return": "positive, predicate total_return > 0, unchanged",
+        "S3-C2_maximum_drawdown": "no worse than 15%, predicate max_drawdown <= 0.15, inclusive boundary, unchanged",
+        "S3-C3_profit_factor": "at least 1.10, predicate profit_factor >= 1.10, unchanged",
+        "S3-C4_minimum_trade_count": "at least 30 closed trades, predicate closed_trades >= 30, unchanged, lower-frequency exception NOT invoked",
+        "S3-C5_best_trade_removal": "both removals - largest equity multiple and largest absolute P&L - must leave total return above 0%, unchanged",
+        "S3-C6_concentration": "NOT_APPLICABLE_BY_CONDITION_TEXT, declared instrument count 1, per the sealed single_instrument_treatment",
+        "S3-C7_neighbour_stability": "sign of net return equal to the primary's for all four neighbours, zero matches nothing, unchanged"
+      },
+      "implemented": false,
+      "evaluated": false
+    },
+    "SE100-S3A2-C2-MEANREV-RA1": {
+      "family": "mean reversion",
+      "family_authorised_by": "SE100-GOV-0001 section 3, which names mean reversion among the families that may be researched separately in Generation 1.",
+      "hypothesis": "SPY reverts over a two-to-five session horizon, and entering after a 2-period Wilder RSI below 10 at volatility-scaled exposure no greater than half of equity, exiting once the close is back above its 5-session average or at an 8% loss or after 10 sessions held, earns a positive after-cost total return over the development window without account equity ever falling 15% below its running high-water mark.",
+      "distinction_from_attempt_1": {
+        "shares_signal_form_with": "SE100-S3-F3-MEANREV-RSI2, rejected in Attempt 1",
+        "signal_form_held_fixed_deliberately": "Same reason as C1: the research question is about risk structure. C2 is not an independent test of the mean-reversion hypothesis.",
+        "what_is_materially_different": [
+          "Position size: F3 requested a fixed 95% of equity. C2 requests min(f_cap, 0.10 / VOL20) * equity with ceiling 0.50.",
+          "Per-position loss control: F3 had none, explicitly. C2 exits at an 8% decline from its entry decision close.",
+          "Maximum holding period: F3 had none, explicitly. C2 exits after 10 decision sessions held.",
+          "Account de-risk ladder and re-entry delay: F3 had neither.",
+          "Robustness neighbours: two of C2's four probe the risk machinery."
+        ],
+        "the_sealed_sentence_this_candidate_must_answer": "SE100-CFG-3001 experiment SE100-S3-F3-MEANREV-RSI2 exit_rule states: 'There is no stop, no time exit, and no profit target: adding one would be a rule chosen after the fact.'",
+        "answer": "That sentence is correct about F3 and remains correct about F3 permanently. Adding a stop or a time exit TO F3 after seeing F3's drawdown would be exactly the prohibited post-result repair. Declaring a stop and a time exit prospectively in a NEW candidate that restarts at Gate 3 under a new pre-registration is the route constitution section 11 provides, and it is the route taken. F3 is not edited, not superseded, and not re-run. The distinction is real but it is thin, and it is recorded here rather than glossed: the reason a stop and a time exit are being declared at all is that Attempt 1 showed unstopped, untimed mean reversion breached the ceiling. That is an adaptation, and it is disclosed as one.",
+        "why_this_is_not_a_post_result_parameter_repair": "No signal parameter is changed: rsi_period stays 2, rsi_entry_below stays 10, exit_sma stays 5, the values F3 declared before any result.",
+        "counter_argument_recorded": "The same counter-argument as C1 applies with more force here, because F3's sealed text names the exact additions C2 makes. A reader should treat C2's result as the second look it is."
+      },
+      "primary_parameters": {
+        "rsi_period": 2,
+        "rsi_entry_below": 10,
+        "exit_sma": 5,
+        "f_base": "0.50",
+        "vol_target": "0.10",
+        "vol_floor_fraction": "0.05",
+        "loss_control": "0.08",
+        "max_hold": 10,
+        "reentry_delay": 5,
+        "ladder_rungs": [
+          [
+            "0.08",
+            "0.25"
+          ],
+          [
+            "0.10",
+            "0.125"
+          ]
+        ]
+      },
+      "maximum_exposure": "f_base = 0.50 of equity at the decision close, reduced by RA1-2 and RA1-5, and further capped by the engine.",
+      "stop_or_shutdown_rule": "RA1-3 at the position level, RA1-5 at the account level, the engine-enforced section 5.1 shutdown at 15% unreferenced by any candidate rule.",
+      "max_variants": 5,
+      "robustness_neighbours": [
+        {
+          "rsi_entry_below": 5
+        },
+        {
+          "exit_sma": 10
+        },
+        {
+          "vol_target": "0.08"
+        },
+        {
+          "loss_control": "0.12"
+        }
+      ],
+      "gate_3_conditions_applied": {
+        "S3-C1_total_return": "positive, unchanged",
+        "S3-C2_maximum_drawdown": "no worse than 15%, inclusive, unchanged",
+        "S3-C3_profit_factor": "at least 1.10, unchanged",
+        "S3-C4_minimum_trade_count": "at least 30 closed trades, unchanged, exception NOT invoked",
+        "S3-C5_best_trade_removal": "both removals must leave total return above 0%, unchanged",
+        "S3-C6_concentration": "NOT_APPLICABLE_BY_CONDITION_TEXT, declared instrument count 1",
+        "S3-C7_neighbour_stability": "sign equal to the primary's for all four neighbours, unchanged"
+      },
+      "implemented": false,
+      "evaluated": false
+    },
+    "SE100-S3A2-C3-DEFENSIVE-RA1": {
+      "family": "defensive regime logic",
+      "family_authorised_by": "SE100-GOV-0001 section 3, which names defensive regime logic among the families that may be researched separately in Generation 1.",
+      "hypothesis": "A 200-session regime rule on SPY that routes to short-duration Treasuries rather than to cash when the regime fails, run at volatility-scaled exposure no greater than half of equity with an 8% per-position loss control, an annual re-underwriting horizon, and an account-level size ladder, earns a positive after-cost total return over the development window without account equity ever falling 15% below its running high-water mark, and does so without either instrument contributing more than half of total profit.",
+      "distinction_from_attempt_1": {
+        "shares_signal_form_with": "SE100-S3-F6-DEFENSIVE-SMA200-SHY, rejected in Attempt 1",
+        "signal_form_held_fixed_deliberately": "Same reason as C1 and C2. C3 is not an independent test of the defensive regime hypothesis.",
+        "what_is_materially_different": [
+          "Position size: F6 requested a fixed 95% of equity for both legs. C3 requests min(f_cap, 0.10 / VOL20) * equity with ceiling 0.50, measured on the TARGET symbol.",
+          "Per-position loss control, maximum holding period, account de-risk ladder, and re-entry delay: F6 had none of the four.",
+          "Robustness neighbours: F6 spent all four on sma_long and defensive_symbol. C3 spends two on the risk machinery and keeps two of F6's, including the cash-leg neighbour.",
+          "Warm-up and therefore run window: F6 declared 250 because of a 250-lookback neighbour; C3 declares 200 because its neighbour set tops out at 200. The windows differ and the two candidates are not a matched comparison."
+        ],
+        "why_this_is_not_a_post_result_parameter_repair": "No signal parameter is changed: sma_long stays 200, risk_symbol stays SPY, defensive_symbol stays SHY, the values F6 declared before any result. In particular the defensive leg is NOT switched to IEF, which would be a signal-source change unrelated to the risk thesis and would make the comparison of architectures less clean.",
+        "counter_argument_recorded": "As for C1 and C2. C3's result is a second look at F6's signal on the same data by the same researcher."
+      },
+      "primary_parameters": {
+        "sma_long": 200,
+        "risk_symbol": "SPY",
+        "defensive_symbol": "SHY",
+        "f_base": "0.50",
+        "vol_target": "0.10",
+        "vol_floor_fraction": "0.05",
+        "loss_control": "0.08",
+        "max_hold": 252,
+        "reentry_delay": 5,
+        "ladder_rungs": [
+          [
+            "0.08",
+            "0.25"
+          ],
+          [
+            "0.10",
+            "0.125"
+          ]
+        ]
+      },
+      "maximum_exposure": "f_base = 0.50 of equity at the decision close for either leg, reduced by RA1-2 and RA1-5, and further capped by the engine.",
+      "stop_or_shutdown_rule": "RA1-3 at the position level - and it applies to the defensive leg too, where it is expected almost never to fire, which is a fact the exit-reason counts will show rather than assert. RA1-5 at the account level. The engine-enforced section 5.1 shutdown at 15%, unreferenced by any candidate rule.",
+      "max_variants": 5,
+      "robustness_neighbours": [
+        {
+          "sma_long": 150
+        },
+        {
+          "defensive_symbol": null
+        },
+        {
+          "vol_target": "0.08"
+        },
+        {
+          "f_base": "0.35"
+        }
+      ],
+      "gate_3_conditions_applied": {
+        "S3-C1_total_return": "positive, unchanged",
+        "S3-C2_maximum_drawdown": "no worse than 15%, inclusive, unchanged",
+        "S3-C3_profit_factor": "at least 1.10, unchanged",
+        "S3-C4_minimum_trade_count": "at least 30 closed trades, unchanged, exception NOT invoked",
+        "S3-C5_best_trade_removal": "both removals must leave total return above 0%, unchanged",
+        "S3-C6_concentration": "APPLIES. Declared instrument count 2. Predicate: maximum single-instrument share of total closed-trade P&L <= 0.50, evaluated only when total closed-trade P&L is strictly positive; otherwise NOT_EVALUABLE. Unchanged from SE100-CFG-3002.",
+        "S3-C7_neighbour_stability": "sign equal to the primary's for all four neighbours, unchanged"
+      },
+      "implemented": false,
+      "evaluated": false
+    }
+  },
+  "iteration_budget": {
+    "candidates": 3,
+    "runs_per_candidate": "one primary run plus four robustness-neighbour runs, plus one non-gating stressed-cost run of the primary",
+    "gating_variants_per_candidate": 5,
+    "max_variants_per_candidate": 5,
+    "total_declared_gating_variants": 15,
+    "total_declared_non_gating_stress_runs": 3,
+    "total_declared_runs": 18,
+    "revisions_permitted": 0,
+    "meaning": "Each candidate is run once at its primary parameterisation. No parameter is changed, no rule is amended, no symbol is added or removed, and no candidate is re-run after any result is seen. A candidate that fails is reported as failed. Constitution section 11: a change to universe, timing, cost, signal, parameter range, metric, threshold, or data partition is material, and a material change creates a NEW candidate that restarts at Gate 3 - it does not repair this one.",
+    "neighbour_runs_are_not_iterations": "The four neighbour runs per candidate exist solely to evaluate S3-C7 on the sign of net return. They are never used to select a parameterisation, are never promoted to primary, and their metrics other than the sign of net return are reported but carry no gate weight.",
+    "stress_runs_are_not_iterations": "The three stressed-cost runs are diagnostics required by constitution section 7. They are non-gating at Gate 3 and cannot admit or reject any candidate. See cost_stress_treatment."
+  },
+  "cumulative_experiment_count": {
+    "attempt_1_candidates": 6,
+    "attempt_2_candidates": 3,
+    "cumulative_candidates": 9,
+    "attempt_1_gating_variants": 30,
+    "attempt_2_gating_variants": 15,
+    "cumulative_gating_variants": 45,
+    "attempt_1_total_runs": 30,
+    "attempt_2_total_runs": 18,
+    "cumulative_total_runs": 48,
+    "binding_number_for_interpretation": "9 candidates and 45 gating variants against the same development window. Any later statistical statement about Gate 3 evidence uses the cumulative figure, not Attempt 2's figure.",
+    "distinct_signal_forms": "Attempt 2 introduces no new signal form. Its three signals share rule form with three of Attempt 1's six candidates, so the cumulative count of distinct signal forms tested at Gate 3 remains 6, while the cumulative count of distinct SPECIFICATIONS tested is 9."
+  },
+  "multiple_comparisons_disclosure": "Three candidates are tested against the same development data that six candidates were already tested against, by a researcher who knows how those six failed. A per-candidate criterion is not a family-wise one, and the probability that at least one of nine specifications passes by chance exceeds the probability that any single pre-specified one does. Because the Attempt 2 design space was narrowed by an observed Attempt 1 outcome, the effective search is wider than nine independent draws and cannot be bounded by counting runs. Nothing in this attempt corrects for it numerically. The correction the constitution relies on is that an admitted candidate must still survive Gate 4 robustness, Gate 5's single sealed holdout read, and the duration-based paper and shadow gates. Attempt 2 weakens none of those and earns no relief from any of them.",
+  "no_selection_in_this_stage": "Gate 3 is admissibility, not selection. Every candidate that satisfies every hard condition is recorded as admitted; the stage does not rank admitted candidates, does not name a winner, and does not carry a preference forward. Choosing which admitted candidate proceeds is a later-stage decision under the constitution's own rules.",
+  "risk_architecture": {
+    "id": "RA1",
+    "name": "Structural exposure and loss architecture, shared identically by all three Attempt 2 candidates",
+    "why_shared": "Declaring one architecture once, identically across candidates, means its degrees of freedom are counted once rather than three times. If RA1 were tuned per candidate, three candidates would carry three independent sets of risk parameters and the search would be three times wider than it appears.",
+    "design_intent": "S3-C2 is satisfied if and only if the constitution section 5.1 research shutdown never fires. RA1 is the structural answer to that: it lowers exposure, caps single-position loss, reduces size as account drawdown grows, and bounds time at risk. Every constant below is either taken from a frozen artifact or derived arithmetically from constants that are, and none was selected by inspecting an Attempt 1 equity path.",
+    "prohibition_on_mechanical_targeting": "RA1 is not a device for stopping at 14.99%. No rule references the 15% ceiling, no rule references a drawdown level between 10% and 15%, and no rule is conditioned on proximity to the shutdown. The deepest level RA1 reacts to is 10%, which is the constitution's own section 5.2 hard risk halt, declared for live trading and adopted here as a research-side de-risking trigger.",
+    "RA1-1": {
+      "name": "Exposure ceiling",
+      "rule": "f_base = 0.50. No entry may request a budget above f_base multiplied by account equity measured at the decision close.",
+      "derivation": "Not fitted. The constitution's section 5.2 live soft risk halt is 8% below the high-water mark and its hard risk halt is 10%. RA1-3 caps a single position's nominal decline at L = 0.08. With f_base = 0.50 the worst nominal single-position cost to the account is f_base * L = 0.040, which is half the soft-halt distance and 40% of the hard-halt distance. No single position can, at its declared limit, carry the account through a halt rung on its own.",
+      "relation_to_constitutional_cap": "The constitution section 3 ceiling is 95% gross exposure with a 5% minimum cash buffer, and the sealed cost model enforces it. RA1-1 requests less. It never requests more and cannot.",
+      "applies_to_defensive_leg": true,
+      "defensive_leg_note": "RA1-1 applies uniformly, including to a defensive Treasury leg. A candidate holding SHY therefore holds about 50% SHY and about 50% cash, which reduces the defensive leg's return contribution relative to Attempt 1's F6. This is a disclosed cost of the architecture, not an oversight. No instrument-specific carve-out is granted, because a per-instrument exposure exemption would be a discretionary rule and the whole point of RA1 is that its rules are not discretionary."
+    },
+    "RA1-2": {
+      "name": "Volatility-targeted entry sizing",
+      "applies": "at entry only",
+      "entry_only_reason": "The sealed portfolio accounting appends a closed trade only when a position is fully closed, so a position is all-or-nothing. Re-sizing an open position would require a partial exit the accounting does not model. Sizing is therefore decided once, at entry, and never adjusted while the position is open.",
+      "rule": [
+        "sigma_target = 0.10, annualised.",
+        "sigma = VOL20 of the symbol being entered, measured at the decision close.",
+        "f_vol = sigma_target / sigma.",
+        "f_cap = the RA1-5 ladder value for the decision session.",
+        "f = min(f_cap, f_vol).",
+        "If sigma == 0: no entry, reason NO_ENTRY_ZERO_VOLATILITY.",
+        "If f < f_floor = 0.05: no entry that session, reason NO_ENTRY_VOLATILITY_FLOOR.",
+        "budget = f * equity at the decision close.",
+        "If budget < min_order_notional_usd = 1.00 from SE100-CFG-2001 sizing: no entry, reason NO_ENTRY_SIZE_FLOOR.",
+        "Otherwise emit BUY with that budget. The engine applies its own exposure cap, cash buffer, one-cent budget safety margin, and share rounding on top, and may reduce the executed notional further."
+      ],
+      "sigma_target_rationale": "0.10 annualised is a deliberately low volatility target: below the long-run realised volatility of every equity ETF in the frozen universe, so the target binds rather than decorates, and above zero by enough that a position of economically meaningful size is still taken in calm regimes. It is one round number declared once and probed by a neighbour at 0.08 in every candidate.",
+      "f_floor_rationale": "f_floor = 0.05 mirrors the constitution's 5% minimum cash buffer read as a smallest-meaningful-fraction. It is a safety rail against an absurdly small position in an extreme volatility regime, not a filter: it binds only when sigma exceeds sigma_target / f_floor = 2.00, that is 200% annualised, which is far above any level the frozen universe has exhibited. Declared so that the case is decided in advance rather than on sight.",
+      "cannot_increase_exposure": "f = min(f_cap, f_vol), so volatility targeting can only reduce exposure below the RA1-1 ceiling. It can never raise it."
+    },
+    "RA1-3": {
+      "name": "Per-position loss control",
+      "rule": [
+        "L = 0.08.",
+        "P_ref = close of the DECISION session on which the entry order was scheduled.",
+        "On any later decision session t at which the symbol is in context.open_symbols: if close(symbol, t) <= P_ref * (1 - L), emit a full exit, reason EXIT_LOSS_CONTROL.",
+        "A pending P_ref is discarded if the symbol is absent from context.open_symbols at the next decision session, because the entry was not filled."
+      ],
+      "why_decision_close_and_not_fill_price": "The fill price is the next session's open and is not exposed to the candidate at decision time. Referencing the decision close keeps the rule computable from information the candidate is allowed to see, and structurally prevents a look-ahead read of the fill. The difference between the decision close and the fill open is one overnight gap and is disclosed as such rather than modelled away.",
+      "L_rationale": "0.08 is the constitution's own section 5.2 live soft risk halt distance, adopted at the position level. Taking the number from a frozen artifact rather than choosing one keeps it out of the search space.",
+      "not_a_stop_order": "This is a close-referenced exit that fills at the next open under MARKET_ON_NEXT_OPEN. It is not a stop order, not a stop-limit, and not an intraday trigger. The project holds no intraday data, so no intraday trigger could be evaluated.",
+      "not_a_bound": "RA1-3 does not bound loss at 8%. The trigger is evaluated at a close and filled at the next open, so one overnight gap and one session of exposure sit between the trigger and the exit. Constitution section 5.2: 'Stops are risk tools, not guarantees; overnight gaps may exceed intended losses.' A position that declines faster than the rule can react loses more than L, and the account loses f times that larger amount."
+    },
+    "RA1-4": {
+      "name": "Maximum holding period",
+      "rule": [
+        "H is declared per candidate.",
+        "sessions_held counts the decision sessions on which the symbol has appeared in context.open_symbols, the current session included.",
+        "If sessions_held >= H, emit a full exit, reason EXIT_MAX_HOLD."
+      ],
+      "purpose": "Bounds time at risk and forces every thesis to be re-underwritten. A position that has not resolved within its candidate's declared horizon is closed rather than held indefinitely.",
+      "per_candidate_H_is_not_a_trade_count_dial": "Each H is set from its candidate's own stated thesis horizon, and in every case H is longer than the horizon the thesis names, so H is the outer bound rather than the operative exit. The values are stated with their reasoning in each candidate block and are not adjusted to reach any gate threshold."
+    },
+    "RA1-5": {
+      "name": "Account de-risk ladder",
+      "read": "at entry only, to set f_cap for the RA1-2 computation",
+      "rule": [
+        "hwm is the running maximum of context.equity over the decision sessions of the run, seeded at the first decision session's equity and updated on every decision session whether the account is flat or not.",
+        "dd = (hwm - equity) / hwm at the decision close.",
+        "dd < 0.08: f_cap = 0.50.",
+        "0.08 <= dd < 0.10: f_cap = 0.25.",
+        "dd >= 0.10: f_cap = 0.125."
+      ],
+      "equity_series_identity": "context.equity is the same value the engine records before it evaluates the section 5.1 shutdown, so RA1-5's drawdown series is byte-identical to the shutdown's own. The ladder and the shutdown read one series, not two approximations of one.",
+      "never_blocks_entry": "The ladder reduces size. It never blocks an entry and never sets f_cap to zero. This is deliberate and is the correction of a rejected earlier formulation.",
+      "rejected_alternative": "An earlier formulation blocked new entries once dd reached 0.08 until equity recovered above the high-water mark. It is recorded here because it is fatally defective and the defect is instructive: a flat account's equity is constant, so equity can never recover, so the block can never re-arm. That rule would produce a permanently dead strategy - which is the failure mode the constitution's own shutdown already represents, reintroduced by the risk overlay meant to avoid it. It is also what the operating constraint against making a strategy incapable of meaningful trading solely to suppress drawdown forbids.",
+      "rung_rationale": "0.08 and 0.10 are the constitution's section 5.2 live soft and hard risk halt distances, verbatim. The multipliers halve and then halve again. Nothing here is a new number chosen by the researcher except the choice to halve, which is declared and is probed indirectly by the f_base neighbour in every candidate."
+    },
+    "RA1-6": {
+      "name": "Re-entry rule after a risk exit",
+      "rule": "After an exit with reason EXIT_LOSS_CONTROL or EXIT_MAX_HOLD, the candidate may not re-enter that same symbol for R = 5 decision sessions counted from the decision session that scheduled the exit. A blocked entry is recorded with reason NO_ENTRY_LOCKOUT. An exit with reason EXIT_SIGNAL creates no lockout.",
+      "R_rationale": "One exchange week. A cooling-off period after a risk-driven exit prevents the loss control from converting a single adverse move into an immediate sequence of identical entries into the same condition. Five sessions is the shortest period that spans a full weekly cycle.",
+      "rejected_alternative": "The lockout was first specified as lasting until the candidate's entry condition evaluated false at least once. That is defective for the same reason as the rejected RA1-5 formulation: a regime condition can remain true for years, so the lockout could fail to expire and would leave the account in cash indefinitely. A fixed number of sessions always expires.",
+      "not_load_bearing_for_the_drawdown_arithmetic": "The drawdown arithmetic below assumes back-to-back maximum losses with no lockout at all, so RA1-6 can only improve on it. It is an economic sensibility rule, not part of the bound."
+    },
+    "RA1-7": {
+      "name": "Conflict resolution",
+      "rule": "The shared flat_first_rule, adopted unchanged. A candidate never schedules an exit and an entry for the same fill session, so every symbol switch costs one full session out of the market. Combined with RA1-6, a switch that follows a risk exit costs at least six sessions out of the market."
+    },
+    "RA1-8": {
+      "name": "All-or-nothing positions",
+      "rule": "Entries and exits are for the full position. No partial entry, no partial exit, no scaling in, no scaling out, no averaging down, no pyramiding.",
+      "reason": "Constitution section 5.1 prohibits averaging down without an explicit predeclared rule, and the sealed portfolio accounting appends a closed trade only when a position is fully closed. Partial exits would make the closed-trade series - the basis of S3-C3, S3-C4, S3-C5, and S3-C6 - ambiguous."
+    },
+    "exit_precedence": {
+      "order": [
+        "EXIT_LOSS_CONTROL",
+        "EXIT_MAX_HOLD",
+        "EXIT_SIGNAL"
+      ],
+      "rule": "At most one exit is emitted per session because positions are all-or-nothing. When more than one exit condition is true on the same decision session, the position is closed once and the attributed reason is the highest-precedence condition in the order above.",
+      "purpose": "Reason attribution only. The precedence changes no exit decision - the position closes either way - so it cannot affect any metric. It exists so that the evidence can report how many exits each mechanism caused, which is how RA1-3 and RA1-4 are diagnosed instead of being probed by a neighbour."
+    },
+    "engine_shutdown_relationship": {
+      "enforcement": "The section 5.1 research shutdown is enforced by the engine for every run, primary and neighbour and stressed alike. It is not disabled, not relaxed, and not treated as an artefact.",
+      "candidate_behaviour": "A candidate emits no order on any decision session where context.shutdown_active is true. This is belt-and-braces; the engine already forces liquidation and blocks entries.",
+      "no_candidate_reads_the_ceiling": "No RA1 rule and no candidate rule references 0.15, the shutdown state, or the distance to it as an input to sizing or signalling."
+    },
+    "drawdown_arithmetic": {
+      "claim": "This is an arithmetic property of the declared constants, computed by hand from RA1-1, RA1-3, and RA1-5 before any Attempt 2 code exists. It is NOT a prediction, NOT a guarantee, and NOT a claim that S3-C2 will be met.",
+      "worst_case_sequence": "Consecutive round trips each losing exactly the RA1-3 limit, starting from the high-water mark with equity 1.0. Loss per trade = f_cap * L.",
+      "steps": [
+        "trade 1: dd = 0.0000, f_cap = 0.500, loss 4.000%, equity 0.960000, dd after = 4.0000%",
+        "trade 2: dd = 4.0000%, f_cap = 0.500, loss 4.000%, equity 0.921600, dd after = 7.8400%",
+        "trade 3: dd = 7.8400%, f_cap = 0.500, loss 4.000%, equity 0.884736, dd after = 11.5264%",
+        "trade 4: dd = 11.5264%, f_cap = 0.125, loss 1.000%, equity 0.875889, dd after = 12.4111%",
+        "trade 5: dd = 12.4111%, f_cap = 0.125, loss 1.000%, equity 0.867130, dd after = 13.2870%",
+        "trade 6: dd = 13.2870%, f_cap = 0.125, loss 1.000%, equity 0.858459, dd after = 14.1541%",
+        "trade 7: dd = 14.1541%, f_cap = 0.125, loss 1.000%, equity 0.849874, dd after = 15.0126% - BREACH"
+      ],
+      "result": "Seven consecutive maximum-loss round trips are required to breach the 15% ceiling. Six leave drawdown at 14.15%.",
+      "middle_rung_note": "The 0.25 rung is skipped on this particular path, because trade 3 carries drawdown from 7.84% straight to 11.53%. The middle rung is reached by paths made of smaller individual losses, not by the maximum-loss path.",
+      "caveats": [
+        "RA1-3 is not a bound. The trigger is a close and the fill is the next open, so a gap can exceed L and the per-trade loss can exceed f_cap * L. Constitution section 5.2 says so in terms.",
+        "A position that declines without ever printing a close at or below the trigger, then gaps through it, loses more than L.",
+        "Drawdown is measured at session closes because the project holds no intraday data. Every measured drawdown is a lower bound on the true intraday figure, and this is an Attempt 1 limitation that Attempt 2 inherits unchanged.",
+        "Losses need not be consecutive. Interleaved gains raise the high-water mark and reset the ladder, which helps; interleaved small losses can walk the account down through the rungs more slowly than this path, which does not.",
+        "This arithmetic says nothing about profitability. A structure that never breaches the ceiling and never makes money fails S3-C1 and S3-C3, and that is a real and anticipated way for Attempt 2 to fail."
+      ]
+    },
+    "disclosed_costs_of_the_architecture": [
+      "Sell-side regulatory fees in SE100-CFG-2001 round UP to the cent, so a sale costs about two cents regardless of size. On a 95%-of-equity position that is roughly 2 bps; on a 50% position roughly 4 bps; on a 12.5% position roughly 16 bps. Lowering exposure therefore RAISES cost per unit of exposure. RA1 pays this drag on every trade and it is not modelled away.",
+      "RA1-1 halves exposure, so it also roughly halves the strategy's participation in the returns that made every Attempt 1 candidate profitable. Attempt 2's research question is precisely whether what remains is still meaningful after costs.",
+      "RA1-1 applies to a defensive Treasury leg as well, reducing its carry contribution.",
+      "RA1-4 forces an exit and a later re-entry on any position held to its horizon; with RA1-7 and RA1-6 that costs at least six sessions out of the market and two round-trip cost charges per cycle.",
+      "RA1-6 keeps the account in cash for five decision sessions after every risk exit, forgoing any recovery that occurs inside that window."
+    ]
+  },
+  "gate_3_binding": {
+    "criteria_source": "config/stage3_gate_criteria.json",
+    "criteria_sha256": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+    "criteria_adoption": "ADOPTED_UNCHANGED",
+    "conditions_evaluated": 7,
+    "max_drawdown_ceiling": "0.15",
+    "max_drawdown_ceiling_changed": false,
+    "within_candidate": "CONJUNCTIVE",
+    "across_candidates": "DISJUNCTIVE",
+    "admissible_candidate_exists": {
+      "frozen_rule": "admissible_candidate_exists is TRUE if and only if there exists at least one pre-registered Attempt 2 candidate for which EVERY applicable Gate 3 hard condition is SATISFIED, where satisfied means the condition's verdict is MET or NOT_APPLICABLE_BY_CONDITION_TEXT.",
+      "source": "SE100-CFG-3002 verdict_token_derivation pass condition - 'At least one pre-registered candidate satisfies EVERY hard condition of Gate 3' - and its conjunctive_note. Adopted unchanged.",
+      "satisfied_definition": "verdict in (MET, NOT_APPLICABLE_BY_CONDITION_TEXT)",
+      "not_satisfied_values": [
+        "NOT_MET",
+        "NOT_EVALUABLE",
+        "NOT_RUN",
+        "UNKNOWN",
+        "MISSING_EVIDENCE",
+        "absent"
+      ],
+      "within_candidate": "CONJUNCTIVE. All seven conditions are evaluated for every candidate; all applicable ones must be satisfied by that same candidate.",
+      "across_candidates": "DISJUNCTIVE. One admissible candidate is enough to pass Gate 3.",
+      "how_many_admissible_candidates_are_required": {
+        "answer": "Exactly one.",
+        "evidence": "SE100-CFG-3002 verdict_token_derivation pass condition reads 'At least one pre-registered candidate satisfies EVERY hard condition of Gate 3'. Nothing in SE100-GOV-0001 section 9 gate 3 requires two or more.",
+        "and_no_more_than_one_is_needed": "If more than one candidate is admissible, all of them are recorded as admissible. Gate 3 does not rank them and does not name a winner; selection is a later-stage decision. Attempt 2 declares no preference order among its three candidates."
+      },
+      "per_condition_rollup_is_not_the_gate": {
+        "rule": "A per-condition rollup row aggregates SATISFACTION across candidates and therefore means only 'at least one candidate satisfied this condition'. It is not evidence that any candidate satisfied all of them, and it settles nothing on its own.",
+        "required_reporting_shape": "Each per-condition row must carry three separate lists - met_by, not_met_by, and not_applicable_for - so that a NOT_APPLICABLE_BY_CONDITION_TEXT verdict is visible as such rather than folded into a pass or a fail.",
+        "known_failure_mode_recorded": "Aggregating a per-condition row on verdict == MET rather than on satisfaction produced a false FAIL for S3-C6 in Attempt 1's first rollup. The rollup must aggregate on satisfaction. It is recorded here so the same defect is not reintroduced by a fresh implementation.",
+        "decisive_row": "The conditions table must carry the admissible_candidate_exists row, and that row alone decides the gate. A conditions table that omits it is misleading and is not an acceptable deliverable."
+      },
+      "verdict_mapping": {
+        "true": "PASS with the sealed pass token",
+        "false": "FAIL with the sealed fail token",
+        "token_source": "SE100-CFG-3002 verdict_token_derivation. The tokens are derived from that sealed field at build time, never restated as literals in a builder or a test.",
+        "pass_token": "STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+        "fail_token": "STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT",
+        "quoted_here_for_a_reader_only": "The two tokens are written above so a human can read this file without opening another. A builder must still read them from the sealed derivation, and a test must assert them from the sealed derivation, so that a divergence between this file and the sealed one fails rather than silently prefers this file."
+      },
+      "incoherent_combinations_refused": [
+        "A PASS with zero admissible candidates.",
+        "A FAIL with at least one admissible candidate.",
+        "A PASS reached by treating NOT_EVALUABLE, NOT_RUN, UNKNOWN, or missing evidence as satisfied.",
+        "A PASS reached by aggregating per-condition rollup rows instead of evaluating conjunction within a candidate.",
+        "A verdict written into a decision package that is not the verdict the recorded evidence reaches."
+      ]
+    },
+    "neighbour_status": {
+      "are_neighbours_diagnostic_or_independently_selectable": {
+        "answer": "Diagnostic only.",
+        "evidence": "SE100-CFG-3002 conditions S3-C7 selection_prohibition, adopted unchanged: no neighbour is ever promoted, and no primary is revised because a neighbour did better; such a revision is a material change under constitution section 11 that creates a new candidate restarting at Gate 3."
+      },
+      "can_a_neighbour_become_the_representative_of_its_candidate": {
+        "answer": "No. Never. Under no result.",
+        "consequence": "A candidate whose primary fails but whose four neighbours all pass is a FAILED candidate. It is recorded as failed, and its neighbour metrics are reported as diagnostics. Substituting the neighbour would be selection on an observed outcome."
+      },
+      "is_a_neighbour_separately_admissible_at_gate_3": {
+        "answer": "No. A neighbour is not a candidate. Only the three pre-registered primaries are candidates, and only a candidate can be admissible.",
+        "why_this_matters_numerically": "It keeps the number of admissibility trials at 3 for Attempt 2 rather than 15. The 15 gating variants still count as searches for the purpose of the cumulative multiple-testing disclosure in SE100-CFG-3003; they do not count as chances to pass."
+      },
+      "what_a_neighbour_contributes_to_the_gate": "One thing only: the sign of its net return, consumed by S3-C7 for its own candidate. Every other neighbour metric is reported and non-gating.",
+      "neighbour_that_fails_to_run": "NOT_RUN. Not a pass. S3-C7 fails for that candidate, and the candidate is therefore not admissible."
+    },
+    "shutdown_behaviour": {
+      "constitution_ref": "SE100-GOV-0001 section 5.1",
+      "threshold": "equity 15% below the running high-water mark",
+      "sealed_action": "LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES",
+      "action_source": "SE100-CFG-2001 risk.research_shutdown_action, sha256 f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2, with the sealed note that the constitution names the state but not the action and that liquidating and blocking further entries is the strictest reading.",
+      "does_a_breach_cause_immediate_liquidation": {
+        "answer": "Liquidation at the NEXT OPEN, not intraday and not at the breaching close.",
+        "reason": "The engine's execution model has no intraday fill. The breach is detected at a session close and the liquidation fills at the following open, exactly as any other order does. The one-session lag is real, is charged, and is not modelled away."
+      },
+      "is_deactivation_permanent": {
+        "answer": "Yes. It never re-arms.",
+        "consequence": "Once tripped, entries are blocked for the remainder of the run and the equity curve is flat from the liquidation onward. Every metric computed over the full window thereafter describes a short live period followed by a long dead one.",
+        "attempt_1_observed": "All six Attempt 1 candidates tripped it, earliest October 1997 and latest August 2010, which is why their full-window annualised figures were recorded as a limitation rather than reported as descriptions of the rules."
+      },
+      "relationship_to_S3_C2": {
+        "conflict_id": "S3-CONFLICT-3, carried forward from SE100-CFG-3002 unchanged",
+        "statement": "The Gate 3 drawdown ceiling and the section 5.1 research shutdown are the same number, 15%, measured against the running high-water mark of the same session-close equity series. A candidate that trips the shutdown has by construction breached S3-C2, and its equity curve is flat from the liquidation onward.",
+        "equivalence": "S3-C2 is MET if and only if the shutdown never fires.",
+        "attempt_2_use": "This equivalence is Attempt 2's design target and is the reason RA1 exists. It is NOT a licence to treat a shutdown as anything other than a failure, and no Attempt 2 rule references the 15% level, the shutdown state, or the distance to it."
+      },
+      "enforced_for_every_run": "primary runs, all four neighbour runs per candidate, and the three non-gating stressed-cost runs. It is never disabled for a candidate. It is disabled only for the explicitly labelled SPY buy-and-hold benchmark reference account, which is reported both ways, exactly as Stage 2 and Attempt 1 reported it."
+    },
+    "rerun_policy": {
+      "may_a_result_be_rerun_after_a_valid_completed_evaluation": {
+        "answer": "No.",
+        "rule": "Once a variant has completed a valid run over its full declared window under the sealed cost model, that result is the result. It is not re-run, not re-seeded, not re-ordered, and not recomputed in the hope of a different number. There is nothing to re-seed: SE100-CFG-3003 declares random_seeds null and every rule is deterministic, so a re-run of an unchanged variant must reproduce byte-identical output. A re-run that produced a DIFFERENT number would be a determinism defect and a blocker, not a better result."
+      },
+      "when_a_rerun_is_required": [
+        "A run that did not reach the development window end is NOT_RUN, not a result, and is re-run in full.",
+        "A software defect discovered after a result exists INVALIDATES that result per constitution section 10. The result is recorded as INVALIDATED, the fix is recorded, and ALL affected runs are re-run in full."
+      ],
+      "prohibited": "Selectively re-running only the variants whose numbers were disliked, extending a partial run rather than re-running it, or patching a completed result.",
+      "no_specification_change_ever_follows_a_result": "A change to SE100-CFG-3003 after any Attempt 2 result exists creates a new candidate under a new pre-registration and restarts at Gate 3. It never repairs a candidate declared for this attempt."
+    },
+    "evaluation_integrity_rules": {
+      "adopted_unchanged_from": "SE100-CFG-3002 evaluation_integrity_rules",
+      "restated_for_a_reader": [
+        "Verdicts are computed by program from recorded evidence, never asserted by a human reading a number.",
+        "Exactly four verdict values exist: MET, NOT_MET, NOT_EVALUABLE, NOT_APPLICABLE_BY_CONDITION_TEXT. There is no fifth value and no borderline value.",
+        "A candidate's admissibility is the conjunction of its applicable conditions.",
+        "Comparisons are exact Decimal with no rounding before comparison.",
+        "The measured value is recorded alongside every verdict, so that a verdict can be checked against its own evidence."
+      ]
+    },
+    "denominators_and_universes_of_measurement": {
+      "note": "Restated from SE100-CFG-3002 for a reader, and enforced from that file. Nothing here is a new rule.",
+      "total_return": "final equity divided by starting equity, minus 1. Starting equity is the sealed USD 100.00. An equity curve with fewer than two points is NOT_EVALUABLE and fails.",
+      "max_drawdown": "largest peak-to-trough decline of the DAILY CLOSING equity curve, expressed as a non-negative fraction of the RUNNING PEAK. Session-close granularity; the project holds no intraday data and none is imputed.",
+      "profit_factor": "gross profit divided by gross loss over CLOSED trades only. Trade P&L is exit cash plus dividends received while held, minus entry cash, with both legs' costs inside. Open positions at window end are excluded from the numerator and the denominator alike.",
+      "closed_trades": "count of CLOSED round trips. Open positions at window end are not counted.",
+      "best_trade_removal": "a multiplicative equity reconstruction over closed trades in order, from E[0] = 100.00 with E[i] = E[i-1] + pnl[i] and r[i] = E[i]/E[i-1]. Realised return is the product of all r[i] minus 1; the removed-trade return is the product over i not equal to j minus 1.",
+      "concentration": "single-instrument closed-trade P&L divided by TOTAL closed-trade P&L, evaluated only when the total is strictly positive.",
+      "neighbour_stability": "the SIGN of net return of each of the four neighbours, compared to the sign of the primary's net return. Magnitudes are irrelevant to the condition and zero matches nothing."
+    },
+    "cost_stress_is_not_a_gate_3_condition": {
+      "statement": "Gate 3's seven hard conditions contain no stressed-cost condition. SE100-CFG-3003 declares three non-gating stressed-cost runs at 2x complete base friction to satisfy constitution section 7 and to put the number on disk for a later gate.",
+      "rule": "A STRESS_FRAGILE flag cannot reject a candidate that satisfied every hard condition, and a clean stressed run cannot admit a candidate that failed one. The flag is evidence for Gate 4, not a Gate 3 criterion.",
+      "why_this_needs_saying": "Adding evidence next to a gate is exactly how a gate quietly acquires an eighth condition. Declaring the non-gating status before any stressed number exists is what prevents it."
+    },
+    "conflicts_carried_forward": [
+      {
+        "id": "S3-CONFLICT-1",
+        "summary": "The frozen constitution's Markdown states seven Gate 3 thresholds and its JSON companion carries five. The sealed resolution is that the Markdown is authoritative, all seven are evaluated, and the discrepancy is reported and not repaired.",
+        "attempt_2_position": "Carried forward unchanged. All seven conditions are evaluated for every Attempt 2 candidate. The discrepancy remains reported and unrepaired."
+      },
+      {
+        "id": "S3-CONFLICT-2",
+        "summary": "The constitution's JSON companion supplies a fail_result for gate 3 but no pass_result key. The sealed resolution derives the pass token by negation as STRATEGY_ADMITTED_IN_DEVELOPMENT.",
+        "attempt_2_position": "Carried forward unchanged. The pass token is derived from the sealed verdict_token_derivation, not invented."
+      },
+      {
+        "id": "S3-CONFLICT-3",
+        "summary": "The Gate 3 drawdown ceiling and the section 5.1 research shutdown are the same 15% on the same series.",
+        "attempt_2_position": "Carried forward unchanged, and adopted as the design target of Attempt 2's risk architecture. See shutdown_behaviour.relationship_to_S3_C2."
+      },
+      {
+        "id": "S3-CONFLICT-4-ATTEMPT-2",
+        "summary": "New, recorded by this attempt. SE100-CFG-3001 shared_rules.sizing_rule states that position size is not a research variable 'in this stage', which on a broad reading would prohibit Attempt 2's volatility-targeted sizing.",
+        "resolution": "Recorded, not repaired. SE100-CFG-3001 is not edited and remains permanently true of its own six candidates. The sentence is read as scoping itself to Attempt 1's sealed candidate set, and the constitutional route for Attempt 2 is section 11: a sizing change is material and creates a new candidate restarting at Gate 3. The rejected broad reading is recorded in full in SE100-CFG-3003 recorded_interpretations A2-INTERP-1 so that a reader can disagree with the resolution on the record rather than discover it by inference.",
+        "constitutional_exposure_ceiling": "unchanged at 95% gross with a 5% minimum cash buffer. Attempt 2 requests less."
+      }
+    ],
+    "nothing_else_changed": {
+      "thresholds": "unchanged",
+      "predicates": "unchanged",
+      "denominators": "unchanged",
+      "measurement_procedures": "unchanged",
+      "boundary_treatments": "unchanged",
+      "undefined_cases": "unchanged",
+      "not_evaluable_semantics": "unchanged",
+      "conjunction_logic": "unchanged",
+      "verdict_tokens": "unchanged",
+      "verdict_value_set": "unchanged",
+      "conflicts_found": "carried forward unchanged and unrepaired - see conflicts_carried_forward",
+      "reported_but_not_gating": "unchanged, extended only with non-gating RA1 diagnostics declared in SE100-CFG-3003 secondary_metrics; extending a non-gating report cannot affect admission",
+      "windows": "unchanged - development AUTHORIZED, validation LOCKED, holdout SEALED"
+    }
+  },
+  "windows": {
+    "authorized": [
+      "development"
+    ],
+    "validation": "LOCKED",
+    "holdout": "SEALED",
+    "enforcement": "stockedge100.backtest.window.ResearchWindow raises WindowViolation for any session outside the development window; MarketView raises LookAheadError for any read past the decision session. Structural, not procedural.",
+    "unchanged_by_this_attempt": "No boundary is moved, widened, narrowed, or re-cut. No validation observation is read. No holdout observation is read.",
+    "holdout_lock_sha256": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+    "development_window_dates_restated": false,
+    "development_window_dates_note": "bound by the holdout lock's digest and read at run time; date_range is null in this package for that reason, not by omission"
+  },
+  "contamination": {
+    "strategy_code_existed_before_sealing": false,
+    "attempt_2_performance_generated_or_inspected": false,
+    "validation_results_examined": false,
+    "holdout_accessed": false,
+    "prospective_with_respect_to_attempt_2_results": true,
+    "prospective_with_respect_to_attempt_1_results": false,
+    "adaptation_recorded_in": [
+      "config/stage3_attempt2_strategy_protocol.json adaptive_research_disclosure (10 items)",
+      "the cumulative experiment count spanning both attempts",
+      "the families_excluded reasoning",
+      "each candidate's distinction_from_attempt_1 block"
+    ],
+    "predicates_at_sealing": {
+      "attempt_2_strategy_modules": 0,
+      "modules_naming_an_attempt_2_candidate": 0,
+      "attempt_2_report_artifacts": 0,
+      "attempt_2_run_records": 0
+    },
+    "files_making_the_movable_predicates_non_zero": {
+      "runs/SE100-R-20260810T115933Z.json": "the seal's own run record",
+      "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_TEST_SUMMARY.md": "test artifact",
+      "reports/stage3_attempt2/pytest_stage3_attempt2_output.txt": "test artifact",
+      "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_DESIGN.json": "design-session decision record",
+      "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_ARTIFACT_MANIFEST.json": "artifact manifest",
+      "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_DESIGN.sha256": "checksum record",
+      "runs/<this session's run id>.json": "design-session reproducibility record"
+    },
+    "none_is_strategy_code_or_a_performance_result": true
+  },
+  "scope": {
+    "strategy_modules_written": 0,
+    "backtests_run": 0,
+    "simulations_run": 0,
+    "parameter_sweeps_run": 0,
+    "performance_calculations_run": 0,
+    "market_observations_loaded_for_performance": 0,
+    "candidate_selected": false,
+    "candidate_admitted": false,
+    "revisions_after_seeing_a_result": 0,
+    "stage_4_remains_prohibited_conditions": [
+      "Stage 4 remains prohibited unless and until Gate 3 is passed by at least one Attempt 2 candidate under the admissible_candidate_exists rule frozen in config/stage3_attempt2_gate_criteria_binding.json.",
+      "A per-condition rollup showing every condition satisfied by SOME candidate does not pass Gate 3 and does not unlock Stage 4.",
+      "A candidate admitted only by treating NOT_EVALUABLE, NOT_RUN, UNKNOWN, or missing evidence as a pass does not pass Gate 3.",
+      "A candidate admitted only after a change to this file, to SE100-CFG-3002, or to any threshold, does not pass Gate 3.",
+      "A STRESS_FRAGILE flag does not block Stage 4 at Gate 3, and a clean stressed run does not unlock it.",
+      "Validation-window access remains prohibited until the frozen gate that authorises it, regardless of any development result.",
+      "The holdout remains SEALED regardless of any development result.",
+      "live_trading_authorized remains false regardless of any development result."
+    ],
+    "explicit_non_authorizations": [
+      "No data of any kind is downloaded, purchased, or acquired by this attempt. Every price comes from the Stage 1 normalized dataset already on disk.",
+      "No validation-window or holdout-window data is read. The window guard raises WindowViolation structurally rather than relying on discipline.",
+      "No frozen artifact is edited, regenerated, replaced, superseded, or re-encoded. Attempt 1's SE100-CFG-3001, SE100-CFG-3002, its pre-registration, its decision record, its manifest, its checksum records, and its run record are read-only and byte-for-byte unchanged.",
+      "No Attempt 1 candidate is re-run, re-parameterised, repaired, or combined with an Attempt 2 candidate.",
+      "No Gate 3 condition, threshold, denominator, predicate, boundary, undefined case, or not-evaluable treatment is changed. The 15% maximum-drawdown ceiling is unchanged.",
+      "No candidate is combined with any other candidate. Constitution section 8 prohibits combination until each component has an independent verdict, and no Attempt 2 component has one.",
+      "No machine learning, no optimiser, no search over any parameter grid, and no fit of any kind.",
+      "No fundamental, earnings, or intraday data is introduced. None exists in this project.",
+      "No paper order, no live order, no cancel, no replace, no liquidation, no broker call, and no unattended scheduling.",
+      "No Alpaca credential is read, and no credential presence is tested by this attempt.",
+      "No strategy is selected as a winner, and no expected income, profit, or return is claimed for any period, past or future.",
+      "live_trading_authorized remains false."
+    ],
+    "money_spent_usd": 0,
+    "credentials_used": "none",
+    "data_acquired": "none",
+    "orders_generated": 0
+  },
+  "integrity": {
+    "frozen_artifacts_modified": false,
+    "attempt_1_artifacts_modified": false,
+    "stage_3_attempt_2_freeze_record_issued": false,
+    "stage_3_attempt_2_freeze_record_rationale": "the pre-registration is already covered by governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256 and this package's outputs by its own checksum record, while code identity is repo_state_id. Recorded as a decision, not left as an omission.",
+    "self_reference_policy": "the manifest excludes its own entry and is covered by the checksum record; no repo_state_id is written into any governance Markdown, both of which are searched for the value rather than for the field name",
+    "package_not_covered_by_tests": "tests/**/*.py is one of the repo_state_id patterns, so a test asserting this package's repo_state_id would invalidate the value it asserts. The package is verified by re-running the recomputation."
+  },
+  "evidence": [
+    "Attempt 2's pre-registration was sealed at 2026-08-10T11:59:33Z under run SE100-R-20260810T115933Z, with all four contamination predicates at 0 and sealed_before_any_attempt_2_strategy_code=True. The predicates are what make the prospectiveness claim falsifiable rather than self-reported: each is defined in the seal, each is tested in both directions, and each is wired to refusal.",
+    "3 candidates were declared \u2014 SE100-S3A2-C1-PULLBACK-RA1, SE100-S3A2-C2-MEANREV-RA1, SE100-S3A2-C3-DEFENSIVE-RA1 \u2014 retaining pullback, mean reversion, defensive regime logic and excluding trend/momentum, breakout, ETF rotation, all three sharing one risk architecture (RA1). 4 declared neighbours each, 5 maximum variants each, 15 gating variants and 18 runs declared in advance, 0 revisions permitted.",
+    "Gate 3 is adopted unchanged and by digest: config/stage3_gate_criteria.json at 310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d, 7 conditions, ceiling 0.15 with max_drawdown_ceiling_changed=False, CONJUNCTIVE within a candidate and DISJUNCTIVE across them. Two re-derivations apply sealed rules to a new candidate set and change no threshold, predicate, measurement or token.",
+    "The adaptation to Attempt 1's known outcome is disclosed rather than hidden behind new identifiers: a 10-item disclosure, a cumulative count of 6 + 3 = 9 candidates and 45 gating variants spanning both attempts, and a distinction_from_attempt_1 block on every candidate.",
+    "Every upstream checksum record verifies from its intended working directory, and the Stage 0 freeze was re-verified over both halves of the constitution. Entry counts and statuses are in gate_conditions.A2D-C1.",
+    "The pre-registration checksum record verifies 4/4 from stockedge100, and each of the three pre-registered file digests recomputes to the value the seal recorded: config/stage3_attempt2_strategy_protocol.json 77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433; config/stage3_attempt2_gate_criteria_binding.json a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e; governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.md d9e34b3ce61f5998fe91c0b7b551a29a778fdb410330e60d6919c0a94ec447c6.",
+    "No Attempt 2 strategy module, backtest, simulation, parameter sweep, performance calculation or result artifact exists. No validation-period result was examined. No holdout observation was read; the holdout lock was read for integrity metadata and is bound by digest.",
+    "The suite floor rose from 389 to 460 collected. The recorded selection is 115 passed, 0 failed, 0 skipped, of which 71 are the new pre-registration module; no test in the selection opens a price file, computes a return, or touches the validation or holdout windows. All 11 test-file digests recorded in Attempt 1's run record recompute unchanged against disk.",
+    "This design report is governance/STAGE_3_ATTEMPT_2_DESIGN_REPORT.md at 03f706d847f6220c8b0a497bdd4a763ac9798901f1b6a2a84dfd1bab32a11b21; its gate-condition table is the table in this record's gate_conditions field, and the requirement text of each condition here is copied from it so the two can be diffed."
+  ],
+  "limitations": [
+    "Gate 3 is not passed. A sealed design is a specification, not evidence. Nothing here indicates that any Attempt 2 candidate will satisfy S3-C2 or any other condition.",
+    "The drawdown arithmetic in section 9 of the design report is a property of the declared constants under an idealised worst-case sequence, not a guarantee, and it carries five caveats that all cut the same way.",
+    "The development window is no longer pristine: nine specifications now share it, and the effective search is wider than nine independent draws.",
+    "No Attempt 2 candidate is a controlled comparison against Attempt 1. Warm-up lengths differ, so run windows differ; differencing an Attempt 2 number against an Attempt 1 number would not measure the risk architecture.",
+    "Attempt 2 introduces no new signal form. All three signals are reused from rejected candidates, so the attempt cannot corroborate any family's hypothesis.",
+    "Drawdown is measured at session closes. The project holds no intraday data, so every measured drawdown is a lower bound on the true intraday figure. Inherited from Attempt 1, unchanged.",
+    "Lower fixed exposure raises cost per unit of exposure, because sell-side regulatory fees round up to the cent. The drag is charged, not modelled away.",
+    "S3-C6 remains a live failure mode for the defensive candidate, declared and accepted before any result.",
+    "The whole test suite was not executed, so unmodified for the pre-existing test files is asserted by digest recomputation rather than by a green run.",
+    "scipy and pyarrow are not installed, and no Attempt 2 rule requires either.",
+    "No test covers this package: tests/**/*.py is one of the repo_state_id patterns, so a test asserting this package's repo_state_id would invalidate the value it asserts the moment it was written. The package is verified by re-running the recomputation."
+  ],
+  "blockers": [],
+  "conflicts_found": [],
+  "gate_conditions": {
+    "A2D-C1": {
+      "required": "Stage 0 freeze (both halves), Stage 1 freeze, and the Stage 1/2/3 pre-registration and decision checksum records all verify from their intended working directories before any artifact is authored",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about any candidate's behaviour. No condition in this table measures a return, a drawdown, a trade count or an equity value, because none exists for any Attempt 2 candidate. The gate 3 determination is the separate gate_3_admissible_candidate_exists entry, whose verdict is NOT_RUN.",
+      "evidence": {
+        "records": {
+          "governance/STAGE_0_FREEZE.sha256": {
+            "verify_from": "stockedge100/governance",
+            "entries": 2,
+            "entries_expected": 2,
+            "statuses": [
+              "OK"
+            ],
+            "all_ok": true
+          },
+          "governance/STAGE_1_FREEZE.sha256": {
+            "verify_from": "stockedge100/governance",
+            "entries": 2,
+            "entries_expected": 2,
+            "statuses": [
+              "OK"
+            ],
+            "all_ok": true
+          },
+          "governance/STAGE_1_PREREGISTRATION.sha256": {
+            "verify_from": "stockedge100",
+            "entries": 4,
+            "entries_expected": 4,
+            "statuses": [
+              "OK"
+            ],
+            "all_ok": true
+          },
+          "governance/STAGE_2_PREREGISTRATION.sha256": {
+            "verify_from": "stockedge100",
+            "entries": 4,
+            "entries_expected": 4,
+            "statuses": [
+              "OK"
+            ],
+            "all_ok": true
+          },
+          "governance/STAGE_3_PREREGISTRATION.sha256": {
+            "verify_from": "stockedge100",
+            "entries": 4,
+            "entries_expected": 4,
+            "statuses": [
+              "OK"
+            ],
+            "all_ok": true
+          },
+          "reports/stage0/STAGE_0_VERIFICATION.sha256": {
+            "verify_from": "stockedge100",
+            "entries": 8,
+            "entries_expected": 8,
+            "statuses": [
+              "OK"
+            ],
+            "all_ok": true
+          },
+          "reports/stage1/STAGE_1_DATA_READINESS.sha256": {
+            "verify_from": "stockedge100",
+            "entries": 19,
+            "entries_expected": 19,
+            "statuses": [
+              "OK"
+            ],
+            "all_ok": true
+          },
+          "reports/stage2/STAGE_2_BACKTEST_ENGINE.sha256": {
+            "verify_from": "stockedge100",
+            "entries": 20,
+            "entries_expected": 20,
+            "statuses": [
+              "OK"
+            ],
+            "all_ok": true
+          },
+          "reports/stage3/STAGE_3_STRATEGY_RESEARCH.sha256": {
+            "verify_from": "stockedge100",
+            "entries": 26,
+            "entries_expected": 26,
+            "statuses": [
+              "OK"
+            ],
+            "all_ok": true
+          },
+          "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256": {
+            "verify_from": "stockedge100",
+            "entries": 4,
+            "entries_expected": 4,
+            "statuses": [
+              "OK"
+            ],
+            "all_ok": true
+          }
+        },
+        "stage_0_freeze_verified": true,
+        "stage_0_freeze_detail": {
+          "STAGE_0_CONSTITUTION.md": {
+            "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+            "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+            "match": "True"
+          },
+          "STAGE_0_CONSTITUTION.json": {
+            "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+            "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+            "match": "True"
+          }
+        },
+        "working_directory_note": "records listing bare filenames verify from stockedge100/governance; records listing project-root-relative paths verify from stockedge100. A mismatch reported from the other directory is an operator error, not an integrity failure.",
+        "frozen_artifacts_modified": false
+      }
+    },
+    "A2D-C2": {
+      "required": "Frozen on-disk governance permits a further gate 3 attempt by new pre-registration, with the determination resting on quoted frozen text and not on the operating prompt",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about any candidate's behaviour. No condition in this table measures a return, a drawdown, a trade count or an equity value, because none exists for any Attempt 2 candidate. The gate 3 determination is the separate gate_3_admissible_candidate_exists entry, whose verdict is NOT_RUN.",
+      "evidence": {
+        "question": "Does frozen on-disk governance permit a second Stage 3 attempt after a failed first attempt?",
+        "answer": "Yes, by a new pre-registration declaring new candidates, sealed before any code for them exists. No erratum, no new project generation, and no separate human written approval is required at this gate.",
+        "evidence_items": 8,
+        "evidence": [
+          "SE100-GOV-0001 section 11, lines 290-291: 'A change that affects universe, timing, cost, signal, parameter range, metric, threshold, or data partition is material.' and 'A material change after seeing validation results creates a new candidate and restarts at Gate 3.' A new candidate restarting at Gate 3 is the mechanism this attempt uses. The scope gap is stated rather than glossed: the second sentence's trigger is 'after seeing VALIDATION results', and Attempt 1's results are development-only, so the clause does not literally cover this case. It is relied on a fortiori - if a material change made after seeing the more strongly protected validation results is permitted and costs no more than restarting at Gate 3, a material change made after seeing only development results cannot require more, and Gate 3 is where Attempt 2 begins. The constitution nowhere states a stricter consequence for the development case, and this attempt does not read the silence as permission for anything beyond restarting at Gate 3.",
+          "SE100-GOV-0001 section 11, line 293, the most directly on-point clause: 'Safety thresholds may be tightened without promoting a failed strategy, but the change must still be versioned.' Attempt 2 tightens safety - lower fixed exposure, entry-only volatility targeting, a per-position loss control, an account-level de-risking ladder - and promotes no failed strategy: F1 through F6 are not re-run, not edited, not superseded, and not carried forward. The versioning requirement is met by a new artifact id at version 1.0.0 rather than an edit to SE100-CFG-3001.",
+          "SE100-GOV-0001 section 2: 'Negative results are deliverables. Rejected strategies are recorded and not silently recycled.' Attempt 1 remains on disk, unmodified, and is cited rather than recycled.",
+          "SE100-GOV-0001 section 2: 'No result-driven rule changes. A failed gate cannot be weakened after results are observed.' No Gate 3 condition, threshold, denominator, predicate, boundary, or measurement is changed by this attempt.",
+          "STAGE_0_CONSTITUTION.json gates entry with id 3 carries a fail_result and no once-only clause, no attempt limit, and no manual_written_approval_required flag. The only gate carrying manual_written_approval_required true is gate 9.",
+          "governance/STAGE_3_STRATEGY_RESEARCH_REPORT.md section 19, lines 511-514: 'A further attempt at Gate 3 requires a new pre-registration declaring new candidates, sealed before any code for them exists, under the same prohibition on revising a specification because of a result it produced.' Quoted as prose; the source emphasises the word new with markdown bold, which is not reproduced here.",
+          "governance/STAGE_3_STRATEGY_RESEARCH_REPORT.md section 15, lines 405-409: 'A future generation of candidates is a new pre-registration and a new Gate 3, not an amendment to this one.' Attempt 2 is a new pre-registration and a new Gate 3, and amends nothing. The same passage hands forward the section 7 observation that the risk control and the quality gate are the same number, and states that it 'belongs to whoever writes the next pre-registration'. This file is that pre-registration, and risk_architecture RA1 is what it does with the observation.",
+          "STAGE_3_PREREGISTRATION.md section 7.8 bars a seventh candidate 'in this session'. That bar is scoped to the Attempt 1 session and does not reach this one. Attempt 2 does not add a seventh candidate to Attempt 1; it declares a new candidate set under a new pre-registration."
+        ],
+        "not_relied_on": "This determination rests on frozen on-disk governance. The operating prompt for this session was not treated as authority for it, and no frozen rule was reinterpreted or weakened to reach it.",
+        "families_requirement": {
+          "question": "Does the constitution require all six strategy families to be researched again in a second attempt?",
+          "answer": "No.",
+          "evidence": "SE100-GOV-0001 section 3, the scope table, reads 'Trend/momentum, pullback, mean reversion, breakout, ETF rotation, and defensive regime logic may be researched separately'. The modal verb is 'may', which is permissive and not a requirement to research all six; the quotation reproduces the source's lower-case 'may' rather than emphasising it. Section 8's sentence 'Strategy families must first be tested independently' is a precondition on COMBINING strategies, not a requirement to test all six in every attempt; its own next sentence is 'Combining strategies is prohibited until each component has an independent verdict.' Attempt 2 combines nothing.",
+          "consequence": "Attempt 2 declares three candidates, which is the smallest set that can answer the research question while keeping one multi-instrument candidate so that S3-C6 is live rather than not-applicable for every candidate."
+        },
+        "determined_from": "on-disk frozen governance, quoted; not from the operating prompt and not from any conversational claim"
+      }
+    },
+    "A2D-C3": {
+      "required": "All four contamination predicates read 0 at sealing and Attempt 1's records verify; each predicate is tested in both directions and wired to refusal",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about any candidate's behaviour. No condition in this table measures a return, a drawdown, a trade count or an equity value, because none exists for any Attempt 2 candidate. The gate 3 determination is the separate gate_3_admissible_candidate_exists entry, whose verdict is NOT_RUN.",
+      "evidence": {
+        "counts_at_sealing": {
+          "attempt_2_strategy_modules": 0,
+          "modules_naming_an_attempt_2_candidate": 0,
+          "attempt_2_report_artifacts": 0,
+          "attempt_2_run_records": 0
+        },
+        "definitions": {
+          "attempt_2_strategy_modules": "Count of files under src/stockedge100/ with suffix .py whose path relative to the project root, lowercased with backslashes normalised to forward slashes, contains 'attempt2', EXCLUDING src/stockedge100/reporting/. The exclusion exists because the sealing program itself is src/stockedge100/reporting/stage3_attempt2_preregistration.py; it narrows the check and is recorded rather than hidden. Must be 0.",
+          "modules_naming_an_attempt_2_candidate": "Count of files under src/stockedge100/strategies/ with suffix .py whose decoded text contains any candidate id declared in config/stage3_attempt2_strategy_protocol.json. Catches an Attempt 2 implementation added to an existing Attempt 1 module, which the path-based predicate above would miss. Must be 0.",
+          "attempt_2_report_artifacts": "Count of files anywhere under reports/ whose project-root-relative path, lowercased and slash-normalised, contains 'attempt2'. Any Attempt 2 evidence, admissibility, or test artifact would appear here. Must be 0 at sealing.",
+          "attempt_2_run_records": "Count of files under runs/ whose decoded text contains 'ATTEMPT_2' or any candidate id declared in config/stage3_attempt2_strategy_protocol.json. Measured BEFORE this seal writes its own run record, which carries stage STAGE_3_ATTEMPT_2_PRE_REGISTRATION and therefore contains the token by construction. A re-verification after sealing will legitimately count 1; the value recorded here is the count of records that existed before this run. Must be 0.",
+          "attempt_1_records_verify": "Both governance/STAGE_3_PREREGISTRATION.sha256 and reports/stage3/STAGE_3_STRATEGY_RESEARCH.sha256 verify entry-for-entry from the project root. This is the Attempt 1 immutability check: it fails if any Attempt 1 pre-registered file or result artifact changed by a single byte. Must be true."
+        },
+        "attempt_1_records_verify": true,
+        "why_not_attempt_1_predicates": "Attempt 1 recorded strategy_modules_present_at_seal_time 0 and strategy_output_files_present_at_seal_time 0 over src/stockedge100/strategies/ and reports/stage3/. Both directories are now legitimately non-empty with Attempt 1's own modules and results, which may not be deleted, so counting to zero over those paths is not the available test. Attempt 1 recorded its two counts as bare integers with no definition attached; each predicate here carries its definition.",
+        "sealed_before_any_attempt_2_strategy_code": true,
+        "sealed_utc": "2026-08-10T11:59:33Z",
+        "movable_after_sealing": [
+          "attempt_2_run_records becomes 1: the seal writes its own run record, whose stage token contains ATTEMPT_2 by construction",
+          "attempt_2_report_artifacts becomes non-zero: this design session's test summary, pytest output, decision record, manifest and checksum record live under reports/stage3_attempt2/"
+        ],
+        "movable_note": "both moves are anticipated in the sealed definitions, which say the counts must be 0 at sealing. Neither file is strategy code and neither is a performance result."
+      }
+    },
+    "A2D-C4": {
+      "required": "Criteria adopted by digest, 7 conditions, ceiling 0.15 unchanged, conjunction logic unchanged; two re-derivations apply sealed rules to a new candidate set and change no threshold, predicate, measurement, or token",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about any candidate's behaviour. No condition in this table measures a return, a drawdown, a trade count or an equity value, because none exists for any Attempt 2 candidate. The gate 3 determination is the separate gate_3_admissible_candidate_exists entry, whose verdict is NOT_RUN.",
+      "evidence": {
+        "criteria_source": "config/stage3_gate_criteria.json",
+        "criteria_sha256_recorded": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+        "criteria_sha256_recomputed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+        "criteria_adoption": "ADOPTED_UNCHANGED",
+        "criteria_changed_for_attempt_2": false,
+        "conditions_in_criteria_file": [
+          "S3-C1",
+          "S3-C2",
+          "S3-C3",
+          "S3-C4",
+          "S3-C5",
+          "S3-C6",
+          "S3-C7"
+        ],
+        "conditions_evaluated_declared": 7,
+        "max_drawdown_ceiling": "0.15",
+        "max_drawdown_ceiling_changed": false,
+        "drawdown_condition_verbatim": "maximum drawdown is no worse than 15%",
+        "drawdown_measurement": "max_drawdown from stockedge100.backtest.metrics: the largest peak-to-trough decline of the daily closing equity curve, expressed as a non-negative fraction of the running peak. Session-close granularity; the project holds no intraday data and none is imputed.",
+        "drawdown_predicate": "max_drawdown <= 0.15",
+        "drawdown_boundary": "Inclusive. 'No worse than 15%' admits exactly 15%.",
+        "drawdown_interaction": "See S3-CONFLICT-3. A candidate that triggers the section 5.1 research shutdown breaches this condition by construction.",
+        "within_candidate": "CONJUNCTIVE",
+        "across_candidates": "DISJUNCTIVE",
+        "admissible_candidates_required": 1,
+        "rederivations": [
+          "A2-REDERIVE-1",
+          "A2-REDERIVE-2"
+        ],
+        "rederivation_note": "Two enumerations in the sealed criteria name Attempt 1's candidates by id. Both are re-derived by applying the sealed RULE to Attempt 2's candidate set rather than carrying the sealed OUTPUT forward. No threshold, predicate, denominator, measurement procedure, or verdict token is changed. See config/stage3_attempt2_gate_criteria_binding.json.",
+        "rederivation_detail": [
+          {
+            "id": "A2-REDERIVE-1",
+            "condition": "S3-C6",
+            "sealed_field": "conditions[S3-C6].scope_interpretation.applies_to",
+            "sealed_text_quoted": "Candidates whose declared universe contains more than one instrument: SE100-S3-F5-ROTATION-DUALMOM and SE100-S3-F6-DEFENSIVE-SMA200-SHY.",
+            "why_rederivation_is_necessary": "The sealed field states a RULE and then applies it to the candidate set in front of it. The rule is 'candidates whose declared universe contains more than one instrument'. The two named ids are its output for Attempt 1. Read literally against Attempt 2's candidate set the enumeration is empty, which would silently make S3-C6 not-applicable for a candidate that declares two instruments - a weakening. Applying the sealed rule instead of the sealed output is the reading that changes nothing.",
+            "rule_applied": "declared_instrument_count > 1",
+            "attempt_2_applies_to": [
+              "SE100-S3A2-C3-DEFENSIVE-RA1"
+            ],
+            "attempt_2_not_applicable_to": [
+              {
+                "candidate": "SE100-S3A2-C1-PULLBACK-RA1",
+                "declared_instrument_count": 1,
+                "verdict": "NOT_APPLICABLE_BY_CONDITION_TEXT"
+              },
+              {
+                "candidate": "SE100-S3A2-C2-MEANREV-RA1",
+                "declared_instrument_count": 1,
+                "verdict": "NOT_APPLICABLE_BY_CONDITION_TEXT"
+              }
+            ],
+            "not_applicable_evidence_requirement": "Per the sealed single_instrument_treatment, a NOT_APPLICABLE_BY_CONDITION_TEXT verdict must record the declared instrument count as its evidence. It is not a blank pass.",
+            "unchanged": "threshold 0.50, predicate maximum single-instrument share of total closed-trade P&L <= 0.50, the requirement that total closed-trade P&L be strictly positive for the condition to be evaluable at all, the NOT_EVALUABLE treatment otherwise, and the rationale."
+          },
+          {
+            "id": "A2-REDERIVE-2",
+            "condition": "S3-C7",
+            "sealed_field": "conditions[S3-C7].measurement",
+            "sealed_text_quoted": "Each candidate declares exactly four robustness neighbours in SE100-CFG-3001, chosen before any result.",
+            "why_rederivation_is_necessary": "SE100-CFG-3001 is Attempt 1's sealed protocol and cannot declare neighbours for candidates that did not exist when it was sealed. The declaring artifact for Attempt 2 candidates is SE100-CFG-3003.",
+            "attempt_2_declaring_artifact": {
+              "artifact_id": "SE100-CFG-3003",
+              "path": "config/stage3_attempt2_strategy_protocol.json"
+            },
+            "unchanged": "The count is exactly four per candidate. The requirement that they be chosen before any result is unchanged. The predicate - the sign of net return must match the primary's for all four, and zero matches nothing - is unchanged. The NOT_RUN treatment of a neighbour that fails to run is unchanged and is not a pass. The selection prohibition is unchanged.",
+            "count_is_enforced_in_code": "The Gate 2 validated evaluator at src/stockedge100/strategies/gate.py raises when a candidate does not present exactly four sealed neighbours. Attempt 2 declares exactly four per candidate, so the sealed count is satisfied structurally rather than by intention.",
+            "selection_prohibition_restated": "No neighbour is ever promoted to primary. No primary is revised because a neighbour performed better. Doing either would be a material change under constitution section 11, creating a new candidate that restarts at Gate 3."
+          }
+        ],
+        "nothing_else_changed": {
+          "thresholds": "unchanged",
+          "predicates": "unchanged",
+          "denominators": "unchanged",
+          "measurement_procedures": "unchanged",
+          "boundary_treatments": "unchanged",
+          "undefined_cases": "unchanged",
+          "not_evaluable_semantics": "unchanged",
+          "conjunction_logic": "unchanged",
+          "verdict_tokens": "unchanged",
+          "verdict_value_set": "unchanged",
+          "conflicts_found": "carried forward unchanged and unrepaired - see conflicts_carried_forward",
+          "reported_but_not_gating": "unchanged, extended only with non-gating RA1 diagnostics declared in SE100-CFG-3003 secondary_metrics; extending a non-gating report cannot affect admission",
+          "windows": "unchanged - development AUTHORIZED, validation LOCKED, holdout SEALED"
+        },
+        "drawdown_ceiling_is_unchanged": {
+          "value": "0.15",
+          "predicate": "max_drawdown <= 0.15",
+          "boundary": "inclusive - 'No worse than 15%' admits exactly 15%",
+          "source": "SE100-CFG-3002 conditions S3-C2, verbatim",
+          "verification": "The value is not stored in this file as an independent constant that could disagree with the sealed one. It is quoted here for a reader and is enforced from SE100-CFG-3002 at evaluation time, whose digest is pinned above. Any attempt to change the ceiling changes that digest and fails the loader.",
+          "attempt_2_position": "Unchanged. Attempt 2 lowers the risk taken to meet the ceiling; it does not raise the ceiling to meet the risk."
+        }
+      }
+    },
+    "A2D-C5": {
+      "required": "Ten-item disclosure recorded, each item asserted individually through eleven required substrings; cumulative count 9 candidates / 45 gating variants / 48 runs; no result may be called independent confirmation because its code is new",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about any candidate's behaviour. No condition in this table measures a return, a drawdown, a trade count or an equity value, because none exists for any Attempt 2 candidate. The gate 3 determination is the separate gate_3_admissible_candidate_exists entry, whose verdict is NOT_RUN.",
+      "evidence": {
+        "disclosure_items": 10,
+        "disclosure": {
+          "constitution_ref": "SE100-GOV-0001 sections 2 and 11",
+          "items": [
+            "Attempt 1's results are known to the researcher who wrote this file. This is an adaptive second attempt at Gate 3, not an independent first look.",
+            "All six Attempt 1 candidates breached the 15% maximum-drawdown ceiling. Some also failed the closed-trade-count floor, the profit-concentration condition, and the best-trade-removal condition.",
+            "The development data are no longer pristine with respect to at least the broad fact that the first candidate set produced excessive drawdown, and with respect to the per-candidate closed-trade counts recorded above. Attempt 2's design is conditioned on those facts.",
+            "Researcher degrees of freedom are higher in Attempt 2 than in Attempt 1, and false-discovery risk is correspondingly higher, because the design space was narrowed using an observed outcome.",
+            "The total experiment count for any later statistical interpretation is the cumulative count across both attempts, not Attempt 2's count alone. See cumulative_experiment_count.",
+            "No Attempt 2 result may be described as independent confirmation of anything merely because the code that produced it is new. The candidates share development data, a researcher, and a known prior outcome with Attempt 1.",
+            "Three of the three Attempt 2 candidates hold the entry and exit signal in the same rule FORM as a rejected Attempt 1 candidate. That is deliberate - the research question is about risk structure, so the return source is held fixed and the risk architecture is varied - and it means Attempt 2 is a second look at the same signals on the same data, not a new hypothesis about what predicts returns.",
+            "Validation-window and holdout-window protections are unchanged by this attempt. The validation window remains LOCKED and the holdout window remains SEALED.",
+            "A passing development result authorises only the next frozen evaluation step. It is not evidence of a trading edge, and it is not a claim about any future period.",
+            "This adaptation is not concealed behind a new strategy identifier. Each candidate id carries the RA1 suffix naming the shared risk architecture, and each candidate block states in distinction_from_attempt_1 exactly which rejected Attempt 1 candidate it shares its signal form with."
+          ]
+        },
+        "cumulative_experiment_count": {
+          "cumulative_candidates": 9,
+          "cumulative_gating_variants": 45,
+          "cumulative_total_runs": 48,
+          "binding_number_for_interpretation": "9 candidates and 45 gating variants against the same development window. Any later statistical statement about Gate 3 evidence uses the cumulative figure, not Attempt 2's figure."
+        },
+        "cumulative_experiment_count_full": {
+          "attempt_1_candidates": 6,
+          "attempt_2_candidates": 3,
+          "cumulative_candidates": 9,
+          "attempt_1_gating_variants": 30,
+          "attempt_2_gating_variants": 15,
+          "cumulative_gating_variants": 45,
+          "attempt_1_total_runs": 30,
+          "attempt_2_total_runs": 18,
+          "cumulative_total_runs": 48,
+          "binding_number_for_interpretation": "9 candidates and 45 gating variants against the same development window. Any later statistical statement about Gate 3 evidence uses the cumulative figure, not Attempt 2's figure.",
+          "distinct_signal_forms": "Attempt 2 introduces no new signal form. Its three signals share rule form with three of Attempt 1's six candidates, so the cumulative count of distinct signal forms tested at Gate 3 remains 6, while the cumulative count of distinct SPECIFICATIONS tested is 9."
+        },
+        "multiple_comparisons_disclosure": "Three candidates are tested against the same development data that six candidates were already tested against, by a researcher who knows how those six failed. A per-candidate criterion is not a family-wise one, and the probability that at least one of nine specifications passes by chance exceeds the probability that any single pre-specified one does. Because the Attempt 2 design space was narrowed by an observed Attempt 1 outcome, the effective search is wider than nine independent draws and cannot be bounded by counting runs. Nothing in this attempt corrects for it numerically. The correction the constitution relies on is that an admitted candidate must still survive Gate 4 robustness, Gate 5's single sealed holdout read, and the duration-based paper and shadow gates. Attempt 2 weakens none of those and earns no relief from any of them.",
+        "adaptation_is_prospective_with_respect_to_attempt_1": false,
+        "adaptation_note": "Attempt 1's results are known. The adaptation is disclosed rather than hidden behind new candidate identifiers: it is recorded in the disclosure items, in the cumulative count, in the family-exclusion reasoning, and in each candidate's distinction_from_attempt_1 block."
+      }
+    },
+    "A2D-C6": {
+      "required": "3 candidates, each carrying all 31 required fields (39, 39, 41 declared); attempt-level content complete; grid invariant holds; no discretionary choice is left to an implementation session",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about any candidate's behaviour. No condition in this table measures a return, a drawdown, a trade count or an equity value, because none exists for any Attempt 2 candidate. The gate 3 determination is the separate gate_3_admissible_candidate_exists entry, whose verdict is NOT_RUN.",
+      "evidence": {
+        "candidates_declared": 3,
+        "candidate_ids": [
+          "SE100-S3A2-C1-PULLBACK-RA1",
+          "SE100-S3A2-C2-MEANREV-RA1",
+          "SE100-S3A2-C3-DEFENSIVE-RA1"
+        ],
+        "required_field_count": 31,
+        "per_candidate": {
+          "SE100-S3A2-C1-PULLBACK-RA1": {
+            "family": "pullback",
+            "declared_fields": 39,
+            "required_fields_present": 31,
+            "required_fields_missing": [],
+            "robustness_neighbours": 4,
+            "max_variants": 5,
+            "grid_keys": [
+              "f_base",
+              "sma_long",
+              "sma_short",
+              "vol_target"
+            ],
+            "neighbours_outside_the_grid": []
+          },
+          "SE100-S3A2-C2-MEANREV-RA1": {
+            "family": "mean reversion",
+            "declared_fields": 39,
+            "required_fields_present": 31,
+            "required_fields_missing": [],
+            "robustness_neighbours": 4,
+            "max_variants": 5,
+            "grid_keys": [
+              "exit_sma",
+              "f_base",
+              "loss_control",
+              "rsi_entry_below",
+              "rsi_period",
+              "vol_target"
+            ],
+            "neighbours_outside_the_grid": []
+          },
+          "SE100-S3A2-C3-DEFENSIVE-RA1": {
+            "family": "defensive regime logic",
+            "declared_fields": 41,
+            "required_fields_present": 31,
+            "required_fields_missing": [],
+            "robustness_neighbours": 4,
+            "max_variants": 5,
+            "grid_keys": [
+              "defensive_symbol",
+              "f_base",
+              "sma_long",
+              "vol_target"
+            ],
+            "neighbours_outside_the_grid": []
+          }
+        },
+        "attempt_level_keys_missing": [],
+        "grid_invariant": {
+          "purpose": "Each candidate declares a permitted_parameter_grid. This field states exactly what that grid means, once, so that three per-candidate prose notes cannot drift into three different rules and so that the invariant is machine-checkable.",
+          "invariant": [
+            "For every key present in a candidate's permitted_parameter_grid, the declared value list is exactly the set formed by that candidate's primary value for the key together with every value the four declared neighbours give that key. Nothing else is permitted for that key.",
+            "Every key that at least one declared neighbour varies is present in the grid. A neighbour cannot vary a parameter the grid does not admit.",
+            "A key whose list holds a single value is a PIN, not a search axis: it records that the parameter exists, is fixed, and is deliberately not probed by any neighbour of this candidate."
+          ],
+          "the_grid_is_not_the_full_parameter_set": "The grid enumerates only the parameters this candidate's neighbours touch, plus any pin it names explicitly. Parameters of the primary that no neighbour varies and that the grid does not pin - max_hold, reentry_delay, ladder_rungs, vol_floor_fraction - are single-valued by their appearance in the primary parameterisation and are not restated in the grid. They are no less fixed for being absent from it.",
+          "no_search": "No search, sweep, or optimisation over any grid is performed at any point. The grid is a declared boundary on what could legitimately be run, and the runs that are actually run are the primary and its four neighbours - five per candidate, fifteen in total. A value inside the grid is not thereby authorised as an additional run.",
+          "why_declare_a_boundary_that_is_not_searched": "So that a later session cannot run a sixth variant, find it inside a broad grid, and call it pre-registered. The grid is deliberately narrower than Attempt 1's, which listed values no variant used."
+        },
+        "no_retuning_rule": "No parameter value, threshold, lookback, exposure fraction, volatility target, loss limit, holding period, re-entry delay, ladder rung, universe, or rule in this file may be changed for any reason once this file is sealed. A neighbour is never promoted to primary. A primary is never revised because a neighbour did better. No candidate is re-run at a different parameterisation. Under constitution section 11 any such change is material and creates a NEW candidate that restarts at Gate 3 under a NEW pre-registration; it does not repair a candidate declared here. Safety thresholds may be TIGHTENED without promoting a failed strategy, per section 11, but any such tightening must be versioned and may not be applied to a candidate whose result is already known.",
+        "iteration_budget": {
+          "candidates": 3,
+          "runs_per_candidate": "one primary run plus four robustness-neighbour runs, plus one non-gating stressed-cost run of the primary",
+          "gating_variants_per_candidate": 5,
+          "max_variants_per_candidate": 5,
+          "total_declared_gating_variants": 15,
+          "total_declared_non_gating_stress_runs": 3,
+          "total_declared_runs": 18,
+          "revisions_permitted": 0,
+          "meaning": "Each candidate is run once at its primary parameterisation. No parameter is changed, no rule is amended, no symbol is added or removed, and no candidate is re-run after any result is seen. A candidate that fails is reported as failed. Constitution section 11: a change to universe, timing, cost, signal, parameter range, metric, threshold, or data partition is material, and a material change creates a NEW candidate that restarts at Gate 3 - it does not repair this one.",
+          "neighbour_runs_are_not_iterations": "The four neighbour runs per candidate exist solely to evaluate S3-C7 on the sign of net return. They are never used to select a parameterisation, are never promoted to primary, and their metrics other than the sign of net return are reported but carry no gate weight.",
+          "stress_runs_are_not_iterations": "The three stressed-cost runs are diagnostics required by constitution section 7. They are non-gating at Gate 3 and cannot admit or reject any candidate. See cost_stress_treatment."
+        },
+        "discretion_left_to_implementation": "none on any parameter, threshold, lookback, symbol, sizing rule, risk rule, benchmark or neighbour: every one is a declared value in the sealed protocol"
+      }
+    },
+    "A2D-C7": {
+      "required": "Checksum record verifies 4/4 from the project root; MD and JSON materially agree; serialisation deterministic and all three JSON artifacts ASCII-only in fact; manifest self-reference policy followed; no tree digest written inside a covered file",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about any candidate's behaviour. No condition in this table measures a return, a drawdown, a trade count or an equity value, because none exists for any Attempt 2 candidate. The gate 3 determination is the separate gate_3_admissible_candidate_exists entry, whose verdict is NOT_RUN.",
+      "evidence": {
+        "checksum_record": {
+          "path": "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256",
+          "path_convention": "project-root-relative",
+          "verify_from": "stockedge100/",
+          "command": "cd stockedge100 && sha256sum -c governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256",
+          "entries": 4,
+          "results": {
+            "config/stage3_attempt2_gate_criteria_binding.json": "OK",
+            "config/stage3_attempt2_strategy_protocol.json": "OK",
+            "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.json": "OK",
+            "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.md": "OK"
+          }
+        },
+        "preregistered_file_digests": {
+          "config/stage3_attempt2_strategy_protocol.json": {
+            "recorded": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+            "recomputed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433"
+          },
+          "config/stage3_attempt2_gate_criteria_binding.json": {
+            "recorded": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+            "recomputed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e"
+          },
+          "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.md": {
+            "recorded": "d9e34b3ce61f5998fe91c0b7b551a29a778fdb410330e60d6919c0a94ec447c6",
+            "recomputed": "d9e34b3ce61f5998fe91c0b7b551a29a778fdb410330e60d6919c0a94ec447c6"
+          }
+        },
+        "markdown_json_agreement": {
+          "SE100-S3-A2": true,
+          "0.15": true,
+          "SEALED": true,
+          "RA1": true,
+          "SE100-GOV-0007": true,
+          "SE100-S3A2-C1-PULLBACK-RA1": true,
+          "SE100-S3A2-C2-MEANREV-RA1": true,
+          "SE100-S3A2-C3-DEFENSIVE-RA1": true,
+          "pullback": true,
+          "mean reversion": true,
+          "defensive regime logic": true,
+          "trend/momentum": true,
+          "breakout": true,
+          "ETF rotation": true
+        },
+        "agreement_exclusions": "declared_utc, the string LOCKED, and every digest are deliberately absent from the Markdown: it is written before the seal exists and cannot quote values the seal computes over it. It points at the JSON for them instead.",
+        "json_artifacts_ascii_only_in_fact": {
+          "config/stage3_attempt2_strategy_protocol.json": true,
+          "config/stage3_attempt2_gate_criteria_binding.json": true,
+          "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.json": true
+        },
+        "ascii_note": "measured with text.isascii(), not read off the declared encoding field. The pre-registration Markdown and this design report are UTF-8 and carry em dashes and section signs like every other governance document here; their digests are pinned, so their encoding cannot drift silently either.",
+        "tree_digest_written_into_a_covered_file": {
+          "governance/STAGE_3_ATTEMPT_2_DESIGN_REPORT.md": false,
+          "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.md": false
+        },
+        "self_reference_policy": "nothing hashes itself: the artifact manifest excludes its own entry and the checksum record covers it instead; the pre-registration checksum record does not name itself; and no repo_state_id is written into any file the digest is computed over, which is why both governance Markdown documents are searched for the value rather than for the field name",
+        "seal_is_unrepeatable": "the sealing program returns exit 2 when its record already exists, so the seal cannot be silently rewritten"
+      }
+    },
+    "A2D-C8": {
+      "required": "Development window only authorised; validation LOCKED; holdout SEALED; enforcement structural through ResearchWindow / MarketView; no boundary changed",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about any candidate's behaviour. No condition in this table measures a return, a drawdown, a trade count or an equity value, because none exists for any Attempt 2 candidate. The gate 3 determination is the separate gate_3_admissible_candidate_exists entry, whose verdict is NOT_RUN.",
+      "evidence": {
+        "authorized_windows": [
+          "development"
+        ],
+        "validation_window_state": "LOCKED",
+        "holdout_window_state": "SEALED",
+        "binding_windows": {
+          "authorized": [
+            "development"
+          ],
+          "validation": "LOCKED",
+          "holdout": "SEALED",
+          "enforcement": "stockedge100.backtest.window.ResearchWindow raises WindowViolation for any session outside the development window; MarketView raises LookAheadError for any read past the decision session. Structural, not procedural.",
+          "unchanged_by_this_attempt": "No boundary is moved, widened, narrowed, or re-cut. No validation observation is read. No holdout observation is read."
+        },
+        "holdout_lock": {
+          "path": "governance/STAGE_1_HOLDOUT_LOCK.json",
+          "artifact_id": "SE100-GOV-1005",
+          "status": "LOCKED",
+          "holdout_state": "SEALED",
+          "sha256": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+          "binding_rules": [
+            "The holdout window is read exactly once, at the constitutional holdout gate, and never before.",
+            "No parameter, threshold, symbol, or rule may be chosen using any value inside the validation or holdout windows.",
+            "These boundaries may not be recomputed, widened, narrowed, or shifted by any later stage.",
+            "If the dataset is re-acquired and the cutoff moves, the existing lock still governs; a new lock requires a new stage and a recorded reason."
+          ],
+          "read_for": "integrity metadata only; no holdout observation was read",
+          "boundary_dates_restated_in_any_attempt_2_artifact": false,
+          "boundary_dates_note": "the lock has no separate validation-state field; the validation window's LOCKED state rests on its binding rule that no parameter, threshold, symbol or rule may be chosen using any value inside the validation or holdout windows. Attempt 2 binds the lock by digest and reads the bounds at run time rather than restating them, which is why date_range is null in this package."
+        },
+        "enforcement": "stockedge100.backtest.window.ResearchWindow raises WindowViolation for any session outside the development window; MarketView raises LookAheadError for any read past the decision session. Structural, not procedural.",
+        "unchanged_by_this_attempt": "No boundary is moved, widened, narrowed, or re-cut. No validation observation is read. No holdout observation is read."
+      }
+    },
+    "A2D-C9": {
+      "required": "460 collected, up from 389; targeted selection 115 passed / 0 failed / 0 skipped; 11 of 11 recorded test-file digests unchanged; nothing weakened, skipped, xfailed, or deleted",
+      "verdict": "MET",
+      "verdict_semantics": "MET here is a statement about the seal, not about any candidate's behaviour. No condition in this table measures a return, a drawdown, a trade count or an equity value, because none exists for any Attempt 2 candidate. The gate 3 determination is the separate gate_3_admissible_candidate_exists entry, whose verdict is NOT_RUN.",
+      "evidence": {
+        "collected_before": 389,
+        "collected_now": 460,
+        "selection_command": "cd stockedge100 && python -m pytest tests/unit/test_stage0_governance.py tests/unit/test_stage1_preregistration.py tests/unit/test_stage3_attempt2_preregistration.py -q",
+        "selection_result": {
+          "passed": 115,
+          "failed": 0,
+          "skipped": 0
+        },
+        "new_file_alone": {
+          "passed": 71,
+          "failed": 0,
+          "skipped": 0
+        },
+        "broad_command_not_run": "python -m pytest tests -q was deliberately not run: two integration modules read the normalised dataset and drive the engine over it, which this session may not do",
+        "recorded_test_files": 11,
+        "unchanged": [
+          "tests/adversarial/test_stage1_adversarial.py",
+          "tests/adversarial/test_stage2_defects.py",
+          "tests/adversarial/test_stage3_defects.py",
+          "tests/conftest.py",
+          "tests/integration/test_stage1_data_foundation.py",
+          "tests/integration/test_stage2_backtest.py",
+          "tests/unit/test_stage0_governance.py",
+          "tests/unit/test_stage1_calendar_partition.py",
+          "tests/unit/test_stage1_preregistration.py",
+          "tests/unit/test_stage2_engine.py",
+          "tests/unit/test_stage3_strategies.py"
+        ],
+        "changed": [],
+        "missing": [],
+        "live_test_files": 12,
+        "added_this_session": [
+          "tests/unit/test_stage3_attempt2_preregistration.py"
+        ],
+        "unmodified_asserted_by": "digest recomputation against Attempt 1's run record, not by a green run of the whole suite. A weakened or deleted test would appear here as changed or missing.",
+        "attempt_1_run_record": "runs/SE100-R-20260810T101622Z.json",
+        "nothing_weakened_skipped_xfailed_or_deleted": true
+      }
+    },
+    "gate_3_admissible_candidate_exists": {
+      "required": "admissible_candidate_exists is TRUE if and only if there exists at least one pre-registered Attempt 2 candidate for which EVERY applicable Gate 3 hard condition is SATISFIED, where satisfied means the condition's verdict is MET or NOT_APPLICABLE_BY_CONDITION_TEXT.",
+      "verdict": "NOT_RUN",
+      "verdict_semantics": "This entry, and only this entry, is the gate 3 determination. NOT_RUN is not a pass and is not a fail: no Attempt 2 candidate was implemented or evaluated, so the disjunction has no terms. This entry exists so that this package cannot be read as a gate 3 result.",
+      "evidence": {
+        "candidates_implemented": 0,
+        "candidates_evaluated": 0,
+        "admitted_candidates": [],
+        "satisfied_definition": "verdict in (MET, NOT_APPLICABLE_BY_CONDITION_TEXT)",
+        "not_satisfied_values": [
+          "NOT_MET",
+          "NOT_EVALUABLE",
+          "NOT_RUN",
+          "UNKNOWN",
+          "MISSING_EVIDENCE",
+          "absent"
+        ],
+        "admissible_candidates_required": 1,
+        "neighbour_status": {
+          "are_neighbours_diagnostic_or_independently_selectable": {
+            "answer": "Diagnostic only.",
+            "evidence": "SE100-CFG-3002 conditions S3-C7 selection_prohibition, adopted unchanged: no neighbour is ever promoted, and no primary is revised because a neighbour did better; such a revision is a material change under constitution section 11 that creates a new candidate restarting at Gate 3."
+          },
+          "can_a_neighbour_become_the_representative_of_its_candidate": {
+            "answer": "No. Never. Under no result.",
+            "consequence": "A candidate whose primary fails but whose four neighbours all pass is a FAILED candidate. It is recorded as failed, and its neighbour metrics are reported as diagnostics. Substituting the neighbour would be selection on an observed outcome."
+          },
+          "is_a_neighbour_separately_admissible_at_gate_3": {
+            "answer": "No. A neighbour is not a candidate. Only the three pre-registered primaries are candidates, and only a candidate can be admissible.",
+            "why_this_matters_numerically": "It keeps the number of admissibility trials at 3 for Attempt 2 rather than 15. The 15 gating variants still count as searches for the purpose of the cumulative multiple-testing disclosure in SE100-CFG-3003; they do not count as chances to pass."
+          },
+          "what_a_neighbour_contributes_to_the_gate": "One thing only: the sign of its net return, consumed by S3-C7 for its own candidate. Every other neighbour metric is reported and non-gating.",
+          "neighbour_that_fails_to_run": "NOT_RUN. Not a pass. S3-C7 fails for that candidate, and the candidate is therefore not admissible."
+        },
+        "shutdown_behaviour": {
+          "constitution_ref": "SE100-GOV-0001 section 5.1",
+          "threshold": "equity 15% below the running high-water mark",
+          "sealed_action": "LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES",
+          "action_source": "SE100-CFG-2001 risk.research_shutdown_action, sha256 f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2, with the sealed note that the constitution names the state but not the action and that liquidating and blocking further entries is the strictest reading.",
+          "does_a_breach_cause_immediate_liquidation": {
+            "answer": "Liquidation at the NEXT OPEN, not intraday and not at the breaching close.",
+            "reason": "The engine's execution model has no intraday fill. The breach is detected at a session close and the liquidation fills at the following open, exactly as any other order does. The one-session lag is real, is charged, and is not modelled away."
+          },
+          "is_deactivation_permanent": {
+            "answer": "Yes. It never re-arms.",
+            "consequence": "Once tripped, entries are blocked for the remainder of the run and the equity curve is flat from the liquidation onward. Every metric computed over the full window thereafter describes a short live period followed by a long dead one.",
+            "attempt_1_observed": "All six Attempt 1 candidates tripped it, earliest October 1997 and latest August 2010, which is why their full-window annualised figures were recorded as a limitation rather than reported as descriptions of the rules."
+          },
+          "relationship_to_S3_C2": {
+            "conflict_id": "S3-CONFLICT-3, carried forward from SE100-CFG-3002 unchanged",
+            "statement": "The Gate 3 drawdown ceiling and the section 5.1 research shutdown are the same number, 15%, measured against the running high-water mark of the same session-close equity series. A candidate that trips the shutdown has by construction breached S3-C2, and its equity curve is flat from the liquidation onward.",
+            "equivalence": "S3-C2 is MET if and only if the shutdown never fires.",
+            "attempt_2_use": "This equivalence is Attempt 2's design target and is the reason RA1 exists. It is NOT a licence to treat a shutdown as anything other than a failure, and no Attempt 2 rule references the 15% level, the shutdown state, or the distance to it."
+          },
+          "enforced_for_every_run": "primary runs, all four neighbour runs per candidate, and the three non-gating stressed-cost runs. It is never disabled for a candidate. It is disabled only for the explicitly labelled SPY buy-and-hold benchmark reference account, which is reported both ways, exactly as Stage 2 and Attempt 1 reported it."
+        },
+        "rerun_policy": {
+          "may_a_result_be_rerun_after_a_valid_completed_evaluation": {
+            "answer": "No.",
+            "rule": "Once a variant has completed a valid run over its full declared window under the sealed cost model, that result is the result. It is not re-run, not re-seeded, not re-ordered, and not recomputed in the hope of a different number. There is nothing to re-seed: SE100-CFG-3003 declares random_seeds null and every rule is deterministic, so a re-run of an unchanged variant must reproduce byte-identical output. A re-run that produced a DIFFERENT number would be a determinism defect and a blocker, not a better result."
+          },
+          "when_a_rerun_is_required": [
+            "A run that did not reach the development window end is NOT_RUN, not a result, and is re-run in full.",
+            "A software defect discovered after a result exists INVALIDATES that result per constitution section 10. The result is recorded as INVALIDATED, the fix is recorded, and ALL affected runs are re-run in full."
+          ],
+          "prohibited": "Selectively re-running only the variants whose numbers were disliked, extending a partial run rather than re-running it, or patching a completed result.",
+          "no_specification_change_ever_follows_a_result": "A change to SE100-CFG-3003 after any Attempt 2 result exists creates a new candidate under a new pre-registration and restarts at Gate 3. It never repairs a candidate declared for this attempt."
+        }
+      }
+    }
+  },
+  "artifacts": [
+    "governance/STAGE_3_ATTEMPT_2_DESIGN_REPORT.md",
+    "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_DESIGN.json",
+    "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_ARTIFACT_MANIFEST.json",
+    "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_TEST_SUMMARY.md",
+    "reports/stage3_attempt2/pytest_stage3_attempt2_output.txt"
+  ],
+  "frozen_inputs_read_only": [
+    "governance/STAGE_0_CONSTITUTION.md",
+    "governance/STAGE_0_CONSTITUTION.json",
+    "governance/STAGE_0_FREEZE.sha256",
+    "governance/STAGE_1_DATA_FOUNDATION_REPORT.md",
+    "governance/STAGE_1_UNIVERSE.json",
+    "governance/STAGE_1_HOLDOUT_LOCK.json",
+    "governance/STAGE_1_FREEZE.sha256",
+    "governance/STAGE_1_PREREGISTRATION.json",
+    "governance/STAGE_1_PREREGISTRATION.sha256",
+    "governance/STAGE_2_BACKTEST_ENGINE_REPORT.md",
+    "governance/STAGE_2_PREREGISTRATION.md",
+    "governance/STAGE_2_PREREGISTRATION.json",
+    "governance/STAGE_2_PREREGISTRATION.sha256",
+    "config/stage2_cost_model.json",
+    "config/stage2_engine_spec.json",
+    "governance/STAGE_3_PREREGISTRATION.md",
+    "governance/STAGE_3_PREREGISTRATION.json",
+    "governance/STAGE_3_PREREGISTRATION.sha256",
+    "config/stage3_strategy_protocol.json",
+    "config/stage3_gate_criteria.json",
+    "governance/STAGE_3_STRATEGY_RESEARCH_REPORT.md",
+    "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.md",
+    "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.json",
+    "governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256",
+    "config/stage3_attempt2_strategy_protocol.json",
+    "config/stage3_attempt2_gate_criteria_binding.json"
+  ],
+  "tests": {
+    "passed": 115,
+    "failed": 0,
+    "skipped": 0,
+    "collected": 460
+  },
+  "authorization_state": {
+    "attempt_2_implementation": "UNLOCKED_FOR_THE_THREE_SEALED_CANDIDATES_ONLY",
+    "attempt_2_development_evaluation": "UNLOCKED_ON_DEVELOPMENT_WINDOW_ONLY",
+    "validation_window": "LOCKED",
+    "final_holdout": "SEALED",
+    "stage_4_constitutional_gates_4_and_5": "LOCKED_NO_ADMITTED_CANDIDATE",
+    "alpaca_paper_trading": "LOCKED",
+    "shadow_live": "LOCKED",
+    "alpaca_live_trading": "LOCKED",
+    "capital_or_risk_expansion": "LOCKED"
+  },
+  "next_authorized_stage": "STAGE_3_ATTEMPT_2_IMPLEMENTATION_AND_DEVELOPMENT_EVALUATION \u2014 a separate session that implements and evaluates only the three candidates sealed in SE100-GOV-0007, on the development window only, at their declared primary parameterisations plus their four declared neighbours each, with the sealed base cost model and the research shutdown enforced. Nothing else.",
+  "live_trading_authorized": false,
+  "reproducibility": {
+    "run_id": "SE100-R-20260810T131107Z",
+    "repo_state_id": "af0133a8c006121a0927f5e230af51599eb13e5dc3e8a8a1c5e9884d36aae926",
+    "package_version": "0.1.0",
+    "python": "3.10.6",
+    "dependency_versions": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "requests": "2.34.2",
+      "pytest": "8.4.2",
+      "yfinance": "1.4.1",
+      "exchange_calendars": "4.13.2",
+      "pyarrow": "MISSING",
+      "scipy": "MISSING"
+    },
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage3_attempt2_package",
+    "config_hash": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+    "random_seed": null
+  }
+}

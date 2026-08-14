@@ -1,0 +1,143 @@
+{
+  "config_id": "SE100-CFG-1001",
+  "title": "Stage 1 data-source decision, acquisition protocol, normalization spec, and validation battery",
+  "version": "1.0.0",
+  "status": "PREREGISTERED",
+  "constitution_ref": "SE100-GOV-0001",
+  "declared_before_any_data_acquired": true,
+  "note": "This file contains no timestamp by design. The authoritative declaration time and the digest of this file are recorded in governance/STAGE_1_PREREGISTRATION.json, which is written after this file and therefore cannot be embedded in it.",
+
+  "provider_decision": {
+    "selected_provider": "yahoo_finance",
+    "client": "yfinance",
+    "access_mode": "unofficial public chart endpoint via the yfinance client",
+    "cost": "free",
+    "api_key_required": false,
+    "account_required": false,
+    "payment_authorized": false,
+    "credential_access_authorized": false,
+    "selection_rationale": [
+      "Stage 0 STAGE_0_VERIFICATION_REPORT.md section 11 recorded two provider reachability probes as inputs to this decision, not as post-hoc discoveries.",
+      "Stooq returned an anti-bot HTML page rather than CSV for the documented CSV endpoint and is therefore not usable as an automated no-key provider from this environment.",
+      "Yahoo Finance returned a parseable daily series with an explicit adjusted-close column and separate dividend and split action series, which is the minimum needed to satisfy constitution section 6.",
+      "No paid provider was evaluated because no purchase is authorized."
+    ],
+    "known_provider_weaknesses_declared_in_advance": [
+      "Unofficial endpoint with no service-level guarantee and no published schema contract; it may change or be withdrawn without notice.",
+      "Yahoo Finance terms permit personal, non-commercial use and do not permit redistribution. Acquired data therefore stays local and git-ignored, and is never committed or published.",
+      "No point-in-time index-membership history and no delisted-security coverage, which is the direct cause of the universe narrowing declared in stage1_universe_spec.json.",
+      "Historical values are subject to silent vendor revision. This is mitigated by immutable raw preservation plus hash comparison on every rerun, not by trusting the vendor.",
+      "Single-provider risk is not mitigated. There is no second free provider available in this environment, so no cross-provider agreement check is possible. This is recorded as an unresolved Stage 1 limitation."
+    ],
+    "fallback_policy": {
+      "per_symbol_attempts": 3,
+      "backoff_seconds": [2, 5, 12],
+      "on_symbol_exhausted": "mark symbol ACQUISITION_FAILED, exclude it from the realized universe, record it; never substitute another symbol",
+      "candidate_failure_fraction_that_blocks_the_stage": 0.20,
+      "blocked_verdict": "BLOCKED_BY_DATA — DATA_NOT_FIT_FOR_RESEARCH",
+      "on_provider_requiring_payment": "stop the stage and ask the project owner; never purchase, subscribe, or create an account"
+    }
+  },
+
+  "acquisition_protocol": {
+    "interval": "1d",
+    "request_parameters": {
+      "auto_adjust": false,
+      "back_adjust": false,
+      "actions": true,
+      "repair": false,
+      "rounding": false,
+      "prepost": false,
+      "timeout_seconds": 60
+    },
+    "why_auto_adjust_is_false": "Constitution section 6 requires retaining adjusted and unadjusted OHLCV or documenting a verified transformation between them. auto_adjust=True would discard the unadjusted series and make that verification impossible.",
+    "sequencing": "one symbol per request, sequential, minimum 1.0 s spacing between requests",
+    "raw_storage": {
+      "directory": "data/raw/yahoo",
+      "filename_pattern": "{SYMBOL}.csv",
+      "write_once": true,
+      "overwrite_permitted": false,
+      "on_existing_file_with_different_content": "keep the original, write the new payload to data/quarantine/, record a PROVIDER_REVISION anomaly, and do not silently replace"
+    },
+    "raw_manifest": {
+      "path": "data/manifests/STAGE_1_RAW_MANIFEST.json",
+      "required_fields": [
+        "provider", "client", "client_version", "endpoint_mode", "retrieved_utc",
+        "symbol", "sha256", "bytes", "rows", "first_session", "last_session",
+        "columns", "source_timezone", "license", "request_parameters"
+      ]
+    }
+  },
+
+  "normalization_spec": {
+    "output_directory": "data/normalized/daily",
+    "filename_pattern": "{SYMBOL}.csv",
+    "session_key": {
+      "definition": "the calendar date of the provider timestamp expressed in America/New_York",
+      "format": "YYYY-MM-DD",
+      "stored_timezone_naive": true,
+      "rationale": "A daily bar is identified by its trading session, not by an instant. Storing an instant invites silent timezone drift; the session date is checked against the XNYS calendar instead."
+    },
+    "columns": ["session", "open", "high", "low", "close", "adj_close", "volume", "dividend", "split_ratio"],
+    "float_format": "%.10f",
+    "determinism_requirement": "identical raw bytes must produce byte-identical normalized output on any platform",
+    "row_policy": "no row is ever silently dropped; a row failing a sanity rule is retained, flagged, and copied to data/quarantine with a reason",
+    "adjustment_semantics": {
+      "determination": "MEASURED_NOT_ASSUMED",
+      "method": "The normalizer measures whether the provider's unadjusted OHLC series is already split-adjusted by testing the close-to-close step across a known split in the reference fixture, and records the measured result in the normalized manifest.",
+      "independent_factor": "factor[t] = adj_close[t] / close[t]",
+      "expected_terminal_factor": 1.0,
+      "tolerance_relative": 1e-06
+    }
+  },
+
+  "validation_battery": {
+    "declared_before_data_seen": true,
+    "severity_levels": ["FAIL", "WARN", "INFO"],
+    "checks": [
+      {"id": "SESSION_IN_CALENDAR", "severity": "FAIL", "rule": "every normalized session is an XNYS trading session"},
+      {"id": "NO_DUPLICATE_SESSIONS", "severity": "FAIL", "rule": "no session key appears more than once"},
+      {"id": "SESSIONS_STRICTLY_INCREASING", "severity": "FAIL", "rule": "session keys are sorted and strictly increasing"},
+      {"id": "NO_FUTURE_SESSIONS", "severity": "FAIL", "rule": "no session is later than the acquisition date in America/New_York"},
+      {"id": "OHLC_CONSISTENT", "severity": "FAIL", "rule": "low <= min(open, close) and max(open, close) <= high, and all four prices are finite and strictly positive"},
+      {"id": "VOLUME_VALID", "severity": "FAIL", "rule": "volume is finite and non-negative"},
+      {"id": "ADJ_CLOSE_POSITIVE", "severity": "FAIL", "rule": "adj_close is finite and strictly positive"},
+      {"id": "TERMINAL_FACTOR_IS_ONE", "severity": "FAIL", "rule": "on the final session, adj_close equals close within tolerance"},
+      {"id": "FACTOR_NON_DECREASING", "severity": "FAIL", "rule": "the adjustment factor adj_close/close is non-decreasing forward in time within tolerance"},
+      {"id": "SPLIT_RECONCILES", "severity": "FAIL", "rule": "every recorded split produces the expected step in the adjustment factor within tolerance"},
+      {"id": "DIVIDEND_RECONCILES", "severity": "WARN", "rule": "every recorded dividend produces an adjustment-factor step consistent with the dividend amount and the prior close within tolerance"},
+      {"id": "CORPORATE_ACTION_FIXTURE", "severity": "FAIL", "rule": "the declared reference corporate actions reproduce their expected adjustment steps"},
+      {"id": "MISSING_SESSION_FRACTION", "severity": "FAIL", "rule": "fraction of XNYS sessions missing inside the symbol's own first-to-last range is at most 0.01"},
+      {"id": "MISSING_SESSION_RUN", "severity": "FAIL", "rule": "no run of consecutive missing XNYS sessions exceeds 5"},
+      {"id": "EXTREME_MOVE_EXPLAINED", "severity": "WARN", "rule": "any absolute adjusted close-to-close return above 0.50 is explained by a recorded split or dividend, otherwise it is quarantined for explanation"},
+      {"id": "PRICE_NOT_PENNY", "severity": "FAIL", "rule": "minimum close over the development window is at least USD 5.00"}
+    ],
+    "tolerances": {
+      "price_relative": 1e-06,
+      "factor_relative": 5e-04,
+      "dividend_relative": 0.05
+    },
+    "measurement_window_restriction": "Every quantitative eligibility measurement is computed on development-window data only. No eligibility decision may read validation-window or holdout-window values."
+  },
+
+  "time_partition_rule": {
+    "source": "SE100-GOV-0001 section 6.1",
+    "steps": [
+      "exclude the incomplete cutoff month",
+      "lock the most recent 24 complete calendar months as the final holdout",
+      "lock the preceding 36 complete calendar months as validation and walk-forward assessment",
+      "use all earlier eligible history as development, subject to a minimum of five years"
+    ],
+    "computed_once": true,
+    "computed_before_any_strategy_result": true,
+    "holdout_state_after_lock": "SEALED"
+  },
+
+  "explicit_non_authorizations_restated": [
+    "no paid data, purchase, subscription, or account creation",
+    "no credential access; Alpaca tradability and fractional eligibility remain UNVERIFIED at Stage 1",
+    "no order of any kind, paper or live",
+    "no strategy computation, signal, parameter, or performance figure",
+    "no read of holdout-window data for any eligibility or quality decision"
+  ]
+}

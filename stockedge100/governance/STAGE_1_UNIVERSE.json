@@ -1,0 +1,2607 @@
+{
+  "artifact_id": "SE100-GOV-1004",
+  "title": "Stage 1 realized research universe",
+  "status": "FROZEN",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 1,
+  "frozen_utc": "2026-08-08T10:55:32Z",
+  "universe_version": "SE100-U1-d4917c2f7f1cd834",
+  "universe_identity_sha256": "d4917c2f7f1cd8344728a39165929b352766fbe7193b3c64e71a971749dcbf38",
+  "derivation": "produced by applying the eligibility rules sealed in config/stage1_universe_spec.json to the acquired data; no symbol was added, removed, or substituted by hand",
+  "preregistration": {
+    "declared_utc": "2026-08-08T10:40:10Z",
+    "universe_spec_sha256": "0583ef00fb5907feaedab561b13b4056c7e07e7c9ce1aae03d8ae197245f4057",
+    "data_source_sha256": "7c6273ca501e3aaceafd006b0902ce4f329f83a67c4a9e5190155e8edf83064f",
+    "sealed_before_any_data_acquired": true
+  },
+  "research_universe_class": "ETF_ONLY",
+  "member_count": 34,
+  "members": [
+    "AGG",
+    "BND",
+    "DIA",
+    "DVY",
+    "EEM",
+    "EFA",
+    "HYG",
+    "IEF",
+    "IVV",
+    "IWM",
+    "IYR",
+    "LQD",
+    "MDY",
+    "QQQ",
+    "SHY",
+    "SPY",
+    "TIP",
+    "TLT",
+    "VEA",
+    "VGK",
+    "VIG",
+    "VNQ",
+    "VTI",
+    "VWO",
+    "VYM",
+    "XLB",
+    "XLE",
+    "XLF",
+    "XLI",
+    "XLK",
+    "XLP",
+    "XLU",
+    "XLV",
+    "XLY"
+  ],
+  "rejected": [],
+  "not_acquired": [],
+  "survivorship_bias": {
+    "stock_universe_verdict": "SURVIVORSHIP_BIAS_UNCONTROLLED",
+    "stock_research_authorization": "PROHIBITED_IN_GENERATION_1_WITHOUT_A_NEW_DATA_SOURCE",
+    "etf_universe_verdict": "RESIDUAL_FUND_CLOSURE_BIAS_DISCLOSED_AND_UNQUANTIFIED",
+    "honest_statement": "The candidate list below was assembled in 2026 and therefore contains only funds that still exist in 2026. Exchange-traded funds that launched and later closed between the start of the development window and the data cutoff are absent from it. This is a real residual survivorship bias and it is not eliminated by the ETF narrowing.",
+    "quantified": false,
+    "binding_consequence": "Every downstream result carries this limitation in its report. No Stage 1 artifact may claim the ETF universe is survivorship-free."
+  },
+  "broker_eligibility": {
+    "alpaca_tradable": "UNVERIFIED",
+    "alpaca_fractionable": "UNVERIFIED",
+    "reason": "No credential access is authorized at Stage 1.",
+    "resolution_stage": "Stage 6 (constitution gate 7, Alpaca paper trading)",
+    "binding_consequence": "The realized universe is conditional. Any symbol later found non-tradable or non-fractionable at Alpaca must be removed and every affected gate re-run."
+  },
+  "measurement_window_restriction": {
+    "rule": "No eligibility measurement may read validation-window or holdout-window data. This is a hard rule and is enforced by test, not by convention.",
+    "development_window": [
+      "1993-01-29",
+      "2021-07-31"
+    ],
+    "enforced_by": "stockedge100.universe.build.measure raises WindowViolation"
+  },
+  "structural_rules_not_verifiable_from_price_data": [
+    "US_LISTED",
+    "UNLEVERAGED",
+    "NON_INVERSE",
+    "NOT_K1_PARTNERSHIP",
+    "NOT_COMMODITY_TRUST",
+    "RULES_BASED_INDEX"
+  ],
+  "assessments": {
+    "SPY": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1993-01-29",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 7178,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 11362325371.97,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 43.40625,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 7178,
+        "development_first_session": "1993-01-29",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 11362325371.97,
+        "minimum_close": 43.40625,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_broad",
+      "exposure": "S&P 500",
+      "first_session": "1993-01-29",
+      "last_session": "2026-08-07"
+    },
+    "IVV": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2000-05-19",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5333,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 445042890.25,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 68.190002,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5333,
+        "development_first_session": "2000-05-19",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 445042890.25,
+        "minimum_close": 68.190002,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_broad",
+      "exposure": "S&P 500",
+      "first_session": "2000-05-19",
+      "last_session": "2026-08-07"
+    },
+    "VTI": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2001-06-15",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5063,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 132964768.57,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 33.700001,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5063,
+        "development_first_session": "2001-06-15",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 132964768.57,
+        "minimum_close": 33.700001,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_broad",
+      "exposure": "US total market",
+      "first_session": "2001-06-15",
+      "last_session": "2026-08-07"
+    },
+    "QQQ": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1999-03-10",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5636,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 3517263432.88,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 20.059999,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5636,
+        "development_first_session": "1999-03-10",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 3517263432.88,
+        "minimum_close": 20.059999,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_broad",
+      "exposure": "Nasdaq-100",
+      "first_session": "1999-03-10",
+      "last_session": "2026-08-07"
+    },
+    "IWM": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2000-05-26",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5328,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 3153248068.96,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 32.549999,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5328,
+        "development_first_session": "2000-05-26",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 3153248068.96,
+        "minimum_close": 32.549999,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_broad",
+      "exposure": "Russell 2000 small cap",
+      "first_session": "2000-05-26",
+      "last_session": "2026-08-07"
+    },
+    "DIA": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1998-01-20",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5922,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 755430767.89,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 65.440002,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5922,
+        "development_first_session": "1998-01-20",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 755430767.89,
+        "minimum_close": 65.440002,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_broad",
+      "exposure": "Dow Jones Industrial Average",
+      "first_session": "1998-01-20",
+      "last_session": "2026-08-07"
+    },
+    "MDY": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1995-05-04",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 6607,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 280571787.19,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 37.1875,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 6607,
+        "development_first_session": "1995-05-04",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 280571787.19,
+        "minimum_close": 37.1875,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_broad",
+      "exposure": "S&P MidCap 400",
+      "first_session": "1995-05-04",
+      "last_session": "2026-08-07"
+    },
+    "XLB": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1998-12-22",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5688,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 207959189.94,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 8.315,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5688,
+        "development_first_session": "1998-12-22",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 207959189.94,
+        "minimum_close": 8.315,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_sector",
+      "exposure": "materials",
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07"
+    },
+    "XLE": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1998-12-22",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5688,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 872534401.68,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 9.9,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5688,
+        "development_first_session": "1998-12-22",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 872534401.68,
+        "minimum_close": 9.9,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_sector",
+      "exposure": "energy",
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07"
+    },
+    "XLF": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1998-12-22",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5688,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 809885857.7,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 5.020309,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5688,
+        "development_first_session": "1998-12-22",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 809885857.7,
+        "minimum_close": 5.020309,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_sector",
+      "exposure": "financials",
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07"
+    },
+    "XLI": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1998-12-22",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5688,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 315930936.8,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 15.36,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5688,
+        "development_first_session": "1998-12-22",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 315930936.8,
+        "minimum_close": 15.36,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_sector",
+      "exposure": "industrials",
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07"
+    },
+    "XLK": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1998-12-22",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5688,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 164752435.13,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 5.79,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5688,
+        "development_first_session": "1998-12-22",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 164752435.13,
+        "minimum_close": 5.79,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_sector",
+      "exposure": "technology",
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07"
+    },
+    "XLP": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1998-12-22",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5688,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 146309812.07,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 17.82,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5688,
+        "development_first_session": "1998-12-22",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 146309812.07,
+        "minimum_close": 17.82,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_sector",
+      "exposure": "consumer staples",
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07"
+    },
+    "XLU": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1998-12-22",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5688,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 211925833.55,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 7.615,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5688,
+        "development_first_session": "1998-12-22",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 211925833.55,
+        "minimum_close": 7.615,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_sector",
+      "exposure": "utilities",
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07"
+    },
+    "XLV": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1998-12-22",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5688,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 172616655.81,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 21.879999,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5688,
+        "development_first_session": "1998-12-22",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 172616655.81,
+        "minimum_close": 21.879999,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_sector",
+      "exposure": "health care",
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07"
+    },
+    "XLY": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "1998-12-22",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5688,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 190108974.27,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 8.055,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5688,
+        "development_first_session": "1998-12-22",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 190108974.27,
+        "minimum_close": 8.055,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_sector",
+      "exposure": "consumer discretionary",
+      "first_session": "1998-12-22",
+      "last_session": "2026-08-07"
+    },
+    "SHY": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2002-07-30",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4785,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 72380950.13,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 79.330002,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4785,
+        "development_first_session": "2002-07-30",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 72380950.13,
+        "minimum_close": 79.330002,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "fixed_income",
+      "exposure": "1-3y US Treasury",
+      "first_session": "2002-07-30",
+      "last_session": "2026-08-07"
+    },
+    "IEF": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2002-07-30",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4785,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 75772647.6,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 79.589996,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4785,
+        "development_first_session": "2002-07-30",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 75772647.6,
+        "minimum_close": 79.589996,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "fixed_income",
+      "exposure": "7-10y US Treasury",
+      "first_session": "2002-07-30",
+      "last_session": "2026-08-07"
+    },
+    "TLT": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2002-07-30",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4785,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 648828447.23,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 80.650002,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4785,
+        "development_first_session": "2002-07-30",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 648828447.23,
+        "minimum_close": 80.650002,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "fixed_income",
+      "exposure": "20y+ US Treasury",
+      "first_session": "2002-07-30",
+      "last_session": "2026-08-07"
+    },
+    "LQD": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2002-07-30",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4785,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 149919668.84,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 81.699997,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4785,
+        "development_first_session": "2002-07-30",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 149919668.84,
+        "minimum_close": 81.699997,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "fixed_income",
+      "exposure": "investment grade credit",
+      "first_session": "2002-07-30",
+      "last_session": "2026-08-07"
+    },
+    "HYG": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2007-04-11",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 3603,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 425738733.24,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 61.639999,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 3603,
+        "development_first_session": "2007-04-11",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 425738733.24,
+        "minimum_close": 61.639999,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "fixed_income",
+      "exposure": "high yield credit",
+      "first_session": "2007-04-11",
+      "last_session": "2026-08-07"
+    },
+    "AGG": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2003-09-29",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4491,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 104598782.94,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 88.400002,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4491,
+        "development_first_session": "2003-09-29",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 104598782.94,
+        "minimum_close": 88.400002,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "fixed_income",
+      "exposure": "US aggregate bond",
+      "first_session": "2003-09-29",
+      "last_session": "2026-08-07"
+    },
+    "BND": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2007-04-10",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 3604,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 118598468.39,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 69.959999,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 3604,
+        "development_first_session": "2007-04-10",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 118598468.39,
+        "minimum_close": 69.959999,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "fixed_income",
+      "exposure": "US total bond market",
+      "first_session": "2007-04-10",
+      "last_session": "2026-08-07"
+    },
+    "TIP": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2003-12-05",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4443,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 80166311.4,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 90.730003,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4443,
+        "development_first_session": "2003-12-05",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 80166311.4,
+        "minimum_close": 90.730003,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "fixed_income",
+      "exposure": "TIPS",
+      "first_session": "2003-12-05",
+      "last_session": "2026-08-07"
+    },
+    "EFA": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2001-08-27",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5013,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 940921617.53,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 28.813334,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5013,
+        "development_first_session": "2001-08-27",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 940921617.53,
+        "minimum_close": 28.813334,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "intl_equity",
+      "exposure": "developed ex-US",
+      "first_session": "2001-08-27",
+      "last_session": "2026-08-07"
+    },
+    "VEA": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2007-07-26",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 3529,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 151005177.11,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 19.440001,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 3529,
+        "development_first_session": "2007-07-26",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 151005177.11,
+        "minimum_close": 19.440001,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "intl_equity",
+      "exposure": "developed ex-US",
+      "first_session": "2007-07-26",
+      "last_session": "2026-08-07"
+    },
+    "VGK": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2005-03-10",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4127,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 109377346.67,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 26.76,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4127,
+        "development_first_session": "2005-03-10",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 109377346.67,
+        "minimum_close": 26.76,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "intl_equity",
+      "exposure": "Europe",
+      "first_session": "2005-03-10",
+      "last_session": "2026-08-07"
+    },
+    "EEM": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2003-04-14",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4607,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 2023717893.62,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 11.222222,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4607,
+        "development_first_session": "2003-04-14",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 2023717893.62,
+        "minimum_close": 11.222222,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "intl_equity",
+      "exposure": "emerging markets",
+      "first_session": "2003-04-14",
+      "last_session": "2026-08-07"
+    },
+    "VWO": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2005-03-10",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4127,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 463313424.53,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 18.6,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4127,
+        "development_first_session": "2005-03-10",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 463313424.53,
+        "minimum_close": 18.6,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "intl_equity",
+      "exposure": "emerging markets",
+      "first_session": "2005-03-10",
+      "last_session": "2026-08-07"
+    },
+    "IYR": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2000-06-19",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 5313,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 449434665.8,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 22.209999,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 5313,
+        "development_first_session": "2000-06-19",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 449434665.8,
+        "minimum_close": 22.209999,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "real_estate",
+      "exposure": "US real estate",
+      "first_session": "2000-06-19",
+      "last_session": "2026-08-07"
+    },
+    "VNQ": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2004-09-29",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4239,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 182366425.82,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 21.15,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4239,
+        "development_first_session": "2004-09-29",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 182366425.82,
+        "minimum_close": 21.15,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "real_estate",
+      "exposure": "US REITs",
+      "first_session": "2004-09-29",
+      "last_session": "2026-08-07"
+    },
+    "DVY": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2003-11-07",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 4462,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 44629866.92,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 26.27,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 4462,
+        "development_first_session": "2003-11-07",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 44629866.92,
+        "minimum_close": 26.27,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_factor",
+      "exposure": "dividend yield",
+      "first_session": "2003-11-07",
+      "last_session": "2026-08-07"
+    },
+    "VIG": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2006-05-02",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 3839,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 52002914.79,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 30.549999,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 3839,
+        "development_first_session": "2006-05-02",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 52002914.79,
+        "minimum_close": 30.549999,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_factor",
+      "exposure": "dividend growth",
+      "first_session": "2006-05-02",
+      "last_session": "2026-08-07"
+    },
+    "VYM": {
+      "eligible": true,
+      "failed_rules": [],
+      "rules": {
+        "US_LISTED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "UNLEVERAGED": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NON_INVERSE": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_K1_PARTNERSHIP": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "NOT_COMMODITY_TRUST": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "RULES_BASED_INDEX": {
+          "status": "ASSERTED_AT_CANDIDATE_CONSTRUCTION",
+          "verifiable_from_price_data": false
+        },
+        "INCEPTION_CUTOFF": {
+          "status": "PASS",
+          "first_session": "2006-11-16",
+          "cutoff": "2010-01-04",
+          "verifiable_from_price_data": true
+        },
+        "MIN_DEVELOPMENT_SESSIONS": {
+          "status": "PASS",
+          "observed": 3700,
+          "minimum": 1260,
+          "verifiable_from_price_data": true
+        },
+        "MEDIAN_DOLLAR_VOLUME": {
+          "status": "PASS",
+          "observed": 33672579.09,
+          "minimum": 5000000.0,
+          "verifiable_from_price_data": true
+        },
+        "MIN_CLOSE": {
+          "status": "PASS",
+          "observed": 22.93,
+          "minimum": 5.0,
+          "verifiable_from_price_data": true
+        },
+        "DATA_QUALITY": {
+          "status": "PASS",
+          "basis": "every FAIL-severity check in the sealed validation battery",
+          "verifiable_from_price_data": true
+        }
+      },
+      "measurements": {
+        "development_sessions": 3700,
+        "development_first_session": "2006-11-16",
+        "development_last_session": "2021-07-30",
+        "median_dollar_volume": 33672579.09,
+        "minimum_close": 22.93,
+        "window": [
+          "1993-01-29",
+          "2021-07-31"
+        ]
+      },
+      "asset_class": "us_equity_factor",
+      "exposure": "high dividend yield",
+      "first_session": "2006-11-16",
+      "last_session": "2026-08-07"
+    }
+  }
+}

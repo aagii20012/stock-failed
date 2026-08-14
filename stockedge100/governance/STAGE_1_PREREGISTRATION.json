@@ -1,0 +1,51 @@
+{
+  "document_id": "SE100-GOV-0003",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 1,
+  "record_type": "PRE_REGISTRATION",
+  "status": "SEALED",
+  "declared_utc": "2026-08-08T10:40:10Z",
+  "run_id": "SE100-R-20260808T104010Z",
+  "constitution_ref": "SE100-GOV-0001",
+  "stage_0_freeze_verified": true,
+  "stage_0_freeze_verification": {
+    "STAGE_0_CONSTITUTION.md": {
+      "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "match": "True"
+    },
+    "STAGE_0_CONSTITUTION.json": {
+      "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+      "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+      "match": "True"
+    }
+  },
+  "sealed_before_any_data_acquired": true,
+  "raw_data_files_present_at_seal_time": 0,
+  "preregistered_files": {
+    "config/stage1_data_source.json": {
+      "sha256": "7c6273ca501e3aaceafd006b0902ce4f329f83a67c4a9e5190155e8edf83064f"
+    },
+    "config/stage1_universe_spec.json": {
+      "sha256": "0583ef00fb5907feaedab561b13b4056c7e07e7c9ce1aae03d8ae197245f4057"
+    },
+    "governance/STAGE_1_PREREGISTRATION.md": {
+      "sha256": "53cea32ff202a4763378a5ecedc360c7e2fa1ccf1ce969d329c2e36b1cb5caee"
+    }
+  },
+  "checksum_record": {
+    "path": "governance/STAGE_1_PREREGISTRATION.sha256",
+    "path_convention": "project-root-relative",
+    "verify_from": "stockedge100/",
+    "command": "cd stockedge100 && sha256sum -c governance/STAGE_1_PREREGISTRATION.sha256"
+  },
+  "repo_state_id_location": "Deliberately omitted here. This file lives in governance/ and is one of the inputs to repo_state_id, so any value written into it would be stale on write. The binding value is the repo_state_id field of runs/SE100-R-20260808T104010Z.json.",
+  "binding_consequences": [
+    "The provider, acquisition protocol, normalization spec, validation battery, universe candidate list, and eligibility rules are fixed as of this timestamp.",
+    "No symbol may be added to or removed from the candidate list by judgement after data is visible; eligibility is applied mechanically.",
+    "No eligibility or quality measurement may read validation-window or holdout-window data.",
+    "live_trading_authorized remains false."
+  ],
+  "live_trading_authorized": false
+}

@@ -1,0 +1,643 @@
+== running build() with the writer intercepted ==
+run_id        SE100-R-DRYRUN
+timestamp_utc DRYRUN
+repo_state_id 60a927f5e8b8433887304c2977d3685dbc10a902743644c3431bd7c4bbea7160
+verdict       FAIL — STAGE_4_STRATEGY_REJECTED_IN_VALIDATION
+wrote         reports\stage4\STAGE_4_VALIDATION.json
+wrote         reports\stage4\STAGE_4_VALIDATION_ARTIFACT_MANIFEST.json
+wrote         reports\stage4\STAGE_4_VALIDATION.sha256
+wrote         runs\SE100-R-DRYRUN.json
+  build() -> 0
+
+================================================================================================
+== scalar fields ==
+  stage                  "STAGE_4_VALIDATION"
+  stage_slug             "stage4"
+  decision_basename      "STAGE_4_VALIDATION"
+  manifest_basename      "STAGE_4_VALIDATION_ARTIFACT_MANIFEST"
+  gate_id                4
+  gate_name              "validation_robustness"
+  verdict                "FAIL \u2014 STAGE_4_STRATEGY_REJECTED_IN_VALIDATION"
+  gate_passed            false
+  universe_version       "SE100-U1-d4917c2f7f1cd834"
+  date_range             ["2021-08-01", "2024-07-31"]
+  holdout_state          "SEALED"
+  config_hash            "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea"
+  random_seed            null
+  command                "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage4_evaluation_package"
+  tests                  {"passed": 836, "failed": 1, "skipped": 0, "collected": 837}
+  dataset_hashes         {"data/manifests/STAGE_1_NORMALIZED_MANIFEST.json": "15b9ed6b090e79f21bc55e8f2c5bed7ca2eac8c51b83863d80c4cc45e
+  frozen_inputs          32 entries
+  produced               12 entries
+
+== gate conditions (diff these against report section 8) ==
+  S4-C1                                          MET      satisfied=True
+      required: after-cost total return is positive
+      measured=0.0215 threshold=0 cmp=total_return > threshold rederived_met=True agrees=True
+  S4-C2                                          NOT_MET  satisfied=False
+      required: annualized Sharpe ratio is at least 0.50 using daily equity returns and a documented cash rate
+      measured=0.20252942065030886805474201212307 threshold=0.50 cmp=sharpe >= threshold rederived_met=False agrees=True
+  S4-C3                                          MET      satisfied=True
+      required: maximum drawdown is no worse than 15%
+      measured=0.03161389554784035323758760240844 threshold=0.15 cmp=max_drawdown <= threshold rederived_met=True agrees=True
+  S4-C4                                          MET      satisfied=True
+      required: profit factor is at least 1.15
+      measured=1.196526508226691042047531993 threshold=1.15 cmp=profit_factor >= threshold rederived_met=True agrees=True
+  S4-C5                                          MET      satisfied=True
+      required: stressed-cost total return remains positive
+      measured=0.0015 threshold=0 cmp=stressed_total_return > threshold rederived_met=True agrees=True
+  S4-C6                                          NOT_MET  satisfied=False
+      required: at least 70% of completed walk-forward test folds have positive after-cost return
+      measured=0.5833333333333333333333333333 threshold=0.70 cmp=positive_fold_count / completed_fold_count >= threshold rederived_met=False agrees=True
+  S4-C7                                          MET      satisfied=True
+      required: no material rule, feature, universe, or parameter change is made in response to validation results
+      measured=None threshold=exact equality of every sealed digest; no tolerance cmp=all sealed digests equal AND exactly one validation evaluation run record AND engine runs == declared runs rederived_met=True agrees=True
+  gate_4_representative_admitted_in_validation   NOT_MET  satisfied=False
+      required: The single sealed representative satisfies every hard condition of gate 4. Conjunctive within the candidate; the across-candidate disjunction of const
+
+== decisive row detail ==
+{
+  "representative": "SE100-S3A2-C2-MEANREV-RA1",
+  "condition_count": 7,
+  "met": [
+    "S4-C1",
+    "S4-C3",
+    "S4-C4",
+    "S4-C5",
+    "S4-C7"
+  ],
+  "not_met": [
+    "S4-C2",
+    "S4-C6"
+  ],
+  "not_evaluable": [],
+  "not_applicable_by_condition_text": [],
+  "within_candidate": "CONJUNCTIVE",
+  "across_candidates": "NOT_APPLICABLE_EXACTLY_ONE_REPRESENTATIVE",
+  "conjunction": false,
+  "no_admissible_candidate_exists_row": "Deliberate. That row belongs to a stage that ranks candidates across a disjunction. Gate 4 has one representative and takes no disjunction, so the row would be meaningless rather than merely unevaluated."
+}
+
+== evidence bullets ==
+  - Representative SE100-S3A2-C2-MEANREV-RA1, selected by SE100-CFG-4003 rule SE100-CFG-4003-R1 (Declared-variant research-shutdown screen), evaluated once on the locked validation window 2021-08-01..2024-07-31.
+  - Evidence file reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json (SE100-EVID-4001), self-digest 3a2ea8d9875c150aef8346f507f75cde6c307da01bed8a24281e53195b2de7c2, recomputed from the written file by this builder and equal.
+  - Validation dataset loads 1; validation reading sessions 1; validation-window engine runs 2; declared run count 2, recorded as a hard limit. Run record SE100-R-20260814T143226Z.
+  - Base-cost run: total return 0.0215, Sharpe 0.2025294206503088680547420121230750 at a documented cash rate of 0.00, maximum drawdown 0.03161389554784035323758760240844931, profit factor 1.196526508226691042047531993, 41 closed trades, section 5.1 shutdown session None.
+  - Stressed-cost run at the sealed multiplier 2.0: total return 0.0015, shutdown enforced True, shutdown session None.
+  - Folds: 12 declared test folds, 0 training folds, 12 completed, 7 positive. Smallest passing count at twelve completed folds is 9.
+  - S4-C7 invariance: 13 of 13 sealed digests recomputed here and all equal; exactly one validation evaluation run record (SE100-R-20260814T143226Z); engine runs equal the declared count.
+  - Every one of the seven sealed conditions was re-derived by this builder from the raw measurements against thresholds parsed out of the sealed predicate strings, in Decimal with no rounding before comparison, and all seven agree with the evaluator.
+  - 14 checksum records plus the Stage 0 freeze verified, each from the working directory its own convention requires; every entry OK.
+  - Repository-state delta measured at build time rather than predicted: see repo_state_delta in this record for the seal-to-evaluation, evaluation-to-build and seal-to-build diffs and for the protected-path check.
+  - Holdout 2024-08-01..2026-07-31 state SEALED, sessions read 0. Unreachability is proved mechanically in the evidence file, not asserted.
+
+== conflicts ==
+  - S4-CONFLICT-1 through S4-CONFLICT-5 were found and resolved prospectively by the pre-registration and are recorded in config/stage4_gate_criteria.json conflicts_found. All five were applied here exact
+  - S4-CONFLICT-6: the sealed invariance clause names config/stage4_representative_selection.json as the home of the representative's parameterisation; that file carries no parameter values and they are i
+  - S4-CONFLICT-7: the sealed P5 contamination predicate states its purpose as the fail-closed proof that the PRE-REGISTRATION path cannot reach restricted data or a broker, but its mechanical scope is ev
+
+== body key tree ==
+  session_type                                   str 47
+  gate_4_evaluated                               bool 
+  gate_4_passed                                  bool 
+  representative                                 dict 7
+    experiment_id                                  str 25
+    family                                         str 14
+    declared_universe                              list 1
+    declared_warmup_sessions                       int 
+    parameters                                     dict 10
+      rsi_period                                     int 
+      rsi_entry_below                                int 
+      exit_sma                                       int 
+      f_base                                         str 4
+      vol_target                                     str 4
+      vol_floor_fraction                             str 4
+      loss_control                                   str 4
+      max_hold                                       int 
+      reentry_delay                                  int 
+      ladder_rungs                                   list 2
+    selection_rule                                 str 14
+    identifier_unchanged_from_gate_3               bool 
+  protocol                                       dict 12
+    protocol_id                                    str 14
+    criteria_id                                    str 14
+    selection_id                                   str 14
+    selection_rule_id                              str 17
+    selection_rule_name                            str 41
+    prohibited_after_the_selection_seal            list 7
+    seal_document_id                               str 14
+    sealed_utc                                     str 20
+    sealing_run                                    str 34
+    preregistration_package_run                    str 34
+    validation_evaluation_run                      str 34
+    authorized_for                                 str 246
+  verdict_derivation                             dict 9
+    pass_token                                     str 39
+    fail_token                                     str 39
+    source                                         str 57
+    fail_condition                                 str 165
+    token_emitted                                  str 39
+    token_taken_from_disk_not_from_a_prompt        bool 
+    within_candidate                               str 11
+    across_candidates                              str 41
+    conjunction                                    bool 
+  independent_rederivation                       dict 4
+    why                                            str 311
+    all_seven_agree                                bool 
+    per_condition                                  dict 7
+      S4-C1                                          dict 3
+        recorded_verdict                               str 3
+        rederived_met                                  bool 
+        agrees                                         bool 
+      S4-C2                                          dict 3
+        recorded_verdict                               str 7
+        rederived_met                                  bool 
+        agrees                                         bool 
+      S4-C3                                          dict 3
+        recorded_verdict                               str 3
+        rederived_met                                  bool 
+        agrees                                         bool 
+      S4-C4                                          dict 3
+        recorded_verdict                               str 3
+        rederived_met                                  bool 
+        agrees                                         bool 
+      S4-C5                                          dict 3
+        recorded_verdict                               str 3
+        rederived_met                                  bool 
+        agrees                                         bool 
+      S4-C6                                          dict 3
+        recorded_verdict                               str 7
+        rederived_met                                  bool 
+        agrees                                         bool 
+      S4-C7                                          dict 3
+        recorded_verdict                               str 3
+        rederived_met                                  bool 
+        agrees                                         bool 
+    rederived                                      dict 7
+      S4-C1                                          dict 4
+        measured                                       str 6
+        threshold                                      str 1
+        comparison                                     str 24
+        met                                            bool 
+      S4-C2                                          dict 4
+        measured                                       str 36
+        threshold                                      str 4
+        comparison                                     str 19
+        met                                            bool 
+      S4-C3                                          dict 4
+        measured                                       str 37
+        threshold                                      str 4
+        comparison                                     str 25
+        met                                            bool 
+      S4-C4                                          dict 4
+        measured                                       str 29
+        threshold                                      str 4
+        comparison                                     str 26
+        met                                            bool 
+      S4-C5                                          dict 4
+        measured                                       str 6
+        threshold                                      str 1
+        comparison                                     str 33
+        met                                            bool 
+      S4-C6                                          dict 6
+        measured                                       str 30
+        threshold                                      str 4
+        comparison                                     str 55
+        positive_fold_count                            int 
+        completed_fold_count                           int 
+        met                                            bool 
+      S4-C7                                          dict 10
+        measured                                       NoneType 
+        threshold                                      str 51
+        comparison                                     str 106
+        all_digests_equal                              bool 
+        digests_equal                                  int 
+        digests_total                                  int 
+        validation_evaluation_run_records              int 
+        validation_window_engine_runs                  int 
+        declared_run_count                             int 
+        met                                            bool 
+  single_validation_read                         dict 10
+    rule                                           str 184
+    validation_partition                           dict 2
+      start                                          str 10
+      end                                            str 10
+    engine_visibility_window                       dict 4
+      name                                           str 20
+      start                                          str 10
+      end                                            str 10
+      note                                           str 288
+    run_bounds                                     dict 2
+      start                                          str 10
+      end                                            str 10
+    holdout_partition                              dict 4
+      start                                          str 10
+      end                                            str 10
+      state                                          str 6
+      sessions_read                                  int 
+    validation_dataset_loads                       int 
+    validation_reading_sessions                    int 
+    validation_window_engine_runs                  int 
+    run_record                                     str 24
+    command                                        str 82
+  run_evidence                                   dict 11
+    declared_run_count                             int 
+    count_is_a_hard_limit                          bool 
+    single_validation_read_rule                    dict 5
+      rule                                           str 184
+      constitution_basis                             str 264
+      what_counts_as_one_read                        str 62
+      what_is_prohibited                             list 5
+      if_the_run_fails_mid_window                    str 190
+    partial_or_failed_run_rule                     dict 5
+      rule                                           str 192
+      remedy                                         str 348
+      hard_limit                                     str 218
+      no_partial_scoring                             str 194
+      no_silent_retry                                str 159
+    runs                                           list 2
+    base                                           dict 20
+      run_label                                      str 39
+      scenario                                       str 4
+      gating_conditions                              list 5
+      equity_points                                  int 
+      reached_window_end                             bool 
+      starting_equity                                str 6
+      final_equity                                   str 6
+      total_return                                   str 6
+      sharpe                                         str 36
+      sharpe_risk_free_annual                        str 4
+      daily_returns                                  int 
+      max_drawdown                                   str 37
+      max_drawdown_basis                             str 50
+      profit_factor                                  str 29
+      profit_factor_note                             NoneType 
+      closed_trades                                  int 
+      gross_profit                                   str 5
+      gross_loss                                     str 5
+      shutdown_session                               NoneType 
+      shutdown_fraction                              str 4
+    stress                                         dict 12
+      run_label                                      str 41
+      scenario                                       str 8
+      gating_conditions                              list 1
+      equity_points                                  int 
+      reached_window_end                             bool 
+      starting_equity                                str 6
+      final_equity                                   str 6
+      total_return                                   str 6
+      stress_multiplier                              str 3
+      sealed_stress_multiplier                       str 3
+      shutdown_enforced                              bool 
+      shutdown_session                               NoneType 
+    failed_or_partial_runs                         int 
+    unregistered_runs                              int 
+    repeated_runs                                  int 
+    rerun_policy_applied                           str 252
+  folds                                          dict 8
+    construction_id                                str 18
+    rule                                           str 287
+    declared_test_folds                            int 
+    declared_train_folds                           int 
+    expected_completed_count                       int 
+    rows                                           list 12
+    completed                                      int 
+    positive                                       int 
+  strategy_invariance                            dict 5
+    evaluator_measurement                          dict 4
+      recheck_before_validation_load                 list 13
+      recheck_after_evaluation                       list 13
+      recheck_rule                                   str 208
+      gate_3_comparison                              dict 16
+        representative                                 str 25
+        identifier_unchanged_from_gate_3               bool 
+        parameters_equal_gate_3_primary                bool 
+        sealed_parameters                              str 240
+        gate_3_primary_parameters                      str 240
+        universe_equal_gate_3                          bool 
+        declared_universe                              list 1
+        family_equal_gate_3                            bool 
+        warmup_equal_gate_3                            bool 
+        declared_warmup_sessions                       int 
+        largest_lookback_recomputed                    int 
+        warmup_matches_largest_lookback                bool 
+        rsi_warmup_changes                             int 
+        strategy_module                                str 50
+        strategy_module_digest_equal                   bool 
+        all_equal                                      bool 
+    package_recheck                                dict 5
+      declared_set_size                              int 
+      rechecked                                      int 
+      all_equal                                      bool 
+      entries                                        dict 13
+        config/stage2_cost_model.json                  dict 3
+        config/stage2_engine_spec.json                 dict 3
+        config/stage3_attempt2_gate_criteria_binding.json dict 3
+        config/stage3_attempt2_strategy_protocol.json  dict 3
+        config/stage3_gate_criteria.json               dict 3
+        config/stage4_gate_criteria.json               dict 3
+        config/stage4_representative_selection.json    dict 3
+        config/stage4_validation_protocol.json         dict 3
+        governance/STAGE_1_HOLDOUT_LOCK.json           dict 3
+        governance/STAGE_1_UNIVERSE.json               dict 3
+        governance/STAGE_4_PREREGISTRATION.md          dict 3
+        src/stockedge100/strategies/attempt2_candidates.py dict 3
+        governance/STAGE_4_PREREGISTRATION.json        dict 4
+      recheck_rule                                   str 208
+    conflict_note                                  str 254
+    no_tolerance_rule                              str 176
+    representative_not_modified_after_performance_was_observed bool 
+  integrity_verification                         dict 7
+    checksum_records                               dict 6
+      stage_0_freeze_verified                        bool 
+      stage_0_freeze_detail                          dict 2
+        STAGE_0_CONSTITUTION.md                        dict 3
+        STAGE_0_CONSTITUTION.json                      dict 3
+      records                                        dict 14
+        governance/STAGE_0_FREEZE.sha256               dict 5
+        governance/STAGE_1_FREEZE.sha256               dict 5
+        governance/STAGE_1_PREREGISTRATION.sha256      dict 5
+        governance/STAGE_2_PREREGISTRATION.sha256      dict 5
+        governance/STAGE_3_PREREGISTRATION.sha256      dict 5
+        governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256 dict 5
+        governance/STAGE_4_PREREGISTRATION.sha256      dict 5
+        reports/stage0/STAGE_0_VERIFICATION.sha256     dict 5
+        reports/stage1/STAGE_1_DATA_READINESS.sha256   dict 5
+        reports/stage2/STAGE_2_BACKTEST_ENGINE.sha256  dict 5
+        reports/stage3/STAGE_3_STRATEGY_RESEARCH.sha256 dict 5
+        reports/stage3_attempt2/STAGE_3_ATTEMPT_2_DESIGN.sha256 dict 5
+        reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256 dict 5
+        reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION.sha256 dict 5
+      records_verified                               int 
+      all_ok                                         bool 
+      working_directory_note                         str 321
+    evidence_digest                                dict 4
+      recorded                                       str 64
+      recomputed                                     str 64
+      equal                                          bool 
+      covers                                         str 84
+    repo_state_delta                               dict 7
+      baselines                                      dict 4
+        sealing_run                                    str 34
+        preregistration_package_run                    str 34
+        validation_evaluation_run                      str 34
+        which_one_the_report_reconciles                str 34
+      seal_to_preregistration_package                dict 10
+        entries_before                                 int 
+        entries_after                                  int 
+        added                                          list 3
+        changed                                        list 1
+        removed                                        list 0
+        added_count                                    int 
+        changed_count                                  int 
+        removed_count                                  int 
+        protected_paths_changed_or_removed             list 0
+        no_frozen_or_sealed_path_moved                 bool 
+      preregistration_package_to_evaluation          dict 10
+        entries_before                                 int 
+        entries_after                                  int 
+        added                                          list 5
+        changed                                        list 0
+        removed                                        list 0
+        added_count                                    int 
+        changed_count                                  int 
+        removed_count                                  int 
+        protected_paths_changed_or_removed             list 0
+        no_frozen_or_sealed_path_moved                 bool 
+      evaluation_to_package_build                    dict 10
+        entries_before                                 int 
+        entries_after                                  int 
+        added                                          list 2
+        changed                                        list 1
+        removed                                        list 0
+        added_count                                    int 
+        changed_count                                  int 
+        removed_count                                  int 
+        protected_paths_changed_or_removed             list 0
+        no_frozen_or_sealed_path_moved                 bool 
+      seal_to_package_build                          dict 10
+        entries_before                                 int 
+        entries_after                                  int 
+        added                                          list 10
+        changed                                        list 1
+        removed                                        list 0
+        added_count                                    int 
+        changed_count                                  int 
+        removed_count                                  int 
+        protected_paths_changed_or_removed             list 0
+        no_frozen_or_sealed_path_moved                 bool 
+      why_they_differ                                str 382
+      identifiers_recorded_where                     str 243
+    frozen_artifacts_modified                      bool 
+    sealed_artifacts_modified                      bool 
+    self_reference_policy                          str 266
+    package_not_covered_by_tests                   str 196
+  contamination_predicates                       dict 8
+    measured_before_this_package_wrote_anything    bool 
+    sealed_values_at_sealing                       dict 6
+      stage_4_evaluator_or_result_modules            int 
+      modules_naming_a_stage_4_run_label             int 
+      stage_4_report_artifacts                       int 
+      stage_4_run_records                            int 
+      stage_4_modules_touching_restricted_data_or_a_broker int 
+      gate_3_attempt_2_records_verify                bool 
+    stage_4_evaluator_or_result_modules            dict 5
+      count                                          int 
+      files                                          list 5
+      sealed_value                                   int 
+      expected_to_move                               bool 
+      why                                            str 351
+    modules_naming_a_stage_4_run_label             dict 5
+      count                                          int 
+      files                                          list 0
+      sealed_value                                   int 
+      labels_searched                                list 2
+      note                                           str 120
+    stage_4_report_artifacts                       dict 5
+      count                                          int 
+      files                                          list 11
+      sealed_value                                   int 
+      expected_to_move                               bool 
+      mechanism                                      str 275
+    stage_4_run_records                            dict 5
+      count                                          int 
+      files                                          list 4
+      sealed_value                                   int 
+      expected_to_move                               bool 
+      mechanism                                      str 233
+    stage_4_modules_touching_restricted_data_or_a_broker dict 12
+      reference_implementation                       dict 5
+        source                                         str 95
+        count                                          int 
+        files                                          list 1
+        hits                                           list 1
+        status                                         str 273
+      data_access_half                               dict 2
+        count                                          int 
+        files                                          dict 2
+      broker_network_env_url_half                    dict 2
+        count                                          int 
+        files                                          dict 0
+      modules_matching_either_half                   int 
+      resolution                                     dict 2
+        src/stockedge100/reporting/stage4_evidence.py  str 233
+        src/stockedge100/strategies/stage4_evaluation.py str 292
+      unresolved                                     list 0
+      sealed_value                                   int 
+      conflict                                       str 13
+      two_implementations_disagree                   dict 6
+        reference_count                                int 
+        this_package_count                             int 
+        seen_only_by_this_package                      list 1
+        seen_only_by_the_reference                     list 0
+        cause                                          str 621
+        resolution_rule                                str 602
+      why_the_data_half_cannot_be_zero               str 716
+      why_the_broker_half_is_still_zero              str 620
+      no_network_or_broker_import_anywhere           bool 
+    gate_3_attempt_2_records_verify                dict 4
+      value                                          bool 
+      sealed_value                                   bool 
+      records                                        dict 2
+        governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256 list 1
+        reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256 list 1
+      why_it_matters                                 str 370
+  holdout                                        dict 9
+    lock_artifact                                  str 14
+    lock_status                                    str 6
+    start                                          str 10
+    end                                            str 10
+    state                                          str 6
+    sessions_read                                  int 
+    access_authorized                              bool 
+    unreachability_proof                           dict 7
+      holdout_start                                  str 10
+      holdout_end                                    str 10
+      window_end                                     str 10
+      run_end                                        str 10
+      window_end_precedes_holdout_start              bool 
+      run_end_precedes_holdout_start                 bool 
+      mechanism                                      str 226
+    unchanged_by_this_stage                        bool 
+  defects_found_and_corrected                    dict 6
+    rule                                           dict 3
+      rule                                           str 350
+      after_a_validation_read                        str 414
+      why_this_is_strict                             str 211
+    all_corrected_before_the_validation_load       bool 
+    none_corrected_after_performance_was_visible   bool 
+    items                                          list 6
+    how_they_were_found                            str 234
+    no_sealed_specification_was_altered            bool 
+  terminal_consequence                           dict 5
+    applies                                        bool 
+    binding_consequence                            str 181
+    what_a_fail_does_not_authorize                 list 5
+    what_a_fail_does_authorize                     str 270
+    there_is_no_attempt_2_at_gate_4                bool 
+  scope                                          dict 26
+    candidates_evaluated                           int 
+    candidates_evaluated_ids                       list 1
+    other_gate_3_candidate_reconsidered            bool 
+    neighbours_promoted                            int 
+    parameterisations_evaluated                    int 
+    validation_dataset_loads                       int 
+    validation_reading_sessions                    int 
+    validation_window_engine_runs                  int 
+    training_folds                                 int 
+    refits_on_validation_data                      int 
+    retunes                                        int 
+    threshold_changes                              int 
+    fold_boundary_changes                          int 
+    cost_benchmark_or_metric_changes               int 
+    sensitivity_checks_run                         int 
+    debugging_performance_runs                     int 
+    alternative_metrics_computed                   int 
+    external_data_acquired                         str 4
+    holdout_sessions_read                          int 
+    stage_5_work_performed                         str 4
+    broker_connections                             int 
+    credentials_used                               str 4
+    orders_generated                               int 
+    money_spent_usd                                int 
+    stage_5_remains_prohibited_conditions          list 9
+    explicit_non_authorizations                    list 7
+  trade_readiness_statement                      str 294
+
+== integrity summary ==
+  checksum records all_ok        True
+  stage 0 freeze verified        True
+  records verified               14
+  evidence digest equal          True
+  sealed digests rechecked       13 of 13, all_equal=True
+
+== repo state delta ==
+  baselines: {
+  "sealing_run": "runs/SE100-R-20260813T140121Z.json",
+  "preregistration_package_run": "runs/SE100-R-20260814T111459Z.json",
+  "validation_evaluation_run": "runs/SE100-R-20260814T143226Z.json",
+  "which_one_the_report_reconciles": "runs/SE100-R-20260814T111459Z.json"
+}
+  seal_to_preregistration_package: 115 -> 118 entries, +3 ~1 -0 protected_moved=[]
+      + governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md
+      + src/stockedge100/reporting/stage4_package.py
+      + tests/unit/test_stage4_preregistration.py
+      ~ README.md
+  preregistration_package_to_evaluation: 118 -> 123 entries, +5 ~0 -0 protected_moved=[]
+      + src/stockedge100/reporting/stage4_evidence.py
+      + src/stockedge100/strategies/stage4_evaluation.py
+      + src/stockedge100/strategies/stage4_gate.py
+      + tests/unit/test_stage4_evaluation.py
+      + tests/unit/test_stage4_evidence.py
+  evaluation_to_package_build: 123 -> 125 entries, +2 ~1 -0 protected_moved=[]
+      + governance/STAGE_4_VALIDATION_REPORT.md
+      + src/stockedge100/reporting/stage4_evaluation_package.py
+      ~ README.md
+  seal_to_package_build: 115 -> 125 entries, +10 ~1 -0 protected_moved=[]
+      + governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md
+      + governance/STAGE_4_VALIDATION_REPORT.md
+      + src/stockedge100/reporting/stage4_evaluation_package.py
+      + src/stockedge100/reporting/stage4_evidence.py
+      + src/stockedge100/reporting/stage4_package.py
+      + src/stockedge100/strategies/stage4_evaluation.py
+      + src/stockedge100/strategies/stage4_gate.py
+      + tests/unit/test_stage4_evaluation.py
+      + tests/unit/test_stage4_evidence.py
+      + tests/unit/test_stage4_preregistration.py
+      ~ README.md
+
+== contamination predicates ==
+  sealed at sealing: {"stage_4_evaluator_or_result_modules": 0, "modules_naming_a_stage_4_run_label": 0, "stage_4_report_artifacts": 0, "stage_4_run_records": 0, "stage_4_modules_touching_restricted_data_or_a_broker": 0, "gate_3_attempt_2_records_verify": true}
+  P1 evaluator/result modules    5 ['src/stockedge100/reporting/stage4_evaluation_package.py', 'src/stockedge100/reporting/stage4_evidence.py', 'src/stockedge100/reporting/stage4_package.py', 'src/stockedge100/strategies/stage4_evaluation.py', 'src/stockedge100/strategies/stage4_gate.py']
+  P2 modules naming a run label  0 []
+  P3 report artifacts            11
+      reports/stage4/STAGE_4_VALIDATION.json
+      reports/stage4/STAGE_4_VALIDATION.sha256
+      reports/stage4/STAGE_4_VALIDATION_ARTIFACT_MANIFEST.json
+      reports/stage4/STAGE_4_VALIDATION_EVIDENCE.json
+      reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION.json
+      reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION.sha256
+      reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION_ARTIFACT_MANIFEST.json
+      reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION_TEST_SUMMARY.md
+      reports/stage4/STAGE_4_VALIDATION_TEST_SUMMARY.md
+      reports/stage4/pytest_stage4_evaluation_output.txt
+      reports/stage4/pytest_stage4_output.txt
+  P4 run records                 4 ['SE100-R-20260813T140121Z.json', 'SE100-R-20260814T111459Z.json', 'SE100-R-20260814T143226Z.json', 'SE100-R-20260814T152439Z.json']
+  P5 REFERENCE (frozen sealer)   1 ["src/stockedge100/strategies/stage4_evaluation.py"]
+  P5 divergence                  reference=1 this_package=2
+      only this package sees: ["src/stockedge100/reporting/stage4_evidence.py"]
+      only the reference sees: []
+  P5 data-access half            2 {"src/stockedge100/reporting/stage4_evidence.py": ["call load_validation_series"], "src/stockedge100/strategies/stage4_evaluation.py": ["call load_dataset", "from stockedge100.backtest.dataset", "from stockedge100.data.calendar"]}
+  P5 broker/net/env/url half     0 {}
+  P5 no network/broker marker    True
+  P5 unresolved                  []
+      src/stockedge100/reporting/stage4_evidence.py
+         -> AUTHORIZED_EVALUATION_PATH: dataset-loader and data-layer markers only (call load_validation_series). These are the reads the seal authorized this session to perform. No 
+      src/stockedge100/strategies/stage4_evaluation.py
+         -> AUTHORIZED_EVALUATION_PATH: dataset-loader and data-layer markers only (call load_dataset, from stockedge100.backtest.dataset, from stockedge100.data.calendar). These are
+  P6 gate 3 records verify       True {"governance/STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256": ["OK"], "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256": ["OK"]}
+
+== serialisation ==
+  ok, 115870 bytes
+
+DRY RUN COMPLETE -- nothing was written into the tree

@@ -1,0 +1,462 @@
+{
+  "artifact_id": "SE100-CFG-4001",
+  "title": "Stage 4 validation protocol - the signed specification for the single authorized read of the locked validation window",
+  "version": "1.0.0",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 4,
+  "gate_id": 4,
+  "gate_name": "validation_robustness",
+  "constitution_ref": "SE100-GOV-0001 sections 4, 5.1, 7, 8, 9, 10, 11",
+  "declared_before_any_validation_observation_was_read": true,
+
+  "declaration_note": "Constitution section 8 requires a signed specification created before execution. This is that specification for the Stage 4 validation evaluation. It fixes what will be run, on which window, with which parameters, how many times, and what will be measured, before any validation observation has been read by anyone. Nothing in it may be revised after the validation window is opened: a revision at that point is a change made in response to validation results, which is the exact thing Gate 4's seventh condition forbids. The session that wrote this file did not read the validation partition and did not execute the strategy.",
+
+  "serialisation": {
+    "encoding": "UTF-8, ASCII-only characters",
+    "decimal_representation": "Every monetary amount, fraction, threshold and parameter is a JSON string, parsed as an exact Decimal. No such value is a JSON number, because a JSON number is a float and a float comparison against a frozen threshold is not reproducible.",
+    "note": "SE100-CFG-3002 contains a non-ASCII byte inside verdict_token_derivation.fail_is_a_deliverable. It is frozen and is not repaired, corrected, or re-encoded by this stage."
+  },
+
+  "currency": "USD",
+
+  "research_question": "Does the single sealed Stage 4 representative, run unchanged on the locked validation window with no re-fitting of any kind, satisfy every hard condition of constitution gate 4? The question is deliberately not 'which of the Gate 3 admitted candidates performs better on validation' - that question would require reading the window twice and would make the selection a function of the result.",
+
+  "known_prior_evidence": {
+    "summary": "Gate 3 Attempt 2 admitted two candidates on development data and ranked neither. Attempt 1 rejected every candidate it tried. The researcher who wrote this file has read all of that development evidence.",
+    "gate_3_verdict": "PASS - STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "gate_3_admitted_candidates": [
+      "SE100-S3A2-C1-PULLBACK-RA1",
+      "SE100-S3A2-C2-MEANREV-RA1"
+    ],
+    "gate_3_rejected_candidate": "SE100-S3A2-C3-DEFENSIVE-RA1, on S3-C6. Ineligible for selection and not reconsidered by this stage.",
+    "gate_3_evidence_files": [
+      {
+        "path": "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.json",
+        "sha256": "26eecacfe96420878ce647b86f68da8ed8a17fea1338d85ee982b190645ed466"
+      },
+      {
+        "path": "reports/stage3_attempt2/STAGE_3_ATTEMPT_2_DEVELOPMENT_ADMISSIBILITY.json",
+        "sha256": "904cb6668202df8628bbb08a494511e8ee584fc49cc5de7b5782a35ddd38fb93"
+      }
+    ],
+    "development_window_is_no_longer_pristine": "Two attempts at Gate 3 have now run on the development partition, with a cumulative experiment count that any later statistical interpretation must carry. No development result may be described as out-of-sample.",
+    "no_validation_evidence_exists": "No validation observation has been read by any session of this project. There is no validation return, no validation Sharpe, no validation drawdown, no validation trade count, and no validation coverage statistic anywhere on disk or in any transcript. This protocol is prospective in the full sense."
+  },
+
+  "adaptive_research_disclosure": [
+    "The Stage 4 representative was selected in the same session that wrote this protocol, with Gate 3 development evidence lawfully visible. That is an adaptation and is disclosed as one, not concealed.",
+    "The selection rule is recorded in config/stage4_representative_selection.json together with its provenance, its return-blindness argument, and its full application to both eligible candidates. It is a screen over the section 5.1 research shutdown, and it reads no return, no Sharpe and no profit factor. It would have eliminated the same candidate had the returns been reversed. That property is what makes the rule defensible prospectively; it does not make the session in which it was authored an independent one.",
+    "Researcher degrees of freedom in this stage are lower than in Gate 3 Attempt 2 - the parameters are frozen, the window is frozen, the thresholds are frozen, the run count is two - but they are not zero. The one genuinely free choice was the walk-forward fold construction, and it is recorded in config/stage4_gate_criteria.json walk_forward_fold_construction with its reasoning stated before any fold return exists.",
+    "The fold construction was chosen from calendar arithmetic on the frozen partition boundaries and from the arithmetic of the 70% threshold. It was not chosen by trying several partitions and keeping one. No validation equity curve existed to try them against.",
+    "The 0% documented cash rate used by S4-C2 was sealed in SE100-CFG-2001 before Gate 3 was evaluated and is not chosen by this stage. It makes S4-C2 easier to pass than a real short-rate series would, and any Gate 4 pass must travel with that qualification.",
+    "Neither Gate 3 admitted candidate reached S4-C2's frozen Sharpe floor of 0.50 on development data at that same 0% cash rate. A Gate 4 FAIL is therefore a live and arguably likely outcome, and it is a deliverable. Recording that expectation now is what prevents a later session from treating a fail as a defect to be worked around.",
+    "The total experiment count for any later statistical interpretation is the cumulative count across Gate 3 Attempt 1, Gate 3 Attempt 2, and this stage's two runs. This stage adds two runs of one parameterisation; it does not reset the count.",
+    "A passing validation result authorises only the next frozen evaluation step, which is the constitutional holdout gate, and only after a separate authorization recorded at that gate. It is not evidence of a trading edge and it is not a claim about any future period.",
+    "This adaptation is not concealed behind a new strategy identifier. The representative keeps its Gate 3 identifier SE100-S3A2-C2-MEANREV-RA1 unchanged, so a reader can trace it to the development evidence that admitted it.",
+    "Validation-window and holdout-window protections are unchanged by this stage. Writing this protocol read no validation row and no holdout row."
+  ],
+
+  "authorization_determination": {
+    "question": "Is a Stage 4 validation evaluation authorized, and by what?",
+    "gate_3_passed": true,
+    "gate_3_authorizes": "The writing and sealing of a prospective Stage 4 validation pre-registration, and nothing else. Gate 3's own artifacts say so: config/stage3_attempt2_strategy_protocol.json stage_4_remains_prohibited_conditions states that validation-window access remains prohibited until the frozen gate that authorises it, regardless of any development result.",
+    "this_session_authorizes": "Nothing to be executed. This session writes and seals a specification. It performs no validation read and no engine run.",
+    "validation_evaluation_authorized": true,
+    "validation_evaluation_authorized_scope": "Exactly the two runs declared in runs_declared below, of exactly the representative sealed in config/stage4_representative_selection.json, under exactly the procedure frozen by this protocol, in exactly one future session, once this pre-registration is sealed.",
+    "validation_access_authorized_in_this_session": false,
+    "holdout_access_authorized": false,
+    "what_would_void_the_authorization": [
+      "Any change to a sealed digest listed in reproducibility_requirements.sealed_digests_to_recheck.",
+      "Any run beyond the two declared.",
+      "Any second session reading the validation window.",
+      "Any parameter, rule, feature or universe change to the representative.",
+      "Substituting the other Gate 3 admitted candidate, a robustness neighbour, or a combination of candidates."
+    ]
+  },
+
+  "recorded_interpretations": [
+    {
+      "id": "S4-INTERP-1",
+      "subject": "The meaning of 'walk-forward' when re-fitting is prohibited",
+      "interpretation": "Gate 4's seventh condition and constitution section 11 forbid re-estimating any parameter inside the validation window. The gate text imposes conditions on 'completed walk-forward test folds' and names no train fold. The walk-forward therefore degenerates into a sequence of contiguous out-of-sample test folds under one frozen parameterisation.",
+      "why_this_is_the_stricter_reading": "It gives the candidate no opportunity to adapt to the window. A genuine re-fitting walk-forward would let each fold's parameters be tuned on the immediately preceding data, which would raise measured performance and is precisely what the seventh condition exists to prevent.",
+      "recorded_as": "S4-CONFLICT-5 in config/stage4_gate_criteria.json, reported and not repaired."
+    },
+    {
+      "id": "S4-INTERP-2",
+      "subject": "What counts as one read of the validation window",
+      "interpretation": "The validation partition is read exactly once, in one authorized session, from one dataset load, with both declared runs executed inside that session against that single load. The section 7 stressed-cost run is part of the same single read, not a second one.",
+      "why_this_matters": "Without this interpretation the section 7 stressed run would appear to be a second read of a window the lock permits reading once, and the protocol would be self-contradictory. Defining the read at the session-and-load level rather than the run level resolves it without weakening anything: the same rows are touched either way, and no additional information is extracted by charging doubled frictions to them.",
+      "what_it_does_not_permit": "It does not permit a third run, a re-run after a completed valid run, an exploratory query, or a second session. See single_validation_read_rule."
+    },
+    {
+      "id": "S4-INTERP-3",
+      "subject": "The indicator warmup segment",
+      "interpretation": "The representative needs 101 prior sessions of price history to compute its indicators on the first validation session. Those sessions are drawn from the tail of the DEVELOPMENT partition, which is already authorized and already read. During warmup no order is generated, no position is held, and equity is constant at the sealed starting capital.",
+      "why_it_is_not_a_new_development_search": "No development metric is recomputed, no development parameter is re-estimated, and no development result is reported. The warmup segment is an input to the first validation decision, not an experiment.",
+      "why_it_is_not_look_ahead": "Warmup runs strictly before the validation window opens and reads strictly past data. MarketView raises LookAheadError structurally on any read past the decision session, so this is enforced rather than promised.",
+      "consequence_for_the_fold_baseline": "Fold 1's baseline equity is the sealed starting capital, unchanged by warmup, so no validation observation is needed to establish it."
+    },
+    {
+      "id": "S4-INTERP-4",
+      "subject": "The 15% Gate 4 drawdown ceiling and the 15% section 5.1 research shutdown",
+      "interpretation": "The same number on the same daily closing equity series. S4-C3 is MET if and only if the shutdown never fires during the validation run.",
+      "recorded_as": "S4-CONFLICT-3 in config/stage4_gate_criteria.json, carried forward from S3-CONFLICT-3 and adopted unchanged."
+    },
+    {
+      "id": "S4-INTERP-5",
+      "subject": "Folds after a research shutdown",
+      "interpretation": "COMPLETED, with a return of exactly 0, which is not positive. A shutdown cannot shrink the fold denominator.",
+      "why": "The alternative would let a candidate trip the shutdown early and satisfy the 70% condition on the two or three folds it completed before the liquidation. The strict reading is chosen deliberately.",
+      "recorded_as": "config/stage4_gate_criteria.json walk_forward_fold_construction.completed_fold_definition."
+    }
+  ],
+
+  "inputs_bound": {
+    "principle": "Every input is bound by digest so that a change to any of them after this seal is detectable by recomputing one hash. Files sealed simultaneously with this one are referenced by artifact id and path; their digests are recorded by the enclosing Stage 4 pre-registration record, because a file cannot carry the digest of a file that carries its own.",
+    "bound_by_digest": [
+      {
+        "artifact_id": "SE100-GOV-0001",
+        "path": "governance/STAGE_0_CONSTITUTION.md",
+        "sha256": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "role": "The frozen gate 4 text, sections 4, 5.1, 7, 8, 9, 10, 11.",
+        "adoption": "FROZEN_READ_ONLY"
+      },
+      {
+        "artifact_id": "SE100-GOV-0001",
+        "path": "governance/STAGE_0_CONSTITUTION.json",
+        "sha256": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "role": "The gate 4 threshold companion.",
+        "adoption": "FROZEN_READ_ONLY"
+      },
+      {
+        "artifact_id": "SE100-GOV-1005",
+        "path": "governance/STAGE_1_HOLDOUT_LOCK.json",
+        "sha256": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+        "role": "The three partition boundaries and holdout_state SEALED. The only source of the validation window bounds used to construct the folds.",
+        "adoption": "ADOPTED_UNCHANGED"
+      },
+      {
+        "artifact_id": "SE100-GOV-1004",
+        "path": "governance/STAGE_1_UNIVERSE.json",
+        "sha256": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+        "role": "The frozen research universe, universe_version SE100-U1-d4917c2f7f1cd834. The representative's declared universe is a subset of it and is not widened.",
+        "adoption": "ADOPTED_UNCHANGED"
+      },
+      {
+        "artifact_id": "SE100-CFG-2001",
+        "path": "config/stage2_cost_model.json",
+        "sha256": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+        "role": "The complete friction assumption, the metric bases including the documented cash rate for S4-C2, the section 5.1 shutdown fraction and action, and the 2.0 stress multiplier with its coverage.",
+        "adoption": "ADOPTED_UNCHANGED",
+        "why_not_copied": "A copy could drift from the sealed original while both remained syntactically valid, and the drift would be invisible without a line-by-line comparison. A digest reference cannot drift, and the loader fails closed on any mismatch. This is the same reason SE100-CFG-3004 gave for binding SE100-CFG-3002 rather than copying it."
+      },
+      {
+        "artifact_id": "SE100-CFG-2002",
+        "path": "config/stage2_engine_spec.json",
+        "sha256": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+        "role": "The execution model: market-on-next-open fills, no partial fills, no negative cash, no leverage, dividend handling, stale-mark detection.",
+        "adoption": "ADOPTED_UNCHANGED"
+      },
+      {
+        "artifact_id": "SE100-CFG-3003",
+        "path": "config/stage3_attempt2_strategy_protocol.json",
+        "sha256": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+        "role": "The representative's rules, indicator definitions, risk architecture and declared variant set, sealed before any Attempt 2 strategy code was written. The parameterisation carried forward by this stage is the one this file declared as C2's PRIMARY.",
+        "adoption": "ADOPTED_UNCHANGED"
+      },
+      {
+        "artifact_id": "SE100-CFG-3002",
+        "path": "config/stage3_gate_criteria.json",
+        "sha256": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+        "role": "The denominators and universes of measurement for return, drawdown, profit factor and closed-trade counting, and the evaluation integrity rules. Its THRESHOLDS are Gate 3's and are not used here.",
+        "adoption": "ADOPTED_FOR_DENOMINATORS_AND_INTEGRITY_RULES_ONLY"
+      },
+      {
+        "artifact_id": "SE100-CFG-3004",
+        "path": "config/stage3_attempt2_gate_criteria_binding.json",
+        "sha256": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+        "role": "The sealed shutdown_behaviour block, including enforced_for_every_run and the permanence of deactivation; the neighbour_status prohibition; the rerun_policy; and cost_stress_is_not_a_gate_3_condition, whose 'evidence for Gate 4' clause this stage is the addressee of.",
+        "adoption": "ADOPTED_UNCHANGED"
+      }
+    ],
+    "sealed_simultaneously_referenced_by_id": [
+      {
+        "artifact_id": "SE100-CFG-4002",
+        "path": "config/stage4_gate_criteria.json",
+        "role": "The seven Gate 4 conditions, their measurements and predicates, the five recorded conflicts, the verdict token derivation, and the walk-forward fold construction."
+      },
+      {
+        "artifact_id": "SE100-CFG-4003",
+        "path": "config/stage4_representative_selection.json",
+        "role": "The representative, the selection rule, its provenance, and its application."
+      },
+      {
+        "artifact_id": "SE100-GOV-0008",
+        "path": "governance/STAGE_4_PREREGISTRATION.md and governance/STAGE_4_PREREGISTRATION.json",
+        "role": "The seal. Its .sha256 record carries the digests of all files sealed in this session, including this one."
+      }
+    ],
+    "dataset": {
+      "path": "data/normalized/",
+      "state": "Present and hashed since Stage 1. Its digests are recorded in the Stage 1 artifacts and in every runs/ record that read it.",
+      "read_in_this_session": false,
+      "why_no_dataset_digest_is_recorded_here": "The normalized files contain validation and holdout observations in the same files as development observations. Hashing them is not itself an exposure, but this session has no need to touch them, and the operating constraint is to hash observation-level restricted files only where governance explicitly authorizes metadata hashing without exposure. The digests already exist in the Stage 1 artifacts and are bound there; recording them again here would add nothing and would require opening the files.",
+      "read_in_the_authorized_evaluation_session": "Yes, once. The evaluation session records the dataset digests in its runs/ record, as every prior engine run has."
+    }
+  },
+
+  "sealed_representative": {
+    "experiment_id": "SE100-S3A2-C2-MEANREV-RA1",
+    "family": "mean reversion",
+    "selection_record": "config/stage4_representative_selection.json (SE100-CFG-4003)",
+    "identifier_unchanged_from_gate_3": true,
+    "declared_universe": ["SPY"],
+    "universe_is_a_subset_of": "SE100-U1-d4917c2f7f1cd834, unchanged and not widened.",
+    "declared_warmup_sessions": 101,
+    "parameters": {
+      "rsi_period": 2,
+      "rsi_entry_below": 10,
+      "exit_sma": 5,
+      "f_base": "0.50",
+      "vol_target": "0.10",
+      "vol_floor_fraction": "0.05",
+      "loss_control": "0.08",
+      "max_hold": 10,
+      "reentry_delay": 5,
+      "ladder_rungs": [["0.08", "0.25"], ["0.10", "0.125"]]
+    },
+    "parameters_source": "The PRIMARY parameterisation of C2 as declared in SE100-CFG-3003 and as recorded in the Gate 3 Attempt 2 evidence for variant SE100-S3A2-C2-MEANREV-RA1#PRIMARY. Not one value is altered by this stage.",
+    "development_run_digests_carried_forward": {
+      "purpose": "Recorded so that the evaluation session can prove it ran the same code and the same specification, not so that any development number is reused.",
+      "primary_trade_digest": "299dc2c4cec963668bc08c67601f431851695c78c5f1d7e056fa9f42e1e6112d",
+      "primary_equity_digest": "e50d787ef2733034ab7a418823b255d785ff0038d0fa657a38e89b7d44ff67d8",
+      "stressed_trade_digest": "46c86efd21f26c62ad17c14e9430cf6b29010140788c5b7a0a9c37b4ee9a5715",
+      "stressed_equity_digest": "25cfd6700efc5ba34bd0c802fd5a18c9c694eb4b6bf1b3aafe37304e7f658f73",
+      "these_are_development_digests": "They cover development-window outputs. No validation digest exists and none is predicted."
+    },
+    "prohibited_substitutions": [
+      "A robustness neighbour of C2 may never become the representative, under any result. SE100-CFG-3004 neighbour_status states the answer as 'No. Never. Under no result.'",
+      "SE100-S3A2-C1-PULLBACK-RA1 may not be substituted after a C2 result exists, and may not be run on validation as a comparison.",
+      "SE100-S3A2-C3-DEFENSIVE-RA1 is ineligible and is not reconsidered.",
+      "No combination, average, portfolio or ensemble of C1 and C2 is authorized.",
+      "No Attempt 1 candidate is revisited.",
+      "No risk overlay is added and no parameter is retuned."
+    ]
+  },
+
+  "partitions": {
+    "development": {
+      "start": "1993-01-29",
+      "end": "2021-07-31",
+      "state": "AUTHORIZED_AND_ALREADY_READ",
+      "use_in_the_evaluation_session": "The 101-session warmup tail immediately preceding 2021-08-01, indicator computation only, no orders, equity constant. See S4-INTERP-3."
+    },
+    "validation": {
+      "start": "2021-08-01",
+      "end": "2024-07-31",
+      "calendar_months": 36,
+      "state_now": "LOCKED",
+      "state_in_the_authorized_evaluation_session": "AUTHORIZED_FOR_EXACTLY_ONE_READ",
+      "source": "governance/STAGE_1_HOLDOUT_LOCK.json, sha256 9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3"
+    },
+    "holdout": {
+      "start": "2024-08-01",
+      "end": "2026-07-31",
+      "state": "SEALED",
+      "state_after_a_gate_4_pass": "SEALED. A Gate 4 pass does not open the holdout. It is read exactly once, at the constitutional holdout gate, after a separate authorization recorded at that gate."
+    },
+    "boundaries_not_recomputed": "The boundaries are read from the frozen lock and are not recomputed, widened, narrowed, or shifted. The twelve folds partition the validation window; they do not redefine it."
+  },
+
+  "single_validation_read_rule": {
+    "rule": "The validation partition is read exactly once, in exactly one authorized session, from exactly one dataset load, with both declared runs executed inside that session against that load.",
+    "constitution_basis": "SE100-GOV-1005 binding_rules and constitution section 9's treatment of the locked validation period. The holdout's 'read exactly once' discipline is applied to the validation window as the stricter reading; nothing in the lock authorises repeated validation reads.",
+    "what_counts_as_one_read": "One session, one load, the two declared runs. See S4-INTERP-2.",
+    "what_is_prohibited": [
+      "A second session reading the validation window for any purpose.",
+      "An exploratory query against the validation partition, including a row count, a coverage check, a date-range probe, or a summary statistic, before or outside the declared runs.",
+      "A third engine run on validation observations, including a diagnostic run, a debug run, or a run with the shutdown disabled.",
+      "A re-run after a valid completed evaluation. SE100-CFG-3004 rerun_policy: 'No.' A re-run that produced a different number would be a determinism defect and a blocker, not a better result.",
+      "Reading validation rows to check that the data are suitable before running. Suitability is established by the frozen Stage 1 readiness evidence or not at all."
+    ],
+    "if_the_run_fails_mid_window": "See partial_or_failed_run_rule. A crash is not a read that must be spent; it is a run that produced no valid evidence. The remedy is bounded and recorded there rather than left to judgement."
+  },
+
+  "runs_declared": {
+    "count": 2,
+    "count_is_a_hard_limit": true,
+    "runs": [
+      {
+        "run_label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+        "candidate": "SE100-S3A2-C2-MEANREV-RA1",
+        "window": "validation, 2021-08-01 to 2024-07-31",
+        "warmup": "101 development sessions immediately preceding 2021-08-01",
+        "friction": "The complete base friction assumption of SE100-CFG-2001, unmodified.",
+        "shutdown": "Section 5.1 research shutdown enforced at 15% below the running high-water mark, action LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES, permanent, never re-arming.",
+        "gates_conditions": ["S4-C1", "S4-C2", "S4-C3", "S4-C4", "S4-C6"],
+        "gating": true
+      },
+      {
+        "run_label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS",
+        "candidate": "SE100-S3A2-C2-MEANREV-RA1",
+        "window": "validation, 2021-08-01 to 2024-07-31",
+        "warmup": "101 development sessions immediately preceding 2021-08-01",
+        "friction": "Every component of the complete base friction assumption multiplied by 2.0, including the FINRA TAF per-order cap, per SE100-CFG-2001 frictions.stress_multiplier and frictions.stress_note.",
+        "shutdown": "Enforced identically. It is never disabled for a gating run.",
+        "gates_conditions": ["S4-C5"],
+        "gating": true,
+        "status_change_from_gate_3": "At Gate 3 the stressed run was non-gating by SE100-CFG-3004 cost_stress_is_not_a_gate_3_condition. At Gate 4 the constitution's own gate text makes stressed-cost total return a hard condition. See config/stage4_gate_criteria.json stressed_cost_status_change."
+      }
+    ],
+    "no_neighbour_runs": {
+      "declared": false,
+      "reason": "Gate 4 states no neighbour-stability condition. Gate 3's S3-C7 required four robustness neighbours per candidate; Gate 4 requires none. Declaring neighbour runs on the validation window would be four additional searches over a window that may be read once, and the results would gate nothing. Their absence is therefore not a gap in the evidence; adding them would be an unauthorised expansion of the search.",
+      "consequence_recorded": "Gate 4 will produce no validation-window robustness evidence. That is a limitation of the gate as frozen, not of this protocol, and it travels with the result."
+    },
+    "benchmark_accounts": {
+      "declared": [
+        "SPY index total return over the validation window, no costs, no shutdown, labelled a benchmark reference series.",
+        "SPY tradable buy-and-hold over the validation window, full base costs, shutdown enforced.",
+        "SPY tradable buy-and-hold over the validation window, full base costs, shutdown DISABLED, explicitly labelled a benchmark reference account and never a strategy result.",
+        "Cash at 0.00% annual, labelled conservative.",
+        "Do-nothing: flat equity at starting capital, zero trades."
+      ],
+      "are_these_additional_reads": "No. They are computed from the same single dataset load inside the same session, and none of them involves the strategy. They are not strategy runs and do not count against the declared run limit of 2.",
+      "gating": false,
+      "why_they_are_computed_at_all": "Constitution section 4 requires the three benchmarks to be reported. Reporting them is not the same as gating on them: beating SPY is not mandatory per section 4, and 'better risk-adjusted performance than cash' against the sealed 0% zero-volatility series is subsumed by S4-C2."
+    }
+  },
+
+  "measurement_and_gate_criteria": {
+    "location": "config/stage4_gate_criteria.json (SE100-CFG-4002), sealed simultaneously with this file.",
+    "conditions": ["S4-C1", "S4-C2", "S4-C3", "S4-C4", "S4-C5", "S4-C6", "S4-C7"],
+    "primary_metric": "There is no single primary metric at Gate 4. The gate is the conjunction of the seven conditions, and constitution section 8's requirement to name 'primary metric and all pass/fail gates' is satisfied by naming the conjunction and every condition in it. Naming one metric primary would imply the others were tie-breakers, which they are not.",
+    "verdict_tokens": {
+      "pass": "STAGE_4_STRATEGY_ADMITTED_IN_VALIDATION",
+      "fail": "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+      "derivation": "See config/stage4_gate_criteria.json verdict_token_derivation. The fail token is the constitution's gate 4 fail_result, stage-prefixed. The pass token is its negation, because the constitution's gate 4 object carries no pass_result. Both are fixed here, before any validation observation exists.",
+      "not_the_pass_token": "ELIGIBLE_FOR_PAPER_TRADING belongs to gate 5 and is not conferred by gate 4."
+    },
+    "quoted_here_for_a_reader_only": "A builder must read the tokens and thresholds from SE100-CFG-4002 and a test must assert them from SE100-CFG-4002, so that a divergence between this file and that one fails rather than silently prefers this file."
+  },
+
+  "iteration_budget": {
+    "parameterisations": 1,
+    "runs": 2,
+    "sessions_reading_validation": 1,
+    "re_runs_permitted_after_a_valid_completed_run": 0,
+    "note": "There is no search at Gate 4. The budget is not a limit on exploration; it is the statement that no exploration is authorized."
+  },
+
+  "cumulative_experiment_count": {
+    "gate_3_attempt_1": "6 primary parameterisations, one per declared candidate family, as recorded in results.per_candidate_primary of reports/stage3/STAGE_3_STRATEGY_RESEARCH.json. That evidence file records no robustness-neighbour and no stressed-cost variant, because all six failed S3-C2 on the primary run.",
+    "gate_3_attempt_2": "15 gating variants across three candidates - one primary and four declared robustness neighbours each - plus three non-gating stressed-cost runs, 18 development runs in total. Counted from results.all_registered_variants (15 keys) and results.stressed_cost_runs (3 keys) of reports/stage3_attempt2/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.json, sha256 26eecacfe96420878ce647b86f68da8ed8a17fea1338d85ee982b190645ed466.",
+    "gate_3_total_across_both_attempts": "24 development runs.",
+    "stage_4": 2,
+    "rule": "Any later statistical interpretation uses the cumulative count across all attempts and stages. This stage does not reset it, and two runs of one frozen parameterisation on a fresh window do not undo the multiplicity accumulated in development."
+  },
+
+  "multiple_comparisons_disclosure": [
+    "The representative was chosen from two development-admitted candidates, which were themselves chosen from a larger set across two Gate 3 attempts. A validation pass therefore carries the selection history of everything that came before it.",
+    "Gate 4 applies no multiplicity correction, and this protocol does not invent one. What it does instead is hold the validation exposure to the minimum the gate requires: one candidate, one parameterisation, two runs, one read.",
+    "A single out-of-sample window evaluated once is the strongest evidence this project's design can produce at this stage. It is still one window, three years long, of one instrument, over one macro regime. It is not a demonstration that an edge exists."
+  ],
+
+  "no_selection_in_this_stage": {
+    "statement": "The selection is already made and sealed. This stage's evaluation session selects nothing: it runs one candidate and reports one verdict.",
+    "consequence_of_a_fail": "See no_retuning_rule and stage_5_remains_prohibited_conditions. A fail is recorded and the project stops at Gate 4. It does not fall back to C1."
+  },
+
+  "cost_stress_treatment": {
+    "multiplier": "2.0",
+    "applies_to": "The complete base friction assumption, every component, including the FINRA TAF per-order cap. Bound by digest from SE100-CFG-2001 frictions.stress_applies_to and frictions.stress_note.",
+    "gating_at_gate_4": true,
+    "condition": "S4-C5, stressed-cost total return strictly greater than zero.",
+    "shutdown_enforced_in_the_stressed_run": true,
+    "no_intermediate_multiplier": "No 1.5x or 1.25x run is authorized. The constitution names 2x and only 2x, and adding intermediate levels would be a search for the multiplier at which the candidate survives."
+  },
+
+  "missing_or_invalid_data_rule": {
+    "rule": "The frozen Stage 1 data-readiness evidence and the sealed engine specification govern. A missing session, a stale mark, or a non-positive price is handled exactly as SE100-CFG-2002 specifies, with no stage-specific exception.",
+    "no_imputation": "No validation observation is imputed, interpolated, forward-filled beyond what the sealed engine specification already permits, or substituted from another source.",
+    "no_external_data": "No external market data source is consulted for any purpose, including to sanity-check a validation figure, to obtain a short-rate series, or to verify a dividend. Constitution section 4's cash rate is the sealed 0%.",
+    "if_the_validation_partition_is_unusable": "BLOCKED_BY_DATA, recorded with the evidence, and the read is not spent. An unusable partition is a data blocker, not a Gate 4 fail."
+  },
+
+  "post_seal_defect_rule": {
+    "rule": "If a defect is discovered in this protocol, in SE100-CFG-4002, or in SE100-CFG-4003 AFTER the seal but BEFORE any validation observation is read, the defect is recorded, this pre-registration is superseded by a new one with a new artifact id, and the supersession is recorded in the new runs/ record's notes. The sealed files are not edited in place.",
+    "after_a_validation_read": "If a defect is discovered after any validation observation has been read, it may not be repaired by changing a sealed specification: that would be a change made with validation results in hand, which S4-C7 forbids regardless of the researcher's intent. The outcome is INVALIDATED with the defect recorded, and the project's position is that no valid Gate 4 evaluation exists. It is not a fail and it is not a pass.",
+    "why_this_is_strict": "The alternative - allowing a 'clearly unrelated' repair after seeing the numbers - requires someone to judge relatedness while holding the result. That judgement cannot be made disinterestedly, so it is removed."
+  },
+
+  "partial_or_failed_run_rule": {
+    "rule": "A run that crashes, is interrupted, or does not reach 2024-07-31 produces no valid evidence and is not scored. Its conditions are NOT_EVALUABLE, which per constitution section 9 is not a pass.",
+    "remedy": "The cause is diagnosed and fixed in code outside the validation window - using development data, synthetic data, or unit tests - and the full evaluation is then re-run from the start within the same authorized session. A crash-and-restart within one session on one load is one read, not two, because no result was extracted from the failed attempt.",
+    "hard_limit": "If the evaluation cannot be completed within the authorized session, the outcome is BLOCKED_BY_INFRASTRUCTURE. A second session is not self-authorized: it requires the same explicit authorization that opened the first.",
+    "no_partial_scoring": "Scoring a run on the folds it completed before crashing is prohibited. See config/stage4_gate_criteria.json walk_forward_fold_construction.completed_fold_definition.incomplete_run_is_not_a_pass.",
+    "no_silent_retry": "Every attempt, including a failed one, gets a runs/ record with its exit status. A failed attempt that leaves no record on disk is itself a governance failure."
+  },
+
+  "no_retuning_rule": {
+    "rule": "No rule, feature, universe, parameter, cost assumption, risk setting, indicator definition, fold construction, threshold or measurement method may be changed in response to any validation result. This is S4-C7 and it is measured mechanically by digest recomputation, not asserted.",
+    "constitution_basis": "Gate 4's seventh condition and constitution section 11, under which a material change creates a new candidate that restarts at Gate 3.",
+    "what_a_fail_does_not_authorize": [
+      "Retuning C2's parameters and re-reading validation.",
+      "Substituting C1, or any neighbour of either candidate.",
+      "Relaxing a threshold, re-cutting the folds, changing the cash rate, or reinterpreting 'positive'.",
+      "Reopening Gate 3 Attempt 2 to admit a different candidate.",
+      "Describing the fail as a defect in the protocol."
+    ],
+    "what_a_fail_does_authorize": "Recording the fail as a deliverable, and stopping. Any subsequent strategy work is a new candidate restarting at Gate 3, disclosed as adaptive, with the validation window's information now known to the researcher and therefore permanently compromised for that candidate."
+  },
+
+  "reproducibility_requirements": {
+    "run_record": "Every run, including a failed one, writes an append-only runs/ record with run_id, stage, command, timestamp_utc, repo_state_id, code_hashes, config_hash, dataset_hashes, universe_version, date_range, holdout_state, strategy_id, random_seed, dependency_versions, exit_status and output_artifact_hashes.",
+    "determinism": "The evaluation must be bit-reproducible from the recorded inputs. Trade-level and equity-level digests are recorded for both runs so that a reader can verify a re-derivation without re-running the engine.",
+    "random_seed": null,
+    "random_seed_note": "The representative uses no randomness. Recording null rather than an unused integer keeps the field honest.",
+    "sealed_digests_to_recheck": [
+      "config/stage4_validation_protocol.json",
+      "config/stage4_gate_criteria.json",
+      "config/stage4_representative_selection.json",
+      "config/stage2_cost_model.json",
+      "config/stage2_engine_spec.json",
+      "config/stage3_attempt2_strategy_protocol.json",
+      "config/stage3_gate_criteria.json",
+      "config/stage3_attempt2_gate_criteria_binding.json",
+      "governance/STAGE_1_UNIVERSE.json",
+      "governance/STAGE_1_HOLDOUT_LOCK.json",
+      "governance/STAGE_4_PREREGISTRATION.md",
+      "governance/STAGE_4_PREREGISTRATION.json",
+      "the strategy module implementing SE100-S3A2-C2-MEANREV-RA1"
+    ],
+    "recheck_rule": "Recompute each digest after the evaluation and require equality with the value recorded in the Stage 4 pre-registration record. Any inequality is S4-C7 NOT_MET. There is no tolerance and no immaterial change.",
+    "environment": "Python 3.10.6, no virtual environment, pyarrow and scipy absent. Dependency versions are captured in the runs/ record. A different interpreter version is recorded, not silently accepted."
+  },
+
+  "stage_5_remains_prohibited_conditions": [
+    "A Gate 4 PASS authorises exactly one thing: the constitutional holdout gate, and only after a separate explicit human authorization recorded at that gate. It authorises no holdout read by itself.",
+    "The holdout window remains SEALED regardless of the Gate 4 verdict. It is read exactly once, at the holdout gate, and never before.",
+    "Passing Gate 5 would mean only ELIGIBLE_FOR_PAPER_TRADING. Passing Gate 4 does not mean that, and Gate 4 may not emit that token.",
+    "paper_trading_authorized remains false regardless of any validation result.",
+    "shadow_live_authorized remains false regardless of any validation result.",
+    "live_trading_authorized remains false regardless of any validation result. No live order, cancel, replace, liquidation, or unattended scheduling is authorized.",
+    "capital_or_risk_expansion_authorized remains false regardless of any validation result.",
+    "No broker connection, credential read, or order submission is authorized at any point in Stage 4. No order-submitting code exists in this repository and none is written by this stage.",
+    "A validation PASS is not evidence of a trading edge and is not a claim about any future period. StockEdge100 is not trade-ready and may not be described as trade-ready at any point in Stage 4 or after it."
+  ],
+
+  "explicit_non_authorizations": [
+    "This protocol does not authorize reading the validation window in the session that wrote it.",
+    "This protocol does not authorize implementing the Stage 4 evaluator. The evaluator is written in the authorized evaluation session, before the dataset is loaded, and its code is hashed into that session's runs/ record.",
+    "This protocol does not authorize creating empty or placeholder Stage 4 evaluator or result files. A file that exists but contains no evidence is indistinguishable on a manifest from one that does.",
+    "This protocol does not authorize any development backtest, re-run, or re-measurement.",
+    "This protocol does not authorize acquiring any new data source, including a Treasury-bill series.",
+    "This protocol does not authorize any Alpaca or broker interaction, credential read, or network access.",
+    "This protocol does not authorize a second Gate 4 attempt. There is no Attempt 2 at Gate 4 in this design: the window can be read once."
+  ],
+
+  "live_trading_authorized": false
+}

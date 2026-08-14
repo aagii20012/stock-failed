@@ -1,0 +1,1588 @@
+{
+  "artifact_id": "SE100-EVID-4001",
+  "title": "StockEdge100 Stage 4 sealed validation evidence",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 4,
+  "gate_id": 4,
+  "gate_name": "validation_robustness",
+  "constitution_ref": "SE100-GOV-0001 sections 4, 5.1, 7, 8, 9, 10, 11",
+  "representative": {
+    "experiment_id": "SE100-S3A2-C2-MEANREV-RA1",
+    "family": "mean reversion",
+    "declared_universe": [
+      "SPY"
+    ],
+    "declared_warmup_sessions": 101,
+    "parameters": {
+      "rsi_period": 2,
+      "rsi_entry_below": 10,
+      "exit_sma": 5,
+      "f_base": "0.50",
+      "vol_target": "0.10",
+      "vol_floor_fraction": "0.05",
+      "loss_control": "0.08",
+      "max_hold": 10,
+      "reentry_delay": 5,
+      "ladder_rungs": [
+        [
+          "0.08",
+          "0.25"
+        ],
+        [
+          "0.10",
+          "0.125"
+        ]
+      ]
+    },
+    "selection_rule": "SE100-CFG-4003",
+    "identifier_unchanged_from_gate_3": true
+  },
+  "sealed_inputs": {
+    "repo_state_id_at_evaluation": "f57e2590a4ec7f36bf7670ed810b96b55e441878b141d10c7d5ed91606a033e0",
+    "artifact_ids": {
+      "config/stage4_validation_protocol.json": "SE100-CFG-4001",
+      "config/stage4_gate_criteria.json": "SE100-CFG-4002",
+      "config/stage4_representative_selection.json": "SE100-CFG-4003"
+    },
+    "sealed_digests_verified_at_load": {
+      "config/stage2_cost_model.json": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+      "config/stage2_engine_spec.json": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+      "config/stage3_attempt2_gate_criteria_binding.json": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+      "config/stage3_attempt2_strategy_protocol.json": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+      "config/stage3_gate_criteria.json": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+      "config/stage4_gate_criteria.json": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+      "config/stage4_representative_selection.json": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+      "config/stage4_validation_protocol.json": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+      "governance/STAGE_1_HOLDOUT_LOCK.json": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+      "governance/STAGE_1_UNIVERSE.json": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+      "governance/STAGE_4_PREREGISTRATION.md": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+      "src/stockedge100/strategies/attempt2_candidates.py": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+      "governance/STAGE_4_PREREGISTRATION.json": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b"
+    },
+    "sealed_digest_count": 13,
+    "strategy_module": "src/stockedge100/strategies/attempt2_candidates.py",
+    "preregistration_files": [
+      "governance/STAGE_4_PREREGISTRATION.md",
+      "governance/STAGE_4_PREREGISTRATION.json"
+    ],
+    "stage_0_freeze_verified": true
+  },
+  "single_validation_read": {
+    "rule": "The validation partition is read exactly once, in exactly one authorized session, from exactly one dataset load, with both declared runs executed inside that session against that load.",
+    "validation_partition": {
+      "start": "2021-08-01",
+      "end": "2024-07-31"
+    },
+    "engine_visibility_window": {
+      "name": "validation+warmup101",
+      "start": "2021-03-09",
+      "end": "2024-07-31",
+      "note": "A visibility bound, not a run bound. The leading segment is the sealed 101-session development tail that partitions.development.use_in_the_evaluation_session authorises for indicator computation only; no order may be placed in it because the run does not begin until the validation start."
+    },
+    "run_bounds": {
+      "start": "2021-08-01",
+      "end": "2024-07-31"
+    },
+    "holdout_partition": {
+      "start": "2024-08-01",
+      "end": "2026-07-31",
+      "state": "SEALED",
+      "sessions_read": 0
+    },
+    "validation_dataset_loads": 1,
+    "validation_reading_sessions": 1,
+    "validation_window_engine_runs": 2,
+    "run_record": "SE100-R-20260814T143226Z",
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage4_evidence"
+  },
+  "holdout_unreachability_proof": {
+    "holdout_start": "2024-08-01",
+    "holdout_end": "2026-07-31",
+    "window_end": "2024-07-31",
+    "run_end": "2024-07-31",
+    "window_end_precedes_holdout_start": true,
+    "run_end_precedes_holdout_start": true,
+    "mechanism": "MarketView.history returns bars filtered by window.contains(day) and day <= as_of; as_of is drawn from sessions_between(run_start, run_end). With both bounds before the holdout start no holdout bar is addressable by any probe."
+  },
+  "datasets": {
+    "symbols_loaded": [
+      "SPY"
+    ],
+    "digests": {
+      "data/manifests/STAGE_1_NORMALIZED_MANIFEST.json": "15b9ed6b090e79f21bc55e8f2c5bed7ca2eac8c51b83863d80c4cc45ebd5d184",
+      "data/normalized/daily/SPY.csv": "42c202dad76f60e34a35d45514539dc8e7e4b3bccd7945875b845eb1bed6963c"
+    }
+  },
+  "runs": [
+    {
+      "run_label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+      "scenario": "BASE",
+      "declared_order": 1,
+      "gates_conditions": [
+        "S4-C1",
+        "S4-C2",
+        "S4-C3",
+        "S4-C4",
+        "S4-C6"
+      ],
+      "cost_multiplier_declared": null,
+      "cost_model_in_force": {
+        "scenario": "BASE",
+        "stress_multiplier": "1",
+        "commission_per_order_usd": "0.00",
+        "half_spread_bps": "2.5",
+        "slippage_bps": "2.5",
+        "price_friction_bps_per_side": "5.0",
+        "sec_section_31_fee_rate": "0.0000278",
+        "finra_taf_per_share_usd": "0.000166",
+        "finra_taf_cap_usd": "8.30"
+      },
+      "measure": {
+        "variant_id": "SE100-S4-C2-MEANREV-RA1#VALIDATION",
+        "role": "primary",
+        "scenario": "BASE",
+        "gating": true,
+        "parameters": {
+          "rsi_period": 2,
+          "rsi_entry_below": 10,
+          "exit_sma": 5,
+          "f_base": "0.50",
+          "vol_target": "0.10",
+          "vol_floor_fraction": "0.05",
+          "loss_control": "0.08",
+          "max_hold": 10,
+          "reentry_delay": 5,
+          "ladder_rungs": [
+            [
+              "0.08",
+              "0.25"
+            ],
+            [
+              "0.10",
+              "0.125"
+            ]
+          ]
+        },
+        "symbols_loaded": [
+          "SPY"
+        ],
+        "ra1_parameters_in_force": {
+          "f_base": "0.50",
+          "vol_target": "0.10",
+          "vol_floor_fraction": "0.05",
+          "loss_control": "0.08",
+          "max_hold": 10,
+          "reentry_delay": 5,
+          "ladder_rungs": [
+            [
+              "0.08",
+              "0.25"
+            ],
+            [
+              "0.10",
+              "0.125"
+            ]
+          ],
+          "ladder_bands": [
+            "dd<0.08",
+            "0.08<=dd<0.10",
+            "dd>=0.10"
+          ]
+        },
+        "label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+        "start": "2021-08-01",
+        "end": "2024-07-31",
+        "sessions": 754,
+        "starting_equity": "100.00",
+        "final_equity": "102.15",
+        "final_cash": "102.15",
+        "total_return": "0.0215",
+        "cagr": "0.007127333702201046330123025404761",
+        "max_drawdown": "0.03161389554784035323758760240844931",
+        "daily_return_stdev": "0.002448903298362655805767459868707416",
+        "sharpe": "0.2025294206503088680547420121230750",
+        "sharpe_risk_free_annual": "0.00",
+        "profit_factor": "1.196526508226691042047531993",
+        "profit_factor_note": null,
+        "closed_trades": 41,
+        "exposure_fraction": "0.1883289124668435013262599469496021",
+        "win_rate": "0.5365853658536585365853658536585366",
+        "wins": 22,
+        "losses": 19,
+        "scratches": 0,
+        "average_win": "0.595",
+        "average_loss": "-0.5757894736842105263157894736842105",
+        "longest_flat_streak_sessions": 53,
+        "fills": 82,
+        "rejections": 0,
+        "rejection_reasons": {},
+        "dividend_events": 1,
+        "stale_marks": 0,
+        "shutdown_session": null,
+        "open_positions_at_end": 0,
+        "contribution_by_symbol": {
+          "SPY": "2.15"
+        },
+        "trades_digest": "977188f4d61a76f6a9208f8150b58d0fc363887648290c96ba1a1bfa13f03cdd",
+        "equity_digest": "e618416ca3c5f6163eecdc98867d972d8d7576fc95b24671eeda0611d81762c5",
+        "deepest_drawdown_4dp": "0.0316",
+        "ra1_diagnostics": {
+          "exits_by_reason": {
+            "EXIT_LOSS_CONTROL": 0,
+            "EXIT_MAX_HOLD": 0,
+            "EXIT_SIGNAL": 41
+          },
+          "blocked_entries_by_reason": {
+            "NO_ENTRY_ZERO_VOLATILITY": 0,
+            "NO_ENTRY_VOLATILITY_FLOOR": 0,
+            "NO_ENTRY_SIZE_FLOOR": 0,
+            "NO_ENTRY_LOCKOUT": 0,
+            "NO_ENTRY_INSUFFICIENT_HISTORY": 0
+          },
+          "entry_fractions_at_order_emission": [
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.4513489351921419482641995752106820",
+            "0.4216282657951437761982417646708217",
+            "0.50",
+            "0.50",
+            "0.3195173327850828798569643059699335",
+            "0.3401501001073577538578915295930258",
+            "0.4272932131181962654925162704605470",
+            "0.50",
+            "0.4864220669824234593473398470652736",
+            "0.4016960739151069671260373931678031",
+            "0.4103840216163418922762727319948138",
+            "0.3710837163035585549207429524208505",
+            "0.3623422850795584645569640725758172",
+            "0.4871249754993624250136826060953565",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50"
+          ],
+          "entry_fractions_realised": [
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.4513489351921419482641995752106820",
+            "0.4216282657951437761982417646708217",
+            "0.50",
+            "0.50",
+            "0.3195173327850828798569643059699335",
+            "0.3401501001073577538578915295930258",
+            "0.4272932131181962654925162704605470",
+            "0.50",
+            "0.4864220669824234593473398470652736",
+            "0.4016960739151069671260373931678031",
+            "0.4103840216163418922762727319948138",
+            "0.3710837163035585549207429524208505",
+            "0.3623422850795584645569640725758172",
+            "0.4871249754993624250136826060953565",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50"
+          ],
+          "entries_emitted": 41,
+          "entries_filled": 41,
+          "ladder_sessions": {
+            "dd<0.08": 753,
+            "0.08<=dd<0.10": 0,
+            "dd>=0.10": 0
+          },
+          "decision_sessions": 753,
+          "decision_sessions_shutdown_active": 0,
+          "exits_by_reason_shutdown": 0
+        }
+      }
+    },
+    {
+      "run_label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS",
+      "scenario": "STRESSED",
+      "declared_order": 2,
+      "gates_conditions": [
+        "S4-C5"
+      ],
+      "cost_multiplier_declared": null,
+      "cost_model_in_force": {
+        "scenario": "STRESSED",
+        "stress_multiplier": "2.0",
+        "commission_per_order_usd": "0.00",
+        "half_spread_bps": "5.00",
+        "slippage_bps": "5.00",
+        "price_friction_bps_per_side": "10.00",
+        "sec_section_31_fee_rate": "0.00005560",
+        "finra_taf_per_share_usd": "0.0003320",
+        "finra_taf_cap_usd": "16.60"
+      },
+      "measure": {
+        "variant_id": "SE100-S4-C2-MEANREV-RA1#VALIDATION",
+        "role": "primary",
+        "scenario": "STRESSED",
+        "gating": true,
+        "parameters": {
+          "rsi_period": 2,
+          "rsi_entry_below": 10,
+          "exit_sma": 5,
+          "f_base": "0.50",
+          "vol_target": "0.10",
+          "vol_floor_fraction": "0.05",
+          "loss_control": "0.08",
+          "max_hold": 10,
+          "reentry_delay": 5,
+          "ladder_rungs": [
+            [
+              "0.08",
+              "0.25"
+            ],
+            [
+              "0.10",
+              "0.125"
+            ]
+          ]
+        },
+        "symbols_loaded": [
+          "SPY"
+        ],
+        "ra1_parameters_in_force": {
+          "f_base": "0.50",
+          "vol_target": "0.10",
+          "vol_floor_fraction": "0.05",
+          "loss_control": "0.08",
+          "max_hold": 10,
+          "reentry_delay": 5,
+          "ladder_rungs": [
+            [
+              "0.08",
+              "0.25"
+            ],
+            [
+              "0.10",
+              "0.125"
+            ]
+          ],
+          "ladder_bands": [
+            "dd<0.08",
+            "0.08<=dd<0.10",
+            "dd>=0.10"
+          ]
+        },
+        "label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS",
+        "start": "2021-08-01",
+        "end": "2024-07-31",
+        "sessions": 754,
+        "starting_equity": "100.00",
+        "final_equity": "100.15",
+        "final_cash": "100.15",
+        "total_return": "0.0015",
+        "cagr": "0.000500549825775029442954250696252",
+        "max_drawdown": "0.03662984840179431696571743483371691",
+        "daily_return_stdev": "0.002459921470167783189502285356451387",
+        "sharpe": "0.03233812598518122956116657959336107",
+        "sharpe_risk_free_annual": "0.00",
+        "profit_factor": "1.012776831345826235093696763",
+        "profit_factor_note": null,
+        "closed_trades": 41,
+        "exposure_fraction": "0.1883289124668435013262599469496021",
+        "win_rate": "0.5365853658536585365853658536585366",
+        "wins": 22,
+        "losses": 19,
+        "scratches": 0,
+        "average_win": "0.5404545454545454545454545454545455",
+        "average_loss": "-0.6178947368421052631578947368421053",
+        "longest_flat_streak_sessions": 53,
+        "fills": 82,
+        "rejections": 0,
+        "rejection_reasons": {},
+        "dividend_events": 1,
+        "stale_marks": 0,
+        "shutdown_session": null,
+        "open_positions_at_end": 0,
+        "contribution_by_symbol": {
+          "SPY": "0.15"
+        },
+        "trades_digest": "7f24509e792b6e1bec1505c8d757541472d2e13c2a6620d15a7e7541abaf07a1",
+        "equity_digest": "499776a499dbb0dd69d851cade2c5b03b2a4ba2ea296c35f6cb84d64d8583205",
+        "deepest_drawdown_4dp": "0.0366",
+        "ra1_diagnostics": {
+          "exits_by_reason": {
+            "EXIT_LOSS_CONTROL": 0,
+            "EXIT_MAX_HOLD": 0,
+            "EXIT_SIGNAL": 41
+          },
+          "blocked_entries_by_reason": {
+            "NO_ENTRY_ZERO_VOLATILITY": 0,
+            "NO_ENTRY_VOLATILITY_FLOOR": 0,
+            "NO_ENTRY_SIZE_FLOOR": 0,
+            "NO_ENTRY_LOCKOUT": 0,
+            "NO_ENTRY_INSUFFICIENT_HISTORY": 0
+          },
+          "entry_fractions_at_order_emission": [
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.4513489351921419482641995752106820",
+            "0.4216282657951437761982417646708217",
+            "0.50",
+            "0.50",
+            "0.3195173327850828798569643059699335",
+            "0.3401501001073577538578915295930258",
+            "0.4272932131181962654925162704605470",
+            "0.50",
+            "0.4864220669824234593473398470652736",
+            "0.4016960739151069671260373931678031",
+            "0.4103840216163418922762727319948138",
+            "0.3710837163035585549207429524208505",
+            "0.3623422850795584645569640725758172",
+            "0.4871249754993624250136826060953565",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50"
+          ],
+          "entry_fractions_realised": [
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.4513489351921419482641995752106820",
+            "0.4216282657951437761982417646708217",
+            "0.50",
+            "0.50",
+            "0.3195173327850828798569643059699335",
+            "0.3401501001073577538578915295930258",
+            "0.4272932131181962654925162704605470",
+            "0.50",
+            "0.4864220669824234593473398470652736",
+            "0.4016960739151069671260373931678031",
+            "0.4103840216163418922762727319948138",
+            "0.3710837163035585549207429524208505",
+            "0.3623422850795584645569640725758172",
+            "0.4871249754993624250136826060953565",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50",
+            "0.50"
+          ],
+          "entries_emitted": 41,
+          "entries_filled": 41,
+          "ladder_sessions": {
+            "dd<0.08": 753,
+            "0.08<=dd<0.10": 0,
+            "dd>=0.10": 0
+          },
+          "decision_sessions": 753,
+          "decision_sessions_shutdown_active": 0,
+          "exits_by_reason_shutdown": 0
+        }
+      }
+    }
+  ],
+  "gate_evidence": {
+    "base": {
+      "run_label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE",
+      "scenario": "BASE",
+      "gating_conditions": [
+        "S4-C1",
+        "S4-C2",
+        "S4-C3",
+        "S4-C4",
+        "S4-C6"
+      ],
+      "equity_points": 754,
+      "reached_window_end": true,
+      "starting_equity": "100.00",
+      "final_equity": "102.15",
+      "total_return": "0.0215",
+      "sharpe": "0.2025294206503088680547420121230750",
+      "sharpe_risk_free_annual": "0.00",
+      "daily_returns": 753,
+      "max_drawdown": "0.03161389554784035323758760240844931",
+      "max_drawdown_basis": "daily marked equity including cash, peak to trough",
+      "profit_factor": "1.196526508226691042047531993",
+      "profit_factor_note": null,
+      "closed_trades": 41,
+      "gross_profit": "13.09",
+      "gross_loss": "10.94",
+      "shutdown_session": null,
+      "shutdown_fraction": "0.15"
+    },
+    "stress": {
+      "run_label": "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS",
+      "scenario": "STRESSED",
+      "gating_conditions": [
+        "S4-C5"
+      ],
+      "equity_points": 754,
+      "reached_window_end": true,
+      "starting_equity": "100.00",
+      "final_equity": "100.15",
+      "total_return": "0.0015",
+      "stress_multiplier": "2.0",
+      "sealed_stress_multiplier": "2.0",
+      "shutdown_enforced": true,
+      "shutdown_session": null
+    },
+    "invariance": {
+      "all_digests_equal": true,
+      "digests_equal": 13,
+      "digests_total": 13,
+      "digest_rows": [
+        {
+          "artifact": "config/stage2_cost_model.json",
+          "sealed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+          "recomputed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage2_engine_spec.json",
+          "sealed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+          "recomputed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage3_attempt2_gate_criteria_binding.json",
+          "sealed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+          "recomputed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage3_attempt2_strategy_protocol.json",
+          "sealed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+          "recomputed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage3_gate_criteria.json",
+          "sealed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+          "recomputed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage4_gate_criteria.json",
+          "sealed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+          "recomputed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage4_representative_selection.json",
+          "sealed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+          "recomputed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "config/stage4_validation_protocol.json",
+          "sealed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+          "recomputed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_1_HOLDOUT_LOCK.json",
+          "sealed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+          "recomputed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_1_UNIVERSE.json",
+          "sealed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+          "recomputed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_4_PREREGISTRATION.json",
+          "sealed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+          "recomputed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.sha256",
+          "resolves_description": null
+        },
+        {
+          "artifact": "governance/STAGE_4_PREREGISTRATION.md",
+          "sealed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+          "recomputed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": null
+        },
+        {
+          "artifact": "src/stockedge100/strategies/attempt2_candidates.py",
+          "sealed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+          "recomputed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+          "equal": true,
+          "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+          "resolves_description": "the strategy module implementing SE100-S3A2-C2-MEANREV-RA1"
+        }
+      ],
+      "validation_evaluation_run_records": 1,
+      "validation_evaluation_run_record_names": [
+        "SE100-R-20260814T143226Z.json"
+      ],
+      "validation_window_engine_runs": 2,
+      "declared_run_count": 2,
+      "parameters_unchanged": true,
+      "parameter_comparison": {
+        "sealed_parameters": "{\"exit_sma\": 5, \"f_base\": \"0.50\", \"ladder_rungs\": [[\"0.08\", \"0.25\"], [\"0.10\", \"0.125\"]], \"loss_control\": \"0.08\", \"max_hold\": 10, \"reentry_delay\": 5, \"rsi_entry_below\": 10, \"rsi_period\": 2, \"vol_floor_fraction\": \"0.05\", \"vol_target\": \"0.10\"}",
+        "gate_3_primary_parameters": "{\"exit_sma\": 5, \"f_base\": \"0.50\", \"ladder_rungs\": [[\"0.08\", \"0.25\"], [\"0.10\", \"0.125\"]], \"loss_control\": \"0.08\", \"max_hold\": 10, \"reentry_delay\": 5, \"rsi_entry_below\": 10, \"rsi_period\": 2, \"vol_floor_fraction\": \"0.05\", \"vol_target\": \"0.10\"}",
+        "equal": true,
+        "source_of_the_sealed_parameterisation": "config/stage4_validation_protocol.json sealed_representative.parameters"
+      },
+      "strategy_invariance": {
+        "representative": "SE100-S3A2-C2-MEANREV-RA1",
+        "identifier_unchanged_from_gate_3": true,
+        "parameters_equal_gate_3_primary": true,
+        "universe_equal_gate_3": true,
+        "declared_universe": [
+          "SPY"
+        ],
+        "family_equal_gate_3": true,
+        "warmup_equal_gate_3": true,
+        "declared_warmup_sessions": 101,
+        "largest_lookback_recomputed": 101,
+        "warmup_matches_largest_lookback": true,
+        "rsi_warmup_changes": 100,
+        "strategy_module": "src/stockedge100/strategies/attempt2_candidates.py",
+        "strategy_module_digest_equal": true,
+        "all_equal": true
+      },
+      "conflict_note": "S4-CONFLICT-6: the sealed clause names config/stage4_representative_selection.json as the home of the parameterisation; that file carries none and the values are in config/stage4_validation_protocol.json. Both are inside the thirteen-artifact digest set."
+    }
+  },
+  "folds": {
+    "construction_id": "SE100-CFG-4002-WF1",
+    "rule": "The validation window is partitioned into consecutive, non-overlapping, calendar-aligned blocks of exactly three calendar months each, beginning at the validation window start. The window spans 36 calendar months exactly, so twelve blocks tile it with no remainder and no discarded tail.",
+    "declared_test_folds": 12,
+    "declared_train_folds": 0,
+    "expected_completed_count": 12,
+    "rows": [
+      {
+        "fold": 1,
+        "start": "2021-08-01",
+        "end": "2021-10-31",
+        "calendar_sessions": 64,
+        "run_sessions": 64,
+        "last_trading_session": "2021-10-29",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "100.65",
+        "baseline_equity": "100.00",
+        "baseline_source": "sealed starting capital",
+        "completed": true,
+        "fold_return": "0.0065",
+        "positive": true
+      },
+      {
+        "fold": 2,
+        "start": "2021-11-01",
+        "end": "2022-01-31",
+        "calendar_sessions": 63,
+        "run_sessions": 63,
+        "last_trading_session": "2022-01-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "99.36",
+        "baseline_equity": "100.65",
+        "baseline_source": "fold 1 close",
+        "completed": true,
+        "fold_return": "-0.0128166915052160953800298063",
+        "positive": false
+      },
+      {
+        "fold": 3,
+        "start": "2022-02-01",
+        "end": "2022-04-30",
+        "calendar_sessions": 62,
+        "run_sessions": 62,
+        "last_trading_session": "2022-04-29",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "99.72",
+        "baseline_equity": "99.36",
+        "baseline_source": "fold 2 close",
+        "completed": true,
+        "fold_return": "0.003623188405797101449275362",
+        "positive": true
+      },
+      {
+        "fold": 4,
+        "start": "2022-05-01",
+        "end": "2022-07-31",
+        "calendar_sessions": 62,
+        "run_sessions": 62,
+        "last_trading_session": "2022-07-29",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "100.15",
+        "baseline_equity": "99.72",
+        "baseline_source": "fold 3 close",
+        "completed": true,
+        "fold_return": "0.004312073806658644203770558",
+        "positive": true
+      },
+      {
+        "fold": 5,
+        "start": "2022-08-01",
+        "end": "2022-10-31",
+        "calendar_sessions": 65,
+        "run_sessions": 65,
+        "last_trading_session": "2022-10-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "99.63",
+        "baseline_equity": "100.15",
+        "baseline_source": "fold 4 close",
+        "completed": true,
+        "fold_return": "-0.0051922116824762855716425362",
+        "positive": false
+      },
+      {
+        "fold": 6,
+        "start": "2022-11-01",
+        "end": "2023-01-31",
+        "calendar_sessions": 62,
+        "run_sessions": 62,
+        "last_trading_session": "2023-01-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "102.14",
+        "baseline_equity": "99.63",
+        "baseline_source": "fold 5 close",
+        "completed": true,
+        "fold_return": "0.025193214895111914082103784",
+        "positive": true
+      },
+      {
+        "fold": 7,
+        "start": "2023-02-01",
+        "end": "2023-04-30",
+        "calendar_sessions": 61,
+        "run_sessions": 61,
+        "last_trading_session": "2023-04-28",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "101.86",
+        "baseline_equity": "102.14",
+        "baseline_source": "fold 6 close",
+        "completed": true,
+        "fold_return": "-0.0027413354219698453103583317",
+        "positive": false
+      },
+      {
+        "fold": 8,
+        "start": "2023-05-01",
+        "end": "2023-07-31",
+        "calendar_sessions": 63,
+        "run_sessions": 63,
+        "last_trading_session": "2023-07-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "103.11",
+        "baseline_equity": "101.86",
+        "baseline_source": "fold 7 close",
+        "completed": true,
+        "fold_return": "0.012271745533084625957196152",
+        "positive": true
+      },
+      {
+        "fold": 9,
+        "start": "2023-08-01",
+        "end": "2023-10-31",
+        "calendar_sessions": 65,
+        "run_sessions": 65,
+        "last_trading_session": "2023-10-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "101.0882445391692330300",
+        "baseline_equity": "103.11",
+        "baseline_source": "fold 8 close",
+        "completed": true,
+        "fold_return": "-0.0196077534752280765202211231",
+        "positive": false
+      },
+      {
+        "fold": 10,
+        "start": "2023-11-01",
+        "end": "2024-01-31",
+        "calendar_sessions": 62,
+        "run_sessions": 62,
+        "last_trading_session": "2024-01-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "101.78",
+        "baseline_equity": "101.0882445391692330300",
+        "baseline_source": "fold 9 close",
+        "completed": true,
+        "fold_return": "0.006843085108305828525379588",
+        "positive": true
+      },
+      {
+        "fold": 11,
+        "start": "2024-02-01",
+        "end": "2024-04-30",
+        "calendar_sessions": 62,
+        "run_sessions": 62,
+        "last_trading_session": "2024-04-30",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "101.77",
+        "baseline_equity": "101.78",
+        "baseline_source": "fold 10 close",
+        "completed": true,
+        "fold_return": "-0.0000982511298879937119276872",
+        "positive": false
+      },
+      {
+        "fold": 12,
+        "start": "2024-05-01",
+        "end": "2024-07-31",
+        "calendar_sessions": 63,
+        "run_sessions": 63,
+        "last_trading_session": "2024-07-31",
+        "bounds_inside_validation_window": true,
+        "has_at_least_one_session": true,
+        "equity_at_last_session": "102.15",
+        "baseline_equity": "101.77",
+        "baseline_source": "fold 11 close",
+        "completed": true,
+        "fold_return": "0.003733909796600176869411418",
+        "positive": true
+      }
+    ],
+    "completed": 12,
+    "positive": 7
+  },
+  "strategy_invariance": {
+    "recheck_before_validation_load": [
+      {
+        "artifact": "config/stage2_cost_model.json",
+        "sealed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+        "recomputed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage2_engine_spec.json",
+        "sealed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+        "recomputed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage3_attempt2_gate_criteria_binding.json",
+        "sealed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+        "recomputed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage3_attempt2_strategy_protocol.json",
+        "sealed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+        "recomputed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage3_gate_criteria.json",
+        "sealed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+        "recomputed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage4_gate_criteria.json",
+        "sealed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+        "recomputed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage4_representative_selection.json",
+        "sealed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+        "recomputed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage4_validation_protocol.json",
+        "sealed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+        "recomputed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "governance/STAGE_1_HOLDOUT_LOCK.json",
+        "sealed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+        "recomputed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "governance/STAGE_1_UNIVERSE.json",
+        "sealed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+        "recomputed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "governance/STAGE_4_PREREGISTRATION.json",
+        "sealed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+        "recomputed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.sha256",
+        "resolves_description": null
+      },
+      {
+        "artifact": "governance/STAGE_4_PREREGISTRATION.md",
+        "sealed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+        "recomputed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "src/stockedge100/strategies/attempt2_candidates.py",
+        "sealed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+        "recomputed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": "the strategy module implementing SE100-S3A2-C2-MEANREV-RA1"
+      }
+    ],
+    "recheck_after_evaluation": [
+      {
+        "artifact": "config/stage2_cost_model.json",
+        "sealed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+        "recomputed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage2_engine_spec.json",
+        "sealed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+        "recomputed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage3_attempt2_gate_criteria_binding.json",
+        "sealed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+        "recomputed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage3_attempt2_strategy_protocol.json",
+        "sealed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+        "recomputed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage3_gate_criteria.json",
+        "sealed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+        "recomputed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage4_gate_criteria.json",
+        "sealed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+        "recomputed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage4_representative_selection.json",
+        "sealed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+        "recomputed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "config/stage4_validation_protocol.json",
+        "sealed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+        "recomputed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "governance/STAGE_1_HOLDOUT_LOCK.json",
+        "sealed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+        "recomputed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "governance/STAGE_1_UNIVERSE.json",
+        "sealed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+        "recomputed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "governance/STAGE_4_PREREGISTRATION.json",
+        "sealed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+        "recomputed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.sha256",
+        "resolves_description": null
+      },
+      {
+        "artifact": "governance/STAGE_4_PREREGISTRATION.md",
+        "sealed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+        "recomputed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": null
+      },
+      {
+        "artifact": "src/stockedge100/strategies/attempt2_candidates.py",
+        "sealed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+        "recomputed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+        "equal": true,
+        "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+        "resolves_description": "the strategy module implementing SE100-S3A2-C2-MEANREV-RA1"
+      }
+    ],
+    "recheck_rule": "Recompute each digest after the evaluation and require equality with the value recorded in the Stage 4 pre-registration record. Any inequality is S4-C7 NOT_MET. There is no tolerance and no immaterial change.",
+    "gate_3_comparison": {
+      "representative": "SE100-S3A2-C2-MEANREV-RA1",
+      "identifier_unchanged_from_gate_3": true,
+      "parameters_equal_gate_3_primary": true,
+      "sealed_parameters": "{\"exit_sma\": 5, \"f_base\": \"0.50\", \"ladder_rungs\": [[\"0.08\", \"0.25\"], [\"0.10\", \"0.125\"]], \"loss_control\": \"0.08\", \"max_hold\": 10, \"reentry_delay\": 5, \"rsi_entry_below\": 10, \"rsi_period\": 2, \"vol_floor_fraction\": \"0.05\", \"vol_target\": \"0.10\"}",
+      "gate_3_primary_parameters": "{\"exit_sma\": 5, \"f_base\": \"0.50\", \"ladder_rungs\": [[\"0.08\", \"0.25\"], [\"0.10\", \"0.125\"]], \"loss_control\": \"0.08\", \"max_hold\": 10, \"reentry_delay\": 5, \"rsi_entry_below\": 10, \"rsi_period\": 2, \"vol_floor_fraction\": \"0.05\", \"vol_target\": \"0.10\"}",
+      "universe_equal_gate_3": true,
+      "declared_universe": [
+        "SPY"
+      ],
+      "family_equal_gate_3": true,
+      "warmup_equal_gate_3": true,
+      "declared_warmup_sessions": 101,
+      "largest_lookback_recomputed": 101,
+      "warmup_matches_largest_lookback": true,
+      "rsi_warmup_changes": 100,
+      "strategy_module": "src/stockedge100/strategies/attempt2_candidates.py",
+      "strategy_module_digest_equal": true,
+      "all_equal": true
+    }
+  },
+  "determinism": {
+    "random_seed": null,
+    "random_seed_note": "The representative uses no randomness. Recording null rather than an unused integer keeps the field honest.",
+    "digests": {
+      "SE100-S4-C2-MEANREV-RA1#VALIDATION#BASE": {
+        "trades_digest": "977188f4d61a76f6a9208f8150b58d0fc363887648290c96ba1a1bfa13f03cdd",
+        "equity_digest": "e618416ca3c5f6163eecdc98867d972d8d7576fc95b24671eeda0611d81762c5"
+      },
+      "SE100-S4-C2-MEANREV-RA1#VALIDATION#STRESS": {
+        "trades_digest": "7f24509e792b6e1bec1505c8d757541472d2e13c2a6620d15a7e7541abaf07a1",
+        "equity_digest": "499776a499dbb0dd69d851cade2c5b03b2a4ba2ea296c35f6cb84d64d8583205"
+      }
+    }
+  },
+  "gate": {
+    "gate_id": 4,
+    "gate_name": "validation_robustness",
+    "representative": "SE100-S3A2-C2-MEANREV-RA1",
+    "within_candidate": "CONJUNCTIVE",
+    "across_candidates": "NOT_APPLICABLE_EXACTLY_ONE_REPRESENTATIVE",
+    "conjunctive_note": "Gates are conjunctive per constitution section 9: every hard condition must pass. At Gate 3 the stage verdict was additionally a disjunction ACROSS candidates, because Gate 3 asked whether a candidate worth carrying forward exists. Gate 4 has no disjunction: exactly one representative is evaluated, so conjunction within that candidate IS the stage verdict. There is no second candidate whose result could rescue it.",
+    "conditions": [
+      {
+        "id": "S4-C1",
+        "required_verbatim": "after-cost total return is positive",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "0.0215",
+        "threshold": "total_return > Decimal('0')",
+        "note": "Strict inequality. Exactly zero is NOT positive.",
+        "evidence": {
+          "starting_equity": "100.00",
+          "final_equity": "102.15",
+          "scenario": "BASE",
+          "sealed_predicate_literal": "0"
+        }
+      },
+      {
+        "id": "S4-C2",
+        "required_verbatim": "annualized Sharpe ratio is at least 0.50 using daily equity returns and a documented cash rate",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "0.2025294206503088680547420121230750",
+        "threshold": "sharpe >= Decimal('0.50')",
+        "note": "Inclusive. The threshold is 0.50 and it is frozen.",
+        "evidence": {
+          "documented_cash_rate": {
+            "value": "0.00",
+            "source": "SE100-CFG-2001 metrics.sharpe_risk_free_annual_rate, whose metrics.sharpe_note reads: 'The documented cash rate required by constitution gate 4 is the 0% conservative proxy declared above.'",
+            "why_zero": "Constitution section 4 permits a 3-month US Treasury-bill proxy when reliable point-in-time data are available and otherwise 0% explicitly labeled conservative. Stage 1 acquired no T-bill series, so 0% is the documented rate and is labeled conservative. This was documented before Gate 3 was evaluated and is not chosen by this stage.",
+            "direction_of_bias": "A 0% cash rate cannot make this condition harder to pass. Any positive cash rate would reduce excess return and therefore reduce the measured Sharpe. A Sharpe of at least 0.50 measured at 0% is therefore weaker evidence than the same figure measured against a real short-rate series, and any Stage 4 pass must travel with that qualification. SE100-CFG-2001 benchmarks.cash_benchmark_note records the same direction for the cash return benchmark.",
+            "no_substitute_may_be_introduced_later": "A T-bill series may not be acquired and substituted after a validation result exists. Doing so would change the measurement in response to a result, which S4-C7 forbids."
+          },
+          "development_context": "This is the condition on which Gate 4 is most likely to be decided. Neither Gate 3 admitted candidate reached 0.50 on DEVELOPMENT data at the same 0% cash rate: SE100-S3A2-C1-PULLBACK-RA1 measured 0.1284700281897133148507047085010721 and SE100-S3A2-C2-MEANREV-RA1 measured 0.4202409206802080245242547261750272. Recording that now, before any validation number exists, is what stops a later session from discovering the threshold is demanding and arguing about the cash rate. The threshold is 0.50 and it is frozen.",
+          "sealed_predicate_literal": "0.50"
+        }
+      },
+      {
+        "id": "S4-C3",
+        "required_verbatim": "maximum drawdown is no worse than 15%",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "0.03161389554784035323758760240844931",
+        "threshold": "max_drawdown <= Decimal('0.15')",
+        "note": "Inclusive: exactly 15% is not worse than 15%. S4-CONFLICT-3 and S4-INTERP-4: this ceiling and the section 5.1 shutdown are the same 15% on the same series, so the condition is MET if and only if the shutdown never fired.",
+        "evidence": {
+          "research_shutdown_fired": false,
+          "shutdown_session": null,
+          "shutdown_fraction": "0.15",
+          "max_drawdown_basis": "daily marked equity including cash, peak to trough",
+          "sealed_predicate_literal": "0.15"
+        }
+      },
+      {
+        "id": "S4-C4",
+        "required_verbatim": "profit factor is at least 1.15",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "1.196526508226691042047531993",
+        "threshold": "profit_factor >= Decimal('1.15')",
+        "note": "Inclusive. Open positions at the window end are excluded from both sides of the ratio.",
+        "evidence": {
+          "closed_trades": 41,
+          "gross_profit": "13.09",
+          "gross_loss": "10.94",
+          "no_closed_trade_floor_at_this_gate": "Gate 4 states no minimum closed-trade count. Gate 5 states 20. The count is reported for Gate 4 and does not gate it. Importing Gate 5's floor into Gate 4 would be a change to a frozen gate and is not done; the consequence - that a profit factor computed from very few validation trades could satisfy S4-C4 - is recorded as a limitation rather than repaired by adding an eighth condition.",
+          "sealed_predicate_literal": "1.15"
+        }
+      },
+      {
+        "id": "S4-C5",
+        "required_verbatim": "stressed-cost total return remains positive",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "0.0015",
+        "threshold": "stressed_total_return > Decimal('0')",
+        "note": "Strict. Gating at Gate 4: the Gate 3 STRESS_FRAGILE flag semantics are superseded, so a non-positive stressed return is NOT_MET rather than a flag.",
+        "evidence": {
+          "scenario": "STRESSED",
+          "stress_multiplier": "2.0",
+          "shutdown_enforced": true,
+          "status_change_from_gate_3": "GATING at Gate 4. See stressed_cost_status_change.",
+          "sealed_predicate_literal": "0"
+        }
+      },
+      {
+        "id": "S4-C6",
+        "required_verbatim": "at least 70% of completed walk-forward test folds have positive after-cost return",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "0.5833333333333333333333333333",
+        "threshold": "positive_fold_count / completed_fold_count >= Decimal('0.70')",
+        "note": "Inclusive. Denominator is COMPLETED folds; a research shutdown cannot shrink it, because post-shutdown folds are COMPLETED with a return of exactly 0.",
+        "evidence": {
+          "declared_fold_count": 12,
+          "folds_scored": 12,
+          "completed_fold_count": 12,
+          "positive_fold_count": 7,
+          "positive_folds": [
+            1,
+            3,
+            4,
+            6,
+            8,
+            10,
+            12
+          ],
+          "non_positive_folds": [
+            2,
+            5,
+            7,
+            9,
+            11
+          ],
+          "incomplete_folds": [],
+          "smallest_passing_count_at_twelve_folds": 9,
+          "sealed_predicate_literal": "0.70"
+        }
+      },
+      {
+        "id": "S4-C7",
+        "required_verbatim": "no material rule, feature, universe, or parameter change is made in response to validation results",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": null,
+        "threshold": "every sealed digest recomputes to its sealed value AND exactly one validation evaluation run record exists in runs/ AND the number of validation-window engine runs equals the declared count of 2 AND no parameter recorded in the evaluation evidence differs from the parameterisation sealed in config/stage4_representative_selection.json",
+        "note": "All four sealed clauses hold; exact digest equality with no tolerance.",
+        "evidence": {
+          "clauses": {
+            "every_sealed_digest_recomputes": true,
+            "exactly_one_validation_evaluation_run_record": true,
+            "validation_window_engine_runs_equals_declared": true,
+            "no_parameter_differs_from_the_seal": true
+          },
+          "digest_rows": [
+            {
+              "artifact": "config/stage2_cost_model.json",
+              "sealed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+              "recomputed": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage2_engine_spec.json",
+              "sealed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+              "recomputed": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage3_attempt2_gate_criteria_binding.json",
+              "sealed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+              "recomputed": "a482f499173c0d7e2b0ca158b2edf7cb2e25a516ac2eb361e1441b2964006c8e",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage3_attempt2_strategy_protocol.json",
+              "sealed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+              "recomputed": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage3_gate_criteria.json",
+              "sealed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+              "recomputed": "310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage4_gate_criteria.json",
+              "sealed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+              "recomputed": "2191e905121b5fcaf768224fd79577dee3f8b3d5653836843fa1a3514e2c4c0d",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage4_representative_selection.json",
+              "sealed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+              "recomputed": "fb4f3eb506989a80a08dda752f83d390589f1f3126effece91257e43f899d3dc",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "config/stage4_validation_protocol.json",
+              "sealed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+              "recomputed": "2c9eeb7cf1123430e2d9b1163478d6923879c68fdc17e44b45b5910137a0acea",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "governance/STAGE_1_HOLDOUT_LOCK.json",
+              "sealed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+              "recomputed": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "governance/STAGE_1_UNIVERSE.json",
+              "sealed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+              "recomputed": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "governance/STAGE_4_PREREGISTRATION.json",
+              "sealed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+              "recomputed": "aa33202aa98b5d48839e17d47557e61684ec08b82e992fd8862222582b2a246b",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.sha256",
+              "resolves_description": null
+            },
+            {
+              "artifact": "governance/STAGE_4_PREREGISTRATION.md",
+              "sealed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+              "recomputed": "952897926fa281b85ee11eefde825e04a7d9cd483d22aef2fee568c5b5672fd1",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": null
+            },
+            {
+              "artifact": "src/stockedge100/strategies/attempt2_candidates.py",
+              "sealed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+              "recomputed": "86563afe7fd2d6ca1594739c4cf4b67f42ce0cdb70fe1e2138c1e7bafeb56a2d",
+              "equal": true,
+              "digest_source": "governance/STAGE_4_PREREGISTRATION.json sealed_digests_for_s4_c7.entries",
+              "resolves_description": "the strategy module implementing SE100-S3A2-C2-MEANREV-RA1"
+            }
+          ],
+          "digests_equal": 13,
+          "digests_total": 13,
+          "validation_evaluation_run_records": 1,
+          "validation_window_engine_runs": 2,
+          "declared_run_count": 2,
+          "parameter_comparison": {
+            "sealed_parameters": "{\"exit_sma\": 5, \"f_base\": \"0.50\", \"ladder_rungs\": [[\"0.08\", \"0.25\"], [\"0.10\", \"0.125\"]], \"loss_control\": \"0.08\", \"max_hold\": 10, \"reentry_delay\": 5, \"rsi_entry_below\": 10, \"rsi_period\": 2, \"vol_floor_fraction\": \"0.05\", \"vol_target\": \"0.10\"}",
+            "gate_3_primary_parameters": "{\"exit_sma\": 5, \"f_base\": \"0.50\", \"ladder_rungs\": [[\"0.08\", \"0.25\"], [\"0.10\", \"0.125\"]], \"loss_control\": \"0.08\", \"max_hold\": 10, \"reentry_delay\": 5, \"rsi_entry_below\": 10, \"rsi_period\": 2, \"vol_floor_fraction\": \"0.05\", \"vol_target\": \"0.10\"}",
+            "equal": true,
+            "source_of_the_sealed_parameterisation": "config/stage4_validation_protocol.json sealed_representative.parameters"
+          },
+          "strategy_invariance": {
+            "representative": "SE100-S3A2-C2-MEANREV-RA1",
+            "identifier_unchanged_from_gate_3": true,
+            "parameters_equal_gate_3_primary": true,
+            "universe_equal_gate_3": true,
+            "declared_universe": [
+              "SPY"
+            ],
+            "family_equal_gate_3": true,
+            "warmup_equal_gate_3": true,
+            "declared_warmup_sessions": 101,
+            "largest_lookback_recomputed": 101,
+            "warmup_matches_largest_lookback": true,
+            "rsi_warmup_changes": 100,
+            "strategy_module": "src/stockedge100/strategies/attempt2_candidates.py",
+            "strategy_module_digest_equal": true,
+            "all_equal": true
+          },
+          "conflict": "S4-CONFLICT-6: the sealed clause names config/stage4_representative_selection.json as the home of the parameterisation; that file carries none and the values are in config/stage4_validation_protocol.json. Both are inside the thirteen-artifact digest set.",
+          "boundary": "Exact equality of every digest. There is no tolerance and no immaterial change: a whitespace edit to a sealed specification fails this condition, because the condition's purpose is to make the specification unchangeable rather than to adjudicate materiality after the fact.",
+          "scope_note": "S4-C7 constrains changes made IN RESPONSE TO VALIDATION RESULTS. The selection of the representative and the authoring of the fold construction happened BEFORE any validation observation was read and are sealed by the pre-registration; they are within the condition's scope only in the sense that they may not change afterwards. That they were informed by Gate 3 DEVELOPMENT results is a separate and disclosed adaptation, recorded in config/stage4_representative_selection.json adaptation_disclosure.",
+          "sealed_predicate_literal": null
+        }
+      }
+    ],
+    "condition_count": 7,
+    "met": [
+      "S4-C1",
+      "S4-C3",
+      "S4-C4",
+      "S4-C5",
+      "S4-C7"
+    ],
+    "not_met": [
+      "S4-C2",
+      "S4-C6"
+    ],
+    "not_evaluable": [],
+    "not_applicable": [],
+    "gate_passed": false,
+    "verdict_token": "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+    "verdict_token_source": "config/stage4_gate_criteria.json verdict_token_derivation.fail_token",
+    "verdict": "FAIL \u2014 STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+    "thresholds_cross_checked": {
+      "S4-C1": {
+        "predicate_literal": "0",
+        "companion_key": "net_return_positive",
+        "companion_value": true,
+        "companion_as_compared": "0",
+        "agrees": true
+      },
+      "S4-C2": {
+        "predicate_literal": "0.50",
+        "companion_key": "sharpe_min",
+        "companion_value": 0.5,
+        "companion_as_compared": "0.50",
+        "agrees": true
+      },
+      "S4-C3": {
+        "predicate_literal": "0.15",
+        "companion_key": "max_drawdown_pct",
+        "companion_value": 15,
+        "companion_as_compared": "15.00",
+        "agrees": true
+      },
+      "S4-C4": {
+        "predicate_literal": "1.15",
+        "companion_key": "profit_factor_min",
+        "companion_value": 1.15,
+        "companion_as_compared": "1.15",
+        "agrees": true
+      },
+      "S4-C5": {
+        "predicate_literal": "0",
+        "companion_key": "stressed_cost_return_positive",
+        "companion_value": true,
+        "companion_as_compared": "0",
+        "agrees": true
+      },
+      "S4-C6": {
+        "predicate_literal": "0.70",
+        "companion_key": "positive_walk_forward_folds_pct_min",
+        "companion_value": 70,
+        "companion_as_compared": "70.00",
+        "agrees": true
+      },
+      "S4-C7": {
+        "predicate_literal": null,
+        "companion_key": null,
+        "companion_value": null,
+        "agrees": null,
+        "note": "S4-CONFLICT-1: the JSON companion omits this condition, and its sealed predicate is four equalities rather than a numeric threshold. The Markdown gate text is authoritative for it."
+      }
+    }
+  },
+  "stage_verdict": {
+    "gate_passed": false,
+    "verdict_token": "STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+    "verdict_token_source": "config/stage4_gate_criteria.json verdict_token_derivation.fail_token",
+    "within_candidate": "CONJUNCTIVE",
+    "across_candidates": "NOT_APPLICABLE_EXACTLY_ONE_REPRESENTATIVE"
+  },
+  "explicit_non_authorizations": [
+    "This protocol does not authorize reading the validation window in the session that wrote it.",
+    "This protocol does not authorize implementing the Stage 4 evaluator. The evaluator is written in the authorized evaluation session, before the dataset is loaded, and its code is hashed into that session's runs/ record.",
+    "This protocol does not authorize creating empty or placeholder Stage 4 evaluator or result files. A file that exists but contains no evidence is indistinguishable on a manifest from one that does.",
+    "This protocol does not authorize any development backtest, re-run, or re-measurement.",
+    "This protocol does not authorize acquiring any new data source, including a Treasury-bill series.",
+    "This protocol does not authorize any Alpaca or broker interaction, credential read, or network access.",
+    "This protocol does not authorize a second Gate 4 attempt. There is no Attempt 2 at Gate 4 in this design: the window can be read once."
+  ],
+  "authorization_state_unchanged_by_this_stage": {
+    "final_holdout": "SEALED",
+    "stage_5_paper_trading": "NOT_AUTHORIZED",
+    "alpaca_paper_trading": "LOCKED",
+    "shadow_live": "LOCKED",
+    "alpaca_live_trading": "LOCKED",
+    "capital_or_risk_expansion": "LOCKED",
+    "broker_connection_attempted": false,
+    "broker_credential_accessed": false,
+    "orders_generated": 0
+  },
+  "live_trading_authorized": false,
+  "generated_utc": "2026-08-14T14:32:26Z",
+  "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.stage4_evidence",
+  "evidence_digest_covers": "every field of this file except generated_utc and evidence_digest, as canonical JSON",
+  "evidence_digest": "3a2ea8d9875c150aef8346f507f75cde6c307da01bed8a24281e53195b2de7c2"
+}

@@ -1,0 +1,75 @@
+{
+  "document_id": "SE100-GOV-0005",
+  "project": "StockEdge100",
+  "generation": 1,
+  "stage": 2,
+  "record_type": "PRE_REGISTRATION",
+  "status": "SEALED",
+  "declared_utc": "2026-08-08T15:12:15Z",
+  "run_id": "SE100-R-20260808T151215Z",
+  "constitution_ref": "SE100-GOV-0001",
+  "gate": {
+    "constitutional_gate": 2,
+    "name": "Backtest engine validity",
+    "pass_conditions": [
+      "deterministic reruns produce identical trades and equity curves",
+      "tests detect look-ahead, same-close fill, split/dividend, delisting, stale-price, cash, rounding, fee, slippage, rejected-order, and duplicate-order errors",
+      "independent hand-calculated fixtures match engine output",
+      "benchmark calculations reconcile"
+    ],
+    "fail_result": "BACKTEST_ENGINE_NOT_VALIDATED"
+  },
+  "stage_0_freeze_verified": true,
+  "stage_0_freeze_verification": {
+    "STAGE_0_CONSTITUTION.md": {
+      "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "match": "True"
+    },
+    "STAGE_0_CONSTITUTION.json": {
+      "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+      "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+      "match": "True"
+    }
+  },
+  "stage_1_freeze_verified": true,
+  "stage_1_freeze_files": [
+    "STAGE_1_HOLDOUT_LOCK.json",
+    "STAGE_1_UNIVERSE.json"
+  ],
+  "sealed_before_any_engine_code": true,
+  "engine_modules_present_at_seal_time": 0,
+  "engine_output_files_present_at_seal_time": 0,
+  "preregistered_files": {
+    "config/stage2_cost_model.json": {
+      "sha256": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2"
+    },
+    "config/stage2_engine_spec.json": {
+      "sha256": "c376d12b2392eb2558092a6ad245481b88e36123e7e087522374dd28b218ed21"
+    },
+    "governance/STAGE_2_PREREGISTRATION.md": {
+      "sha256": "93c4c0ac0b1303bb645501fbbd6e62a72cd4c79b660122722933b03c422202c0"
+    }
+  },
+  "checksum_record": {
+    "path": "governance/STAGE_2_PREREGISTRATION.sha256",
+    "path_convention": "project-root-relative",
+    "verify_from": "stockedge100/",
+    "command": "cd stockedge100 && sha256sum -c governance/STAGE_2_PREREGISTRATION.sha256"
+  },
+  "repo_state_id_location": "Deliberately omitted here. This file lives in governance/ and is one of the inputs to repo_state_id, so any value written into it would be stale on write. The binding value is the repo_state_id field of runs/SE100-R-20260808T151215Z.json.",
+  "binding_consequences": [
+    "Every cost, fee, spread, slippage, rounding direction, and corporate-action convention the engine applies is fixed as of this timestamp and may not be revised because of a result it produced.",
+    "The hand-calculated fixture values in config/stage2_engine_spec.json are the reference. If engine output disagrees, the discrepancy is reported; the sealed value is not edited to match the engine.",
+    "Each of the twelve declared defect classes requires an injected-defect test that proves its detector fires.",
+    "Stage 2 reads development-window data only. Validation stays LOCKED and holdout stays SEALED.",
+    "No probe in Stage 2 is a strategy: no signal, no parameter, no fitting, no selection, and no performance claim.",
+    "live_trading_authorized remains false."
+  ],
+  "authorized_windows": [
+    "development"
+  ],
+  "validation_window_state": "LOCKED",
+  "holdout_window_state": "SEALED",
+  "live_trading_authorized": false
+}

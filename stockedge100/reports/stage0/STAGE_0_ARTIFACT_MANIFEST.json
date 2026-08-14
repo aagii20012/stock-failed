@@ -1,0 +1,50 @@
+{
+  "project": "StockEdge100",
+  "stage": "STAGE_0_CONSTITUTION_VERIFICATION",
+  "generation": 1,
+  "timestamp_utc": "2026-08-08T10:15:40Z",
+  "repo_state_id": "6b426b6a8ff37757713849345bdd8bfccabb050329790f7fc244b39bec1bae26",
+  "frozen_inputs": {
+    "governance/STAGE_0_CONSTITUTION.md": {
+      "sha256": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "disposition": "READ_ONLY_NOT_MODIFIED"
+    },
+    "governance/STAGE_0_CONSTITUTION.json": {
+      "sha256": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+      "disposition": "READ_ONLY_NOT_MODIFIED"
+    },
+    "governance/STAGE_0_FREEZE.sha256": {
+      "sha256": "6b9fe70005216188b1fde53195a962633e777f41bc345ee93af36d0c00bd8416",
+      "disposition": "READ_ONLY_NOT_MODIFIED"
+    }
+  },
+  "produced_artifacts": {
+    "governance/STAGE_0_VERIFICATION_REPORT.md": {
+      "sha256": "f108d2bf6cb179759692c9712cb52b0a2b51c104e144851714307cb2bacc047b"
+    },
+    "reports/stage0/STAGE_0_TEST_SUMMARY.md": {
+      "sha256": "ff07556110b976c33afb95970293497ba5d2cae380848526d94f0cedac8b92e2"
+    },
+    "reports/stage0/pytest_stage0_output.txt": {
+      "sha256": "23d59b429a2ee62aa9acee3ec484c105ee39b95e861bca2d40995230c735403e"
+    },
+    "reports/stage0/STAGE_0_VERIFICATION.json": {
+      "sha256": "e182cf56259a135ce3b76769ad904c23df0f7a51125176d16e3143fc36697b3c"
+    }
+  },
+  "repo_state_files": {
+    ".gitignore": "b3404984fba828a70105fd34915932b6a0863ae1ebfcb5e186d699477dff8875",
+    "README.md": "1ced164e3f16c2eb4ca4cae04185cdbabd4b0e3aa35216d0f0438a373af2e4e8",
+    "governance/STAGE_0_CONSTITUTION.json": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+    "governance/STAGE_0_CONSTITUTION.md": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+    "governance/STAGE_0_FREEZE.sha256": "6b9fe70005216188b1fde53195a962633e777f41bc345ee93af36d0c00bd8416",
+    "governance/STAGE_0_VERIFICATION_REPORT.md": "f108d2bf6cb179759692c9712cb52b0a2b51c104e144851714307cb2bacc047b",
+    "pyproject.toml": "2816a9772f3c020984cb2daa75be12a424dc1bfc61d8101e65ca339ad948cc07",
+    "src/stockedge100/__init__.py": "00389738b7e2a2be38d77e5f9d380f84150d46c4f72fa486fe5db3f2c3797fd2",
+    "src/stockedge100/audit.py": "0e510890a8250e98a4af52d0f57dff876b2cd7553b8adbaa8d65486f42049c53",
+    "src/stockedge100/reporting/__init__.py": "3ffd9e858fd295acceca08ec5e7bd69220e9575f1e8aaa264e1db9e859d0aa18",
+    "src/stockedge100/reporting/stage0_package.py": "bce0a7adc0a83a89bb0f91db7e354d192f4d28823a83d19b302492615678f094",
+    "tests/conftest.py": "1e689f048fea793bbdb0cb2d474e98151f70500b4b639094f716cfd2f173e1ea",
+    "tests/unit/test_stage0_governance.py": "bfe574fc8bbcd5f775f1fa62aeca676f58bfc5a61e00c52a1dd1c07f0a81c245"
+  }
+}

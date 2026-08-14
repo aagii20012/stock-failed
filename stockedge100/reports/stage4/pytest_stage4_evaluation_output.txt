@@ -1,0 +1,29 @@
+........................................................................ [  8%]
+........................................................................ [ 17%]
+........................................................................ [ 25%]
+........................................................................ [ 34%]
+........................................................................ [ 43%]
+........................................................................ [ 51%]
+........................................................................ [ 60%]
+........................................................................ [ 68%]
+........................................................................ [ 77%]
+........................................................................ [ 86%]
+.................................................................F...... [ 94%]
+.............................................                            [100%]
+================================== FAILURES ===================================
+________ test_no_stage_4_module_can_reach_restricted_data_or_a_broker _________
+
+    def test_no_stage_4_module_can_reach_restricted_data_or_a_broker():
+        """The three zeros, as an AST question. A text sweep of ``src/`` for these names returns a wall
+        of false hits — prose recording Alpaca as LOCKED, the tracked-dependency list, a local variable
+        called ``requests`` — so the predicate walks the parsed tree instead."""
+>       assert sealer._stage_4_modules_touching_restricted_data() == []
+E       AssertionError: assert ['src/stocked...r import ...'] == []
+E         
+E         Left contains one more item: 'src/stockedge100/strategies/stage4_evaluation.py: call load_dataset(), from stockedge100.backtest.dataset import load_dataset, from stockedge100.data.calendar import ...'
+E         Use -v to get more diff
+
+tests\unit\test_stage4_preregistration.py:1024: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_stage4_preregistration.py::test_no_stage_4_module_can_reach_restricted_data_or_a_broker
+1 failed, 836 passed in 17.56s
