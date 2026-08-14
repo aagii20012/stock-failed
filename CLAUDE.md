@@ -171,6 +171,32 @@ Run from the parent directory instead and `PYTHONPATH=src` points at nothing; th
 `ModuleNotFoundError: No module named 'stockedge100.reporting'` looks like a packaging fault and is
 not one.
 
-This tree is **not** a git repository. Repository identity is the content-derived `repo_state_id`.
-Do not run `git init` without asking — the README and the Stage 0 report both state on the record
-that it has not been done.
+## Git
+
+The workspace **is** a git repository as of 2026-08-14, pushed to
+`https://github.com/aagii20012/stock-failed.git`. The `.git` lives at the workspace root, not inside
+`stockedge100/`, so the governed tree still carries no repository of its own.
+
+Governance identity is still the content-derived `repo_state_id`, not a commit — and git can destroy
+it. Two settings are load-bearing:
+
+- **`core.autocrlf=false` and `* -text` in the root `.gitattributes`.** Git's Windows default rewrites
+  LF to CRLF in the working tree on the *next checkout*, which changes the SHA-256 of every tracked
+  file and silently invalidates every freeze record, manifest and `repo_state_id` from Stage 0 onward
+  — with no file having been "edited". Never remove either.
+- **The sealed `stockedge100/.gitignore` excludes `data/raw|normalized|reference`.** That is what
+  keeps the final holdout observations off GitHub. Manifests and checksums are tracked, so the data
+  stays reproducible without being published. Never `git add -f` a payload.
+
+The root `.gitignore` and `.gitattributes` sit outside `stockedge100/`, so neither is a
+`repo_state_id` pattern and creating them perturbed nothing. **Recompute `repo_state_id` after any git
+operation and confirm it is unchanged** before reporting success.
+
+Two statements on the record are now stale and **must not be corrected in place**: `README.md` and
+`STAGE_0_VERIFICATION_REPORT.md` both say the tree is not a git repository. The Stage 0 report is
+frozen; `README.md` is a pattern locked by the built Stage 4 package. Disclose the staleness in prose.
+The README's correction belongs to whatever stage next legitimately rewrites it.
+
+Commits are allowed when asked, but the post-package rule still binds: a commit must not add, move or
+rename anything under `governance|src|tests|config`, nor `README.md`, `pyproject.toml` or
+`.gitignore`. A rename would break the manifest and the checksum records, which pin exact paths.

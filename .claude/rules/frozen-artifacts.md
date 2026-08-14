@@ -95,8 +95,10 @@ on disk and confirm none is the tree digest and none is the file's own — a bar
 ## Verifying a package after the build
 
 **Start from the previous stage's verifier, not from a blank file.** `_scratch/postbuild_verify.py` is
-the Stage 3 Attempt 2 sweep and `_scratch/stage4_postbuild_verify.py` the Stage 4 one; both already
-call the helpers correctly. Two signatures are the reverse of the natural guess and cost two failed
+the Stage 3 Attempt 2 sweep, `_scratch/stage4_postbuild_verify.py` the Stage 4 pre-registration one,
+and `_scratch/stage4_evaluation_postbuild_verify.py` the Stage 4 evaluation one — 86 checks across the
+seventeen post-build requirements, and the richest of the three. Copy that one. All three already call
+the helpers correctly. Two signatures are the reverse of the natural guess and cost two failed
 runs when re-derived from scratch:
 
 ```python
@@ -129,6 +131,31 @@ legitimately populated by the next:
 When a sweep and a checksum record disagree, the record is right and the predicate is wrong — a
 `sha256sum -c` that reports OK while your probe reports a mismatch means the probe misread the file
 shape. Fix the probe before doubting the disk.
+
+**"Nothing hashes itself" applies to sealed digest sets too, not just manifests.** Stage 4's S4-C7
+recheck set carries `declared_set_size: 13` and `recorded_here: 12`, because the thirteenth entry is
+`governance/STAGE_4_PREREGISTRATION.json` — the file doing the declaring. Its digest is carried by
+`governance/STAGE_4_PREREGISTRATION.sha256` instead. A bare `len(entries) == 13` reports a scary
+`FAIL` on a package that is fine. Assert the triple and then verify the excluded member through its
+own record:
+
+```python
+(block["declared_set_size"], block["recorded_here"], block["own_digest_excluded"]) == (13, 12, "...")
+verify_sha256_record(ROOT / "governance/STAGE_4_PREREGISTRATION.sha256", ROOT)[excluded] == "OK"
+```
+
+**A predicate that compares against an empty collection passes vacuously.** The Stage 4 parameterisation
+check printed `rsi_period now 2, sealed []` and reported OK — it had found nothing to disagree with,
+because the sealed selection record names no parameter values at all (`S4-CONFLICT-6`; they live in
+`config/stage3_attempt2_strategy_protocol.json` → the candidate's `primary_parameters`). `all()` over an
+empty sequence is `True`, and so is a zero-length mismatch list. **Assert the source is non-empty and
+assert the overlap count before asserting agreement** — report `shared=10 mismatch=0`, never a bare
+"matches". Any check whose output could be produced by finding nothing is not a check.
+
+Locating that block by *shape* failed too: `all(not isinstance(v, list) for v in node.values())`
+excluded the real candidate object because one parameter, `ladder_rungs`, is a list of pairs. Locate
+evidence structures by **identity** — the object carrying the candidate's id — not by a guess at their
+shape.
 
 **"No broker or credential access" is an AST question, not a `grep` question.** A textual sweep of
 `src/` for `alpaca` or `requests` returns a wall of false violations: prose recording Alpaca as
