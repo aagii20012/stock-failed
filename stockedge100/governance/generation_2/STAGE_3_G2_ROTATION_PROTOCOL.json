@@ -1,0 +1,427 @@
+{
+  "artifact_id": "SE100-GOV-2003",
+  "title": "Generation 2 Stage 3 cross-sectional rotation pre-registration",
+  "status": "SEALED",
+  "project": "StockEdge100",
+  "generation": 2,
+  "generation_id": "SE100-GEN2-7394207c543401e2",
+  "stage": 3,
+  "gate_id": 3,
+  "sealed_utc": "2026-08-15T04:36:55Z",
+  "run_id": "SE100-R-20260815T043655Z",
+  "charter_ref": "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md (SE100-GOV-2001)",
+  "partition_lock_ref": "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md (SE100-GOV-2002)",
+  "constitution_ref": "SE100-GOV-0001 sections 3, 4, 5.1, 6.1, 9 gate 3, 11",
+  "markdown_counterpart": "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md",
+  "sealed_before_any_strategy_code": true,
+  "sealed_before_any_variant_is_run": true,
+  "contamination_measurement": {
+    "predicate": "a Python file under src/stockedge100/ or tests/ whose basename contains 'g2_'",
+    "strategies": [],
+    "backtest": [],
+    "elsewhere_in_src": [],
+    "tests": [],
+    "reporting": [
+      "src/stockedge100/reporting/g2_partition_lock.py",
+      "src/stockedge100/reporting/g2_rotation_preregistration.py"
+    ],
+    "strategies_count": 0,
+    "backtest_count": 0,
+    "elsewhere_in_src_count": 0,
+    "tests_count": 0,
+    "reporting_count": 2,
+    "generation_2_report_artifacts": [],
+    "generation_2_run_records_other_than_the_partition_lock": [],
+    "permitted_reporting_modules": [
+      "src/stockedge100/reporting/g2_partition_lock.py",
+      "src/stockedge100/reporting/g2_rotation_preregistration.py"
+    ],
+    "narrowing_note": "The two permitted modules are sealing programs, not strategies. Recording them as a narrowing of the predicate rather than excluding them silently is the same treatment Generation 1 gave its own reporting modules."
+  },
+  "sealed_inputs": {
+    "config/generation_2/g2_rotation_protocol.json": "1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810",
+    "config/generation_2/g2_gate_criteria.json": "a1ac96f98dcbe9e5ce975f2eb27914fcbc7728cad6355a1650dc1ec137ad0d31",
+    "config/generation_2/g2_cost_model.json": "b9491485b9560b948ec83d3eb86ee4946c1e83b128a368b71473d14ad0f73650",
+    "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md": "865a2feffe683e0baf71f1ab976e286fbb2d003109ab47cfaffc1fe6a63dbc90",
+    "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md": "5ae2408dc318e5b87a054a6014e4439d8c6b1934748617c787720f63356b0773",
+    "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.json": "e17ea82c499d51cf23fc9986e7231dce6388f8a3c7394d3dd3c0e3d27fbacbe7"
+  },
+  "strategy": {
+    "strategy_id": "SE100-G2-S3-C1-ROTATION",
+    "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH",
+    "hypothesis": "Relative strength among the eligible ETF universe persists over a multi-week to multi-month horizon sufficiently to justify periodically rotating exposure toward the currently-strongest names.",
+    "candidate_count": 1,
+    "universe_version": "SE100-U1-d4917c2f7f1cd834",
+    "member_count": 34,
+    "members": [
+      "AGG",
+      "BND",
+      "DIA",
+      "DVY",
+      "EEM",
+      "EFA",
+      "HYG",
+      "IEF",
+      "IVV",
+      "IWM",
+      "IYR",
+      "LQD",
+      "MDY",
+      "QQQ",
+      "SHY",
+      "SPY",
+      "TIP",
+      "TLT",
+      "VEA",
+      "VGK",
+      "VIG",
+      "VNQ",
+      "VTI",
+      "VWO",
+      "VYM",
+      "XLB",
+      "XLE",
+      "XLF",
+      "XLI",
+      "XLK",
+      "XLP",
+      "XLU",
+      "XLV",
+      "XLY"
+    ]
+  },
+  "grid": {
+    "size": 18,
+    "axes": {
+      "lookback_months": [
+        3,
+        6,
+        12
+      ],
+      "top_k": [
+        1,
+        2,
+        3
+      ],
+      "rebalance_frequency": [
+        "MONTHLY",
+        "QUARTERLY"
+      ]
+    },
+    "variant_id_format": "SE100-G2-S3-C1-ROTATION-L{lookback:02d}-K{k}-{FREQUENCY}",
+    "variants": [
+      {
+        "index": 1,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000"
+      },
+      {
+        "index": 2,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000"
+      },
+      {
+        "index": 3,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000"
+      },
+      {
+        "index": 4,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000"
+      },
+      {
+        "index": 5,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998"
+      },
+      {
+        "index": 6,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998"
+      },
+      {
+        "index": 7,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000"
+      },
+      {
+        "index": 8,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000"
+      },
+      {
+        "index": 9,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000"
+      },
+      {
+        "index": 10,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000"
+      },
+      {
+        "index": 11,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998"
+      },
+      {
+        "index": 12,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998"
+      },
+      {
+        "index": 13,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000"
+      },
+      {
+        "index": 14,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000"
+      },
+      {
+        "index": 15,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000"
+      },
+      {
+        "index": 16,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000"
+      },
+      {
+        "index": 17,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998"
+      },
+      {
+        "index": 18,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998"
+      }
+    ],
+    "runs_per_variant": 2,
+    "run_labels": [
+      "#BASE",
+      "#STRESS"
+    ],
+    "total_runs": 36,
+    "recomputed_here": "Every field above is recomputed by this program from the declared axes and from decimal arithmetic, then compared field by field against the sealed config and row by row against the Markdown. It is not copied from either."
+  },
+  "run_span_measured_from_disk": {
+    "member_count": 34,
+    "run_start": "2008-07-28",
+    "run_start_weekday": "Monday",
+    "run_start_lookback_reference": "2007-07-28",
+    "session_before_run_start": "2008-07-25",
+    "session_before_run_start_lookback_reference": "2007-07-25",
+    "run_end": "2021-07-30",
+    "run_sessions": 3276,
+    "exchange_calendar_sessions": 3276,
+    "session_lists_agree": true,
+    "binding_symbol": "VEA",
+    "binding_symbols": [
+      "VEA"
+    ],
+    "binding_symbol_inception": "2007-07-26",
+    "earliest_inception": "1993-01-29",
+    "earliest_inception_symbols": [
+      "SPY"
+    ],
+    "members_missing_a_bar_at_run_start": [],
+    "symbols_ending_before_run_end": [],
+    "development_union_sessions": 7178,
+    "development_union_span": [
+      "1993-01-29",
+      "2021-07-30"
+    ],
+    "monthly_rebalance_sessions": 157,
+    "quarterly_rebalance_sessions": 53,
+    "monthly_first_three": [
+      "2008-07-28",
+      "2008-08-01",
+      "2008-09-02"
+    ],
+    "monthly_last_two": [
+      "2021-06-01",
+      "2021-07-01"
+    ],
+    "quarterly_first_three": [
+      "2008-07-28",
+      "2008-10-01",
+      "2009-01-02"
+    ],
+    "quarterly_last_two": [
+      "2021-04-01",
+      "2021-07-01"
+    ],
+    "measurement_basis": "Date column only, plus the exchange calendar. This module parses no price, volume, or dividend field in any window, so nothing it measures is an observation of a market."
+  },
+  "representative_selection_rule": {
+    "return_blind": true,
+    "steps": [
+      "zero research-shutdown events across both the base and the stress run",
+      "lowest turnover, measured as total executed fills across both runs",
+      "lexicographically smallest variant id"
+    ],
+    "inputs": [
+      "research_shutdown_events",
+      "fill_count",
+      "variant_id"
+    ],
+    "prohibited_inputs": [
+      "total return",
+      "maximum drawdown",
+      "profit factor",
+      "Sharpe ratio",
+      "equity level",
+      "per-trade profit and loss"
+    ],
+    "no_candidate_path": "STAGE_3_G2_NO_CANDIDATE",
+    "representative_fails_gate_path": "STAGE_3_G2_NO_CANDIDATE",
+    "runner_up_promotion": false,
+    "conflict_refs": [
+      "G2-CONFLICT-11",
+      "G2-CONFLICT-13"
+    ]
+  },
+  "gate": {
+    "criteria_file": "config/generation_2/g2_gate_criteria.json",
+    "criteria_sha256": "a1ac96f98dcbe9e5ce975f2eb27914fcbc7728cad6355a1650dc1ec137ad0d31",
+    "evaluated_on": "the selected representative's #BASE run only",
+    "condition_count": 7,
+    "conjunctive_within_candidate": true,
+    "pass_token": "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "fail_token": "STAGE_3_G2_NO_CANDIDATE",
+    "not_a_disjunction_over_variants": "The eighteen variants are parameterisations of one candidate, not eighteen candidates. Recorded as G2-CONFLICT-15."
+  },
+  "adversarial_test_requirements": {
+    "required": [
+      "the engine never holds more than k positions at once",
+      "combined gross exposure across the k positions never exceeds 95% of equity",
+      "no single position ever exceeds 50% of equity at a rebalance",
+      "no order is bought or sold at the close that generated the ranking signal",
+      "tomorrow's bar cannot enter today's ranking",
+      "identical inputs on a clean rerun produce identical results"
+    ],
+    "additional": [
+      "the window guard rejects a window ending after 2021-07-31",
+      "the window guard rejects a loaded series containing a session after 2021-07-31, detected from the bars rather than from the loader",
+      "the window guard rejects any window intersecting 2024-08-01 .. 2026-07-31 or 2026-08-01 .. 2028-07-31",
+      "the representative-selection rule is return-blind: permuting every variant's returns while holding shutdown counts and fill counts fixed does not change which variant is selected",
+      "the derived cost model differs from the sealed Generation 1 model at exactly one JSON pointer"
+    ],
+    "total": 11
+  },
+  "windows": {
+    "authorized": [
+      "development"
+    ],
+    "development": [
+      "1993-01-29",
+      "2021-07-31"
+    ],
+    "validation": [
+      "2021-08-01",
+      "2024-07-31"
+    ],
+    "generation_1_holdout": [
+      "2024-08-01",
+      "2026-07-31"
+    ],
+    "generation_2_holdout": [
+      "2026-08-01",
+      "2028-07-31"
+    ],
+    "enforcement": "stockedge100.strategies.g2_window_guard, implementing the three checks sealed in STAGE_1_G2_PARTITION_LOCK.md section 4, on top of ResearchWindow and MarketView."
+  },
+  "validation_reuse_disclosure": "Generation 2's validation window (2021-08-01 → 2024-07-31) overlaps the exact period Generation 1 used for its own Gate 4 validation read. The researcher therefore already knows, from Generation 1's published report, approximately how SPY (and by extension the broad market) behaved in this window — including its Sharpe ratio (≈0.20), total return (≈2.15%), and fold-by-fold sign pattern (7 of 12 positive). Generation 2 tests a different hypothesis (cross-sectional multi-asset selection vs. single-symbol mean reversion) over the same calendar period, which limits but does not eliminate the concern. This is a real multiplicity cost, disclosed and not minimized, and it is the reason Generation 2's validation result alone — without a clean holdout confirmation — cannot be treated as sufficient evidence of an edge.",
+  "validation_reuse_disclosure_note": "Reproduced verbatim because this artifact names the validation window. Nothing in Stage 3 reads it.",
+  "binding_rules": [
+    "The grid is complete at eighteen variants. No variant is added, removed, or re-parameterised under any result.",
+    "The representative-selection rule is applied exactly as sealed, on research-shutdown counts, fill counts, and variant ids alone. No return, drawdown, profit factor, or equity level is an input to it.",
+    "Gate 3 is evaluated on the selected representative's base run only. No other variant is evaluated against the gate, and the runner-up is never promoted.",
+    "No parameter, threshold, symbol, weight, or rule may be chosen using any value inside the validation window or either holdout window.",
+    "A defect discovered after this seal is reported and its effect disclosed. This artifact is superseded by a new id if it is wrong; it is never edited in place.",
+    "Stage 4 validation for Generation 2 requires a separate, explicitly authorized session. Nothing sealed here, and no result produced under it, authorizes one.",
+    "live_trading_authorized remains false. This artifact authorizes no order, no broker connection, no credential read, and no scheduling of either."
+  ],
+  "repo_state_id_location": "Deliberately omitted here. governance/generation_2/ is not reached by the repo_state_id patterns (governance/*.md is single-level), so this file is covered by STAGE_3_G2_ROTATION_PROTOCOL.sha256 instead. The binding repo_state_id for this seal is the repo_state_id field of runs/SE100-R-20260815T043655Z.json.",
+  "stage_3_authorized": true,
+  "stage_4_authorized": false,
+  "holdout_read_authorized": false,
+  "live_trading_authorized": false
+}

@@ -1,0 +1,1271 @@
+{
+  "project": "StockEdge100",
+  "stage": "STAGE_3_G2_ROTATION_DEVELOPMENT",
+  "generation": {
+    "generation": 2,
+    "generation_id": "SE100-GEN2-7394207c543401e2",
+    "charter": "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md",
+    "charter_sha256": "865a2feffe683e0baf71f1ab976e286fbb2d003109ab47cfaffc1fe6a63dbc90",
+    "generation_1_status": "CLOSED. Generation 1 ended FAIL \u2014 STAGE_4_STRATEGY_REJECTED_IN_VALIDATION. No Generation 1 artifact under governance/, config/ or reports/ was read for anything but context, and none was edited, regenerated or reinterpreted by this stage.",
+    "what_changed_from_generation_1": {
+      "generation_1_failure_mode": "Generation 1's validated candidate declared a multi-symbol universe but its realized trading collapsed onto a single symbol: reports/stage4/STAGE_4_VALIDATION.json run_evidence.runs[0].measure.symbols_loaded is ['SPY'] and contribution_by_symbol is {'SPY': '2.15'}. A universe that is never selected among is decoration.",
+      "generation_2_requirement": "The selection is a rank over the full eligible universe recomputed at every scheduled rebalance. Whether that produces genuine breadth is an empirical question this stage answers, not an assumption. The realized distinct-symbol count and per-symbol contribution are recorded for every variant, and S3-C6 gates the representative on the 50% single-instrument profit share, so a Generation 2 candidate that collapses onto one symbol fails the gate rather than passing it quietly.",
+      "not_a_promise": "Declaring the mechanism does not guarantee breadth. If the top-k ranking happens to hold the same ETF for years, the candidate is a single-symbol strategy wearing a rotation costume, and S3-C6 is the condition that says so."
+    }
+  },
+  "timestamp_utc": "2026-08-15T07:09:24Z",
+  "verdict": "FAIL \u2014 STAGE_3_G2_NO_CANDIDATE",
+  "gate": {
+    "constitution_gate_id": 3,
+    "name": "development_admissibility"
+  },
+  "gate_passed": false,
+  "constitution": {
+    "document_id": "SE100-GOV-0001",
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "modified_by_this_stage": false,
+    "freeze_verification_working_directory": "stockedge100/governance",
+    "freeze_verified": true,
+    "freeze_verification": {
+      "STAGE_0_CONSTITUTION.md": {
+        "recorded": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "computed": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+        "match": "True"
+      },
+      "STAGE_0_CONSTITUTION.json": {
+        "recorded": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "computed": "af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5",
+        "match": "True"
+      }
+    }
+  },
+  "verdict_semantics": "FAIL \u2014 STAGE_3_G2_NO_CANDIDATE is the outcome the sealed no_candidate_path anticipated in writing before any variant was run. Every one of the eighteen declared variants recorded a research-shutdown event in both of its declared runs, so step 1 of the frozen return-blind selection rule admitted nothing and Gate 3 was never reached. The verdict is a statement about the grid, not about any variant's return: no return figure was an input to it, and the strongest variant by return failed the screen on the same terms as the weakest. The result is a deliverable and is kept on disk. It does not license a nineteenth variant, a re-run with a loosened grid, a raised shutdown threshold, a screen narrowed to the base run, or the promotion of a runner-up.",
+  "verdict_token_derivation": {
+    "pass_token": "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "fail_token": "STAGE_3_G2_NO_CANDIDATE",
+    "pass_condition": "The representative selected by the frozen return-blind rule in SE100-CFG-3101 satisfies EVERY hard condition of Gate 3 on its base-cost development run.",
+    "fail_condition": "Either no representative exists, because every one of the eighteen variants recorded at least one research-shutdown event, or a representative exists and does not satisfy every hard condition.",
+    "conjunctive_note": "Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, NOT_EVALUABLE, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Generation 2 declares one candidate, so the cross-candidate disjunction is over a set of size one \u2014 see G2-CONFLICT-15.",
+    "constitutional_fail_result_equivalent": "STRATEGY_REJECTED_IN_DEVELOPMENT",
+    "token_naming_note": "See G2-CONFLICT-12. The instruction's fail token names the absence of an admissible candidate; the constitution's names the rejection of one. They denote the same stage outcome and both are recorded in the decision package.",
+    "other_tokens_available": "BLOCKED_BY_DATA, BLOCKED_BY_INFRASTRUCTURE, INSUFFICIENT_EVIDENCE, INVALIDATED, NOT_RUN, per constitution section 10. Missing evidence may never be converted to PASS or NOT_APPLICABLE for convenience.",
+    "fail_is_a_deliverable": "FAIL \u2014 STAGE_3_G2_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and does not license a nineteenth variant, a re-run with a different grid, or a promotion of the runner-up.",
+    "neither_token_is_a_stage_verdict_for_any_other_stage": "These two tokens belong to Generation 2 Stage 3 alone. No Generation 2 artifact at any other stage may emit either."
+  },
+  "preregistration": {
+    "protocol": "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.json",
+    "protocol_sha256": "f805129dba90bc9e7877d62547c27dcfd599cd9ccd75046cd643d676a8c4a547",
+    "protocol_record": "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256",
+    "protocol_record_verification": {
+      "config/generation_2/g2_cost_model.json": "OK",
+      "config/generation_2/g2_gate_criteria.json": "OK",
+      "config/generation_2/g2_rotation_protocol.json": "OK",
+      "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.json": "OK",
+      "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md": "OK"
+    },
+    "criteria": "config/generation_2/g2_gate_criteria.json",
+    "criteria_sha256": "a1ac96f98dcbe9e5ce975f2eb27914fcbc7728cad6355a1650dc1ec137ad0d31",
+    "declared_before_any_strategy_code": true,
+    "strategy_id": "SE100-G2-S3-C1-ROTATION",
+    "hypothesis": "Relative strength among the eligible ETF universe persists over a multi-week to multi-month horizon sufficiently to justify periodically rotating exposure toward the currently-strongest names.",
+    "grid": {
+      "axes": {
+        "lookback_months": [
+          3,
+          6,
+          12
+        ],
+        "top_k": [
+          1,
+          2,
+          3
+        ],
+        "rebalance_frequency": [
+          "MONTHLY",
+          "QUARTERLY"
+        ]
+      },
+      "variants_declared": 18,
+      "runs_per_variant": {
+        "count": 2,
+        "labels": [
+          "#BASE",
+          "#STRESS"
+        ],
+        "base": "the derived cost model at the sealed base friction assumption",
+        "stress": "the same model with the sealed stress_multiplier of 2.0 applied to the complete friction assumption, including the TAF cap, exactly as Generation 1 applied it",
+        "total_runs": 36,
+        "both_declared": "Both runs of all eighteen variants are declared here and all 36 are executed. None is conditional on the outcome of another."
+      },
+      "runs_executed": 36,
+      "all_declared_runs_executed": true,
+      "revisions_after_seeing_a_result": 0
+    },
+    "revisions_after_seeing_a_result": 0
+  },
+  "partition": {
+    "lock": "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.json",
+    "lock_sha256": "e17ea82c499d51cf23fc9986e7231dce6388f8a3c7394d3dd3c0e3d27fbacbe7",
+    "lock_record_verification": {
+      "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md": "OK",
+      "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.json": "OK",
+      "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md": "OK"
+    },
+    "partition": {
+      "development_start": "1993-01-29",
+      "development_end": "2021-07-31",
+      "validation_start": "2021-08-01",
+      "validation_end": "2024-07-31",
+      "generation_1_holdout_start": "2024-08-01",
+      "generation_1_holdout_end": "2026-07-31",
+      "holdout_start": "2026-08-01",
+      "holdout_end": "2028-07-31",
+      "boundaries_inclusive": true,
+      "development_years": 28.501,
+      "validation_months": 36,
+      "generation_1_holdout_months": 24,
+      "holdout_months": 24,
+      "minimum_development_years": 5,
+      "meets_minimum_development": true
+    },
+    "window_read_by_this_stage": {
+      "name": "development",
+      "start": "1993-01-29",
+      "end": "2021-07-31",
+      "development_bound": "2021-07-31",
+      "run_span": {
+        "source": "_scratch/g2_grid_recon.py, measured from session dates only",
+        "run_start": "2008-07-28",
+        "run_start_weekday": "Monday",
+        "run_end": "2021-07-30",
+        "run_sessions": 3276,
+        "binding_symbol": "VEA",
+        "binding_symbol_inception": "2007-07-26",
+        "earliest_inception_in_universe": "1993-01-29",
+        "earliest_inception_symbols": [
+          "SPY"
+        ],
+        "derivation": "The run starts at the first exchange session S for which month_offset(S, -12) is at or after the latest inception in the universe, so that the longest lookback in the grid has a reference bar for EVERY member from the first rebalance onward. month_offset(2008-07-28, -12) = 2007-07-28 >= 2007-07-26; the previous session 2008-07-25 gives 2007-07-25, which is before VEA's inception, so 2008-07-28 is the minimal such session.",
+        "common_to_all_variants": true,
+        "common_start_rationale": "All eighteen variants share one run start, including the 3-month and 6-month lookback variants that could have started earlier. Letting each lookback start as early as it individually could would make a cross-lookback comparison partly a comparison of which market history each variant happened to see. The cost is that the shorter lookbacks discard history they could have used; that cost is paid deliberately and is stated here.",
+        "members_missing_a_bar_at_run_start": [],
+        "symbols_ending_before_run_end": [],
+        "no_delisting_in_window": "Every one of the 34 members has bars through 2021-07-30, so the sealed LIQUIDATE_AT_LAST_AVAILABLE_CLOSE delisting path is not exercised by any Generation 2 Stage 3 run. Stated as a measured fact, not an assumption.",
+        "development_union_sessions": 7178,
+        "development_union_span": [
+          "1993-01-29",
+          "2021-07-30"
+        ]
+      },
+      "latest_session_loaded": "2021-07-30",
+      "validation_read": false,
+      "generation_1_holdout_read": false,
+      "generation_2_holdout_read": false,
+      "enforcement": "load_grid_dataset truncates at the development bound and then audits the loaded bars separately, so a session dated 2021-08-01 or later would have to survive both a truncating loader and an independent check of its output"
+    },
+    "generation_1_holdout_state": "SPENT_AND_PROHIBITED",
+    "holdout_state": "SEALED"
+  },
+  "universe": {
+    "universe_version": "SE100-U1-d4917c2f7f1cd834",
+    "universe_identity_sha256": "d4917c2f7f1cd8344728a39165929b352766fbe7193b3c64e71a971749dcbf38",
+    "symbols_declared": 34,
+    "symbols_loaded": 34,
+    "symbols_missing": [],
+    "re_check": {
+      "performed_in": "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md section 3",
+      "window_read": "development only, 1993-01-29 .. 2021-07-31",
+      "outcome": "all 34 members pass; no symbol added, removed, or substituted",
+      "prohibition": "No symbol may be added or dropped on the basis of any performance figure, in this stage or any later one. Eligibility is a liquidity and structural question and is answered without reference to returns."
+    },
+    "excluded_symbols": {
+      "AAPL": "present in data/normalized/daily as a Stage 2 engine fixture, not a member of the frozen universe, and not ranked, held, or read by any Generation 2 run."
+    }
+  },
+  "selection": {
+    "rule_ref": "SE100-CFG-3101 representative_selection_rule",
+    "frozen_before_any_variant_is_run": true,
+    "return_blind": true,
+    "return_blind_statement": "No step of this rule reads a return, a Sharpe ratio, a profit factor, an equity level, or any other performance figure. Returns are measured and logged for all eighteen variants for the record, and they are not an input to the choice.",
+    "return_blind_enforcement": "select_representative receives only SelectionInput records, whose fields are ['variant_id', 'shutdown_events', 'fill_count', 'per_run']. No BacktestResult, measurement, equity curve or trade P&L is in scope at the point the representative is decided.",
+    "variants_considered": 18,
+    "inputs": [
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count": 256,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 128
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 128
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count": 8,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 4
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 4
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count": 36,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 18
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 18
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count": 56,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 28
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 28
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count": 32,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 16
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 16
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count": 20,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 10
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 10
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count": 304,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 152
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 152
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count": 32,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 16
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 16
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count": 80,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 40
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 40
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count": 20,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 10
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 10
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count": 132,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 66
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 66
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count": 76,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 38
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 38
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count": 40,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 20
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 20
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count": 20,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 10
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 10
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count": 24,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 12
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 12
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count": 12,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 6
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 6
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count": 84,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 42
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 42
+          }
+        ]
+      },
+      {
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count": 60,
+        "per_run": [
+          {
+            "label": "#BASE",
+            "research_shutdown_events": 1,
+            "fill_count": 30
+          },
+          {
+            "label": "#STRESS",
+            "research_shutdown_events": 1,
+            "fill_count": 30
+          }
+        ]
+      }
+    ],
+    "step_1": {
+      "order": 1,
+      "name": "zero_research_shutdown_events",
+      "rule": "A variant is eligible only if it recorded zero research-shutdown events across BOTH of its declared runs, base and stress.",
+      "scope_note": "The operating instruction names the shutdown screen without stating whether it spans both runs. Requiring it across both is the more restrictive reading and is return-blind either way, so it is adopted. A variant that survives base costs and trips the trip-wire under doubled costs is not one this stage carries forward.",
+      "mechanism": "The trip-wire is the constitution section 5.1 shutdown the engine already enforces: 15% below the running high-water mark, action LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES. It fires at most once per run, so the per-run count is 0 or 1 and the per-variant count is 0, 1, or 2.",
+      "eligible": [],
+      "ineligible": [
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-MONTHLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-QUARTERLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-MONTHLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-QUARTERLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-MONTHLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-QUARTERLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-MONTHLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-QUARTERLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-MONTHLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-QUARTERLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-MONTHLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-QUARTERLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-MONTHLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-QUARTERLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-MONTHLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-QUARTERLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-MONTHLY",
+          "research_shutdown_events": 2
+        },
+        {
+          "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-QUARTERLY",
+          "research_shutdown_events": 2
+        }
+      ],
+      "eligible_count": 0
+    },
+    "representative_variant_id": null,
+    "representative_exists": false,
+    "decided_at_step": null,
+    "decided_by": "no_candidate_path",
+    "step_2": null,
+    "step_3": null,
+    "no_candidate_path": {
+      "condition": "Every one of the eighteen variants recorded at least one research-shutdown event.",
+      "verdict": "FAIL \u2014 STAGE_3_G2_NO_CANDIDATE",
+      "prohibition": "The grid is not loosened, the shutdown threshold is not raised, the screen is not narrowed to base-only, and the rule is not revised post hoc. The stage ends."
+    },
+    "selection_note": "All 18 declared variants recorded at least one research-shutdown event across their two declared runs, so no variant is eligible under step 1. The sealed no_candidate_path applies: the grid is not loosened, the shutdown threshold is not raised, the screen is not narrowed to the base run, and the rule is not revised post hoc."
+  },
+  "gate_evaluation_scope": {
+    "evaluated_on": "the selected representative's #BASE run only",
+    "stress_run_treatment": "reported, not gating",
+    "precedent": "Identical to Generation 1's Stage 3, which evaluated its seven conditions on a single primary result with the stress run in reported_but_not_gating.",
+    "not_a_disjunction": "Constitution section 9 makes the stage verdict a disjunction across CANDIDATES. Generation 2 declares one candidate, SE100-G2-S3-C1-ROTATION, whose parameterisation is fixed by the frozen selection rule. The eighteen variants are parameterisations of that one candidate, not eighteen candidates, and the disjunction is therefore over a set of size one.",
+    "criteria_file": "config/generation_2/g2_gate_criteria.json (SE100-CFG-3102)"
+  },
+  "candidate_results": [],
+  "stage_verdict": {
+    "verdict": "FAIL",
+    "verdict_token": "STAGE_3_G2_NO_CANDIDATE",
+    "condition_token": "Either no representative exists, because every one of the eighteen variants recorded at least one research-shutdown event, or a representative exists and does not satisfy every hard condition.",
+    "fail_route": "NO_REPRESENTATIVE_EXISTS",
+    "route": "NO_REPRESENTATIVE_EXISTS",
+    "pass_token": "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "fail_token": "STAGE_3_G2_NO_CANDIDATE",
+    "constitutional_fail_result_equivalent": "STRATEGY_REJECTED_IN_DEVELOPMENT",
+    "token_naming_note": "See G2-CONFLICT-12. The instruction's fail token names the absence of an admissible candidate; the constitution's names the rejection of one. They denote the same stage outcome and both are recorded in the decision package.",
+    "fail_is_a_deliverable": "FAIL \u2014 STAGE_3_G2_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and does not license a nineteenth variant, a re-run with a different grid, or a promotion of the runner-up.",
+    "representative_exists": false,
+    "selection_note": "All 18 declared variants recorded at least one research-shutdown event across their two declared runs, so no variant is eligible under step 1. The sealed no_candidate_path applies: the grid is not loosened, the shutdown threshold is not raised, the screen is not narrowed to the base run, and the rule is not revised post hoc.",
+    "admitted_candidates": [],
+    "candidates_evaluated": 0,
+    "combination_rule": "Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, NOT_EVALUABLE, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Generation 2 declares one candidate, so the cross-candidate disjunction is over a set of size one \u2014 see G2-CONFLICT-15."
+  },
+  "determinism": {
+    "method": "the dataset was reloaded from disk and all thirty-six runs repeated on fresh strategy objects; each run is compared on its trade digest, equity digest, ranking digest, fill count, final equity and shutdown session",
+    "runs_compared": 36,
+    "all_identical": true,
+    "mismatched_runs": []
+  },
+  "grid_results_descriptive_only": {
+    "status": [
+      "total return, maximum drawdown, profit factor, closed trade count, and research-shutdown event count, for both the base and stress runs",
+      "fill count, distinct symbols traded, and per-symbol profit contribution",
+      "CAGR, annualised volatility, Sharpe ratio at a 0.00% risk-free rate, exposure fraction, win rate, average win, average loss, longest flat streak",
+      "These figures are a descriptive record. They may not be used to justify a selection other than the one the frozen rule produced, to argue that a different variant should have advanced, or to reopen the grid."
+    ],
+    "used_in_selection": false,
+    "table": [
+      {
+        "grid_index": 1,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 256,
+        "base_total_return": "0.2534",
+        "base_max_drawdown": "0.1505194844404930683606472144230645",
+        "base_profit_factor": "1.326042202779207411219763253",
+        "base_closed_trades": 64,
+        "base_fills": 128,
+        "base_shutdown_session": "2016-01-20",
+        "base_distinct_symbols_targeted": 21,
+        "stress_total_return": "0.2219",
+        "stress_max_drawdown": "0.1513321528336213350023748057054329",
+        "stress_profit_factor": "1.287584240539139450492483152",
+        "stress_closed_trades": 64,
+        "stress_fills": 128,
+        "stress_shutdown_session": "2016-01-15",
+        "stress_distinct_symbols_targeted": 21
+      },
+      {
+        "grid_index": 2,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 8,
+        "base_total_return": "-0.1636",
+        "base_max_drawdown": "0.1708313101742046992986356544455371",
+        "base_profit_factor": "0",
+        "base_closed_trades": 2,
+        "base_fills": 4,
+        "base_shutdown_session": "2008-11-19",
+        "base_distinct_symbols_targeted": 2,
+        "stress_total_return": "-0.1645",
+        "stress_max_drawdown": "0.1714345115516252450160079947205209",
+        "stress_profit_factor": "0",
+        "stress_closed_trades": 2,
+        "stress_fills": 4,
+        "stress_shutdown_session": "2008-11-19",
+        "stress_distinct_symbols_targeted": 2
+      },
+      {
+        "grid_index": 3,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 36,
+        "base_total_return": "-0.0526",
+        "base_max_drawdown": "0.1589641394641470922236054265946594",
+        "base_profit_factor": "0.5602006688963210702341137124",
+        "base_closed_trades": 9,
+        "base_fills": 18,
+        "base_shutdown_session": "2009-03-09",
+        "base_distinct_symbols_targeted": 7,
+        "stress_total_return": "-0.0565",
+        "stress_max_drawdown": "0.1597775812237236298296679931562135",
+        "stress_profit_factor": "0.5330578512396694214876033058",
+        "stress_closed_trades": 9,
+        "stress_fills": 18,
+        "stress_shutdown_session": "2009-03-09",
+        "stress_distinct_symbols_targeted": 7
+      },
+      {
+        "grid_index": 4,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 56,
+        "base_total_return": "0.1872",
+        "base_max_drawdown": "0.1603845690740103018225752858438412",
+        "base_profit_factor": "1.609375",
+        "base_closed_trades": 14,
+        "base_fills": 28,
+        "base_shutdown_session": "2010-06-07",
+        "base_distinct_symbols_targeted": 12,
+        "stress_total_return": "0.1795",
+        "stress_max_drawdown": "0.1603601806728638835090408650893682",
+        "stress_profit_factor": "1.580155138978668390433096315",
+        "stress_closed_trades": 14,
+        "stress_fills": 28,
+        "stress_shutdown_session": "2010-06-07",
+        "stress_distinct_symbols_targeted": 12
+      },
+      {
+        "grid_index": 5,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 32,
+        "base_total_return": "-0.145",
+        "base_max_drawdown": "0.1618576791005187461974629714262929",
+        "base_profit_factor": "0.1460541813898704358068315665",
+        "base_closed_trades": 8,
+        "base_fills": 16,
+        "base_shutdown_session": "2008-10-24",
+        "base_distinct_symbols_targeted": 7,
+        "stress_total_return": "-0.1469",
+        "stress_max_drawdown": "0.1626395676679965330730636309509497",
+        "stress_profit_factor": "0.1374045801526717557251908397",
+        "stress_closed_trades": 8,
+        "stress_fills": 16,
+        "stress_shutdown_session": "2008-10-24",
+        "stress_distinct_symbols_targeted": 7
+      },
+      {
+        "grid_index": 6,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 20,
+        "base_total_return": "-0.1125",
+        "base_max_drawdown": "0.1538379447846880063471601652301702",
+        "base_profit_factor": "0.1947029348604151753758052971",
+        "base_closed_trades": 5,
+        "base_fills": 10,
+        "base_shutdown_session": "2008-10-27",
+        "base_distinct_symbols_targeted": 5,
+        "stress_total_return": "-0.114",
+        "stress_max_drawdown": "0.1544337826674145953746375549017006",
+        "stress_profit_factor": "0.1891891891891891891891891892",
+        "stress_closed_trades": 5,
+        "stress_fills": 10,
+        "stress_shutdown_session": "2008-10-27",
+        "stress_distinct_symbols_targeted": 5
+      },
+      {
+        "grid_index": 7,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 304,
+        "base_total_return": "0.2193",
+        "base_max_drawdown": "0.1758910197178295025050015994708938",
+        "base_profit_factor": "1.253408828287497111162468223",
+        "base_closed_trades": 76,
+        "base_fills": 152,
+        "base_shutdown_session": "2020-03-12",
+        "base_distinct_symbols_targeted": 19,
+        "stress_total_return": "0.1733",
+        "stress_max_drawdown": "0.1824617788864308592283729245720020",
+        "stress_profit_factor": "1.199058120836204916149781760",
+        "stress_closed_trades": 76,
+        "stress_fills": 152,
+        "stress_shutdown_session": "2020-03-12",
+        "stress_distinct_symbols_targeted": 19
+      },
+      {
+        "grid_index": 8,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 32,
+        "base_total_return": "0.0102",
+        "base_max_drawdown": "0.1618406408470975690506026146103142",
+        "base_profit_factor": "1.049299178347027549540840986",
+        "base_closed_trades": 8,
+        "base_fills": 16,
+        "base_shutdown_session": "2011-08-04",
+        "base_distinct_symbols_targeted": 6,
+        "stress_total_return": "0.0063",
+        "stress_max_drawdown": "0.1634745114174432445950183715455343",
+        "stress_profit_factor": "1.030230326295585412667946257",
+        "stress_closed_trades": 8,
+        "stress_fills": 16,
+        "stress_shutdown_session": "2011-08-04",
+        "stress_distinct_symbols_targeted": 6
+      },
+      {
+        "grid_index": 9,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 80,
+        "base_total_return": "0.2869",
+        "base_max_drawdown": "0.1685750044363352667180784211421214",
+        "base_profit_factor": "2.679742388758782201405152225",
+        "base_closed_trades": 20,
+        "base_fills": 40,
+        "base_shutdown_session": "2010-08-11",
+        "base_distinct_symbols_targeted": 11,
+        "stress_total_return": "0.2751",
+        "stress_max_drawdown": "0.1705724864623912145751496398612024",
+        "stress_profit_factor": "2.584677419354838709677419355",
+        "stress_closed_trades": 20,
+        "stress_fills": 40,
+        "stress_shutdown_session": "2010-08-11",
+        "stress_distinct_symbols_targeted": 11
+      },
+      {
+        "grid_index": 10,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 20,
+        "base_total_return": "-0.1153",
+        "base_max_drawdown": "0.1580739409672689881921692962688449",
+        "base_profit_factor": "0.05954323001631321370309951060",
+        "base_closed_trades": 5,
+        "base_fills": 10,
+        "base_shutdown_session": "2009-05-27",
+        "base_distinct_symbols_targeted": 5,
+        "stress_total_return": "-0.1172",
+        "stress_max_drawdown": "0.1584764821900423952180592135067822",
+        "stress_profit_factor": "0.05483870967741935483870967742",
+        "stress_closed_trades": 5,
+        "stress_fills": 10,
+        "stress_shutdown_session": "2009-05-27",
+        "stress_distinct_symbols_targeted": 5
+      },
+      {
+        "grid_index": 11,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 132,
+        "base_total_return": "0.2263",
+        "base_max_drawdown": "0.1550504602520102189679816384033367",
+        "base_profit_factor": "1.992543859649122807017543860",
+        "base_closed_trades": 33,
+        "base_fills": 66,
+        "base_shutdown_session": "2010-08-12",
+        "base_distinct_symbols_targeted": 20,
+        "stress_total_return": "0.2146",
+        "stress_max_drawdown": "0.1568941442016536834035732964359149",
+        "stress_profit_factor": "1.931019522776572668112798265",
+        "stress_closed_trades": 33,
+        "stress_fills": 66,
+        "stress_shutdown_session": "2010-08-12",
+        "stress_distinct_symbols_targeted": 20
+      },
+      {
+        "grid_index": 12,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 76,
+        "base_total_return": "0.2403",
+        "base_max_drawdown": "0.1551904554398564210230829326348783",
+        "base_profit_factor": "2.704255319148936170212765957",
+        "base_closed_trades": 19,
+        "base_fills": 38,
+        "base_shutdown_session": "2010-12-14",
+        "base_distinct_symbols_targeted": 16,
+        "stress_total_return": "0.2384",
+        "stress_max_drawdown": "0.1528036372616126932234779644371742",
+        "stress_profit_factor": "2.735080058224163027656477438",
+        "stress_closed_trades": 19,
+        "stress_fills": 38,
+        "stress_shutdown_session": "2010-12-10",
+        "stress_distinct_symbols_targeted": 16
+      },
+      {
+        "grid_index": 13,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 40,
+        "base_total_return": "0.0044",
+        "base_max_drawdown": "0.1652867056202656635682619869629926",
+        "base_profit_factor": "1.017418844022169437846397466",
+        "base_closed_trades": 10,
+        "base_fills": 20,
+        "base_shutdown_session": "2011-10-04",
+        "base_distinct_symbols_targeted": 7,
+        "stress_total_return": "-0.0007",
+        "stress_max_drawdown": "0.1659085371067297306821788553605318",
+        "stress_profit_factor": "0.9972527472527472527472527473",
+        "stress_closed_trades": 10,
+        "stress_fills": 20,
+        "stress_shutdown_session": "2011-10-04",
+        "stress_distinct_symbols_targeted": 7
+      },
+      {
+        "grid_index": 14,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 20,
+        "base_total_return": "-0.0465",
+        "base_max_drawdown": "0.1551412228414475136553751438703070",
+        "base_profit_factor": "0.3394886363636363636363636364",
+        "base_closed_trades": 5,
+        "base_fills": 10,
+        "base_shutdown_session": "2010-02-04",
+        "base_distinct_symbols_targeted": 5,
+        "stress_total_return": "-0.049",
+        "stress_max_drawdown": "0.1565409016394996865027722205182391",
+        "stress_profit_factor": "0.3127629733520336605890603086",
+        "stress_closed_trades": 5,
+        "stress_fills": 10,
+        "stress_shutdown_session": "2010-02-04",
+        "stress_distinct_symbols_targeted": 5
+      },
+      {
+        "grid_index": 15,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 24,
+        "base_total_return": "-0.0465",
+        "base_max_drawdown": "0.1603589649569586778592400471626470",
+        "base_profit_factor": "0.4180225281602002503128911139",
+        "base_closed_trades": 6,
+        "base_fills": 12,
+        "base_shutdown_session": "2009-05-27",
+        "base_distinct_symbols_targeted": 4,
+        "stress_total_return": "-0.0489",
+        "stress_max_drawdown": "0.1602852286562391358224992772924039",
+        "stress_profit_factor": "0.3955500618046971569839307787",
+        "stress_closed_trades": 6,
+        "stress_fills": 12,
+        "stress_shutdown_session": "2009-05-27",
+        "stress_distinct_symbols_targeted": 4
+      },
+      {
+        "grid_index": 16,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 12,
+        "base_total_return": "0.0153",
+        "base_max_drawdown": "0.1518865199866625283557921016665205",
+        "base_profit_factor": "1.85",
+        "base_closed_trades": 3,
+        "base_fills": 6,
+        "base_shutdown_session": "2009-05-26",
+        "base_distinct_symbols_targeted": 3,
+        "stress_total_return": "0.014",
+        "stress_max_drawdown": "0.1522420390112744034562614982389996",
+        "stress_profit_factor": "1.744680851063829787234042553",
+        "stress_closed_trades": 3,
+        "stress_fills": 6,
+        "stress_shutdown_session": "2009-05-26",
+        "stress_distinct_symbols_targeted": 3
+      },
+      {
+        "grid_index": 17,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 84,
+        "base_total_return": "0.1029",
+        "base_max_drawdown": "0.1572370206978810977705131981085719",
+        "base_profit_factor": "2.157480314960629921259842520",
+        "base_closed_trades": 21,
+        "base_fills": 42,
+        "base_shutdown_session": "2010-07-02",
+        "base_distinct_symbols_targeted": 16,
+        "stress_total_return": "0.0957",
+        "stress_max_drawdown": "0.1574524482918873190238915395697621",
+        "stress_profit_factor": "2.056291390728476821192052980",
+        "stress_closed_trades": 21,
+        "stress_fills": 42,
+        "stress_shutdown_session": "2010-07-02",
+        "stress_distinct_symbols_targeted": 16
+      },
+      {
+        "grid_index": 18,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "research_shutdown_events": 2,
+        "fill_count_both_runs": 60,
+        "base_total_return": "-0.0302",
+        "base_max_drawdown": "0.1508251444947356436640861976908892",
+        "base_profit_factor": "0.8176328502415458937198067633",
+        "base_closed_trades": 15,
+        "base_fills": 30,
+        "base_shutdown_session": "2010-07-02",
+        "base_distinct_symbols_targeted": 14,
+        "stress_total_return": "-0.0345",
+        "stress_max_drawdown": "0.1509445102513954080882016502375400",
+        "stress_profit_factor": "0.7937836222355050806933652122",
+        "stress_closed_trades": 15,
+        "stress_fills": 30,
+        "stress_shutdown_session": "2010-07-02",
+        "stress_distinct_symbols_targeted": 14
+      }
+    ]
+  },
+  "engine_capability_added": {
+    "what": "The Stage 2 single-position engine was extended to hold up to k risky positions simultaneously. The frozen engine.py was not modified; the capability is a new module, backtest/g2_engine.py.",
+    "ceilings_enforced": "at most k open positions; 95% maximum gross exposure across the combined book; 50% maximum single-position concentration at any rebalance",
+    "adversarial_tests": "tests/adversarial/test_g2_engine_multiposition.py asserts the engine cannot exceed k positions, cannot breach either ceiling, cannot trade at the close that generated its ranking, cannot see tomorrow's bar in today's ranking, and reproduces identical results from identical inputs on a clean rerun"
+  },
+  "evidence_file": {
+    "path": "reports/stage3_g2/STAGE_3_G2_DEVELOPMENT_ADMISSIBILITY.json",
+    "artifact_id": "SE100-EVID-3101",
+    "sha256": "5c7d3238f51965cdff37fec0a1b4ec27bc261288ab5cfbd65485e4a820b9bbb1",
+    "evidence_digest": "0cff85e45ff24b0d6e44d729cfcdfda33e348e97c72f84bae7c25d0f4cfe9acf",
+    "evidence_digest_covers": "every field of this file except generated_utc and evidence_digest, as canonical JSON",
+    "generated_utc": "2026-08-15T06:38:54Z"
+  },
+  "authorization": {
+    "stage_4_validation_authorized": false,
+    "stage_4_note": "Stage 4 validation was not run and is not authorized by this package. The validation-window data exists on disk and is technically reachable; it was not read. Authorization requires an explicit human go-ahead in a separate session.",
+    "holdout_read_authorized": false,
+    "holdout_note": "Generation 2's holdout is 2026-08-01 to 2028-07-31 and does not exist in calendar time. Generation 1's sealed holdout was not read by this stage or by any code it ran.",
+    "explicit_non_authorizations": [
+      "This file does not authorize reading any session after 2021-07-31.",
+      "This file does not authorize Stage 4 validation for Generation 2. That requires a separate, explicitly authorized session.",
+      "This file does not authorize reading Generation 1's holdout window, now or ever.",
+      "This file does not authorize reading Generation 2's holdout window before 2028-07-31 has passed in real calendar time.",
+      "This file does not authorize any order, paper or live, at any broker.",
+      "This file does not authorize reading, writing, or testing for the value of any credential.",
+      "This file does not authorize editing any Generation 1 artifact under governance/, config/, or reports/.",
+      "This file does not authorize revising the cost model, the friction assumptions, the fee schedule, or the universe.",
+      "This file does not authorize adding a nineteenth variant, in this session or a later one.",
+      "This file does not authorize promoting a runner-up if the representative fails the gate."
+    ]
+  },
+  "evidence": [
+    "All 36 declared runs were executed \u2014 eighteen variants times the two sealed cost labels ['#BASE', '#STRESS'] \u2014 with no run conditional on another's outcome and no grid revision after any result was seen.",
+    "Every one of the eighteen variants recorded 2 research-shutdown events, one in each of its two runs: 36 of 36 runs fired the constitution section 5.1 trip-wire (15% below the running high-water mark, LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES).",
+    "The shutdowns fired on 18 distinct sessions spread from 2008-10-24 to 2020-03-12, not on a single session, and each base/stress pair fired on the same or an adjacent session \u2014 the signature of a real equity path, not of a constant.",
+    "Buy-and-hold on the same run span is the control: SPY first breaches the same 15% threshold on 2008-10-03 with a worst drawdown of 0.4789, and IVV on 2008-10-03 with 0.4790 \u2014 both before any variant fired. The sealed run span opens 2008-07-28, ten weeks before the worst equity drawdown in modern market history, so a long-only rotation tripping a 15% trip-wire is a property of the window and not a defect.",
+    "The shutdown's effect was verified from the fill stream rather than from the engine's own rejection counters, on four probe variants spanning the earliest firing, the latest, the highest turnover and the lowest: every shutdown liquidates the whole book at the next open with SHUTDOWN-tagged sells, and no BUY fill occurs at or after the shutdown session in any probe.",
+    "The representative was selected from records carrying no performance figure at all: select_representative receives only SelectionInput records, whose fields are ['variant_id', 'shutdown_events', 'fill_count', 'per_run']. No BacktestResult, measurement, equity curve or trade P&L is in scope at the point the representative is decided.",
+    "Step 1 of the frozen rule admitted 0 of 18 variants, so steps 2 and 3 were never reached and the sealed no_candidate_path applies.",
+    "Determinism: the dataset was reloaded from disk and all 36 runs repeated on fresh strategy objects; 36 of 36 runs matched on trade digest, equity digest, ranking digest, fill count, final equity and shutdown session, with zero mismatches.",
+    "Cross-sectionality, the one thing Generation 2 was built to change: the variants targeted up to 21 distinct symbols across the run, against Generation 1's validated candidate which only ever traded SPY. The failure is not a collapse back onto one symbol.",
+    "Window: the latest session loaded anywhere in the dataset is 2021-07-30, against a development bound of 2021-07-31. load_grid_dataset truncates at the development bound and then audits the loaded bars separately, so a session dated 2021-08-01 or later would have to survive both a truncating loader and an independent check of its output",
+    "Evidence self-digest 0cff85e45ff24b0d6e44d729cfcdfda33e348e97c72f84bae7c25d0f4cfe9acf covers every field of this file except generated_utc and evidence_digest, as canonical JSON, recomputed from the written file by an independent script that follows the coverage sentence literally rather than re-running the writer's own function."
+  ],
+  "limitations": [
+    "Generation 2's validation window (2021-08-01 \u2192 2024-07-31) overlaps the exact period Generation 1 used for its own Gate 4 validation read. The researcher therefore already knows, from Generation 1's published report, approximately how SPY (and by extension the broad market) behaved in this window \u2014 including its Sharpe ratio (\u22480.20), total return (\u22482.15%), and fold-by-fold sign pattern (7 of 12 positive). Generation 2 tests a different hypothesis (cross-sectional multi-asset selection vs. single-symbol mean reversion) over the same calendar period, which limits but does not eliminate the concern. This is a real multiplicity cost, disclosed and not minimized, and it is the reason Generation 2's validation result alone \u2014 without a clean holdout confirmation \u2014 cannot be treated as sufficient evidence of an edge.",
+    "Eighteen variants over one development window is eighteen looks at the same data. The grid is small, pre-registered in full, and spans axes chosen for being the obvious ones rather than for producing a good number, but none of that makes the multiplicity zero. Two mechanisms bound it. First, the representative that advances is chosen by a rule that never reads a return, so no amount of looking at returns can change which variant is carried forward. Second, the gate is evaluated on that single representative and is NOT a disjunction across eighteen candidates \u2014 taking the best of eighteen and gating on it would be precisely the abuse the frozen selection rule exists to prevent. The other seventeen are reported in full as a descriptive record. This disclosure is in addition to, and does not replace, the validation-window reuse disclosure in the partition lock.",
+    "This stage read development data only. Nothing here is evidence about the validation window, the Generation 1 holdout, or the Generation 2 holdout, and a development result has never been evidence of an edge in this project.",
+    "The verdict is bounded by the sealed run span 2008-07-28 to 2021-07-30, which begins at the first session where the 12-month lookback has a reference bar for every universe member. All eighteen variants share that start, including the 3- and 6-month variants that could individually have started earlier. That choice makes the cross-lookback comparison fair and costs the shorter lookbacks history they could have used; a grid run on a later start that excluded 2008 would very likely have produced a different shutdown count, and this stage cannot say what it would have been.",
+    "The shutdown screen is the whole of the selection here. Because it eliminated every variant at step 1, the tiebreak on turnover was never exercised on real data, and this stage provides no evidence that step 2 or step 3 behaves correctly beyond the unit tests that cover them.",
+    "Profit factor, drawdown and return were computed for all 36 runs and are reported in full, but no Gate 3 hard condition was evaluated, because Gate 3 is evaluated only on a representative and none exists. Those figures are descriptive and gate nothing.",
+    "Generation 2 declares a single candidate family, so the constitution's cross-candidate disjunction is over a set of size one. See G2-CONFLICT-15."
+  ],
+  "blockers": [],
+  "conflicts_found": [
+    "G2-CONFLICT-6: the constitution's best-trade-removed condition does not state the basis for the removal in a multi-position strategy; the sealed criteria fix it as the single closed trade with the largest positive net contribution across the whole run.",
+    "G2-CONFLICT-7: the instruction's neighbour-robustness condition does not define neighbours for a three-axis grid; the seal defines them as variants differing on exactly one axis by one step.",
+    "G2-CONFLICT-8: the instruction says 'monthly' and 'quarterly' without defining the rebalance session; the seal fixes it as the first session whose month boundary has been crossed, not the calendar month end.",
+    "G2-CONFLICT-9: at k=1 the 95% gross exposure ceiling and the 50% concentration ceiling conflict; the concentration ceiling is more restrictive and binds, so a k=1 variant holds half its equity in cash by construction. This is disclosed, not corrected.",
+    "G2-CONFLICT-10: equal weighting is applied at entry and not maintained by drift between rebalances; the instruction's 'equal-weight across k held positions' is read as a sizing rule, since maintaining it continuously would require unscheduled trades the instruction forbids.",
+    "G2-CONFLICT-11: the instruction defines one FAIL path (no variant has zero shutdowns); the constitution implies a second (a representative exists and misses a hard condition). Both are sealed, and the route actually taken is recorded.",
+    "G2-CONFLICT-12: the instruction's fail token names the absence of a candidate and the constitution's names the rejection of one. Both are recorded; the sealed token is emitted.",
+    "G2-CONFLICT-13: the instruction's turnover tiebreak does not define turnover; the seal fixes it as the fill count across both declared runs, a return-blind proxy.",
+    "G2-CONFLICT-14: the multi-position engine must mark open positions and sequence sells before buys within a rebalance; neither is specified by the instruction and both are sealed and adversarially tested.",
+    "G2-CONFLICT-15: Generation 2 declares one candidate, so the constitution's cross-candidate disjunction is over a set of size one.",
+    "G2-CONFLICT-16: the frozen Order contract carries a budget measured at the decision close, but rotation buys execute at the next open; the seal re-measures the budget at the open and records the re-evaluation count rather than editing the frozen contract.",
+    "G2-CONFLICT-4: repo_state_id's governance pattern is single-level (governance/*.md), so governance/generation_2/* is NOT covered by it, while config/**/*.json is recursive and config/generation_2/*.json IS. The Generation 2 governance artifacts are therefore covered by their own .sha256 records and by this package's checksum record, not by repo_state_id. Disclosed rather than fixed: changing the pattern set would make repo_state_id values incomparable across stages."
+  ],
+  "gate_conditions": {
+    "S3-C1": {
+      "required_verbatim": "total return is positive",
+      "predicate": "total_return > 0",
+      "verdict": "NOT_RUN",
+      "satisfied_by": [],
+      "met_by": [],
+      "not_met_by": [],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "note": "Not evaluated. Gate 3 is evaluated only on the representative produced by the frozen selection rule, and no representative was produced. NOT_RUN is not a pass (constitution section 9)."
+    },
+    "S3-C2": {
+      "required_verbatim": "maximum drawdown is no worse than 15%",
+      "predicate": "max_drawdown <= 0.15",
+      "verdict": "NOT_RUN",
+      "satisfied_by": [],
+      "met_by": [],
+      "not_met_by": [],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "note": "Not evaluated. Gate 3 is evaluated only on the representative produced by the frozen selection rule, and no representative was produced. NOT_RUN is not a pass (constitution section 9)."
+    },
+    "S3-C3": {
+      "required_verbatim": "profit factor is at least 1.10",
+      "predicate": "profit_factor >= 1.10",
+      "verdict": "NOT_RUN",
+      "satisfied_by": [],
+      "met_by": [],
+      "not_met_by": [],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "note": "Not evaluated. Gate 3 is evaluated only on the representative produced by the frozen selection rule, and no representative was produced. NOT_RUN is not a pass (constitution section 9)."
+    },
+    "S3-C4": {
+      "required_verbatim": "at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results",
+      "predicate": "closed_trades >= 30",
+      "verdict": "NOT_RUN",
+      "satisfied_by": [],
+      "met_by": [],
+      "not_met_by": [],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "note": "Not evaluated. Gate 3 is evaluated only on the representative produced by the frozen selection rule, and no representative was produced. NOT_RUN is not a pass (constitution section 9)."
+    },
+    "S3-C5": {
+      "required_verbatim": "performance is not dependent on one trade: removing the single best trade leaves total return above 0%",
+      "predicate": "best_trade_removed_return > 0 for BOTH removals",
+      "verdict": "NOT_RUN",
+      "satisfied_by": [],
+      "met_by": [],
+      "not_met_by": [],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "note": "Not evaluated. Gate 3 is evaluated only on the representative produced by the frozen selection rule, and no representative was produced. NOT_RUN is not a pass (constitution section 9)."
+    },
+    "S3-C6": {
+      "required_verbatim": "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy",
+      "predicate": "max instrument contribution <= 0.50",
+      "verdict": "NOT_RUN",
+      "satisfied_by": [],
+      "met_by": [],
+      "not_met_by": [],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "note": "Not evaluated. Gate 3 is evaluated only on the representative produced by the frozen selection rule, and no representative was produced. NOT_RUN is not a pass (constitution section 9)."
+    },
+    "S3-C7": {
+      "required_verbatim": "reasonable neighboring parameter values do not reverse the sign of net return",
+      "predicate": "sign(neighbour total_return) == sign(representative total_return) for EVERY neighbour, where sign is positive, negative, or zero and zero matches nothing",
+      "verdict": "NOT_RUN",
+      "satisfied_by": [],
+      "met_by": [],
+      "not_met_by": [],
+      "not_evaluable_for": [],
+      "not_applicable_for": [],
+      "note": "Not evaluated. Gate 3 is evaluated only on the representative produced by the frozen selection rule, and no representative was produced. NOT_RUN is not a pass (constitution section 9)."
+    },
+    "admissible_candidate_exists": {
+      "required_verbatim": "At least one candidate satisfies every hard condition of Gate 3 in development.",
+      "predicate": "a representative exists AND every hard condition is MET on its base run",
+      "verdict": "NOT_MET",
+      "value": false,
+      "variants_declared": 18,
+      "variants_eligible_after_shutdown_screen": 0,
+      "candidates_evaluated": 0,
+      "admitted_candidates": [],
+      "determination": "This entry, and only this entry, is the gate determination. 0 of 18 declared variants survived step 1 of the frozen selection rule, so no candidate reached Gate 3 and none can satisfy it.",
+      "note": "A conditions table that omits this row reads as though the gate were irrelevant rather than decided. The seven rows above settle nothing on their own: gates are conjunctive within a candidate and the stage verdict is a disjunction across candidates, and here the candidate set is empty."
+    }
+  },
+  "artifacts": [
+    "governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md",
+    "reports/stage3_g2/STAGE_3_G2_DEVELOPMENT_ADMISSIBILITY.json",
+    "reports/stage3_g2/STAGE_3_G2_ROTATION_RESEARCH.json",
+    "reports/stage3_g2/STAGE_3_G2_ROTATION_RESEARCH.sha256",
+    "reports/stage3_g2/STAGE_3_G2_ARTIFACT_MANIFEST.json",
+    "reports/stage3_g2/STAGE_3_G2_TEST_SUMMARY.md",
+    "reports/stage3_g2/pytest_stage3_g2_output.txt"
+  ],
+  "frozen_inputs_read_only": [
+    "governance/STAGE_0_CONSTITUTION.md",
+    "governance/STAGE_0_CONSTITUTION.json",
+    "governance/STAGE_0_FREEZE.sha256",
+    "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md",
+    "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md",
+    "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.json",
+    "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.sha256",
+    "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md",
+    "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.json",
+    "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256",
+    "config/generation_2/g2_rotation_protocol.json",
+    "config/generation_2/g2_gate_criteria.json",
+    "config/generation_2/g2_cost_model.json"
+  ],
+  "tests": {
+    "passed": 1090,
+    "failed": 1,
+    "skipped": 0
+  },
+  "authorization_state": {
+    "live_trading_authorized": "false",
+    "paper_trading_authorized": "false",
+    "broker_connection_made": "false",
+    "credentials_read": "false",
+    "stage_4_validation_authorized": "false",
+    "generation_2_holdout_read_authorized": "false",
+    "generation_1_holdout_read": "false"
+  },
+  "next_authorized_stage": "None without human review. Generation 2 Stage 3 reached FAIL \u2014 STAGE_3_G2_NO_CANDIDATE, so no candidate is admitted to validation. The next authorized action is human review of this package. Any subsequent work restarts at Gate 3 with a new pre-registration; it may not reuse this grid, loosen this rule, or promote a runner-up.",
+  "live_trading_authorized": false,
+  "reproducibility": {
+    "run_id": "SE100-R-20260815T070924Z",
+    "repo_state_id": "1eeeb74ef15e38e097f276604cebfb16461b71bb2b77728b29bcdd5bd58f75a9",
+    "package_version": "0.1.0",
+    "python": "3.10.6",
+    "dependency_versions": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "requests": "2.34.2",
+      "pytest": "8.4.2",
+      "yfinance": "1.4.1",
+      "exchange_calendars": "4.13.2",
+      "pyarrow": "MISSING",
+      "scipy": "MISSING"
+    },
+    "command": "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.g2_stage3_package",
+    "config_hash": "1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810",
+    "random_seed": null
+  }
+}

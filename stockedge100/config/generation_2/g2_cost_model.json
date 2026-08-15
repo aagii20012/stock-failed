@@ -1,0 +1,86 @@
+{
+  "artifact_id": "SE100-CFG-2101",
+  "title": "Generation 2 cost, execution, and accounting model — declared as a derivation, not a copy",
+  "version": "1.0.0",
+  "project": "StockEdge100",
+  "generation": 2,
+  "generation_id": "SE100-GEN2-7394207c543401e2",
+  "stage": 2,
+  "constitution_ref": "SE100-GOV-0001 sections 3, 5.1, 6, 7",
+  "charter_ref": "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md (SE100-GOV-2001)",
+  "declared_before_any_generation_2_engine_output": true,
+
+  "what_this_file_is": "This file is NOT a cost model. It is the declaration of a derivation. Generation 2 does not carry its own copy of the cost numbers: it loads Generation 1's sealed config/stage2_cost_model.json through the existing seal check and then applies exactly the override declared below. A second copy of the numbers would be a second place they could drift, and the copy that drifts is always the one an engine ends up trusting. The operating instruction for Generation 2 says the cost model is out of scope and must not be revised; the only way to honour that mechanically is to never hold a revisable copy of it.",
+
+  "derived_from": {
+    "path": "config/stage2_cost_model.json",
+    "artifact_id": "SE100-CFG-2001",
+    "sha256": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+    "seal_record": "governance/STAGE_2_PREREGISTRATION.json preregistered_files",
+    "seal_record_sha256": "90c486cd2115878d669b89b9512a41d02dd4010b4ac1ef478eda3be324e878e3",
+    "loader": "stockedge100.backtest.config.load_stage2_config(require_seal=True)",
+    "loader_note": "The Generation 2 loader calls the Generation 1 loader first and lets it raise. If the sealed cost model has drifted by one byte, no Generation 2 run starts."
+  },
+
+  "overrides": [
+    {
+      "json_pointer": "/account/max_open_risky_positions",
+      "sealed_value": 1,
+      "generation_2_value": "PER_VARIANT_K",
+      "permitted_values": [1, 2, 3],
+      "source_of_the_value": "the k axis of the eighteen-variant grid declared in config/generation_2/g2_rotation_protocol.json",
+      "rationale": "Portfolio breadth is the single variable Generation 2 changes (charter section 2). Constitution section 3 bounds it to one position 'in Generation 1', inside a section titled 'Fixed scope for Generation 1'; the resolution is recorded as G2-CONFLICT-2 in the charter.",
+      "enforcement": "stockedge100.backtest.costs.CostModel reads this field into max_open_risky_positions, which BacktestEngine._execute_buy uses for its MAX_POSITIONS rejection and Portfolio uses for its own invariant. Raising it is therefore not a suggestion to the engine; it is the number the engine already enforces."
+    }
+  ],
+
+  "no_other_field_may_differ": true,
+  "derivation_predicate": "The derived mapping must be equal to the sealed mapping at every JSON path except /account/max_open_risky_positions. stockedge100.backtest.g2_costs asserts this by walking both mappings and refusing to construct a CostModel if the difference set is anything other than exactly that one path.",
+  "difference_set_expected_size": 1,
+
+  "unchanged_and_named_explicitly": {
+    "note": "Named here so that a reader does not have to diff two files to see what Generation 2 did not touch. Every value below is read from the sealed Generation 1 file at run time; the strings here are a description, not a source.",
+    "starting_equity_usd": "100.00",
+    "max_gross_exposure_fraction": "0.95",
+    "min_cash_buffer_fraction": "0.05",
+    "half_spread_bps": "2.5",
+    "slippage_bps": "2.5",
+    "base_friction_bps_per_side": "5.0",
+    "stress_multiplier": "2.0",
+    "sec_section_31_fee_rate": "0.0000278",
+    "finra_taf_per_share_usd": "0.000166",
+    "finra_taf_cap_usd": "8.30",
+    "research_shutdown_drawdown_fraction": "0.15",
+    "research_shutdown_action": "LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES",
+    "decision_point": "the close of session t",
+    "earliest_fill": "the open of session t+1",
+    "fill_reference_price": "open",
+    "fractional_shares_permitted": true,
+    "min_order_notional_usd": "1.00",
+    "price_space": "SPLIT_ADJUSTED",
+    "dividend_handling": "CASH_CREDIT_ON_EX_DATE",
+    "delisting_handling": "LIQUIDATE_AT_LAST_AVAILABLE_CLOSE",
+    "max_stale_sessions_for_fill": 0,
+    "max_consecutive_stale_sessions": 5
+  },
+
+  "concentration_ceiling": {
+    "value": "0.50",
+    "applies_to": "any single position, measured as a fraction of account equity, at any rebalance",
+    "source": "config/stage3_attempt2_strategy_protocol.json risk_architecture.RA1-1.rule (f_base = 0.50), carried forward unchanged as the Generation-1-consistent default, and restated as a requirement by the Generation 2 operating instruction",
+    "source_sha256": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+    "why_it_is_here_and_not_in_the_cost_model": "The sealed Generation 1 cost model has no concentration field, because a one-position portfolio cannot have a concentration problem that the gross-exposure cap does not already cover. Generation 2 cannot add the field to that file — it is frozen — so the ceiling is declared here and enforced in stockedge100.backtest.g2_engine as a named constraint alongside the 95% aggregate one.",
+    "enforcement": "RotationEngine._execute_buy clamps each buy budget by a per-position headroom of 0.50 * equity minus the position's current value, and by an aggregate headroom of 0.95 * equity minus total position value. Both are computed from marks taken at the FILL session's OPEN, never its close.",
+    "interaction_with_equal_weighting": "See G2-CONFLICT-9 in governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md. At k=1 the ceiling binds before the gross-exposure cap does, so a k=1 variant is structurally half in cash. That consequence is disclosed before any variant is run and is not a reason to relax the ceiling."
+  },
+
+  "open_marking_note": "Generation 1's BacktestEngine._execute_buy marks already-held positions with _mark(symbol, session), which returns that session's CLOSE. With at most one open position that call is either empty or self-referential and reads nothing, so it was harmless. With k > 1 it would value the rest of the book at the close of the very session the buy fills at the open — same-session close information used at the open. Generation 2 therefore marks at the open. Recorded as G2-CONFLICT-14.",
+
+  "not_authorized_by_this_file": [
+    "any change to a friction, fee, rounding direction, or benchmark assumption",
+    "any run outside 1993-01-29 .. 2021-07-31",
+    "any order, paper or live, at any broker",
+    "any reading of a credential, by name or by value"
+  ],
+  "live_trading_authorized": false
+}

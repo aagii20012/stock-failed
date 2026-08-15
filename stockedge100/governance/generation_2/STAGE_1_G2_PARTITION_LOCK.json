@@ -1,0 +1,320 @@
+{
+  "artifact_id": "SE100-GOV-2002",
+  "title": "Generation 2 time partition and holdout lock",
+  "status": "LOCKED",
+  "project": "StockEdge100",
+  "generation": 2,
+  "generation_id": "SE100-GEN2-7394207c543401e2",
+  "stage": 1,
+  "locked_utc": "2026-08-15T03:52:13Z",
+  "run_id": "SE100-R-20260815T035213Z",
+  "charter_ref": "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md (SE100-GOV-2001)",
+  "constitution_ref": "SE100-GOV-0001 section 6.1",
+  "locked_before_any_strategy_result": true,
+  "holdout_state": "SEALED",
+  "generation_1_holdout_state": "SPENT_AND_PROHIBITED",
+  "validation_window_state": "LOCKED",
+  "generation_identity": {
+    "inputs": {
+      "project": "StockEdge100",
+      "generation": 2,
+      "constitution_ref": "SE100-GOV-0001",
+      "constitution_sha256": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+      "universe_version": "SE100-U1-d4917c2f7f1cd834",
+      "universe_sha256": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+      "cost_model_sha256": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+      "generation_1_terminal_verdict": "FAIL - STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+      "single_variable_changed": "PORTFOLIO_BREADTH_AND_CROSS_SECTIONAL_SELECTION",
+      "development_window": [
+        "1993-01-29",
+        "2021-07-31"
+      ],
+      "validation_window": [
+        "2021-08-01",
+        "2024-07-31"
+      ],
+      "holdout_window": [
+        "2026-08-01",
+        "2028-07-31"
+      ]
+    },
+    "identity_sha256": "7394207c543401e20fc80f3550c8a6a5aae4de622f2c28eb81dfa116f8b4ae52",
+    "generation_id": "SE100-GEN2-7394207c543401e2"
+  },
+  "partition": {
+    "development_start": "1993-01-29",
+    "development_end": "2021-07-31",
+    "validation_start": "2021-08-01",
+    "validation_end": "2024-07-31",
+    "generation_1_holdout_start": "2024-08-01",
+    "generation_1_holdout_end": "2026-07-31",
+    "holdout_start": "2026-08-01",
+    "holdout_end": "2028-07-31",
+    "boundaries_inclusive": true,
+    "development_years": 28.501,
+    "validation_months": 36,
+    "generation_1_holdout_months": 24,
+    "holdout_months": 24,
+    "minimum_development_years": 5,
+    "meets_minimum_development": true
+  },
+  "inherited_from_generation_1": {
+    "source": "governance/STAGE_1_HOLDOUT_LOCK.json",
+    "source_sha256": "9696161c4c5612fc7f6b3e5a3410917f20ad5707cb9b89b8bcc39cb70831dfb3",
+    "fields": [
+      "development_start",
+      "development_end",
+      "validation_start",
+      "validation_end"
+    ],
+    "note": "Inherited unchanged, not recomputed. The Generation 1 lock is read-only for the whole of Generation 2."
+  },
+  "coverage_measured_from_disk": {
+    "member_count": 34,
+    "development_sessions": 7178,
+    "development_first_session": "1993-01-29",
+    "development_last_session": "2021-07-30",
+    "earliest_inception": "1993-01-29",
+    "earliest_inception_symbols": [
+      "SPY"
+    ],
+    "latest_inception": "2007-07-26",
+    "latest_inception_symbols": [
+      "VEA"
+    ],
+    "dataset_last_session": "2026-08-07",
+    "sealed_generation_2_sessions_present_on_disk": [
+      "2026-08-03",
+      "2026-08-04",
+      "2026-08-05",
+      "2026-08-06",
+      "2026-08-07"
+    ],
+    "sealed_generation_2_session_count_on_disk": 5,
+    "per_symbol": {
+      "AGG": {
+        "first_session": "2003-09-29",
+        "last_session": "2026-08-07",
+        "development_sessions": 4491
+      },
+      "BND": {
+        "first_session": "2007-04-10",
+        "last_session": "2026-08-07",
+        "development_sessions": 3604
+      },
+      "DIA": {
+        "first_session": "1998-01-20",
+        "last_session": "2026-08-07",
+        "development_sessions": 5922
+      },
+      "DVY": {
+        "first_session": "2003-11-07",
+        "last_session": "2026-08-07",
+        "development_sessions": 4462
+      },
+      "EEM": {
+        "first_session": "2003-04-14",
+        "last_session": "2026-08-07",
+        "development_sessions": 4607
+      },
+      "EFA": {
+        "first_session": "2001-08-27",
+        "last_session": "2026-08-07",
+        "development_sessions": 5013
+      },
+      "HYG": {
+        "first_session": "2007-04-11",
+        "last_session": "2026-08-07",
+        "development_sessions": 3603
+      },
+      "IEF": {
+        "first_session": "2002-07-30",
+        "last_session": "2026-08-07",
+        "development_sessions": 4785
+      },
+      "IVV": {
+        "first_session": "2000-05-19",
+        "last_session": "2026-08-07",
+        "development_sessions": 5333
+      },
+      "IWM": {
+        "first_session": "2000-05-26",
+        "last_session": "2026-08-07",
+        "development_sessions": 5328
+      },
+      "IYR": {
+        "first_session": "2000-06-19",
+        "last_session": "2026-08-07",
+        "development_sessions": 5313
+      },
+      "LQD": {
+        "first_session": "2002-07-30",
+        "last_session": "2026-08-07",
+        "development_sessions": 4785
+      },
+      "MDY": {
+        "first_session": "1995-05-04",
+        "last_session": "2026-08-07",
+        "development_sessions": 6607
+      },
+      "QQQ": {
+        "first_session": "1999-03-10",
+        "last_session": "2026-08-07",
+        "development_sessions": 5636
+      },
+      "SHY": {
+        "first_session": "2002-07-30",
+        "last_session": "2026-08-07",
+        "development_sessions": 4785
+      },
+      "SPY": {
+        "first_session": "1993-01-29",
+        "last_session": "2026-08-07",
+        "development_sessions": 7178
+      },
+      "TIP": {
+        "first_session": "2003-12-05",
+        "last_session": "2026-08-07",
+        "development_sessions": 4443
+      },
+      "TLT": {
+        "first_session": "2002-07-30",
+        "last_session": "2026-08-07",
+        "development_sessions": 4785
+      },
+      "VEA": {
+        "first_session": "2007-07-26",
+        "last_session": "2026-08-07",
+        "development_sessions": 3529
+      },
+      "VGK": {
+        "first_session": "2005-03-10",
+        "last_session": "2026-08-07",
+        "development_sessions": 4127
+      },
+      "VIG": {
+        "first_session": "2006-05-02",
+        "last_session": "2026-08-07",
+        "development_sessions": 3839
+      },
+      "VNQ": {
+        "first_session": "2004-09-29",
+        "last_session": "2026-08-07",
+        "development_sessions": 4239
+      },
+      "VTI": {
+        "first_session": "2001-06-15",
+        "last_session": "2026-08-07",
+        "development_sessions": 5063
+      },
+      "VWO": {
+        "first_session": "2005-03-10",
+        "last_session": "2026-08-07",
+        "development_sessions": 4127
+      },
+      "VYM": {
+        "first_session": "2006-11-16",
+        "last_session": "2026-08-07",
+        "development_sessions": 3700
+      },
+      "XLB": {
+        "first_session": "1998-12-22",
+        "last_session": "2026-08-07",
+        "development_sessions": 5688
+      },
+      "XLE": {
+        "first_session": "1998-12-22",
+        "last_session": "2026-08-07",
+        "development_sessions": 5688
+      },
+      "XLF": {
+        "first_session": "1998-12-22",
+        "last_session": "2026-08-07",
+        "development_sessions": 5688
+      },
+      "XLI": {
+        "first_session": "1998-12-22",
+        "last_session": "2026-08-07",
+        "development_sessions": 5688
+      },
+      "XLK": {
+        "first_session": "1998-12-22",
+        "last_session": "2026-08-07",
+        "development_sessions": 5688
+      },
+      "XLP": {
+        "first_session": "1998-12-22",
+        "last_session": "2026-08-07",
+        "development_sessions": 5688
+      },
+      "XLU": {
+        "first_session": "1998-12-22",
+        "last_session": "2026-08-07",
+        "development_sessions": 5688
+      },
+      "XLV": {
+        "first_session": "1998-12-22",
+        "last_session": "2026-08-07",
+        "development_sessions": 5688
+      },
+      "XLY": {
+        "first_session": "1998-12-22",
+        "last_session": "2026-08-07",
+        "development_sessions": 5688
+      }
+    },
+    "measurement_basis": "Date column only. This module parses no price, volume, or dividend field in any window, so its coverage figures are not an observation of sealed data."
+  },
+  "validation_reuse_disclosure": "Generation 2's validation window (2021-08-01 → 2024-07-31) overlaps the exact period Generation 1 used for its own Gate 4 validation read. The researcher therefore already knows, from Generation 1's published report, approximately how SPY (and by extension the broad market) behaved in this window — including its Sharpe ratio (≈0.20), total return (≈2.15%), and fold-by-fold sign pattern (7 of 12 positive). Generation 2 tests a different hypothesis (cross-sectional multi-asset selection vs. single-symbol mean reversion) over the same calendar period, which limits but does not eliminate the concern. This is a real multiplicity cost, disclosed and not minimized, and it is the reason Generation 2's validation result alone — without a clean holdout confirmation — cannot be treated as sufficient evidence of an edge.",
+  "validation_reuse_disclosure_sources": {
+    "sharpe": {
+      "value": "0.2025294206503088680547420121230750",
+      "field": "reports/stage4/STAGE_4_VALIDATION.json run_evidence.base.sharpe"
+    },
+    "total_return": {
+      "value": "0.0215",
+      "field": "reports/stage4/STAGE_4_VALIDATION.json run_evidence.base.total_return"
+    },
+    "positive_folds": {
+      "value": "7 of 12",
+      "field": "reports/stage4/STAGE_4_VALIDATION.json gate_conditions.S4-C6.evidence.condition_evidence"
+    },
+    "symbols_traded": {
+      "value": "['SPY']",
+      "field": "reports/stage4/STAGE_4_VALIDATION.json run_evidence.runs[0].measure.symbols_loaded"
+    }
+  },
+  "sealed_data_on_disk_note": "The acquired dataset already contains 5 session(s) inside the Generation 2 holdout window, and all 24 months of Generation 1's holdout window. Nothing is deleted; enforcement is a window bound applied in code. See section 3 of the Markdown counterpart.",
+  "enforcement": {
+    "mechanism": "stockedge100.backtest.window.ResearchWindow plus a Generation 2 guard",
+    "development_bound": "2021-07-31",
+    "prohibited_windows": [
+      [
+        "2024-08-01",
+        "2026-07-31"
+      ],
+      [
+        "2026-08-01",
+        "2028-07-31"
+      ]
+    ],
+    "note": "The prohibition on both holdout windows is broader than Stage 3 requires. It is written to survive into stages this lock does not authorize."
+  },
+  "binding_rules": [
+    "The Generation 2 holdout window is read exactly once, at the constitutional holdout gate, after 2028-07-31 has passed in real calendar time, and never before - not in part, not as a preview, not to check data availability.",
+    "Generation 1's holdout window, 2024-08-01 to 2026-07-31, is never read again by anyone, for any purpose, in any generation.",
+    "No parameter, threshold, symbol, weight, or rule may be chosen using any value inside the validation window or either holdout window.",
+    "These boundaries may not be recomputed, widened, narrowed, or shifted by any later stage. If the dataset is re-acquired and its coverage moves, this lock still governs.",
+    "The Generation 2 holdout may not be shortened. A holdout gate reached with less than the full 24 months available is a blocked gate, not a shortened one.",
+    "Stage 4 validation for Generation 2 requires a separate, explicitly authorized session. This lock does not authorize it, and no result produced under this lock authorizes it.",
+    "The validation-reuse disclosure is reproduced verbatim wherever the validation window is referenced. It may be quoted at greater length; it may not be shortened, paraphrased, or summarised."
+  ],
+  "repo_state_id_location": "Deliberately omitted here. governance/generation_2/ is not reached by the repo_state_id patterns (governance/*.md is single-level), so this file is covered by STAGE_1_G2_PARTITION_LOCK.sha256 instead. The binding repo_state_id for this seal is the repo_state_id field of runs/SE100-R-20260815T035213Z.json.",
+  "authorized_windows": [
+    "development"
+  ],
+  "stage_3_authorized": true,
+  "stage_4_authorized": false,
+  "holdout_read_authorized": false,
+  "live_trading_authorized": false
+}

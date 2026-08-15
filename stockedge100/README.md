@@ -12,18 +12,41 @@ outcome, and "no tested strategy has a reliable edge" is a valid final answer.
 
 ## Current state
 
+**No strategy in this project has passed Gate 4. Two generations have now been run and neither
+produced a validated edge.**
+
+### Generation 1 — closed
+
 | Item | Value |
 |---|---|
-| Generation | 1 |
+| Status | **CLOSED.** Rejected in validation. Every Generation 1 artifact is read-only history. |
 | Highest gate genuinely passed | **Gate 3 — development admissibility** (`PASS — STAGE_3_STRATEGY_ADMITTED_IN_DEVELOPMENT`), on the development window only |
 | Gate 3 — development admissibility | **PASSED at attempt 2.** Attempt 1 failed (`FAIL — STAGE_3_STRATEGY_REJECTED_IN_DEVELOPMENT`) — six candidates, none admitted. Attempt 2 admitted **two of three**: `SE100-S3A2-C1-PULLBACK-RA1` and `SE100-S3A2-C2-MEANREV-RA1`. `SE100-S3A2-C3-DEFENSIVE-RA1` failed S3-C6, the failure mode its own seal declared in advance. |
 | Gate 4 — validation robustness | **FAILED** (`FAIL — STAGE_4_STRATEGY_REJECTED_IN_VALIDATION`). The sole representative `SE100-S3A2-C2-MEANREV-RA1` was evaluated once against the seven sealed conditions. Five are `MET`; two are `NOT_MET` — **S4-C2** (Sharpe 0.2025 against the frozen 0.50 floor) and **S4-C6** (7 of 12 folds positive, 58.33%, against the frozen 70% requirement). Gate 4 is conjunctive, so one `NOT_MET` rejects. |
 | Next authorized stage | **None in this line of work.** The sealed protocol states that a fail authorizes "recording the fail as a deliverable, and stopping". No strategy advances past Gate 4. Any subsequent strategy work is a **new candidate restarting at Gate 3**, disclosed as adaptive, with the validation window's information now known and therefore permanently compromised for that candidate. |
+| Validation window | **SPENT** — 2021-08-01 → 2024-07-31. Read exactly once, on the single authorization the sealed Stage 4 protocol granted, in one loading session running the two declared runs. No further read is permitted and no rerun is authorized. |
+| Final holdout | **SEALED** — 2024-08-01 → 2026-07-31. Never read, by Generation 1 or by any later generation. |
+
+### Generation 2 — open, and failing at Gate 3
+
+| Item | Value |
+|---|---|
+| Generation id | `SE100-GEN2-7394207c543401e2` |
+| Charter | [STAGE_10_GENERATION_2_CHARTER.md](governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md) (`SE100-GOV-2001`) — a new generation under constitution §19 |
+| What it changes | Exactly one thing: the strategy must be **genuinely cross-sectional**, selecting among the 34 ETFs rather than collapsing onto a single symbol the way Generation 1's validated candidate collapsed onto SPY. Same provider, same account model, same daily bars, same cost model, same frozen universe. |
+| Gate 3 — development admissibility | **FAILED** (`FAIL — STAGE_3_G2_NO_CANDIDATE`). Eighteen pre-registered rotation variants, two cost scenarios each, 36 runs. **All 18 recorded a research-shutdown event in both runs**, and step 1 of the frozen return-blind selection rule requires zero — so no representative exists, and Gate 3's seven hard conditions are `NOT_RUN` rather than evaluated. |
+| Next authorized stage | **None.** Human review of the Stage 3 package. Stage 4 has nothing to validate and is not authorized. Any further Generation 2 work restarts at Gate 3 with a **new** pre-registration; this grid may not be loosened, re-run, or have a nineteenth variant appended to it. |
+| Development window | 1993-01-29 → 2021-07-31; run span 2008-07-28 → 2021-07-30, bounded by the 12-month lookback's first reference bar for every universe member |
+| Validation window | 2021-08-01 → 2024-07-31 — **not read**. Reused from Generation 1, which is a real multiplicity cost disclosed verbatim in the partition lock and in every report that references validation. |
+| Holdout | **2026-08-01 → 2028-07-31 — does not yet exist in calendar time** and may not be read before it does |
+
+### Both generations
+
+| Item | Value |
+|---|---|
 | Research universe | 34 ETFs, `SE100-U1-d4917c2f7f1cd834`, FROZEN |
 | Strategy research | UNLOCKED — **development window only**, 1993-01-29 → 2021-07-31 |
-| Backtest engine | VALIDATED — **development window only**; sealed costs `SE100-CFG-2001`, spec `SE100-CFG-2002` |
-| Validation window | **SPENT** — 2021-08-01 → 2024-07-31. Read exactly once, on the single authorization the sealed Stage 4 protocol granted, in one loading session running the two declared runs. No further read is permitted and no rerun is authorized. |
-| Final holdout | **SEALED** — 2024-08-01 → 2026-07-31, read exactly once, at the holdout gate |
+| Backtest engine | VALIDATED — **development window only**; sealed costs `SE100-CFG-2001`, spec `SE100-CFG-2002`. Generation 2 adds a multi-position engine alongside it; the Generation 1 engine module is unmodified. |
 | Alpaca paper trading | LOCKED |
 | Shadow-live | LOCKED |
 | **Alpaca live trading** | **LOCKED — `LIVE_TRADING_LOCKED`** |
@@ -31,7 +54,7 @@ outcome, and "no tested strategy has a reliable edge" is a valid final answer.
 
 No order-submitting code exists in this repository. No broker credential is configured or read.
 
-Stage decisions: [Stage 0](governance/STAGE_0_VERIFICATION_REPORT.md) ·
+Generation 1 stage decisions: [Stage 0](governance/STAGE_0_VERIFICATION_REPORT.md) ·
 [Stage 1](governance/STAGE_1_DATA_FOUNDATION_REPORT.md) ·
 [Stage 2](governance/STAGE_2_BACKTEST_ENGINE_REPORT.md) ·
 [Stage 3 attempt 1](governance/STAGE_3_STRATEGY_RESEARCH_REPORT.md) ·
@@ -39,6 +62,11 @@ Stage decisions: [Stage 0](governance/STAGE_0_VERIFICATION_REPORT.md) ·
 [Stage 3 attempt 2 evaluation](governance/STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH_REPORT.md) ·
 [Stage 4 validation pre-registration](governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md) ·
 [Stage 4 validation evaluation](governance/STAGE_4_VALIDATION_REPORT.md).
+
+Generation 2: [charter](governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md) ·
+[partition lock](governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md) ·
+[Stage 3 rotation pre-registration](governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md) ·
+[Stage 3 rotation research](governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md).
 
 **Attempt 1** ran six strategies, one per family the constitution authorises for Generation 1. All six
 were pre-registered before any strategy code was written, run once each over the development window
@@ -101,6 +129,26 @@ C2's development Sharpe never cleared the floor, and validation did not rescue i
 this project has passed Gate 4, and the validation window is now spent.** The final holdout was not
 read, and no session may retune C2, substitute C1, or reopen Gate 3 Attempt 2 in response to this
 result.
+
+**Generation 2** was opened under constitution §19 as a separately governed research generation with
+its own charter, its own partition lock, and its own subtrees under `governance/generation_2/` and
+`config/generation_2/`. It changes one thing and holds everything else constant: the strategy must be
+genuinely cross-sectional. Its Stage 3 pre-registered a single candidate family,
+`SE100-G2-S3-C1-ROTATION` — rank the 34 ETFs by N-month total return, hold the top k, rebalance on a
+fixed calendar, enter at the next session's open — across a full 3 × 3 × 2 grid of 18 variants, with
+two declared cost scenarios each, all sealed before any strategy module existed. **Gate 3 failed:
+`FAIL — STAGE_3_G2_NO_CANDIDATE`.** Every one of the 18 variants tripped the §5.1 research shutdown in
+both of its runs, so step 1 of the frozen selection rule — zero shutdowns, tiebroken on turnover, never
+on return — admitted nothing, and Gate 3 was never reached on a candidate. The 36 runs fired on 18
+distinct sessions between 2008-10-24 and 2020-03-12; buy-and-hold SPY breaches the same 15% threshold
+on 2008-10-03, *before any variant*, which is the control that makes the 100% rate a property of a run
+span opening in July 2008 rather than a defect. The change the charter set out to make was made — the
+variants targeted up to **21** distinct symbols against Generation 1's one — and it did not survive the
+shutdown screen. The grid was not loosened, the threshold was not raised, and no runner-up was
+promoted; all three are forbidden by the seal, and two of them would have produced a candidate. The
+full 18-variant table is published in the [Stage 3 report](governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md)
+as a descriptive record that decided nothing: the strongest variant by return failed the screen on
+exactly the same terms as the weakest.
 
 **No expected income, profit, or return is claimed for any period, past or future.** The performance
 figures on disk are historical simulations under an unvalidated proxy cost model, plus the Stage 2
@@ -222,6 +270,26 @@ sha256sum -c reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION.sha256
 sha256sum -c reports/stage4/STAGE_4_VALIDATION.sha256
 ```
 
+**Generation 2** seals its partition and its rotation pre-registration in its own subtree, and both
+records use project-root-relative paths. The partition lock fixes all four windows — including a
+holdout that did not exist in calendar time when it was written. The rotation protocol was sealed
+before any Generation 2 strategy module existed, and carries the module and output counts at seal
+time that make that ordering falsifiable:
+
+```bash
+cd stockedge100
+sha256sum -c governance/generation_2/STAGE_1_G2_PARTITION_LOCK.sha256
+sha256sum -c governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256
+sha256sum -c reports/stage3_g2/STAGE_3_G2_ROTATION_RESEARCH.sha256
+```
+
+One asymmetry is worth knowing before verifying anything: `repo_state_id`'s governance pattern is
+single-level (`governance/*.md`), so `governance/generation_2/` is **not** covered by it, while
+`config/**/*.json` is recursive and `config/generation_2/` **is**. That is recorded as `G2-CONFLICT-4`
+and disclosed rather than fixed — changing the pattern set would make `repo_state_id` values
+incomparable across stages. The Generation 2 governance artifacts are covered by the three records
+above instead.
+
 ---
 
 ## Stage and gate map
@@ -247,6 +315,10 @@ ids are authoritative for threshold lookup. The mapping is fixed in
 Stage 4 must clear **two** constitutional gates: robustness thresholds before the holdout is
 unlocked, holdout thresholds after.
 
+Generation 2 was opened under stage 10 and then re-enters this same map from the top: its own
+partition lock is a stage 1 artifact and its rotation research is a stage 3 artifact, both in the
+`generation_2/` subtrees. A new generation restarts the gates; it does not inherit a pass.
+
 ---
 
 ## Repository layout
@@ -254,7 +326,9 @@ unlocked, holdout thresholds after.
 ```
 stockedge100/
 ├── governance/     frozen constitution, freeze hashes, verification and stage decision records
+│   └── generation_2/  Generation 2's charter, partition lock, pre-registration and reports
 ├── config/         versioned, hashed configuration (no secrets, ever)
+│   └── generation_2/  Generation 2's cost derivation, rotation protocol and gate criteria
 ├── data/
 │   ├── raw/         immutable provider payloads exactly as received
 │   ├── normalized/  derived, reproducible datasets
@@ -294,13 +368,28 @@ attributable.
 
 ## Reproducibility
 
-This working tree is not a git repository. Repository identity is therefore established by a
-**repo state id**: a SHA-256 over the sorted map of tracked source and governance file digests
-(`stockedge100.audit.hash_tree` → `tree_digest`). Every material run records the repo state id,
-config hash, dataset hashes, dependency versions, seed, command, and output artifact hashes.
+Repository identity is established by a **repo state id**: a SHA-256 over the sorted map of tracked
+source and governance file digests (`stockedge100.audit.hash_tree` → `tree_digest`). Every material
+run records the repo state id, config hash, dataset hashes, dependency versions, seed, command, and
+output artifact hashes.
 
-Running `git init` here is available on request; it has not been done, and nothing has been
-committed.
+The workspace **is** a git repository as of 2026-08-14, pushed to
+`https://github.com/aagii20012/stock-failed`. The `.git` lives at the workspace root, one level above
+this directory, so the governed tree still carries no repository of its own. This paragraph corrects
+a statement that stood here through Stage 4 — that the tree was not a git repository — which was true
+when written and became stale without any file having been edited. **The same stale sentence remains
+in `governance/STAGE_0_VERIFICATION_REPORT.md` and is not corrected there**, because that report is
+frozen; the staleness is disclosed rather than repaired.
+
+Governance identity remains the content-derived repo state id, not a commit, and git can destroy it.
+Two settings in the workspace root are load-bearing and must never be removed:
+
+- **`core.autocrlf=false` and `* -text` in `.gitattributes`.** Git's Windows default rewrites LF to
+  CRLF in the working tree on the *next checkout*, which changes the SHA-256 of every tracked file and
+  silently invalidates every freeze record, manifest and repo state id from Stage 0 onward.
+- **The `.gitignore` in this directory excludes `data/raw|normalized|reference`.** That is what keeps
+  the sealed holdout observations off GitHub. Manifests and checksums are tracked, so the data stays
+  reproducible without being published.
 
 ---
 
@@ -318,7 +407,7 @@ pass. No prior approval of research, paper trading, or shadow-live operation imp
 
 ## Known limitations (kept current)
 
-Seven sets now, and all of them travel with every downstream result. Data limitations settled at
+Eight sets now, and all of them travel with every downstream result. Data limitations settled at
 Stage 1 — full detail and the remaining seven items in
 [STAGE_1_DATA_FOUNDATION_REPORT.md](governance/STAGE_1_DATA_FOUNDATION_REPORT.md) §9. Engine
 limitations settled at Stage 2 — all twelve in
@@ -332,9 +421,13 @@ limitations settled at the attempt 2 evaluation — all sixteen in
 §20. Validation pre-registration limitations settled at Stage 4 — all eleven in
 [STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md](governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md)
 §20. Validation evaluation limitations settled at the Stage 4 evaluation — all seven in
-[STAGE_4_VALIDATION_REPORT.md](governance/STAGE_4_VALIDATION_REPORT.md) §11. An engine cannot be more
-trustworthy than its inputs, and a research result cannot be more
-trustworthy than the engine, so each list applies to everything downstream of it.
+[STAGE_4_VALIDATION_REPORT.md](governance/STAGE_4_VALIDATION_REPORT.md) §11. Generation 2 rotation
+limitations settled at its Stage 3 — all seven in
+[STAGE_3_G2_ROTATION_RESEARCH_REPORT.md](governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md)
+§17. An engine cannot be more trustworthy than its inputs, and a research result cannot be more
+trustworthy than the engine, so each list applies to everything downstream of it. The first seven sets
+were settled under Generation 1 and apply unchanged to Generation 2, which reuses the same provider,
+the same universe, the same account model and the same cost model.
 
 - **Single provider.** Every price comes from one unofficial public Yahoo Finance endpoint via
   `yfinance`. There is no second source to cross-check against, so a systematic provider error would
@@ -402,3 +495,21 @@ trustworthy than the engine, so each list applies to everything downstream of it
   fail settles is narrow: one representative, on one window, under one parameterisation. It is not
   evidence that C1 would have failed, and C1 cannot now be tested — the validation window is spent
   and its information is known.**
+- **Generation 2's validation window is Generation 1's.** 2021-08-01 → 2024-07-31 is the exact period
+  Generation 1 already read and published, so the researcher knows approximately how the broad market
+  behaved in it. Generation 2 tests a different hypothesis over the same calendar period, which limits
+  but does not eliminate the concern. The full disclosure is sealed in the partition lock and
+  reproduced verbatim in every Generation 2 report that references validation; it is why a Generation 2
+  validation result alone, without a clean holdout confirmation, could not be treated as evidence of an
+  edge even if one were obtained.
+- **Generation 2's Gate 3 fail is bounded by its run span.** All 18 variants share a start of
+  2008-07-28 — the first session where the longest lookback in the grid has a reference bar for every
+  universe member — which is ten weeks before the worst equity drawdown in modern market history. A
+  15% research trip-wire and that start are close to incompatible for any long-only equity rotation.
+  That is a finding about the interaction of two frozen choices, not a licence to change either, and
+  the stage cannot say what a later start would have produced because running one to find out is the
+  post-hoc loosening the seal forbids.
+- **Generation 2 declares one candidate family, and its tiebreak was never exercised.** The
+  constitution's cross-candidate disjunction is therefore over a set of size one, carrying none of the
+  robustness a wider set would. And because the shutdown screen eliminated everything at step 1, the
+  turnover tiebreak has no evidence behind it beyond unit tests on synthetic inputs.

@@ -1,0 +1,182 @@
+[
+    {
+        "index": 1,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000",
+        "scheduled_rebalance_sessions": 157
+    },
+    {
+        "index": 2,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000",
+        "scheduled_rebalance_sessions": 53
+    },
+    {
+        "index": 3,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000",
+        "scheduled_rebalance_sessions": 157
+    },
+    {
+        "index": 4,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000",
+        "scheduled_rebalance_sessions": 53
+    },
+    {
+        "index": 5,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998",
+        "scheduled_rebalance_sessions": 157
+    },
+    {
+        "index": 6,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998",
+        "scheduled_rebalance_sessions": 53
+    },
+    {
+        "index": 7,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000",
+        "scheduled_rebalance_sessions": 157
+    },
+    {
+        "index": 8,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000",
+        "scheduled_rebalance_sessions": 53
+    },
+    {
+        "index": 9,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000",
+        "scheduled_rebalance_sessions": 157
+    },
+    {
+        "index": 10,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000",
+        "scheduled_rebalance_sessions": 53
+    },
+    {
+        "index": 11,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998",
+        "scheduled_rebalance_sessions": 157
+    },
+    {
+        "index": 12,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998",
+        "scheduled_rebalance_sessions": 53
+    },
+    {
+        "index": 13,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000",
+        "scheduled_rebalance_sessions": 157
+    },
+    {
+        "index": 14,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.500000000",
+        "target_gross_exposure": "0.500000000",
+        "scheduled_rebalance_sessions": 53
+    },
+    {
+        "index": 15,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000",
+        "scheduled_rebalance_sessions": 157
+    },
+    {
+        "index": 16,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.475000000",
+        "target_gross_exposure": "0.950000000",
+        "scheduled_rebalance_sessions": 53
+    },
+    {
+        "index": 17,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998",
+        "scheduled_rebalance_sessions": 157
+    },
+    {
+        "index": 18,
+        "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.316666666",
+        "target_gross_exposure": "0.949999998",
+        "scheduled_rebalance_sessions": 53
+    }
+]

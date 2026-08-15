@@ -1,0 +1,350 @@
+{
+  "artifact_id": "SE100-CFG-3101",
+  "title": "Generation 2 Stage 3 strategy protocol — cross-sectional ETF rotation, pre-registered before any variant is run",
+  "version": "1.0.0",
+  "project": "StockEdge100",
+  "generation": 2,
+  "generation_id": "SE100-GEN2-7394207c543401e2",
+  "stage": 3,
+  "gate_id": 3,
+  "constitution_ref": "SE100-GOV-0001 sections 3, 4, 5.1, 6.1, 9 gate 3, 11",
+  "charter_ref": "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md (SE100-GOV-2001)",
+  "partition_lock_ref": "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md (SE100-GOV-2002)",
+  "partition_lock_md_sha256": "5ae2408dc318e5b87a054a6014e4439d8c6b1934748617c787720f63356b0773",
+  "partition_lock_json_sha256": "e17ea82c499d51cf23fc9986e7231dce6388f8a3c7394d3dd3c0e3d27fbacbe7",
+  "charter_md_sha256": "865a2feffe683e0baf71f1ab976e286fbb2d003109ab47cfaffc1fe6a63dbc90",
+  "cost_model_derivation_ref": "config/generation_2/g2_cost_model.json (SE100-CFG-2101)",
+  "gate_criteria_ref": "config/generation_2/g2_gate_criteria.json (SE100-CFG-3102)",
+
+  "declared_before_any_strategy_code": true,
+  "declaration_note": "This file and its Markdown counterpart are sealed before any Generation 2 strategy module exists on disk and before any variant is run. The seal program refuses to write if it finds a Generation 2 strategy module, a Generation 2 result file, or a Generation 2 runs/ record, so the claim above is a measured precondition and not an assertion of good faith. Everything a later session could be tempted to choose after seeing results — which variants exist, how the ranking signal is computed, which session each order fills on, how the representative is picked, and what happens if none qualifies — is fixed here.",
+
+  "serialisation": {
+    "numbers": "Every quantity that enters arithmetic is a decimal STRING, parsed with stockedge100.backtest.config.dec, which refuses float input. No value in this file is to be read as an IEEE double.",
+    "dates": "ISO 8601 calendar dates, inclusive at both ends, compared as strings."
+  },
+  "currency": "USD",
+
+  "strategy_id": "SE100-G2-S3-C1-ROTATION",
+  "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH",
+  "hypothesis": "Relative strength among the eligible ETF universe persists over a multi-week to multi-month horizon sufficiently to justify periodically rotating exposure toward the currently-strongest names.",
+
+  "what_makes_this_genuinely_cross_sectional": {
+    "generation_1_failure_mode": "Generation 1's validated candidate declared a multi-symbol universe but its realized trading collapsed onto a single symbol: reports/stage4/STAGE_4_VALIDATION.json run_evidence.runs[0].measure.symbols_loaded is ['SPY'] and contribution_by_symbol is {'SPY': '2.15'}. A universe that is never selected among is decoration.",
+    "generation_2_requirement": "The selection is a rank over the full eligible universe recomputed at every scheduled rebalance. Whether that produces genuine breadth is an empirical question this stage answers, not an assumption. The realized distinct-symbol count and per-symbol contribution are recorded for every variant, and S3-C6 gates the representative on the 50% single-instrument profit share, so a Generation 2 candidate that collapses onto one symbol fails the gate rather than passing it quietly.",
+    "not_a_promise": "Declaring the mechanism does not guarantee breadth. If the top-k ranking happens to hold the same ETF for years, the candidate is a single-symbol strategy wearing a rotation costume, and S3-C6 is the condition that says so."
+  },
+
+  "eligible_universe": {
+    "source": "governance/STAGE_1_UNIVERSE.json (SE100-GOV-1004, FROZEN)",
+    "source_sha256": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+    "universe_version": "SE100-U1-d4917c2f7f1cd834",
+    "universe_identity_sha256": "d4917c2f7f1cd8344728a39165929b352766fbe7193b3c64e71a971749dcbf38",
+    "member_count": 34,
+    "members": ["AGG", "BND", "DIA", "DVY", "EEM", "EFA", "HYG", "IEF", "IVV", "IWM", "IYR", "LQD", "MDY", "QQQ", "SHY", "SPY", "TIP", "TLT", "VEA", "VGK", "VIG", "VNQ", "VTI", "VWO", "VYM", "XLB", "XLE", "XLF", "XLI", "XLK", "XLP", "XLU", "XLV", "XLY"],
+    "re_check": {
+      "performed_in": "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md section 3",
+      "window_read": "development only, 1993-01-29 .. 2021-07-31",
+      "outcome": "all 34 members pass; no symbol added, removed, or substituted",
+      "prohibition": "No symbol may be added or dropped on the basis of any performance figure, in this stage or any later one. Eligibility is a liquidity and structural question and is answered without reference to returns."
+    },
+    "ranking_membership_rule": "All 34 members are ranked at every scheduled rebalance. A symbol lacking a bar at either end of its lookback interval on the decision date is excluded from THAT date's ranking and recorded as excluded, never silently treated as a zero return. Given the common run start below this exclusion never actually fires, but the rule is fixed anyway so that a future window cannot make it a judgement call.",
+    "excluded_symbols": {
+      "AAPL": "present in data/normalized/daily as a Stage 2 engine fixture, not a member of the frozen universe, and not ranked, held, or read by any Generation 2 run."
+    }
+  },
+
+  "ranking_signal": {
+    "name": "N-month total return (price plus dividends)",
+    "definition_prose": "The total return of a symbol over the lookback interval ending at the decision session's close, including dividends paid inside the interval, computed only from bars at or before the decision session.",
+    "interval": "from the close of the last session at or before month_offset(decision_session, -N) to the close of the decision session",
+    "month_offset_rule": "month_offset(d, -N) shifts the calendar month by N and clamps the day of month to the last day of the resulting month. It is pure calendar arithmetic and reads no market data.",
+    "formula": "TR(t0 -> t1) = (close[t1] / close[t0]) / product over sessions s in (t0, t1] of (1 - D[s] / close[s-1]) - 1",
+    "formula_note": "This is exactly adj[t1] / adj[t0] - 1 under the adjustment convention Stage 1 measured and the sealed cost model's ADJ_CLOSE_RATIO benchmark method uses, where adj[t] = close[t] * product over s > t of (1 - D[s] / close[s-1]). Writing it as a backward product over the interval rather than as a ratio of adjusted closes matters: an adjusted-close column is a function of every dividend AFTER the session too, so reading one at t1 would be a look-ahead. The form above touches only sessions in (t0, t1].",
+    "inputs": "close prices and per-share cash dividends, both from the normalized daily bars, read through MarketView.history so that any read past the decision session raises LookAheadError structurally rather than being caught by review",
+    "arithmetic": "exact Decimal in ENGINE_CONTEXT (prec=34, ROUND_HALF_EVEN); no float appears at any point",
+    "lookback_grid_months": [3, 6, 12],
+    "no_caching": "Signals are recomputed from scratch at every rebalance in every run. A cache keyed on anything would be one more thing whose invalidation could differ between two runs, and determinism across a clean rerun is a gated claim in this stage.",
+    "no_other_signal": "There is no volatility filter, no absolute-momentum overlay, no trend filter, no cash-when-negative rule, and no skip-month. Every one of those is a defensible design choice and every one is a parameter that could be added after seeing a disappointing result. The grid declared below is the whole search."
+  },
+
+  "ranking_rule": {
+    "sort_key": "(-signal, symbol)",
+    "tie_break": "ascending ticker, applied to exactly equal Decimal signals; deterministic and independent of dict or file ordering",
+    "selection": "the first k entries of the sorted list",
+    "no_thresholding": "The top k are held regardless of the sign or size of their signal. A variant is always fully allocated to k names at a rebalance; it never sits in cash because the leaders look weak. Adding such a rule would be adding an untested absolute-momentum overlay to a relative-strength hypothesis."
+  },
+
+  "position_count": {
+    "grid_k": [1, 2, 3],
+    "enforcement": "Each variant runs against a cost model derived from the sealed Generation 1 model with /account/max_open_risky_positions set to that variant's k, per config/generation_2/g2_cost_model.json. The engine's own MAX_POSITIONS rejection and the Portfolio invariant therefore enforce k; it is not enforced by the strategy politely asking."
+  },
+
+  "rebalance": {
+    "grid_frequency": ["MONTHLY", "QUARTERLY"],
+    "rule": "A scheduled rebalance occurs on the run's first session (the inception rebalance) and on the first exchange session of each calendar month, or of January, April, July and October for the quarterly variants.",
+    "detection": "backward-looking only: the current session is a rebalance if its calendar month differs from the previous session the strategy saw. No forward calendar is consulted and no future session is needed to know whether today qualifies.",
+    "why_not_month_end": "Month-END is not decidable at the close of the session that would be the month's last one without knowing that no further session falls in that month — which is a forward calendar read, exactly the look-ahead the adversarial tests for this stage are required to forbid. Recorded as G2-CONFLICT-8.",
+    "inception_rebalance": {
+      "included": true,
+      "rationale": "Without it the quarterly variants would sit in cash for up to three months after the run start while the monthly variants traded, making a cross-frequency comparison partly a comparison of start dates. Declared here rather than discovered later.",
+      "counted_in": "the scheduled_rebalance_sessions figures below"
+    },
+    "calendar_rule_is_fixed": "Never signal-triggered. No rebalance is added, skipped, or moved because of what the ranking or the equity curve is doing.",
+    "measured_counts": {
+      "source": "_scratch/g2_grid_recon.py, run against the exchange calendar and the normalized daily bars, reading session dates only",
+      "monthly_rebalance_sessions": 157,
+      "quarterly_rebalance_sessions": 53,
+      "monthly_first_three": ["2008-07-28", "2008-08-01", "2008-09-02"],
+      "monthly_last_two": ["2021-06-01", "2021-07-01"],
+      "quarterly_first_three": ["2008-07-28", "2008-10-01", "2009-01-02"],
+      "quarterly_last_two": ["2021-04-01", "2021-07-01"]
+    }
+  },
+
+  "execution": {
+    "entry": "At each scheduled rebalance the decision is taken at that session's CLOSE and every resulting order fills at the NEXT session's OPEN. No order fills at the close that generated the ranking.",
+    "exit": "A held symbol is sold when it is not in the top k at a scheduled rebalance. Its sell order fills at the same next open as the buys it funds.",
+    "no_discretionary_exits": "Between scheduled rebalances the strategy issues no orders at all. There is no stop, no trailing stop, no profit target, and no intra-period re-rank.",
+    "only_forced_exception": "The constitution section 5.1 research shutdown. On a 15% drawdown from the running high-water mark the engine liquidates every position at the next open and blocks entries for the remainder of the run. This is the engine's behaviour, enforced for every variant, never disabled and never treated as an artefact.",
+    "order_sequencing": {
+      "rule": "Within a fill session, SELLs execute before BUYs.",
+      "reason": "Generation 1's engine sorts scheduled orders by (symbol, side, order_id), so a sale of a late-alphabet symbol would settle after a purchase of an early-alphabet one and the buy would be clamped by cash that had not arrived yet. With one position this could not arise. Recorded as G2-CONFLICT-14.",
+      "implementation": "stockedge100.backtest.g2_engine.RotationEngine._execute re-sorts by (0 if side == SELL else 1, symbol, order_id), which is total and therefore deterministic.",
+      "disclosed_limitation": "Same-session rotation assumes sale proceeds are available to fund same-session purchases, i.e. no T+1 settlement delay. This assumption is inherited unchanged from Generation 1's engine; Generation 2 does not introduce it and does not repair it here. It is disclosed as a limitation of the result."
+    },
+    "marks_used_for_sizing": {
+      "rule": "Position values used to size a buy are marked at the FILL session's OPEN.",
+      "reason": "Generation 1's _execute_buy marks held positions at the fill session's CLOSE. With at most one open position that call reads nothing. With k > 1 it would size an open-priced purchase using closing prices from the same session. Recorded as G2-CONFLICT-14.",
+      "implementation_note": "RotationEngine uses its own open-marking helper rather than reusing BacktestEngine._mark, whose side effect of updating the last-close cache must not fire at the open."
+    }
+  },
+
+  "position_sizing": {
+    "rule": "Equal weight across the k held positions, subject to the 95% maximum gross exposure and the 50% single-position concentration ceiling.",
+    "target_weight_formula": "w(k) = min(0.95 / k, 0.50), quantized to nine decimal places with ROUND_DOWN",
+    "quantization_reason": "Nine decimals matches the sealed sizing block's share_decimals. ROUND_DOWN rather than ROUND_HALF_EVEN because at k=3 the half-even value multiplied by 3 exceeds 0.95 in the thirty-fourth decimal place, which would make the aggregate ceiling bind on the third buy of every rebalance for a reason that is pure representation error. Rounding down makes k*w(k) <= 0.95 exactly, for every k, by construction.",
+    "target_weights": {"1": "0.500000000", "2": "0.475000000", "3": "0.316666666"},
+    "target_gross_exposure": {"1": "0.500000000", "2": "0.950000000", "3": "0.949999998"},
+    "budget": "Each buy is issued with budget = w(k) * equity, where equity is measured at the fill session's open as described above.",
+    "clamps": {
+      "aggregate": "0.95 * equity minus the total value of positions already held, per the sealed max_gross_exposure_fraction",
+      "cash_floor": "cash minus 0.05 * equity, per the sealed min_cash_buffer_fraction",
+      "per_position": "0.50 * equity minus the current value of that same position, per the concentration ceiling",
+      "resolution": "The budget actually submitted is the minimum of the requested budget and all three clamps. If the minimum is not strictly positive the order is rejected with the existing INSUFFICIENT_CASH reason, naming the binding clamp in its detail string. No new rejection reason is introduced: stockedge100.backtest.orders.REASONS is a closed declared set and the engine may not invent a member of it at runtime."
+    },
+    "no_rebalancing_of_continuing_holdings": {
+      "rule": "A symbol that is in the top k at consecutive rebalances is left alone. It is neither trimmed back to w(k) nor topped up to it.",
+      "consequence": "Realized weights drift away from equal between entries, and a long-held winner can approach the 50% ceiling without a new order being issued.",
+      "why": "Equal-weight-AT-ENTRY is one rule; continuous equal-weight maintenance is a different strategy with materially higher turnover and cost drag, and choosing between them after seeing which one performed better would be exactly the fitting Gate 3 exists to catch. Equal-weight-at-entry is chosen for being the lower-turnover and more conservative of the two. Recorded as G2-CONFLICT-10.",
+      "ceiling_still_binds": "The 50% ceiling is enforced at every buy, so drift can never be increased by a new purchase past the ceiling. Drift caused purely by price appreciation is not an order and is not trimmed."
+    },
+    "k_equals_1_disclosure": {
+      "statement": "At k=1 the concentration ceiling binds before the gross-exposure cap, so a k=1 variant is structurally 50% invested and 50% in cash at all times.",
+      "consequence_for_selection": "A half-cash portfolio has roughly half the drawdown of a fully invested one. The frozen representative-selection rule below screens on research-shutdown events, which is a drawdown-driven trip-wire. The rule therefore structurally favours k=1 variants, for a reason that has nothing to do with the rotation hypothesis being true.",
+      "disclosed_before_any_run": true,
+      "not_repaired": "The ceiling is not relaxed at k=1 and the selection rule is not changed to compensate. Both are declared as they are, and the bias is stated here so that a k=1 representative is read as what it is. Precedent for disclosing a structural allocation consequence rather than tuning it away: config/stage3_attempt2_strategy_protocol.json risk_architecture.RA1-1.defensive_leg_note.",
+      "recorded_as": "G2-CONFLICT-9"
+    }
+  },
+
+  "concentration_ceiling": {
+    "value": "0.50",
+    "applies_at": "every buy, measured as position value over account equity at the fill session's open",
+    "source": "config/stage3_attempt2_strategy_protocol.json risk_architecture.RA1-1.rule, f_base = 0.50, carried forward as the Generation-1-consistent default",
+    "source_sha256": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433"
+  },
+
+  "window": {
+    "authorized": "development only",
+    "start": "1993-01-29",
+    "end": "2021-07-31",
+    "last_exchange_session_in_window": "2021-07-30",
+    "prohibited": [
+      {"window": ["2021-08-01", "2024-07-31"], "state": "LOCKED", "note": "Generation 2 validation. Not readable in this stage."},
+      {"window": ["2024-08-01", "2026-07-31"], "state": "SPENT_AND_PROHIBITED", "note": "Generation 1's final holdout. Never readable again, in any generation."},
+      {"window": ["2026-08-01", "2028-07-31"], "state": "SEALED", "note": "Generation 2's holdout. Not readable before that period has elapsed in real calendar time."}
+    ],
+    "enforcement": "ResearchWindow raises WindowViolation outside its bounds; MarketView raises LookAheadError past the decision session; and stockedge100.strategies.g2_window_guard adds the three checks promised in governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md section 4, including an inspection of the loaded bars themselves rather than trust in the loader."
+  },
+
+  "run_span": {
+    "source": "_scratch/g2_grid_recon.py, measured from session dates only",
+    "run_start": "2008-07-28",
+    "run_start_weekday": "Monday",
+    "run_end": "2021-07-30",
+    "run_sessions": 3276,
+    "binding_symbol": "VEA",
+    "binding_symbol_inception": "2007-07-26",
+    "earliest_inception_in_universe": "1993-01-29",
+    "earliest_inception_symbols": ["SPY"],
+    "derivation": "The run starts at the first exchange session S for which month_offset(S, -12) is at or after the latest inception in the universe, so that the longest lookback in the grid has a reference bar for EVERY member from the first rebalance onward. month_offset(2008-07-28, -12) = 2007-07-28 >= 2007-07-26; the previous session 2008-07-25 gives 2007-07-25, which is before VEA's inception, so 2008-07-28 is the minimal such session.",
+    "common_to_all_variants": true,
+    "common_start_rationale": "All eighteen variants share one run start, including the 3-month and 6-month lookback variants that could have started earlier. Letting each lookback start as early as it individually could would make a cross-lookback comparison partly a comparison of which market history each variant happened to see. The cost is that the shorter lookbacks discard history they could have used; that cost is paid deliberately and is stated here.",
+    "members_missing_a_bar_at_run_start": [],
+    "symbols_ending_before_run_end": [],
+    "no_delisting_in_window": "Every one of the 34 members has bars through 2021-07-30, so the sealed LIQUIDATE_AT_LAST_AVAILABLE_CLOSE delisting path is not exercised by any Generation 2 Stage 3 run. Stated as a measured fact, not an assumption.",
+    "development_union_sessions": 7178,
+    "development_union_span": ["1993-01-29", "2021-07-30"]
+  },
+
+  "grid": {
+    "axes": {"lookback_months": [3, 6, 12], "top_k": [1, 2, 3], "rebalance_frequency": ["MONTHLY", "QUARTERLY"]},
+    "size": 18,
+    "declared_in_full_before_any_variant_is_run": true,
+    "no_expansion": "The grid may not be widened, narrowed, or re-centred after any result is seen. A variant that would have been interesting is not added; a variant that embarrasses the hypothesis is not removed. If the grid is wrong, that is a finding, not a fixable defect.",
+    "variant_id_format": "SE100-G2-S3-C1-ROTATION-L{lookback:02d}-K{k}-{FREQUENCY}",
+    "variant_id_padding_note": "The lookback is zero-padded so that lexicographic order over variant ids equals numeric order over lookbacks. The final tiebreak in the selection rule is lexicographic, and an unpadded L12 would sort before L3.",
+    "variants": [
+      {"index": 1, "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-MONTHLY", "lookback_months": 3, "top_k": 1, "rebalance_frequency": "MONTHLY", "target_weight_per_position": "0.500000000", "target_gross_exposure": "0.500000000", "scheduled_rebalance_sessions": 157},
+      {"index": 2, "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K1-QUARTERLY", "lookback_months": 3, "top_k": 1, "rebalance_frequency": "QUARTERLY", "target_weight_per_position": "0.500000000", "target_gross_exposure": "0.500000000", "scheduled_rebalance_sessions": 53},
+      {"index": 3, "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-MONTHLY", "lookback_months": 3, "top_k": 2, "rebalance_frequency": "MONTHLY", "target_weight_per_position": "0.475000000", "target_gross_exposure": "0.950000000", "scheduled_rebalance_sessions": 157},
+      {"index": 4, "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K2-QUARTERLY", "lookback_months": 3, "top_k": 2, "rebalance_frequency": "QUARTERLY", "target_weight_per_position": "0.475000000", "target_gross_exposure": "0.950000000", "scheduled_rebalance_sessions": 53},
+      {"index": 5, "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-MONTHLY", "lookback_months": 3, "top_k": 3, "rebalance_frequency": "MONTHLY", "target_weight_per_position": "0.316666666", "target_gross_exposure": "0.949999998", "scheduled_rebalance_sessions": 157},
+      {"index": 6, "variant_id": "SE100-G2-S3-C1-ROTATION-L03-K3-QUARTERLY", "lookback_months": 3, "top_k": 3, "rebalance_frequency": "QUARTERLY", "target_weight_per_position": "0.316666666", "target_gross_exposure": "0.949999998", "scheduled_rebalance_sessions": 53},
+      {"index": 7, "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-MONTHLY", "lookback_months": 6, "top_k": 1, "rebalance_frequency": "MONTHLY", "target_weight_per_position": "0.500000000", "target_gross_exposure": "0.500000000", "scheduled_rebalance_sessions": 157},
+      {"index": 8, "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K1-QUARTERLY", "lookback_months": 6, "top_k": 1, "rebalance_frequency": "QUARTERLY", "target_weight_per_position": "0.500000000", "target_gross_exposure": "0.500000000", "scheduled_rebalance_sessions": 53},
+      {"index": 9, "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-MONTHLY", "lookback_months": 6, "top_k": 2, "rebalance_frequency": "MONTHLY", "target_weight_per_position": "0.475000000", "target_gross_exposure": "0.950000000", "scheduled_rebalance_sessions": 157},
+      {"index": 10, "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K2-QUARTERLY", "lookback_months": 6, "top_k": 2, "rebalance_frequency": "QUARTERLY", "target_weight_per_position": "0.475000000", "target_gross_exposure": "0.950000000", "scheduled_rebalance_sessions": 53},
+      {"index": 11, "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-MONTHLY", "lookback_months": 6, "top_k": 3, "rebalance_frequency": "MONTHLY", "target_weight_per_position": "0.316666666", "target_gross_exposure": "0.949999998", "scheduled_rebalance_sessions": 157},
+      {"index": 12, "variant_id": "SE100-G2-S3-C1-ROTATION-L06-K3-QUARTERLY", "lookback_months": 6, "top_k": 3, "rebalance_frequency": "QUARTERLY", "target_weight_per_position": "0.316666666", "target_gross_exposure": "0.949999998", "scheduled_rebalance_sessions": 53},
+      {"index": 13, "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-MONTHLY", "lookback_months": 12, "top_k": 1, "rebalance_frequency": "MONTHLY", "target_weight_per_position": "0.500000000", "target_gross_exposure": "0.500000000", "scheduled_rebalance_sessions": 157},
+      {"index": 14, "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K1-QUARTERLY", "lookback_months": 12, "top_k": 1, "rebalance_frequency": "QUARTERLY", "target_weight_per_position": "0.500000000", "target_gross_exposure": "0.500000000", "scheduled_rebalance_sessions": 53},
+      {"index": 15, "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-MONTHLY", "lookback_months": 12, "top_k": 2, "rebalance_frequency": "MONTHLY", "target_weight_per_position": "0.475000000", "target_gross_exposure": "0.950000000", "scheduled_rebalance_sessions": 157},
+      {"index": 16, "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K2-QUARTERLY", "lookback_months": 12, "top_k": 2, "rebalance_frequency": "QUARTERLY", "target_weight_per_position": "0.475000000", "target_gross_exposure": "0.950000000", "scheduled_rebalance_sessions": 53},
+      {"index": 17, "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-MONTHLY", "lookback_months": 12, "top_k": 3, "rebalance_frequency": "MONTHLY", "target_weight_per_position": "0.316666666", "target_gross_exposure": "0.949999998", "scheduled_rebalance_sessions": 157},
+      {"index": 18, "variant_id": "SE100-G2-S3-C1-ROTATION-L12-K3-QUARTERLY", "lookback_months": 12, "top_k": 3, "rebalance_frequency": "QUARTERLY", "target_weight_per_position": "0.316666666", "target_gross_exposure": "0.949999998", "scheduled_rebalance_sessions": 53}
+    ]
+  },
+
+  "runs_per_variant": {
+    "count": 2,
+    "labels": ["#BASE", "#STRESS"],
+    "base": "the derived cost model at the sealed base friction assumption",
+    "stress": "the same model with the sealed stress_multiplier of 2.0 applied to the complete friction assumption, including the TAF cap, exactly as Generation 1 applied it",
+    "total_runs": 36,
+    "both_declared": "Both runs of all eighteen variants are declared here and all 36 are executed. None is conditional on the outcome of another."
+  },
+
+  "multiple_comparisons_disclosure": "Eighteen variants over one development window is eighteen looks at the same data. The grid is small, pre-registered in full, and spans axes chosen for being the obvious ones rather than for producing a good number, but none of that makes the multiplicity zero. Two mechanisms bound it. First, the representative that advances is chosen by a rule that never reads a return, so no amount of looking at returns can change which variant is carried forward. Second, the gate is evaluated on that single representative and is NOT a disjunction across eighteen candidates — taking the best of eighteen and gating on it would be precisely the abuse the frozen selection rule exists to prevent. The other seventeen are reported in full as a descriptive record. This disclosure is in addition to, and does not replace, the validation-window reuse disclosure in the partition lock.",
+
+  "representative_selection_rule": {
+    "frozen_before_any_variant_is_run": true,
+    "return_blind": true,
+    "return_blind_statement": "No step of this rule reads a return, a Sharpe ratio, a profit factor, an equity level, or any other performance figure. Returns are measured and logged for all eighteen variants for the record, and they are not an input to the choice.",
+    "steps": [
+      {
+        "order": 1,
+        "name": "zero_research_shutdown_events",
+        "rule": "A variant is eligible only if it recorded zero research-shutdown events across BOTH of its declared runs, base and stress.",
+        "scope_note": "The operating instruction names the shutdown screen without stating whether it spans both runs. Requiring it across both is the more restrictive reading and is return-blind either way, so it is adopted. A variant that survives base costs and trips the trip-wire under doubled costs is not one this stage carries forward.",
+        "mechanism": "The trip-wire is the constitution section 5.1 shutdown the engine already enforces: 15% below the running high-water mark, action LIQUIDATE_AT_NEXT_OPEN_AND_BLOCK_ENTRIES. It fires at most once per run, so the per-run count is 0 or 1 and the per-variant count is 0, 1, or 2.",
+        "same_mechanism_as_generation_1": true
+      },
+      {
+        "order": 2,
+        "name": "lowest_turnover",
+        "rule": "Among eligible variants, the one with the lowest turnover advances. Turnover is measured as the total number of executed fills across both declared runs.",
+        "proxy_justification": "Fill count is a pure activity measure. Gross traded notional was considered and rejected: a variant whose equity grows trades larger notionals for the same activity, which would make the tiebreak a partial return proxy and break the return-blind property. Recorded as G2-CONFLICT-13.",
+        "measurement": "len(result.fills) summed over the #BASE and #STRESS runs, counting both entries and exits, including any forced liquidation fills."
+      },
+      {
+        "order": 3,
+        "name": "lexicographic_variant_id",
+        "rule": "If two or more variants tie on fill count, the lexicographically smallest variant id advances.",
+        "purpose": "A total order, so the rule always terminates in exactly one variant and never requires a judgement call. It is arbitrary, which is the point: an arbitrary tiebreak cannot be steered."
+      }
+    ],
+    "no_candidate_path": {
+      "condition": "Every one of the eighteen variants recorded at least one research-shutdown event.",
+      "verdict": "FAIL — STAGE_3_G2_NO_CANDIDATE",
+      "prohibition": "The grid is not loosened, the shutdown threshold is not raised, the screen is not narrowed to base-only, and the rule is not revised post hoc. The stage ends."
+    },
+    "second_fail_path": {
+      "condition": "A representative is selected by the rule above but does not satisfy every hard condition of Gate 3.",
+      "verdict": "FAIL — STAGE_3_G2_NO_CANDIDATE",
+      "rationale": "The operating instruction names only the all-shutdown path for this token. A representative that survives the screen but fails the gate is still a stage with no admissible candidate, and Gate 3 is conjunctive within a candidate. Emitting the same FAIL token is the more restrictive reading; the alternative would be a stage with no defined verdict. Recorded as G2-CONFLICT-11.",
+      "prohibition": "The runner-up is NOT promoted. Walking down the selection order until one passes the gate would convert a return-blind rule into a search over eighteen candidates for the one that passes, which is the multiplicity abuse the rule exists to prevent."
+    },
+    "no_reselection": "The representative is selected once, mechanically, from the 36 completed runs. If the selected variant then fails the gate, the stage fails. There is no second pass."
+  },
+
+  "gate_evaluation_scope": {
+    "evaluated_on": "the selected representative's #BASE run only",
+    "stress_run_treatment": "reported, not gating",
+    "precedent": "Identical to Generation 1's Stage 3, which evaluated its seven conditions on a single primary result with the stress run in reported_but_not_gating.",
+    "not_a_disjunction": "Constitution section 9 makes the stage verdict a disjunction across CANDIDATES. Generation 2 declares one candidate, SE100-G2-S3-C1-ROTATION, whose parameterisation is fixed by the frozen selection rule. The eighteen variants are parameterisations of that one candidate, not eighteen candidates, and the disjunction is therefore over a set of size one.",
+    "criteria_file": "config/generation_2/g2_gate_criteria.json (SE100-CFG-3102)"
+  },
+
+  "reported_for_every_variant_but_not_gating": [
+    "total return, maximum drawdown, profit factor, closed trade count, and research-shutdown event count, for both the base and stress runs",
+    "fill count, distinct symbols traded, and per-symbol profit contribution",
+    "CAGR, annualised volatility, Sharpe ratio at a 0.00% risk-free rate, exposure fraction, win rate, average win, average loss, longest flat streak",
+    "These figures are a descriptive record. They may not be used to justify a selection other than the one the frozen rule produced, to argue that a different variant should have advanced, or to reopen the grid."
+  ],
+
+  "structural_consequences_declared_before_running": [
+    {
+      "id": "SC-1",
+      "statement": "A quarterly k=1 variant has 53 scheduled rebalances, of which at most 52 can close a trade. It may therefore be structurally unable to reach the Gate 3 floor of 30 closed trades only if it holds the same symbol across most rebalances; with full turnover it would reach 52. The binding risk is low turnover, not the calendar.",
+      "consequence": "If such a variant is selected and closes fewer than 30 trades, S3-C4 fails and the stage fails. The 30-trade floor is not lowered and the lower-frequency exception is not invoked — that exception permits a LONGER evidence requirement, never a smaller count."
+    },
+    {
+      "id": "SC-2",
+      "statement": "At $100 starting equity with k=3, each position is approximately $31.67, far above the sealed min_order_notional_usd of $1.00. The minimum-notional floor is not expected to bind, but it is enforced and any MIN_NOTIONAL rejection is recorded rather than suppressed."
+    },
+    {
+      "id": "SC-3",
+      "statement": "The k=1 half-cash consequence described above biases the shutdown screen toward k=1. Declared, not corrected."
+    }
+  ],
+
+  "reproducibility_requirements": {
+    "determinism": "Two clean runs of the same variant on the same data must produce byte-identical trade and equity digests. This is a gated engineering claim with its own adversarial test, not an aspiration.",
+    "no_randomness": "No random number is drawn anywhere in the strategy or the engine. random_seed is recorded as null.",
+    "ordering": "Every sort key used in ranking, order scheduling, and execution is total, so no result depends on dict insertion order, filesystem ordering, or set iteration order.",
+    "arithmetic": "Exact Decimal throughout, in ENGINE_CONTEXT. dec() refuses float input.",
+    "recorded": "Each run's trades_digest and equity_digest are recorded in the Stage 3 (Generation 2) decision package."
+  },
+
+  "adversarial_test_requirements": {
+    "note": "Holding more than one risky position is new engine capability. It is tested as new capability, not assumed to work because the single-position engine worked. Each item below must have at least one test that FAILS if the engine regresses on it.",
+    "required": [
+      "the engine never holds more than k positions at once",
+      "combined gross exposure across the k positions never exceeds 95% of equity",
+      "no single position ever exceeds 50% of equity at a rebalance",
+      "no order is bought or sold at the close that generated the ranking signal",
+      "tomorrow's bar cannot enter today's ranking",
+      "identical inputs on a clean rerun produce identical results"
+    ],
+    "additional": [
+      "the window guard rejects a window ending after 2021-07-31",
+      "the window guard rejects a loaded series containing a session after 2021-07-31, detected from the bars rather than from the loader",
+      "the window guard rejects any window intersecting 2024-08-01 .. 2026-07-31 or 2026-08-01 .. 2028-07-31",
+      "the representative-selection rule is return-blind: permuting every variant's returns while holding shutdown counts and fill counts fixed does not change which variant is selected",
+      "the derived cost model differs from the sealed Generation 1 model at exactly one JSON pointer"
+    ]
+  },
+
+  "post_seal_defect_rule": {
+    "rule": "If a defect is found in a Generation 2 strategy or engine module after this file is sealed but before results are produced, the module is repaired and every affected run is redone from scratch. This file is not edited.",
+    "if_found_after_results": "The affected results are discarded, not adjusted. A repaired engine produces a new set of runs; a partially repaired result set is not evidence.",
+    "if_the_defect_is_in_this_file": "It is reported as a blocker and superseded by a new artifact with a new id. It is never edited in place."
+  },
+
+  "explicit_non_authorizations": [
+    "This file does not authorize reading any session after 2021-07-31.",
+    "This file does not authorize Stage 4 validation for Generation 2. That requires a separate, explicitly authorized session.",
+    "This file does not authorize reading Generation 1's holdout window, now or ever.",
+    "This file does not authorize reading Generation 2's holdout window before 2028-07-31 has passed in real calendar time.",
+    "This file does not authorize any order, paper or live, at any broker.",
+    "This file does not authorize reading, writing, or testing for the value of any credential.",
+    "This file does not authorize editing any Generation 1 artifact under governance/, config/, or reports/.",
+    "This file does not authorize revising the cost model, the friction assumptions, the fee schedule, or the universe.",
+    "This file does not authorize adding a nineteenth variant, in this session or a later one.",
+    "This file does not authorize promoting a runner-up if the representative fails the gate."
+  ],
+
+  "live_trading_authorized": false
+}

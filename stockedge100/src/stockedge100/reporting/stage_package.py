@@ -140,6 +140,11 @@ class StageDecision:
     gate_passed: bool
     command: str
 
+    # Which research generation this package belongs to. Generation 1 predates the field and every
+    # record it wrote carries 1, so 1 is the default and those records stay byte-identical; a
+    # Generation 2 stage passes 2 rather than letting its package claim Generation 1's lineage.
+    generation: int = 1
+
     gate_conditions: dict[str, Any] = field(default_factory=dict)
     evidence: list[str] = field(default_factory=list)
     limitations: list[str] = field(default_factory=list)
@@ -195,7 +200,7 @@ def build_stage_package(decision: StageDecision) -> BuildResult:
     record: dict[str, Any] = {
         "project": "StockEdge100",
         "stage": decision.stage,
-        "generation": 1,
+        "generation": decision.generation,
         "timestamp_utc": timestamp,
         "verdict": decision.verdict,
         "gate": {"constitution_gate_id": decision.gate_id, "name": decision.gate_name},
@@ -240,7 +245,7 @@ def build_stage_package(decision: StageDecision) -> BuildResult:
     manifest = {
         "project": "StockEdge100",
         "stage": decision.stage,
-        "generation": 1,
+        "generation": decision.generation,
         "timestamp_utc": timestamp,
         "repo_state_id": repo_state_id,
         "frozen_inputs": {
