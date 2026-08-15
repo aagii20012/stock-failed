@@ -77,7 +77,19 @@ an artifact manifest, and an append-only `runs/` reproducibility record.
 `governance/*.{md,json,sha256}`, `src/**/*.py`, `tests/**/*.py`, `config/**/*.{json,yaml}`,
 `pyproject.toml`, `README.md`, `.gitignore`. Editing any of those after the build invalidates the
 digest the build just recorded, and `runs/` is append-only, so the only repair is to regenerate and
-record the supersession in the new run record's notes. Four consequences worth internalizing:
+record the supersession in the new run record's notes.
+
+**Read those glob depths literally — they are not uniform.** `governance/*` is single-level and
+`config/**` is recursive, so a new generation's subtree splits down the middle: `config/generation_2/*.json`
+**is** covered by `repo_state_id`, while `governance/generation_2/*.md|json|sha256` is **not**. That is
+not a defect to fix by widening the pattern — the patterns are themselves sealed by every earlier stage's
+digest — but it must be disclosed as a numbered conflict, as Generation 2 did in `G2-CONFLICT-4`. The
+practical consequence is that a generation subtree's governance artifacts are held by their own `.sha256`
+record and the artifact manifest alone, so those two must actually cover them; `repo_state_id` will not
+notice if they drift. Verify both directions explicitly — assert the report is outside the patterns *and*
+that the config JSON is inside — because a check that only confirms what you expect confirms nothing.
+
+Four consequences worth internalizing:
 
 - Finish the Markdown report, test summary, pytest output **and any `README.md` update** before
   running the builder. A stale README cost Stage 1 a full regeneration. The builder is itself in
@@ -160,7 +172,7 @@ looking for matching` on a script containing nested quotes, and `python -c` with
 here-string truncates.
 
 That `pythonpath` setting applies to pytest only. Running a stage module directly needs an explicit
-`PYTHONPATH=src`, and the Bash tool's working directory resets between calls — so always `cd` by
+`PYTHONPATH=src`, and the Bash tool's working directory **persists** between calls — so always `cd` by
 absolute path in the same command:
 
 ```bash
@@ -170,6 +182,12 @@ cd /d/Product/stock-trade-alpaca/stockedge100 && PYTHONPATH=src python -m stocke
 Run from the parent directory instead and `PYTHONPATH=src` points at nothing; the resulting
 `ModuleNotFoundError: No module named 'stockedge100.reporting'` looks like a packaging fault and is
 not one.
+
+Persistence bites in the other direction too, and this line used to claim the opposite. A later
+`python _scratch/g2_stage3_postbuild_verify.py`, typed as though the shell were at the workspace root,
+resolved against a previous call's `cd` into `stockedge100/` and failed with
+`can't open file 'D:\Product\stock-trade-alpaca\stockedge100\_scratch\...'`. The path in the error is
+the diagnostic: it names a directory you never asked for. Prefix every call with its own absolute `cd`.
 
 ## Git
 
@@ -197,6 +215,35 @@ Two statements on the record are now stale and **must not be corrected in place*
 frozen; `README.md` is a pattern locked by the built Stage 4 package. Disclose the staleness in prose.
 The README's correction belongs to whatever stage next legitimately rewrites it.
 
-Commits are allowed when asked, but the post-package rule still binds: a commit must not add, move or
-rename anything under `governance|src|tests|config`, nor `README.md`, `pyproject.toml` or
-`.gitignore`. A rename would break the manifest and the checksum records, which pin exact paths.
+Commits are allowed when asked, but the post-package rule still binds: a commit must not **create,
+move, rename or delete** anything under `governance|src|tests|config`, nor `README.md`,
+`pyproject.toml` or `.gitignore`. A rename would break the manifest and the checksum records, which
+pin exact paths.
+
+**`git add` is not "adding a file" in that sense**, and reading it that way would make the rule
+forbid ever committing a stage's own work. Staging a file that already exists on disk changes no
+byte and creates no path, so `repo_state_id` cannot move. What the rule forbids is a *filesystem*
+change after the package is built. Generation 2's commit staged 70 new paths under
+`governance/generation_2`, `config/generation_2`, `src/` and `tests/` — all of them written before
+the build and covered by it — and the digest was byte-identical afterwards.
+
+The distinction is checkable rather than argued, so check it instead of reasoning about it. Stage,
+then read the status codes back before committing:
+
+```bash
+git add -A && git status --porcelain | awk '{print $1}' | sort | uniq -c
+```
+
+`A` and `M` are safe. **Any `R` or `D` under a governed path is the violation** — that is the
+signature of a move, rename or deletion, and it breaks the manifests whatever the intent was. Then
+recompute `repo_state_id` and *assert* it, rather than eyeballing two hex strings:
+
+```python
+assert d == EXPECTED, 'DIGEST MOVED: %s' % d
+```
+
+One more thing a commit can quietly get wrong: `git ls-files 'stockedge100/data/*'` matches the
+`.gitkeep` placeholders inside `data/raw|normalized|reference`, so a naive count reports payload that
+is not there. Exclude them (`grep -v '\.gitkeep$'`) and require **zero**, then count what is on disk
+and unpublished to prove the `.gitignore` is doing work — 0 tracked against 70 on disk is the
+evidence; a bare "0 tracked" would also be produced by an empty data directory.

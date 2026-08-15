@@ -132,6 +132,37 @@ When a sweep and a checksum record disagree, the record is right and the predica
 `sha256sum -c` that reports OK while your probe reports a mismatch means the probe misread the file
 shape. Fix the probe before doubting the disk.
 
+## An allow-list that only ever widens is not a check
+
+The previous rule — allow `README.md` and name it — has a failure mode of its own. When a sweep flags an
+*unexpected* changed file, the tempting repair is to add it to the allow-list and watch the sweep go
+green. That converts a detector into a rubber stamp, and it is indistinguishable in the output from an
+undisclosed rewrite of a previous generation's machinery.
+
+Generation 2's post-build sweep flagged `src/stockedge100/reporting/stage_package.py`, the shared
+builder. It was a real change and a legitimate one — a `generation: int = 1` field so the builder stops
+hardcoding `"generation": 1`. It still does not get a bare allow-list entry. Diff it first, then encode
+what makes it safe as *new assertions*, so that a future change which is not safe still fails:
+
+```python
+ALLOWED_TO_CHANGE = {"README.md", BUILDER}
+# the exception must be exact: both must really have changed, or the list is stale
+sorted(k for k in ALLOWED_TO_CHANGE if sha(ROOT / k) != prev[k]) == sorted(ALLOWED_TO_CHANGE)
+StageDecision.__dataclass_fields__["generation"].default == 1   # additive: old records unmoved
+json.loads(gen1_decision.read_text())["generation"] == 1        # and demonstrably unmoved on disk
+```
+
+Three properties are worth asserting for any shared-module change: the new behaviour is **opt-in by
+default**, the **earlier generation's own record is still byte-identical**, and the change is **disclosed
+by name in the report** rather than left for a diff to discover. Check the disclosure's placement too —
+`md.index("no frozen module edited") < md.index("shared builder")` — because a qualification that
+appears before the claim it qualifies does not qualify it.
+
+Where the disclosure is *absent*, say so instead of fixing it. The same builder change is in the report's
+prose but appears nowhere in that package's JSON decision record. The package was already sealed, so
+repairing it would mean regenerating a built package — strictly worse than disclosing the asymmetry in
+the stage report. Report the gap; do not reopen the seal for it.
+
 **"Nothing hashes itself" applies to sealed digest sets too, not just manifests.** Stage 4's S4-C7
 recheck set carries `declared_set_size: 13` and `recorded_here: 12`, because the thirteenth entry is
 `governance/STAGE_4_PREREGISTRATION.json` — the file doing the declaring. Its digest is carried by
