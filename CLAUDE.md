@@ -189,6 +189,16 @@ resolved against a previous call's `cd` into `stockedge100/` and failed with
 `can't open file 'D:\Product\stock-trade-alpaca\stockedge100\_scratch\...'`. The path in the error is
 the diagnostic: it names a directory you never asked for. Prefix every call with its own absolute `cd`.
 
+**Not every command gives you that diagnostic, and the ones that don't are the dangerous ones.**
+`python` echoes the path it tried; `cat`, `ls`, `test -f` and `sha256sum -c` do not. A wrong-cwd
+`cat .gitattributes` returns `No such file or directory` — byte-identical to what you would see if
+the root `.gitattributes` had actually been deleted, which is a five-alarm governance finding (it is
+the `* -text` guard that stops a checkout from rewriting every hashed file's line endings). That
+exact false alarm happened during the Generation 2 Attempt 2 wrap-up. Before believing any "file is
+missing" result about a guard file, re-run it with an explicit absolute `cd` — and prefer a form that
+prints its own location, e.g. `git check-attr text -- <path>`, which answers the real question and
+cannot be faked by being in the wrong directory.
+
 ## Git
 
 The workspace **is** a git repository as of 2026-08-14, pushed to
@@ -244,6 +254,18 @@ assert d == EXPECTED, 'DIGEST MOVED: %s' % d
 
 One more thing a commit can quietly get wrong: `git ls-files 'stockedge100/data/*'` matches the
 `.gitkeep` placeholders inside `data/raw|normalized|reference`, so a naive count reports payload that
-is not there. Exclude them (`grep -v '\.gitkeep$'`) and require **zero**, then count what is on disk
-and unpublished to prove the `.gitignore` is doing work — 0 tracked against 70 on disk is the
-evidence; a bare "0 tracked" would also be produced by an empty data directory.
+is not there. Excluding them (`grep -v '\.gitkeep$'`) is **still not enough**, and requiring zero from
+that form is wrong — it returns **3** on a perfectly clean tree, because Stage 1's
+`data/manifests/STAGE_1_{RAW,NORMALIZED}_MANIFEST.json` and `STAGE_1_VALIDATION_REPORT.json` are
+tracked *on purpose*. `data/manifests` is not in the sealed `.gitignore`; only `raw|normalized|reference`
+are. Scope the glob to the three ignored directories instead:
+
+```bash
+git ls-files 'stockedge100/data/raw/*' 'stockedge100/data/normalized/*' \
+             'stockedge100/data/reference/*' | grep -v '\.gitkeep$' | wc -l   # must be 0
+```
+
+Then count what is on disk **in those same three directories** and unpublished, to prove the
+`.gitignore` is doing work — 0 tracked against 70 on disk is the evidence; a bare "0 tracked" would
+also be produced by an empty data directory. Counting on-disk files across all of `data/` inflates
+the denominator to 73 and quietly mixes the manifests into the payload figure.

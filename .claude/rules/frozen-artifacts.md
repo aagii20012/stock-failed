@@ -128,6 +128,18 @@ legitimately populated by the next:
   `code_hashes` and is *supposed* to change each stage. Allow it explicitly and name it, rather than
   reporting a bare list and leaving the reader to guess whether evidence moved.
 
+**The added-since-seal diff is not the session's file inventory, and reporting it as one undercounts
+the pre-registration machinery by exactly the modules that wrote the seal.** Diffing the build run's
+`code_hashes` against the *seal* run's is the right integrity check — it proves nothing appeared
+between sealing and building except the implementation. It is the wrong source for a "files created
+this session" list, because any module authored *before* the seal in order to produce it is already in
+the seal's `code_hashes` and so cancels out of the diff. Generation 2 Attempt 2's diff was a clean
+`8 added, 0 removed, 1 changed (README.md)`, and the end-of-session report copied that 8 as the
+session total — omitting `reporting/g2_rotation_ra1_preregistration.py`, the sealer itself. Nine
+Python files were new; the report said eight. Take the inventory from git (`git status --porcelain`
+against the last commit) or from the seal run's own diff against the run before *it*, and reconcile
+the two numbers explicitly rather than assuming one answers both questions.
+
 When a sweep and a checksum record disagree, the record is right and the predicate is wrong — a
 `sha256sum -c` that reports OK while your probe reports a mismatch means the probe misread the file
 shape. Fix the probe before doubting the disk.
