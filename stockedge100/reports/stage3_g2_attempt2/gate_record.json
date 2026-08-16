@@ -1,0 +1,1889 @@
+{
+  "gate_inputs": {
+    "evaluated_on": "The selected representative variant only, across both of its runs.",
+    "conjunctive": "All Gate 3 conditions must be satisfied. Constitution section 9.",
+    "both_gate": "A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.",
+    "criteria_source": "config/generation_2/g2_gate_criteria_ra1.json",
+    "conflict_ref": "G2A2-CONFLICT-25",
+    "scope_resolution": "SE100-CFG-3103 scopes the gate across both runs and states that a condition is satisfied only if both runs satisfy it; SE100-CFG-3104 measures S3-C1 and S3-C4 on the base run and lists the stress run as reported_but_not_gating. Both were sealed in the same session and neither outranks the other, so the more restrictive reading is adopted: all seven conditions on #BASE, and S3-C1..S3-C6 also on #STRESS. S3-C7 is evaluated once, on base runs, because its own what_is_read fixes the neighbour side to base-run total return and gives no sealed basis for a stress-side comparison. Both condition sets are reported in full.",
+    "neighbour_run_label": "#BASE"
+  },
+  "representative_variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+  "neighbour_variant_ids": [
+    "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY",
+    "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY",
+    "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY"
+  ],
+  "base_evaluation": {
+    "experiment_id": "SE100-G2-S3-C2-ROTATION-RA1",
+    "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+    "variant": {
+      "index": 14,
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+      "lookback_months": 12,
+      "top_k": 1,
+      "rebalance_frequency": "QUARTERLY",
+      "target_weight_per_position": "0.500000000",
+      "scheduled_rebalance_sessions": 53
+    },
+    "plan": {
+      "experiment_id": "SE100-G2-S3-C2-ROTATION-RA1",
+      "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+      "declared_universe": [
+        "AGG",
+        "BND",
+        "DIA",
+        "DVY",
+        "EEM",
+        "EFA",
+        "HYG",
+        "IEF",
+        "IVV",
+        "IWM",
+        "IYR",
+        "LQD",
+        "MDY",
+        "QQQ",
+        "SHY",
+        "SPY",
+        "TIP",
+        "TLT",
+        "VEA",
+        "VGK",
+        "VIG",
+        "VNQ",
+        "VTI",
+        "VWO",
+        "VYM",
+        "XLB",
+        "XLE",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLP",
+        "XLU",
+        "XLV",
+        "XLY"
+      ],
+      "declared_instrument_count": 34,
+      "run_start": "2008-07-28",
+      "run_end": "2021-07-30",
+      "binding_symbol": "VEA",
+      "sessions": 3276,
+      "span_recheck_requirement": "The runner recomputes every value below from the loaded series and refuses to run if any differs.",
+      "risk_architecture_id": "RA2"
+    },
+    "scenario": "BASE",
+    "admitted": false,
+    "conditions": [
+      {
+        "id": "S3-C1",
+        "required_verbatim": "total return is positive",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "0.004221210809341463756",
+        "threshold": "> 0",
+        "note": null,
+        "evidence": {
+          "starting_equity": "100.00",
+          "final_equity": "100.4221210809341463756"
+        }
+      },
+      {
+        "id": "S3-C2",
+        "required_verbatim": "maximum drawdown is no worse than 15%",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "0.1396851017217713172058464193097361",
+        "threshold": "<= 0.15",
+        "note": "Inclusive. 'No worse than 15%' admits exactly 15%.",
+        "evidence": {
+          "granularity": "session close",
+          "research_shutdown_session": null
+        }
+      },
+      {
+        "id": "S3-C3",
+        "required_verbatim": "profit factor is at least 1.10",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "1.072939866369710467706013363028953",
+        "threshold": ">= 1.1",
+        "note": null,
+        "evidence": {
+          "basis": "Gross profit divided by gross loss over CLOSED EPISODES, where an episode's P&L is exit_cash plus dividends received while held minus entry_cash, with both legs' costs already inside those cash figures, and exit_cash is summed across every sale leg of the episode rather than only the leg that closed it. On any episode with exactly one sale leg this is numerically identical to stockedge100.backtest.metrics.profit_factor over Portfolio.trades.",
+          "closed_episodes": 36,
+          "gross_profit": "19.27",
+          "gross_loss": "17.96",
+          "reconciliation": {
+            "closed_trades": 36,
+            "profit_factor_over_portfolio_trades": "1.245912050690961900807542805634733",
+            "total_trimmed_proceeds": "155.01",
+            "pnl_discrepancy": "-2.53079999628074145058072414769604",
+            "single_leg_compared": 19,
+            "mismatch_count": 0,
+            "note": "The frozen metrics function is not modified and is still called for the reconciliation figure. Both numbers are reported: profit factor over the episode ledger, which gates, and profit factor over Portfolio.trades, which does not. Where they differ, the difference is the trimmed proceeds the frozen recorder drops, and its size is the measure of how much the risk architecture actually traded."
+          }
+        }
+      },
+      {
+        "id": "S3-C4",
+        "required_verbatim": "at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "36",
+        "threshold": ">= 30",
+        "note": "No Attempt 2 variant invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly and before results so that a quarterly variant cannot be argued into it once its count is known. See G2A2-CONFLICT-20 for the two opposing effects the risk architecture has on this count, and SC-1 in SE100-CFG-3103 for the structural risk that a low-turnover quarterly k=1 variant falls short of 30.",
+        "evidence": {
+          "basis": "Count of closed episodes in the representative's base run. An episode is closed when a sale returns the position to zero. A position still open on the final session is not closed and is not counted; at k = 3 up to three positions may be open on the final session and none of them counts. A position that has been trimmed but not closed is still open and is not counted.",
+          "exception_invoked": false,
+          "counting_identity": "A closed episode and a closed Portfolio.Trade are the same event: both are the moment a position returns to zero. The episode ledger changes what P&L is attributed to that event, not when the event occurs, so this count is identical to the count over Portfolio.trades. It is asserted equal at evaluation time rather than assumed.",
+          "closed_episodes": 36,
+          "closed_trades": 36,
+          "counts_agree": true,
+          "open_episodes_at_end": 1,
+          "open_positions_at_end": 1,
+          "trimmed_but_not_closed": 1,
+          "not_evaluable_treatment": "This condition is always evaluable. A count is defined for every run, and a run with no closed episodes has a count of zero, which is a measured value that fails the predicate rather than absent evidence. There is consequently no NOT_EVALUABLE path here and no case in which a missing figure could be read as satisfying the floor. Stated explicitly, because G2A2-CONFLICT-20 makes a low count a live possibility for Attempt 2 in a way it was not for Attempt 1."
+        }
+      },
+      {
+        "id": "S3-C5",
+        "required_verbatim": "performance is not dependent on one trade: removing the single best trade leaves total return above 0%",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "min(-0.0111713778050263521403667741091303, -0.0111713778050263521403667741091303)",
+        "threshold": "best_trade_removed_return > 0 for BOTH removals",
+        "note": "The reconstruction is NOT expected to equal the equity-curve total return, and no attempt is made to make it equal. Concurrent positions mean the products do not telescope; dividends credited outside an episode and positions still open on the final session also contribute; and under Attempt 2 the exposure scalar changes within an episode's life. Both figures are reported side by side, together with their difference, and the condition is evaluated on the reconstruction, whose purpose is to be a like-for-like comparison against the same reconstruction with one episode removed.",
+        "evidence": {
+          "basis": "Closed episodes only. Each episode's multiple is taken against the equity that actually existed when that episode was entered, which is well defined whether or not other positions were open at the time and whether or not the position was later trimmed.",
+          "closed_episodes": 36,
+          "multi_leg_episodes": 17,
+          "reconstructed_total_return": "0.012981045438241682361951853534756",
+          "equity_curve_total_return": "0.004221210809341463756",
+          "reconstruction_gap": "0.008759834628900218605951853534756",
+          "disclosure_requirement": "The Attempt 2 report states the reconstructed return, the equity-curve return, and the gap between them explicitly. A material gap is a limitation to disclose, not a defect to reconcile.",
+          "which_trade_is_removed": "Two removals are computed and BOTH must leave a positive return. j1 is the episode with the largest equity multiple r[i]. j2 is the episode with the largest absolute P&L pnl[i]. These usually coincide and need not. Requiring both is the stricter reading, carried over unchanged from Generation 1 and Attempt 1, and it is fixed here so the stricter or looser reading cannot be chosen after seeing which one the representative survives.",
+          "tie_handling": "If several episodes tie on the maximum, the earliest by index is removed. Carried over from Generation 1's max(..., key=(value, -index)) tiebreak so that the removal is deterministic.",
+          "j2_reading": "largest P&L in signed currency terms, not largest abs(pnl); carried over from Generation 1's condition_5, whose docstring establishes the reading",
+          "episodes_entered_on_first_session": 0,
+          "distinct_entry_equity_bases": 36,
+          "j1_largest_equity_multiple": {
+            "episode_index": 25,
+            "close_index": 25,
+            "symbol": "XLF",
+            "entry_session": "2017-04-04",
+            "exit_session": "2018-01-03",
+            "sale_legs": 1,
+            "single_leg": true,
+            "entry_equity_base": "97.44",
+            "multiple": "1.024425287356321839080459770114943",
+            "pnl": "2.38",
+            "removed_return": "-0.0111713778050263521403667741091303"
+          },
+          "j2_largest_absolute_pnl": {
+            "episode_index": 25,
+            "close_index": 25,
+            "symbol": "XLF",
+            "entry_session": "2017-04-04",
+            "exit_session": "2018-01-03",
+            "sale_legs": 1,
+            "single_leg": true,
+            "entry_equity_base": "97.44",
+            "multiple": "1.024425287356321839080459770114943",
+            "pnl": "2.38",
+            "removed_return": "-0.0111713778050263521403667741091303"
+          },
+          "j1_equals_j2": true
+        }
+      },
+      {
+        "id": "S3-C6",
+        "required_verbatim": "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "2.717557251908396946564885496183206",
+        "threshold": "<= 0.50",
+        "note": null,
+        "evidence": {
+          "basis": "For each instrument, contribution = sum of pnl over that instrument's closed EPISODES, divided by the sum of pnl over all closed episodes. Evaluated only when total closed-episode P&L is strictly positive; when total P&L is zero or negative the share is not a meaningful proportion and the case is recorded as NOT_EVALUABLE \u2014 which is moot, because S3-C1 has already failed such a candidate.",
+          "applies_to": "SE100-G2-S3-C2-ROTATION-RA1, unconditionally.",
+          "why_it_always_applies": "Attempt 2's declared universe is the full 34-member frozen list at every rebalance, so the strategy is multi-instrument by declaration regardless of how many symbols it turns out to trade. Deciding applicability from the realized count would let a candidate that collapsed onto one symbol escape the condition precisely when it is most informative.",
+          "declared_instrument_count": 34,
+          "declared_universe": [
+            "AGG",
+            "BND",
+            "DIA",
+            "DVY",
+            "EEM",
+            "EFA",
+            "HYG",
+            "IEF",
+            "IVV",
+            "IWM",
+            "IYR",
+            "LQD",
+            "MDY",
+            "QQQ",
+            "SHY",
+            "SPY",
+            "TIP",
+            "TLT",
+            "VEA",
+            "VGK",
+            "VIG",
+            "VNQ",
+            "VTI",
+            "VWO",
+            "VYM",
+            "XLB",
+            "XLE",
+            "XLF",
+            "XLI",
+            "XLK",
+            "XLP",
+            "XLU",
+            "XLV",
+            "XLY"
+          ],
+          "distinct_symbols_traded": 14,
+          "total_closed_episode_pnl": "1.31",
+          "pnl_by_instrument": {
+            "EEM": "-1.58",
+            "IEF": "0.40",
+            "LQD": "0.16",
+            "QQQ": "3.35",
+            "TIP": "-0.70",
+            "TLT": "-3.42",
+            "VNQ": "1.57",
+            "VWO": "-1.61",
+            "XLE": "-3.65",
+            "XLF": "3.56",
+            "XLK": "-0.25",
+            "XLU": "1.45",
+            "XLV": "0.90",
+            "XLY": "1.13"
+          },
+          "reconciliation": {
+            "total_closed_trade_pnl": "3.84079999628074145058072414769604",
+            "pnl_by_instrument_over_portfolio_trades": {
+              "EEM": "-1.04699157382700167976345115213812",
+              "IEF": "0.41995190600284075296009632980259",
+              "LQD": "0.16",
+              "QQQ": "3.35",
+              "TIP": "-0.70",
+              "TLT": "-4.34961482873418889064934672810528",
+              "VNQ": "1.45744159917381045523029863603954",
+              "VWO": "-1.20958489531763076128061537266491",
+              "XLE": "-3.36767062948228622650875414735667",
+              "XLF": "3.56",
+              "XLK": "0.79012632367266518891010668495281",
+              "XLU": "1.73141740068155092522245139683652",
+              "XLV": "1.54884600913006088137621828359190",
+              "XLY": "1.49687868498092080508372021673766"
+            },
+            "per_instrument_difference": {
+              "EEM": "-0.53300842617299832023654884786188",
+              "IEF": "-0.01995190600284075296009632980259",
+              "LQD": "0.00",
+              "QQQ": "0.00",
+              "TIP": "0.00",
+              "TLT": "0.92961482873418889064934672810528",
+              "VNQ": "0.11255840082618954476970136396046",
+              "VWO": "-0.40041510468236923871938462733509",
+              "XLE": "-0.28232937051771377349124585264333",
+              "XLF": "0.00",
+              "XLK": "-1.04012632367266518891010668495281",
+              "XLU": "-0.28141740068155092522245139683652",
+              "XLV": "-0.64884600913006088137621828359190",
+              "XLY": "-0.36687868498092080508372021673766"
+            },
+            "why_the_basis_matters_here": "This is the condition G2A2-CONFLICT-18 distorts most. Attribution is a ratio of one symbol's P&L to the total, so dropping a trim's proceeds corrupts both the numerator and the denominator, and the probe showed the dropped amount can exceed the retained one and reverse its sign. Computing the ratio over episodes is what makes the answer a fact about the strategy rather than about which positions happened to be trimmed."
+          },
+          "share_by_instrument": {
+            "EEM": "-1.206106870229007633587786259541985",
+            "IEF": "0.3053435114503816793893129770992366",
+            "LQD": "0.1221374045801526717557251908396947",
+            "QQQ": "2.557251908396946564885496183206107",
+            "TIP": "-0.5343511450381679389312977099236641",
+            "TLT": "-2.610687022900763358778625954198473",
+            "VNQ": "1.198473282442748091603053435114504",
+            "VWO": "-1.229007633587786259541984732824427",
+            "XLE": "-2.786259541984732824427480916030534",
+            "XLF": "2.717557251908396946564885496183206",
+            "XLK": "-0.1908396946564885496183206106870229",
+            "XLU": "1.106870229007633587786259541984733",
+            "XLV": "0.6870229007633587786259541984732824",
+            "XLY": "0.8625954198473282442748091603053435"
+          },
+          "largest_contributor": "XLF",
+          "attempt_2_significance": "This is the condition that tests the claim in the charter's section 2. Generation 1's validated candidate put 100% of its profit into SPY. If Attempt 2's representative does the same, this condition fails and the stage fails, which is the correct outcome: a rotation strategy that never rotates has not demonstrated the thing Generation 2 exists to test. The 50 percent aggregate exposure ceiling does not change this \u2014 it scales every position down together and cannot make a concentrated portfolio diversified."
+        }
+      },
+      {
+        "id": "S3-C7",
+        "required_verbatim": "reasonable neighboring parameter values do not reverse the sign of net return",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "3/3 neighbours match",
+        "threshold": "all 3 match, zero matches nothing",
+        "note": "Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's parameterisation is never revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3. It would also destroy the return-blind property of the selection rule, since the promotion would be driven by a return.",
+        "evidence": {
+          "neighbour_definition": "Every variant in the eighteen-variant Attempt 2 grid that differs from the representative in exactly one axis by exactly one step.",
+          "neighbour_count": 3,
+          "neighbour_count_rule": "3 when the representative is at an endpoint of both the lookback and the k axis; 5 when it is interior on both; 4 otherwise. The count is a function of the representative's grid position and is not chosen.",
+          "one_step_note": "A step is to an adjacent value in the ordering above. From lookback 3 the only neighbour is 6, not 12. From k = 2 both 1 and 3 are neighbours. The frequency axis has two values, so its single neighbour is always the other one.",
+          "representative_variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+          "representative_grid_index": 14,
+          "primary_total_return": "0.004221210809341463756",
+          "primary_sign": 1,
+          "neighbours_not_run": [],
+          "what_is_read": "Each neighbour's base-run equity-curve total return and its sign. Nothing else about a neighbour enters this condition.",
+          "no_new_runs": "Every neighbour is already a declared member of the Attempt 2 grid and is already run under the same window, the same base cost model, the same frozen risk architecture and the research shutdown enforced. This condition creates no new parameterisation and no new run.",
+          "risk_constants_have_no_neighbours": "The five RA1 constants are identical across all eighteen variants and are not gridded, so no neighbour differs from the representative in any risk parameter. See G2A2-CONFLICT-22: this condition is silent about the robustness of the risk architecture and a MET verdict must not be read as covering it.",
+          "neighbours": [
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY",
+              "grid_index": 8,
+              "parameters": {
+                "lookback_months": 6,
+                "top_k": 1,
+                "rebalance_frequency": "QUARTERLY"
+              },
+              "status": "RUN",
+              "total_return": "0.083431813045189356076",
+              "sign": 1,
+              "matches_primary": true
+            },
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY",
+              "grid_index": 13,
+              "parameters": {
+                "lookback_months": 12,
+                "top_k": 1,
+                "rebalance_frequency": "MONTHLY"
+              },
+              "status": "RUN",
+              "total_return": "0.0633",
+              "sign": 1,
+              "matches_primary": true
+            },
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY",
+              "grid_index": 16,
+              "parameters": {
+                "lookback_months": 12,
+                "top_k": 2,
+                "rebalance_frequency": "QUARTERLY"
+              },
+              "status": "RUN",
+              "total_return": "0.195362530238434197066",
+              "sign": 1,
+              "matches_primary": true
+            }
+          ]
+        }
+      }
+    ],
+    "conditions_met": 4,
+    "conditions_not_met": [
+      "S3-C3",
+      "S3-C5",
+      "S3-C6"
+    ],
+    "conditions_not_evaluable": [],
+    "conditions_not_applicable": [],
+    "reconciliation": {
+      "closed_episodes": 36,
+      "closed_trades": 36,
+      "counts_agree": true,
+      "single_leg_compared": 19,
+      "multi_leg_episodes": 17,
+      "multi_entry_episodes": 0,
+      "max_sale_legs": 5,
+      "mismatches": [],
+      "vacuous": false,
+      "reconciled": true,
+      "reconciled_fields": [
+        "entry_cash",
+        "exit_cash",
+        "dividends",
+        "pnl"
+      ],
+      "total_trimmed_proceeds": "155.01",
+      "episode_pnl_total": "1.31",
+      "frozen_trade_pnl_total": "3.84079999628074145058072414769604",
+      "pnl_discrepancy": "-2.53079999628074145058072414769604"
+    },
+    "non_vacuity_check": {
+      "rule": "evaluation_integrity_rules[9]",
+      "ledger_id": "SE100-G2-S3-C2-EPISODE-LEDGER",
+      "conflict_id": "G2A2-CONFLICT-18",
+      "reconciled_fields": [
+        "entry_cash",
+        "exit_cash",
+        "dividends",
+        "pnl"
+      ],
+      "single_leg_compared": 19,
+      "mismatch_count": 0,
+      "closed_episodes": 36,
+      "closed_trades": 36,
+      "counts_agree": true,
+      "vacuous": false,
+      "reconciled": true,
+      "nothing_closed": false,
+      "total_trimmed_proceeds": "155.01",
+      "pnl_discrepancy": "-2.53079999628074145058072414769604"
+    },
+    "redefined_for_generation_2": [
+      "S3-C5",
+      "S3-C7"
+    ],
+    "carried_over_unchanged": [
+      "S3-C1",
+      "S3-C2",
+      "S3-C3",
+      "S3-C4",
+      "S3-C6"
+    ],
+    "measurement_basis_changed_from_attempt_1": [
+      "S3-C3",
+      "S3-C4",
+      "S3-C5",
+      "S3-C6"
+    ],
+    "measurement_basis_unchanged_from_attempt_1": [
+      "S3-C1",
+      "S3-C2",
+      "S3-C7"
+    ]
+  },
+  "stress_evaluation": {
+    "experiment_id": "SE100-G2-S3-C2-ROTATION-RA1",
+    "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+    "variant": {
+      "index": 14,
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+      "lookback_months": 12,
+      "top_k": 1,
+      "rebalance_frequency": "QUARTERLY",
+      "target_weight_per_position": "0.500000000",
+      "scheduled_rebalance_sessions": 53
+    },
+    "plan": {
+      "experiment_id": "SE100-G2-S3-C2-ROTATION-RA1",
+      "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+      "declared_universe": [
+        "AGG",
+        "BND",
+        "DIA",
+        "DVY",
+        "EEM",
+        "EFA",
+        "HYG",
+        "IEF",
+        "IVV",
+        "IWM",
+        "IYR",
+        "LQD",
+        "MDY",
+        "QQQ",
+        "SHY",
+        "SPY",
+        "TIP",
+        "TLT",
+        "VEA",
+        "VGK",
+        "VIG",
+        "VNQ",
+        "VTI",
+        "VWO",
+        "VYM",
+        "XLB",
+        "XLE",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLP",
+        "XLU",
+        "XLV",
+        "XLY"
+      ],
+      "declared_instrument_count": 34,
+      "run_start": "2008-07-28",
+      "run_end": "2021-07-30",
+      "binding_symbol": "VEA",
+      "sessions": 3276,
+      "span_recheck_requirement": "The runner recomputes every value below from the loaded series and refuses to run if any differs.",
+      "risk_architecture_id": "RA2"
+    },
+    "scenario": "STRESSED",
+    "admitted": false,
+    "conditions": [
+      {
+        "id": "S3-C1",
+        "required_verbatim": "total return is positive",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "-0.000805436201623164544",
+        "threshold": "> 0",
+        "note": null,
+        "evidence": {
+          "starting_equity": "100.00",
+          "final_equity": "99.9194563798376835456"
+        }
+      },
+      {
+        "id": "S3-C2",
+        "required_verbatim": "maximum drawdown is no worse than 15%",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "0.1420128991297120600142654278172959",
+        "threshold": "<= 0.15",
+        "note": "Inclusive. 'No worse than 15%' admits exactly 15%.",
+        "evidence": {
+          "granularity": "session close",
+          "research_shutdown_session": null
+        }
+      },
+      {
+        "id": "S3-C3",
+        "required_verbatim": "profit factor is at least 1.10",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "1.029894490035169988276670574443142",
+        "threshold": ">= 1.1",
+        "note": null,
+        "evidence": {
+          "basis": "Gross profit divided by gross loss over CLOSED EPISODES, where an episode's P&L is exit_cash plus dividends received while held minus entry_cash, with both legs' costs already inside those cash figures, and exit_cash is summed across every sale leg of the episode rather than only the leg that closed it. On any episode with exactly one sale leg this is numerically identical to stockedge100.backtest.metrics.profit_factor over Portfolio.trades.",
+          "closed_episodes": 36,
+          "gross_profit": "17.57",
+          "gross_loss": "17.06",
+          "reconciliation": {
+            "closed_trades": 36,
+            "profit_factor_over_portfolio_trades": "1.170875467160605533947199396613506",
+            "total_trimmed_proceeds": "135.68",
+            "pnl_discrepancy": "-2.11962569101468741976539726802568",
+            "single_leg_compared": 21,
+            "mismatch_count": 0,
+            "note": "The frozen metrics function is not modified and is still called for the reconciliation figure. Both numbers are reported: profit factor over the episode ledger, which gates, and profit factor over Portfolio.trades, which does not. Where they differ, the difference is the trimmed proceeds the frozen recorder drops, and its size is the measure of how much the risk architecture actually traded."
+          }
+        }
+      },
+      {
+        "id": "S3-C4",
+        "required_verbatim": "at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "36",
+        "threshold": ">= 30",
+        "note": "No Attempt 2 variant invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly and before results so that a quarterly variant cannot be argued into it once its count is known. See G2A2-CONFLICT-20 for the two opposing effects the risk architecture has on this count, and SC-1 in SE100-CFG-3103 for the structural risk that a low-turnover quarterly k=1 variant falls short of 30.",
+        "evidence": {
+          "basis": "Count of closed episodes in the representative's base run. An episode is closed when a sale returns the position to zero. A position still open on the final session is not closed and is not counted; at k = 3 up to three positions may be open on the final session and none of them counts. A position that has been trimmed but not closed is still open and is not counted.",
+          "exception_invoked": false,
+          "counting_identity": "A closed episode and a closed Portfolio.Trade are the same event: both are the moment a position returns to zero. The episode ledger changes what P&L is attributed to that event, not when the event occurs, so this count is identical to the count over Portfolio.trades. It is asserted equal at evaluation time rather than assumed.",
+          "closed_episodes": 36,
+          "closed_trades": 36,
+          "counts_agree": true,
+          "open_episodes_at_end": 1,
+          "open_positions_at_end": 1,
+          "trimmed_but_not_closed": 0,
+          "not_evaluable_treatment": "This condition is always evaluable. A count is defined for every run, and a run with no closed episodes has a count of zero, which is a measured value that fails the predicate rather than absent evidence. There is consequently no NOT_EVALUABLE path here and no case in which a missing figure could be read as satisfying the floor. Stated explicitly, because G2A2-CONFLICT-20 makes a low count a live possibility for Attempt 2 in a way it was not for Attempt 1."
+        }
+      },
+      {
+        "id": "S3-C5",
+        "required_verbatim": "performance is not dependent on one trade: removing the single best trade leaves total return above 0%",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "min(-0.0187959786703338421765362263696300, -0.0187959786703338421765362263696300)",
+        "threshold": "best_trade_removed_return > 0 for BOTH removals",
+        "note": "The reconstruction is NOT expected to equal the equity-curve total return, and no attempt is made to make it equal. Concurrent positions mean the products do not telescope; dividends credited outside an episode and positions still open on the final session also contribute; and under Attempt 2 the exposure scalar changes within an episode's life. Both figures are reported side by side, together with their difference, and the condition is evaluated on the reconstruction, whose purpose is to be a like-for-like comparison against the same reconstruction with one episode removed.",
+        "evidence": {
+          "basis": "Closed episodes only. Each episode's multiple is taken against the equity that actually existed when that episode was entered, which is well defined whether or not other positions were open at the time and whether or not the position was later trimmed.",
+          "closed_episodes": 36,
+          "multi_leg_episodes": 15,
+          "reconstructed_total_return": "0.004988342306843768058297119005962",
+          "equity_curve_total_return": "-0.000805436201623164544",
+          "reconstruction_gap": "0.005793778508466932602297119005962",
+          "disclosure_requirement": "The Attempt 2 report states the reconstructed return, the equity-curve return, and the gap between them explicitly. A material gap is a limitation to disclose, not a defect to reconcile.",
+          "which_trade_is_removed": "Two removals are computed and BOTH must leave a positive return. j1 is the episode with the largest equity multiple r[i]. j2 is the episode with the largest absolute P&L pnl[i]. These usually coincide and need not. Requiring both is the stricter reading, carried over unchanged from Generation 1 and Attempt 1, and it is fixed here so the stricter or looser reading cannot be chosen after seeing which one the representative survives.",
+          "tie_handling": "If several episodes tie on the maximum, the earliest by index is removed. Carried over from Generation 1's max(..., key=(value, -index)) tiebreak so that the removal is deterministic.",
+          "j2_reading": "largest P&L in signed currency terms, not largest abs(pnl); carried over from Generation 1's condition_5, whose docstring establishes the reading",
+          "episodes_entered_on_first_session": 0,
+          "distinct_entry_equity_bases": 36,
+          "j1_largest_equity_multiple": {
+            "episode_index": 25,
+            "close_index": 25,
+            "symbol": "XLF",
+            "entry_session": "2017-04-04",
+            "exit_session": "2018-01-03",
+            "sale_legs": 1,
+            "single_leg": true,
+            "entry_equity_base": "97.36",
+            "multiple": "1.024239934264585045193097781429745",
+            "pnl": "2.36",
+            "removed_return": "-0.0187959786703338421765362263696300"
+          },
+          "j2_largest_absolute_pnl": {
+            "episode_index": 25,
+            "close_index": 25,
+            "symbol": "XLF",
+            "entry_session": "2017-04-04",
+            "exit_session": "2018-01-03",
+            "sale_legs": 1,
+            "single_leg": true,
+            "entry_equity_base": "97.36",
+            "multiple": "1.024239934264585045193097781429745",
+            "pnl": "2.36",
+            "removed_return": "-0.0187959786703338421765362263696300"
+          },
+          "j1_equals_j2": true
+        }
+      },
+      {
+        "id": "S3-C6",
+        "required_verbatim": "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "6.882352941176470588235294117647059",
+        "threshold": "<= 0.50",
+        "note": null,
+        "evidence": {
+          "basis": "For each instrument, contribution = sum of pnl over that instrument's closed EPISODES, divided by the sum of pnl over all closed episodes. Evaluated only when total closed-episode P&L is strictly positive; when total P&L is zero or negative the share is not a meaningful proportion and the case is recorded as NOT_EVALUABLE \u2014 which is moot, because S3-C1 has already failed such a candidate.",
+          "applies_to": "SE100-G2-S3-C2-ROTATION-RA1, unconditionally.",
+          "why_it_always_applies": "Attempt 2's declared universe is the full 34-member frozen list at every rebalance, so the strategy is multi-instrument by declaration regardless of how many symbols it turns out to trade. Deciding applicability from the realized count would let a candidate that collapsed onto one symbol escape the condition precisely when it is most informative.",
+          "declared_instrument_count": 34,
+          "declared_universe": [
+            "AGG",
+            "BND",
+            "DIA",
+            "DVY",
+            "EEM",
+            "EFA",
+            "HYG",
+            "IEF",
+            "IVV",
+            "IWM",
+            "IYR",
+            "LQD",
+            "MDY",
+            "QQQ",
+            "SHY",
+            "SPY",
+            "TIP",
+            "TLT",
+            "VEA",
+            "VGK",
+            "VIG",
+            "VNQ",
+            "VTI",
+            "VWO",
+            "VYM",
+            "XLB",
+            "XLE",
+            "XLF",
+            "XLI",
+            "XLK",
+            "XLP",
+            "XLU",
+            "XLV",
+            "XLY"
+          ],
+          "distinct_symbols_traded": 14,
+          "total_closed_episode_pnl": "0.51",
+          "pnl_by_instrument": {
+            "EEM": "-1.59",
+            "IEF": "0.38",
+            "LQD": "0.13",
+            "QQQ": "3.26",
+            "TIP": "-0.76",
+            "TLT": "-3.42",
+            "VNQ": "1.39",
+            "VWO": "-1.64",
+            "XLE": "-3.37",
+            "XLF": "3.51",
+            "XLK": "0.30",
+            "XLU": "0.65",
+            "XLV": "0.62",
+            "XLY": "1.05"
+          },
+          "reconciliation": {
+            "total_closed_trade_pnl": "2.62962569101468741976539726802568",
+            "pnl_by_instrument_over_portfolio_trades": {
+              "EEM": "-1.05694645689327771259048454768379",
+              "IEF": "0.41036925751677987064020591337001",
+              "LQD": "0.13",
+              "QQQ": "3.29419922487284787343637128158862",
+              "TIP": "-0.76",
+              "TLT": "-4.40844706471368766876679322008431",
+              "VNQ": "1.32356632602173040046195502076445",
+              "VWO": "-1.22362756225347043889519779647928",
+              "XLE": "-3.37",
+              "XLF": "3.51",
+              "XLK": "1.18300806362210192539141312126426",
+              "XLU": "0.77227063107008177295860265578383",
+              "XLV": "1.47866326948993837419129836640901",
+              "XLY": "1.34657000228164302293802647309288"
+            },
+            "per_instrument_difference": {
+              "EEM": "-0.53305354310672228740951545231621",
+              "IEF": "-0.03036925751677987064020591337001",
+              "LQD": "0.00",
+              "QQQ": "-0.03419922487284787343637128158862",
+              "TIP": "0.00",
+              "TLT": "0.98844706471368766876679322008431",
+              "VNQ": "0.06643367397826959953804497923555",
+              "VWO": "-0.41637243774652956110480220352072",
+              "XLE": "0.00",
+              "XLF": "0.00",
+              "XLK": "-0.88300806362210192539141312126426",
+              "XLU": "-0.12227063107008177295860265578383",
+              "XLV": "-0.85866326948993837419129836640901",
+              "XLY": "-0.29657000228164302293802647309288"
+            },
+            "why_the_basis_matters_here": "This is the condition G2A2-CONFLICT-18 distorts most. Attribution is a ratio of one symbol's P&L to the total, so dropping a trim's proceeds corrupts both the numerator and the denominator, and the probe showed the dropped amount can exceed the retained one and reverse its sign. Computing the ratio over episodes is what makes the answer a fact about the strategy rather than about which positions happened to be trimmed."
+          },
+          "share_by_instrument": {
+            "EEM": "-3.117647058823529411764705882352941",
+            "IEF": "0.7450980392156862745098039215686275",
+            "LQD": "0.2549019607843137254901960784313725",
+            "QQQ": "6.392156862745098039215686274509804",
+            "TIP": "-1.490196078431372549019607843137255",
+            "TLT": "-6.705882352941176470588235294117647",
+            "VNQ": "2.725490196078431372549019607843137",
+            "VWO": "-3.215686274509803921568627450980392",
+            "XLE": "-6.607843137254901960784313725490196",
+            "XLF": "6.882352941176470588235294117647059",
+            "XLK": "0.5882352941176470588235294117647059",
+            "XLU": "1.274509803921568627450980392156863",
+            "XLV": "1.215686274509803921568627450980392",
+            "XLY": "2.058823529411764705882352941176471"
+          },
+          "largest_contributor": "XLF",
+          "attempt_2_significance": "This is the condition that tests the claim in the charter's section 2. Generation 1's validated candidate put 100% of its profit into SPY. If Attempt 2's representative does the same, this condition fails and the stage fails, which is the correct outcome: a rotation strategy that never rotates has not demonstrated the thing Generation 2 exists to test. The 50 percent aggregate exposure ceiling does not change this \u2014 it scales every position down together and cannot make a concentrated portfolio diversified."
+        }
+      },
+      {
+        "id": "S3-C7",
+        "required_verbatim": "reasonable neighboring parameter values do not reverse the sign of net return",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "0/3 neighbours match",
+        "threshold": "all 3 match, zero matches nothing",
+        "note": "Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's parameterisation is never revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3. It would also destroy the return-blind property of the selection rule, since the promotion would be driven by a return.",
+        "evidence": {
+          "neighbour_definition": "Every variant in the eighteen-variant Attempt 2 grid that differs from the representative in exactly one axis by exactly one step.",
+          "neighbour_count": 3,
+          "neighbour_count_rule": "3 when the representative is at an endpoint of both the lookback and the k axis; 5 when it is interior on both; 4 otherwise. The count is a function of the representative's grid position and is not chosen.",
+          "one_step_note": "A step is to an adjacent value in the ordering above. From lookback 3 the only neighbour is 6, not 12. From k = 2 both 1 and 3 are neighbours. The frequency axis has two values, so its single neighbour is always the other one.",
+          "representative_variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+          "representative_grid_index": 14,
+          "primary_total_return": "-0.000805436201623164544",
+          "primary_sign": -1,
+          "neighbours_not_run": [],
+          "what_is_read": "Each neighbour's base-run equity-curve total return and its sign. Nothing else about a neighbour enters this condition.",
+          "no_new_runs": "Every neighbour is already a declared member of the Attempt 2 grid and is already run under the same window, the same base cost model, the same frozen risk architecture and the research shutdown enforced. This condition creates no new parameterisation and no new run.",
+          "risk_constants_have_no_neighbours": "The five RA1 constants are identical across all eighteen variants and are not gridded, so no neighbour differs from the representative in any risk parameter. See G2A2-CONFLICT-22: this condition is silent about the robustness of the risk architecture and a MET verdict must not be read as covering it.",
+          "neighbours": [
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY",
+              "grid_index": 8,
+              "parameters": {
+                "lookback_months": 6,
+                "top_k": 1,
+                "rebalance_frequency": "QUARTERLY"
+              },
+              "status": "RUN",
+              "total_return": "0.083431813045189356076",
+              "sign": 1,
+              "matches_primary": false
+            },
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY",
+              "grid_index": 13,
+              "parameters": {
+                "lookback_months": 12,
+                "top_k": 1,
+                "rebalance_frequency": "MONTHLY"
+              },
+              "status": "RUN",
+              "total_return": "0.0633",
+              "sign": 1,
+              "matches_primary": false
+            },
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY",
+              "grid_index": 16,
+              "parameters": {
+                "lookback_months": 12,
+                "top_k": 2,
+                "rebalance_frequency": "QUARTERLY"
+              },
+              "status": "RUN",
+              "total_return": "0.195362530238434197066",
+              "sign": 1,
+              "matches_primary": false
+            }
+          ]
+        }
+      }
+    ],
+    "conditions_met": 2,
+    "conditions_not_met": [
+      "S3-C1",
+      "S3-C3",
+      "S3-C5",
+      "S3-C6",
+      "S3-C7"
+    ],
+    "conditions_not_evaluable": [],
+    "conditions_not_applicable": [],
+    "reconciliation": {
+      "closed_episodes": 36,
+      "closed_trades": 36,
+      "counts_agree": true,
+      "single_leg_compared": 21,
+      "multi_leg_episodes": 15,
+      "multi_entry_episodes": 0,
+      "max_sale_legs": 5,
+      "mismatches": [],
+      "vacuous": false,
+      "reconciled": true,
+      "reconciled_fields": [
+        "entry_cash",
+        "exit_cash",
+        "dividends",
+        "pnl"
+      ],
+      "total_trimmed_proceeds": "135.68",
+      "episode_pnl_total": "0.51",
+      "frozen_trade_pnl_total": "2.62962569101468741976539726802568",
+      "pnl_discrepancy": "-2.11962569101468741976539726802568"
+    },
+    "non_vacuity_check": {
+      "rule": "evaluation_integrity_rules[9]",
+      "ledger_id": "SE100-G2-S3-C2-EPISODE-LEDGER",
+      "conflict_id": "G2A2-CONFLICT-18",
+      "reconciled_fields": [
+        "entry_cash",
+        "exit_cash",
+        "dividends",
+        "pnl"
+      ],
+      "single_leg_compared": 21,
+      "mismatch_count": 0,
+      "closed_episodes": 36,
+      "closed_trades": 36,
+      "counts_agree": true,
+      "vacuous": false,
+      "reconciled": true,
+      "nothing_closed": false,
+      "total_trimmed_proceeds": "135.68",
+      "pnl_discrepancy": "-2.11962569101468741976539726802568"
+    },
+    "redefined_for_generation_2": [
+      "S3-C5",
+      "S3-C7"
+    ],
+    "carried_over_unchanged": [
+      "S3-C1",
+      "S3-C2",
+      "S3-C3",
+      "S3-C4",
+      "S3-C6"
+    ],
+    "measurement_basis_changed_from_attempt_1": [
+      "S3-C3",
+      "S3-C4",
+      "S3-C5",
+      "S3-C6"
+    ],
+    "measurement_basis_unchanged_from_attempt_1": [
+      "S3-C1",
+      "S3-C2",
+      "S3-C7"
+    ]
+  },
+  "combined": {
+    "experiment_id": "SE100-G2-S3-C2-ROTATION-RA1",
+    "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+    "variant": {
+      "index": 14,
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+      "lookback_months": 12,
+      "top_k": 1,
+      "rebalance_frequency": "QUARTERLY",
+      "target_weight_per_position": "0.500000000",
+      "scheduled_rebalance_sessions": 53
+    },
+    "plan": {
+      "experiment_id": "SE100-G2-S3-C2-ROTATION-RA1",
+      "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+      "declared_universe": [
+        "AGG",
+        "BND",
+        "DIA",
+        "DVY",
+        "EEM",
+        "EFA",
+        "HYG",
+        "IEF",
+        "IVV",
+        "IWM",
+        "IYR",
+        "LQD",
+        "MDY",
+        "QQQ",
+        "SHY",
+        "SPY",
+        "TIP",
+        "TLT",
+        "VEA",
+        "VGK",
+        "VIG",
+        "VNQ",
+        "VTI",
+        "VWO",
+        "VYM",
+        "XLB",
+        "XLE",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLP",
+        "XLU",
+        "XLV",
+        "XLY"
+      ],
+      "declared_instrument_count": 34,
+      "run_start": "2008-07-28",
+      "run_end": "2021-07-30",
+      "binding_symbol": "VEA",
+      "sessions": 3276,
+      "span_recheck_requirement": "The runner recomputes every value below from the loaded series and refuses to run if any differs.",
+      "risk_architecture_id": "RA2"
+    },
+    "scenario": "BASE",
+    "admitted": false,
+    "conditions": [
+      {
+        "id": "S3-C1",
+        "required_verbatim": "total return is positive",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "0.004221210809341463756",
+        "threshold": "> 0",
+        "note": null,
+        "evidence": {
+          "starting_equity": "100.00",
+          "final_equity": "100.4221210809341463756"
+        }
+      },
+      {
+        "id": "S3-C2",
+        "required_verbatim": "maximum drawdown is no worse than 15%",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "0.1396851017217713172058464193097361",
+        "threshold": "<= 0.15",
+        "note": "Inclusive. 'No worse than 15%' admits exactly 15%.",
+        "evidence": {
+          "granularity": "session close",
+          "research_shutdown_session": null
+        }
+      },
+      {
+        "id": "S3-C3",
+        "required_verbatim": "profit factor is at least 1.10",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "1.072939866369710467706013363028953",
+        "threshold": ">= 1.1",
+        "note": null,
+        "evidence": {
+          "basis": "Gross profit divided by gross loss over CLOSED EPISODES, where an episode's P&L is exit_cash plus dividends received while held minus entry_cash, with both legs' costs already inside those cash figures, and exit_cash is summed across every sale leg of the episode rather than only the leg that closed it. On any episode with exactly one sale leg this is numerically identical to stockedge100.backtest.metrics.profit_factor over Portfolio.trades.",
+          "closed_episodes": 36,
+          "gross_profit": "19.27",
+          "gross_loss": "17.96",
+          "reconciliation": {
+            "closed_trades": 36,
+            "profit_factor_over_portfolio_trades": "1.245912050690961900807542805634733",
+            "total_trimmed_proceeds": "155.01",
+            "pnl_discrepancy": "-2.53079999628074145058072414769604",
+            "single_leg_compared": 19,
+            "mismatch_count": 0,
+            "note": "The frozen metrics function is not modified and is still called for the reconciliation figure. Both numbers are reported: profit factor over the episode ledger, which gates, and profit factor over Portfolio.trades, which does not. Where they differ, the difference is the trimmed proceeds the frozen recorder drops, and its size is the measure of how much the risk architecture actually traded."
+          }
+        }
+      },
+      {
+        "id": "S3-C4",
+        "required_verbatim": "at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "36",
+        "threshold": ">= 30",
+        "note": "No Attempt 2 variant invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly and before results so that a quarterly variant cannot be argued into it once its count is known. See G2A2-CONFLICT-20 for the two opposing effects the risk architecture has on this count, and SC-1 in SE100-CFG-3103 for the structural risk that a low-turnover quarterly k=1 variant falls short of 30.",
+        "evidence": {
+          "basis": "Count of closed episodes in the representative's base run. An episode is closed when a sale returns the position to zero. A position still open on the final session is not closed and is not counted; at k = 3 up to three positions may be open on the final session and none of them counts. A position that has been trimmed but not closed is still open and is not counted.",
+          "exception_invoked": false,
+          "counting_identity": "A closed episode and a closed Portfolio.Trade are the same event: both are the moment a position returns to zero. The episode ledger changes what P&L is attributed to that event, not when the event occurs, so this count is identical to the count over Portfolio.trades. It is asserted equal at evaluation time rather than assumed.",
+          "closed_episodes": 36,
+          "closed_trades": 36,
+          "counts_agree": true,
+          "open_episodes_at_end": 1,
+          "open_positions_at_end": 1,
+          "trimmed_but_not_closed": 1,
+          "not_evaluable_treatment": "This condition is always evaluable. A count is defined for every run, and a run with no closed episodes has a count of zero, which is a measured value that fails the predicate rather than absent evidence. There is consequently no NOT_EVALUABLE path here and no case in which a missing figure could be read as satisfying the floor. Stated explicitly, because G2A2-CONFLICT-20 makes a low count a live possibility for Attempt 2 in a way it was not for Attempt 1."
+        }
+      },
+      {
+        "id": "S3-C5",
+        "required_verbatim": "performance is not dependent on one trade: removing the single best trade leaves total return above 0%",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "min(-0.0111713778050263521403667741091303, -0.0111713778050263521403667741091303)",
+        "threshold": "best_trade_removed_return > 0 for BOTH removals",
+        "note": "The reconstruction is NOT expected to equal the equity-curve total return, and no attempt is made to make it equal. Concurrent positions mean the products do not telescope; dividends credited outside an episode and positions still open on the final session also contribute; and under Attempt 2 the exposure scalar changes within an episode's life. Both figures are reported side by side, together with their difference, and the condition is evaluated on the reconstruction, whose purpose is to be a like-for-like comparison against the same reconstruction with one episode removed.",
+        "evidence": {
+          "basis": "Closed episodes only. Each episode's multiple is taken against the equity that actually existed when that episode was entered, which is well defined whether or not other positions were open at the time and whether or not the position was later trimmed.",
+          "closed_episodes": 36,
+          "multi_leg_episodes": 17,
+          "reconstructed_total_return": "0.012981045438241682361951853534756",
+          "equity_curve_total_return": "0.004221210809341463756",
+          "reconstruction_gap": "0.008759834628900218605951853534756",
+          "disclosure_requirement": "The Attempt 2 report states the reconstructed return, the equity-curve return, and the gap between them explicitly. A material gap is a limitation to disclose, not a defect to reconcile.",
+          "which_trade_is_removed": "Two removals are computed and BOTH must leave a positive return. j1 is the episode with the largest equity multiple r[i]. j2 is the episode with the largest absolute P&L pnl[i]. These usually coincide and need not. Requiring both is the stricter reading, carried over unchanged from Generation 1 and Attempt 1, and it is fixed here so the stricter or looser reading cannot be chosen after seeing which one the representative survives.",
+          "tie_handling": "If several episodes tie on the maximum, the earliest by index is removed. Carried over from Generation 1's max(..., key=(value, -index)) tiebreak so that the removal is deterministic.",
+          "j2_reading": "largest P&L in signed currency terms, not largest abs(pnl); carried over from Generation 1's condition_5, whose docstring establishes the reading",
+          "episodes_entered_on_first_session": 0,
+          "distinct_entry_equity_bases": 36,
+          "j1_largest_equity_multiple": {
+            "episode_index": 25,
+            "close_index": 25,
+            "symbol": "XLF",
+            "entry_session": "2017-04-04",
+            "exit_session": "2018-01-03",
+            "sale_legs": 1,
+            "single_leg": true,
+            "entry_equity_base": "97.44",
+            "multiple": "1.024425287356321839080459770114943",
+            "pnl": "2.38",
+            "removed_return": "-0.0111713778050263521403667741091303"
+          },
+          "j2_largest_absolute_pnl": {
+            "episode_index": 25,
+            "close_index": 25,
+            "symbol": "XLF",
+            "entry_session": "2017-04-04",
+            "exit_session": "2018-01-03",
+            "sale_legs": 1,
+            "single_leg": true,
+            "entry_equity_base": "97.44",
+            "multiple": "1.024425287356321839080459770114943",
+            "pnl": "2.38",
+            "removed_return": "-0.0111713778050263521403667741091303"
+          },
+          "j1_equals_j2": true
+        }
+      },
+      {
+        "id": "S3-C6",
+        "required_verbatim": "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "2.717557251908396946564885496183206",
+        "threshold": "<= 0.50",
+        "note": null,
+        "evidence": {
+          "basis": "For each instrument, contribution = sum of pnl over that instrument's closed EPISODES, divided by the sum of pnl over all closed episodes. Evaluated only when total closed-episode P&L is strictly positive; when total P&L is zero or negative the share is not a meaningful proportion and the case is recorded as NOT_EVALUABLE \u2014 which is moot, because S3-C1 has already failed such a candidate.",
+          "applies_to": "SE100-G2-S3-C2-ROTATION-RA1, unconditionally.",
+          "why_it_always_applies": "Attempt 2's declared universe is the full 34-member frozen list at every rebalance, so the strategy is multi-instrument by declaration regardless of how many symbols it turns out to trade. Deciding applicability from the realized count would let a candidate that collapsed onto one symbol escape the condition precisely when it is most informative.",
+          "declared_instrument_count": 34,
+          "declared_universe": [
+            "AGG",
+            "BND",
+            "DIA",
+            "DVY",
+            "EEM",
+            "EFA",
+            "HYG",
+            "IEF",
+            "IVV",
+            "IWM",
+            "IYR",
+            "LQD",
+            "MDY",
+            "QQQ",
+            "SHY",
+            "SPY",
+            "TIP",
+            "TLT",
+            "VEA",
+            "VGK",
+            "VIG",
+            "VNQ",
+            "VTI",
+            "VWO",
+            "VYM",
+            "XLB",
+            "XLE",
+            "XLF",
+            "XLI",
+            "XLK",
+            "XLP",
+            "XLU",
+            "XLV",
+            "XLY"
+          ],
+          "distinct_symbols_traded": 14,
+          "total_closed_episode_pnl": "1.31",
+          "pnl_by_instrument": {
+            "EEM": "-1.58",
+            "IEF": "0.40",
+            "LQD": "0.16",
+            "QQQ": "3.35",
+            "TIP": "-0.70",
+            "TLT": "-3.42",
+            "VNQ": "1.57",
+            "VWO": "-1.61",
+            "XLE": "-3.65",
+            "XLF": "3.56",
+            "XLK": "-0.25",
+            "XLU": "1.45",
+            "XLV": "0.90",
+            "XLY": "1.13"
+          },
+          "reconciliation": {
+            "total_closed_trade_pnl": "3.84079999628074145058072414769604",
+            "pnl_by_instrument_over_portfolio_trades": {
+              "EEM": "-1.04699157382700167976345115213812",
+              "IEF": "0.41995190600284075296009632980259",
+              "LQD": "0.16",
+              "QQQ": "3.35",
+              "TIP": "-0.70",
+              "TLT": "-4.34961482873418889064934672810528",
+              "VNQ": "1.45744159917381045523029863603954",
+              "VWO": "-1.20958489531763076128061537266491",
+              "XLE": "-3.36767062948228622650875414735667",
+              "XLF": "3.56",
+              "XLK": "0.79012632367266518891010668495281",
+              "XLU": "1.73141740068155092522245139683652",
+              "XLV": "1.54884600913006088137621828359190",
+              "XLY": "1.49687868498092080508372021673766"
+            },
+            "per_instrument_difference": {
+              "EEM": "-0.53300842617299832023654884786188",
+              "IEF": "-0.01995190600284075296009632980259",
+              "LQD": "0.00",
+              "QQQ": "0.00",
+              "TIP": "0.00",
+              "TLT": "0.92961482873418889064934672810528",
+              "VNQ": "0.11255840082618954476970136396046",
+              "VWO": "-0.40041510468236923871938462733509",
+              "XLE": "-0.28232937051771377349124585264333",
+              "XLF": "0.00",
+              "XLK": "-1.04012632367266518891010668495281",
+              "XLU": "-0.28141740068155092522245139683652",
+              "XLV": "-0.64884600913006088137621828359190",
+              "XLY": "-0.36687868498092080508372021673766"
+            },
+            "why_the_basis_matters_here": "This is the condition G2A2-CONFLICT-18 distorts most. Attribution is a ratio of one symbol's P&L to the total, so dropping a trim's proceeds corrupts both the numerator and the denominator, and the probe showed the dropped amount can exceed the retained one and reverse its sign. Computing the ratio over episodes is what makes the answer a fact about the strategy rather than about which positions happened to be trimmed."
+          },
+          "share_by_instrument": {
+            "EEM": "-1.206106870229007633587786259541985",
+            "IEF": "0.3053435114503816793893129770992366",
+            "LQD": "0.1221374045801526717557251908396947",
+            "QQQ": "2.557251908396946564885496183206107",
+            "TIP": "-0.5343511450381679389312977099236641",
+            "TLT": "-2.610687022900763358778625954198473",
+            "VNQ": "1.198473282442748091603053435114504",
+            "VWO": "-1.229007633587786259541984732824427",
+            "XLE": "-2.786259541984732824427480916030534",
+            "XLF": "2.717557251908396946564885496183206",
+            "XLK": "-0.1908396946564885496183206106870229",
+            "XLU": "1.106870229007633587786259541984733",
+            "XLV": "0.6870229007633587786259541984732824",
+            "XLY": "0.8625954198473282442748091603053435"
+          },
+          "largest_contributor": "XLF",
+          "attempt_2_significance": "This is the condition that tests the claim in the charter's section 2. Generation 1's validated candidate put 100% of its profit into SPY. If Attempt 2's representative does the same, this condition fails and the stage fails, which is the correct outcome: a rotation strategy that never rotates has not demonstrated the thing Generation 2 exists to test. The 50 percent aggregate exposure ceiling does not change this \u2014 it scales every position down together and cannot make a concentrated portfolio diversified."
+        }
+      },
+      {
+        "id": "S3-C7",
+        "required_verbatim": "reasonable neighboring parameter values do not reverse the sign of net return",
+        "verdict": "MET",
+        "satisfied": true,
+        "measured": "3/3 neighbours match",
+        "threshold": "all 3 match, zero matches nothing",
+        "note": "Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's parameterisation is never revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3. It would also destroy the return-blind property of the selection rule, since the promotion would be driven by a return.",
+        "evidence": {
+          "neighbour_definition": "Every variant in the eighteen-variant Attempt 2 grid that differs from the representative in exactly one axis by exactly one step.",
+          "neighbour_count": 3,
+          "neighbour_count_rule": "3 when the representative is at an endpoint of both the lookback and the k axis; 5 when it is interior on both; 4 otherwise. The count is a function of the representative's grid position and is not chosen.",
+          "one_step_note": "A step is to an adjacent value in the ordering above. From lookback 3 the only neighbour is 6, not 12. From k = 2 both 1 and 3 are neighbours. The frequency axis has two values, so its single neighbour is always the other one.",
+          "representative_variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+          "representative_grid_index": 14,
+          "primary_total_return": "0.004221210809341463756",
+          "primary_sign": 1,
+          "neighbours_not_run": [],
+          "what_is_read": "Each neighbour's base-run equity-curve total return and its sign. Nothing else about a neighbour enters this condition.",
+          "no_new_runs": "Every neighbour is already a declared member of the Attempt 2 grid and is already run under the same window, the same base cost model, the same frozen risk architecture and the research shutdown enforced. This condition creates no new parameterisation and no new run.",
+          "risk_constants_have_no_neighbours": "The five RA1 constants are identical across all eighteen variants and are not gridded, so no neighbour differs from the representative in any risk parameter. See G2A2-CONFLICT-22: this condition is silent about the robustness of the risk architecture and a MET verdict must not be read as covering it.",
+          "neighbours": [
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY",
+              "grid_index": 8,
+              "parameters": {
+                "lookback_months": 6,
+                "top_k": 1,
+                "rebalance_frequency": "QUARTERLY"
+              },
+              "status": "RUN",
+              "total_return": "0.083431813045189356076",
+              "sign": 1,
+              "matches_primary": true
+            },
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY",
+              "grid_index": 13,
+              "parameters": {
+                "lookback_months": 12,
+                "top_k": 1,
+                "rebalance_frequency": "MONTHLY"
+              },
+              "status": "RUN",
+              "total_return": "0.0633",
+              "sign": 1,
+              "matches_primary": true
+            },
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY",
+              "grid_index": 16,
+              "parameters": {
+                "lookback_months": 12,
+                "top_k": 2,
+                "rebalance_frequency": "QUARTERLY"
+              },
+              "status": "RUN",
+              "total_return": "0.195362530238434197066",
+              "sign": 1,
+              "matches_primary": true
+            }
+          ]
+        }
+      }
+    ],
+    "conditions_met": 4,
+    "conditions_not_met": [
+      "S3-C3",
+      "S3-C5",
+      "S3-C6"
+    ],
+    "conditions_not_evaluable": [],
+    "conditions_not_applicable": [],
+    "reconciliation": {
+      "closed_episodes": 36,
+      "closed_trades": 36,
+      "counts_agree": true,
+      "single_leg_compared": 19,
+      "multi_leg_episodes": 17,
+      "multi_entry_episodes": 0,
+      "max_sale_legs": 5,
+      "mismatches": [],
+      "vacuous": false,
+      "reconciled": true,
+      "reconciled_fields": [
+        "entry_cash",
+        "exit_cash",
+        "dividends",
+        "pnl"
+      ],
+      "total_trimmed_proceeds": "155.01",
+      "episode_pnl_total": "1.31",
+      "frozen_trade_pnl_total": "3.84079999628074145058072414769604",
+      "pnl_discrepancy": "-2.53079999628074145058072414769604"
+    },
+    "non_vacuity_check": {
+      "rule": "evaluation_integrity_rules[9]",
+      "ledger_id": "SE100-G2-S3-C2-EPISODE-LEDGER",
+      "conflict_id": "G2A2-CONFLICT-18",
+      "reconciled_fields": [
+        "entry_cash",
+        "exit_cash",
+        "dividends",
+        "pnl"
+      ],
+      "single_leg_compared": 19,
+      "mismatch_count": 0,
+      "closed_episodes": 36,
+      "closed_trades": 36,
+      "counts_agree": true,
+      "vacuous": false,
+      "reconciled": true,
+      "nothing_closed": false,
+      "total_trimmed_proceeds": "155.01",
+      "pnl_discrepancy": "-2.53079999628074145058072414769604"
+    },
+    "redefined_for_generation_2": [
+      "S3-C5",
+      "S3-C7"
+    ],
+    "carried_over_unchanged": [
+      "S3-C1",
+      "S3-C2",
+      "S3-C3",
+      "S3-C4",
+      "S3-C6"
+    ],
+    "measurement_basis_changed_from_attempt_1": [
+      "S3-C3",
+      "S3-C4",
+      "S3-C5",
+      "S3-C6"
+    ],
+    "measurement_basis_unchanged_from_attempt_1": [
+      "S3-C1",
+      "S3-C2",
+      "S3-C7"
+    ],
+    "admission_basis": {
+      "conflict_ref": "G2A2-CONFLICT-25",
+      "resolution": "SE100-CFG-3103 scopes the gate across both runs and states that a condition is satisfied only if both runs satisfy it; SE100-CFG-3104 measures S3-C1 and S3-C4 on the base run and lists the stress run as reported_but_not_gating. Both were sealed in the same session and neither outranks the other, so the more restrictive reading is adopted: all seven conditions on #BASE, and S3-C1..S3-C6 also on #STRESS. S3-C7 is evaluated once, on base runs, because its own what_is_read fixes the neighbour side to base-run total return and gives no sealed basis for a stress-side comparison. Both condition sets are reported in full.",
+      "evaluated_on": "The selected representative variant only, across both of its runs.",
+      "both_gate": "A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.",
+      "base_all_seven_satisfied": false,
+      "stress_first_six_satisfied": false,
+      "stress_conditions_not_satisfied": [
+        "S3-C1",
+        "S3-C3",
+        "S3-C5",
+        "S3-C6"
+      ],
+      "base_conditions_not_satisfied": [
+        "S3-C3",
+        "S3-C5",
+        "S3-C6"
+      ],
+      "s3_c7_stress_side_reported_not_gating": {
+        "id": "S3-C7",
+        "required_verbatim": "reasonable neighboring parameter values do not reverse the sign of net return",
+        "verdict": "NOT_MET",
+        "satisfied": false,
+        "measured": "0/3 neighbours match",
+        "threshold": "all 3 match, zero matches nothing",
+        "note": "Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's parameterisation is never revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3. It would also destroy the return-blind property of the selection rule, since the promotion would be driven by a return.",
+        "evidence": {
+          "neighbour_definition": "Every variant in the eighteen-variant Attempt 2 grid that differs from the representative in exactly one axis by exactly one step.",
+          "neighbour_count": 3,
+          "neighbour_count_rule": "3 when the representative is at an endpoint of both the lookback and the k axis; 5 when it is interior on both; 4 otherwise. The count is a function of the representative's grid position and is not chosen.",
+          "one_step_note": "A step is to an adjacent value in the ordering above. From lookback 3 the only neighbour is 6, not 12. From k = 2 both 1 and 3 are neighbours. The frequency axis has two values, so its single neighbour is always the other one.",
+          "representative_variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+          "representative_grid_index": 14,
+          "primary_total_return": "-0.000805436201623164544",
+          "primary_sign": -1,
+          "neighbours_not_run": [],
+          "what_is_read": "Each neighbour's base-run equity-curve total return and its sign. Nothing else about a neighbour enters this condition.",
+          "no_new_runs": "Every neighbour is already a declared member of the Attempt 2 grid and is already run under the same window, the same base cost model, the same frozen risk architecture and the research shutdown enforced. This condition creates no new parameterisation and no new run.",
+          "risk_constants_have_no_neighbours": "The five RA1 constants are identical across all eighteen variants and are not gridded, so no neighbour differs from the representative in any risk parameter. See G2A2-CONFLICT-22: this condition is silent about the robustness of the risk architecture and a MET verdict must not be read as covering it.",
+          "neighbours": [
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY",
+              "grid_index": 8,
+              "parameters": {
+                "lookback_months": 6,
+                "top_k": 1,
+                "rebalance_frequency": "QUARTERLY"
+              },
+              "status": "RUN",
+              "total_return": "0.083431813045189356076",
+              "sign": 1,
+              "matches_primary": false
+            },
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY",
+              "grid_index": 13,
+              "parameters": {
+                "lookback_months": 12,
+                "top_k": 1,
+                "rebalance_frequency": "MONTHLY"
+              },
+              "status": "RUN",
+              "total_return": "0.0633",
+              "sign": 1,
+              "matches_primary": false
+            },
+            {
+              "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY",
+              "grid_index": 16,
+              "parameters": {
+                "lookback_months": 12,
+                "top_k": 2,
+                "rebalance_frequency": "QUARTERLY"
+              },
+              "status": "RUN",
+              "total_return": "0.195362530238434197066",
+              "sign": 1,
+              "matches_primary": false
+            }
+          ]
+        }
+      },
+      "permissive_base_only_reading_would_give": false
+    },
+    "stress_evaluation": {
+      "experiment_id": "SE100-G2-S3-C2-ROTATION-RA1",
+      "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+      "variant": {
+        "index": 14,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.500000000",
+        "scheduled_rebalance_sessions": 53
+      },
+      "plan": {
+        "experiment_id": "SE100-G2-S3-C2-ROTATION-RA1",
+        "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+        "declared_universe": [
+          "AGG",
+          "BND",
+          "DIA",
+          "DVY",
+          "EEM",
+          "EFA",
+          "HYG",
+          "IEF",
+          "IVV",
+          "IWM",
+          "IYR",
+          "LQD",
+          "MDY",
+          "QQQ",
+          "SHY",
+          "SPY",
+          "TIP",
+          "TLT",
+          "VEA",
+          "VGK",
+          "VIG",
+          "VNQ",
+          "VTI",
+          "VWO",
+          "VYM",
+          "XLB",
+          "XLE",
+          "XLF",
+          "XLI",
+          "XLK",
+          "XLP",
+          "XLU",
+          "XLV",
+          "XLY"
+        ],
+        "declared_instrument_count": 34,
+        "run_start": "2008-07-28",
+        "run_end": "2021-07-30",
+        "binding_symbol": "VEA",
+        "sessions": 3276,
+        "span_recheck_requirement": "The runner recomputes every value below from the loaded series and refuses to run if any differs.",
+        "risk_architecture_id": "RA2"
+      },
+      "scenario": "STRESSED",
+      "admitted": false,
+      "conditions": [
+        {
+          "id": "S3-C1",
+          "required_verbatim": "total return is positive",
+          "verdict": "NOT_MET",
+          "satisfied": false,
+          "measured": "-0.000805436201623164544",
+          "threshold": "> 0",
+          "note": null,
+          "evidence": {
+            "starting_equity": "100.00",
+            "final_equity": "99.9194563798376835456"
+          }
+        },
+        {
+          "id": "S3-C2",
+          "required_verbatim": "maximum drawdown is no worse than 15%",
+          "verdict": "MET",
+          "satisfied": true,
+          "measured": "0.1420128991297120600142654278172959",
+          "threshold": "<= 0.15",
+          "note": "Inclusive. 'No worse than 15%' admits exactly 15%.",
+          "evidence": {
+            "granularity": "session close",
+            "research_shutdown_session": null
+          }
+        },
+        {
+          "id": "S3-C3",
+          "required_verbatim": "profit factor is at least 1.10",
+          "verdict": "NOT_MET",
+          "satisfied": false,
+          "measured": "1.029894490035169988276670574443142",
+          "threshold": ">= 1.1",
+          "note": null,
+          "evidence": {
+            "basis": "Gross profit divided by gross loss over CLOSED EPISODES, where an episode's P&L is exit_cash plus dividends received while held minus entry_cash, with both legs' costs already inside those cash figures, and exit_cash is summed across every sale leg of the episode rather than only the leg that closed it. On any episode with exactly one sale leg this is numerically identical to stockedge100.backtest.metrics.profit_factor over Portfolio.trades.",
+            "closed_episodes": 36,
+            "gross_profit": "17.57",
+            "gross_loss": "17.06",
+            "reconciliation": {
+              "closed_trades": 36,
+              "profit_factor_over_portfolio_trades": "1.170875467160605533947199396613506",
+              "total_trimmed_proceeds": "135.68",
+              "pnl_discrepancy": "-2.11962569101468741976539726802568",
+              "single_leg_compared": 21,
+              "mismatch_count": 0,
+              "note": "The frozen metrics function is not modified and is still called for the reconciliation figure. Both numbers are reported: profit factor over the episode ledger, which gates, and profit factor over Portfolio.trades, which does not. Where they differ, the difference is the trimmed proceeds the frozen recorder drops, and its size is the measure of how much the risk architecture actually traded."
+            }
+          }
+        },
+        {
+          "id": "S3-C4",
+          "required_verbatim": "at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results",
+          "verdict": "MET",
+          "satisfied": true,
+          "measured": "36",
+          "threshold": ">= 30",
+          "note": "No Attempt 2 variant invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly and before results so that a quarterly variant cannot be argued into it once its count is known. See G2A2-CONFLICT-20 for the two opposing effects the risk architecture has on this count, and SC-1 in SE100-CFG-3103 for the structural risk that a low-turnover quarterly k=1 variant falls short of 30.",
+          "evidence": {
+            "basis": "Count of closed episodes in the representative's base run. An episode is closed when a sale returns the position to zero. A position still open on the final session is not closed and is not counted; at k = 3 up to three positions may be open on the final session and none of them counts. A position that has been trimmed but not closed is still open and is not counted.",
+            "exception_invoked": false,
+            "counting_identity": "A closed episode and a closed Portfolio.Trade are the same event: both are the moment a position returns to zero. The episode ledger changes what P&L is attributed to that event, not when the event occurs, so this count is identical to the count over Portfolio.trades. It is asserted equal at evaluation time rather than assumed.",
+            "closed_episodes": 36,
+            "closed_trades": 36,
+            "counts_agree": true,
+            "open_episodes_at_end": 1,
+            "open_positions_at_end": 1,
+            "trimmed_but_not_closed": 0,
+            "not_evaluable_treatment": "This condition is always evaluable. A count is defined for every run, and a run with no closed episodes has a count of zero, which is a measured value that fails the predicate rather than absent evidence. There is consequently no NOT_EVALUABLE path here and no case in which a missing figure could be read as satisfying the floor. Stated explicitly, because G2A2-CONFLICT-20 makes a low count a live possibility for Attempt 2 in a way it was not for Attempt 1."
+          }
+        },
+        {
+          "id": "S3-C5",
+          "required_verbatim": "performance is not dependent on one trade: removing the single best trade leaves total return above 0%",
+          "verdict": "NOT_MET",
+          "satisfied": false,
+          "measured": "min(-0.0187959786703338421765362263696300, -0.0187959786703338421765362263696300)",
+          "threshold": "best_trade_removed_return > 0 for BOTH removals",
+          "note": "The reconstruction is NOT expected to equal the equity-curve total return, and no attempt is made to make it equal. Concurrent positions mean the products do not telescope; dividends credited outside an episode and positions still open on the final session also contribute; and under Attempt 2 the exposure scalar changes within an episode's life. Both figures are reported side by side, together with their difference, and the condition is evaluated on the reconstruction, whose purpose is to be a like-for-like comparison against the same reconstruction with one episode removed.",
+          "evidence": {
+            "basis": "Closed episodes only. Each episode's multiple is taken against the equity that actually existed when that episode was entered, which is well defined whether or not other positions were open at the time and whether or not the position was later trimmed.",
+            "closed_episodes": 36,
+            "multi_leg_episodes": 15,
+            "reconstructed_total_return": "0.004988342306843768058297119005962",
+            "equity_curve_total_return": "-0.000805436201623164544",
+            "reconstruction_gap": "0.005793778508466932602297119005962",
+            "disclosure_requirement": "The Attempt 2 report states the reconstructed return, the equity-curve return, and the gap between them explicitly. A material gap is a limitation to disclose, not a defect to reconcile.",
+            "which_trade_is_removed": "Two removals are computed and BOTH must leave a positive return. j1 is the episode with the largest equity multiple r[i]. j2 is the episode with the largest absolute P&L pnl[i]. These usually coincide and need not. Requiring both is the stricter reading, carried over unchanged from Generation 1 and Attempt 1, and it is fixed here so the stricter or looser reading cannot be chosen after seeing which one the representative survives.",
+            "tie_handling": "If several episodes tie on the maximum, the earliest by index is removed. Carried over from Generation 1's max(..., key=(value, -index)) tiebreak so that the removal is deterministic.",
+            "j2_reading": "largest P&L in signed currency terms, not largest abs(pnl); carried over from Generation 1's condition_5, whose docstring establishes the reading",
+            "episodes_entered_on_first_session": 0,
+            "distinct_entry_equity_bases": 36,
+            "j1_largest_equity_multiple": {
+              "episode_index": 25,
+              "close_index": 25,
+              "symbol": "XLF",
+              "entry_session": "2017-04-04",
+              "exit_session": "2018-01-03",
+              "sale_legs": 1,
+              "single_leg": true,
+              "entry_equity_base": "97.36",
+              "multiple": "1.024239934264585045193097781429745",
+              "pnl": "2.36",
+              "removed_return": "-0.0187959786703338421765362263696300"
+            },
+            "j2_largest_absolute_pnl": {
+              "episode_index": 25,
+              "close_index": 25,
+              "symbol": "XLF",
+              "entry_session": "2017-04-04",
+              "exit_session": "2018-01-03",
+              "sale_legs": 1,
+              "single_leg": true,
+              "entry_equity_base": "97.36",
+              "multiple": "1.024239934264585045193097781429745",
+              "pnl": "2.36",
+              "removed_return": "-0.0187959786703338421765362263696300"
+            },
+            "j1_equals_j2": true
+          }
+        },
+        {
+          "id": "S3-C6",
+          "required_verbatim": "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy",
+          "verdict": "NOT_MET",
+          "satisfied": false,
+          "measured": "6.882352941176470588235294117647059",
+          "threshold": "<= 0.50",
+          "note": null,
+          "evidence": {
+            "basis": "For each instrument, contribution = sum of pnl over that instrument's closed EPISODES, divided by the sum of pnl over all closed episodes. Evaluated only when total closed-episode P&L is strictly positive; when total P&L is zero or negative the share is not a meaningful proportion and the case is recorded as NOT_EVALUABLE \u2014 which is moot, because S3-C1 has already failed such a candidate.",
+            "applies_to": "SE100-G2-S3-C2-ROTATION-RA1, unconditionally.",
+            "why_it_always_applies": "Attempt 2's declared universe is the full 34-member frozen list at every rebalance, so the strategy is multi-instrument by declaration regardless of how many symbols it turns out to trade. Deciding applicability from the realized count would let a candidate that collapsed onto one symbol escape the condition precisely when it is most informative.",
+            "declared_instrument_count": 34,
+            "declared_universe": [
+              "AGG",
+              "BND",
+              "DIA",
+              "DVY",
+              "EEM",
+              "EFA",
+              "HYG",
+              "IEF",
+              "IVV",
+              "IWM",
+              "IYR",
+              "LQD",
+              "MDY",
+              "QQQ",
+              "SHY",
+              "SPY",
+              "TIP",
+              "TLT",
+              "VEA",
+              "VGK",
+              "VIG",
+              "VNQ",
+              "VTI",
+              "VWO",
+              "VYM",
+              "XLB",
+              "XLE",
+              "XLF",
+              "XLI",
+              "XLK",
+              "XLP",
+              "XLU",
+              "XLV",
+              "XLY"
+            ],
+            "distinct_symbols_traded": 14,
+            "total_closed_episode_pnl": "0.51",
+            "pnl_by_instrument": {
+              "EEM": "-1.59",
+              "IEF": "0.38",
+              "LQD": "0.13",
+              "QQQ": "3.26",
+              "TIP": "-0.76",
+              "TLT": "-3.42",
+              "VNQ": "1.39",
+              "VWO": "-1.64",
+              "XLE": "-3.37",
+              "XLF": "3.51",
+              "XLK": "0.30",
+              "XLU": "0.65",
+              "XLV": "0.62",
+              "XLY": "1.05"
+            },
+            "reconciliation": {
+              "total_closed_trade_pnl": "2.62962569101468741976539726802568",
+              "pnl_by_instrument_over_portfolio_trades": {
+                "EEM": "-1.05694645689327771259048454768379",
+                "IEF": "0.41036925751677987064020591337001",
+                "LQD": "0.13",
+                "QQQ": "3.29419922487284787343637128158862",
+                "TIP": "-0.76",
+                "TLT": "-4.40844706471368766876679322008431",
+                "VNQ": "1.32356632602173040046195502076445",
+                "VWO": "-1.22362756225347043889519779647928",
+                "XLE": "-3.37",
+                "XLF": "3.51",
+                "XLK": "1.18300806362210192539141312126426",
+                "XLU": "0.77227063107008177295860265578383",
+                "XLV": "1.47866326948993837419129836640901",
+                "XLY": "1.34657000228164302293802647309288"
+              },
+              "per_instrument_difference": {
+                "EEM": "-0.53305354310672228740951545231621",
+                "IEF": "-0.03036925751677987064020591337001",
+                "LQD": "0.00",
+                "QQQ": "-0.03419922487284787343637128158862",
+                "TIP": "0.00",
+                "TLT": "0.98844706471368766876679322008431",
+                "VNQ": "0.06643367397826959953804497923555",
+                "VWO": "-0.41637243774652956110480220352072",
+                "XLE": "0.00",
+                "XLF": "0.00",
+                "XLK": "-0.88300806362210192539141312126426",
+                "XLU": "-0.12227063107008177295860265578383",
+                "XLV": "-0.85866326948993837419129836640901",
+                "XLY": "-0.29657000228164302293802647309288"
+              },
+              "why_the_basis_matters_here": "This is the condition G2A2-CONFLICT-18 distorts most. Attribution is a ratio of one symbol's P&L to the total, so dropping a trim's proceeds corrupts both the numerator and the denominator, and the probe showed the dropped amount can exceed the retained one and reverse its sign. Computing the ratio over episodes is what makes the answer a fact about the strategy rather than about which positions happened to be trimmed."
+            },
+            "share_by_instrument": {
+              "EEM": "-3.117647058823529411764705882352941",
+              "IEF": "0.7450980392156862745098039215686275",
+              "LQD": "0.2549019607843137254901960784313725",
+              "QQQ": "6.392156862745098039215686274509804",
+              "TIP": "-1.490196078431372549019607843137255",
+              "TLT": "-6.705882352941176470588235294117647",
+              "VNQ": "2.725490196078431372549019607843137",
+              "VWO": "-3.215686274509803921568627450980392",
+              "XLE": "-6.607843137254901960784313725490196",
+              "XLF": "6.882352941176470588235294117647059",
+              "XLK": "0.5882352941176470588235294117647059",
+              "XLU": "1.274509803921568627450980392156863",
+              "XLV": "1.215686274509803921568627450980392",
+              "XLY": "2.058823529411764705882352941176471"
+            },
+            "largest_contributor": "XLF",
+            "attempt_2_significance": "This is the condition that tests the claim in the charter's section 2. Generation 1's validated candidate put 100% of its profit into SPY. If Attempt 2's representative does the same, this condition fails and the stage fails, which is the correct outcome: a rotation strategy that never rotates has not demonstrated the thing Generation 2 exists to test. The 50 percent aggregate exposure ceiling does not change this \u2014 it scales every position down together and cannot make a concentrated portfolio diversified."
+          }
+        },
+        {
+          "id": "S3-C7",
+          "required_verbatim": "reasonable neighboring parameter values do not reverse the sign of net return",
+          "verdict": "NOT_MET",
+          "satisfied": false,
+          "measured": "0/3 neighbours match",
+          "threshold": "all 3 match, zero matches nothing",
+          "note": "Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's parameterisation is never revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3. It would also destroy the return-blind property of the selection rule, since the promotion would be driven by a return.",
+          "evidence": {
+            "neighbour_definition": "Every variant in the eighteen-variant Attempt 2 grid that differs from the representative in exactly one axis by exactly one step.",
+            "neighbour_count": 3,
+            "neighbour_count_rule": "3 when the representative is at an endpoint of both the lookback and the k axis; 5 when it is interior on both; 4 otherwise. The count is a function of the representative's grid position and is not chosen.",
+            "one_step_note": "A step is to an adjacent value in the ordering above. From lookback 3 the only neighbour is 6, not 12. From k = 2 both 1 and 3 are neighbours. The frequency axis has two values, so its single neighbour is always the other one.",
+            "representative_variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+            "representative_grid_index": 14,
+            "primary_total_return": "-0.000805436201623164544",
+            "primary_sign": -1,
+            "neighbours_not_run": [],
+            "what_is_read": "Each neighbour's base-run equity-curve total return and its sign. Nothing else about a neighbour enters this condition.",
+            "no_new_runs": "Every neighbour is already a declared member of the Attempt 2 grid and is already run under the same window, the same base cost model, the same frozen risk architecture and the research shutdown enforced. This condition creates no new parameterisation and no new run.",
+            "risk_constants_have_no_neighbours": "The five RA1 constants are identical across all eighteen variants and are not gridded, so no neighbour differs from the representative in any risk parameter. See G2A2-CONFLICT-22: this condition is silent about the robustness of the risk architecture and a MET verdict must not be read as covering it.",
+            "neighbours": [
+              {
+                "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY",
+                "grid_index": 8,
+                "parameters": {
+                  "lookback_months": 6,
+                  "top_k": 1,
+                  "rebalance_frequency": "QUARTERLY"
+                },
+                "status": "RUN",
+                "total_return": "0.083431813045189356076",
+                "sign": 1,
+                "matches_primary": false
+              },
+              {
+                "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY",
+                "grid_index": 13,
+                "parameters": {
+                  "lookback_months": 12,
+                  "top_k": 1,
+                  "rebalance_frequency": "MONTHLY"
+                },
+                "status": "RUN",
+                "total_return": "0.0633",
+                "sign": 1,
+                "matches_primary": false
+              },
+              {
+                "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY",
+                "grid_index": 16,
+                "parameters": {
+                  "lookback_months": 12,
+                  "top_k": 2,
+                  "rebalance_frequency": "QUARTERLY"
+                },
+                "status": "RUN",
+                "total_return": "0.195362530238434197066",
+                "sign": 1,
+                "matches_primary": false
+              }
+            ]
+          }
+        }
+      ],
+      "conditions_met": 2,
+      "conditions_not_met": [
+        "S3-C1",
+        "S3-C3",
+        "S3-C5",
+        "S3-C6",
+        "S3-C7"
+      ],
+      "conditions_not_evaluable": [],
+      "conditions_not_applicable": [],
+      "reconciliation": {
+        "closed_episodes": 36,
+        "closed_trades": 36,
+        "counts_agree": true,
+        "single_leg_compared": 21,
+        "multi_leg_episodes": 15,
+        "multi_entry_episodes": 0,
+        "max_sale_legs": 5,
+        "mismatches": [],
+        "vacuous": false,
+        "reconciled": true,
+        "reconciled_fields": [
+          "entry_cash",
+          "exit_cash",
+          "dividends",
+          "pnl"
+        ],
+        "total_trimmed_proceeds": "135.68",
+        "episode_pnl_total": "0.51",
+        "frozen_trade_pnl_total": "2.62962569101468741976539726802568",
+        "pnl_discrepancy": "-2.11962569101468741976539726802568"
+      },
+      "non_vacuity_check": {
+        "rule": "evaluation_integrity_rules[9]",
+        "ledger_id": "SE100-G2-S3-C2-EPISODE-LEDGER",
+        "conflict_id": "G2A2-CONFLICT-18",
+        "reconciled_fields": [
+          "entry_cash",
+          "exit_cash",
+          "dividends",
+          "pnl"
+        ],
+        "single_leg_compared": 21,
+        "mismatch_count": 0,
+        "closed_episodes": 36,
+        "closed_trades": 36,
+        "counts_agree": true,
+        "vacuous": false,
+        "reconciled": true,
+        "nothing_closed": false,
+        "total_trimmed_proceeds": "135.68",
+        "pnl_discrepancy": "-2.11962569101468741976539726802568"
+      },
+      "redefined_for_generation_2": [
+        "S3-C5",
+        "S3-C7"
+      ],
+      "carried_over_unchanged": [
+        "S3-C1",
+        "S3-C2",
+        "S3-C3",
+        "S3-C4",
+        "S3-C6"
+      ],
+      "measurement_basis_changed_from_attempt_1": [
+        "S3-C3",
+        "S3-C4",
+        "S3-C5",
+        "S3-C6"
+      ],
+      "measurement_basis_unchanged_from_attempt_1": [
+        "S3-C1",
+        "S3-C2",
+        "S3-C7"
+      ]
+    }
+  }
+}

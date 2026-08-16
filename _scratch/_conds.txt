@@ -1,0 +1,119 @@
+==============================================================================
+{
+ "id": "S3-C1",
+ "required_verbatim": "total return is positive",
+ "attempt_2_status": "unchanged from Attempt 1 in threshold, predicate and measurement basis",
+ "measurement": "total_return over the representative's base run, from stockedge100.backtest.metrics.total_return on the engine equity curve: final equity / starting equity - 1, exact Decimal.",
+ "predicate": "total_return > 0",
+ "costs": "base cost model, all costs already charged inside the equity curve",
+ "not_evaluable_treatment": "An equity curve with fewer than two points is NOT_EVALUABLE and fails.",
+ "attempt_2_note": "Unaffected by G2A2-CONFLICT-18: the equity curve reflects every cash movement including partial sales, and the probe confirmed the ledger reconciles exactly in the case where the trade list does not. See also SC-6 in SE100-CFG-3103 — the risk architecture can only reduce exposure, so a FAIL here is a predictable consequence of the architecture rather than a new fact about the rotation signal, and must be reported as such."
+}
+==============================================================================
+{
+ "id": "S3-C2",
+ "required_verbatim": "maximum drawdown is no worse than 15%",
+ "attempt_2_status": "unchanged from Attempt 1 in threshold, predicate and measurement basis",
+ "measurement": "max_drawdown from stockedge100.backtest.metrics: the largest peak-to-trough decline of the daily closing equity curve, expressed as a non-negative fraction of the running peak. Session-close granularity; the project holds no intraday data and none is imputed.",
+ "predicate": "max_drawdown <= 0.15",
+ "boundary": "Inclusive. 'No worse than 15%' admits exactly 15%.",
+ "not_evaluable_treatment": "An equity curve with fewer than two points is NOT_EVALUABLE and fails, on the same guard as S3-C1. Otherwise this condition is always evaluable: a run that never declined has a maximum drawdown of exactly zero, which is a measured value and not absent evidence. Attempt 1's file left this implicit; it is stated here because the ladder makes the drawdown path an engineered quantity rather than an incidental one, and an unstated assumption cannot be checked.",
+ "interaction": "See S3-CONFLICT-3 and G2A2-CONFLICT-19. A MET verdict here is produced by three overlapping devices and is not independent evidence about the hypothesis. A NOT_MET verdict, by contrast, is informative: it means the ladder failed at the job it was added to do."
+}
+==============================================================================
+{
+ "id": "S3-C3",
+ "required_verbatim": "profit factor is at least 1.10",
+ "attempt_2_status": "threshold and predicate unchanged; measurement basis generalised to the episode ledger — see G2A2-CONFLICT-18",
+ "measurement": "Gross profit divided by gross loss over CLOSED EPISODES, where an episode's P&L is exit_cash plus dividends received while held minus entry_cash, with both legs' costs already inside those cash figures, and exit_cash is summed across every sale leg of the episode rather than only the leg that closed it. On any episode with exactly one sale leg this is numerically identical to stockedge100.backtest.metrics.profit_factor over Portfolio.trades.",
+ "predicate": "profit_factor >= 1.10",
+ "undefined_cases": {
+  "no_closed_episodes": "profit_factor is null. Recorded as NOT_EVALUABLE and the condition FAILS. It is not passed by default and not marked not-applicable.",
+  "no_losing_episodes": "profit_factor is null because gross loss is zero. If closed episodes exist and gross profit is positive, this is recorded as UNDEFINED_NO_LOSSES_TREATED_AS_MET, with the raw null preserved in the evidence rather than replaced by a number. The sealed cost model requires profit factor undefined when there are no losses to be reported as null, never as infinity."
+ },
+ "attempt_2_note": "The frozen metrics function is not modified and is still called for the reconciliation figure. Both numbers are reported: profit factor over the episode ledger, which gates, and profit factor over Portfolio.trades, which does not. Where they differ, the difference is the trimmed proceeds the frozen recorder drops, and its size is the measure of how much the risk architecture actually traded."
+}
+==============================================================================
+{
+ "id": "S3-C4",
+ "required_verbatim": "at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results",
+ "attempt_2_status": "threshold and predicate unchanged; measurement basis generalised to the episode ledger — see G2A2-CONFLICT-18",
+ "measurement": "Count of closed episodes in the representative's base run. An episode is closed when a sale returns the position to zero. A position still open on the final session is not closed and is not counted; at k = 3 up to three positions may be open on the final session and none of them counts. A position that has been trimmed but not closed is still open and is not counted.",
+ "predicate": "closed_episodes >= 30",
+ "not_evaluable_treatment": "This condition is always evaluable. A count is defined for every run, and a run with no closed episodes has a count of zero, which is a measured value that fails the predicate rather than absent evidence. There is consequently no NOT_EVALUABLE path here and no case in which a missing figure could be read as satisfying the floor. Stated explicitly, because G2A2-CONFLICT-20 makes a low count a live possibility for Attempt 2 in a way it was not for Attempt 1.",
+ "exception_invoked": false,
+ "exception_note": "No Attempt 2 variant invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly and before results so that a quarterly variant cannot be argued into it once its count is known. See G2A2-CONFLICT-20 for the two opposing effects the risk architecture has on this count, and SC-1 in SE100-CFG-3103 for the structural risk that a low-turnover quarterly k=1 variant falls short of 30.",
+ "counting_identity": "A closed episode and a closed Portfolio.Trade are the same event: both are the moment a position returns to zero. The episode ledger changes what P&L is attributed to that event, not when the event occurs, so this count is identical to the count over Portfolio.trades. It is asserted equal at evaluation time rather than assumed."
+}
+==============================================================================
+{
+ "id": "S3-C5",
+ "required_verbatim": "performance is not dependent on one trade: removing the single best trade leaves total return above 0%",
+ "attempt_2_status": "REDEFINED for Generation 2 by G2-CONFLICT-6, carried into Attempt 2 with the episode-ledger P&L of G2A2-CONFLICT-18 and the qualification of G2A2-CONFLICT-23",
+ "measurement": {
+  "basis": "Closed episodes only. Each episode's multiple is taken against the equity that actually existed when that episode was entered, which is well defined whether or not other positions were open at the time and whether or not the position was later trimmed.",
+  "procedure": [
+   "For the i-th closed episode, E_entry[i] = account equity at the CLOSE of the session immediately preceding that episode's entry fill, read from the engine's own equity curve. If the entry fill is on the first session of the run, E_entry[i] = starting equity = 100.00.",
+   "Per-episode equity multiple r[i] = 1 + pnl[i] / E_entry[i], with pnl[i] the episode P&L defined in S3-C3.",
+   "Reconstructed total return = product of all r[i], minus 1.",
+   "Best-episode-removed return = product of r[i] for i not equal to j, minus 1."
+  ],
+  "which_trade_is_removed": "Two removals are computed and BOTH must leave a positive return. j1 is the episode with the largest equity multiple r[i]. j2 is the episode with the largest absolute P&L pnl[i]. These usually coincide and need not. Requiring both is the stricter reading, carried over unchanged from Generation 1 and Attempt 1, and it is fixed here so the stricter or looser reading cannot be chosen after seeing which one the representative survives.",
+  "tie_handling": "If several episodes tie on the maximum, the earliest by index is removed. Carried over from Generation 1's max(..., key=(value, -index)) tiebreak so that the removal is deterministic.",
+  "relation_to_headline_return": "The reconstruction is NOT expected to equal the equity-curve total return, and no attempt is made to make it equal. Concurrent positions mean the products do not telescope; dividends credited outside an episode and positions still open on the final session also contribute; and under Attempt 2 the exposure scalar changes within an episode's life. Both figures are reported side by side, together with their difference, and the condition is evaluated on the reconstruction, whose purpose is to be a like-for-like comparison against the same reconstruction with one episode removed.",
+  "disclosure_requirement": "The Attempt 2 report states the reconstructed return, the equity-curve return, and the gap between them explicitly. A material gap is a limitation to disclose, not a defect to reconcile."
+ },
+ "predicate": "best_trade_removed_return > 0 for BOTH removals",
+ "not_evaluable_treatment": "Fewer than two closed episodes is NOT_EVALUABLE and fails; a result that is one episode is the exact dependence this condition tests for.",
+ "implementation": "The Attempt 2 gate module. Generation 1's stockedge100.strategies.gate.condition_5 and Attempt 1's stockedge100.strategies.g2_gate are not called for Attempt 2 and neither is modified."
+}
+==============================================================================
+{
+ "id": "S3-C6",
+ "required_verbatim": "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy",
+ "attempt_2_status": "predicate unchanged; measurement basis generalised to the episode ledger — see G2A2-CONFLICT-18",
+ "measurement": "For each instrument, contribution = sum of pnl over that instrument's closed EPISODES, divided by the sum of pnl over all closed episodes. Evaluated only when total closed-episode P&L is strictly positive; when total P&L is zero or negative the share is not a meaningful proportion and the case is recorded as NOT_EVALUABLE — which is moot, because S3-C1 has already failed such a candidate.",
+ "predicate": "max instrument contribution <= 0.50",
+ "why_the_basis_matters_here": "This is the condition G2A2-CONFLICT-18 distorts most. Attribution is a ratio of one symbol's P&L to the total, so dropping a trim's proceeds corrupts both the numerator and the denominator, and the probe showed the dropped amount can exceed the retained one and reverse its sign. Computing the ratio over episodes is what makes the answer a fact about the strategy rather than about which positions happened to be trimmed.",
+ "scope_interpretation": {
+  "applies_to": "SE100-G2-S3-C2-ROTATION-RA1, unconditionally.",
+  "rationale": "Applicability is decided by the DECLARED universe, never by the realized symbol count. A candidate that declares one instrument cannot have a concentration problem the condition could detect, so it is NOT_APPLICABLE_BY_CONDITION_TEXT. A candidate that declares many and then trades one is exactly the case this condition exists to catch, so it remains applicable and fails.",
+  "why_it_always_applies": "Attempt 2's declared universe is the full 34-member frozen list at every rebalance, so the strategy is multi-instrument by declaration regardless of how many symbols it turns out to trade. Deciding applicability from the realized count would let a candidate that collapsed onto one symbol escape the condition precisely when it is most informative.",
+  "single_instrument_treatment": "Not reachable in Attempt 2. Retained in the schema so this file remains comparable to SE100-CFG-3102 and SE100-CFG-3002.",
+  "attempt_2_significance": "This is the condition that tests the claim in the charter's section 2. Generation 1's validated candidate put 100% of its profit into SPY. If Attempt 2's representative does the same, this condition fails and the stage fails, which is the correct outcome: a rotation strategy that never rotates has not demonstrated the thing Generation 2 exists to test. The 50 percent aggregate exposure ceiling does not change this — it scales every position down together and cannot make a concentrated portfolio diversified."
+ }
+}
+==============================================================================
+{
+ "id": "S3-C7",
+ "required_verbatim": "reasonable neighboring parameter values do not reverse the sign of net return",
+ "attempt_2_status": "REDEFINED for Generation 2 by G2-CONFLICT-7, carried into Attempt 2 unchanged, and qualified by G2A2-CONFLICT-22",
+ "measurement": {
+  "neighbour_definition": "Every variant in the eighteen-variant Attempt 2 grid that differs from the representative in exactly one axis by exactly one step.",
+  "axis_orderings": {
+   "lookback_months": [
+    3,
+    6,
+    12
+   ],
+   "top_k": [
+    1,
+    2,
+    3
+   ],
+   "rebalance_frequency": [
+    "MONTHLY",
+    "QUARTERLY"
+   ]
+  },
+  "one_step_note": "A step is to an adjacent value in the ordering above. From lookback 3 the only neighbour is 6, not 12. From k = 2 both 1 and 3 are neighbours. The frequency axis has two values, so its single neighbour is always the other one.",
+  "neighbour_count": "3 when the representative is at an endpoint of both the lookback and the k axis; 5 when it is interior on both; 4 otherwise. The count is a function of the representative's grid position and is not chosen.",
+  "no_new_runs": "Every neighbour is already a declared member of the Attempt 2 grid and is already run under the same window, the same base cost model, the same frozen risk architecture and the research shutdown enforced. This condition creates no new parameterisation and no new run.",
+  "risk_constants_have_no_neighbours": "The five RA1 constants are identical across all eighteen variants and are not gridded, so no neighbour differs from the representative in any risk parameter. See G2A2-CONFLICT-22: this condition is silent about the robustness of the risk architecture and a MET verdict must not be read as covering it.",
+  "what_is_read": "Each neighbour's base-run equity-curve total return and its sign. Nothing else about a neighbour enters this condition."
+ },
+ "predicate": "sign(neighbour total_return) == sign(representative total_return) for EVERY neighbour, where sign is positive, negative, or zero and zero matches nothing",
+ "selection_prohibition": "Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's parameterisation is never revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3. It would also destroy the return-blind property of the selection rule, since the promotion would be driven by a return.",
+ "not_evaluable_treatment": "A neighbour that fails to run is NOT_RUN, which is not a pass; the condition fails.",
+ "implementation": "The Attempt 2 gate module. Generation 1's condition_7 raises ConfigViolation on a neighbour count other than four and is not called; it is not modified. Attempt 1's g2_gate is not called and is not modified."
+}

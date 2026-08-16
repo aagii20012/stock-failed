@@ -27,15 +27,16 @@ produced a validated edge.**
 | Validation window | **SPENT** — 2021-08-01 → 2024-07-31. Read exactly once, on the single authorization the sealed Stage 4 protocol granted, in one loading session running the two declared runs. No further read is permitted and no rerun is authorized. |
 | Final holdout | **SEALED** — 2024-08-01 → 2026-07-31. Never read, by Generation 1 or by any later generation. |
 
-### Generation 2 — open, and failing at Gate 3
+### Generation 2 — open, and failing at Gate 3 at both attempts
 
 | Item | Value |
 |---|---|
 | Generation id | `SE100-GEN2-7394207c543401e2` |
 | Charter | [STAGE_10_GENERATION_2_CHARTER.md](governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md) (`SE100-GOV-2001`) — a new generation under constitution §19 |
 | What it changes | Exactly one thing: the strategy must be **genuinely cross-sectional**, selecting among the 34 ETFs rather than collapsing onto a single symbol the way Generation 1's validated candidate collapsed onto SPY. Same provider, same account model, same daily bars, same cost model, same frozen universe. |
-| Gate 3 — development admissibility | **FAILED** (`FAIL — STAGE_3_G2_NO_CANDIDATE`). Eighteen pre-registered rotation variants, two cost scenarios each, 36 runs. **All 18 recorded a research-shutdown event in both runs**, and step 1 of the frozen return-blind selection rule requires zero — so no representative exists, and Gate 3's seven hard conditions are `NOT_RUN` rather than evaluated. |
-| Next authorized stage | **None.** Human review of the Stage 3 package. Stage 4 has nothing to validate and is not authorized. Any further Generation 2 work restarts at Gate 3 with a **new** pre-registration; this grid may not be loosened, re-run, or have a nineteenth variant appended to it. |
+| Gate 3 attempt 1 — development admissibility | **FAILED** (`FAIL — STAGE_3_G2_NO_CANDIDATE`). Eighteen pre-registered rotation variants, two cost scenarios each, 36 runs. **All 18 recorded a research-shutdown event in both runs**, and step 1 of the frozen return-blind selection rule requires zero — so no representative exists, and Gate 3's seven hard conditions are `NOT_RUN` rather than evaluated. |
+| Gate 3 attempt 2 — development admissibility | **FAILED** (`FAIL — STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE`), by a different route. The same 18-variant grid under a frozen risk architecture recorded **zero** research shutdowns across all 36 runs, so a representative did exist and Gate 3 was evaluated for the first time in this generation. `SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY` fails **`S3-C3`** (profit factor 1.0729 against 1.10), **`S3-C5`** (removing the single best trade takes total return to −1.12%) and **`S3-C6`** (largest single-instrument contribution 2.72× total profit) on the gating base run, and total return is negative on the stressed run. `admissible_candidate_exists` is `NOT_MET`. |
+| Next authorized stage | **None.** Human review of the attempt 2 package. Stage 4 has nothing to validate and is not authorized. Any further Generation 2 work restarts at Gate 3 with a **new** pre-registration and a **further disclosed adaptation**; neither grid may be loosened, re-run, or have a nineteenth variant appended to it, and no attempt 2 variant may be re-selected on return. |
 | Development window | 1993-01-29 → 2021-07-31; run span 2008-07-28 → 2021-07-30, bounded by the 12-month lookback's first reference bar for every universe member |
 | Validation window | 2021-08-01 → 2024-07-31 — **not read**. Reused from Generation 1, which is a real multiplicity cost disclosed verbatim in the partition lock and in every report that references validation. |
 | Holdout | **2026-08-01 → 2028-07-31 — does not yet exist in calendar time** and may not be read before it does |
@@ -65,8 +66,10 @@ Generation 1 stage decisions: [Stage 0](governance/STAGE_0_VERIFICATION_REPORT.m
 
 Generation 2: [charter](governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md) ·
 [partition lock](governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md) ·
-[Stage 3 rotation pre-registration](governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md) ·
-[Stage 3 rotation research](governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md).
+[Stage 3 attempt 1 pre-registration](governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md) ·
+[Stage 3 attempt 1 research](governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md) ·
+[Stage 3 attempt 2 pre-registration](governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.md) ·
+[Stage 3 attempt 2 research](governance/generation_2/STAGE_3_G2_ROTATION_RA1_RESEARCH_REPORT.md).
 
 **Attempt 1** ran six strategies, one per family the constitution authorises for Generation 1. All six
 were pre-registered before any strategy code was written, run once each over the development window
@@ -149,6 +152,32 @@ promoted; all three are forbidden by the seal, and two of them would have produc
 full 18-variant table is published in the [Stage 3 report](governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md)
 as a descriptive record that decided nothing: the strongest variant by return failed the screen on
 exactly the same terms as the weakest.
+
+**Generation 2 attempt 2** was pre-registered **after** attempt 1's results were known, and says so:
+an 842-character adaptation disclosure is sealed in the protocol and carried verbatim in the report,
+the decision record and every reference to the result. It changes exactly one thing — a **frozen,
+not grid-searched** risk architecture wrapped around the identical grid: a 50% aggregate exposure
+ceiling, a 10% annualized volatility target, an 8% per-position stop evaluated at the close and
+filled at the next open, a de-risk ladder at 5/8/10% from the equity high-water mark, and a
+ten-session re-entry lockout. Universe, lookbacks, k, rebalance calendars, execution rule, cost model,
+Gate 3 thresholds and the return-blind selection rule are all unchanged. **The architecture worked at
+what it was built to do.** All 18 variants recorded **zero** research-shutdown events across all 36
+runs, against 36 of 36 in attempt 1; base-run maximum drawdown fell from a 15.05–17.59% band to
+9.10–13.97%, and every single variant improved. A representative therefore existed, and Gate 3 was
+evaluated on a Generation 2 candidate for the first time.
+
+**It failed anyway, and the failure is more informative than attempt 1's.**
+`SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY` was selected at step 2 of the frozen rule — lowest
+turnover, 189 fills across both runs, a unique minimum, with return read nowhere — and misses three
+of the seven hard conditions on its gating base run: profit factor **1.0729** against a 1.10 floor,
+best-trade-removed return **−1.12%** against a requirement of positive, and a largest-instrument
+contribution of **2.72×** total strategy profit against a 50% ceiling. Thirty-six closed trades over
+thirteen years for a base return of **+0.42%**: the risk architecture bought its drawdown reduction
+by barely trading, and the gate correctly declines to call that an edge. The variant with the highest
+base return in the grid (`L03-K1-MONTHLY`, +63.15%) would plausibly have cleared more conditions, and
+**was not selected**, because the selection rule reads turnover and shutdowns and never return —
+which is the property that makes it prospective. Re-selecting on that knowledge is forbidden and was
+not done; it is recorded in §17.6 of the report as the honest finding it is.
 
 **No expected income, profit, or return is claimed for any period, past or future.** The performance
 figures on disk are historical simulations under an unvalidated proxy cost model, plus the Stage 2
@@ -270,25 +299,36 @@ sha256sum -c reports/stage4/STAGE_4_VALIDATION_PREREGISTRATION.sha256
 sha256sum -c reports/stage4/STAGE_4_VALIDATION.sha256
 ```
 
-**Generation 2** seals its partition and its rotation pre-registration in its own subtree, and both
-records use project-root-relative paths. The partition lock fixes all four windows — including a
-holdout that did not exist in calendar time when it was written. The rotation protocol was sealed
-before any Generation 2 strategy module existed, and carries the module and output counts at seal
-time that make that ordering falsifiable:
+**Generation 2** seals its partition and each of its two rotation pre-registrations in its own
+subtree, and every record uses project-root-relative paths. The partition lock fixes all four windows
+— including a holdout that did not exist in calendar time when it was written. The attempt 1 rotation
+protocol was sealed before any Generation 2 strategy module existed, and carries the module and output
+counts at seal time that make that ordering falsifiable. The attempt 2 protocol could not repeat that
+proof — attempt 1's modules are on disk and may not be deleted, so counting `strategies/` to zero is
+unavailable — a path test over `strategies/` would now either refuse to seal forever or have to be
+loosened until it tested nothing. It seals a **content-based** predicate instead: no `.py` file under
+`src/stockedge100` or `tests` contained the attempt 2 candidate id at seal time, across **97** scanned
+files, including the sealer itself, which loads that id from `config/` at run time rather than
+restating it. Paired with the predicate are the recorded SHA-256 digests of all **nine** attempt 1
+modules — a content test alone would stay green while an attempt 1 module was quietly rewritten, so
+`reports/stage3_g2_attempt2/attempt_1_module_verification.json` re-hashes every one of them rather
+than asserting they are unchanged:
 
 ```bash
 cd stockedge100
 sha256sum -c governance/generation_2/STAGE_1_G2_PARTITION_LOCK.sha256
 sha256sum -c governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256
+sha256sum -c governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.sha256
 sha256sum -c reports/stage3_g2/STAGE_3_G2_ROTATION_RESEARCH.sha256
+sha256sum -c reports/stage3_g2_attempt2/STAGE_3_G2_A2_ROTATION_RESEARCH.sha256
 ```
 
 One asymmetry is worth knowing before verifying anything: `repo_state_id`'s governance pattern is
 single-level (`governance/*.md`), so `governance/generation_2/` is **not** covered by it, while
 `config/**/*.json` is recursive and `config/generation_2/` **is**. That is recorded as `G2-CONFLICT-4`
 and disclosed rather than fixed — changing the pattern set would make `repo_state_id` values
-incomparable across stages. The Generation 2 governance artifacts are covered by the three records
-above instead.
+incomparable across stages. The Generation 2 governance artifacts are covered by the five records
+above, and by each attempt's artifact manifest, instead.
 
 ---
 
@@ -407,7 +447,7 @@ pass. No prior approval of research, paper trading, or shadow-live operation imp
 
 ## Known limitations (kept current)
 
-Eight sets now, and all of them travel with every downstream result. Data limitations settled at
+Nine sets now, and all of them travel with every downstream result. Data limitations settled at
 Stage 1 — full detail and the remaining seven items in
 [STAGE_1_DATA_FOUNDATION_REPORT.md](governance/STAGE_1_DATA_FOUNDATION_REPORT.md) §9. Engine
 limitations settled at Stage 2 — all twelve in
@@ -422,8 +462,10 @@ limitations settled at the attempt 2 evaluation — all sixteen in
 [STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md](governance/STAGE_4_VALIDATION_PREREGISTRATION_REPORT.md)
 §20. Validation evaluation limitations settled at the Stage 4 evaluation — all seven in
 [STAGE_4_VALIDATION_REPORT.md](governance/STAGE_4_VALIDATION_REPORT.md) §11. Generation 2 rotation
-limitations settled at its Stage 3 — all seven in
+limitations settled at its Stage 3 attempt 1 — all seven in
 [STAGE_3_G2_ROTATION_RESEARCH_REPORT.md](governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md)
+§17. Risk-architecture limitations settled at its Stage 3 attempt 2 — all eleven in
+[STAGE_3_G2_ROTATION_RA1_RESEARCH_REPORT.md](governance/generation_2/STAGE_3_G2_ROTATION_RA1_RESEARCH_REPORT.md)
 §17. An engine cannot be more trustworthy than its inputs, and a research result cannot be more
 trustworthy than the engine, so each list applies to everything downstream of it. The first seven sets
 were settled under Generation 1 and apply unchanged to Generation 2, which reuses the same provider,
@@ -509,7 +551,31 @@ the same universe, the same account model and the same cost model.
   That is a finding about the interaction of two frozen choices, not a licence to change either, and
   the stage cannot say what a later start would have produced because running one to find out is the
   post-hoc loosening the seal forbids.
-- **Generation 2 declares one candidate family, and its tiebreak was never exercised.** The
-  constitution's cross-candidate disjunction is therefore over a set of size one, carrying none of the
-  robustness a wider set would. And because the shutdown screen eliminated everything at step 1, the
-  turnover tiebreak has no evidence behind it beyond unit tests on synthetic inputs.
+- **Generation 2 declares one candidate family, and its selection rule is still only half tested.**
+  The constitution's cross-candidate disjunction is therefore over a set of size one, carrying none of
+  the robustness a wider set would. Attempt 1's shutdown screen eliminated everything at step 1, so its
+  turnover tiebreak was never reached; attempt 2 reached step 2 and it decided outright, on a unique
+  minimum of 189 fills. Step 3, the lexicographic tiebreak, has still never run on real data in either
+  attempt and is covered only by unit tests on synthetic inputs.
+- **Attempt 2's risk architecture bought survival at the cost of trading almost not at all.** Removing
+  the shutdowns worked — 0 events across 36 runs against attempt 1's 36 of 36, with every variant's
+  drawdown improving — but the representative it produced closes **36 trades in thirteen years** for
+  **+0.42%**, and fails Gate 3 on profit factor, best-trade dependence and concentration. A rule that
+  survives by holding cash is not a demonstration that the architecture works; it is a demonstration
+  that the grid contains nothing that both trades and survives. Two frozen choices interact here and
+  neither may be changed to find out which one binds.
+- **Better attempt 2 variants exist and were deliberately not selected.** `L03-K1-MONTHLY` returned
+  **+63.15%** with a 0.1116 drawdown, a 1.9341 profit factor and 105 closed trades, and on descriptive
+  figures would plausibly have cleared several conditions the representative missed. The frozen
+  return-blind rule selected the lowest-turnover variant instead. That is the rule working, not
+  failing — a rule that could see +63.15% would be selecting on return — and **re-selecting on return
+  is forbidden**, in this session or any later one. The figure is recorded so the cost of the rule is
+  visible rather than buried.
+- **The 50% exposure ceiling is not a hard bound in attempt 2.** Measured maxima run **0.5043 to
+  0.5184**. The ceiling is enforced at the fill open, and open-to-close movement on positions already
+  held can carry the book above it before the next session throttles. Recorded as `G2A2-CONFLICT-27`
+  and `-28`, disclosed and not corrected: correcting it would require intra-session trading the
+  execution convention does not permit. The residual is bounded by test to under one minimum lot per
+  leg, but it is a real deviation from a sealed constant. The related `SC-4` disclosure applies to the
+  tiebreak itself — fill count includes stop and throttle legs, so a variant whose risk architecture
+  intervened less has an advantage in step 2 that is not purely signal turnover.

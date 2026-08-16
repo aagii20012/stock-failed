@@ -1,0 +1,403 @@
+{
+  "rule_ref": "SE100-CFG-3103 representative_selection_rule",
+  "frozen_before_any_variant_is_run": true,
+  "return_blind": true,
+  "unchanged_from_attempt_1": true,
+  "structural_enforcement": {
+    "mechanism": "The selection function accepts a frozen SelectionInput dataclass whose fields are exactly (variant_id, shutdown_events, fill_count, per_run). No return, drawdown, profit factor or trade-count figure can reach it, because there is no field to carry one.",
+    "import_time_assertion": "The module asserts at import that the dataclass's actual field tuple equals the declared SELECTION_FIELD_NAMES. A field added later - including one of Attempt 2's own new risk-architecture counters - fails the import rather than silently widening what the selector can see.",
+    "attempt_2_counters_excluded": "The de-risk ladder activation count and the re-entry lockout trigger count are reported for every variant and are NOT selection inputs. They are descriptive evidence. Admitting them would make the selection a function of how hard the risk architecture worked, which is a performance-adjacent quantity."
+  },
+  "return_blind_enforcement": "select_representative receives only SelectionInputRA1 records, whose fields are ['variant_id', 'shutdown_events', 'fill_count', 'per_run'] and are asserted equal to that tuple at import. No BacktestResult, measurement, equity curve, trade P&L, ladder activation count or lockout trigger count is in scope at the point the representative is decided.",
+  "variants_considered": 18,
+  "inputs": [
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY",
+      "research_shutdown_events": 0,
+      "fill_count": 647,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 328
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 319
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-QUARTERLY",
+      "research_shutdown_events": 0,
+      "fill_count": 268,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 133
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 135
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K2-MONTHLY",
+      "research_shutdown_events": 0,
+      "fill_count": 804,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 370
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 434
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K2-QUARTERLY",
+      "research_shutdown_events": 0,
+      "fill_count": 309,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 153
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 156
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K3-MONTHLY",
+      "research_shutdown_events": 0,
+      "fill_count": 1076,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 514
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 562
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K3-QUARTERLY",
+      "research_shutdown_events": 0,
+      "fill_count": 491,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 251
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 240
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-MONTHLY",
+      "research_shutdown_events": 0,
+      "fill_count": 477,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 240
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 237
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY",
+      "research_shutdown_events": 0,
+      "fill_count": 249,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 126
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 123
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K2-MONTHLY",
+      "research_shutdown_events": 0,
+      "fill_count": 701,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 361
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 340
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K2-QUARTERLY",
+      "research_shutdown_events": 0,
+      "fill_count": 264,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 132
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 132
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K3-MONTHLY",
+      "research_shutdown_events": 0,
+      "fill_count": 848,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 427
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 421
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K3-QUARTERLY",
+      "research_shutdown_events": 0,
+      "fill_count": 432,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 216
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 216
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY",
+      "research_shutdown_events": 0,
+      "fill_count": 360,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 178
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 182
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+      "research_shutdown_events": 0,
+      "fill_count": 189,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 97
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 92
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-MONTHLY",
+      "research_shutdown_events": 0,
+      "fill_count": 371,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 186
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 185
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY",
+      "research_shutdown_events": 0,
+      "fill_count": 267,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 156
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 111
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K3-MONTHLY",
+      "research_shutdown_events": 0,
+      "fill_count": 644,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 308
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 336
+        }
+      ]
+    },
+    {
+      "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K3-QUARTERLY",
+      "research_shutdown_events": 0,
+      "fill_count": 317,
+      "per_run": [
+        {
+          "label": "#BASE",
+          "research_shutdown_events": 0,
+          "fills": 157
+        },
+        {
+          "label": "#STRESS",
+          "research_shutdown_events": 0,
+          "fills": 160
+        }
+      ]
+    }
+  ],
+  "step_1": {
+    "order": 1,
+    "criterion": "zero_research_shutdown_events",
+    "scope": "across BOTH runs of the variant",
+    "eliminates": "any variant with one or more shutdown events in either run",
+    "eligible": [
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-QUARTERLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K2-MONTHLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K2-QUARTERLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K3-MONTHLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K3-QUARTERLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-MONTHLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K2-MONTHLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K2-QUARTERLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K3-MONTHLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K3-QUARTERLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-MONTHLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K3-MONTHLY",
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K3-QUARTERLY"
+    ],
+    "ineligible": [],
+    "eligible_count": 18
+  },
+  "representative_variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+  "representative_exists": true,
+  "decided_at_step": 2,
+  "decided_by": "lowest_turnover",
+  "step_2": {
+    "order": 2,
+    "criterion": "lowest_turnover",
+    "definition": "total fill count across both runs",
+    "why_not_gross_notional": "Gross notional traded is a partial return proxy - a variant that compounded further trades larger notionals for the same decisions. Fill count is not. Carried from Attempt 1's G2-CONFLICT-13.",
+    "attempt_2_note": "Fill count now includes STOP and THROTTLE legs. The throttle in particular adds fills, so Attempt 2's turnover figures are not comparable with Attempt 1's and the tiebreak now partly measures how often the risk architecture intervened. This is disclosed as SC-4 and the rule is not changed to compensate, because changing a frozen selection rule after seeing that it might behave differently is precisely what pre-registration exists to prevent.",
+    "fill_counts": {
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY": 647,
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-QUARTERLY": 268,
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K2-MONTHLY": 804,
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K2-QUARTERLY": 309,
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K3-MONTHLY": 1076,
+      "SE100-G2-S3-C2-ROTATION-RA1-L03-K3-QUARTERLY": 491,
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-MONTHLY": 477,
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY": 249,
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K2-MONTHLY": 701,
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K2-QUARTERLY": 264,
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K3-MONTHLY": 848,
+      "SE100-G2-S3-C2-ROTATION-RA1-L06-K3-QUARTERLY": 432,
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY": 360,
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY": 189,
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-MONTHLY": 371,
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY": 267,
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K3-MONTHLY": 644,
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K3-QUARTERLY": 317
+    },
+    "lowest_fill_count": 189,
+    "tied_at_lowest": [
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY"
+    ],
+    "reached": true
+  },
+  "step_3": {
+    "order": 3,
+    "criterion": "lexicographic_variant_id",
+    "purpose": "A total order. Reached only if two variants tie on both criteria above.",
+    "reached": false,
+    "ordering": [
+      "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY"
+    ]
+  },
+  "no_reselection": "The representative is selected once, before any gate condition is evaluated. It is not reselected, re-ranked or substituted for any reason.",
+  "second_fail_path": {
+    "condition": "If a representative is selected and then fails one or more Gate 3 conditions.",
+    "verdict": "FAIL - STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE",
+    "same_token_note": "The same FAIL token is emitted on both fail routes. The routes are distinguished in the decision record's gate conditions and in the report prose, not in the token. Carried from Attempt 1's G2-CONFLICT-11.",
+    "runner_up_not_promoted": "If the representative fails, no runner-up is promoted. Promoting one would convert a return-blind selection into a search over eighteen candidates for one that passes.",
+    "conflict_ref": "G2A2-CONFLICT-9"
+  },
+  "selection_note": "18 variants recorded zero research-shutdown events across both declared runs. Among them SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY had the lowest turnover, 189 fills summed over its two runs, and no other eligible variant matched that count. Step 2 decided; step 3 was not reached."
+}

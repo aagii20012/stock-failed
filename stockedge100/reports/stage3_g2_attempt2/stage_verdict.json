@@ -1,0 +1,22 @@
+{
+  "verdict": "FAIL",
+  "verdict_token": "STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE",
+  "condition_token": "Either no representative exists, because every one of the eighteen variants recorded at least one research-shutdown event, or a representative exists and does not satisfy every hard condition.",
+  "fail_route": "REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION",
+  "route": "REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION",
+  "pass_token": "STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+  "fail_token": "STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE",
+  "attempt_1_tokens_withheld": [
+    "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "STAGE_3_G2_NO_CANDIDATE"
+  ],
+  "attempt_1_tokens_note": "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_NO_CANDIDATE belong to Attempt 1. No Attempt 2 artifact may emit either, and the Attempt 2 package builder asserts that the verdict token it writes is one of the two sealed above and is not either of Attempt 1's.",
+  "constitutional_fail_result_equivalent": "STRATEGY_REJECTED_IN_DEVELOPMENT",
+  "token_naming_note": "See G2A2-CONFLICT-21. The instruction's fail token names the absence of an admissible candidate; the constitution's names the rejection of one. They denote the same stage outcome and both are recorded in the decision package.",
+  "fail_is_a_deliverable": "FAIL \u2014 STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and does not license a nineteenth variant, a re-run with a different grid, a loosened risk constant, or a promotion of the runner-up. Per SE100-CFG-3103, it closes the attempt: there is no Attempt 3 without a further disclosed adaptation authorised in a later session.",
+  "representative_exists": true,
+  "selection_note": "18 variants recorded zero research-shutdown events across both declared runs. Among them SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY had the lowest turnover, 189 fills summed over its two runs, and no other eligible variant matched that count. Step 2 decided; step 3 was not reached.",
+  "admitted_candidates": [],
+  "candidates_evaluated": 1,
+  "combination_rule": "Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, NOT_EVALUABLE, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Attempt 2 declares one live candidate, so the cross-candidate disjunction is over a set of size one \u2014 see G2-CONFLICT-15 and G2A2-CONFLICT-24."
+}

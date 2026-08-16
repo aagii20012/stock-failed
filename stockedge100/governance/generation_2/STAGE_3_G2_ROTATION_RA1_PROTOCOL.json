@@ -1,0 +1,728 @@
+{
+  "artifact_id": "SE100-GOV-2005",
+  "title": "Generation 2 Stage 3 Attempt 2 cross-sectional rotation pre-registration under risk architecture RA2",
+  "status": "SEALED",
+  "project": "StockEdge100",
+  "generation": 2,
+  "generation_id": "SE100-GEN2-7394207c543401e2",
+  "stage": 3,
+  "gate_id": 3,
+  "attempt": 2,
+  "sealed_utc": "2026-08-15T09:55:41Z",
+  "run_id": "SE100-R-20260815T095541Z",
+  "charter_ref": "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md (SE100-GOV-2001)",
+  "partition_lock_ref": "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md (SE100-GOV-2002)",
+  "constitution_ref": "SE100-GOV-0001 sections 3, 4, 5.1, 6.1, 9 gate 3, 11",
+  "markdown_counterpart": "governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.md",
+  "source_of_record": "config/generation_2/g2_rotation_ra1_protocol.json",
+  "attempt_1_ref": {
+    "artifact_id": "SE100-GOV-2003",
+    "strategy_id": "SE100-G2-S3-C1-ROTATION",
+    "verdict": "FAIL - STAGE_3_G2_NO_CANDIDATE",
+    "disposition": "CLOSED_READ_ONLY",
+    "record_verified_here": "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256",
+    "record_verification": {
+      "config/generation_2/g2_cost_model.json": "OK",
+      "config/generation_2/g2_gate_criteria.json": "OK",
+      "config/generation_2/g2_rotation_protocol.json": "OK",
+      "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.json": "OK",
+      "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md": "OK"
+    },
+    "pinned_artifact_digests_reverified": {
+      "reports/stage3_g2/STAGE_3_G2_DEVELOPMENT_ADMISSIBILITY.json": "5c7d3238f51965cdff37fec0a1b4ec27bc261288ab5cfbd65485e4a820b9bbb1",
+      "config/generation_2/g2_gate_criteria.json": "a1ac96f98dcbe9e5ce975f2eb27914fcbc7728cad6355a1650dc1ec137ad0d31",
+      "reports/stage3_g2/STAGE_3_G2_ARTIFACT_MANIFEST.json": "8d0510d7aadce4ffecc871c71941729e7ca8dc3f563b3fcaeb888a2dc0bdc99f",
+      "config/generation_2/g2_rotation_protocol.json": "1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810",
+      "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.json": "f805129dba90bc9e7877d62547c27dcfd599cd9ccd75046cd643d676a8c4a547",
+      "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md": "be8f9320036de8eb4503a111e77f99f337832229898de185a0b8e6f6d0cd8a63",
+      "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256": "64d1377705dd3ae6ffc710f39a2616e2285c5610b593f7223f4e8ce7fde026b1",
+      "reports/stage3_g2/STAGE_3_G2_ROTATION_RESEARCH.json": "5c46393b69b1048a045c8401f5ea40edc82039a9cd319d0980a39a2efbea5955",
+      "governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md": "07a1ec202060de83820e284bd110486fd9e38f8e7ccaff3f3e4b97ec0fffc939"
+    }
+  },
+  "sealed_before_any_strategy_code": true,
+  "sealed_before_any_variant_is_run": true,
+  "sealed_before_any_result_was_seen": false,
+  "sealed_before_any_result_was_seen_note": "False, and stated as such. This pre-registration was designed after Attempt 1's development results were known. See adaptation_disclosure.",
+  "contamination_measurement": {
+    "contamination_predicate": "CONTENT_BASED",
+    "predicate": "No .py file under src/stockedge100 or tests contains the string SE100-G2-S3-C2-ROTATION-RA1 at seal time.",
+    "python_files_scanned": 97,
+    "modules_naming_this_candidate": [],
+    "tests_naming_this_candidate": [],
+    "modules_naming_this_candidate_count": 0,
+    "tests_naming_this_candidate_count": 0,
+    "sealer_names_the_candidate": false,
+    "sealer_indirection": "This module loads strategy_id from config/generation_2/g2_rotation_ra1_protocol.json at run time. It is itself scanned by the predicate above and satisfies it.",
+    "attempt_1_immutability_source": "runs/SE100-R-20260815T070924Z.json",
+    "attempt_1_module_count": 9,
+    "attempt_1_module_digests": {
+      "src/stockedge100/strategies/g2_rotation.py": "bceff15807d7a2cbacef703ad239479b12101fbb46a50aa43ed92f093c05f553",
+      "src/stockedge100/strategies/g2_gate.py": "1694d2366a1b90b1d450d51d6c6a1f9aec2ed4bda3deaf88633f92f6c5349636",
+      "src/stockedge100/strategies/g2_runner.py": "dc3c9a1e7dd1e4fc635c715c6058caf4332c8a6ea4aa216a26ce1d5967fa9b84",
+      "src/stockedge100/strategies/g2_window_guard.py": "7189ded67006920f0d3c4258e1f795e66b266eb58862fec693c3f17cead3e2aa",
+      "src/stockedge100/backtest/g2_engine.py": "12cebcbc6c07ad7819c58fd2f85a9193da0424069ae2d2e25f808ae039c92e21",
+      "src/stockedge100/backtest/g2_costs.py": "a797469eb374416d246f759388b85bc2ceccec6f5dad1dd338c2191e8a799583",
+      "src/stockedge100/reporting/g2_rotation_preregistration.py": "5b47fb1de5c6767819e3181dcf8a3ab8779f63503e4bc9d28b208bb1703f2a2a",
+      "src/stockedge100/reporting/g2_stage3_evidence.py": "b50fb9f9696f3e81d37043dbc940bbefd025eccfe492265d41e4b900dd0330f1",
+      "src/stockedge100/reporting/g2_stage3_package.py": "d264981404206374af4bea23a7c1db8b025655021180e4731b2d1ef0b16c3653"
+    },
+    "attempt_1_modules_that_moved": [],
+    "attempt_1_modules_not_in_the_run_record": [],
+    "attempt_1_artifact_digests": {
+      "reports/stage3_g2/STAGE_3_G2_DEVELOPMENT_ADMISSIBILITY.json": "5c7d3238f51965cdff37fec0a1b4ec27bc261288ab5cfbd65485e4a820b9bbb1",
+      "config/generation_2/g2_gate_criteria.json": "a1ac96f98dcbe9e5ce975f2eb27914fcbc7728cad6355a1650dc1ec137ad0d31",
+      "reports/stage3_g2/STAGE_3_G2_ARTIFACT_MANIFEST.json": "8d0510d7aadce4ffecc871c71941729e7ca8dc3f563b3fcaeb888a2dc0bdc99f",
+      "config/generation_2/g2_rotation_protocol.json": "1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810",
+      "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.json": "f805129dba90bc9e7877d62547c27dcfd599cd9ccd75046cd643d676a8c4a547",
+      "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md": "be8f9320036de8eb4503a111e77f99f337832229898de185a0b8e6f6d0cd8a63",
+      "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256": "64d1377705dd3ae6ffc710f39a2616e2285c5610b593f7223f4e8ce7fde026b1",
+      "reports/stage3_g2/STAGE_3_G2_ROTATION_RESEARCH.json": "5c46393b69b1048a045c8401f5ea40edc82039a9cd319d0980a39a2efbea5955",
+      "governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md": "07a1ec202060de83820e284bd110486fd9e38f8e7ccaff3f3e4b97ec0fffc939"
+    },
+    "attempt_1_artifacts_that_moved": [],
+    "attempt_2_report_artifacts": [],
+    "run_records_naming_this_candidate": []
+  },
+  "sealed_inputs": {
+    "config/generation_2/g2_rotation_ra1_protocol.json": "0054edce91a8a49dc39f4f53529969902e318ddc3d67e9cc0307e2c015ca6880",
+    "config/generation_2/g2_gate_criteria_ra1.json": "3b9626214db6a6f6183384456489338ea19a277866e35a1aa6c09b0bacb3e625",
+    "config/generation_2/g2_cost_model.json": "b9491485b9560b948ec83d3eb86ee4946c1e83b128a368b71473d14ad0f73650",
+    "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md": "865a2feffe683e0baf71f1ab976e286fbb2d003109ab47cfaffc1fe6a63dbc90",
+    "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md": "5ae2408dc318e5b87a054a6014e4439d8c6b1934748617c787720f63356b0773",
+    "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.json": "e17ea82c499d51cf23fc9986e7231dce6388f8a3c7394d3dd3c0e3d27fbacbe7"
+  },
+  "strategy": {
+    "strategy_id": "SE100-G2-S3-C2-ROTATION-RA1",
+    "candidate_index": 2,
+    "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+    "hypothesis": "Cross-sectional relative strength over a fixed 34-member ETF universe, held in an equally weighted top-k basket and refreshed on a fixed calendar, produces a positive net return over the Generation 2 development window while remaining inside the constitutional research-shutdown ceiling, WHEN exposure is capped at half of equity, scaled down by realized portfolio volatility, staged down further as the equity drawdown deepens, and cut at the position level by a fixed stop.",
+    "candidate_count": 1,
+    "universe_version": "SE100-U1-d4917c2f7f1cd834",
+    "member_count": 34,
+    "members": [
+      "AGG",
+      "BND",
+      "DIA",
+      "DVY",
+      "EEM",
+      "EFA",
+      "HYG",
+      "IEF",
+      "IVV",
+      "IWM",
+      "IYR",
+      "LQD",
+      "MDY",
+      "QQQ",
+      "SHY",
+      "SPY",
+      "TIP",
+      "TLT",
+      "VEA",
+      "VGK",
+      "VIG",
+      "VNQ",
+      "VTI",
+      "VWO",
+      "VYM",
+      "XLB",
+      "XLE",
+      "XLF",
+      "XLI",
+      "XLK",
+      "XLP",
+      "XLU",
+      "XLV",
+      "XLY"
+    ]
+  },
+  "risk_architecture": {
+    "id": "RA2",
+    "frozen_before_any_variant_is_run": true,
+    "not_part_of_the_grid": true,
+    "components": {
+      "RA2-1": {
+        "name": "aggregate_exposure_ceiling",
+        "value": "0.50",
+        "unit": "fraction of equity"
+      },
+      "RA2-2": {
+        "name": "portfolio_volatility_target",
+        "value": "0.10",
+        "unit": "annualized standard deviation of portfolio returns"
+      },
+      "RA2-3": {
+        "name": "per_position_stop",
+        "value": "0.08",
+        "unit": "fractional loss from entry price"
+      },
+      "RA2-4": {
+        "name": "de_risk_ladder",
+        "value": null,
+        "unit": null
+      },
+      "RA2-5": {
+        "name": "re_entry_lockout",
+        "value": 10,
+        "unit": "trading sessions"
+      }
+    },
+    "ladder_bands": [
+      {
+        "band": 0,
+        "dd_from": "0.00",
+        "dd_to_exclusive": "0.05",
+        "scalar": "1.00"
+      },
+      {
+        "band": 1,
+        "dd_from": "0.05",
+        "dd_to_exclusive": "0.08",
+        "scalar": "0.75"
+      },
+      {
+        "band": 2,
+        "dd_from": "0.08",
+        "dd_to_exclusive": "0.10",
+        "scalar": "0.50"
+      },
+      {
+        "band": 3,
+        "dd_from": "0.10",
+        "dd_to_exclusive": null,
+        "scalar": "0.25"
+      }
+    ],
+    "combined_scalar": "f(t) = f_vol(t) * f_ladder(t), quantized to nine decimal places, ROUND_DOWN.",
+    "recomputed_here": "The per-position weights below are derived from RA2-1's ceiling by this program, not copied from the config, so a change to the ceiling that was not carried into the weight table would refuse the seal."
+  },
+  "position_sizing": {
+    "formula": "w(k) = min(A / k, C), quantized to nine decimal places with ROUND_DOWN, where A = 0.50 is the Attempt 2 aggregate exposure ceiling (RA2-1) and C = 0.50 is the sealed per-position concentration ceiling.",
+    "aggregate_ceiling": "0.500000000",
+    "concentration_ceiling": "0.500000000",
+    "target_weights": {
+      "1": "0.500000000",
+      "2": "0.250000000",
+      "3": "0.166666666"
+    },
+    "target_gross_exposure": {
+      "1": "0.500000000",
+      "2": "0.500000000",
+      "3": "0.499999998"
+    }
+  },
+  "grid": {
+    "size": 18,
+    "axes": {
+      "lookback_months": [
+        3,
+        6,
+        12
+      ],
+      "top_k": [
+        1,
+        2,
+        3
+      ],
+      "rebalance_frequency": [
+        "MONTHLY",
+        "QUARTERLY"
+      ]
+    },
+    "variant_id_format": "SE100-G2-S3-C2-ROTATION-RA1-L{lookback:02d}-K{k}-{FREQUENCY}",
+    "variants": [
+      {
+        "index": 1,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.500000000"
+      },
+      {
+        "index": 2,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.500000000"
+      },
+      {
+        "index": 3,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K2-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.250000000"
+      },
+      {
+        "index": 4,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K2-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.250000000"
+      },
+      {
+        "index": 5,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K3-MONTHLY",
+        "lookback_months": 3,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.166666666"
+      },
+      {
+        "index": 6,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K3-QUARTERLY",
+        "lookback_months": 3,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.166666666"
+      },
+      {
+        "index": 7,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.500000000"
+      },
+      {
+        "index": 8,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.500000000"
+      },
+      {
+        "index": 9,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K2-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.250000000"
+      },
+      {
+        "index": 10,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K2-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.250000000"
+      },
+      {
+        "index": 11,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K3-MONTHLY",
+        "lookback_months": 6,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.166666666"
+      },
+      {
+        "index": 12,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K3-QUARTERLY",
+        "lookback_months": 6,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.166666666"
+      },
+      {
+        "index": 13,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 1,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.500000000"
+      },
+      {
+        "index": 14,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 1,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.500000000"
+      },
+      {
+        "index": 15,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 2,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.250000000"
+      },
+      {
+        "index": 16,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 2,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.250000000"
+      },
+      {
+        "index": 17,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K3-MONTHLY",
+        "lookback_months": 12,
+        "top_k": 3,
+        "rebalance_frequency": "MONTHLY",
+        "target_weight_per_position": "0.166666666"
+      },
+      {
+        "index": 18,
+        "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K3-QUARTERLY",
+        "lookback_months": 12,
+        "top_k": 3,
+        "rebalance_frequency": "QUARTERLY",
+        "target_weight_per_position": "0.166666666"
+      }
+    ],
+    "runs_per_variant": 2,
+    "run_labels": [
+      "#BASE",
+      "#STRESS"
+    ],
+    "total_runs": 36,
+    "unchanged_from_attempt_1": true,
+    "recomputed_here": "Every field above is recomputed by this program from the declared axes, the config's own variant id template, and decimal arithmetic, then compared field by field against the sealed config and row by row against the Markdown."
+  },
+  "run_span_measured_from_disk": {
+    "member_count": 34,
+    "run_start": "2008-07-28",
+    "run_start_weekday": "Monday",
+    "run_start_lookback_reference": "2007-07-28",
+    "session_before_run_start": "2008-07-25",
+    "session_before_run_start_lookback_reference": "2007-07-25",
+    "run_end": "2021-07-30",
+    "run_sessions": 3276,
+    "exchange_calendar_sessions": 3276,
+    "session_lists_agree": true,
+    "binding_symbol": "VEA",
+    "binding_symbols": [
+      "VEA"
+    ],
+    "binding_symbol_inception": "2007-07-26",
+    "earliest_inception": "1993-01-29",
+    "earliest_inception_symbols": [
+      "SPY"
+    ],
+    "members_missing_a_bar_at_run_start": [],
+    "symbols_ending_before_run_end": [],
+    "development_union_sessions": 7178,
+    "development_union_span": [
+      "1993-01-29",
+      "2021-07-30"
+    ],
+    "monthly_rebalance_sessions": 157,
+    "quarterly_rebalance_sessions": 53,
+    "monthly_first_three": [
+      "2008-07-28",
+      "2008-08-01",
+      "2008-09-02"
+    ],
+    "monthly_last_two": [
+      "2021-06-01",
+      "2021-07-01"
+    ],
+    "quarterly_first_three": [
+      "2008-07-28",
+      "2008-10-01",
+      "2009-01-02"
+    ],
+    "quarterly_last_two": [
+      "2021-04-01",
+      "2021-07-01"
+    ],
+    "measurement_basis": "Date column only, plus the exchange calendar. This module parses no price, volume, or dividend field in any window, so nothing it measures is an observation of a market."
+  },
+  "representative_selection_rule": {
+    "frozen_before_any_variant_is_run": true,
+    "return_blind": true,
+    "unchanged_from_attempt_1": true,
+    "structural_enforcement": {
+      "mechanism": "The selection function accepts a frozen SelectionInput dataclass whose fields are exactly (variant_id, shutdown_events, fill_count, per_run). No return, drawdown, profit factor or trade-count figure can reach it, because there is no field to carry one.",
+      "import_time_assertion": "The module asserts at import that the dataclass's actual field tuple equals the declared SELECTION_FIELD_NAMES. A field added later - including one of Attempt 2's own new risk-architecture counters - fails the import rather than silently widening what the selector can see.",
+      "attempt_2_counters_excluded": "The de-risk ladder activation count and the re-entry lockout trigger count are reported for every variant and are NOT selection inputs. They are descriptive evidence. Admitting them would make the selection a function of how hard the risk architecture worked, which is a performance-adjacent quantity."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "criterion": "zero_research_shutdown_events",
+        "scope": "across BOTH runs of the variant",
+        "eliminates": "any variant with one or more shutdown events in either run"
+      },
+      {
+        "order": 2,
+        "criterion": "lowest_turnover",
+        "definition": "total fill count across both runs",
+        "why_not_gross_notional": "Gross notional traded is a partial return proxy - a variant that compounded further trades larger notionals for the same decisions. Fill count is not. Carried from Attempt 1's G2-CONFLICT-13.",
+        "attempt_2_note": "Fill count now includes STOP and THROTTLE legs. The throttle in particular adds fills, so Attempt 2's turnover figures are not comparable with Attempt 1's and the tiebreak now partly measures how often the risk architecture intervened. This is disclosed as SC-4 and the rule is not changed to compensate, because changing a frozen selection rule after seeing that it might behave differently is precisely what pre-registration exists to prevent."
+      },
+      {
+        "order": 3,
+        "criterion": "lexicographic_variant_id",
+        "purpose": "A total order. Reached only if two variants tie on both criteria above."
+      }
+    ],
+    "no_candidate_path": {
+      "condition": "If all eighteen variants record at least one research-shutdown event, no variant is eligible and no representative exists.",
+      "verdict": "FAIL - STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE",
+      "attempt_closes": "The attempt closes. No Attempt 3 is authorized by this file, and no Attempt 3 may be opened without a further disclosed adaptation and a separate authorization."
+    },
+    "second_fail_path": {
+      "condition": "If a representative is selected and then fails one or more Gate 3 conditions.",
+      "verdict": "FAIL - STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE",
+      "same_token_note": "The same FAIL token is emitted on both fail routes. The routes are distinguished in the decision record's gate conditions and in the report prose, not in the token. Carried from Attempt 1's G2-CONFLICT-11.",
+      "runner_up_not_promoted": "If the representative fails, no runner-up is promoted. Promoting one would convert a return-blind selection into a search over eighteen candidates for one that passes.",
+      "conflict_ref": "G2A2-CONFLICT-9"
+    },
+    "no_reselection": "The representative is selected once, before any gate condition is evaluated. It is not reselected, re-ranked or substituted for any reason."
+  },
+  "gate": {
+    "criteria_file": "config/generation_2/g2_gate_criteria_ra1.json",
+    "criteria_sha256": "3b9626214db6a6f6183384456489338ea19a277866e35a1aa6c09b0bacb3e625",
+    "evaluated_on": "The selected representative variant only, across both of its runs.",
+    "conjunctive_within_candidate": true,
+    "thresholds_changed_from_attempt_1": "none",
+    "pass_token": "STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+    "fail_token": "STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE",
+    "tokens_taken_from": "config/generation_2/g2_gate_criteria_ra1.json"
+  },
+  "multiple_comparisons_disclosure": {
+    "variants_this_attempt": 18,
+    "runs_this_attempt": 36,
+    "variants_attempt_1": 18,
+    "runs_attempt_1": 36,
+    "cumulative_variants_this_hypothesis_family": 36,
+    "cumulative_runs_this_hypothesis_family": 72,
+    "no_correction_applied": "No multiplicity correction is applied to the gate thresholds, because the thresholds are constitutional and may not be altered by a stage that would benefit from altering them. The multiplicity is disclosed instead, and it is the reason a development pass is explicitly not evidence of an edge.",
+    "adaptive_design_note": "The 36 cumulative variants are not 36 independent tests. Attempt 2's risk architecture was chosen after seeing where Attempt 1 broke, so the effective number of researcher degrees of freedom is larger than 36 and is not quantified here because any quantification would itself be a choice made after the fact.",
+    "statement": "See adaptation_disclosure_verbatim, which is the binding text and must be carried verbatim wherever this attempt's development result is referenced."
+  },
+  "adaptation_disclosure": "This pre-registration was designed after Attempt 1's development results were known. All eighteen Attempt 1 variants recorded at least one research-shutdown event, clustered at 2008-10 through 2011-10 (thirteen of eighteen), with additional single occurrences in mid-2010, January 2016, and March 2020 — periods of acute market stress that an unconstrained rotation strategy had no mechanism to survive. Attempt 2 adds risk architecture explicitly informed by this observation. The development window is no longer pristine for this hypothesis family. This adaptation increases researcher degrees of freedom and cumulative multiplicity across both attempts. No successful development result from Attempt 2 can, by itself, establish a trading edge — this mirrors exactly the disclosure Generation 1 made between its own Attempt 1 and Attempt 2.",
+  "adaptation_disclosure_carriage_requirement": {
+    "must_appear_verbatim_in": [
+      "governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.md",
+      "governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.json",
+      "governance/generation_2/STAGE_3_G2_ROTATION_RA1_RESEARCH_REPORT.md",
+      "reports/stage3_g2_attempt2/STAGE_3_G2_A2_ROTATION_RESEARCH.json",
+      "reports/stage3_g2_attempt2/STAGE_3_G2_A2_DEVELOPMENT_ADMISSIBILITY.json"
+    ],
+    "enforcement": "The sealer and the package builder both assert byte-equality of this string against the value in this file. A paraphrase is a failure, not a stylistic choice.",
+    "encoding_note": "The string is stored with the em dashes of the source prose, as UTF-8, matching every other governance artifact in this tree. An earlier draft of this file substituted ASCII hyphen-minus on the stated grounds that the tree was ASCII-only; that was false — the Attempt 1 protocol Markdown alone carries 49 em dashes — and it would have made 'verbatim' mean 'verbatim except for two characters'. Byte-equality is checked against this stored form. The consequence is that no diagnostic script may print this string to a cp1252 console; scripts compare it and report a boolean instead."
+  },
+  "structural_consequences_declared_before_running": {
+    "SC-1": {
+      "statement": "A quarterly k=1 variant has 53 scheduled rebalances over the run and can therefore close at most 52 positions by signal exit. Gate 3 requires at least 30 closed trades.",
+      "attempt_2_amendment": "In Attempt 2 the stop and the throttle can also close or reduce a position, so the closed-trade count is no longer bounded by the rebalance count. The direction of the change is upward and it is the risk architecture, not the signal, that produces the additional trades. A representative that clears the 30-trade condition mainly on stop exits has cleared it on evidence about its risk controls.",
+      "risk": "Low turnover remains the failure mode for quarterly k=1; it is now less likely to bind and the reason it is less likely is disclosed."
+    },
+    "SC-2": {
+      "statement": "Starting equity is $100.00 and the sealed minimum order notional is $1.00. At k=3 and a 50% aggregate ceiling the per-position budget is about $16.67, sixteen times the minimum.",
+      "attempt_2_amendment": "This margin is thinner than Attempt 1's, where the k=3 budget was about $31.67. With the combined risk scalar at its floor of 0.25 * (a volatility scalar that can go lower still), a k=3 entry budget can approach the minimum notional. Entries rejected as MIN_NOTIONAL or ZERO_QUANTITY are counted and reported per variant rather than treated as absent decisions.",
+      "throttle_interaction": "A throttle trim on a small position is the case most likely to fall below the minimum notional and be skipped. See G2A2-CONFLICT-17."
+    },
+    "SC-3": {
+      "statement": "Attempt 1's k=1 half-cash bias is removed. All three k values now target the same 50% gross exposure, so the k axis is no longer confounded with exposure and the zero-shutdown screen is no longer structurally easier for k=1.",
+      "see": "position_sizing.attempt_1_k1_half_cash_bias_neutralised"
+    },
+    "SC-4": {
+      "statement": "The continuous throttle adds SELL fills that Attempt 1 could not produce, and total fill count is the representative-selection tiebreak.",
+      "consequence": "The tiebreak now partly measures how often the risk architecture intervened - a variant whose exposure drifted above the ceiling more often will have a higher fill count and lose the tiebreak to one that drifted less. That is a defensible ordering (less intervention is less turnover is less cost) but it is not the same quantity Attempt 1's tiebreak measured, and the two attempts' turnover figures are not comparable.",
+      "not_corrected": "The rule is not changed to exclude throttle legs. It was frozen before Attempt 1 ran and adjusting it now, after reasoning about how it might behave, would be exactly the researcher degree of freedom this document exists to constrain."
+    },
+    "SC-5": {
+      "statement": "The 5% minimum cash buffer of the sealed cost model can never bind at a 50% aggregate exposure ceiling, because cash is at least 50% of equity at all times.",
+      "consequence": "The CASH_FLOOR clamp is present, enforced and never the binding clamp. Reported as such rather than removed.",
+      "conflict_ref": "G2A2-CONFLICT-12"
+    },
+    "SC-6": {
+      "statement": "The risk architecture reduces exposure and can only reduce it. Every one of RA2-1, RA2-2, RA2-4 and RA2-5 scales sizing down or holds it, and RA2-3 exits.",
+      "consequence": "Attempt 2's expected gross return is lower than Attempt 1's would have been on the same signal, mechanically, before any question of whether the drawdown protection is worth it. Gate 3's first condition is that net return is positive, and halving exposure roughly halves the return while the fixed costs of trading do not halve. A FAIL on net return would be a predictable consequence of the architecture and not a new fact about the signal.",
+      "why_declared_now": "So that a FAIL on S3-C1 cannot be presented afterwards as a surprising discovery, and so that a PASS cannot be presented as evidence the architecture is free."
+    }
+  },
+  "adversarial_test_requirements": {
+    "note": "Declared here before the tests exist, so that the test suite is written against a specification rather than against the implementation's behaviour. Each item is a required test, not a suggestion.",
+    "AT-A": "Aggregate exposure never exceeds 50% of equity at any session, including mid-rebalance, verified after every fill and not only at session close.",
+    "AT-B": "Volatility scaling reduces position size when trailing realized portfolio volatility exceeds 10% annualized, verified against a hand-constructed high-volatility equity fixture with an independently computed expected scalar.",
+    "AT-C": "A position breaching the 8% stop is exited at the NEXT session's open, not at the same close, and the exit is a full sell.",
+    "AT-D": "The de-risk ladder steps down at the declared thresholds and back up only after the declared recovery condition, verified against a hand-constructed drawdown-and-recovery fixture that visits every band in both directions.",
+    "AT-E": "The re-entry lockout genuinely blocks a return to a higher sizing band before its cooldown elapses, verified by a fixture in which recovery is available and blocked for exactly the declared number of sessions.",
+    "AT-F": "Determinism: identical inputs produce identical trade, equity, ranking and risk-state digests on a clean rerun.",
+    "AT-G": "The Generation 2 window guard still blocks any read at or after 2021-08-01, exercised through the Attempt 2 loading path.",
+    "AT-H": "No Generation 1 or Attempt 1 module is modified: every module listed in attempt_1_modules_immutable re-hashes to its recorded digest.",
+    "AT-I": "The selection input cannot carry a performance figure: the dataclass field tuple equals SELECTION_FIELD_NAMES and the import-time assertion fires when it does not.",
+    "regression_floor": "The existing suite is a permanent regression floor. No test is weakened, skipped or deleted to make this attempt pass."
+  },
+  "reproducibility_requirements": {
+    "determinism": "Two clean runs of the same variant and scenario must produce byte-identical trade payloads, equity payloads, ranking digests, and risk-architecture state traces.",
+    "risk_state_trace_digest": "In addition to Attempt 1's ranking digest, Attempt 2 records a SHA-256 over the per-session risk state (band, lockout counter, volatility scalar, combined scalar) in session order. Equal equity curves are weaker evidence than equal decisions, and equal decisions are weaker evidence than equal risk state: two runs could agree on every fill while disagreeing about a band transition that never reached an order.",
+    "no_wall_clock_in_payloads": "No run id, timestamp or filesystem path enters any digested payload.",
+    "seed": null,
+    "seed_note": "There is no randomness in this strategy. The field is null rather than absent so that a future stage cannot read its absence as an oversight."
+  },
+  "conflicts_found": [
+    {
+      "id": "G2A2-CONFLICT-1",
+      "summary": "Per-session decision-taking departs from Attempt 1's sealed execution.no_discretionary_exits clause.",
+      "resolution": "The clause is narrowed to entries rather than weakened: Attempt 2 may issue risk-reducing SELL orders between rebalances and may issue no BUY of any kind. The ranking is still consulted only on scheduled rebalance sessions.",
+      "see": "execution.no_discretionary_exits_superseded"
+    },
+    {
+      "id": "G2A2-CONFLICT-2",
+      "summary": "The 50% aggregate exposure ceiling has no cost-model derivation route: g2_costs.derive_mapping permits exactly one JSON-pointer override and it is spent on /account/max_open_risky_positions.",
+      "resolution": "RA2-1 is enforced as a new named engine clamp AGGREGATE_RA2 in the Attempt 2 engine subclass, in addition to the inherited 0.95 AGGREGATE clamp, which stays in place and is never binding. The sealed cost model is not modified.",
+      "see": "risk_architecture.components.RA2-1.enforcement.part_a_entry_clamp"
+    },
+    {
+      "id": "G2A2-CONFLICT-3",
+      "summary": "Attempt 1's path-based contamination predicate cannot be reused: strategies/ and backtest/ are now legitimately populated with Attempt 1's Generation 2 modules.",
+      "resolution": "The predicate becomes content-based - no module names this attempt's candidate id - paired with an immutability check that every Attempt 1 module still matches its recorded digest.",
+      "see": "declared_before_any_strategy_code_measurement"
+    },
+    {
+      "id": "G2A2-CONFLICT-4",
+      "summary": "Target weights change from min(0.95/k, 0.50) to min(0.50/k, 0.50).",
+      "resolution": "Derived from the ceiling that actually binds. Declared here before any run and checked against this table by the candidate.",
+      "see": "position_sizing"
+    },
+    {
+      "id": "G2A2-CONFLICT-5",
+      "summary": "Stop and throttle decisions carry one session of execution lag.",
+      "resolution": "Accepted and measured. It is the constitutional next-open convention, which the research shutdown itself obeys.",
+      "see": "execution.execution_lag"
+    },
+    {
+      "id": "G2A2-CONFLICT-6",
+      "summary": "This pre-registration was written after Attempt 1's development results were known.",
+      "resolution": "Disclosed verbatim, carried into every downstream artifact, and asserted byte-identical by the sealer and the package builder. The development window is not pristine for this hypothesis family and no Attempt 2 development pass can establish an edge.",
+      "see": "adaptation_disclosure_verbatim"
+    },
+    {
+      "id": "G2A2-CONFLICT-7",
+      "summary": "Attempt 1's declared k=1 half-cash bias (its SC-3) is removed as a side effect of RA2-1.",
+      "resolution": "Recorded so that a reader comparing selection outcomes across the two attempts knows the k axis is no longer confounded with gross exposure.",
+      "see": "position_sizing.attempt_1_k1_half_cash_bias_neutralised"
+    },
+    {
+      "id": "G2A2-CONFLICT-8",
+      "summary": "The verdict tokens named in the operating prompt exist in no artifact on disk.",
+      "resolution": "They are sealed here and in config/generation_2/g2_gate_criteria_ra1.json, which becomes the disk. The tokens are STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE. No existing derivation is edited to match a prompt.",
+      "see": "config/generation_2/g2_gate_criteria_ra1.json verdict_token_derivation"
+    },
+    {
+      "id": "G2A2-CONFLICT-9",
+      "summary": "Both fail routes - no eligible representative, and a representative that fails the gate - emit the same FAIL token.",
+      "resolution": "Carried from Attempt 1's G2-CONFLICT-11. The routes are distinguished in the gate conditions and the prose, not in the token.",
+      "see": "representative_selection_rule.second_fail_path"
+    },
+    {
+      "id": "G2A2-CONFLICT-10",
+      "summary": "governance/generation_2/*.md|json|sha256 is NOT covered by repo_state_id, because the pattern governance/*.md is single-level, while config/generation_2/*.json IS covered, because config/**/*.json is recursive.",
+      "resolution": "Restates Attempt 1's G2-CONFLICT-4. The patterns are sealed by every earlier stage's digest and are not widened. The consequence is that this attempt's governance artifacts are held by their own .sha256 record and the artifact manifest alone, so both must actually cover them, and both directions are asserted explicitly.",
+      "see": "the Attempt 2 decision package"
+    },
+    {
+      "id": "G2A2-CONFLICT-11",
+      "summary": "The per-position concentration ceiling (0.50) now equals the aggregate ceiling, so it is non-binding for k>=2 and coincident with RA2-1 at k=1.",
+      "resolution": "Left in place and still enforced. A clamp that never binds is not a clamp that may be removed.",
+      "see": "concentration_ceiling.non_binding_note"
+    },
+    {
+      "id": "G2A2-CONFLICT-12",
+      "summary": "The sealed 5% minimum cash buffer can never bind at a 50% gross ceiling.",
+      "resolution": "Enforced anyway and reported as never binding.",
+      "see": "structural_consequences_declared_before_running.SC-5"
+    },
+    {
+      "id": "G2A2-CONFLICT-13",
+      "summary": "The RA2-2 volatility measure is taken on an equity curve that RA2-2 itself influences.",
+      "resolution": "The feedback is negative, damped by a 20-session lag, and cannot diverge. Not corrected - correcting it would require a counterfactual unlevered equity curve. The realized distribution of the scalar is reported instead.",
+      "see": "risk_architecture.components.RA2-2.self_reference"
+    },
+    {
+      "id": "G2A2-CONFLICT-14",
+      "summary": "Position carries no entry price, so the 8% stop reference must be defined.",
+      "resolution": "Frozen as cost_basis / quantity, the all-in per-share cost including commission and fees. Marginally conservative and invariant under a partial trim.",
+      "see": "risk_architecture.components.RA2-3.reference_price_definition"
+    },
+    {
+      "id": "G2A2-CONFLICT-15",
+      "summary": "The ladder's deepest rung (10%) sits inside Gate 3's 15% max-drawdown condition and inside the constitutional 15% shutdown threshold, by construction.",
+      "resolution": "Sharpens Attempt 1's S3-CONFLICT-3: a MET S3-C2 in Attempt 2 is almost entirely a statement about the risk architecture and almost not at all about the signal. Recorded so the gate result is not over-read.",
+      "see": "risk_architecture.components.RA2-4.relationship_to_the_shutdown_threshold"
+    },
+    {
+      "id": "G2A2-CONFLICT-16",
+      "summary": "stockedge100.backtest.orders.REASONS is a closed declared set with no entry for an aggregate-ceiling rejection.",
+      "resolution": "An entry clamped to zero by AGGREGATE_RA2 is rejected as INSUFFICIENT_CASH with the clamp named in the detail string. The sealed set is not widened at runtime.",
+      "see": "risk_architecture.components.RA2-1.enforcement.part_a_entry_clamp"
+    },
+    {
+      "id": "G2A2-CONFLICT-17",
+      "summary": "A throttle trim below the sealed minimum order notional is skipped, so the aggregate ceiling can be transiently exceeded by less than one minimum lot.",
+      "resolution": "Skipped legs are counted and reported per variant, and the ceiling assertion admits exactly this slack and no more.",
+      "see": "risk_architecture.components.RA2-1.enforcement.part_b_continuous_throttle"
+    }
+  ],
+  "post_seal_defect_rule": {
+    "rule": "If a defect is found in this protocol after it is sealed, it is reported as a blocker and recorded in the stage report. This file is not edited. A correction means a new artifact with a new id that supersedes this one, and the superseding artifact carries the reason.",
+    "applies_equally_to": "Every Generation 1 artifact, every Generation 2 Attempt 1 artifact, and this one."
+  },
+  "windows": {
+    "authorized": [
+      "development"
+    ],
+    "development": [
+      "1993-01-29",
+      "2021-07-31"
+    ],
+    "validation": [
+      "2021-08-01",
+      "2024-07-31"
+    ],
+    "generation_1_holdout": [
+      "2024-08-01",
+      "2026-07-31"
+    ],
+    "generation_2_holdout": [
+      "2026-08-01",
+      "2028-07-31"
+    ],
+    "enforcement": "stockedge100.strategies.g2_window_guard, imported unmodified from Attempt 1. Every series is truncated while parsing, not after, and the bound is re-asserted after loading. Reusing the guard rather than re-deriving the bound is deliberate: a second derivation of the same bound is a second place for it to be wrong."
+  },
+  "validation_reuse_disclosure": "Generation 2's validation window (2021-08-01 → 2024-07-31) overlaps the exact period Generation 1 used for its own Gate 4 validation read. The researcher therefore already knows, from Generation 1's published report, approximately how SPY (and by extension the broad market) behaved in this window — including its Sharpe ratio (≈0.20), total return (≈2.15%), and fold-by-fold sign pattern (7 of 12 positive). Generation 2 tests a different hypothesis (cross-sectional multi-asset selection vs. single-symbol mean reversion) over the same calendar period, which limits but does not eliminate the concern. This is a real multiplicity cost, disclosed and not minimized, and it is the reason Generation 2's validation result alone — without a clean holdout confirmation — cannot be treated as sufficient evidence of an edge.",
+  "validation_reuse_disclosure_note": "Reproduced verbatim because this artifact names the validation window. Nothing in Stage 3 Attempt 2 reads it.",
+  "binding_rules": [
+    "The grid is complete at eighteen variants and is the same eighteen Attempt 1 declared. No variant is added, removed, re-parameterised, or widened under any result.",
+    "The five RA2 constants are frozen before any variant is run and are applied uniformly to all eighteen. None of them is an axis of the grid, and none is tuned after seeing a result.",
+    "The representative-selection rule is applied exactly as sealed, on research-shutdown counts, fill counts, and variant ids alone. No return, drawdown, profit factor, or equity level is an input to it.",
+    "Gate 3 is evaluated on the selected representative only, and both of its runs must satisfy every condition. The runner-up is never promoted.",
+    "No parameter, threshold, symbol, weight, or rule may be chosen using any value inside the validation window or either holdout window.",
+    "Every Generation 1 artifact and every Generation 2 Attempt 1 artifact is read-only. Attempt 1's verdict stands; nothing here reopens, re-runs, loosens, or supersedes it.",
+    "A defect discovered after this seal is reported and its effect disclosed. This artifact is superseded by a new id if it is wrong; it is never edited in place.",
+    "Stage 4 validation for Generation 2 requires a separate, explicitly authorized session. Nothing sealed here, and no result produced under it, authorizes one.",
+    "live_trading_authorized remains false. This artifact authorizes no order, no broker connection, no credential read, and no scheduling of either."
+  ],
+  "explicit_non_authorizations": [
+    "This file does not authorize reading any session at or after 2021-08-01, in this or any later stage.",
+    "This file does not authorize reading Generation 1's holdout (2024-08-01 to 2026-07-31), which is spent and prohibited regardless of generation.",
+    "This file does not authorize reading Generation 2's holdout (2026-08-01 to 2028-07-31), which is sealed and must never be read before that period exists in real calendar time.",
+    "This file does not authorize Stage 4 validation. Stage 4 requires an explicit human go-ahead recorded in a later session.",
+    "This file does not authorize live trading, order placement, order cancellation, order replacement, liquidation, or unattended scheduling. live_trading_authorized remains false.",
+    "This file does not authorize reading, writing, printing or logging any broker credential, and no module of this attempt may import a network client.",
+    "This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 1 artifact or module.",
+    "This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 2 Attempt 1 artifact or module. Attempt 1's verdict stands permanently.",
+    "This file does not authorize widening, narrowing or re-centring the eighteen-variant grid.",
+    "This file does not authorize grid-searching, tuning or adjusting any RA2 constant, before or after seeing a result.",
+    "This file does not authorize promoting a runner-up if the representative fails the gate.",
+    "This file does not authorize an Attempt 3. If Attempt 2 fails, the attempt closes and any further work requires a further disclosed adaptation and a separate authorization.",
+    "This file does not authorize weakening, skipping or deleting any existing test."
+  ],
+  "repo_state_id_location": "Deliberately omitted here. governance/generation_2/ is not reached by the repo_state_id patterns (governance/*.md is single-level), so this file is covered by STAGE_3_G2_ROTATION_RA1_PROTOCOL.sha256 instead. The binding repo_state_id for this seal is the repo_state_id field of runs/SE100-R-20260815T095541Z.json. Recorded as G2A2-CONFLICT-10.",
+  "stage_3_authorized": true,
+  "stage_4_authorized": false,
+  "holdout_read_authorized": false,
+  "live_trading_authorized": false
+}

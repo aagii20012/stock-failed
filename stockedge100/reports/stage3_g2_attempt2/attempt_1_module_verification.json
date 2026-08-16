@@ -1,0 +1,18 @@
+{
+  "requirement": "AT-H",
+  "digest_source": "SE100-GOV-2005 contamination_measurement.attempt_1_module_digests",
+  "module_count": 9,
+  "modules_verified": {
+    "src/stockedge100/strategies/g2_rotation.py": "bceff15807d7a2cbacef703ad239479b12101fbb46a50aa43ed92f093c05f553",
+    "src/stockedge100/strategies/g2_gate.py": "1694d2366a1b90b1d450d51d6c6a1f9aec2ed4bda3deaf88633f92f6c5349636",
+    "src/stockedge100/strategies/g2_runner.py": "dc3c9a1e7dd1e4fc635c715c6058caf4332c8a6ea4aa216a26ce1d5967fa9b84",
+    "src/stockedge100/strategies/g2_window_guard.py": "7189ded67006920f0d3c4258e1f795e66b266eb58862fec693c3f17cead3e2aa",
+    "src/stockedge100/backtest/g2_engine.py": "12cebcbc6c07ad7819c58fd2f85a9193da0424069ae2d2e25f808ae039c92e21",
+    "src/stockedge100/backtest/g2_costs.py": "a797469eb374416d246f759388b85bc2ceccec6f5dad1dd338c2191e8a799583",
+    "src/stockedge100/reporting/g2_rotation_preregistration.py": "5b47fb1de5c6767819e3181dcf8a3ab8779f63503e4bc9d28b208bb1703f2a2a",
+    "src/stockedge100/reporting/g2_stage3_evidence.py": "b50fb9f9696f3e81d37043dbc940bbefd025eccfe492265d41e4b900dd0330f1",
+    "src/stockedge100/reporting/g2_stage3_package.py": "d264981404206374af4bea23a7c1db8b025655021180e4731b2d1ef0b16c3653"
+  },
+  "modules_that_moved": [],
+  "note": "Digests measured at seal time and re-verified by the sealer, the runner and the post-build sweep. Any difference is a governance failure, not a value to update."
+}

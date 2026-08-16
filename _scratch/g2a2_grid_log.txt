@@ -1,0 +1,113 @@
+== 1. pre-run verification ==
+  attempt 1 modules verified: 9  moved: []
+  run span: 2008-07-28 -> 2021-07-30  sessions=3276 monthly=157 quarterly=53 binding=VEA
+  differences: []
+  reported_but_not_gating entries: 16
+     - net return, both runs
+     - maximum drawdown, both runs
+     - profit factor, both runs
+     - closed trade count, both runs
+     - best-trade-removed return, both runs
+     - research-shutdown event count and the session of each, both runs
+     - total fill count, both runs
+     - de-risk ladder activations (downward transitions), both runs
+     - de-risk ladder upward transitions and deepest band reached, both runs
+     - sessions spent in each ladder band, both runs
+     - re-entry lockout arms and sessions on which a recovery was blocked by it, both runs
+     - stop exits and the realized loss at each, both runs
+     - throttle legs issued and throttle legs skipped below minimum notional, both runs
+     - maximum observed gross exposure fraction, both runs
+     - minimum and mean combined risk scalar, and sessions on which it was below 1, both runs
+     - ranking digest, both runs
+  wrote attempt_1_module_verification.json     1462 bytes
+  wrote run_span_recheck.json                  1896 bytes
+
+== 2. the grid: 36 runs ==
+  [ 1/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY#BASE      ret=0.631462289893305023555 dd=0.1116420305479441094684710637822694 pf=1.934106893626847307444942574 trades= 105 eps= 105 shutdown=None  10.6s
+  [ 2/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY#STRESS    ret=0.57150209692728973121 dd=0.1141404073714592835164534344996816 pf=1.834603051835659167864826501 trades= 105 eps= 105 shutdown=None  17.6s
+  [ 3/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K1-QUARTERLY#BASE    ret=0.069057918185949541935 dd=0.1329972541025655847336513233402809 pf=1.411553990408623412005237955 trades=  49 eps=  49 shutdown=None  20.5s
+  [ 4/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K1-QUARTERLY#STRESS  ret=0.06512403056146988154 dd=0.1333812049915388652039869627109106 pf=1.477742691542725036200340667 trades=  49 eps=  49 shutdown=None  23.3s
+  [ 5/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K2-MONTHLY#BASE      ret=0.42031400782219944306 dd=0.1044911090977067383102421324986419 pf=1.671440396923947005618065195 trades= 157 eps= 157 shutdown=None  30.4s
+  [ 6/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K2-MONTHLY#STRESS    ret=0.30540767796333507523 dd=0.1120465322031456278856547829052141 pf=1.471485093140379385381157558 trades= 182 eps= 182 shutdown=None  37.6s
+  [ 7/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K2-QUARTERLY#BASE    ret=0.04192916677057361722 dd=0.1051971144686032811583938179342166 pf=1.112575399095870357478694523 trades=  65 eps=  65 shutdown=None  40.4s
+  [ 8/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K2-QUARTERLY#STRESS  ret=0.00378999082448454724 dd=0.1073343399302192837891867669380516 pf=1.001475573746087133575312797 trades=  66 eps=  66 shutdown=None  43.4s
+  [ 9/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K3-MONTHLY#BASE      ret=0.286860687316000323982 dd=0.1194786509883558301092040203036046 pf=1.523890047865464798602669818 trades= 231 eps= 231 shutdown=None  50.5s
+  [10/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K3-MONTHLY#STRESS    ret=0.220993288622985028302 dd=0.1330663646686043297831221744889551 pf=1.360522550795847919100058274 trades= 260 eps= 260 shutdown=None  57.7s
+  [11/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K3-QUARTERLY#BASE    ret=0.281098643671256419819 dd=0.09101400625944601348056016902092311 pf=1.413986185891167808649593318 trades= 110 eps= 110 shutdown=None  60.6s
+  [12/36] SE100-G2-S3-C2-ROTATION-RA1-L03-K3-QUARTERLY#STRESS  ret=0.237463776110849072031 dd=0.09288235388010084439895700189583237 pf=1.327950957293975312924715313 trades= 108 eps= 108 shutdown=None  63.5s
+  [13/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K1-MONTHLY#BASE      ret=0.19864015736195982584 dd=0.1262858516387668837233816952156599 pf=1.391632270446741459025019304 trades=  81 eps=  81 shutdown=None  70.4s
+  [14/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K1-MONTHLY#STRESS    ret=0.159808031379719641204 dd=0.1309494990534870323623414361124886 pf=1.308801812750436157205149813 trades=  81 eps=  81 shutdown=None  77.2s
+  [15/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY#BASE    ret=0.083431813045189356076 dd=0.1381953072883027645877794427723500 pf=1.490545944599528901886919454 trades=  40 eps=  40 shutdown=None  80.1s
+  [16/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY#STRESS  ret=0.063954898320806713696 dd=0.1388163858200971919653526413393339 pf=1.388454679761877862100890326 trades=  40 eps=  40 shutdown=None  82.9s
+  [17/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K2-MONTHLY#BASE      ret=0.192693580244888263782 dd=0.1160077961934656774961160251942999 pf=1.444305395960679750783857921 trades= 149 eps= 149 shutdown=None  89.9s
+  [18/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K2-MONTHLY#STRESS    ret=0.15588244556081644349 dd=0.1152477134591629752563765614732557 pf=1.339981252338547075759193077 trades= 141 eps= 141 shutdown=None  96.9s
+  [19/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K2-QUARTERLY#BASE    ret=0.044794004432485238725 dd=0.1298014735228982791515260505170589 pf=1.131910787138916600788125347 trades=  57 eps=  57 shutdown=None  99.7s
+  [20/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K2-QUARTERLY#STRESS  ret=0.01069090544743870463 dd=0.1323499889315661947440862689250699 pf=0.9914231089994381996692437032 trades=  57 eps=  57 shutdown=None  102.6s
+  [21/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K3-MONTHLY#BASE      ret=0.106643219192269519196 dd=0.1187732087712368386869457129893883 pf=1.180238012904465077507214285 trades= 195 eps= 195 shutdown=None  109.6s
+  [22/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K3-MONTHLY#STRESS    ret=0.111260852743548073276 dd=0.1184574871245733670997792281749334 pf=1.171457794342487704450112850 trades= 193 eps= 193 shutdown=None  116.6s
+  [23/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K3-QUARTERLY#BASE    ret=0.036532886601561366567 dd=0.1160232088324862649758084169275475 pf=1.068376641820288627553088287 trades=  95 eps=  95 shutdown=None  119.5s
+  [24/36] SE100-G2-S3-C2-ROTATION-RA1-L06-K3-QUARTERLY#STRESS  ret=0.041215204821638218223 dd=0.1159080555763874969882812576376476 pf=1.086997891199319310372202355 trades=  95 eps=  95 shutdown=None  122.4s
+  [25/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY#BASE      ret=   0.0633 dd=0.1192853271755836157744476311484296 pf=1.267573875856322131903563613 trades=  66 eps=  66 shutdown=None  129.5s
+  [26/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY#STRESS    ret=   0.0463 dd=0.1196421593113974993353735445707549 pf=1.227788746942620890521893760 trades=  66 eps=  66 shutdown=None  136.6s
+  [27/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY#BASE    ret=0.004221210809341463756 dd=0.1396851017217713172058464193097361 pf=1.245912050690961900807542804 trades=  36 eps=  36 shutdown=None  139.5s
+  [28/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY#STRESS  ret=-0.000805436201623164544 dd=0.1420128991297120600142654278172959 pf=1.170875467160605533947199397 trades=  36 eps=  36 shutdown=None  142.3s
+  [29/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K2-MONTHLY#BASE      ret=0.179220234273993083004 dd=0.1153919004325835871419172802082307 pf=1.480835442979185882899214223 trades=  83 eps=  83 shutdown=None  149.4s
+  [30/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K2-MONTHLY#STRESS    ret=0.104798507249567662788 dd=0.1172082243280981479538234837690314 pf=1.300683619873384549246723197 trades=  83 eps=  83 shutdown=None  156.6s
+  [31/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY#BASE    ret=0.195362530238434197066 dd=0.1031245534915289562769743379107962 pf=1.750309110482475385254330508 trades=  58 eps=  58 shutdown=None  159.5s
+  [32/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY#STRESS  ret=0.082809623063705705467 dd=0.1059913039393149063879585207632505 pf=1.328379363000849024033548412 trades=  46 eps=  46 shutdown=None  162.4s
+  [33/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K3-MONTHLY#BASE      ret=0.089243592235045844834 dd=0.1162275453563977224864930467921199 pf=1.191122675355086744052346495 trades= 140 eps= 140 shutdown=None  169.8s
+  [34/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K3-MONTHLY#STRESS    ret=0.023934379424227466402 dd=0.1174604270821712828352096033675795 pf=1.099615928483213240565369815 trades= 153 eps= 153 shutdown=None  177.9s
+  [35/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K3-QUARTERLY#BASE    ret=0.070856867124409472707 dd=0.09778731163532803719765096343235910 pf=1.185342364085366966705225028 trades=  74 eps=  74 shutdown=None  180.9s
+  [36/36] SE100-G2-S3-C2-ROTATION-RA1-L12-K3-QUARTERLY#STRESS  ret=0.057396383039702918345 dd=0.1006599781229200679907168478033461 pf=1.145058116407509128908240746 trades=  74 eps=  74 shutdown=None  183.9s
+  runs completed: 36
+  wrote grid_results.json                     92368 bytes
+
+== 3. the return-blind selection ==
+  SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY     shutdowns=0 fills=  647  per_run=[('#BASE', 0, 328), ('#STRESS', 0, 319)]
+  SE100-G2-S3-C2-ROTATION-RA1-L03-K1-QUARTERLY   shutdowns=0 fills=  268  per_run=[('#BASE', 0, 133), ('#STRESS', 0, 135)]
+  SE100-G2-S3-C2-ROTATION-RA1-L03-K2-MONTHLY     shutdowns=0 fills=  804  per_run=[('#BASE', 0, 370), ('#STRESS', 0, 434)]
+  SE100-G2-S3-C2-ROTATION-RA1-L03-K2-QUARTERLY   shutdowns=0 fills=  309  per_run=[('#BASE', 0, 153), ('#STRESS', 0, 156)]
+  SE100-G2-S3-C2-ROTATION-RA1-L03-K3-MONTHLY     shutdowns=0 fills= 1076  per_run=[('#BASE', 0, 514), ('#STRESS', 0, 562)]
+  SE100-G2-S3-C2-ROTATION-RA1-L03-K3-QUARTERLY   shutdowns=0 fills=  491  per_run=[('#BASE', 0, 251), ('#STRESS', 0, 240)]
+  SE100-G2-S3-C2-ROTATION-RA1-L06-K1-MONTHLY     shutdowns=0 fills=  477  per_run=[('#BASE', 0, 240), ('#STRESS', 0, 237)]
+  SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY   shutdowns=0 fills=  249  per_run=[('#BASE', 0, 126), ('#STRESS', 0, 123)]
+  SE100-G2-S3-C2-ROTATION-RA1-L06-K2-MONTHLY     shutdowns=0 fills=  701  per_run=[('#BASE', 0, 361), ('#STRESS', 0, 340)]
+  SE100-G2-S3-C2-ROTATION-RA1-L06-K2-QUARTERLY   shutdowns=0 fills=  264  per_run=[('#BASE', 0, 132), ('#STRESS', 0, 132)]
+  SE100-G2-S3-C2-ROTATION-RA1-L06-K3-MONTHLY     shutdowns=0 fills=  848  per_run=[('#BASE', 0, 427), ('#STRESS', 0, 421)]
+  SE100-G2-S3-C2-ROTATION-RA1-L06-K3-QUARTERLY   shutdowns=0 fills=  432  per_run=[('#BASE', 0, 216), ('#STRESS', 0, 216)]
+  SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY     shutdowns=0 fills=  360  per_run=[('#BASE', 0, 178), ('#STRESS', 0, 182)]
+  SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY   shutdowns=0 fills=  189  per_run=[('#BASE', 0, 97), ('#STRESS', 0, 92)]
+  SE100-G2-S3-C2-ROTATION-RA1-L12-K2-MONTHLY     shutdowns=0 fills=  371  per_run=[('#BASE', 0, 186), ('#STRESS', 0, 185)]
+  SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY   shutdowns=0 fills=  267  per_run=[('#BASE', 0, 156), ('#STRESS', 0, 111)]
+  SE100-G2-S3-C2-ROTATION-RA1-L12-K3-MONTHLY     shutdowns=0 fills=  644  per_run=[('#BASE', 0, 308), ('#STRESS', 0, 336)]
+  SE100-G2-S3-C2-ROTATION-RA1-L12-K3-QUARTERLY   shutdowns=0 fills=  317  per_run=[('#BASE', 0, 157), ('#STRESS', 0, 160)]
+  wrote selection_inputs.json                  6826 bytes
+  wrote selection_record.json                 13915 bytes
+  representative: SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY
+  note: 18 variants recorded zero research-shutdown events across both declared runs. Among them SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY had the lowest turnover, 189 fills summed over its two runs, and no other eligible variant matched that count. Step 2 decided; step 3 was not reached.
+
+== 4. the gate, under the G2A2-CONFLICT-25 restrictive resolution ==
+  wrote gate_record.json                      98078 bytes
+  BASE   S3-C1    MET                    satisfied=True
+  BASE   S3-C2    MET                    satisfied=True
+  BASE   S3-C3    NOT_MET                satisfied=False
+  BASE   S3-C4    MET                    satisfied=True
+  BASE   S3-C5    NOT_MET                satisfied=False
+  BASE   S3-C6    NOT_MET                satisfied=False
+  BASE   S3-C7    MET                    satisfied=True
+  STRESS S3-C1    NOT_MET                satisfied=False  (gating)
+  STRESS S3-C2    MET                    satisfied=True  (gating)
+  STRESS S3-C3    NOT_MET                satisfied=False  (gating)
+  STRESS S3-C4    MET                    satisfied=True  (gating)
+  STRESS S3-C5    NOT_MET                satisfied=False  (gating)
+  STRESS S3-C6    NOT_MET                satisfied=False  (gating)
+  STRESS S3-C7    NOT_MET                satisfied=False  (reported-only)
+  admitted: False
+
+== 5. the stage verdict ==
+  wrote stage_verdict.json                     2505 bytes
+  FAIL -- STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE
+  route: REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION
+  condition_token: Either no representative exists, because every one of the eighteen variants recorded at least one research-shutdown event, or a representative exists and does not satisfy every hard condition.
+
+done in 183.9s

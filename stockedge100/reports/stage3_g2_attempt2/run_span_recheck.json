@@ -1,0 +1,61 @@
+{
+  "requirement": "The runner recomputes every value below from the loaded series and refuses to run if any differs.",
+  "recomputed_from": "the guard-loaded PriceSeries in memory",
+  "cross_checked_against": [
+    "SE100-CFG-3103 run_span",
+    "SE100-GOV-2005 run_span_measured_from_disk",
+    "reporting.g2_rotation_preregistration.measure_span()"
+  ],
+  "independent_derivation_keys_compared": [
+    "binding_symbol",
+    "binding_symbol_inception",
+    "binding_symbols",
+    "development_union_sessions",
+    "development_union_span",
+    "earliest_inception",
+    "earliest_inception_symbols",
+    "exchange_calendar_sessions",
+    "member_count",
+    "members_missing_a_bar_at_run_start",
+    "monthly_rebalance_sessions",
+    "quarterly_rebalance_sessions",
+    "run_end",
+    "run_sessions",
+    "run_start",
+    "run_start_lookback_reference",
+    "run_start_weekday",
+    "session_before_run_start",
+    "session_lists_agree",
+    "symbols_ending_before_run_end"
+  ],
+  "differences": [],
+  "measured": {
+    "member_count": 34,
+    "run_start": "2008-07-28",
+    "run_start_weekday": "Monday",
+    "run_start_lookback_reference": "2007-07-28",
+    "session_before_run_start": "2008-07-25",
+    "run_end": "2021-07-30",
+    "run_sessions": 3276,
+    "exchange_calendar_sessions": 3276,
+    "session_lists_agree": true,
+    "binding_symbol": "VEA",
+    "binding_symbols": [
+      "VEA"
+    ],
+    "binding_symbol_inception": "2007-07-26",
+    "earliest_inception": "1993-01-29",
+    "earliest_inception_symbols": [
+      "SPY"
+    ],
+    "members_missing_a_bar_at_run_start": [],
+    "symbols_ending_before_run_end": [],
+    "development_union_sessions": 7178,
+    "development_union_span": [
+      "1993-01-29",
+      "2021-07-30"
+    ],
+    "monthly_rebalance_sessions": 157,
+    "quarterly_rebalance_sessions": 53
+  }
+}

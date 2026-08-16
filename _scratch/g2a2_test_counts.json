@@ -1,0 +1,9 @@
+{
+  "new_test_file": "tests/adversarial/test_g2_ra1_risk_architecture.py",
+  "new_tests_collected": 51,
+  "measured_by": "cd stockedge100 && python -m pytest tests/adversarial/test_g2_ra1_risk_architecture.py --collect-only -q",
+  "measured_output_tail": "51 tests collected in 0.62s",
+  "attempt_1_floor_expected": 1091,
+  "attempt_1_floor_source": "reports/stage3_g2/STAGE_3_G2_TEST_SUMMARY.md composition table (837 Generation 1 floor + 254 Generation 2 additions)",
+  "note": "The renderer derives the prior floor as total_collected - new_tests_collected and asserts it equals attempt_1_floor_expected, so a drift in either number fails the render rather than reaching the report."
+}

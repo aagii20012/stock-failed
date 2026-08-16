@@ -1,0 +1,308 @@
+[
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY",
+    "research_shutdown_events": 0,
+    "fill_count": 647,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 328
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 319
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-QUARTERLY",
+    "research_shutdown_events": 0,
+    "fill_count": 268,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 133
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 135
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K2-MONTHLY",
+    "research_shutdown_events": 0,
+    "fill_count": 804,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 370
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 434
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K2-QUARTERLY",
+    "research_shutdown_events": 0,
+    "fill_count": 309,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 153
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 156
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K3-MONTHLY",
+    "research_shutdown_events": 0,
+    "fill_count": 1076,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 514
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 562
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K3-QUARTERLY",
+    "research_shutdown_events": 0,
+    "fill_count": 491,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 251
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 240
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-MONTHLY",
+    "research_shutdown_events": 0,
+    "fill_count": 477,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 240
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 237
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K1-QUARTERLY",
+    "research_shutdown_events": 0,
+    "fill_count": 249,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 126
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 123
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K2-MONTHLY",
+    "research_shutdown_events": 0,
+    "fill_count": 701,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 361
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 340
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K2-QUARTERLY",
+    "research_shutdown_events": 0,
+    "fill_count": 264,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 132
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 132
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K3-MONTHLY",
+    "research_shutdown_events": 0,
+    "fill_count": 848,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 427
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 421
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L06-K3-QUARTERLY",
+    "research_shutdown_events": 0,
+    "fill_count": 432,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 216
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 216
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-MONTHLY",
+    "research_shutdown_events": 0,
+    "fill_count": 360,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 178
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 182
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY",
+    "research_shutdown_events": 0,
+    "fill_count": 189,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 97
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 92
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-MONTHLY",
+    "research_shutdown_events": 0,
+    "fill_count": 371,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 186
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 185
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K2-QUARTERLY",
+    "research_shutdown_events": 0,
+    "fill_count": 267,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 156
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 111
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K3-MONTHLY",
+    "research_shutdown_events": 0,
+    "fill_count": 644,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 308
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 336
+      }
+    ]
+  },
+  {
+    "variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L12-K3-QUARTERLY",
+    "research_shutdown_events": 0,
+    "fill_count": 317,
+    "per_run": [
+      {
+        "label": "#BASE",
+        "research_shutdown_events": 0,
+        "fills": 157
+      },
+      {
+        "label": "#STRESS",
+        "research_shutdown_events": 0,
+        "fills": 160
+      }
+    ]
+  }
+]
