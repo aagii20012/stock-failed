@@ -1,0 +1,177 @@
+== sealed anchors ==
+   closed_trades      62
+   equity_digest      6d184533a945a4d10a4fca54aa1e45e506fabfca2629e6da51806ff0e2d75a46
+   fills              150
+   ranking_digest     2881c0f6011b5d87f30920446551fae82500207b3d0291d091271abeac79b01b
+   risk_state_digest  85e551b3c17fb6d25a55bb69f6669836cdc3feca64a8ff92a293960997842905
+   shutdown_session   None
+   total_return       0.10337843028513874006
+   trades_digest      90770d732cd1955234583686101f3844964eeada68ba8480db0c902f71a1dd50
+   closed_episodes    62
+   total_ep_pnl       9.94
+   IWM pnl            7.46
+   IWM share          0.7505030181086519114688128772635815
+   symbols_traded     24
+
+== prior-attempt module verification (AT-H) ==
+   module_count       = 17
+   modules_verified   = 17
+   modules_that_moved = []
+   mechanics blocks compared = 13 pointers_removed = []
+
+== dataset ==
+   symbols loaded = 34
+   span keys      = ['config_keys_compared', 'cross_checked_against', 'differences', 'governance_keys_compared', 'governance_keys_not_a_measurement', 'independent_derivation_keys_compared', 'measured', 'recomputed_from', 'requirement', 'reverification_required']
+   span diffs     = [] None
+   run_start/end  = 2008-07-28 2021-07-30
+
+== running SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY#BASE ==
+   fills=150 closed_trades=62 total_return=0.10337843028513874006
+   rebalance sessions observed = 53
+
+== reproduction vs sealed evidence ==
+   [OK] trades_digest          90770d732cd1955234583686101f3844964eeada68ba8480db0c902f71a1dd50
+   [OK] equity_digest          6d184533a945a4d10a4fca54aa1e45e506fabfca2629e6da51806ff0e2d75a46
+   [OK] ranking_digest         2881c0f6011b5d87f30920446551fae82500207b3d0291d091271abeac79b01b
+   [OK] risk_state_digest      85e551b3c17fb6d25a55bb69f6669836cdc3feca64a8ff92a293960997842905
+   [OK] fills                  150
+   [OK] closed_trades          62
+   [OK] total_return           0.10337843028513874006
+   [OK] shutdown_session       None
+   [OK] starting_equity        100.00
+   [OK] final_equity           110.3378430285138740060
+   [OK] closed_episodes        62
+   [OK] open_episodes_at_end   2
+   [OK] total_closed_ep_pnl    9.94
+   [OK] distinct_symbols       24
+   [OK] IWM_pnl                7.46
+   [OK] IWM_share              0.7505030181086519114688128772635815
+   [OK] gross_profit           46.70
+   [OK] gross_loss             36.76
+   [OK] multi_leg_episodes     11
+   [OK] pnl[DIA]               -1.10
+   [OK] pnl[DVY]               -1.00
+   [OK] pnl[EEM]               2.86
+   [OK] pnl[EFA]               0.00
+   [OK] pnl[IEF]               0.55
+   [OK] pnl[IWM]               7.46
+   [OK] pnl[IYR]               3.53
+   [OK] pnl[LQD]               -1.77
+   [OK] pnl[MDY]               -0.01
+   [OK] pnl[QQQ]               -2.15
+   [OK] pnl[SHY]               0.40
+   [OK] pnl[TIP]               -0.51
+   [OK] pnl[TLT]               2.55
+   [OK] pnl[VGK]               1.53
+   [OK] pnl[VNQ]               2.50
+   [OK] pnl[VWO]               5.00
+   [OK] pnl[XLB]               -2.21
+   [OK] pnl[XLE]               1.29
+   [OK] pnl[XLF]               -2.09
+   [OK] pnl[XLI]               -3.59
+   [OK] pnl[XLK]               3.20
+   [OK] pnl[XLP]               0.05
+   [OK] pnl[XLU]               -2.49
+   [OK] pnl[XLV]               -4.06
+
+   REPRODUCTION EXACT (43/43 checks agree)
+
+wrote D:\Product\stock-trade-alpaca\stockedge100\reports\diagnostics\attempt3_iwm_trace\episode_ledger.json
+
+== IWM episodes (4) ==
+#   entry       exit         cald  sess   rank   signal       pnl       cum     gap_d
+1   2011-01-04  2011-04-04     90    62      2 0.178314      1.48      1.48      None
+2   2012-01-04  2012-04-03     90    62      2 0.235214      1.52      3.00       275
+3   2017-01-04  2017-04-04     90    62      2 0.099006     -0.03      2.97      1737
+4   2021-01-05  2021-04-05     90    61      2 0.269897      4.49      7.46      1372
+
+== per-symbol context ==
+sym    eps  cls   days      pnl  share   mean    med    min    max   rank
+IWM      4    4    360     7.46 0.7505     90   90.0     90     90      2
+VWO      2    2    184     5.00 0.5030     92   92.0     92     92    1.5
+IYR      2    2    182     3.53 0.3551     91   91.0     87     95      2
+XLK      3    3    210     3.20 0.3219     70     91     24     95   1.67
+EEM      4    4    365     2.86 0.2877   91.2   92.0     89     92    1.5
+TLT     10   10   1022     2.55 0.2565  102.2   92.5      9    185    1.2
+VNQ      4    3    194     2.50 0.2515   64.7     91      8     95   1.25
+VGK      2    2    183     1.53 0.1539   91.5   91.5     90     93    1.5
+XLE      3    3    357     1.29 0.1297    119     91     84    182      1
+IEF      2    1     94     0.55 0.0553     94     94     94     94      2
+SHY      2    2    156     0.40 0.0402     78   78.0     65     91    1.5
+XLP      1    1     91     0.05 0.0050     91     91     91     91      2
+EFA      1    1     91     0.00      0     91     91     91     91      2
+MDY      1    1     92    -0.01 -0.001     92     92     92     92      2
+TIP      2    2    156    -0.51 -0.051     78   78.0     65     91    1.5
+DVY      3    3    185    -1.00 -0.100   61.7     88      5     92   1.67
+DIA      1    1     90    -1.10 -0.110     90     90     90     90      2
+LQD      1    1     64    -1.77 -0.178     64     64     64     64      2
+XLF      2    2    138    -2.09 -0.210     69   69.0     46     92      2
+QQQ      6    6    403    -2.15 -0.216   67.2   79.5     14     93      2
+XLB      1    1     23    -2.21 -0.222     23     23     23     23      1
+XLU      1    1     35    -2.49 -0.250     35     35     35     35      2
+XLI      4    4    248    -3.59 -0.361     62   67.5     22     91    1.5
+XLV      2    2     83    -4.06 -0.408   41.5   41.5     29     54      1
+
+== IWM rank at every rebalance ==
+   2008-07-28 rank=9   signal=-0.036482674
+   2008-10-01 rank=14  signal=-0.024419193
+   2009-01-02 rank=29  signal=-0.204113163
+   2009-04-01 rank=25  signal=-0.128361077
+   2009-07-01 rank=9   signal=0.2124824780
+   2009-10-01 rank=15  signal=0.1332696063
+   2010-01-04 rank=18  signal=0.1075819161
+   2010-04-01 rank=7   signal=0.0986617180
+   2010-07-01 rank=20  signal=-0.113254420
+   2010-10-01 rank=17  signal=0.1248241565
+   2011-01-03 rank=2   signal=0.1783145512
+   2011-04-01 rank=4   signal=0.0827772995
+   2011-07-01 rank=29  signal=-0.005322978
+   2011-10-03 rank=29  signal=-0.269704990
+   2012-01-03 rank=2   signal=0.2352140752
+   2012-04-02 rank=8   signal=0.1401624763
+   2012-07-02 rank=21  signal=-0.035193427
+   2012-10-01 rank=17  signal=0.0563896335
+   2013-01-02 rank=11  signal=0.0437749036
+   2013-04-01 rank=11  signal=0.1079451452
+   2013-07-01 rank=3   signal=0.0581794542
+   2013-10-01 rank=5   signal=0.1017532050
+   2014-01-02 rank=15  signal=0.0664684148
+   2014-04-01 rank=17  signal=0.0243962987
+   2014-07-01 rank=33  signal=0.0182403821
+   2014-10-01 rank=33  signal=-0.095891023
+   2015-01-02 rank=4   signal=0.0968776159
+   2015-04-01 rank=8   signal=0.0433021169
+   2015-07-01 rank=12  signal=0.0065102491
+   2015-10-01 rank=30  signal=-0.123320430
+   2016-01-04 rank=21  signal=-0.001288480
+   2016-04-01 rank=28  signal=-0.010356174
+   2016-07-01 rank=11  signal=0.0384268946
+   2016-10-03 rank=4   signal=0.0819320679
+   2017-01-03 rank=2   signal=0.0990064195
+   2017-04-03 rank=32  signal=0.0066536924
+   2017-07-03 rank=9   signal=0.0446225639
+   2017-10-02 rank=5   signal=0.0716200059
+   2018-01-02 rank=21  signal=0.0298877215
+   2018-04-02 rank=20  signal=-0.035269520
+   2018-07-02 rank=4   signal=0.1132112904
+   2018-10-01 rank=17  signal=0.0220144396
+   2019-01-02 rank=33  signal=-0.178808352
+   2019-04-01 rank=9   signal=0.1588690567
+   2019-07-01 rank=31  signal=0.0122143691
+   2019-10-01 rank=31  signal=-0.046178683
+   2020-01-02 rank=11  signal=0.1299706414
+   2020-04-01 rank=32  signal=-0.353700572
+   2020-07-01 rank=5   signal=0.3341419746
+   2020-10-01 rank=14  signal=0.0771402787
+   2021-01-04 rank=2   signal=0.2698974517
+   2021-04-01 rank=5   signal=0.1433273437
+   2021-07-01 rank=21  signal=0.0357450169
+
+== totals ==
+   episodes closed          = 62
+   net closed-episode P&L   = 9.94
+   gross profit / gross loss= 46.70 / 36.76
+   IWM P&L / share of net   = 7.46 / 0.7505030181086519114688128772635815
+   IWM share of gross profit= 0.1597430406852248394004282655246253
+   symbols with net > 0     = 12
+   symbols with net < 0     = 11
