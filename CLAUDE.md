@@ -197,7 +197,9 @@ Diagnostic and dry-run scripts live in `_scratch/` at the workspace root — out
 they never perturb `repo_state_id`, and unlike `/tmp` they survive for the next stage to copy. Write
 them with the Write tool rather than a heredoc: a long `<<'PY'` block failed with `unexpected EOF while
 looking for matching` on a script containing nested quotes, and `python -c` with a PowerShell
-here-string truncates.
+here-string truncates. That failure is not specific to Python: the same `unexpected EOF`
+killed a 180-line Markdown heredoc while drafting, so reach for the Write tool for **any** long
+content with nested quotes, not just for scripts.
 
 That `pythonpath` setting applies to pytest only. Running a stage module directly needs an explicit
 `PYTHONPATH=src`, and the Bash tool's working directory **persists** between calls — so always `cd` by
