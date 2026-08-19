@@ -52,6 +52,15 @@ The one that bites: **prompt Stage 4 must clear two constitutional gates — 4 (
   dates, sealed wording: extract them and paste the extraction. A Stage 3 draft reproduced a
   determinism table from memory and every digest in it was invented; another draft asserted the
   sealed protocol carried hand-computed values it does not carry. Quote the file or drop the claim.
+- **When prose paraphrases a sealed `measurement`, name the denominator the seal names.** Generation 2
+  Attempt 3's report says the concentration condition measures a share of "**gross profit**". The sealed
+  text — byte-identical in `config/generation_2/g2_gate_criteria_ra1.json` and `..._ra3.json`, and
+  implemented as `total = sum(contributions.values())` at `g2_gate_ra1.py:697` — divides by the **net**
+  sum over all closed episodes. The two are not close: the same run measures `0.7505` of net and
+  `0.2413` of gross, so the misreading is the difference between the recorded `FAIL` and a `PASS`. The
+  gate followed the seal, so the verdict is right and only two sentences are wrong — but they were
+  already hashed into the manifest, so the repair was disclosure in the session report, not an edit.
+  Extract the `measurement` string and quote it, or restate it and diff your restatement against it.
 - **Never embed a tree digest inside a file that is part of that tree.** `repo_state_id` covers
   `governance/*.md`, so writing the digest into a governance report invalidates it on write. Put
   such values only in the JSON decision record and the `runs/` record, and have the prose point
@@ -108,6 +117,17 @@ Four consequences worth internalizing:
   Import the module from an out-of-tree script with `build_stage_package` monkeypatched, print the
   assembled gate conditions, and diff them against the report's own gate table. Stage 3's rollup was
   wrong on the first dry-run and cost nothing to fix.
+
+Two API shapes that are easy to guess wrong when writing an out-of-tree immutability check, both learned
+by traceback: **`repo_state()` takes no arguments and returns a 2-tuple `(files_dict, digest_str)`** —
+unpack it as `files, d = repo_state()`; reversing it produces an `AssertionError` that dumps all 165
+paths. And a prior stage's **artifact manifest stores its groups as `path -> digest` dicts**, not lists
+of `{path, sha256}` records, under the four keys `frozen_inputs`, `produced_artifacts`, `dataset_hashes`
+and `repo_state_files`. Handle both a bare digest string and a `{"sha256": …}` value. Manifests are also
+not all in one place: Generation 1's Stage 4 manifest is
+`reports/stage4/STAGE_4_VALIDATION_ARTIFACT_MANIFEST.json`, **not** under `governance/` — `find . -name
+'*ARTIFACT_MANIFEST*.json'` before assuming a path, or a missing file surfaces later as
+`TypeError: 'NoneType' object is not iterable`.
 
 `reports/` and `runs/` are outside the patterns, so writing them never perturbs the digest.
 
@@ -212,6 +232,13 @@ it. Two settings are load-bearing:
   LF to CRLF in the working tree on the *next checkout*, which changes the SHA-256 of every tracked
   file and silently invalidates every freeze record, manifest and `repo_state_id` from Stage 0 onward
   — with no file having been "edited". Never remove either.
+- **CRLF in a hashed file is not automatically a finding.** 85 files in the tree carry CRLF and 7 of them
+  are `repo_state_id`-covered paths (`STAGE_1_HOLDOUT_LOCK.json`, `STAGE_1_PREREGISTRATION.json`,
+  `STAGE_1_UNIVERSE.json`, `STAGE_2_PREREGISTRATION.json`, `STAGE_3_PREREGISTRATION.json`,
+  `STAGE_3_ATTEMPT_2_PREREGISTRATION.json`, `STAGE_4_PREREGISTRATION.json`). Their sealed digests match,
+  so CRLF *is* their sealed state and normalizing them would be the corruption. What matters is that the
+  `* -text` guard stops a checkout from *changing* line endings — so verify the digests, not the bytes'
+  flavour, and never "fix" a CRLF file that verifies.
 - **The sealed `stockedge100/.gitignore` excludes `data/raw|normalized|reference`.** That is what
   keeps the final holdout observations off GitHub. Manifests and checksums are tracked, so the data
   stays reproducible without being published. Never `git add -f` a payload.
