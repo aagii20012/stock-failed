@@ -1,0 +1,181 @@
+====================================================================================================
+PROT.adaptation_disclosure_carriage_requirement
+{
+ "must_appear_verbatim_in": [
+  "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md",
+  "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json",
+  "governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md",
+  "reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json",
+  "reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json"
+ ],
+ "enforcement": "The sealer and the package builder both assert byte-equality of this string against the value in this file. A paraphrase is a failure, not a stylistic choice.",
+ "encoding_note": "The string is stored with the em dashes of the source prose, as UTF-8, matching every other governance artifact in this tree. An earlier draft of this file substituted ASCII hyphen-minus on the stated grounds that the tree was ASCII-only; that was false \u2014 the Attempt 1 protocol Markdown alone carries 49 em dashes \u2014 and it would have made 'verbatim' mean 'verbatim except for two characters'. Byte-equality is checked against this stored form. The consequence is that no diagnostic script may print this string to a cp1252 console; scripts compare it and report a boolean instead.",
+ "attempt_3_encoding_addendum": "This attempt's string carries one character the Attempt 2 string did not: U+2212 MINUS SIGN, in the phrase naming the removed drawdown tier. It is stored as it appears in the source prose, for the same reason the em dashes are. A reader diffing the two strings for a hyphen will not find one and should not add one.",
+ "source": "The Attempt 3 operating instruction, section 1, which requires this paragraph to be carried verbatim in the decision report and everywhere the development result is referenced."
+}
+====================================================================================================
+EV.adaptation_disclosure_carriage
+{
+ "must_appear_verbatim_in": [
+  "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md",
+  "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json",
+  "governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md",
+  "reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json",
+  "reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json"
+ ],
+ "this_file_is_a_required_carrier": true,
+ "enforcement": "The sealer and the package builder both assert byte-equality of this string against the value in this file. A paraphrase is a failure, not a stylistic choice.",
+ "encoding_note": "The string is stored with the em dashes of the source prose, as UTF-8, matching every other governance artifact in this tree. An earlier draft of this file substituted ASCII hyphen-minus on the stated grounds that the tree was ASCII-only; that was false \u2014 the Attempt 1 protocol Markdown alone carries 49 em dashes \u2014 and it would have made 'verbatim' mean 'verbatim except for two characters'. Byte-equality is checked against this stored form. The consequence is that no diagnostic script may print this string to a cp1252 console; scripts compare it and report a boolean instead.",
+ "attempt_3_encoding_addendum": "This attempt's string carries one character the Attempt 2 string did not: U+2212 MINUS SIGN, in the phrase naming the removed drawdown tier. It is stored as it appears in the source prose, for the same reason the em dashes are. A reader diffing the two strings for a hyphen will not find one and should not add one.",
+ "source": "The Attempt 3 operating instruction, section 1, which requires this paragraph to be carried verbatim in the decision report and everywhere the development result is referenced.",
+ "characters": 1507,
+ "sha256_of_utf8": "ce1d6476f44562310fb059c5817645baa25477cc4f6168b414f3423834c8e925",
+ "sha256_covers": "the UTF-8 encoding of the string carried in this file's adaptation_disclosure_verbatim field, which is the sealed string byte for byte",
+ "carried_byte_identically_from": "config/generation_2/g2_rotation_ra3_protocol.json"
+}
+====================================================================================================
+sealed disclosure: chars=1507
+sealed disclosure: sha256=ce1d6476f44562310fb059c5817645baa25477cc4f6168b414f3423834c8e925
+====================================================================================================
+carrier state right now:
+   governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md              byte_exact=True  verbatim=True
+   governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json            byte_exact=True  verbatim=True
+   governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md       MISSING
+   reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json          MISSING
+   reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json  byte_exact=False verbatim=True
+====================================================================================================
+EV.stage_verdict
+{
+ "verdict": "FAIL",
+ "verdict_token": "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE",
+ "condition_token": "Either no representative exists, because every one of the eighteen variants recorded at least one research-shutdown event, or a representative exists and does not satisfy every hard condition.",
+ "fail_route": "REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION",
+ "route": "REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION",
+ "pass_token": "STAGE_3_G2_ATTEMPT_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+ "fail_token": "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE",
+ "prior_attempt_tokens_withheld": [
+  "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+  "STAGE_3_G2_NO_CANDIDATE",
+  "STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+  "STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE"
+ ],
+ "prior_attempt_tokens_note": "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_NO_CANDIDATE belong to Attempt 1. STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE belong to Attempt 2. Both attempts are closed. No Attempt 3 artifact may emit any of those four, and the Attempt 3 evaluator and package builder both assert that the verdict token written is one of the two sealed above and is none of the four.",
+ "constitutional_fail_result_equivalent": "STRATEGY_REJECTED_IN_DEVELOPMENT",
+ "token_naming_note": "See G2A3-CONFLICT-21. The fail token names the absence of an admissible candidate; the constitution's names the rejection of one. They denote the same stage outcome and both are recorded in the decision package. The Attempt 3 operating instruction named no token and required that the token be derived from this file, which is what has been done.",
+ "fail_is_a_deliverable": "FAIL \u2014 STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and does not license a nineteenth variant, a re-run with a different grid, a loosened risk constant, a third selection rule, or a promotion of the runner-up. Per SE100-CFG-3105 it closes the attempt: there is no Attempt 4 without a further disclosed adaptation authorised in a later session, and G2A3-CONFLICT-33 records what the cumulative multiplicity of a fourth would be.",
+ "representative_exists": true,
+ "selection_rule_id": "SE100-G2-SEL-2",
+ "selection_note": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) with instability score 0.215471404 over 4 neighbours, from 18 eligible of 18 variants.",
+ "admitted_candidates": [],
+ "candidates_evaluated": 1,
+ "combination_rule": "Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, NOT_EVALUABLE, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Attempt 3 declares one live candidate, so the cross-candidate disjunction is over a set of size one \u2014 see G2-CONFLICT-15 and G2A3-CONFLICT-24."
+}
+====================================================================================================
+EV.refs_reverified
+"Every digest in this block, in attempt_1_ref and in attempt_2_ref was recomputed from the file it names at the moment this file was generated. None was transcribed from SE100-CFG-3103 without being checked against the file itself."
+====================================================================================================
+EV.selection_determinism
+{
+ "requirement": "SE100-CFG-3105 reproducibility_requirements.selection_determinism",
+ "method": "SelectionInputV2 objects rebuilt from the recorded six-field JSON and rescored on a fresh call; the selector never sees the run objects on this pass",
+ "inputs_replayed": 18,
+ "selected_variant_id_first_pass": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+ "selected_variant_id_replay": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+ "selected_variant_identical": true,
+ "decided_at_step_identical": true,
+ "eligible_set_identical": true,
+ "ranking_identical": true,
+ "scores_identical": true,
+ "variants_whose_scores_differ": [],
+ "all_identical": true
+}
+====================================================================================================
+EV.selection.steps
+[
+ {
+  "order": 1,
+  "criterion": "zero_research_shutdown_events",
+  "scope": "across BOTH runs of the variant"
+ },
+ {
+  "order": 2,
+  "criterion": "lowest_neighbourhood_instability_score",
+  "scope": null
+ },
+ {
+  "order": 3,
+  "criterion": "lowest_turnover",
+  "scope": null
+ },
+ {
+  "order": 4,
+  "criterion": "lexicographic_variant_id",
+  "scope": null
+ }
+]
+====================================================================================================
+EV.selection.selection_input_fields + scored_quantities
+{
+ "selection_input_fields": [
+  "variant_id",
+  "shutdown_events",
+  "fill_count",
+  "ladder_descents",
+  "lockout_arms",
+  "stops_filled"
+ ],
+ "scored_quantities": [
+  "fill_count",
+  "ladder_descents",
+  "lockout_arms",
+  "stops_filled"
+ ]
+}
+====================================================================================================
+CRIT.conditions as gate_conditions() reads them:
+   id=S3-C1
+      required_verbatim: total return is positive
+      predicate        : total_return > 0
+   id=S3-C2
+      required_verbatim: maximum drawdown is no worse than 15%
+      predicate        : max_drawdown <= 0.15
+   id=S3-C3
+      required_verbatim: profit factor is at least 1.10
+      predicate        : profit_factor >= 1.10
+   id=S3-C4
+      required_verbatim: at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results
+      predicate        : closed_episodes >= 30
+   id=S3-C5
+      required_verbatim: performance is not dependent on one trade: removing the single best trade leaves total return above 0%
+      predicate        : best_trade_removed_return > 0 for BOTH removals
+   id=S3-C6
+      required_verbatim: no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy
+      predicate        : max instrument contribution <= 0.50
+   id=S3-C7
+      required_verbatim: reasonable neighboring parameter values do not reverse the sign of net return
+      predicate        : sign(neighbour total_return) == sign(representative total_return) for EVERY neighbour, where sign is positive, negative, or zero and zero matches noth
+====================================================================================================
+candidate_results[0] scalars:
+   variant_id                   "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"
+   experiment_id                "SE100-G2-S3-C3-ROTATION-RA3"
+   admitted                     false
+   scenario                     "BASE"
+   family                       "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE"
+   conditions_met               6
+   conditions_not_met           ["S3-C6"]
+   conditions_not_applicable    []
+   conditions_not_evaluable     []
+   stress_evaluation keys: ['admitted', 'carried_over_unchanged', 'conditions', 'conditions_met', 'conditions_not_applicable', 'conditions_not_evaluable', 'conditions_not_met', 'episode_ledger_inherited', 'experiment_id', 'family', 'measurement_basis_changed_from_attempt_1', 'measurement_basis_changed_from_attempt_2', 'measurement_basis_unchanged_from_attempt_1', 'measurement_basis_unchanged_from_attempt_2', 'non_vacuity_check', 'plan', 'prose_alias_adapter', 'reconciliation', 'redefined_for_generation_2', 'scenario', 'variant', 'variant_id']
+   non_vacuity_check: {"rule": "evaluation_integrity_rules[9]", "ledger_id": "SE100-G2-S3-C2-EPISODE-LEDGER", "conflict_id": "G2A2-CONFLICT-18", "reconciled_fields": ["entry_cash", "exit_cash", "dividends", "pnl"], "single_leg_compared": 51, "mismatch_count": 0, "closed_episodes": 62, "closed_trades": 62, "counts_agree": true, "vacuous": false, "reconciled": true, "nothing_closed": false, "total_trimmed_proceeds": "52.
+====================================================================================================
+sha256 record re-verification:
+   governance/generation_2/STAGE_1_G2_PARTITION_LOCK.sha256     ['OK']
+   governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.sha256 ['OK']
+   governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256  ['OK']
+   governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.sha256 ['OK']
+====================================================================================================
+evidence digest recomputation:
+   recomputed = 462c13d2e07e25bec46713fe0165bcc00d9e8568d2fad403a48f1d30e412711c
+   recorded   = 462c13d2e07e25bec46713fe0165bcc00d9e8568d2fad403a48f1d30e412711c
+   covers     = "every field of this file except generated_utc and evidence_digest, as canonical JSON"
+   command    = cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.g2_stage3_attempt3_evidence

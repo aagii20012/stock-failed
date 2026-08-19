@@ -1,0 +1,135 @@
+########## structural_consequences_declared_before_running
+
+-- SC-1
+   statement                  A quarterly k=1 variant has 53 scheduled rebalances over the run and can therefore close at most 52 positions by signal exit. Gate 3 requires at least 30 closed trades.
+   attempt_2_amendment        In Attempt 2 the stop and the throttle can also close or reduce a position, so the closed-trade count is no longer bounded by the rebalance count. The direction of the change is upward and it is the risk architecture, not the signal, that produces the additional trades. A representative that clears the 30-trade condition mainly on stop exits has cleared it on evidence about its risk controls.
+   risk                       Low turnover remains the failure mode for quarterly k=1; it is now less likely to bind and the reason it is less likely is disclosed.
+   attempt_3_amendment        Unchanged in kind from Attempt 2. The stop and the throttle still close positions, so the closed-trade count is still not bounded by the rebalance count. RA3 throttles less, so fewer of the additional trades come from the ladder and more of the exposure is left in place; the direction of the effect on trade count is not predictable and is measured.
+
+-- SC-2
+   statement                  Starting equity is $100.00 and the sealed minimum order notional is $1.00. At k=3 and a 50% aggregate ceiling the per-position budget is about $16.67, sixteen times the minimum.
+   attempt_2_amendment        This margin is thinner than Attempt 1's, where the k=3 budget was about $31.67. With the combined risk scalar at its floor of 0.25 * (a volatility scalar that can go lower still), a k=3 entry budget can approach the minimum notional. Entries rejected as MIN_NOTIONAL or ZERO_QUANTITY are counted and reported per variant rather than treated as absent decisions.
+   throttle_interaction       A throttle trim on a small position is the case most likely to fall below the minimum notional and be skipped. See G2A2-CONFLICT-17.
+   attempt_3_amendment        The margin is wider than Attempt 2's at shallow drawdowns, because the combined scalar is 1 rather than 0.75 across [0.05, 0.08), and identical to Attempt 2's at 0.08 and beyond. MIN_NOTIONAL and ZERO_QUANTITY rejections are still counted and reported.
+
+-- SC-3
+   statement                  Attempt 1's k=1 half-cash bias is removed. All three k values now target the same 50% gross exposure, so the k axis is no longer confounded with exposure and the zero-shutdown screen is no longer structurally easier for k=1.
+   see                        position_sizing.attempt_1_k1_half_cash_bias_neutralised
+
+-- SC-4
+   statement                  The continuous throttle adds SELL fills that Attempt 1 could not produce, and total fill count is the representative-selection tiebreak.
+   consequence                The tiebreak now partly measures how often the risk architecture intervened - a variant whose exposure drifted above the ceiling more often will have a higher fill count and lose the tiebreak to one that drifted less. That is a defensible ordering (less intervention is less turnover is less cost) but it is not the same quantity Attempt 1's tiebreak measured, and the two attempts' turnover figures are not comparable.
+   not_corrected              The rule is not changed to exclude throttle legs. It was frozen before Attempt 1 ran and adjusting it now, after reasoning about how it might behave, would be exactly the researcher degree of freedom this document exists to constrain.
+   attempt_3_amendment        Turnover is no longer the primary selection criterion, so the objection SC-4 raised against it \u2014 that it partly measures how often the risk architecture intervened \u2014 now bites only on the tiebreak. It is not thereby resolved: fill_count is also one of SEL-2's four stability quantities, where the same objection applies to its dispersion rather than its level. See G2A3-CONFLICT-26.
+
+-- SC-5
+   statement                  The 5% minimum cash buffer of the sealed cost model can never bind at a 50% aggregate exposure ceiling, because cash is at least 50% of equity at all times.
+   consequence                The CASH_FLOOR clamp is present, enforced and never the binding clamp. Reported as such rather than removed.
+   conflict_ref               G2A2-CONFLICT-12
+
+-- SC-6
+   statement                  The risk architecture reduces exposure and can only reduce it. Every one of RA3-1, RA3-2, RA3-4 and RA3-5 scales sizing down or holds it, and RA3-3 exits.
+   consequence                Attempt 2's expected gross return is lower than Attempt 1's would have been on the same signal, mechanically, before any question of whether the drawdown protection is worth it. Gate 3's first condition is that net return is positive, and halving exposure roughly halves the return while the fixed costs of trading do not halve. A FAIL on net return would be a predictable consequence of the architecture and not a new fact about the signal.
+   why_declared_now           So that a FAIL on S3-C1 cannot be presented afterwards as a surprising discovery, and so that a PASS cannot be presented as evidence the architecture is free.
+   attempt_3_amendment        RA3 reduces exposure strictly less than RA2 did, and never more. At every session the RA3 combined scalar is greater than or equal to the RA2 scalar for the same drawdown, with equality outside [0.05, 0.08). Mechanically this raises both the expected return and the expected drawdown relative to Attempt 2. A FAIL on net return remains a predictable consequence of an architecture that halves exposure, and a PASS on net return that arrives together with a materially larger drawdown is the architecture being paid for, not the signal being better.
+
+-- SC-7
+   statement                  SE100-G2-SEL-2 scores a variant using four quantities the risk architecture produces: ladder descents, lockout arms, stop fills and total fills. On a grid where the architecture rarely engages, three of the four are small integers and the score is dominated by fill_count.
+   consequence                If RA3 turns out to engage rarely, SEL-2 degenerates toward a fill-count dispersion rule and is closer to Attempt 2's turnover rule than its description suggests. The per-quantity components are reported so this is visible in the evidence rather than inferred.
+   not_corrected              The rule is not reweighted to compensate. It is sealed before the run and the degenerate case is declared before the run.
+
+-- SC-8
+   statement                  RA3 holds full sizing across the whole of [0, 0.08) drawdown, where RA2 throttled to 75 percent from 0.05.
+   consequence                Every drawdown episode that reached 5 percent but not 8 percent \u2014 which on thirteen years of equity-index history is the common case \u2014 is now traversed at full sizing. This is the intended effect. It also means the maximum drawdown condition S3-C2 is under more pressure than in Attempt 2, and the research shutdown is closer than it was.
+   why_declared_now           So that a larger drawdown under RA3 is read as the declared cost of the change and not as a defect, and so that a S3-C2 failure cannot be presented afterwards as unforeseen.
+
+
+########## adversarial_test_requirements
+
+-- note
+   Declared here before the tests exist, so that the test suite is written against a specification rather than against the implementation's behaviour. Each item is a required test, not a suggestion.
+
+-- AT-A
+   Aggregate exposure never exceeds 50% of equity at any session, including mid-rebalance, verified after every fill and not only at session close.
+
+-- AT-B
+   Volatility scaling reduces position size when trailing realized portfolio volatility exceeds 10% annualized, verified against a hand-constructed high-volatility equity fixture with an independently computed expected scalar.
+
+-- AT-C
+   A position breaching the 8% stop is exited at the NEXT session's open, not at the same close, and the exit is a full sell.
+
+-- AT-D
+   The de-risk ladder steps down at the declared RA3 thresholds and back up only after the declared recovery condition, verified against a hand-constructed drawdown-and-recovery fixture that visits every band in both directions. The fixture must include a drawdown that reaches 6 percent and assert that the combined ladder scalar is exactly 1 there, which is the single behavioural difference from RA2 and would otherwise be tested only by absence.
+
+-- AT-E
+   The re-entry lockout genuinely blocks a return to a higher sizing band before its cooldown elapses, verified by a fixture in which recovery is available and blocked for exactly the declared number of sessions.
+
+-- AT-F
+   Determinism: identical inputs produce identical trade, equity, ranking and risk-state digests on a clean rerun.
+
+-- AT-G
+   The Generation 2 window guard still blocks any read at or after 2021-08-01, exercised through the Attempt 3 loading path. The guard is reused, not reimplemented, and the test asserts that the module under test is the existing g2_window_guard.
+
+-- AT-H
+   No Generation 1, Attempt 1 or Attempt 2 module is modified: every one of the seventeen modules listed in prior_attempt_modules_immutable re-hashes to its recorded digest.
+
+-- AT-I
+   The selection input cannot carry a performance figure: the SelectionInputV2 field tuple equals SELECTION_V2_FIELD_NAMES and the import-time assertion fires when it does not. The test also asserts that no field name matches a performance vocabulary (return, pnl, profit, drawdown, sharpe, equity, ratio, factor), so a future field named plausibly rather than obviously is also caught.
+
+-- regression_floor
+   The existing suite is a permanent regression floor. No test is weakened, skipped or deleted to make this attempt pass.
+
+-- AT-J
+   Neighbour identification is correct at the grid edges: the neighbour counts are 3, 4 and 5, the partition over the eighteen variants is 8 / 8 / 2, and at least one variant of each class has its full neighbour set written out as a literal in the test and compared element by element against the computed set. The relation is also asserted symmetric, and asserted to contain no variant outside the grid and never the variant itself.
+
+-- AT-K
+   SE100-G2-SEL-2 is deterministic: identical recorded statistics produce identical scores, identical component breakdowns and an identical selected variant across two independent computations in the same process and one from a round-trip through the serialised selection inputs.
+
+-- AT-L
+   The RA3 band table is the sealed one and contains no band boundary below 0.08: the loaded architecture has exactly three bands, its scalars are strictly decreasing in (0, 1], its first band starts at 0.00 with scalar 1.00, its last band is open-ended, and the absolute aggregate ceilings it induces equal 0.500000000 / 0.250000000 / 0.125000000.
+
+-- AT-M
+   The RA3 engine re-derives exactly the risk-dependent attributes it must after calling super().__init__, verified by parsing the Attempt 2 engine's __init__ for the attributes assigned from self.risk and asserting the RA3 subclass reassigns precisely that set. This is the same AST mechanism Attempt 2 used against Attempt 1's __init__.
+
+
+########## explicit_non_authorizations (16)
+   1. This file does not authorize reading any session at or after 2021-08-01, in this or any later stage.
+   2. This file does not authorize reading Generation 1's holdout (2024-08-01 to 2026-07-31), which is spent and prohibited regardless of generation.
+   3. This file does not authorize reading Generation 2's holdout (2026-08-01 to 2028-07-31), which is sealed and must never be read before that period exists in real calendar time.
+   4. This file does not authorize Stage 4 validation. Stage 4 requires an explicit human go-ahead recorded in a later session.
+   5. This file does not authorize live trading, order placement, order cancellation, order replacement, liquidation, or unattended scheduling. live_trading_authorized remains false.
+   6. This file does not authorize reading, writing, printing or logging any broker credential, and no module of this attempt may import a network client.
+   7. This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 1 artifact or module.
+   8. This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 2 Attempt 1 artifact or module. Attempt 1's verdict stands permanently.
+   9. This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 2 Attempt 2 artifact or module. Attempt 2's verdict stands permanently.
+  10. This file does not authorize widening, narrowing or re-centring the eighteen-variant grid.
+  11. This file does not authorize grid-searching, tuning or adjusting any RA3 constant, or any SE100-G2-SEL-2 quantity, weight or threshold, before or after seeing a result.
+  12. This file does not authorize promoting a runner-up if the representative fails the gate.
+  13. This file does not authorize an Attempt 4. If Attempt 3 fails, the attempt closes and any further work requires a further disclosed adaptation and a separate authorization. SE100-CFG-3103 said the same of Attempt 3; see G2A3-CONFLICT-28, which records that this attempt exists on a separate authorization and not on SE100-CFG-3103's.
+  14. This file does not authorize weakening, skipping or deleting any existing test.
+  15. This file does not authorize a fourth selection rule, a reweighting of SE100-G2-SEL-2's four quantities, or the addition of a fifth, at any point after this file is sealed.
+  16. This file does not authorize isolating the two changes by re-running either of them alone. An isolation attempt is a further attempt and requires its own authorization and its own disclosure of the multiplicity it adds.
+
+
+########## selection step 2 neighbour detail
+{
+  "order": 2,
+  "criterion": "lowest_neighbourhood_instability_score",
+  "neighbours": "The immediate grid neighbours of a variant are the variants reachable by exactly one single-axis step: lookback one position up or down the ordered list [3, 6, 12], k one position up or down the ordered list [1, 2, 3], and the rebalance frequency flipped. Every other axis value is held equal.",
+  "neighbour_counts": "3, 4 or 5. The frequency axis has two values, so it contributes exactly one neighbour to every variant with no edge case. The lookback and k axes have three ordered values each and contribute one neighbour at an end and two in the middle. A variant at an end of both ordered axes has 1+1+1 = 3; at an end of one of them, 1+2+1 = 4; at the middle of both, 2+2+1 = 5. Over the eighteen variants the partition is 8 with three neighbours, 8 with four, and 2 with five.",
+  "neighbour_counts_provenance": "The 8/8/2 partition was computed by enumerating the sealed grid, not counted by hand: 2 end values on the lookback axis times 2 end values on the k axis times 2 frequencies is 8 variants at an end of both ordered axes, 1 middle lookback times 1 middle k times 2 frequencies is 2 at the middle of both, and the remaining 8 are at an end of exactly one. A hand count of this partition was wrong on the first pass, which is why the build asserts it.",
+  "symmetry": "The neighbour relation is symmetric: b is a neighbour of a if and only if a is a neighbour of b. Asserted over all eighteen variants at build time and again in AT-J.",
+  "neighbour_count_conflict": "The operating instruction describes this as 'up to 4 neighbours' with corner=2, edge=3, interior=4. That is the count for a two-axis grid and omits the frequency axis, which the same instruction lists as a one-step change. Adding the frequency neighbour to each of the instruction's figures gives exactly 3, 4 and 5. The sealed counts are 3/4/5. See G2A3-CONFLICT-27 in SE100-CFG-3106.",
+  "quantities": [
+    "fill_count",
+    "ladder_descents",
+    "lockout_arms",
+    "stops_filled"
+  ],
+  "quantity_basis": "Each quantity is summed across the variant's two runs (#BASE and #STRESS) before any comparison, so a variant contributes one integer per quantity.",
+  "per_pair_dissimilarity": "abs(a - b) / max(abs(a), abs(b), 1)",
+  "score": "The arithmetic mean of the per-pair dissimilarity over all (neighbour, quantity) pairs: sum over neighbours, sum over the four quantities, divided by 4 * len(neighbours). Lower is preferred.",
+  "arithmetic": "Computed in Decimal under the sealed ENGINE_CONTEXT and quantized to nine decimal places, ROUND_HALF_EVEN, so the score is reproducible and comparable without float drift. The inputs are integers, so the only inexactness is the division.",
+  "denominator_floor_note": "The max(..., 1) term means a quantity that is zero for both a variant and its neighbour contributes 0, reading as perfect stability where in fact nothing fired. The formula is sealed as the instruction specifies it and is not repaired; the per-quantity contributions are reported per variant so a reader can see how much of a low score is agreement and how much is absence. See G2A3-CONFLICT-32 in SE100-CFG-3106.",
+  "eligibility_of_neighbours": "Neighbours are structural, not filtered by eligibility. A variant's score uses all of its grid neighbours whether or not those neighbours passed the shutdown screen, because the score measures the smoothness of the parameter region and an ineligible neighbour is part of that region. Only the variant being scored must itself be eligible to be selectable."
+}

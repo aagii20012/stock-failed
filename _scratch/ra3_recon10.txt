@@ -1,0 +1,136 @@
+ok       CRIT.verdict_token_derivation                                            dict[11] ['conjunctive_note', 'constitutional_fail_result_equivalent', 'fail_condition', 'fail_is_a_deliverable', 'fail_token', 'neither_token_is_a_stage_verdict_for_any_other_stage', 'other_tokens_available', 'pass_condition', 'pass_token']
+ok       CRIT.verdict_token_derivation.pass_token                                 "STAGE_3_G2_ATTEMPT_3_STRATEGY_ADMITTED_IN_DEVELOPMENT"
+ok       CRIT.verdict_token_derivation.fail_token                                 "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE"
+ok       CRIT.verdict_token_derivation.constitutional_fail_result_equivalent      "STRATEGY_REJECTED_IN_DEVELOPMENT"
+ok       CRIT.verdict_token_derivation.fail_is_a_deliverable                      "FAIL \u2014 STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and do
+ok       CRIT.verdict_token_derivation.prior_attempt_tokens_are_not_available_here "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_NO_CANDIDATE belong to Attempt 1. STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITT
+ok       CRIT.conditions                                                          list[7] 
+ok       PROT.attempt                                                             3
+ok       PROT.strategy_id                                                         "SE100-G2-S3-C3-ROTATION-RA3"
+ok       PROT.candidate_index                                                     3
+ok       PROT.family                                                              "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE"
+ok       PROT.generation_id                                                       "SE100-GEN2-7394207c543401e2"
+ok       PROT.attempt_1_ref                                                       dict[23] ['carried_from', 'decision_json', 'decision_json_sha256', 'disposition', 'disposition_note', 'gate_criteria_config', 'gate_criteria_config_sha256', 'manifest_json', 'manifest_json_sha256']
+ok       PROT.attempt_2_ref                                                       dict[27] ['decision_json', 'decision_json_sha256', 'disposition', 'disposition_note', 'fail_route', 'gate_criteria_config', 'gate_criteria_config_sha256', 'manifest_json', 'manifest_json_sha256']
+ok       PROT.what_this_attempt_changes_from_attempt_2                            "Exactly two things, and nothing else. (1) The de-risk ladder loses its 5-to-8 percent rung, reverting to the three-band spacing G
+ok       PROT.declared_before_any_strategy_code                                   true
+ok       PROT.declared_before_any_strategy_code_measurement                       dict[7] ['conflict_ref', 'contamination_predicate', 'paired_immutability_check', 'predicate', 'sealer_indirection_note', 'supersedes_in_scope', 'why_not_path_based']
+ok       PROT.hypothesis                                                          "Cross-sectional relative strength over a fixed 34-member ETF universe, held in an equally weighted top-k basket and refreshed on 
+ok       PROT.structural_consequences_declared_before_running                     dict[8] ['SC-1', 'SC-2', 'SC-3', 'SC-4', 'SC-5', 'SC-6', 'SC-7', 'SC-8']
+ok       PROT.explicit_non_authorizations                                         list[16] 
+ok       PROT.eligible_universe.universe_version                                  "SE100-U1-d4917c2f7f1cd834"
+ok       PROT.run_span.run_start                                                  "2008-07-28"
+ok       PROT.run_span.run_end                                                    "2021-07-30"
+ok       PROT.runs_per_variant.labels                                             list[2] 
+ok       PROT.multiple_comparisons_disclosure                                     dict[12] ['adaptive_design_note', 'cumulative_runs_this_hypothesis_family', 'cumulative_variants_this_hypothesis_family', 'no_correction_applied', 'runs_attempt_1', 'runs_attempt_2', 'runs_this_attempt', 'statement', 'third_attempt_note']
+ok       PROT.multiple_comparisons_disclosure.adaptive_design_note                "The 54 cumulative variants are not 54 independent tests. Attempt 2's risk architecture was chosen after seeing where Attempt 1 br
+ok       PROT.multiple_comparisons_disclosure.third_attempt_note                  "A third adaptation on one hypothesis family is the point at which a development PASS carries very little evidential weight on its
+ok       PROT.adaptation_disclosure_verbatim                                      "This pre-registration was designed after both Attempt 1 and Attempt 2's development results were known. Attempt 1 (no risk archit
+ok       PROT.adaptation_disclosure_carriage_requirement.must_appear_verbatim_in  list[5] 
+ok       PROT.adaptation_disclosure_carriage_requirement.enforcement              "The sealer and the package builder both assert byte-equality of this string against the value in this file. A paraphrase is a fai
+ok       PROT.adaptation_disclosure_carriage_requirement.encoding_note            "The string is stored with the em dashes of the source prose, as UTF-8, matching every other governance artifact in this tree. An 
+ok       PROT.adaptation_disclosure_carriage_requirement.attempt_3_encoding_addendum "This attempt's string carries one character the Attempt 2 string did not: U+2212 MINUS SIGN, in the phrase naming the removed dra
+ok       PROT.prior_attempt_modules_immutable                                     dict[8] ['attempt_1_list_source', 'attempt_1_modules', 'attempt_2_list_source', 'attempt_2_modules', 'count', 'digests_not_recorded_here', 'digests_recorded_by', 'g2_partition_lock_excluded']
+ok       PROT.risk_architecture.components                                        dict[5] ['RA3-1', 'RA3-2', 'RA3-3', 'RA3-4', 'RA3-5']
+ok       PROT.risk_architecture.combined_scalar                                   dict[5] ['applies_to', 'does_not_apply_to', 'formula', 'multiplicative_not_minimum', 'range']
+ok       PROT.risk_architecture.frozen_before_any_variant_is_run                  true
+ok       PROT.risk_architecture.not_part_of_the_grid                              true
+ok       PROT.risk_architecture.why_not_gridded                                   "Every constant below is fixed and applied uniformly to all eighteen variants. Searching them alongside the rotation parameters wo
+ok       PROT.risk_architecture.provenance                                        "RA3-1, RA3-2, RA3-3 and RA3-5 are RA2-1, RA2-2, RA2-3 and RA2-5 unchanged, which are in turn the values of the Attempt 2 operatin
+ok       PROT.risk_architecture.single_difference_from_ra2                        "RA2-4's band 1 (0.05 <= dd < 0.08, scalar 0.75) is deleted and band 0 is extended to 0.08. No other threshold, scalar, formula, o
+ok       PROT.representative_selection_rule                                       dict[13] ['frozen_before_any_variant_is_run', 'id', 'no_candidate_path', 'no_reselection', 'replaces', 'retrospective_check_disclosure', 'return_blind', 'second_fail_path', 'steps']
+MISSING  PROT.representative_selection_rule.rule_id                               (KeyError: 'rule_id')
+ok       PROT.representative_selection_rule.steps                                 list[4] 
+ok       PROT.representative_selection_rule.replaces                              "The unnamed lowest-turnover rule of SE100-CFG-3103, which selected SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY."
+ok       PROT.representative_selection_rule.why_it_changes                        "Attempt 2's rule preferred the variant that traded least. On a grid where every variant survived the eligibility screen, 'traded 
+ok       PROT.representative_selection_rule.structural_enforcement                dict[5] ['field_names', 'frozen_dataclass', 'import_time_assertion', 'mechanism', 'what_is_still_excluded']
+ok       PROT.representative_selection_rule.retrospective_check_disclosure        dict[3] ['statement', 'what_the_check_did_not_do', 'why_disclosed']
+ok       PROT.representative_selection_rule.no_candidate_path                     dict[4] ['attempt_closes', 'condition', 'live_possibility_note', 'verdict']
+ok       PROT.representative_selection_rule.second_fail_path                      dict[5] ['condition', 'conflict_ref', 'runner_up_not_promoted', 'same_token_note', 'verdict']
+ok       EV.artifact_id                                                           "SE100-EVID-3103"
+ok       EV.generated_utc                                                         "2026-08-16T09:25:05Z"
+ok       EV.evidence_digest                                                       "462c13d2e07e25bec46713fe0165bcc00d9e8568d2fad403a48f1d30e412711c"
+ok       EV.evidence_digest_covers                                                "every field of this file except generated_utc and evidence_digest, as canonical JSON"
+ok       EV.command                                                               "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.g2_stage3_attempt3_evidence"
+ok       EV.universe                                                              dict[8] ['eligibility_recheck_convention', 'excluded_symbols', 'symbols_declared', 'symbols_loaded', 'symbols_missing', 'unchanged_from_attempt_1', 'universe_identity_sha256', 'universe_version']
+ok       EV.grid                                                                  dict[8] ['all_declared_runs_executed', 'axes', 'grid_widened_from_attempt_1', 'grid_widened_from_attempt_2', 'revisions_after_seeing_a_result', 'runs_executed', 'runs_per_variant', 'variants_declared']
+ok       EV.grid.runs_executed                                                    36
+ok       EV.grid.variants_declared                                                18
+ok       EV.gate_scope                                                            dict[10] ['both_gate', 'conflict_ref', 'conflict_status', 'conjunctive', 'criteria_source', 'evaluated_on', 'neighbour_run_label', 'neighbours', 'scope_resolution']
+ok       EV.variant_table                                                         list[18] 
+ok       EV.variant_table_is_descriptive_only                                     list[18] 
+ok       EV.reported_for_every_variant_coverage                                   dict[7] ['map', 'new_since_attempt_2', 'not_supplied_by_grid_report', 'per_variant_scope_note', 'quantities', 'quantities_sealed', 'rule']
+ok       EV.run_span_recheck                                                      dict[11] ['config_keys_compared', 'cross_checked_against', 'differences', 'governance_keys_compared', 'governance_keys_not_a_measurement', 'independent_derivation_keys_compared', 'measured', 'recomputed_from', 'requirement']
+ok       EV.window                                                                dict[10] ['development_bound', 'end', 'enforcement', 'generation_1_holdout_read', 'generation_2_holdout_read', 'latest_session_loaded', 'name', 'run_span', 'start']
+ok       EV.window.latest_session_loaded                                          "2021-07-30"
+ok       EV.window.development_bound                                              "2021-07-31"
+ok       EV.window.enforcement                                                    "load_grid_dataset truncates at the development bound and then audits the loaded bars separately, so a session dated 2021-08-01 or
+ok       EV.window.validation_read                                                false
+ok       EV.window.generation_1_holdout_read                                      false
+ok       EV.window.generation_2_holdout_read                                      false
+ok       EV.determinism                                                           dict[11] ['all_identical', 'fields_compared', 'method', 'mismatched_runs', 'no_wall_clock_in_payloads', 'requirement', 'risk_state_trace_digest_note', 'run_digests', 'runs_compared']
+ok       EV.determinism.all_identical                                             true
+ok       EV.determinism.runs_compared                                             36
+ok       EV.determinism.fields_compared                                           list[8] 
+ok       EV.reconciliation                                                        dict[9] ['conflict_ref', 'conflict_status', 'episode_ledger_source', 'mismatches_total', 'rule', 'runs_reconciled', 'single_leg_compared_total', 'vacuity_rule_as_implemented', 'vacuous_runs']
+ok       EV.reconciliation.runs_reconciled                                        36
+ok       EV.reconciliation.single_leg_compared_total                              2804
+ok       EV.reconciliation.mismatches_total                                       0
+ok       EV.reconciliation.vacuous_runs                                           list[0] 
+ok       EV.risk_architecture                                                     dict[10] ['as_loaded', 'attempt_2_counterparts', 'attributes_derived_from_risk', 'frozen_before_any_variant_is_run', 'generation_1_provenance', 'gridded', 'not_part_of_the_grid', 'sealed', 'single_difference_from_ra2']
+ok       EV.risk_architecture.as_loaded                                           dict[11] ['annualisation_sessions', 'architecture_id', 'bands', 'exposure_ceiling', 'lockout_sessions', 'scalar_decimals', 'stop_fraction', 'volatility_returns', 'volatility_target']
+ok       EV.risk_architecture.sealed                                              dict[11] ['combined_scalar', 'components', 'derived_from', 'frozen_before_any_variant_is_run', 'id', 'name', 'not_part_of_the_grid', 'provenance', 'single_difference_from_ra2']
+ok       EV.ladder_engagement_comparison                                          dict[9] ['at_least_one_statistic_differs', 'attempt_2_source', 'band_indices_are_not_comparable', 'per_statistic', 'requirement', 'runs_compared', 'runs_identical_on_every_compared_statistic', 'sessions_at_full_sizing', 'statistics_compared']
+ok       EV.ladder_engagement_comparison.per_statistic                            dict[6] ['ladder_ascents', 'ladder_descents', 'lockout_arms', 'lockout_recoveries_blocked', 'stops_filled', 'stops_triggered']
+ok       EV.prior_attempt_module_verification                                     dict[11] ['attempt_1_list_source', 'attempt_1_module_count', 'attempt_2_list_source', 'attempt_2_module_count', 'conflict_ref', 'digest_source', 'excluded_and_why', 'module_count', 'modules_that_moved']
+ok       EV.prior_attempt_module_verification.module_count                        17
+ok       EV.prior_attempt_module_verification.modules_that_moved                  list[0] 
+ok       EV.prior_attempt_module_verification.attempt_1_module_count              9
+ok       EV.prior_attempt_module_verification.attempt_2_module_count              8
+ok       EV.selection                                                             dict[16] ['decided_at_step', 'frozen_before_any_variant_is_run', 'inputs', 'neighbour_scores', 'no_reselection', 'note', 'outcome', 'result', 'return_blind']
+ok       EV.selection.result.eligible_count                                       18
+ok       EV.selection.result.selected_variant_id                                  "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"
+ok       EV.selection.result.decided_at_step                                      2
+ok       EV.selection.steps                                                       list[4] 
+ok       EV.selection.selection_input_fields                                      list[6] 
+ok       EV.selection.scored_quantities                                           list[4] 
+ok       EV.selection.selected_score                                              dict[7] ['instability_score', 'neighbour_count', 'neighbours', 'own_quantities', 'per_quantity_mean_dissimilarity', 'per_quantity_pairs_zero_on_both_sides', 'variant_id']
+ok       EV.selection.neighbour_scores                                            list[4] 
+ok       EV.selection_determinism                                                 dict[12] ['all_identical', 'decided_at_step_identical', 'eligible_set_identical', 'inputs_replayed', 'method', 'ranking_identical', 'requirement', 'scores_identical', 'selected_variant_id_first_pass']
+ok       EV.selection_determinism.all_identical                                   true
+ok       EV.selection_determinism.inputs_replayed                                 18
+ok       EV.adaptation_disclosure_carriage.sha256_of_utf8                         "ce1d6476f44562310fb059c5817645baa25477cc4f6168b414f3423834c8e925"
+ok       EV.multiple_comparisons_disclosure                                       dict[12] ['adaptive_design_note', 'cumulative_runs_this_hypothesis_family', 'cumulative_variants_this_hypothesis_family', 'no_correction_applied', 'runs_attempt_1', 'runs_attempt_2', 'runs_this_attempt', 'statement', 'third_attempt_note']
+ok       EV.conflicts_declared_in_the_gate_criteria                               dict[3] ['declared_in_g2_gate_criteria_ra3', 'inherited_and_restated_in_g2_gate_criteria_ra3', 'note']
+ok       EV.refs_reverified                                                       "Every digest in this block, in attempt_1_ref and in attempt_2_ref was recomputed from the file it names at the moment this file w
+ok       EV.candidate_results                                                     list[1] 
+ok       EV.stage_verdict.verdict                                                 "FAIL"
+ok       EV.stage_verdict.verdict_token                                           "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE"
+ok       EV.stage_verdict.admitted_candidates                                     list[0] 
+ok       EV.stage_verdict.candidates_evaluated                                    1
+ok       EV.stage_verdict.representative_exists                                   true
+ok       EV.stage_verdict.selection_note                                          "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) with instability sco
+ok       EV.stage_verdict.fail_route                                              "REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION"
+ok       EV.stage_verdict.prior_attempt_tokens_withheld                           list[4] 
+ok       EV.candidate_results.0.variant_id                                        "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"
+ok       EV.candidate_results.0.conditions                                        list[7] 
+ok       EV.candidate_results.0.stress_evaluation.conditions                      list[7] 
+ok       EV.candidate_results.0.admission_basis.base_conditions_not_satisfied     list[1] 
+ok       EV.candidate_results.0.admission_basis.stress_conditions_not_satisfied   list[1] 
+ok       EV.candidate_results.0.admission_basis.permissive_base_only_reading_would_give false
+ok       EV.candidate_results.0.admission_basis.s3_c7_stress_side_reported_not_gating.id "S3-C7"
+ok       EV.candidate_results.0.non_vacuity_check                                 dict[14] ['closed_episodes', 'closed_trades', 'conflict_id', 'counts_agree', 'ledger_id', 'mismatch_count', 'nothing_closed', 'pnl_discrepancy', 'reconciled']
+ok       LOCK.validation_reuse_disclosure                                         "Generation 2's validation window (2021-08-01 \u2192 2024-07-31) overlaps the exact period Generation 1 used for its own Gate 4 va
+ok       LOCK.partition                                                           dict[15] ['boundaries_inclusive', 'development_end', 'development_start', 'development_years', 'generation_1_holdout_end', 'generation_1_holdout_months', 'generation_1_holdout_start', 'holdout_end', 'holdout_months']
+ok       LOCK.generation_1_holdout_state                                          "SPENT_AND_PROHIBITED"
+ok       LOCK.holdout_state                                                       "SEALED"
+====================================================================================================
+MISSING COUNT: 1
+   PROT.representative_selection_rule.rule_id
+====================================================================================================
+EV top-level keys:
+   ['adaptation_disclosure_carriage', 'adaptation_disclosure_verbatim', 'artifact_id', 'attempt', 'attempt_1_ref', 'attempt_2_ref', 'candidate_index', 'candidate_results', 'command', 'conflicts_declared_in_the_gate_criteria', 'determinism', 'evidence_digest', 'evidence_digest_covers', 'explicit_non_authorizations', 'family', 'gate', 'gate_evaluation_scope', 'gate_scope', 'generated_utc', 'generation', 'generation_id', 'grid', 'hypothesis', 'ladder_engagement_comparison', 'live_trading_authorized', 'mechanics_carried_unchanged', 'multiple_comparisons_disclosure', 'prior_attempt_module_verification', 'prior_attempt_modules_immutable', 'project', 'reconciliation', 'refs_reverified', 'reported_for_every_variant_coverage', 'representative_selection_rule', 'risk_architecture', 'run_span_recheck', 'runs', 'sealed_inputs', 'selection', 'selection_determinism', 'stage', 'stage_verdict', 'strategy_id', 'structural_consequences_declared_before_running', 'universe', 'variant_table', 'variant_table_is_descriptive_only', 'what_this_attempt_adds_over_attempt_1', 'what_this_attempt_adds_over_attempt_1_carriage', 'what_this_attempt_changes_from_attempt_2', 'window']
+PROT top-level keys:
+   ['adaptation_disclosure_carriage_requirement', 'adaptation_disclosure_verbatim', 'adversarial_test_requirements', 'artifact_id', 'attempt', 'attempt_1_ref', 'attempt_2_ref', 'candidate_index', 'candidate_index_note', 'charter_md_sha256', 'charter_ref', 'concentration_ceiling', 'conflicts_declared_in_the_gate_criteria', 'conflicts_found', 'constitution_json_sha256', 'constitution_md_sha256', 'constitution_ref', 'cost_model_derivation_ref', 'cost_model_derivation_sha256', 'currency', 'declaration_note', 'declared_before_any_strategy_code', 'declared_before_any_strategy_code_measurement', 'eligible_universe', 'execution', 'explicit_non_authorizations', 'family', 'gate_criteria_ref', 'gate_criteria_sha256_not_recorded_here', 'gate_evaluation_scope', 'gate_id', 'generation', 'generation_id', 'grid', 'hypothesis', 'live_trading_authorized', 'mechanics_carried_unchanged', 'multiple_comparisons_disclosure', 'partition_lock_json_sha256', 'partition_lock_md_sha256', 'partition_lock_ref', 'position_count', 'position_sizing', 'post_seal_defect_rule', 'prior_attempt_modules_immutable', 'project', 'ranking_rule', 'ranking_signal', 'rebalance', 'refs_reverified', 'reported_for_every_variant_but_not_gating', 'representative_selection_rule', 'reproducibility_requirements', 'risk_architecture', 'run_span', 'runs_per_variant', 'serialisation', 'stage', 'strategy_id', 'structural_consequences_declared_before_running', 'title', 'version', 'what_makes_this_genuinely_cross_sectional', 'what_this_attempt_adds_over_attempt_1', 'what_this_attempt_adds_over_attempt_1_carriage', 'what_this_attempt_changes_from_attempt_2', 'window']
+CRIT top-level keys:
+   ['adaptation_disclosure_carried', 'artifact_id', 'attempt', 'attempt_1_counterpart', 'attempt_1_counterpart_sha256', 'attempt_2_counterpart', 'attempt_2_counterpart_sha256', 'charter_ref', 'conditions', 'conflicts_found', 'constitution_ref', 'declaration_note', 'declared_before_any_strategy_code', 'evaluation_integrity_rules', 'frozen_gate_json_companion_verbatim', 'frozen_gate_text_verbatim', 'gate_id', 'gate_name', 'generation', 'generation_1_counterpart', 'generation_1_counterpart_sha256', 'generation_id', 'live_trading_authorized', 'project', 'protocol_ref', 'relationship_to_attempt_1_criteria', 'relationship_to_attempt_2_criteria', 'relationship_to_generation_1_criteria', 'reported_but_not_gating', 'stage', 'title', 'verdict_token_derivation', 'version', 'windows']

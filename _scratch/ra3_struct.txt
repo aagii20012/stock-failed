@@ -1,0 +1,337 @@
+==============================================================================
+### risk_architecture.components.RA3-4.bands
+==============================================================================
+[
+  {
+    "band": 0,
+    "dd_from": "0.00",
+    "dd_to_exclusive": "0.08",
+    "scalar": "1.00"
+  },
+  {
+    "band": 1,
+    "dd_from": "0.08",
+    "dd_to_exclusive": "0.10",
+    "scalar": "0.50"
+  },
+  {
+    "band": 2,
+    "dd_from": "0.10",
+    "dd_to_exclusive": null,
+    "scalar": "0.25"
+  }
+]
+
+==============================================================================
+### risk_architecture.components.RA3-4.provenance
+==============================================================================
+{
+  "statement": "RA3-4 is not a new ladder. It is Generation 1's sealed RA1-5 ladder, restored. SE100-CFG-3103's own provenance field records that three of RA2-4's four bands reproduce the RA1-5 f_cap values exactly and that 'only band 1 is new'. Deleting band 1 therefore leaves an architecture with no post-Attempt-1 degree of freedom in it at all.",
+  "quoted_from_attempt_2": "RA2-1, RA2-2, RA2-3 and RA2-5 take the values specified in the Stage 3 Attempt 2 operating prompt. RA2-4's ladder thresholds and scalars take the prompt's proposed -5/-8/-10 to 75%/50%/25% staging; the prompt permitted a more principled staging with documented reasoning, and none was found that was not itself a fit to the observed drawdown dates, so the proposed staging is adopted unchanged. That staging is nevertheless not unsourced. Expressed as absolute aggregate ceilings (f_base * ladder scalar), three of RA2-4's four bands reproduce the sealed Generation 1 RA1-5 f_cap values exactly: band 0 gives 0.500000000 against RA1-5's 0.500000000 for dd < 0.08, band 2 gives 0.250000000 against RA1-5's 0.250000000 for 0.08 <= dd < 0.10, and band 3 gives 0.125000000 against RA1-5's 0.125000000 for dd >= 0.10. Only band 1 is new, and it is new as a subdivision rather than as a value: RA1-5 has no threshold at 0.05 and holds f_cap flat at 0.500000000 across the whole of [0.05, 0.08), which RA2-4 splits and tightens to 0.375000000. RA2-4 is therefore a strict tightening of an architecture that was sealed before Attempt 1's results existed, not a fresh choice made after seeing them, and the single degree of freedom it adds is one threshold and one scalar. RA2-2 and RA2-3 are carried from Generation 1's RA1 (config/stage3_attempt2_strategy_protocol.json), which is why this architecture is named RA2 and its modules carry the _ra1 suffix that names their lineage.",
+  "absolute_ceilings": "Expressed as absolute aggregate ceilings (f_base * ladder scalar), RA3-4's three bands give 0.500000000 for dd < 0.08, 0.250000000 for 0.08 <= dd < 0.10 and 0.125000000 for dd >= 0.10. Those are the three RA1-5 f_cap values SE100-CFG-3103 names, in the same order, at the same thresholds.",
+  "degrees_of_freedom_added_by_this_change": 0,
+  "degrees_of_freedom_removed_by_this_change": "One threshold (0.05) and one scalar (0.75) \u2014 precisely the pair SE100-CFG-3103 identified as 'the single degree of freedom it adds'.",
+  "why_this_direction": "The adaptation disclosure states the reasoning: a 5-percent-from-peak dip is common in ordinary markets, so a rung at 5 percent throttles ordinary conditions rather than crises. Attempt 2's own non-return evidence is consistent with that \u2014 the combined scalar ran as low as 0.19 and the ladder descended over a thousand times across 36 runs \u2014 but consistency is not proof, and no return figure was consulted in making the change.",
+  "what_would_falsify_the_reasoning": "If RA3's ladder-descent counts are close to RA2's, the 5-percent rung was not the cause of the near-constant throttling and the change was aimed at the wrong mechanism. The descent counts are therefore reported per variant against Attempt 2's, and the comparison is required by the operating instruction rather than optional."
+}
+
+==============================================================================
+### risk_architecture.components.RA3-4.relationship_to_the_shutdown_threshold
+==============================================================================
+{
+  "statement": "The deepest rung still fires at a 10 percent drawdown. The constitutional research shutdown fires at 15 percent, and Gate 3's max-drawdown condition S3-C2 is also 15 percent. The ladder remains entirely inside the threshold it is trying to keep the strategy away from, by construction. What has changed is the shallow end: RA3 holds full sizing across the whole of [0, 0.08), where RA2 throttled to 75 percent from 0.05.",
+  "consequence_for_the_gate": "This sharpens Attempt 1's S3-CONFLICT-3. A MET S3-C2 was already near-structural in Generation 2 because the representative-selection rule requires zero shutdown events and a shutdown fires at the same 15%. In Attempt 2 the architecture additionally cuts exposure to a quarter before that point is reached. S3-C2 must therefore be read as almost entirely a statement about the risk architecture and almost not at all about the signal, and it is not independent evidence of an edge.",
+  "consequence_for_the_shutdown": "Less exposure reduction on the way down means a shutdown breach is easier to reach than it was in Attempt 2. Attempt 1, with no ladder at all, tripped 36 of 36. Attempt 2, with four rungs, tripped 0 of 36. RA3 sits between them and the outcome is not predictable from either. See G2A3-CONFLICT-29.",
+  "conflict_refs": [
+    "G2A2-CONFLICT-15",
+    "G2A3-CONFLICT-22",
+    "G2A3-CONFLICT-29"
+  ]
+}
+
+==============================================================================
+### risk_architecture.components.RA3-1.enforcement
+==============================================================================
+{
+  "part_a_entry_clamp": {
+    "name": "AGGREGATE_RA2",
+    "rule": "At the fill open, the budget for an entry is clamped to max(0, 0.50 * f * equity_open - position_value_open), where position_value_open is the gross value of the book as already settled on that open. Because the Attempt 1 engine executes all SELL legs before any BUY leg and re-reads the book between buys, the clamp is evaluated against the settled book and cannot be breached by the ordering of legs within one rebalance.",
+    "why_a_new_clamp_and_not_a_lower_cost_model_ceiling": "stockedge100.backtest.g2_costs.derive_mapping permits exactly one JSON-pointer difference from the Generation 1 sealed cost model, and that single permitted override is already spent on /account/max_open_risky_positions. Lowering max_gross_exposure_fraction to 0.50 would require a second override and would silently change the meaning of every cost-model-derived quantity Attempt 1 recorded. RA2-1 is therefore a new named clamp in the Attempt 2 engine, applied in addition to - not instead of - the inherited 0.95 AGGREGATE clamp, which remains in place and is simply never the binding one.",
+    "clamp_names": [
+      "REQUESTED_BUDGET",
+      "AGGREGATE_RA2",
+      "AGGREGATE",
+      "CASH_FLOOR",
+      "CONCENTRATION"
+    ],
+    "clamp_order_note": "AGGREGATE_RA2 is evaluated before the inherited AGGREGATE so that the binding clamp is reported by its own name rather than being masked by a looser one.",
+    "over_ceiling_behaviour": "If the book is already at or above the ceiling when an entry is decided, the clamp yields a budget of zero and the entry is rejected. That is the correct conservative outcome and it is not an error.",
+    "rejection_reason": "INSUFFICIENT_CASH, with the clamp named in the detail string.",
+    "why_that_reason": "stockedge100.backtest.orders.REASONS is a closed declared set. Inventing an AGGREGATE_RA2 rejection reason at runtime would widen a sealed set. The existing reason is reused and the clamp is named in the detail, exactly as Attempt 1's own clamps do.",
+    "conflict_refs": [
+      "G2A2-CONFLICT-2",
+      "G2A2-CONFLICT-16"
+    ]
+  },
+  "part_b_continuous_throttle": {
+    "rule": "At every session close t at which the strategy takes a decision, compute the projected book after any STOP and EXIT legs already merged for that session. If projected_gross(t) exceeds ceiling(t), sell down the excess, largest projected position value first, ties broken by ascending symbol, scheduling partial SELL legs for the next open.",
+    "why_this_is_mandatory_and_not_an_extra": "A ladder that reduced sizing only at entries would do nothing at all between scheduled rebalances - which is precisely when Attempt 1's drawdowns happened. A quarterly variant takes 53 decisions about size in thirteen years. The operating prompt's statement of the problem is that Attempt 1 'had no mechanism to reduce exposure before a breach'; the continuous throttle IS that mechanism, and the de-risk ladder is inert without it.",
+    "appreciation_drift_worked_example": "Start gross 50, cash 50, equity 100, exposure 0.500. The position doubles: gross 100, cash 50, equity 150, exposure 0.667. No order was placed and the ceiling is breached by a third. Only a continuous measurement catches this.",
+    "minimum_notional_skip": "A trim leg whose notional would fall below the sealed min_order_notional is skipped rather than submitted, because the engine would reject it as MIN_NOTIONAL anyway. Skipped legs are counted as throttle_legs_below_min_notional and reported per variant. The consequence is that the ceiling can be transiently exceeded by less than one minimum lot; that is disclosed rather than papered over.",
+    "turnover_cost": "The throttle adds fills, and total fill count is the representative-selection tiebreak. This is a real and declared structural consequence: see SC-4.",
+    "conflict_ref": "G2A2-CONFLICT-17"
+  },
+  "part_c_measurement": {
+    "rule": "max_gross_fraction_observed = max over sessions of gross(t) / equity(t) is recorded for every run and reported for every variant.",
+    "purpose": "The ceiling is a claim about behaviour. The measurement is what makes it checkable. A run whose maximum observed gross fraction exceeds 0.50 by more than the declared minimum-notional slack is a defect, not a result.",
+    "assertion": "The engine asserts the ceiling holds after every fill and raises rather than continuing."
+  }
+}
+
+==============================================================================
+### risk_architecture.components.RA3-2.self_reference
+==============================================================================
+{
+  "statement": "sigma_p is measured on an equity curve that f_vol itself influences. Lower exposure produces a lower measured volatility, which raises f_vol, which raises exposure.",
+  "assessment": "The feedback is negative and therefore stabilising, and it is damped by a 20-session lag. It is not a circularity that can diverge, and it is not corrected here - correcting it would mean measuring a counterfactual unlevered equity curve, which is a second backtest with its own assumptions.",
+  "measurement": "The realized distribution of f_vol is reported per variant (minimum, mean, and the count of sessions on which it was below 1), so a reader can see how often the term actually bound.",
+  "conflict_ref": "G2A2-CONFLICT-13"
+}
+
+==============================================================================
+### risk_architecture.components.RA3-3.reference_price_definition
+==============================================================================
+{
+  "statement": "stockedge100.backtest.portfolio.Position carries no entry price. It carries cost_basis, which is the all-in cash paid for the position including commission and fees, because the engine debits -fill.cash_delta. The stop reference is therefore the all-in per-share cost basis, not the raw fill reference price.",
+  "consequence": "The reference is very slightly above the traded price, by the per-share commission and fees, so the stop triggers marginally earlier than a raw-price stop would. The difference is on the order of a basis point at the sealed cost model and is in the conservative direction.",
+  "why_frozen_explicitly": "Leaving 'entry price' implied would let the implementation choose between two defensible readings after seeing which one performed better. It is frozen here so it cannot be.",
+  "partial_sell_note": "The Attempt 1 portfolio prorates cost_basis on a partial sell, so cost_basis / quantity is invariant under a throttle trim. A trimmed position keeps the same stop reference it had before the trim.",
+  "conflict_ref": "G2A2-CONFLICT-14"
+}
+
+==============================================================================
+### representative_selection_rule.steps
+==============================================================================
+[
+  {
+    "order": 1,
+    "criterion": "zero_research_shutdown_events",
+    "scope": "across BOTH runs of the variant",
+    "eliminates": "any variant with one or more shutdown events in either run",
+    "unchanged_from_attempt_2": true
+  },
+  {
+    "order": 2,
+    "criterion": "lowest_neighbourhood_instability_score",
+    "neighbours": "The immediate grid neighbours of a variant are the variants reachable by exactly one single-axis step: lookback one position up or down the ordered list [3, 6, 12], k one position up or down the ordered list [1, 2, 3], and the rebalance frequency flipped. Every other axis value is held equal.",
+    "neighbour_counts": "3, 4 or 5. The frequency axis has two values, so it contributes exactly one neighbour to every variant with no edge case. The lookback and k axes have three ordered values each and contribute one neighbour at an end and two in the middle. A variant at an end of both ordered axes has 1+1+1 = 3; at an end of one of them, 1+2+1 = 4; at the middle of both, 2+2+1 = 5. Over the eighteen variants the partition is 8 with three neighbours, 8 with four, and 2 with five.",
+    "neighbour_counts_provenance": "The 8/8/2 partition was computed by enumerating the sealed grid, not counted by hand: 2 end values on the lookback axis times 2 end values on the k axis times 2 frequencies is 8 variants at an end of both ordered axes, 1 middle lookback times 1 middle k times 2 frequencies is 2 at the middle of both, and the remaining 8 are at an end of exactly one. A hand count of this partition was wrong on the first pass, which is why the build asserts it.",
+    "symmetry": "The neighbour relation is symmetric: b is a neighbour of a if and only if a is a neighbour of b. Asserted over all eighteen variants at build time and again in AT-J.",
+    "neighbour_count_conflict": "The operating instruction describes this as 'up to 4 neighbours' with corner=2, edge=3, interior=4. That is the count for a two-axis grid and omits the frequency axis, which the same instruction lists as a one-step change. Adding the frequency neighbour to each of the instruction's figures gives exactly 3, 4 and 5. The sealed counts are 3/4/5. See G2A3-CONFLICT-27 in SE100-CFG-3106.",
+    "quantities": [
+      "fill_count",
+      "ladder_descents",
+      "lockout_arms",
+      "stops_filled"
+    ],
+    "quantity_basis": "Each quantity is summed across the variant's two runs (#BASE and #STRESS) before any comparison, so a variant contributes one integer per quantity.",
+    "per_pair_dissimilarity": "abs(a - b) / max(abs(a), abs(b), 1)",
+    "score": "The arithmetic mean of the per-pair dissimilarity over all (neighbour, quantity) pairs: sum over neighbours, sum over the four quantities, divided by 4 * len(neighbours). Lower is preferred.",
+    "arithmetic": "Computed in Decimal under the sealed ENGINE_CONTEXT and quantized to nine decimal places, ROUND_HALF_EVEN, so the score is reproducible and comparable without float drift. The inputs are integers, so the only inexactness is the division.",
+    "denominator_floor_note": "The max(..., 1) term means a quantity that is zero for both a variant and its neighbour contributes 0, reading as perfect stability where in fact nothing fired. The formula is sealed as the instruction specifies it and is not repaired; the per-quantity contributions are reported per variant so a reader can see how much of a low score is agreement and how much is absence. See G2A3-CONFLICT-32 in SE100-CFG-3106.",
+    "eligibility_of_neighbours": "Neighbours are structural, not filtered by eligibility. A variant's score uses all of its grid neighbours whether or not those neighbours passed the shutdown screen, because the score measures the smoothness of the parameter region and an ineligible neighbour is part of that region. Only the variant being scored must itself be eligible to be selectable."
+  },
+  {
+    "order": 3,
+    "criterion": "lowest_turnover",
+    "definition": "total fill count across both runs",
+    "role_change": "Attempt 2's primary criterion becomes Attempt 3's tiebreak. Its rationale is unchanged and is carried from SE100-CFG-3103: gross notional traded is a partial return proxy and fill count is not."
+  },
+  {
+    "order": 4,
+    "criterion": "lexicographic_variant_id",
+    "purpose": "A total order. Reached only if two variants tie on all criteria above."
+  }
+]
+
+==============================================================================
+### window.prohibited
+==============================================================================
+[
+  {
+    "from": "2021-08-01",
+    "to": "2024-07-31",
+    "state": "LOCKED",
+    "note": "Generation 2 validation window. Not read by this attempt."
+  },
+  {
+    "from": "2024-08-01",
+    "to": "2026-07-31",
+    "state": "SPENT_AND_PROHIBITED",
+    "note": "Generation 1's holdout. Sealed and off-limits regardless of generation."
+  },
+  {
+    "from": "2026-08-01",
+    "to": "2028-07-31",
+    "state": "SEALED",
+    "note": "Generation 2's holdout. Never to be read, by any code, at any stage, before that period exists in real calendar time."
+  }
+]
+
+==============================================================================
+### execution.order_kinds_this_attempt_may_issue
+==============================================================================
+[
+  {
+    "tag": "ENTRY",
+    "side": "BUY",
+    "when": "scheduled rebalance only",
+    "quantity": "sized by the budget rule below"
+  },
+  {
+    "tag": "EXIT",
+    "side": "SELL",
+    "when": "scheduled rebalance only",
+    "quantity": "the whole position"
+  },
+  {
+    "tag": "STOP",
+    "side": "SELL",
+    "when": "any session close at which the stop condition holds",
+    "quantity": "the whole position"
+  },
+  {
+    "tag": "THROTTLE",
+    "side": "SELL",
+    "when": "any session close at which projected gross exposure exceeds the scaled ceiling",
+    "quantity": "partial, largest position first"
+  },
+  {
+    "tag": "SHUTDOWN",
+    "side": "SELL",
+    "when": "the session a research shutdown triggers",
+    "quantity": "the whole position",
+    "issued_by": "the engine, unchanged from Generation 1"
+  }
+]
+
+==============================================================================
+### mechanics_carried_unchanged
+==============================================================================
+{
+  "blocks": [
+    "eligible_universe",
+    "ranking_signal",
+    "ranking_rule",
+    "position_count",
+    "rebalance",
+    "execution",
+    "position_sizing",
+    "concentration_ceiling",
+    "window",
+    "run_span",
+    "grid",
+    "runs_per_variant",
+    "gate_evaluation_scope"
+  ],
+  "method": "Each block was copied from SE100-CFG-3103 programmatically, not retyped, so a transcription difference between the two attempts is impossible by construction. Only grid.variant_id_format and grid.variants[].variant_id differ, because a variant id encodes the candidate index and the architecture name.",
+  "why_this_matters": "Attempt 3 changes two things. Any third difference, including an accidental one in a constant nobody re-read, would make the result uninterpretable."
+}
+
+==============================================================================
+### serialisation
+==============================================================================
+{
+  "numbers": "Every quantity that enters arithmetic is a decimal STRING, parsed with stockedge100.backtest.config.dec, which refuses float input.",
+  "dates": "ISO-8601 calendar dates, exchange sessions only.",
+  "rounding": "stockedge100.backtest.costs.ENGINE_CONTEXT, prec=34, ROUND_HALF_EVEN, with explicit ROUND_FLOOR / ROUND_CEILING cent quantization at the adverse boundary and explicit ROUND_DOWN where a fraction is quantized to share_decimals."
+}
+
+==============================================================================
+### reproducibility_requirements
+==============================================================================
+{
+  "determinism": "Two clean runs of the same variant and scenario must produce byte-identical trade payloads, equity payloads, ranking digests, and risk-architecture state traces.",
+  "risk_state_trace_digest": "As Attempt 2: a SHA-256 over the per-session risk state (band, lockout counter, volatility scalar, combined scalar) in session order, recorded in addition to the ranking digest. Under RA3 the band alphabet is {0, 1, 2} rather than {0, 1, 2, 3}, so an Attempt 3 trace digest is not comparable with an Attempt 2 trace digest and neither is expected to equal the other.",
+  "no_wall_clock_in_payloads": "No run id, timestamp or filesystem path enters any digested payload.",
+  "seed": null,
+  "seed_note": "There is no randomness in this strategy. The field is null rather than absent so that a future stage cannot read its absence as an oversight.",
+  "selection_determinism": "SE100-G2-SEL-2 must produce identical scores, identical per-quantity components, identical neighbour sets and an identical selected variant on a clean rerun from the same recorded statistics. This is tested directly against the recorded selection inputs, not only end-to-end, so a determinism failure in the selector cannot hide behind a determinism pass in the engine."
+}
+
+==============================================================================
+### gate_evaluation_scope
+==============================================================================
+{
+  "evaluated_on": "The selected representative variant only, across both of its runs.",
+  "conjunctive": "All Gate 3 conditions must be satisfied. Constitution section 9.",
+  "criteria_source": "config/generation_2/g2_gate_criteria_ra3.json",
+  "thresholds_changed_from_attempt_1": "none",
+  "thresholds_changed_from_generation_1": "none",
+  "thresholds_changed_from_attempt_2": "none"
+}
+
+==============================================================================
+### post_seal_defect_rule
+==============================================================================
+{
+  "rule": "If a defect is found in this protocol after it is sealed, it is reported as a blocker and recorded in the stage report. This file is not edited. A correction means a new artifact with a new id that supersedes this one, and the superseding artifact carries the reason.",
+  "applies_equally_to": "Every Generation 1 artifact, every Generation 2 Attempt 1 artifact, every Generation 2 Attempt 2 artifact, and this one."
+}
+
+==============================================================================
+### conflicts_declared_in_the_gate_criteria
+==============================================================================
+{
+  "note": "The Attempt 3 conflict numbering is one space shared by this file and SE100-CFG-3106, exactly as Attempt 2's was shared by SE100-CFG-3103 and SE100-CFG-3104. Ids 18 to 25 were taken by Attempt 2's criteria file; ids 26 to 33 are taken by Attempt 3's criteria file; this file takes 34 onward. Nothing is duplicated across the two files, so the two cannot drift into disagreeing versions of one conflict.",
+  "declared_in_g2_gate_criteria_ra3": [
+    "G2A3-CONFLICT-19",
+    "G2A3-CONFLICT-21",
+    "G2A3-CONFLICT-22",
+    "G2A3-CONFLICT-24",
+    "G2A3-CONFLICT-26",
+    "G2A3-CONFLICT-27",
+    "G2A3-CONFLICT-28",
+    "G2A3-CONFLICT-29",
+    "G2A3-CONFLICT-30",
+    "G2A3-CONFLICT-31",
+    "G2A3-CONFLICT-32",
+    "G2A3-CONFLICT-33"
+  ],
+  "inherited_and_restated_in_g2_gate_criteria_ra3": [
+    "S3-CONFLICT-1",
+    "S3-CONFLICT-3",
+    "G2-CONFLICT-6",
+    "G2-CONFLICT-7",
+    "G2-CONFLICT-15",
+    "G2A2-CONFLICT-18",
+    "G2A2-CONFLICT-20",
+    "G2A2-CONFLICT-23",
+    "G2A2-CONFLICT-25"
+  ]
+}
+
+==============================================================================
+### reported_for_every_variant_but_not_gating
+==============================================================================
+[
+  "net return, both runs",
+  "maximum drawdown, both runs",
+  "profit factor, both runs",
+  "closed trade count, both runs",
+  "best-trade-removed return, both runs",
+  "research-shutdown event count and the session of each, both runs",
+  "total fill count, both runs",
+  "de-risk ladder activations (downward transitions), both runs",
+  "de-risk ladder upward transitions and deepest band reached, both runs",
+  "sessions spent in each ladder band, both runs",
+  "re-entry lockout arms and sessions on which a recovery was blocked by it, both runs",
+  "stop exits and the realized loss at each, both runs",
+  "throttle legs issued and throttle legs skipped below minimum notional, both runs",
+  "maximum observed gross exposure fraction, both runs",
+  "minimum and mean combined risk scalar, and sessions on which it was below 1, both runs",
+  "ranking digest, both runs",
+  "The SE100-G2-SEL-2 stability score, its four per-quantity components, and the identity and score of every neighbour used to compute it.",
+  "The Attempt 2 counterpart of each ladder, lockout and stop statistic, so the required comparison is on the same page as the figure it compares."
+]
+

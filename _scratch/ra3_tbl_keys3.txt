@@ -1,0 +1,206 @@
+=== EV top-level keys (51)
+  artifact_id                                          str
+  project                                              str
+  generation                                           int
+  generation_id                                        str
+  attempt                                              int
+  stage                                                str
+  gate                                                 dict(2)
+  strategy_id                                          str
+  candidate_index                                      int
+  family                                               str
+  hypothesis                                           str
+  what_this_attempt_adds_over_attempt_1                str
+  what_this_attempt_adds_over_attempt_1_carriage       str
+  what_this_attempt_changes_from_attempt_2             str
+  adaptation_disclosure_verbatim                       str
+  adaptation_disclosure_carriage                       dict(10)
+  attempt_1_ref                                        dict(23)
+  attempt_2_ref                                        dict(27)
+  refs_reverified                                      str
+  prior_attempt_module_verification                    dict(11)
+  prior_attempt_modules_immutable                      dict(8)
+  mechanics_carried_unchanged                          dict(3)
+  conflicts_declared_in_the_gate_criteria              dict(3)
+  sealed_inputs                                        dict(19)
+  window                                               dict(10)
+  run_span_recheck                                     dict(11)
+  universe                                             dict(8)
+  risk_architecture                                    dict(10)
+  ladder_engagement_comparison                         dict(9)
+  grid                                                 dict(8)
+  runs                                                 list(36)
+  selection                                            dict(16)
+  selection_determinism                                dict(12)
+  gate_scope                                           dict(10)
+  candidate_results                                    list(1)
+  stage_verdict                                        dict(18)
+  reconciliation                                       dict(9)
+  determinism                                          dict(11)
+  variant_table                                        list(18)
+  variant_table_is_descriptive_only                    list(18)
+  reported_for_every_variant_coverage                  dict(7)
+  multiple_comparisons_disclosure                      dict(12)
+  representative_selection_rule                        dict(13)
+  gate_evaluation_scope                                dict(6)
+  structural_consequences_declared_before_running      dict(8)
+  explicit_non_authorizations                          list(16)
+  live_trading_authorized                              bool
+  generated_utc                                        str
+  command                                              str
+  evidence_digest_covers                               str
+  evidence_digest                                      str
+
+=== selection
+  rule_id                                      SE100-G2-SEL-2
+  rule_source                                  SE100-CFG-3105 representative_selection_rule
+  return_blind                                 True
+  frozen_before_any_variant_is_run             True
+  steps                                        list(4) [{'order': 1, 'criterion': 'zero_research_shutdown_events', 'scope': 'across BOTH runs of the variant'}, {'order': 2, 'criterion': 'lowest_neighbourhood_instability_score', 'scope': None}, {'order': 3, 'criterion': 'lowe
+  selection_input_fields                       list(6) ['variant_id', 'shutdown_events', 'fill_count', 'ladder_descents', 'lockout_arms', 'stops_filled']
+  scored_quantities                            list(4) ['fill_count', 'ladder_descents', 'lockout_arms', 'stops_filled']
+  inputs                                       list(18) [{'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY', 'shutdown_events': 0, 'fill_count': 614, 'ladder_descents': 78, 'lockout_arms': 78, 'stops_filled': 18}, {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QU
+  result                                       dict(8) {'rule_id': 'SE100-G2-SEL-2', 'selected_variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'decided_at_step': 2, 'eligible_variants': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-
+  selected_variant_id                          SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY
+  decided_at_step                              2
+  outcome                                      representative_selected
+  selected_score                               dict(7) {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'instability_score': '0.215471404', 'neighbours': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY', 'SE100-G2-S3
+  neighbour_scores                             list(4) [{'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'instability_score': '0.215520012', 'neighbours': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'SE100-G2-S
+  note                                         SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) with instability score 0.215471404 over 4 neighbours, from 18 eligible of 18 variants.
+  no_reselection                               The representative is selected once, before any gate condition is evaluated. It is not reselected, re-ranked or substituted for any reason.
+
+=== selection.result
+  rule_id                                      SE100-G2-SEL-2
+  selected_variant_id                          SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY
+  decided_at_step                              2
+  eligible_variants                            list(18) ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L0
+  ineligible_variants                          list(0) []
+  eligible_count                               18
+  ranking                                      list(18) [{'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'eligible': True, 'shutdown_events': 0, 'instability_score': '0.215471404', 'fill_count': 298}, {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY
+  all_scores                                   dict(18) {'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY': {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY', 'instability_score': '0.316981929', 'neighbours': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'SE100-G2-S3-
+
+=== selection.result.ranking (first 6 + last)
+  len 18, type dict
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'eligible': True, 'shutdown_events': 0, 'instability_score': '0.215471404', 'fill_count': 298}
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'eligible': True, 'shutdown_events': 0, 'instability_score': '0.215520012', 'fill_count': 283}
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L12-K1-QUARTERLY', 'eligible': True, 'shutdown_events': 0, 'instability_score': '0.246609961', 'fill_count': 195}
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY', 'eligible': True, 'shutdown_events': 0, 'instability_score': '0.247419599', 'fill_count': 336}
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L06-K1-QUARTERLY', 'eligible': True, 'shutdown_events': 0, 'instability_score': '0.248621581', 'fill_count': 265}
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L06-K2-MONTHLY', 'eligible': True, 'shutdown_events': 0, 'instability_score': '0.274579406', 'fill_count': 658}
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY', 'eligible': True, 'shutdown_events': 0, 'instability_score': '0.423540495', 'fill_count': 610}
+
+=== selection.result.all_scores
+  type dict len 18
+  SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY           {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY', 'instability_score': '0.316981929', 'neighbours': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY', 'SE100-G2-S3-C
+  SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY         {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'instability_score': '0.215520012', 'neighbours': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'SE100-G2-S3
+  SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY           {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY', 'instability_score': '0.299993984', 'neighbours': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'SE100-G2-S3-C
+
+=== selection.neighbour_scores
+  type list len 4
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'instability_score': '0.215520012', 'neighbours': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L06-K1-QUARTERLY'], 'neighbour_count': 3, 'per_quantity_mean_dissimilarity': {'fill_count': '0.217675920', 'ladder_descents': '0.224979842', 'lockout_arms': '0.224
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY', 'instability_score': '0.299993984', 'neighbours': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K3-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L06-K2-MONTHLY'], 'neighbour_count': 4, 'per_quantity_mean_dissimilarity': {'fill_count': '0.316509255', 'ladder_descen
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY', 'instability_score': '0.423540495', 'neighbours': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K3-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L06-K3-QUARTERLY'], 'neighbour_count': 3, 'per_quantity_mean_dissimilarity': {'fill_count': '0.399717536', 'ladder_descents': '0.483333333', 'lockout_arms': '0.483
+  {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY', 'instability_score': '0.247419599', 'neighbours': ['SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L06-K1-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L06-K2-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L06-K3-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L12-K2-QUARTERLY'], 'neighbour_count': 5, 'per_quantity_mean_dissim
+
+=== selection.note
+  SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) with instability score 0.215471404 over 4 neighbours, from 18 eligible of 18 variants.
+
+=== selection.steps
+  list(4)
+    [0] order                                    int = 1
+    [0] criterion                                str = zero_research_shutdown_events
+    [0] scope                                    str = across BOTH runs of the variant
+
+=== selection.rule_id
+  SE100-G2-SEL-2
+
+=== reports/stage3_g2/grid_results.json exists=False
+
+=== reports/stage3_g2_attempt2/grid_results.json exists=True
+  list(36); [0] keys:
+    grid_index                                     int = 1
+    variant_id                                     str = SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY
+    lookback_months                                int = 3
+    top_k                                          int = 1
+    rebalance_frequency                            str = MONTHLY
+    label                                          str = #BASE
+    scenario                                       str = BASE
+    total_return                                   str = 0.631462289893305023555
+    max_drawdown                                   str = 0.1116420305479441094684710637822694
+    profit_factor                                  str = 1.934106893626847307444942574
+    closed_trades                                  int = 105
+    closed_episodes                                int = 105
+    research_shutdown_events                       int = 0
+    shutdown_session                               NoneType = None
+    fills                                          int = 328
+    ladder_descents                                int = 64
+    ladder_ascents                                 int = 64
+    ladder_deepest_band                            int = 3
+    ladder_final_band                              int = 0
+    ladder_sessions_in_band                        dict = {'0': 1297, '1': 1316, '2': 375, '3': 288}
+    lockout_arms                                   int = 64
+    lockout_recoveries_blocked                     int = 276
+    stops_triggered                                int = 9
+    stops_filled                                   int = 9
+    stops_preempted_by_signal_exit                 int = 0
+    throttle_legs_scheduled                        int = 117
+    throttle_legs_below_min_notional               int = 960
+    throttle_sessions_breaching_ceiling            int = 1077
+    max_gross_fraction_observed                    str = 0.5155463571243270334747080073382534
+    max_gross_fraction_session                     str = 2020-11-09
+    combined_scalar_minimum                        str = 0.250000000
+    combined_scalar_mean                           str = 0.7533369327823565323565323565
+    combined_scalar_sessions_below_one             int = 2355
+    volatility_scalar_minimum                      str = 0.603134525
+    volatility_scalar_sessions_below_one           int = 473
+    cagr                                           str = 0.038355471080648857142313681960913
+    sharpe                                         str = 0.5799880630195707200472713524647129
+    daily_return_stdev                             str = 0.004350017674374674082646706183126293
+    exposure_fraction                              str = 0.9764957264957264957264957264957265
+    win_rate                                       str = 0.6190476190476190476190476190476190
+    average_win                                    str = 1.938689738753637505502297696713288
+    average_loss                                   str = -1.628850419723735738015823010532920
+    longest_flat_streak_sessions                   int = 20
+    distinct_symbols_traded                        int = 21
+    distinct_symbols_with_closed_trades            int = 21
+    trades_digest                                  str = 963a9c36660ac7e998f8d0c4e178f322bb1c8d085307d0014598b84174741c71
+    equity_digest                                  str = d484438fd88b8867803c262aee74add810bbce6086b5f0cf195ffdeb874f910c
+    ranking_digest                                 str = d516c547fc57939d86b158731e3948ecba4dbddce131292cd2e6ba986bc14ab9
+    risk_state_digest                              str = c7bbb33656b3a901fe4fe420563a4049045ad49e02fb7c7bef065b81581d511d
+    risk_state_sessions                            int = 3276
+    scheduled_rebalances                           int = 157
+    executed_rebalances                            int = 157
+    reconciliation_single_leg_compared             int = 52
+    reconciliation_mismatches                      int = 0
+    reconciliation_vacuous                         bool = False
+
+=== reports/stage3_g2/STAGE_3_G2_DEVELOPMENT_ADMISSIBILITY.json exists=True
+  dict(29) keys: ['artifact_id', 'candidate_results', 'command', 'determinism', 'evidence_digest', 'evidence_digest_covers', 'explicit_non_authorizations', 'gate', 'gate_evaluation_scope', 'gate_scope', 'generated_utc', 'generation', 'generation_id', 'grid', 'live_trading_authorized', 'multiple_comparisons_disclosure', 'project', 'representative_selection_rule', 'runs', 'sealed_inputs', 'selection', 'selection_inputs', 'stage', 'stage_verdict', 'strategy_id', 'universe', 'variant_table', 'variant_table_is_descriptive_only', 'window']
+
+=== reports/stage3_g2_attempt2/STAGE_3_G2_A2_DEVELOPMENT_ADMISSIBILITY.json exists=True
+  dict(43) keys: ['adaptation_disclosure_carriage', 'adaptation_disclosure_verbatim', 'artifact_id', 'attempt', 'attempt_1_module_verification', 'attempt_1_ref', 'candidate_index', 'candidate_results', 'command', 'determinism', 'evidence_digest', 'evidence_digest_covers', 'explicit_non_authorizations', 'family', 'gate', 'gate_evaluation_scope', 'gate_scope', 'generated_utc', 'generation', 'generation_id', 'grid', 'hypothesis', 'live_trading_authorized', 'multiple_comparisons_disclosure', 'project', 'reconciliation', 'reported_for_every_variant_coverage', 'representative_selection_rule', 'risk_architecture', 'run_span_recheck', 'runs', 'sealed_inputs', 'selection', 'selection_inputs', 'stage', 'stage_verdict', 'strategy_id', 'structural_consequences_declared_before_running', 'universe', 'variant_table']
+
+=== A1 evidence variant_table[0] keys (if present)
+  variant_table list(18); [0] keys:
+    grid_index                                     int = 1
+    variant_id                                     str = SE100-G2-S3-C1-ROTATION-L03-K1-MONTHLY
+    lookback_months                                int = 3
+    top_k                                          int = 1
+    rebalance_frequency                            str = MONTHLY
+    research_shutdown_events                       int = 2
+    fill_count_both_runs                           int = 256
+    base_total_return                              str = 0.2534
+    base_max_drawdown                              str = 0.1505194844404930683606472144230645
+    base_profit_factor                             str = 1.326042202779207411219763253
+    base_closed_trades                             int = 64
+    base_fills                                     int = 128
+    base_shutdown_session                          str = 2016-01-20
+    base_distinct_symbols_targeted                 int = 21
+    stress_total_return                            str = 0.2219
+    stress_max_drawdown                            str = 0.1513321528336213350023748057054329
+    stress_profit_factor                           str = 1.287584240539139450492483152
+    stress_closed_trades                           int = 64
+    stress_fills                                   int = 128
+    stress_shutdown_session                        str = 2016-01-15
+    stress_distinct_symbols_targeted               int = 21
+

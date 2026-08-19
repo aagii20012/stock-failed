@@ -1,0 +1,152 @@
+g1 path exists   : True
+g1 sha256        : 77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433
+g1 expected      : 77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433
+
+--- g1 top-level keys (45)
+   artifact_id
+   title
+   version
+   project
+   generation
+   stage
+   gate_id
+   attempt
+   attempt_id
+   constitution_ref
+   declared_before_any_strategy_code
+   declaration_note
+   serialisation
+   currency
+   research_question
+   known_prior_evidence
+   adaptive_research_disclosure
+   authorization_determination
+   recorded_interpretations
+   inputs_bound
+   partitions
+   excluded_symbols
+   iteration_budget
+   cumulative_experiment_count
+   multiple_comparisons_disclosure
+   no_selection_in_this_stage
+   permitted_parameter_grid_semantics
+   shared_rules
+   indicator_definitions
+   risk_architecture
+   families_excluded
+   primary_decision_rule
+   secondary_metrics
+   cost_stress_treatment
+   attempt_level_abandonment_rule
+   missing_or_invalid_data_rule
+   post_seal_defect_rule
+   partial_or_failed_run_rule
+   reproducibility_requirements
+   no_retuning_rule
+   stage_4_remains_prohibited_conditions
+   experiments
+   benchmarks
+   explicit_non_authorizations
+   live_trading_authorized
+
+--- ladder / RA1-5 key hits in the Generation 1 config
+
+===== risk_architecture.RA1-5
+{
+  "name": "Account de-risk ladder",
+  "read": "at entry only, to set f_cap for the RA1-2 computation",
+  "rule": [
+    "hwm is the running maximum of context.equity over the decision sessions of the run, seeded at the first decision session's equity and updated on every decision session whether the account is flat or not.",
+    "dd = (hwm - equity) / hwm at the decision close.",
+    "dd < 0.08: f_cap = 0.50.",
+    "0.08 <= dd < 0.10: f_cap = 0.25.",
+    "dd >= 0.10: f_cap = 0.125."
+  ],
+  "equity_series_identity": "context.equity is the same value the engine records before it evaluates the section 5.1 shutdown, so RA1-5's drawdown series is byte-identical to the shutdown's own. The ladder and the shutdown read one series, not two approximations of one.",
+  "never_blocks_entry": "The ladder reduces size. It never blocks an entry and never sets f_cap to zero. This is deliberate and is the correction of a rejected earlier formulation.",
+  "rejected_alternative": "An earlier formulation blocked new entries once dd reached 0.08 until equity recovered above the high-water mark. It is recorded here because it is fatally defective and the defect is instructive: a flat account's equity is constant, so equity can never recover, so the block can never re-arm. That rule would produce a permanently dead strategy - which is the failure mode the constitution's own shutdown already represents, reintroduced by the risk overlay meant to avoid it. It is also what the operating constraint against making a strategy incapable of meaningful trading solely to suppress drawdown forbids.",
+  "rung_rationale": "0.08 and 0.10 are the constitution's section 5.2 live soft and hard risk halt distances, verbatim. The multipliers halve and then halve again. Nothing here is a new number chosen by the researcher except the choice to halve, which is declared and is probed indirectly by the f_base neighbour in every candidate."
+}
+
+===== experiments[0].primary_parameters.ladder_rungs
+[
+  [
+    "0.08",
+    "0.25"
+  ],
+  [
+    "0.10",
+    "0.125"
+  ]
+]
+
+===== experiments[1].primary_parameters.ladder_rungs
+[
+  [
+    "0.08",
+    "0.25"
+  ],
+  [
+    "0.10",
+    "0.125"
+  ]
+]
+
+===== experiments[2].primary_parameters.ladder_rungs
+[
+  [
+    "0.08",
+    "0.25"
+  ],
+  [
+    "0.10",
+    "0.125"
+  ]
+]
+
+
+--- risk_architecture scalar fields
+   id                                 "RA3"
+   name                               "Generation 2 Attempt 3 risk architecture"
+   frozen_before_any_variant_is_run   true
+   not_part_of_the_grid               true
+   derived_from                       "RA2, by deleting one ladder band. Four of the five components are identical."
+   why_not_gridded                    "Every constant below is fixed and applied uniformly to all eighteen variants. Searching them alongside the rotation parameters would cross from a disclosed risk control into curve-fitting to 2008 and 2020 - the two episodes whose observation motivated this attempt in the first place. The grid remains exactly the eighteen rotation parameterisations of Attempt 1 and is not widened."
+   single_difference_from_ra2         "RA2-4's band 1 (0.05 <= dd < 0.08, scalar 0.75) is deleted and band 0 is extended to 0.08. No other threshold, scalar, formula, order of operations or code path differs. The engine subclasses Attempt 2's and overrides the band table and the state derived from it; see G2A3-CONFLICT-31."
+   provenance                         "RA3-1, RA3-2, RA3-3 and RA3-5 are RA2-1, RA2-2, RA2-3 and RA2-5 unchanged, which are in turn the values of the Attempt 2 operating prompt and, for RA2-2 and RA2-3, of Generation 1's RA1. RA3-4 is Generation 1's RA1-5 ladder restored: see components.RA3-4.provenance, which quotes SE100-CFG-3103's own statement that only RA2-4's band 1 was new. Every constant in RA3 was therefore sealed before Attempt 1 ran."
+
+--- risk_architecture.combined_scalar
+{
+  "formula": "f(t) = f_vol(t) * f_ladder(t), quantized to nine decimal places, ROUND_DOWN.",
+  "multiplicative_not_minimum": "The two terms answer different questions - how violent is the market, and how much have we already lost - and a portfolio in a violent drawdown should be smaller than one in either condition alone. min() would discard whichever answer was less extreme.",
+  "range": "(0, 1]. f(t) = 1 exactly when volatility is at or below target and the drawdown is below 8 percent. Under RA2 the second clause read 5 percent; the widening of that clause is the whole of this attempt's architectural change.",
+  "applies_to": [
+    "the entry budget at the fill open: w(k) * f * equity",
+    "the aggregate ceiling at every session: 0.50 * f * equity"
+  ],
+  "does_not_apply_to": [
+    "the per-position stop, which is an absolute condition on price and not a sizing rule",
+    "the constitutional research shutdown, which is the engine's and is not modified by this attempt"
+  ]
+}
+
+--- risk_architecture.state_ownership
+{
+  "owner": "The Attempt 3 engine subclass.",
+  "why_not_the_candidate": "The candidate sees only DecisionContext, which carries (session, cash, equity, open_symbols, shutdown_active). It carries no per-position cost basis - needed for the stop - and no high-water mark - needed for the ladder. Extending DecisionContext would mean editing stockedge100/backtest/engine.py, a Generation 1 file that is frozen and read-only.",
+  "why_this_works": "The Generation 1 session loop runs the risk step (step 6: record equity, update the high-water mark, test the shutdown) strictly before the decision step (step 7: build the DecisionContext and call the candidate). Risk state updated during step 6 is therefore current when step 7 runs, in the same session, with no change to the base loop.",
+  "no_generation_1_or_prior_attempt_file_is_edited": "The Attempt 3 engine subclasses the Attempt 2 RotationEngineRA1, which subclasses the Attempt 1 RotationEngine, which subclasses the frozen Generation 1 engine. Each layer overrides only its own methods. Nothing below Attempt 3 is modified, and all seventeen prior-attempt modules are re-hashed at seal time and again at package time."
+}
+
+--- RA3-4 scalar fields
+   name                               "de_risk_ladder"
+   purpose                            "Staged exposure reduction as the drawdown from the equity high-water mark deepens, re-normalizing as the drawdown recovers. The one changed component of this attempt."
+   drawdown_definition                "dd(t) = (high_water(t) - equity(t)) / high_water(t), where high_water(t) is the running maximum of equity including session t. This is the same high-water mark the constitutional research shutdown uses, read from the engine rather than recomputed, so the ladder and the shutdown cannot disagree about the drawdown."
+   boundary_convention                "Each band is closed at its lower bound and open at its upper bound, so dd exactly equal to 0.08 is band 1, not band 0. Stated because a threshold is a decision and an inequality direction chosen at implementation time is a free parameter. The convention is RA2-4's and is not re-chosen; only the threshold it applies to has moved."
+   descent                            "Immediate and to the full computed band. If the band computed from dd(t) is above the current band, the current band becomes that band in one step, at session t. There is no smoothing of the descent - a fast drawdown is exactly the case the ladder exists for."
+   recovery                           "At most one band per session, and only when the computed band is strictly below the current band AND the re-entry lockout of RA3-5 has elapsed. Recovery from band 2 to band 0 therefore requires at least two sessions after the lockout expires. RA2-4's ladder was one rung deeper and required at least three."
+   hysteresis_note                    "The asymmetry - immediate down, one step up, gated by a cooldown - is the mechanism. A symmetric ladder would re-lever into a bear-market rally at the first band boundary it crossed back over, which is the failure the lockout exists to prevent."
+   scalar                             "f_ladder(t) = the scalar of the current band after the transition rule has been applied for session t."
+   measurement                        "Per variant: the number of downward transitions (ladder descents), the number of upward transitions, the deepest band reached, the number of sessions spent in each band, and the number of sessions on which a recovery was computed but blocked by the lockout. All five are reported alongside Attempt 2's corresponding figures, and the descent count is one of SE100-G2-SEL-2's four inputs."
+   inherited_unchanged_from           null
+   derived_from                       "RA2-4, with band 1 deleted and the remaining bands renumbered."

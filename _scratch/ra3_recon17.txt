@@ -1,0 +1,137 @@
+==============================================================================================================
+EV.stage_verdict
+ok  EV.stage_verdict.verdict                                   str    "FAIL"
+ok  EV.stage_verdict.verdict_token                             str    "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE"
+ok  EV.stage_verdict.admitted_candidates                       list   []
+ok  EV.stage_verdict.representative_exists                     bool   true
+ok  EV.stage_verdict.candidates_evaluated                      int    1
+ok  EV.stage_verdict.fail_route                                str    "REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION"
+ok  EV.stage_verdict.prior_attempt_tokens_withheld             list   ["STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT", "STAGE_3_G2_NO_CANDIDATE", "STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMI...
+MISSING  EV['stage_verdict', 'constitutional_equivalent']
+==============================================================================================================
+EV.selection
+ok  EV.selection.outcome                                       str    "representative_selected"
+ok  EV.selection.return_blind                                  bool   true
+ok  EV.selection.selection_input_fields                        list   ["variant_id", "shutdown_events", "fill_count", "ladder_descents", "lockout_arms", "stops_filled"]
+ok  EV.selection.decided_at_step                               int    2
+ok  EV.selection.rule_id                                       str    "SE100-G2-SEL-2"
+ok  EV.selection.result.eligible_count                         int    18
+ok  EV.selection.result.selected_variant_id                    str    "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"
+ok  EV.selection.result.decided_at_step                        int    2
+ok  EV.selection.steps                                         list   [{"order": 1, "criterion": "zero_research_shutdown_events", "scope": "across BOTH runs of the variant"}, {"ord...
+ok  EV.selection.selected_score.instability_score              str    "0.215471404"
+ok  EV.selection.selected_score.neighbour_count                int    4
+ok  EV.selection.selected_score.per_quantity_mean_dissimilarity dict   {"fill_count": "0.325717816", "ladder_descents": "0.131846770", "lockout_arms": "0.131846770", "stops_filled":...  keys=['fill_count', 'ladder_descents', 'lockout_arms', 'stops_filled']
+ok  EV.selection.selected_score.own_quantities                 dict   {"fill_count": 298, "ladder_descents": 44, "lockout_arms": 44, "stops_filled": 32}  keys=['fill_count', 'ladder_descents', 'lockout_arms', 'stops_filled']
+MISSING  EV['selection', 'runner_up']
+MISSING  EV['selection', 'all_scores']
+ok  EV.selection.neighbour_scores                              list   [{"variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY", "instability_score": "0.215520012", "neighbour...
+MISSING  EV['selection', 'selection_note']
+ok  EV.selection.note                                          str    "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) ...
+   selection keys: ['decided_at_step', 'frozen_before_any_variant_is_run', 'inputs', 'neighbour_scores', 'no_reselection', 'note', 'outcome', 'result', 'return_blind', 'rule_id', 'rule_source', 'scored_quantities', 'selected_score', 'selected_variant_id', 'selection_input_fields', 'steps']
+==============================================================================================================
+ok  EV.grid.variants_declared                                  int    18
+ok  EV.grid.runs_executed                                      int    36
+ok  EV.prior_attempt_module_verification.module_count          int    17
+ok  EV.prior_attempt_module_verification.modules_that_moved    list   []
+ok  EV.determinism.all_identical                               bool   true
+ok  EV.determinism.runs_compared                               int    36
+ok  EV.determinism.fields_compared                             list   ["trades_digest", "equity_digest", "ranking_digest", "risk_state_digest", "fills", "closed_trades", "total_ret...
+ok  EV.selection_determinism.all_identical                     bool   true
+ok  EV.ladder_engagement_comparison.at_least_one_statistic_differs bool   true
+ok  EV.ladder_engagement_comparison.runs_compared              int    36
+ok  EV.ladder_engagement_comparison.attempt_2_source           str    "reports/stage3_g2_attempt2/grid_results.json"
+ok  EV.window.validation_read                                  bool   false
+ok  EV.window.generation_1_holdout_read                        bool   false
+ok  EV.window.generation_2_holdout_read                        bool   false
+ok  EV.window.latest_session_loaded                            str    "2021-07-30"
+ok  EV.window.development_bound                                str    "2021-07-31"
+ok  EV.window.enforcement                                      str    "load_grid_dataset truncates at the development bound and then audits the loaded bars separately, so a session...
+ok  EV.reconciliation.runs_reconciled                          int    36
+ok  EV.reconciliation.single_leg_compared_total                int    2804
+ok  EV.reconciliation.mismatches_total                         int    0
+ok  EV.reconciliation.vacuous_runs                             list   []
+ok  EV.adaptation_disclosure_carriage.sha256_of_utf8           str    "ce1d6476f44562310fb059c5817645baa25477cc4f6168b414f3423834c8e925"
+ok  EV.artifact_id                                             str    "SE100-EVID-3103"
+ok  EV.evidence_digest                                         str    "462c13d2e07e25bec46713fe0165bcc00d9e8568d2fad403a48f1d30e412711c"
+ok  EV.evidence_digest_covers                                  str    "every field of this file except generated_utc and evidence_digest, as canonical JSON"
+ok  EV.generated_utc                                           str    "2026-08-16T09:25:05Z"
+ok  EV.universe                                                dict   {"universe_version": "SE100-U1-d4917c2f7f1cd834", "universe_identity_sha256": "d4917c2f7f1cd8344728a39165929b3...  keys=['eligibility_recheck_convention', 'excluded_symbols', 'symbols_declared', 'symbols_loaded', 'symbols_missing', 'unchanged_from_attempt_1', 'universe_identity_sha256', 'universe_ve
+ok  EV.run_span_recheck                                        dict   {"requirement": "The runner recomputes every value below from the loaded series and refuses to run if any diff...  keys=['config_keys_compared', 'cross_checked_against', 'differences', 'governance_keys_compared', 'governance_keys_not_a_measurement', 'independent_derivation_keys_compared', 'measured'
+ok  EV.risk_architecture.as_loaded                             dict   {"architecture_id": "RA3", "exposure_ceiling": "0.50", "volatility_target": "0.10", "volatility_window_bars": ...  keys=['annualisation_sessions', 'architecture_id', 'bands', 'exposure_ceiling', 'lockout_sessions', 'scalar_decimals', 'stop_fraction', 'volatility_returns', 'volatility_target', 'volat
+ok  EV.risk_architecture.single_difference_from_ra2            dict   {"attempt_2_protocol": "g2_rotation_ra1_protocol.json", "ra2_bands": [["0.00", "0.05", "1.00"], ["0.05", "0.08...  keys=['attempt_2_protocol', 'bands_added_by_ra3', 'bands_at_or_beyond_the_deleted_tier_unchanged', 'bands_removed_from_ra2', 'deleted_tier', 'ra2_bands', 'ra3_bands']
+ok  EV.variant_table_is_descriptive_only                       list   ["net return, both runs", "maximum drawdown, both runs", "profit factor, both runs", "closed trade count, both...
+ok  EV.reported_for_every_variant_coverage                     dict   {"rule": "each sealed reported-but-not-gating quantity, and the variant_table columns carrying it for each of ...  keys=['map', 'new_since_attempt_2', 'not_supplied_by_grid_report', 'per_variant_scope_note', 'quantities', 'quantities_sealed', 'rule']
+ok  EV.refs_reverified                                         str    "Every digest in this block, in attempt_1_ref and in attempt_2_ref was recomputed from the file it names at th...
+ok  EV.multiple_comparisons_disclosure.cumulative_variants_this_hypothesis_family int    54
+ok  EV.multiple_comparisons_disclosure.cumulative_runs_this_hypothesis_family int    108
+ok  EV.multiple_comparisons_disclosure.adaptive_design_note    str    "The 54 cumulative variants are not 54 independent tests. Attempt 2's risk architecture was chosen after seein...
+MISSING  EV['generation_1_provenance']
+==============================================================================================================
+PROT
+ok  PROT.attempt                                               int    3
+ok  PROT.strategy_id                                           str    "SE100-G2-S3-C3-ROTATION-RA3"
+ok  PROT.candidate_index                                       int    3
+ok  PROT.family                                                str    "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE"
+ok  PROT.generation_id                                         str    "SE100-GEN2-7394207c543401e2"
+ok  PROT.artifact_id                                           str    "SE100-CFG-3105"
+ok  PROT.runs_per_variant.labels                               list   ["#BASE", "#STRESS"]
+ok  PROT.representative_selection_rule.id                      str    "SE100-G2-SEL-2"
+ok  PROT.representative_selection_rule.structural_enforcement.mechanism str    "The scoring function accepts a frozen SelectionInputV2 dataclass whose fields are exactly (variant_id, shutdo...
+ok  PROT.prior_attempt_modules_immutable                       dict   {"count": 17, "attempt_1_modules": ["src/stockedge100/strategies/g2_rotation.py", "src/stockedge100/strategies...  keys=['attempt_1_list_source', 'attempt_1_modules', 'attempt_2_list_source', 'attempt_2_modules', 'count', 'digests_not_recorded_here', 'digests_recorded_by', 'g2_partition_lock_exclude
+ok  PROT.adaptation_disclosure_carriage_requirement.enforcement str    "The sealer and the package builder both assert byte-equality of this string against the value in this file. A...
+ok  PROT.adaptation_disclosure_carriage_requirement.encoding_note str    "The string is stored with the em dashes of the source prose, as UTF-8, matching every other governance artifa...
+ok  PROT.adaptation_disclosure_carriage_requirement.must_appear_verbatim_in list   ["governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md", "governance/generation_2/STAGE_3_G2_ROTATION_R...
+ok  PROT.risk_architecture.components                          dict   {"RA3-1": {"name": "aggregate_exposure_ceiling", "value": "0.50", "unit": "fraction of equity", "purpose": "Ti...  keys=['RA3-1', 'RA3-2', 'RA3-3', 'RA3-4', 'RA3-5']
+ok  PROT.risk_architecture.combined_scalar                     dict   {"formula": "f(t) = f_vol(t) * f_ladder(t), quantized to nine decimal places, ROUND_DOWN.", "multiplicative_no...  keys=['applies_to', 'does_not_apply_to', 'formula', 'multiplicative_not_minimum', 'range']
+ok  PROT.risk_architecture.frozen_before_any_variant_is_run    bool   true
+ok  PROT.risk_architecture.not_part_of_the_grid                bool   true
+ok  PROT.risk_architecture.why_not_gridded                     str    "Every constant below is fixed and applied uniformly to all eighteen variants. Searching them alongside the ro...
+ok  PROT.risk_architecture.provenance                          str    "RA3-1, RA3-2, RA3-3 and RA3-5 are RA2-1, RA2-2, RA2-3 and RA2-5 unchanged, which are in turn the values of th...
+MISSING  PROT['risk_architecture', 'single_change_from_ra2']
+ok  PROT.eligible_universe.universe_version                    str    "SE100-U1-d4917c2f7f1cd834"
+ok  PROT.run_span.run_start                                    str    "2008-07-28"
+ok  PROT.run_span.run_end                                      str    "2021-07-30"
+ok  PROT.explicit_non_authorizations                           list   ["This file does not authorize reading any session at or after 2021-08-01, in this or any later stage.", "This...
+ok  PROT.multiple_comparisons_disclosure.adaptive_design_note  str    "The 54 cumulative variants are not 54 independent tests. Attempt 2's risk architecture was chosen after seein...
+ok  PROT.hypothesis                                            str    "Cross-sectional relative strength over a fixed 34-member ETF universe, held in an equally weighted top-k bask...
+ok  PROT.declared_before_any_strategy_code                     bool   true
+ok  PROT.declared_before_any_strategy_code_measurement         dict   {"contamination_predicate": "CONTENT_BASED", "predicate": "No .py file under src/stockedge100 or tests contain...  keys=['conflict_ref', 'contamination_predicate', 'paired_immutability_check', 'predicate', 'sealer_indirection_note', 'supersedes_in_scope', 'why_not_path_based']
+ok  PROT.concentration_ceiling                                 dict   {"value": "0.50", "source": "config/stage3_attempt2_strategy_protocol.json risk_architecture.RA1-1.rule, f_bas...  keys=['non_binding_note', 'scope', 'source', 'source_sha256', 'unchanged_from_attempt_1', 'value']
+ok  PROT.attempt_1_ref                                         dict   {"strategy_id": "SE100-G2-S3-C1-ROTATION", "protocol_config": "config/generation_2/g2_rotation_protocol.json",...  keys=['carried_from', 'decision_json', 'decision_json_sha256', 'disposition', 'disposition_note', 'gate_criteria_config', 'gate_criteria_config_sha256', 'manifest_json', 'manifest_json_
+ok  PROT.attempt_2_ref                                         dict   {"strategy_id": "SE100-G2-S3-C2-ROTATION-RA1", "protocol_config": "config/generation_2/g2_rotation_ra1_protoco...  keys=['decision_json', 'decision_json_sha256', 'disposition', 'disposition_note', 'fail_route', 'gate_criteria_config', 'gate_criteria_config_sha256', 'manifest_json', 'manifest_json_sh
+MISSING  PROT['prior_attempts_ref']
+ok  PROT.what_this_attempt_changes_from_attempt_2              str    "Exactly two things, and nothing else. (1) The de-risk ladder loses its 5-to-8 percent rung, reverting to the ...
+MISSING  PROT['what_this_attempt_adds_over_attempt_2']
+ok  PROT.structural_consequences_declared_before_running       dict   {"SC-1": {"statement": "A quarterly k=1 variant has 53 scheduled rebalances over the run and can therefore clo...  keys=['SC-1', 'SC-2', 'SC-3', 'SC-4', 'SC-5', 'SC-6', 'SC-7', 'SC-8']
+MISSING  PROT['generation_1_provenance']
+   PROT keys: ['adaptation_disclosure_carriage_requirement', 'adaptation_disclosure_verbatim', 'adversarial_test_requirements', 'artifact_id', 'attempt', 'attempt_1_ref', 'attempt_2_ref', 'candidate_index', 'candidate_index_note', 'charter_md_sha256', 'charter_ref', 'concentration_ceiling', 'conflicts_declared_in_the_gate_criteria', 'conflicts_found', 'constitution_json_sha256', 'constitution_md_sha256', 'constitution_ref', 'cost_model_derivation_ref', 'cost_model_derivation_sha256', 'currency', 'declaration_note', 'declared_before_any_strategy_code', 'declared_before_any_strategy_code_measurement', 'eligible_universe', 'execution', 'explicit_non_authorizations', 'family', 'gate_criteria_ref', 'gate_criteria_sha256_not_recorded_here', 'gate_evaluation_scope', 'gate_id', 'generation', 'generation_id', 'grid', 'hypothesis', 'live_trading_authorized', 'mechanics_carried_unchanged', 'multiple_comparisons_disclosure', 'partition_lock_json_sha256', 'partition_lock_md_sha256', 'partition_lock_ref', 'position_count', 'position_sizing', 'post_seal_defect_rule', 'prior_attempt_modules_immutable', 'project', 'ranking_rule', 'ranking_signal', 'rebalance', 'refs_reverified', 'reported_for_every_variant_but_not_gating', 'representative_selection_rule', 'reproducibility_requirements', 'risk_architecture', 'run_span', 'runs_per_variant', 'serialisation', 'stage', 'strategy_id', 'structural_consequences_declared_before_running', 'title', 'version', 'what_makes_this_genuinely_cross_sectional', 'what_this_attempt_adds_over_attempt_1', 'what_this_attempt_adds_over_attempt_1_carriage', 'what_this_attempt_changes_from_attempt_2', 'window']
+==============================================================================================================
+CRIT
+ok  CRIT.verdict_token_derivation.pass_token                   str    "STAGE_3_G2_ATTEMPT_3_STRATEGY_ADMITTED_IN_DEVELOPMENT"
+ok  CRIT.verdict_token_derivation.fail_token                   str    "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE"
+ok  CRIT.verdict_token_derivation.fail_is_a_deliverable        str    "FAIL \u2014 STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, ...
+ok  CRIT.verdict_token_derivation.constitutional_fail_result_equivalent str    "STRATEGY_REJECTED_IN_DEVELOPMENT"
+ok  CRIT.verdict_token_derivation.prior_attempt_tokens_are_not_available_here str    "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_NO_CANDIDATE belong to Attempt 1. STAGE_3_G2_ATTEM...
+MISSING  CRIT['verdict_token_derivation', 'fail_routes']
+ok  CRIT.conditions                                            list   [{"id": "S3-C1", "required_verbatim": "total return is positive", "attempt_3_status": "unchanged from Attempt ...
+ok  CRIT.artifact_id                                           str    "SE100-CFG-3106"
+   CRIT keys: ['adaptation_disclosure_carried', 'artifact_id', 'attempt', 'attempt_1_counterpart', 'attempt_1_counterpart_sha256', 'attempt_2_counterpart', 'attempt_2_counterpart_sha256', 'charter_ref', 'conditions', 'conflicts_found', 'constitution_ref', 'declaration_note', 'declared_before_any_strategy_code', 'evaluation_integrity_rules', 'frozen_gate_json_companion_verbatim', 'frozen_gate_text_verbatim', 'gate_id', 'gate_name', 'generation', 'generation_1_counterpart', 'generation_1_counterpart_sha256', 'generation_id', 'live_trading_authorized', 'project', 'protocol_ref', 'relationship_to_attempt_1_criteria', 'relationship_to_attempt_2_criteria', 'relationship_to_generation_1_criteria', 'reported_but_not_gating', 'stage', 'title', 'verdict_token_derivation', 'version', 'windows']
+==============================================================================================================
+LOCK
+ok  LOCK.validation_reuse_disclosure                           str    "Generation 2's validation window (2021-08-01 \u2192 2024-07-31) overlaps the exact period Generation 1 used f...
+ok  LOCK.partition                                             dict   {"development_start": "1993-01-29", "development_end": "2021-07-31", "validation_start": "2021-08-01", "valida...  keys=['boundaries_inclusive', 'development_end', 'development_start', 'development_years', 'generation_1_holdout_end', 'generation_1_holdout_months', 'generation_1_holdout_start', 'hold
+ok  LOCK.generation_1_holdout_state                            str    "SPENT_AND_PROHIBITED"
+ok  LOCK.holdout_state                                         str    "SEALED"
+==============================================================================================================
+MISSING TOTAL: 10
+   EV['stage_verdict', 'constitutional_equivalent']
+   EV['selection', 'runner_up']
+   EV['selection', 'all_scores']
+   EV['selection', 'selection_note']
+   EV['generation_1_provenance']
+   PROT['risk_architecture', 'single_change_from_ra2']
+   PROT['prior_attempts_ref']
+   PROT['what_this_attempt_adds_over_attempt_2']
+   PROT['generation_1_provenance']
+   CRIT['verdict_token_derivation', 'fail_routes']

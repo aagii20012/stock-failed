@@ -1,0 +1,278 @@
+########## ALL TOP-LEVEL KEYS (67)
+   1. artifact_id                                                <-- NOT YET DUMPED
+   2. title                                                      <-- NOT YET DUMPED
+   3. version                                                    <-- NOT YET DUMPED
+   4. project                                                    <-- NOT YET DUMPED
+   5. generation                                                 <-- NOT YET DUMPED
+   6. generation_id                                              <-- NOT YET DUMPED
+   7. stage                                                      <-- NOT YET DUMPED
+   8. gate_id                                                    <-- NOT YET DUMPED
+   9. attempt                                                    
+  10. attempt_1_ref                                              
+  11. attempt_2_ref                                              
+  12. constitution_ref                                           <-- NOT YET DUMPED
+  13. constitution_md_sha256                                     <-- NOT YET DUMPED
+  14. constitution_json_sha256                                   <-- NOT YET DUMPED
+  15. charter_ref                                                <-- NOT YET DUMPED
+  16. partition_lock_ref                                         <-- NOT YET DUMPED
+  17. partition_lock_md_sha256                                   <-- NOT YET DUMPED
+  18. partition_lock_json_sha256                                 <-- NOT YET DUMPED
+  19. charter_md_sha256                                          <-- NOT YET DUMPED
+  20. cost_model_derivation_ref                                  <-- NOT YET DUMPED
+  21. cost_model_derivation_sha256                               <-- NOT YET DUMPED
+  22. refs_reverified                                            
+  23. gate_criteria_ref                                          <-- NOT YET DUMPED
+  24. gate_criteria_sha256_not_recorded_here                     
+  25. declared_before_any_strategy_code                          <-- NOT YET DUMPED
+  26. declaration_note                                           
+  27. declared_before_any_strategy_code_measurement              
+  28. prior_attempt_modules_immutable                            
+  29. serialisation                                              
+  30. currency                                                   <-- NOT YET DUMPED
+  31. strategy_id                                                
+  32. candidate_index                                            
+  33. candidate_index_note                                       
+  34. family                                                     
+  35. hypothesis                                                 
+  36. what_this_attempt_changes_from_attempt_2                   
+  37. what_this_attempt_adds_over_attempt_1                      
+  38. what_this_attempt_adds_over_attempt_1_carriage             <-- NOT YET DUMPED
+  39. adaptation_disclosure_verbatim                             
+  40. adaptation_disclosure_carriage_requirement                 
+  41. what_makes_this_genuinely_cross_sectional                  
+  42. eligible_universe                                          
+  43. ranking_signal                                             
+  44. ranking_rule                                               
+  45. position_count                                             
+  46. rebalance                                                  
+  47. execution                                                  
+  48. position_sizing                                            
+  49. concentration_ceiling                                      
+  50. mechanics_carried_unchanged                                
+  51. risk_architecture                                          
+  52. window                                                     
+  53. run_span                                                   
+  54. grid                                                       <-- NOT YET DUMPED
+  55. runs_per_variant                                           
+  56. multiple_comparisons_disclosure                            
+  57. representative_selection_rule                              
+  58. gate_evaluation_scope                                      
+  59. reported_for_every_variant_but_not_gating                  
+  60. structural_consequences_declared_before_running            
+  61. reproducibility_requirements                               
+  62. adversarial_test_requirements                              
+  63. conflicts_found                                            <-- NOT YET DUMPED
+  64. conflicts_declared_in_the_gate_criteria                    
+  65. post_seal_defect_rule                                      
+  66. explicit_non_authorizations                                
+  67. live_trading_authorized                                    
+
+
+########## conflicts_found
+type=list len=15
+
+-- 0
+   id                                 "G2A2-CONFLICT-1"
+   summary                            "Per-session decision-taking departs from Attempt 1's sealed execution.no_discretionary_exits clause."
+   resolution                         "The clause is narrowed to entries rather than weakened: Attempt 2 may issue risk-reducing SELL orders between rebalances and may issue no BUY of any kind. The ranking is still consulted only on scheduled rebalance sessions."
+   see                                "execution.no_discretionary_exits_superseded"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 1
+   id                                 "G2A2-CONFLICT-2"
+   summary                            "The 50% aggregate exposure ceiling has no cost-model derivation route: g2_costs.derive_mapping permits exactly one JSON-pointer override and it is spent on /account/max_open_risky_positions."
+   resolution                         "RA2-1 is enforced as a new named engine clamp AGGREGATE_RA2 in the Attempt 2 engine subclass, in addition to the inherited 0.95 AGGREGATE clamp, which stays in place and is never binding. The sealed cost model is not modified."
+   see                                "risk_architecture.components.RA2-1.enforcement.part_a_entry_clamp"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 2
+   id                                 "G2A2-CONFLICT-4"
+   summary                            "Target weights change from min(0.95/k, 0.50) to min(0.50/k, 0.50)."
+   resolution                         "Derived from the ceiling that actually binds. Declared here before any run and checked against this table by the candidate."
+   see                                "position_sizing"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 3
+   id                                 "G2A2-CONFLICT-5"
+   summary                            "Stop and throttle decisions carry one session of execution lag."
+   resolution                         "Accepted and measured. It is the constitutional next-open convention, which the research shutdown itself obeys."
+   see                                "execution.execution_lag"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 4
+   id                                 "G2A2-CONFLICT-7"
+   summary                            "Attempt 1's declared k=1 half-cash bias (its SC-3) is removed as a side effect of RA2-1."
+   resolution                         "Recorded so that a reader comparing selection outcomes across the two attempts knows the k axis is no longer confounded with gross exposure."
+   see                                "position_sizing.attempt_1_k1_half_cash_bias_neutralised"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 5
+   id                                 "G2A2-CONFLICT-11"
+   summary                            "The per-position concentration ceiling (0.50) now equals the aggregate ceiling, so it is non-binding for k>=2 and coincident with RA2-1 at k=1."
+   resolution                         "Left in place and still enforced. A clamp that never binds is not a clamp that may be removed."
+   see                                "concentration_ceiling.non_binding_note"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 6
+   id                                 "G2A2-CONFLICT-12"
+   summary                            "The sealed 5% minimum cash buffer can never bind at a 50% gross ceiling."
+   resolution                         "Enforced anyway and reported as never binding."
+   see                                "structural_consequences_declared_before_running.SC-5"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 7
+   id                                 "G2A2-CONFLICT-13"
+   summary                            "The RA2-2 volatility measure is taken on an equity curve that RA2-2 itself influences."
+   resolution                         "The feedback is negative, damped by a 20-session lag, and cannot diverge. Not corrected - correcting it would require a counterfactual unlevered equity curve. The realized distribution of the scalar is reported instead."
+   see                                "risk_architecture.components.RA2-2.self_reference"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 8
+   id                                 "G2A2-CONFLICT-14"
+   summary                            "Position carries no entry price, so the 8% stop reference must be defined."
+   resolution                         "Frozen as cost_basis / quantity, the all-in per-share cost including commission and fees. Marginally conservative and invariant under a partial trim."
+   see                                "risk_architecture.components.RA2-3.reference_price_definition"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 9
+   id                                 "G2A2-CONFLICT-16"
+   summary                            "stockedge100.backtest.orders.REASONS is a closed declared set with no entry for an aggregate-ceiling rejection."
+   resolution                         "An entry clamped to zero by AGGREGATE_RA2 is rejected as INSUFFICIENT_CASH with the clamp named in the detail string. The sealed set is not widened at runtime."
+   see                                "risk_architecture.components.RA2-1.enforcement.part_a_entry_clamp"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 10
+   id                                 "G2A2-CONFLICT-17"
+   summary                            "A throttle trim below the sealed minimum order notional is skipped, so the aggregate ceiling can be transiently exceeded by less than one minimum lot."
+   resolution                         "Skipped legs are counted and reported per variant, and the ceiling assertion admits exactly this slack and no more."
+   see                                "risk_architecture.components.RA2-1.enforcement.part_b_continuous_throttle"
+   carried_from                       "SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id."
+
+-- 11
+   id                                 "G2A3-CONFLICT-34"
+   supersedes_in_scope                "G2A2-CONFLICT-3, which declared a content-based contamination predicate over Attempt 1's nine modules and is not edited."
+   summary                            "The paired immutability check must now cover seventeen modules, not nine: Attempt 2's eight became immutable when Attempt 2 closed, and a check that still counted nine would pass while an Attempt 2 module was being rewritten."
+   resolution                         "prior_attempt_modules_immutable enumerates both lists separately and declares the total. The Attempt 3 sealer refuses to seal unless it measures seventeen, and the count is a literal in the sealer so a silently shortened list fails loudly rather than quietly."
+   see                                "prior_attempt_modules_immutable, declared_before_any_strategy_code_measurement"
+
+-- 12
+   id                                 "G2A3-CONFLICT-35"
+   supersedes_in_scope                "G2A2-CONFLICT-6, which disclosed that Attempt 2's pre-registration was written after Attempt 1's results were known, and is not edited."
+   summary                            "This pre-registration was written after TWO attempts' development results were known, and both of its changes were chosen in response to the second. Pre-registration constrains what happens after this file is sealed; it cannot undo what was known before."
+   resolution                         "The adaptation is disclosed in adaptation_disclosure_verbatim, which is carried byte for byte into five artifacts and enforced by both the sealer and the package builder. The multiplicity is disclosed as 54 variants and 108 runs with an explicit statement that the effective degrees of freedom exceed the count. No threshold is adjusted in either direction to compensate."
+   see                                "adaptation_disclosure_verbatim, multiple_comparisons_disclosure, G2A3-CONFLICT-33"
+
+-- 13
+   id                                 "G2A3-CONFLICT-36"
+   supersedes_in_scope                "G2A2-CONFLICT-9, which recorded the same collision for Attempt 2's token and is not edited."
+   summary                            "Both fail routes \u2014 no eligible representative, and a representative that fails the gate \u2014 emit the same token, STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE, although they are different findings. Under RA3 the two routes are also more nearly equally likely than they were in Attempt 2, where the first was effectively closed."
+   resolution                         "The route is recorded as an explicit fail_route field in the verdict record, in the gate conditions and in the report prose. The token is not split, because the token vocabulary is sealed in SE100-CFG-3106 and minting a third would be a stage inventing its own verdict space."
+   see                                "representative_selection_rule.no_candidate_path, .second_fail_path"
+
+-- 14
+   id                                 "G2A3-CONFLICT-37"
+   supersedes_in_scope                "G2A2-CONFLICT-8, which recorded that the Attempt 2 operating prompt named verdict tokens existing in no artifact, and is not edited."
+   summary                            "The Attempt 3 operating instruction names no verdict token at all. It requires a token 'of your own derivation' and directs that the sealed criteria file be grepped for the actual strings rather than inventing one from the prompt."
+   resolution                         "There is no prompt string to conflict with, so the tokens are minted once, in SE100-CFG-3106's verdict_token_derivation, and every other artifact reads them from there. This is the first attempt in which the prompt and the sealed derivation cannot disagree, which removes the failure mode G2A2-CONFLICT-8 described rather than resolving it a second time. The four tokens belonging to Attempts 1 and 2 are read from those attempts' own files and asserted absent from every Attempt 3 verdict field."
+   see                                "SE100-CFG-3106 verdict_token_derivation, G2A3-CONFLICT-21"
+
+
+########## grid
+  size                               18
+  unchanged_from_attempt_1           true
+  not_widened                        "The grid is complete at eighteen and may not be widened, narrowed or re-centred. The risk architecture constants are not axes."
+  axes                               {"lookback_months": [3, 6, 12], "top_k": [1, 2, 3], "rebalance_frequency": ["MONTHLY", "QUARTERLY"]}
+  enumeration_order                  "lookback_months outer, then top_k, then rebalance_frequency. The index is part of the seal."
+  variant_id_format                  "SE100-G2-S3-C3-ROTATION-RA3-L{lookback:02d}-K{k}-{FREQUENCY}"
+  zero_padding_note                  "The lookback is zero-padded because the final tiebreak of the representative-selection rule is lexicographic, and an unpadded L12 would sort before L3."
+  unchanged_from_attempt_2           true
+  variant_id_change_note             "Only the candidate index and architecture segment differ from Attempt 2's ids: C2-ROTATION-RA1 becomes C3-ROTATION-RA3. The axes, their orderings, the enumeration order, the zero padding, the target weights and the scheduled-rebalance counts are copied and unchanged, so variant n of Attempt 3 is the same parameterisation as variant n of Attempts 1 and 2 and the three grids are directly comparable row by row."
+
+  variants (18):
+   {"index": 1, "lookback_months": 3, "rebalance_frequency": "MONTHLY", "scheduled_rebalance_sessions": 157, "target_weight_per_position": "0.500000000", "top_k": 1, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY"}
+   {"index": 2, "lookback_months": 3, "rebalance_frequency": "QUARTERLY", "scheduled_rebalance_sessions": 53, "target_weight_per_position": "0.500000000", "top_k": 1, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY"}
+   {"index": 3, "lookback_months": 3, "rebalance_frequency": "MONTHLY", "scheduled_rebalance_sessions": 157, "target_weight_per_position": "0.250000000", "top_k": 2, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY"}
+   {"index": 4, "lookback_months": 3, "rebalance_frequency": "QUARTERLY", "scheduled_rebalance_sessions": 53, "target_weight_per_position": "0.250000000", "top_k": 2, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"}
+   {"index": 5, "lookback_months": 3, "rebalance_frequency": "MONTHLY", "scheduled_rebalance_sessions": 157, "target_weight_per_position": "0.166666666", "top_k": 3, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K3-MONTHLY"}
+   {"index": 6, "lookback_months": 3, "rebalance_frequency": "QUARTERLY", "scheduled_rebalance_sessions": 53, "target_weight_per_position": "0.166666666", "top_k": 3, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY"}
+   {"index": 7, "lookback_months": 6, "rebalance_frequency": "MONTHLY", "scheduled_rebalance_sessions": 157, "target_weight_per_position": "0.500000000", "top_k": 1, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L06-K1-MONTHLY"}
+   {"index": 8, "lookback_months": 6, "rebalance_frequency": "QUARTERLY", "scheduled_rebalance_sessions": 53, "target_weight_per_position": "0.500000000", "top_k": 1, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L06-K1-QUARTERLY"}
+   {"index": 9, "lookback_months": 6, "rebalance_frequency": "MONTHLY", "scheduled_rebalance_sessions": 157, "target_weight_per_position": "0.250000000", "top_k": 2, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-MONTHLY"}
+   {"index": 10, "lookback_months": 6, "rebalance_frequency": "QUARTERLY", "scheduled_rebalance_sessions": 53, "target_weight_per_position": "0.250000000", "top_k": 2, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY"}
+   {"index": 11, "lookback_months": 6, "rebalance_frequency": "MONTHLY", "scheduled_rebalance_sessions": 157, "target_weight_per_position": "0.166666666", "top_k": 3, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L06-K3-MONTHLY"}
+   {"index": 12, "lookback_months": 6, "rebalance_frequency": "QUARTERLY", "scheduled_rebalance_sessions": 53, "target_weight_per_position": "0.166666666", "top_k": 3, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L06-K3-QUARTERLY"}
+   {"index": 13, "lookback_months": 12, "rebalance_frequency": "MONTHLY", "scheduled_rebalance_sessions": 157, "target_weight_per_position": "0.500000000", "top_k": 1, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L12-K1-MONTHLY"}
+   {"index": 14, "lookback_months": 12, "rebalance_frequency": "QUARTERLY", "scheduled_rebalance_sessions": 53, "target_weight_per_position": "0.500000000", "top_k": 1, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L12-K1-QUARTERLY"}
+   {"index": 15, "lookback_months": 12, "rebalance_frequency": "MONTHLY", "scheduled_rebalance_sessions": 157, "target_weight_per_position": "0.250000000", "top_k": 2, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L12-K2-MONTHLY"}
+   {"index": 16, "lookback_months": 12, "rebalance_frequency": "QUARTERLY", "scheduled_rebalance_sessions": 53, "target_weight_per_position": "0.250000000", "top_k": 2, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L12-K2-QUARTERLY"}
+   {"index": 17, "lookback_months": 12, "rebalance_frequency": "MONTHLY", "scheduled_rebalance_sessions": 157, "target_weight_per_position": "0.166666666", "top_k": 3, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L12-K3-MONTHLY"}
+   {"index": 18, "lookback_months": 12, "rebalance_frequency": "QUARTERLY", "scheduled_rebalance_sessions": 53, "target_weight_per_position": "0.166666666", "top_k": 3, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L12-K3-QUARTERLY"}
+
+
+########## remaining undumped keys
+
+===== artifact_id
+"SE100-CFG-3105"
+
+===== title
+"Generation 2 Stage 3 Attempt 3 strategy protocol - cross-sectional rotation under risk architecture RA3 and representative-selection rule SE100-G2-SEL-2"
+
+===== version
+"1.0.0"
+
+===== project
+"StockEdge100"
+
+===== generation
+2
+
+===== generation_id
+"SE100-GEN2-7394207c543401e2"
+
+===== stage
+3
+
+===== gate_id
+3
+
+===== constitution_ref
+"SE100-GOV-0001 sections 3, 4, 5.1, 6.1, 9 gate 3, 11"
+
+===== constitution_md_sha256
+"b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5"
+
+===== constitution_json_sha256
+"af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5"
+
+===== charter_ref
+"governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md"
+
+===== partition_lock_ref
+"governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md"
+
+===== partition_lock_md_sha256
+"5ae2408dc318e5b87a054a6014e4439d8c6b1934748617c787720f63356b0773"
+
+===== partition_lock_json_sha256
+"e17ea82c499d51cf23fc9986e7231dce6388f8a3c7394d3dd3c0e3d27fbacbe7"
+
+===== charter_md_sha256
+"865a2feffe683e0baf71f1ab976e286fbb2d003109ab47cfaffc1fe6a63dbc90"
+
+===== cost_model_derivation_ref
+"config/generation_2/g2_cost_model.json"
+
+===== cost_model_derivation_sha256
+"b9491485b9560b948ec83d3eb86ee4946c1e83b128a368b71473d14ad0f73650"
+
+===== gate_criteria_ref
+"config/generation_2/g2_gate_criteria_ra3.json"
+
+===== declared_before_any_strategy_code
+true
+
+===== currency
+"USD"
+
+===== what_this_attempt_adds_over_attempt_1_carriage
+"Copied verbatim from SE100-CFG-3103. It describes the risk architecture Attempt 3 still carries, minus one rung, and is retained so the lineage statement is not silently reworded."

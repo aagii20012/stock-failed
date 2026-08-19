@@ -1,0 +1,247 @@
+ok       PROT.attempt                                                             3
+ok       PROT.strategy_id                                                         "SE100-G2-S3-C3-ROTATION-RA3"
+ok       PROT.candidate_index                                                     3
+ok       PROT.family                                                              "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE"
+ok       PROT.generation_id                                                       "SE100-GEN2-7394207c543401e2"
+ok       PROT.attempt_1_ref                                                       {"strategy_id": "SE100-G2-S3-C1-ROTATION", "protocol_config": "config/generation_2/g2_rotation_protocol.json",
+ok       PROT.attempt_2_ref                                                       {"strategy_id": "SE100-G2-S3-C2-ROTATION-RA1", "protocol_config": "config/generation_2/g2_rotation_ra1_protoco
+ok       PROT.what_this_attempt_adds_over_attempt_1                               "Attempt 1 tested the rotation signal with no mechanism to reduce exposure before a research-shutdown breach: 
+ok       PROT.what_this_attempt_changes_from_attempt_2                            "Exactly two things, and nothing else. (1) The de-risk ladder loses its 5-to-8 percent rung, reverting to the 
+ok       PROT.what_makes_this_genuinely_cross_sectional                           "The ranking scores all 34 eligible members against each other on one date and takes the top k. It is not k in
+ok       PROT.declared_before_any_strategy_code                                   true
+ok       PROT.declared_before_any_strategy_code_measurement                       {"contamination_predicate": "CONTENT_BASED", "predicate": "No .py file under src/stockedge100 or tests contain
+ok       PROT.hypothesis                                                          "Cross-sectional relative strength over a fixed 34-member ETF universe, held in an equally weighted top-k bask
+ok       PROT.structural_consequences_declared_before_running                     {"SC-1": {"statement": "A quarterly k=1 variant has 53 scheduled rebalances over the run and can therefore clo
+ok       PROT.eligible_universe.universe_version                                  "SE100-U1-d4917c2f7f1cd834"
+ok       PROT.run_span.run_start                                                  "2008-07-28"
+ok       PROT.run_span.run_end                                                    "2021-07-30"
+ok       PROT.runs_per_variant.labels                                             ["#BASE", "#STRESS"]
+ok       PROT.multiple_comparisons_disclosure.adaptive_design_note                "The 54 cumulative variants are not 54 independent tests. Attempt 2's risk architecture was chosen after seein
+ok       PROT.explicit_non_authorizations                                         ["This file does not authorize reading any session at or after 2021-08-01, in this or any later stage.", "This
+ok       PROT.adaptation_disclosure_verbatim                                      "This pre-registration was designed after both Attempt 1 and Attempt 2's development results were known. Attem
+ok       PROT.adaptation_disclosure_carriage_requirement.enforcement              "The sealer and the package builder both assert byte-equality of this string against the value in this file. A
+ok       PROT.adaptation_disclosure_carriage_requirement.encoding_note            "The string is stored with the em dashes of the source prose, as UTF-8, matching every other governance artifa
+ok       PROT.adaptation_disclosure_carriage_requirement.attempt_3_encoding_addendum "This attempt's string carries one character the Attempt 2 string did not: U+2212 MINUS SIGN, in the phrase na
+ok       PROT.adaptation_disclosure_carriage_requirement.must_appear_verbatim_in  ["governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md", "governance/generation_2/STAGE_3_G2_ROTATION_R
+ok       PROT.risk_architecture.id                                                "RA3"
+ok       PROT.risk_architecture.components                                        {"RA3-1": {"name": "aggregate_exposure_ceiling", "value": "0.50", "unit": "fraction of equity", "purpose": "Ti
+ok       PROT.risk_architecture.combined_scalar                                   {"formula": "f(t) = f_vol(t) * f_ladder(t), quantized to nine decimal places, ROUND_DOWN.", "multiplicative_no
+ok       PROT.risk_architecture.frozen_before_any_variant_is_run                  true
+ok       PROT.risk_architecture.not_part_of_the_grid                              true
+ok       PROT.risk_architecture.why_not_gridded                                   "Every constant below is fixed and applied uniformly to all eighteen variants. Searching them alongside the ro
+ok       PROT.risk_architecture.provenance                                        "RA3-1, RA3-2, RA3-3 and RA3-5 are RA2-1, RA2-2, RA2-3 and RA2-5 unchanged, which are in turn the values of th
+ok       PROT.risk_architecture.single_difference_from_ra2                        "RA2-4's band 1 (0.05 <= dd < 0.08, scalar 0.75) is deleted and band 0 is extended to 0.08. No other threshold
+ok       PROT.representative_selection_rule.id                                    "SE100-G2-SEL-2"
+ok       PROT.representative_selection_rule.steps                                 [{"order": 1, "criterion": "zero_research_shutdown_events", "scope": "across BOTH runs of the variant", "elimi
+ok       PROT.representative_selection_rule.return_blind                          true
+ok       PROT.representative_selection_rule.structural_enforcement                {"mechanism": "The scoring function accepts a frozen SelectionInputV2 dataclass whose fields are exactly (vari
+ok       PROT.representative_selection_rule.no_reselection                        "The representative is selected once, before any gate condition is evaluated. It is not reselected, re-ranked 
+ok       PROT.representative_selection_rule.why_it_changes                        "Attempt 2's rule preferred the variant that traded least. On a grid where every variant survived the eligibil
+ok       PROT.representative_selection_rule.retrospective_check_disclosure        {"statement": "SEL-2 was checked against Attempt 2's frozen recorded statistics before being sealed, to confir
+ok       PROT.representative_selection_rule.replaces                              "The unnamed lowest-turnover rule of SE100-CFG-3103, which selected SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTER
+ok       PROT.mechanics_carried_unchanged                                         {"blocks": ["eligible_universe", "ranking_signal", "ranking_rule", "position_count", "rebalance", "execution",
+ok       PROT.concentration_ceiling                                               {"value": "0.50", "source": "config/stage3_attempt2_strategy_protocol.json risk_architecture.RA1-1.rule, f_bas
+ok       CRIT.verdict_token_derivation.pass_token                                 "STAGE_3_G2_ATTEMPT_3_STRATEGY_ADMITTED_IN_DEVELOPMENT"
+ok       CRIT.verdict_token_derivation.fail_token                                 "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE"
+ok       CRIT.verdict_token_derivation.prior_attempt_tokens_are_not_available_here "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_NO_CANDIDATE belong to Attempt 1. STAGE_3_G2_ATTEM
+ok       CRIT.verdict_token_derivation.constitutional_fail_result_equivalent      "STRATEGY_REJECTED_IN_DEVELOPMENT"
+ok       CRIT.verdict_token_derivation.fail_is_a_deliverable                      "FAIL \u2014 STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, 
+ok       CRIT.conditions                                                          [{"id": "S3-C1", "required_verbatim": "total return is positive", "attempt_3_status": "unchanged from Attempt 
+ok       LOCK.validation_reuse_disclosure                                         "Generation 2's validation window (2021-08-01 \u2192 2024-07-31) overlaps the exact period Generation 1 used f
+ok       LOCK.partition                                                           {"development_start": "1993-01-29", "development_end": "2021-07-31", "validation_start": "2021-08-01", "valida
+ok       LOCK.generation_1_holdout_state                                          "SPENT_AND_PROHIBITED"
+ok       LOCK.holdout_state                                                       "SEALED"
+ok       EV.artifact_id                                                           "SE100-EVID-3103"
+ok       EV.evidence_digest                                                       "462c13d2e07e25bec46713fe0165bcc00d9e8568d2fad403a48f1d30e412711c"
+ok       EV.evidence_digest_covers                                                "every field of this file except generated_utc and evidence_digest, as canonical JSON"
+ok       EV.generated_utc                                                         "2026-08-16T09:25:05Z"
+ok       EV.grid.runs_executed                                                    36
+ok       EV.grid.variants_declared                                                18
+ok       EV.grid.axes                                                             {"lookback_months": [3, 6, 12], "top_k": [1, 2, 3], "rebalance_frequency": ["MONTHLY", "QUARTERLY"]}
+ok       EV.window.latest_session_loaded                                          "2021-07-30"
+ok       EV.window.development_bound                                              "2021-07-31"
+ok       EV.window.enforcement                                                    "load_grid_dataset truncates at the development bound and then audits the loaded bars separately, so a session
+ok       EV.window.validation_read                                                false
+ok       EV.window.generation_1_holdout_read                                      false
+ok       EV.window.generation_2_holdout_read                                      false
+ok       EV.run_span_recheck                                                      {"requirement": "The runner recomputes every value below from the loaded series and refuses to run if any diff
+ok       EV.universe                                                              {"universe_version": "SE100-U1-d4917c2f7f1cd834", "universe_identity_sha256": "d4917c2f7f1cd8344728a39165929b3
+ok       EV.selection.outcome                                                     "representative_selected"
+ok       EV.selection.result.eligible_count                                       18
+ok       EV.selection.result.selected_variant_id                                  "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"
+ok       EV.selection.result.ineligible_variants                                  []
+ok       EV.selection.result.decided_at_step                                      2
+ok       EV.selection.decided_at_step                                             2
+ok       EV.selection.steps                                                       [{"order": 1, "criterion": "zero_research_shutdown_events", "scope": "across BOTH runs of the variant"}, {"ord
+ok       EV.selection.rule_id                                                     "SE100-G2-SEL-2"
+ok       EV.selection.rule_source                                                 "SE100-CFG-3105 representative_selection_rule"
+ok       EV.selection.return_blind                                                true
+ok       EV.selection.note                                                        "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) 
+ok       EV.selection.selected_score.instability_score                            "0.215471404"
+ok       EV.selection.selected_score.neighbours                                   ["SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY", "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY", "SE100-G2-S3-C3
+ok       EV.selection.selected_score.neighbour_count                              4
+ok       EV.selection.selected_score.per_quantity_mean_dissimilarity              {"fill_count": "0.325717816", "ladder_descents": "0.131846770", "lockout_arms": "0.131846770", "stops_filled":
+ok       EV.selection.selected_score.own_quantities                               {"fill_count": 298, "ladder_descents": 44, "lockout_arms": 44, "stops_filled": 32}
+ok       EV.selection.neighbour_scores                                            [{"variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY", "instability_score": "0.215520012", "neighbour
+ok       EV.selection.scored_quantities                                           ["fill_count", "ladder_descents", "lockout_arms", "stops_filled"]
+ok       EV.selection.selection_input_fields                                      ["variant_id", "shutdown_events", "fill_count", "ladder_descents", "lockout_arms", "stops_filled"]
+ok       EV.selection_determinism.all_identical                                   true
+ok       EV.determinism.all_identical                                             true
+ok       EV.determinism.runs_compared                                             36
+ok       EV.determinism.fields_compared                                           ["trades_digest", "equity_digest", "ranking_digest", "risk_state_digest", "fills", "closed_trades", "total_ret
+ok       EV.determinism.mismatched_runs                                           []
+ok       EV.reconciliation.runs_reconciled                                        36
+ok       EV.reconciliation.single_leg_compared_total                              2804
+ok       EV.reconciliation.mismatches_total                                       0
+ok       EV.reconciliation.vacuous_runs                                           []
+ok       EV.prior_attempt_module_verification.module_count                        17
+ok       EV.prior_attempt_module_verification.modules_that_moved                  []
+ok       EV.prior_attempt_module_verification.attempt_1_module_count              9
+ok       EV.prior_attempt_module_verification.attempt_2_module_count              8
+ok       EV.prior_attempt_module_verification.digest_source                       "SE100-GOV-2007 contamination_measurement.prior_attempt_module_digests"
+ok       EV.prior_attempt_module_verification.requirement                         "AT-H"
+ok       EV.prior_attempt_modules_immutable                                       {"count": 17, "attempt_1_modules": ["src/stockedge100/strategies/g2_rotation.py", "src/stockedge100/strategies
+ok       EV.ladder_engagement_comparison.at_least_one_statistic_differs           true
+ok       EV.ladder_engagement_comparison.per_statistic                            {"ladder_descents": {"attempt_3_total": 1008, "attempt_2_total": 1605, "runs_differing": 36, "differs": true},
+ok       EV.ladder_engagement_comparison.requirement                              "Operating instruction section 4.3: run the grid fresh under RA3 and verify that at least the ladder-engagemen
+ok       EV.risk_architecture                                                     {"sealed": {"id": "RA3", "name": "Generation 2 Attempt 3 risk architecture", "frozen_before_any_variant_is_run
+ok       EV.gate_scope                                                            {"variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY", "evaluated_on": "The selected representative va
+ok       EV.gate                                                                  {"constitution_gate_id": 3, "name": "development_admissibility"}
+ok       EV.candidate_results                                                     [{"experiment_id": "SE100-G2-S3-C3-ROTATION-RA3", "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTU
+ok       EV.stage_verdict.verdict                                                 "FAIL"
+ok       EV.stage_verdict.verdict_token                                           "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE"
+ok       EV.stage_verdict.admitted_candidates                                     []
+ok       EV.stage_verdict.candidates_evaluated                                    1
+ok       EV.stage_verdict.representative_exists                                   true
+ok       EV.stage_verdict.prior_attempt_tokens_withheld                           ["STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT", "STAGE_3_G2_NO_CANDIDATE", "STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMI
+ok       EV.stage_verdict.fail_route                                              "REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION"
+ok       EV.variant_table                                                         [{"grid_index": 1, "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY", "lookback_months": 3, "top_k": 
+ok       EV.variant_table_is_descriptive_only                                     ["net return, both runs", "maximum drawdown, both runs", "profit factor, both runs", "closed trade count, both
+ok       EV.reported_for_every_variant_coverage                                   {"rule": "each sealed reported-but-not-gating quantity, and the variant_table columns carrying it for each of 
+ok       EV.multiple_comparisons_disclosure                                       {"variants_this_attempt": 18, "runs_this_attempt": 36, "variants_attempt_1": 18, "runs_attempt_1": 36, "varian
+ok       EV.adaptation_disclosure_carriage.sha256_of_utf8                         "ce1d6476f44562310fb059c5817645baa25477cc4f6168b414f3423834c8e925"
+ok       EV.mechanics_carried_unchanged                                           {"blocks": ["eligible_universe", "ranking_signal", "ranking_rule", "position_count", "rebalance", "execution",
+ok       EV.conflicts_declared_in_the_gate_criteria                               {"note": "The Attempt 3 conflict numbering is one space shared by this file and SE100-CFG-3106, exactly as Att
+====================================================================================================
+MISSING TOTAL: 0
+====================================================================================================
+PROT top-level keys (67):
+   adaptation_disclosure_carriage_requirement
+   adaptation_disclosure_verbatim
+   adversarial_test_requirements
+   artifact_id
+   attempt
+   attempt_1_ref
+   attempt_2_ref
+   candidate_index
+   candidate_index_note
+   charter_md_sha256
+   charter_ref
+   concentration_ceiling
+   conflicts_declared_in_the_gate_criteria
+   conflicts_found
+   constitution_json_sha256
+   constitution_md_sha256
+   constitution_ref
+   cost_model_derivation_ref
+   cost_model_derivation_sha256
+   currency
+   declaration_note
+   declared_before_any_strategy_code
+   declared_before_any_strategy_code_measurement
+   eligible_universe
+   execution
+   explicit_non_authorizations
+   family
+   gate_criteria_ref
+   gate_criteria_sha256_not_recorded_here
+   gate_evaluation_scope
+   gate_id
+   generation
+   generation_id
+   grid
+   hypothesis
+   live_trading_authorized
+   mechanics_carried_unchanged
+   multiple_comparisons_disclosure
+   partition_lock_json_sha256
+   partition_lock_md_sha256
+   partition_lock_ref
+   position_count
+   position_sizing
+   post_seal_defect_rule
+   prior_attempt_modules_immutable
+   project
+   ranking_rule
+   ranking_signal
+   rebalance
+   refs_reverified
+   reported_for_every_variant_but_not_gating
+   representative_selection_rule
+   reproducibility_requirements
+   risk_architecture
+   run_span
+   runs_per_variant
+   serialisation
+   stage
+   strategy_id
+   structural_consequences_declared_before_running
+   title
+   version
+   what_makes_this_genuinely_cross_sectional
+   what_this_attempt_adds_over_attempt_1
+   what_this_attempt_adds_over_attempt_1_carriage
+   what_this_attempt_changes_from_attempt_2
+   window
+EV top-level keys (51):
+   adaptation_disclosure_carriage
+   adaptation_disclosure_verbatim
+   artifact_id
+   attempt
+   attempt_1_ref
+   attempt_2_ref
+   candidate_index
+   candidate_results
+   command
+   conflicts_declared_in_the_gate_criteria
+   determinism
+   evidence_digest
+   evidence_digest_covers
+   explicit_non_authorizations
+   family
+   gate
+   gate_evaluation_scope
+   gate_scope
+   generated_utc
+   generation
+   generation_id
+   grid
+   hypothesis
+   ladder_engagement_comparison
+   live_trading_authorized
+   mechanics_carried_unchanged
+   multiple_comparisons_disclosure
+   prior_attempt_module_verification
+   prior_attempt_modules_immutable
+   project
+   reconciliation
+   refs_reverified
+   reported_for_every_variant_coverage
+   representative_selection_rule
+   risk_architecture
+   run_span_recheck
+   runs
+   sealed_inputs
+   selection
+   selection_determinism
+   stage
+   stage_verdict
+   strategy_id
+   structural_consequences_declared_before_running
+   universe
+   variant_table
+   variant_table_is_descriptive_only
+   what_this_attempt_adds_over_attempt_1
+   what_this_attempt_adds_over_attempt_1_carriage
+   what_this_attempt_changes_from_attempt_2
+   window

@@ -1,0 +1,560 @@
+==============================================================================
+### g2_rotation_ra3_protocol.json
+==============================================================================
+artifact_id  <str>
+title  <str>
+version  <str>
+project  <str>
+generation  <int>
+generation_id  <str>
+stage  <int>
+gate_id  <int>
+attempt  <int>
+attempt_1_ref  {23}
+attempt_1_ref.strategy_id  <str>
+attempt_1_ref.protocol_config  <str>
+attempt_1_ref.protocol_config_sha256  <str>
+attempt_1_ref.gate_criteria_config  <str>
+attempt_1_ref.gate_criteria_config_sha256  <str>
+attempt_1_ref.protocol_md  <str>
+attempt_1_ref.protocol_md_sha256  <str>
+attempt_1_ref.protocol_json  <str>
+attempt_1_ref.protocol_json_sha256  <str>
+attempt_1_ref.protocol_sha256_record  <str>
+attempt_1_ref.protocol_sha256_record_sha256  <str>
+attempt_1_ref.research_report_md  <str>
+attempt_1_ref.research_report_md_sha256  <str>
+attempt_1_ref.research_json  <str>
+attempt_1_ref.research_json_sha256  <str>
+attempt_1_ref.decision_json  <str>
+attempt_1_ref.decision_json_sha256  <str>
+attempt_1_ref.manifest_json  <str>
+attempt_1_ref.manifest_json_sha256  <str>
+attempt_1_ref.verdict  <str>
+attempt_1_ref.disposition  <str>
+attempt_1_ref.disposition_note  <str>
+attempt_1_ref.carried_from  <str>
+attempt_2_ref  {27}
+attempt_2_ref.strategy_id  <str>
+attempt_2_ref.protocol_config  <str>
+attempt_2_ref.protocol_config_sha256  <str>
+attempt_2_ref.gate_criteria_config  <str>
+attempt_2_ref.gate_criteria_config_sha256  <str>
+attempt_2_ref.protocol_md  <str>
+attempt_2_ref.protocol_md_sha256  <str>
+attempt_2_ref.protocol_json  <str>
+attempt_2_ref.protocol_json_sha256  <str>
+attempt_2_ref.protocol_sha256_record  <str>
+attempt_2_ref.protocol_sha256_record_sha256  <str>
+attempt_2_ref.research_report_md  <str>
+attempt_2_ref.research_report_md_sha256  <str>
+attempt_2_ref.research_json  <str>
+attempt_2_ref.research_json_sha256  <str>
+attempt_2_ref.decision_json  <str>
+attempt_2_ref.decision_json_sha256  <str>
+attempt_2_ref.manifest_json  <str>
+attempt_2_ref.manifest_json_sha256  <str>
+attempt_2_ref.run_record  <str>
+attempt_2_ref.run_record_stage  <str>
+attempt_2_ref.verdict  <str>
+attempt_2_ref.verdict_source  <str>
+attempt_2_ref.fail_route  <str>
+attempt_2_ref.disposition  <str>
+attempt_2_ref.disposition_note  <str>
+attempt_2_ref.run_record_is_not_pinned_by_digest  <str>
+constitution_ref  <str>
+constitution_md_sha256  <str>
+constitution_json_sha256  <str>
+charter_ref  <str>
+partition_lock_ref  <str>
+partition_lock_md_sha256  <str>
+partition_lock_json_sha256  <str>
+charter_md_sha256  <str>
+cost_model_derivation_ref  <str>
+cost_model_derivation_sha256  <str>
+refs_reverified  <str>
+gate_criteria_ref  <str>
+gate_criteria_sha256_not_recorded_here  <str>
+declared_before_any_strategy_code  <bool>
+declaration_note  <str>
+declared_before_any_strategy_code_measurement  {7}
+declared_before_any_strategy_code_measurement.contamination_predicate  <str>
+declared_before_any_strategy_code_measurement.predicate  <str>
+declared_before_any_strategy_code_measurement.why_not_path_based  <str>
+declared_before_any_strategy_code_measurement.paired_immutability_check  <str>
+declared_before_any_strategy_code_measurement.sealer_indirection_note  <str>
+declared_before_any_strategy_code_measurement.conflict_ref  <str>
+declared_before_any_strategy_code_measurement.supersedes_in_scope  <str>
+prior_attempt_modules_immutable  {8}
+prior_attempt_modules_immutable.count  <int>
+prior_attempt_modules_immutable.attempt_1_modules  [9] of str
+prior_attempt_modules_immutable.attempt_2_modules  [8] of str
+prior_attempt_modules_immutable.attempt_1_list_source  <str>
+prior_attempt_modules_immutable.attempt_2_list_source  <str>
+prior_attempt_modules_immutable.g2_partition_lock_excluded  <str>
+prior_attempt_modules_immutable.digests_recorded_by  <str>
+prior_attempt_modules_immutable.digests_not_recorded_here  <str>
+serialisation  {3}
+serialisation.numbers  <str>
+serialisation.dates  <str>
+serialisation.rounding  <str>
+currency  <str>
+strategy_id  <str>
+candidate_index  <int>
+candidate_index_note  <str>
+family  <str>
+hypothesis  <str>
+what_this_attempt_changes_from_attempt_2  <str>
+what_this_attempt_adds_over_attempt_1  <str>
+what_this_attempt_adds_over_attempt_1_carriage  <str>
+adaptation_disclosure_verbatim  <str>
+adaptation_disclosure_carriage_requirement  {5}
+adaptation_disclosure_carriage_requirement.must_appear_verbatim_in  [5] of str
+adaptation_disclosure_carriage_requirement.enforcement  <str>
+adaptation_disclosure_carriage_requirement.encoding_note  <str>
+adaptation_disclosure_carriage_requirement.attempt_3_encoding_addendum  <str>
+adaptation_disclosure_carriage_requirement.source  <str>
+what_makes_this_genuinely_cross_sectional  <str>
+eligible_universe  {9}
+eligible_universe.source  <str>
+eligible_universe.source_sha256  <str>
+eligible_universe.universe_version  <str>
+eligible_universe.universe_identity_sha256  <str>
+eligible_universe.member_count  <int>
+eligible_universe.members  [34] of str
+eligible_universe.unchanged_from_attempt_1  <bool>
+eligible_universe.eligibility_recheck_convention  <str>
+eligible_universe.excluded_symbols  {1}
+eligible_universe.excluded_symbols.AAPL  <str>
+ranking_signal  {6}
+ranking_signal.name  <str>
+ranking_signal.unchanged_from_attempt_1  <bool>
+ranking_signal.implementation_reuse  <str>
+ranking_signal.formula  <str>
+ranking_signal.look_ahead_note  <str>
+ranking_signal.undefined_result  <str>
+ranking_rule  {3}
+ranking_rule.sort_key  <str>
+ranking_rule.tie_break  <str>
+ranking_rule.unchanged_from_attempt_1  <bool>
+position_count  {3}
+position_count.axis  <str>
+position_count.values  [3] of int
+position_count.unchanged_from_attempt_1  <bool>
+rebalance  {7}
+rebalance.axis  <str>
+rebalance.values  [2] of str
+rebalance.rule  <str>
+rebalance.backward_looking_note  <str>
+rebalance.unchanged_from_attempt_1  <bool>
+rebalance.measured_counts  {9}
+rebalance.measured_counts.carried_from  <str>
+rebalance.measured_counts.carried_from_sha256  <str>
+rebalance.measured_counts.recheck_requirement  <str>
+rebalance.measured_counts.monthly  <int>
+rebalance.measured_counts.quarterly  <int>
+rebalance.measured_counts.monthly_first_three  [3] of str
+rebalance.measured_counts.quarterly_first_three  [3] of str
+rebalance.measured_counts.monthly_last  <str>
+rebalance.measured_counts.quarterly_last  <str>
+rebalance.attempt_2_note  <str>
+execution  {7}
+execution.fill_timing  <str>
+execution.entry  <str>
+execution.signal_exit  <str>
+execution.no_discretionary_exits_superseded  {4}
+execution.no_discretionary_exits_superseded.attempt_1_text  <str>
+execution.no_discretionary_exits_superseded.attempt_1_source  <str>
+execution.no_discretionary_exits_superseded.attempt_2_position  <str>
+execution.no_discretionary_exits_superseded.conflict_ref  <str>
+execution.order_kinds_this_attempt_may_issue  [5] of dict
+execution.order_kinds_this_attempt_may_issue[*] keys: ['tag', 'side', 'when', 'quantity']
+execution.one_order_per_symbol_per_session  {3}
+execution.one_order_per_symbol_per_session.constraint  <str>
+execution.one_order_per_symbol_per_session.resolution  <str>
+execution.one_order_per_symbol_per_session.coincidence_recorded  <str>
+execution.execution_lag  {4}
+execution.execution_lag.statement  <str>
+execution.execution_lag.why_it_is_not_a_defect  <str>
+execution.execution_lag.measurement  <str>
+execution.execution_lag.conflict_ref  <str>
+position_sizing  {10}
+position_sizing.target_weight_formula  <str>
+position_sizing.changed_from_attempt_1  <bool>
+position_sizing.attempt_1_formula  <str>
+position_sizing.why_changed  <str>
+position_sizing.target_weights  {3}
+position_sizing.target_weights.1  <str>
+position_sizing.target_weights.2  <str>
+position_sizing.target_weights.3  <str>
+position_sizing.target_gross_exposure  {3}
+position_sizing.target_gross_exposure.1  <str>
+position_sizing.target_gross_exposure.2  <str>
+position_sizing.target_gross_exposure.3  <str>
+position_sizing.round_down_note  <str>
+position_sizing.equal_weight_is_an_entry_rule  <str>
+position_sizing.budget_evaluated_at_the_open  {3}
+position_sizing.budget_evaluated_at_the_open.statement  <str>
+position_sizing.budget_evaluated_at_the_open.why  <str>
+position_sizing.budget_evaluated_at_the_open.scalar_timing  <str>
+position_sizing.attempt_1_k1_half_cash_bias_neutralised  {4}
+position_sizing.attempt_1_k1_half_cash_bias_neutralised.attempt_1_condition  <str>
+position_sizing.attempt_1_k1_half_cash_bias_neutralised.attempt_2_condition  <str>
+position_sizing.attempt_1_k1_half_cash_bias_neutralised.honesty_note  <str>
+position_sizing.attempt_1_k1_half_cash_bias_neutralised.conflict_ref  <str>
+concentration_ceiling  {6}
+concentration_ceiling.value  <str>
+concentration_ceiling.source  <str>
+concentration_ceiling.source_sha256  <str>
+concentration_ceiling.scope  <str>
+concentration_ceiling.unchanged_from_attempt_1  <bool>
+concentration_ceiling.non_binding_note  {3}
+concentration_ceiling.non_binding_note.statement  <str>
+concentration_ceiling.non_binding_note.why_it_is_still_enforced  <str>
+concentration_ceiling.non_binding_note.conflict_ref  <str>
+mechanics_carried_unchanged  {3}
+mechanics_carried_unchanged.blocks  [13] of str
+mechanics_carried_unchanged.method  <str>
+mechanics_carried_unchanged.why_this_matters  <str>
+risk_architecture  {11}
+risk_architecture.id  <str>
+risk_architecture.name  <str>
+risk_architecture.frozen_before_any_variant_is_run  <bool>
+risk_architecture.not_part_of_the_grid  <bool>
+risk_architecture.derived_from  <str>
+risk_architecture.why_not_gridded  <str>
+risk_architecture.single_difference_from_ra2  <str>
+risk_architecture.provenance  <str>
+risk_architecture.components  {5}
+risk_architecture.components.RA3-1  {8}
+risk_architecture.components.RA3-1.name  <str>
+risk_architecture.components.RA3-1.value  <str>
+risk_architecture.components.RA3-1.unit  <str>
+risk_architecture.components.RA3-1.purpose  <str>
+risk_architecture.components.RA3-1.definition  <str>
+risk_architecture.components.RA3-1.enforcement  {3}
+risk_architecture.components.RA3-1.carriage  <str>
+risk_architecture.components.RA3-1.inherited_unchanged_from  <str>
+risk_architecture.components.RA3-2  {14}
+risk_architecture.components.RA3-2.name  <str>
+risk_architecture.components.RA3-2.value  <str>
+risk_architecture.components.RA3-2.unit  <str>
+risk_architecture.components.RA3-2.purpose  <str>
+risk_architecture.components.RA3-2.measured_on  <str>
+risk_architecture.components.RA3-2.definition  <str>
+risk_architecture.components.RA3-2.shape_note  <str>
+risk_architecture.components.RA3-2.why_the_equity_curve_and_not_a_price_series  <str>
+risk_architecture.components.RA3-2.scalar  <str>
+risk_architecture.components.RA3-2.undefined_before_21_points  <str>
+risk_architecture.components.RA3-2.run_start_note  <str>
+risk_architecture.components.RA3-2.self_reference  {4}
+risk_architecture.components.RA3-2.carriage  <str>
+risk_architecture.components.RA3-2.inherited_unchanged_from  <str>
+risk_architecture.components.RA3-3  {14}
+risk_architecture.components.RA3-3.name  <str>
+risk_architecture.components.RA3-3.value  <str>
+risk_architecture.components.RA3-3.unit  <str>
+risk_architecture.components.RA3-3.purpose  <str>
+risk_architecture.components.RA3-3.reference_price  <str>
+risk_architecture.components.RA3-3.reference_price_definition  {5}
+risk_architecture.components.RA3-3.condition  <str>
+risk_architecture.components.RA3-3.evaluated_at  <str>
+risk_architecture.components.RA3-3.exit_at  <str>
+risk_architecture.components.RA3-3.interaction_with_rebalance  <str>
+risk_architecture.components.RA3-3.no_re_entry_bar  <str>
+risk_architecture.components.RA3-3.measurement  <str>
+risk_architecture.components.RA3-3.carriage  <str>
+risk_architecture.components.RA3-3.inherited_unchanged_from  <str>
+risk_architecture.components.RA3-5  {11}
+risk_architecture.components.RA3-5.name  <str>
+risk_architecture.components.RA3-5.value  <int>
+risk_architecture.components.RA3-5.unit  <str>
+risk_architecture.components.RA3-5.purpose  <str>
+risk_architecture.components.RA3-5.armed_by  <str>
+risk_architecture.components.RA3-5.not_armed_by  <str>
+risk_architecture.components.RA3-5.gates  <str>
+risk_architecture.components.RA3-5.counted_in_sessions_not_days  <str>
+risk_architecture.components.RA3-5.measurement  <str>
+risk_architecture.components.RA3-5.carriage  <str>
+risk_architecture.components.RA3-5.inherited_unchanged_from  <str>
+risk_architecture.components.RA3-4  {14}
+risk_architecture.components.RA3-4.name  <str>
+risk_architecture.components.RA3-4.purpose  <str>
+risk_architecture.components.RA3-4.drawdown_definition  <str>
+risk_architecture.components.RA3-4.bands  [3] of dict
+risk_architecture.components.RA3-4.boundary_convention  <str>
+risk_architecture.components.RA3-4.descent  <str>
+risk_architecture.components.RA3-4.recovery  <str>
+risk_architecture.components.RA3-4.hysteresis_note  <str>
+risk_architecture.components.RA3-4.scalar  <str>
+risk_architecture.components.RA3-4.relationship_to_the_shutdown_threshold  {4}
+risk_architecture.components.RA3-4.measurement  <str>
+risk_architecture.components.RA3-4.inherited_unchanged_from  <NoneType>
+risk_architecture.components.RA3-4.derived_from  <str>
+risk_architecture.components.RA3-4.provenance  {7}
+risk_architecture.combined_scalar  {5}
+risk_architecture.combined_scalar.formula  <str>
+risk_architecture.combined_scalar.multiplicative_not_minimum  <str>
+risk_architecture.combined_scalar.range  <str>
+risk_architecture.combined_scalar.applies_to  [2] of str
+risk_architecture.combined_scalar.does_not_apply_to  [2] of str
+risk_architecture.state_ownership  {4}
+risk_architecture.state_ownership.owner  <str>
+risk_architecture.state_ownership.why_not_the_candidate  <str>
+risk_architecture.state_ownership.why_this_works  <str>
+risk_architecture.state_ownership.no_generation_1_or_prior_attempt_file_is_edited  <str>
+window  {4}
+window.development  {3}
+window.development.from  <str>
+window.development.to  <str>
+window.development.last_session  <str>
+window.prohibited  [3] of dict
+window.prohibited[*] keys: ['from', 'to', 'state', 'note']
+window.enforcement  <str>
+window.unchanged_from_attempt_1  <bool>
+run_span  {14}
+run_span.carried_from  <str>
+run_span.carried_from_sha256  <str>
+run_span.recheck_requirement  <str>
+run_span.run_start  <str>
+run_span.run_start_weekday  <str>
+run_span.run_end  <str>
+run_span.sessions  <int>
+run_span.binding_symbol  <str>
+run_span.binding_symbol_inception  <str>
+run_span.members_missing_a_bar_at_run_start  [0] of 
+run_span.symbols_ending_before_run_end  [0] of 
+run_span.development_union_sessions  <int>
+run_span.why_unchanged  <str>
+run_span.reverification_required  <str>
+grid  {10}
+grid.size  <int>
+grid.unchanged_from_attempt_1  <bool>
+grid.not_widened  <str>
+grid.axes  {3}
+grid.axes.lookback_months  [3] of int
+grid.axes.top_k  [3] of int
+grid.axes.rebalance_frequency  [2] of str
+grid.enumeration_order  <str>
+grid.variant_id_format  <str>
+grid.zero_padding_note  <str>
+grid.variants  [18] of dict
+grid.variants[*] keys: ['index', 'variant_id', 'lookback_months', 'top_k', 'rebalance_frequency', 'target_weight_per_position', 'scheduled_rebalance_sessions']
+grid.unchanged_from_attempt_2  <bool>
+grid.variant_id_change_note  <str>
+runs_per_variant  {6}
+runs_per_variant.count  <int>
+runs_per_variant.labels  [2] of str
+runs_per_variant.scenarios  [2] of str
+runs_per_variant.total_runs  <int>
+runs_per_variant.both_gate  <str>
+runs_per_variant.unchanged_from_attempt_1  <bool>
+multiple_comparisons_disclosure  {12}
+multiple_comparisons_disclosure.variants_this_attempt  <int>
+multiple_comparisons_disclosure.runs_this_attempt  <int>
+multiple_comparisons_disclosure.variants_attempt_1  <int>
+multiple_comparisons_disclosure.runs_attempt_1  <int>
+multiple_comparisons_disclosure.variants_attempt_2  <int>
+multiple_comparisons_disclosure.runs_attempt_2  <int>
+multiple_comparisons_disclosure.cumulative_variants_this_hypothesis_family  <int>
+multiple_comparisons_disclosure.cumulative_runs_this_hypothesis_family  <int>
+multiple_comparisons_disclosure.no_correction_applied  <str>
+multiple_comparisons_disclosure.adaptive_design_note  <str>
+multiple_comparisons_disclosure.third_attempt_note  <str>
+multiple_comparisons_disclosure.statement  <str>
+representative_selection_rule  {13}
+representative_selection_rule.id  <str>
+representative_selection_rule.frozen_before_any_variant_is_run  <bool>
+representative_selection_rule.return_blind  <bool>
+representative_selection_rule.unchanged_from_attempt_1  <bool>
+representative_selection_rule.unchanged_from_attempt_2  <bool>
+representative_selection_rule.replaces  <str>
+representative_selection_rule.why_it_changes  <str>
+representative_selection_rule.structural_enforcement  {5}
+representative_selection_rule.structural_enforcement.mechanism  <str>
+representative_selection_rule.structural_enforcement.field_names  [6] of str
+representative_selection_rule.structural_enforcement.import_time_assertion  <str>
+representative_selection_rule.structural_enforcement.frozen_dataclass  <str>
+representative_selection_rule.structural_enforcement.what_is_still_excluded  <str>
+representative_selection_rule.steps  [4] of dict
+representative_selection_rule.steps[*] keys: ['order', 'criterion', 'scope', 'eliminates', 'unchanged_from_attempt_2']
+representative_selection_rule.retrospective_check_disclosure  {3}
+representative_selection_rule.retrospective_check_disclosure.statement  <str>
+representative_selection_rule.retrospective_check_disclosure.what_the_check_did_not_do  <str>
+representative_selection_rule.retrospective_check_disclosure.why_disclosed  <str>
+representative_selection_rule.no_candidate_path  {4}
+representative_selection_rule.no_candidate_path.condition  <str>
+representative_selection_rule.no_candidate_path.verdict  <str>
+representative_selection_rule.no_candidate_path.attempt_closes  <str>
+representative_selection_rule.no_candidate_path.live_possibility_note  <str>
+representative_selection_rule.second_fail_path  {5}
+representative_selection_rule.second_fail_path.condition  <str>
+representative_selection_rule.second_fail_path.verdict  <str>
+representative_selection_rule.second_fail_path.same_token_note  <str>
+representative_selection_rule.second_fail_path.runner_up_not_promoted  <str>
+representative_selection_rule.second_fail_path.conflict_ref  <str>
+representative_selection_rule.no_reselection  <str>
+gate_evaluation_scope  {6}
+gate_evaluation_scope.evaluated_on  <str>
+gate_evaluation_scope.conjunctive  <str>
+gate_evaluation_scope.criteria_source  <str>
+gate_evaluation_scope.thresholds_changed_from_attempt_1  <str>
+gate_evaluation_scope.thresholds_changed_from_generation_1  <str>
+gate_evaluation_scope.thresholds_changed_from_attempt_2  <str>
+reported_for_every_variant_but_not_gating  [18] of str
+structural_consequences_declared_before_running  {8}
+structural_consequences_declared_before_running.SC-1  {4}
+structural_consequences_declared_before_running.SC-1.statement  <str>
+structural_consequences_declared_before_running.SC-1.attempt_2_amendment  <str>
+structural_consequences_declared_before_running.SC-1.risk  <str>
+structural_consequences_declared_before_running.SC-1.attempt_3_amendment  <str>
+structural_consequences_declared_before_running.SC-2  {4}
+structural_consequences_declared_before_running.SC-2.statement  <str>
+structural_consequences_declared_before_running.SC-2.attempt_2_amendment  <str>
+structural_consequences_declared_before_running.SC-2.throttle_interaction  <str>
+structural_consequences_declared_before_running.SC-2.attempt_3_amendment  <str>
+structural_consequences_declared_before_running.SC-3  {2}
+structural_consequences_declared_before_running.SC-3.statement  <str>
+structural_consequences_declared_before_running.SC-3.see  <str>
+structural_consequences_declared_before_running.SC-4  {4}
+structural_consequences_declared_before_running.SC-4.statement  <str>
+structural_consequences_declared_before_running.SC-4.consequence  <str>
+structural_consequences_declared_before_running.SC-4.not_corrected  <str>
+structural_consequences_declared_before_running.SC-4.attempt_3_amendment  <str>
+structural_consequences_declared_before_running.SC-5  {3}
+structural_consequences_declared_before_running.SC-5.statement  <str>
+structural_consequences_declared_before_running.SC-5.consequence  <str>
+structural_consequences_declared_before_running.SC-5.conflict_ref  <str>
+structural_consequences_declared_before_running.SC-6  {4}
+structural_consequences_declared_before_running.SC-6.statement  <str>
+structural_consequences_declared_before_running.SC-6.consequence  <str>
+structural_consequences_declared_before_running.SC-6.why_declared_now  <str>
+structural_consequences_declared_before_running.SC-6.attempt_3_amendment  <str>
+structural_consequences_declared_before_running.SC-7  {3}
+structural_consequences_declared_before_running.SC-7.statement  <str>
+structural_consequences_declared_before_running.SC-7.consequence  <str>
+structural_consequences_declared_before_running.SC-7.not_corrected  <str>
+structural_consequences_declared_before_running.SC-8  {3}
+structural_consequences_declared_before_running.SC-8.statement  <str>
+structural_consequences_declared_before_running.SC-8.consequence  <str>
+structural_consequences_declared_before_running.SC-8.why_declared_now  <str>
+reproducibility_requirements  {6}
+reproducibility_requirements.determinism  <str>
+reproducibility_requirements.risk_state_trace_digest  <str>
+reproducibility_requirements.no_wall_clock_in_payloads  <str>
+reproducibility_requirements.seed  <NoneType>
+reproducibility_requirements.seed_note  <str>
+reproducibility_requirements.selection_determinism  <str>
+adversarial_test_requirements  {15}
+adversarial_test_requirements.note  <str>
+adversarial_test_requirements.AT-A  <str>
+adversarial_test_requirements.AT-B  <str>
+adversarial_test_requirements.AT-C  <str>
+adversarial_test_requirements.AT-D  <str>
+adversarial_test_requirements.AT-E  <str>
+adversarial_test_requirements.AT-F  <str>
+adversarial_test_requirements.AT-G  <str>
+adversarial_test_requirements.AT-H  <str>
+adversarial_test_requirements.AT-I  <str>
+adversarial_test_requirements.regression_floor  <str>
+adversarial_test_requirements.AT-J  <str>
+adversarial_test_requirements.AT-K  <str>
+adversarial_test_requirements.AT-L  <str>
+adversarial_test_requirements.AT-M  <str>
+conflicts_found  [15] of dict
+conflicts_found[*] keys: ['id', 'summary', 'resolution', 'see', 'carried_from']
+conflicts_declared_in_the_gate_criteria  {3}
+conflicts_declared_in_the_gate_criteria.note  <str>
+conflicts_declared_in_the_gate_criteria.declared_in_g2_gate_criteria_ra3  [12] of str
+conflicts_declared_in_the_gate_criteria.inherited_and_restated_in_g2_gate_criteria_ra3  [9] of str
+post_seal_defect_rule  {2}
+post_seal_defect_rule.rule  <str>
+post_seal_defect_rule.applies_equally_to  <str>
+explicit_non_authorizations  [16] of str
+live_trading_authorized  <bool>
+
+==============================================================================
+### g2_gate_criteria_ra3.json
+==============================================================================
+artifact_id  <str>
+title  <str>
+version  <str>
+project  <str>
+generation  <int>
+generation_id  <str>
+attempt  <int>
+stage  <int>
+gate_id  <int>
+gate_name  <str>
+constitution_ref  <str>
+charter_ref  <str>
+protocol_ref  <str>
+attempt_2_counterpart  <str>
+attempt_2_counterpart_sha256  <str>
+attempt_1_counterpart  <str>
+attempt_1_counterpart_sha256  <str>
+generation_1_counterpart  <str>
+generation_1_counterpart_sha256  <str>
+declared_before_any_strategy_code  <bool>
+declaration_note  <str>
+adaptation_disclosure_carried  <str>
+relationship_to_generation_1_criteria  {4}
+relationship_to_generation_1_criteria.carried_over_unchanged  [5] of str
+relationship_to_generation_1_criteria.redefined_for_generation_2  [2] of str
+relationship_to_generation_1_criteria.thresholds_changed  <str>
+relationship_to_generation_1_criteria.note  <str>
+relationship_to_attempt_1_criteria  {5}
+relationship_to_attempt_1_criteria.thresholds_changed  <str>
+relationship_to_attempt_1_criteria.predicates_changed  <str>
+relationship_to_attempt_1_criteria.measurement_basis_changed  [4] of str
+relationship_to_attempt_1_criteria.measurement_basis_unchanged  [3] of str
+relationship_to_attempt_1_criteria.note  <str>
+relationship_to_attempt_2_criteria  {7}
+relationship_to_attempt_2_criteria.thresholds_changed  <str>
+relationship_to_attempt_2_criteria.predicates_changed  <str>
+relationship_to_attempt_2_criteria.measurement_basis_changed  [0] of 
+relationship_to_attempt_2_criteria.measurement_basis_unchanged  [7] of str
+relationship_to_attempt_2_criteria.episode_ledger_inherited  <str>
+relationship_to_attempt_2_criteria.what_actually_differs  [5] of str
+relationship_to_attempt_2_criteria.why_a_new_file_at_all  <str>
+frozen_gate_text_verbatim  <str>
+frozen_gate_json_companion_verbatim  {4}
+frozen_gate_json_companion_verbatim.id  <int>
+frozen_gate_json_companion_verbatim.name  <str>
+frozen_gate_json_companion_verbatim.fail_result  <str>
+frozen_gate_json_companion_verbatim.thresholds  {5}
+frozen_gate_json_companion_verbatim.thresholds.net_return_positive  <bool>
+frozen_gate_json_companion_verbatim.thresholds.max_drawdown_pct  <int>
+frozen_gate_json_companion_verbatim.thresholds.profit_factor_min  <float>
+frozen_gate_json_companion_verbatim.thresholds.closed_trades_min  <int>
+frozen_gate_json_companion_verbatim.thresholds.best_trade_removed_return_positive  <bool>
+conflicts_found  [21] of dict
+conflicts_found[*] keys: ['id', 'status', 'description', 'resolution', 'action_taken']
+verdict_token_derivation  {11}
+verdict_token_derivation.pass_token  <str>
+verdict_token_derivation.fail_token  <str>
+verdict_token_derivation.pass_condition  <str>
+verdict_token_derivation.fail_condition  <str>
+verdict_token_derivation.conjunctive_note  <str>
+verdict_token_derivation.constitutional_fail_result_equivalent  <str>
+verdict_token_derivation.token_naming_note  <str>
+verdict_token_derivation.prior_attempt_tokens_are_not_available_here  <str>
+verdict_token_derivation.other_tokens_available  <str>
+verdict_token_derivation.fail_is_a_deliverable  <str>
+verdict_token_derivation.neither_token_is_a_stage_verdict_for_any_other_stage  <str>
+conditions  [7] of dict
+conditions[*] keys: ['id', 'required_verbatim', 'attempt_3_status', 'measurement', 'predicate', 'costs', 'not_evaluable_treatment', 'attempt_3_note']
+reported_but_not_gating  [10] of str
+evaluation_integrity_rules  [12] of str
+windows  {9}
+windows.authorized  [1] of str
+windows.development_window  [2] of str
+windows.validation_window_state  <str>
+windows.generation_1_holdout_state  <str>
+windows.holdout_window_state  <str>
+windows.enforcement  <str>
+windows.disclosed_limitation_reference  <str>
+windows.generation_1_holdout  <str>
+windows.generation_2_holdout  <str>
+live_trading_authorized  <bool>
+

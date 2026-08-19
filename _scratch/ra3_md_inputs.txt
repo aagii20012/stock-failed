@@ -1,0 +1,153 @@
+== measure_span()
+   binding_symbol                           VEA
+   binding_symbol_inception                 2007-07-26
+   binding_symbols                          ['VEA']
+   development_union_sessions               7178
+   development_union_span                   ['1993-01-29', '2021-07-30']
+   earliest_inception                       1993-01-29
+   earliest_inception_symbols               ['SPY']
+   exchange_calendar_sessions               3276
+   measurement_basis                        Date column only, plus the exchange calendar. This module parses no price, volume, or dividend field in any window, so nothing it measures is an observation of a market.
+   member_count                             34
+   members_missing_a_bar_at_run_start       []
+   monthly_first_three                      ['2008-07-28', '2008-08-01', '2008-09-02']
+   monthly_last_two                         ['2021-06-01', '2021-07-01']
+   monthly_rebalance_sessions               157
+   quarterly_first_three                    ['2008-07-28', '2008-10-01', '2009-01-02']
+   quarterly_last_two                       ['2021-04-01', '2021-07-01']
+   quarterly_rebalance_sessions             53
+   run_end                                  2021-07-30
+   run_sessions                             3276
+   run_start                                2008-07-28
+   run_start_lookback_reference             2007-07-28
+   run_start_weekday                        Monday
+   session_before_run_start                 2008-07-25
+   session_before_run_start_lookback_reference 2007-07-25
+   session_lists_agree                      True
+   symbols_ending_before_run_end            []
+
+== identity
+   generation_id                            SE100-GEN2-7394207c543401e2
+   identity_sha256                          7394207c543401e20fc80f3550c8a6a5aae4de622f2c28eb81dfa116f8b4ae52
+   inputs                                   {'project': 'StockEdge100', 'generation': 2, 'constitution_ref': 'SE100-GOV-0001', 'constitution_sha256': 'b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5', 'universe_version': 'SE100-U1-d4917c2f7f1cd834', 'universe_sha256': '01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a', 'cost_model_sha256': 'f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2', 'generation_1_terminal_verdict': 'FAIL - STAGE_4_STRATEGY_REJECTED_IN_VALIDATION', 'single_variable_changed': 'PORTFOLIO_BREADTH_AND_CROSS_SECTIONAL_SELECTION', 'development_window': ['1993-01-29', '2021-07-31'], 'validation_window': ['2021-08-01', '2024-07-31'], 'holdout_window': ['2026-08-01', '2028-07-31']}
+   charter_id                               SE100-GOV-2001
+   universe_version                         SE100-U1-d4917c2f7f1cd834
+   universe_count                           34
+   windows                                  ['1993-01-29', '2021-07-31', '2021-08-01', '2024-07-31', '2024-08-01', '2026-07-31', '2026-08-01', '2028-07-31']
+
+== sizing (recomputed from RA3-1 0.50 and concentration 0.50)
+   | 1 | 0.500000000 | 0.500000000 |
+   | 2 | 0.250000000 | 0.500000000 |
+   | 3 | 0.166666666 | 0.499999998 |
+
+== grid table rows (Attempt 3 ids)
+| 1 | `SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY` | 3 | 1 | MONTHLY | 0.500000000 | 0.500000000 | 157 |
+| 2 | `SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY` | 3 | 1 | QUARTERLY | 0.500000000 | 0.500000000 | 53 |
+| 3 | `SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY` | 3 | 2 | MONTHLY | 0.250000000 | 0.500000000 | 157 |
+| 4 | `SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY` | 3 | 2 | QUARTERLY | 0.250000000 | 0.500000000 | 53 |
+| 5 | `SE100-G2-S3-C3-ROTATION-RA3-L03-K3-MONTHLY` | 3 | 3 | MONTHLY | 0.166666666 | 0.499999998 | 157 |
+| 6 | `SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY` | 3 | 3 | QUARTERLY | 0.166666666 | 0.499999998 | 53 |
+| 7 | `SE100-G2-S3-C3-ROTATION-RA3-L06-K1-MONTHLY` | 6 | 1 | MONTHLY | 0.500000000 | 0.500000000 | 157 |
+| 8 | `SE100-G2-S3-C3-ROTATION-RA3-L06-K1-QUARTERLY` | 6 | 1 | QUARTERLY | 0.500000000 | 0.500000000 | 53 |
+| 9 | `SE100-G2-S3-C3-ROTATION-RA3-L06-K2-MONTHLY` | 6 | 2 | MONTHLY | 0.250000000 | 0.500000000 | 157 |
+| 10 | `SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY` | 6 | 2 | QUARTERLY | 0.250000000 | 0.500000000 | 53 |
+| 11 | `SE100-G2-S3-C3-ROTATION-RA3-L06-K3-MONTHLY` | 6 | 3 | MONTHLY | 0.166666666 | 0.499999998 | 157 |
+| 12 | `SE100-G2-S3-C3-ROTATION-RA3-L06-K3-QUARTERLY` | 6 | 3 | QUARTERLY | 0.166666666 | 0.499999998 | 53 |
+| 13 | `SE100-G2-S3-C3-ROTATION-RA3-L12-K1-MONTHLY` | 12 | 1 | MONTHLY | 0.500000000 | 0.500000000 | 157 |
+| 14 | `SE100-G2-S3-C3-ROTATION-RA3-L12-K1-QUARTERLY` | 12 | 1 | QUARTERLY | 0.500000000 | 0.500000000 | 53 |
+| 15 | `SE100-G2-S3-C3-ROTATION-RA3-L12-K2-MONTHLY` | 12 | 2 | MONTHLY | 0.250000000 | 0.500000000 | 157 |
+| 16 | `SE100-G2-S3-C3-ROTATION-RA3-L12-K2-QUARTERLY` | 12 | 2 | QUARTERLY | 0.250000000 | 0.500000000 | 53 |
+| 17 | `SE100-G2-S3-C3-ROTATION-RA3-L12-K3-MONTHLY` | 12 | 3 | MONTHLY | 0.166666666 | 0.499999998 | 157 |
+| 18 | `SE100-G2-S3-C3-ROTATION-RA3-L12-K3-QUARTERLY` | 12 | 3 | QUARTERLY | 0.166666666 | 0.499999998 | 53 |
+
+== axes/format
+   LOOKBACKS (3, 6, 12) POSITION_COUNTS (1, 2, 3) FREQUENCIES ('MONTHLY', 'QUARTERLY')
+   variant_id_format SE100-G2-S3-C3-ROTATION-RA3-L{lookback:02d}-K{k}-{FREQUENCY}
+
+== Attempt 2 Markdown section headings (structure to mirror)
+   bytes: 59038 lines: 997
+   # Stage 3 (Generation 2, Attempt 2) — cross-sectional rotation under risk architecture RA2
+   ## 1. What is pre-registered
+   ## 2. Eligible universe
+   ## 3. Ranking signal
+   ## 4. Portfolio construction and position sizing
+   ## 5. Risk architecture `RA2`
+   ### 5.1 Provenance of the constants
+   ### 5.2 `RA2-1` — aggregate exposure ceiling, 0.50 of equity
+   ### 5.3 `RA2-2` — portfolio volatility target, 0.10 annualized
+   ### 5.4 `RA2-3` — per-position stop, 0.08 from entry
+   ### 5.5 `RA2-4` — de-risk ladder
+   ### 5.6 `RA2-5` — re-entry lockout, 10 trading sessions
+   ### 5.7 The combined scalar
+   ### 5.8 Where the risk state lives
+   ## 6. Rebalance calendar
+   ## 7. Window, run span, and the guard
+   ## 8. Execution
+   ### 8.1 Order kinds this attempt may issue
+   ### 8.2 Attempt 1's `no_discretionary_exits` clause is narrowed, not weakened
+   ### 8.3 One order per symbol per session
+   ### 8.4 Execution lag
+   ## 9. The grid
+   ### 9.1 Multiplicity
+   ## 10. Representative selection rule
+   ### 10.1 The two fail routes
+   ## 11. Gate 3 evaluation
+   ### 11.1 Reported for every variant, gating nothing
+   ## 12. Structural consequences, declared before running
+   ## 13. Contamination measurement
+   ## 14. Windows referenced, and the two mandated disclosures
+   ### 14.1 The disclosure
+   ### 14.2 The validation-reuse disclosure
+   ## 15. Conflicts and interpretations
+   ## 16. Adversarial tests required
+   ### 16.1 Reproducibility
+   ## 17. Binding rules
+   ### 17.1 Explicit non-authorizations
+
+== conflicts in CFG-3105 and CFG-3106
+   protocol  G2A2-CONFLICT-1    Per-session decision-taking departs from Attempt 1's sealed execution.no_discretionary_exits cl
+   protocol  G2A2-CONFLICT-2    The 50% aggregate exposure ceiling has no cost-model derivation route: g2_costs.derive_mapping 
+   protocol  G2A2-CONFLICT-4    Target weights change from min(0.95/k, 0.50) to min(0.50/k, 0.50).
+   protocol  G2A2-CONFLICT-5    Stop and throttle decisions carry one session of execution lag.
+   protocol  G2A2-CONFLICT-7    Attempt 1's declared k=1 half-cash bias (its SC-3) is removed as a side effect of RA2-1.
+   protocol  G2A2-CONFLICT-11   The per-position concentration ceiling (0.50) now equals the aggregate ceiling, so it is non-bi
+   protocol  G2A2-CONFLICT-12   The sealed 5% minimum cash buffer can never bind at a 50% gross ceiling.
+   protocol  G2A2-CONFLICT-13   The RA2-2 volatility measure is taken on an equity curve that RA2-2 itself influences.
+   protocol  G2A2-CONFLICT-14   Position carries no entry price, so the 8% stop reference must be defined.
+   protocol  G2A2-CONFLICT-16   stockedge100.backtest.orders.REASONS is a closed declared set with no entry for an aggregate-ce
+   protocol  G2A2-CONFLICT-17   A throttle trim below the sealed minimum order notional is skipped, so the aggregate ceiling ca
+   protocol  G2A3-CONFLICT-34   The paired immutability check must now cover seventeen modules, not nine: Attempt 2's eight bec
+   protocol  G2A3-CONFLICT-35   This pre-registration was written after TWO attempts' development results were known, and both 
+   protocol  G2A3-CONFLICT-36   Both fail routes — no eligible representative, and a representative that fails the gate — emit 
+   protocol  G2A3-CONFLICT-37   The Attempt 3 operating instruction names no verdict token at all. It requires a token 'of your
+   criteria  S3-CONFLICT-1      
+   criteria  S3-CONFLICT-3      
+   criteria  G2-CONFLICT-6      
+   criteria  G2-CONFLICT-7      
+   criteria  G2-CONFLICT-15     
+   criteria  G2A2-CONFLICT-18   
+   criteria  G2A3-CONFLICT-19   
+   criteria  G2A2-CONFLICT-20   
+   criteria  G2A3-CONFLICT-21   
+   criteria  G2A3-CONFLICT-22   
+   criteria  G2A2-CONFLICT-23   
+   criteria  G2A3-CONFLICT-24   
+   criteria  G2A2-CONFLICT-25   
+   criteria  G2A3-CONFLICT-26   
+   criteria  G2A3-CONFLICT-27   
+   criteria  G2A3-CONFLICT-28   
+   criteria  G2A3-CONFLICT-29   
+   criteria  G2A3-CONFLICT-30   
+   criteria  G2A3-CONFLICT-31   
+   criteria  G2A3-CONFLICT-32   
+   criteria  G2A3-CONFLICT-33   
+
+== tokens
+   {"pass_token": "STAGE_3_G2_ATTEMPT_3_STRATEGY_ADMITTED_IN_DEVELOPMENT", "fail_token": "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE", "pass_condition": "The representative selected by the frozen return-blind rule SE100-G2-SEL-2 in SE100-CFG-3105 satisfies EVERY hard condition of Gate 3, on its base-cost development run and — under the restrictive reading of G2A2-CONFLICT-25 — on its stressed-cost run for S3-C1 through S3-C6.", "fail_condition": "Either no representative exists, because every one of the eighteen variants recorded at least one research-shutdown event, or a representative exists and does no
+
+== attempt refs carried in the protocol
+   attempt_1_ref -> {"strategy_id": "SE100-G2-S3-C1-ROTATION", "protocol_config": "config/generation_2/g2_rotation_protocol.json", "protocol_config_sha256": "1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810", "gate_criteria_config": "config/generation_2/g2_gate_criteria.json", "gate_criteria_config_sha256": "a1ac96f98dcbe9e5ce975f2eb27914fcbc7728cad6355a1650dc1ec137ad0d31", "protocol_md": "governance/
+   attempt_2_ref -> {"strategy_id": "SE100-G2-S3-C2-ROTATION-RA1", "protocol_config": "config/generation_2/g2_rotation_ra1_protocol.json", "protocol_config_sha256": "0054edce91a8a49dc39f4f53529969902e318ddc3d67e9cc0307e2c015ca6880", "gate_criteria_config": "config/generation_2/g2_gate_criteria_ra1.json", "gate_criteria_config_sha256": "3b9626214db6a6f6183384456489338ea19a277866e35a1aa6c09b0bacb3e625", "protocol_md": 
+   what_this_attempt_adds_over_attempt_1 -> "Attempt 1 tested the rotation signal with no mechanism to reduce exposure before a research-shutdown breach: between scheduled rebalances it issued no orders at all. Attempt 2 holds the signal, the universe, the calendar, the grid, the cost model and the gate thresholds fixed and adds only risk architecture. Any difference in outcome is therefore attributable to the risk architecture rather than 
+   what_this_attempt_adds_over_attempt_1_carriage -> "Copied verbatim from SE100-CFG-3103. It describes the risk architecture Attempt 3 still carries, minus one rung, and is retained so the lineage statement is not silently reworded."
+   what_this_attempt_changes_from_attempt_2 -> "Exactly two things, and nothing else. (1) The de-risk ladder loses its 5-to-8 percent rung, reverting to the three-band spacing Generation 1's RA1-5 sealed before Attempt 1 was ever run. (2) The representative-selection rule changes from lowest turnover to SE100-G2-SEL-2, a neighbourhood-stability score over four risk-behaviour counters. The signal, the universe, the calendar, the grid, the cost 

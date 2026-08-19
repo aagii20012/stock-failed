@@ -1,0 +1,192 @@
+variant_table len = 18  type=list
+row keys (115):
+   base_attempt_2                                       dict   {"variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY", "matched_...
+   base_average_loss                                    str    "-1.211585359319546400552303999410049"
+   base_average_win                                     str    "1.600237296970658732937840957141294"
+   base_best_trade_removed_return                       dict   {"verdict": "MET", "measured": "min(0.30504183332130280868419280366365...
+   base_cagr                                            str    "0.033455184792084559364445596119954"
+   base_closed_episodes                                 int    105
+   base_closed_trades                                   int    105
+   base_combined_scalar_mean                            str    "0.5920316639499389499389499389"
+   base_combined_scalar_minimum                         str    "0.250000000"
+   base_combined_scalar_sessions_below_one              int    2346
+   base_daily_return_stdev                              str    "0.003958497810173047373818081332669743"
+   base_distinct_symbols_traded                         int    21
+   base_distinct_symbols_with_closed_trades             int    21
+   base_equity_digest                                   str    "51f7d84cf81cfbcd128dbd1f1b12b1862e59f7b9acde1fc8b0d74dae2af253ba"
+   base_executed_rebalances                             int    157
+   base_exposure_fraction                               str    "0.9764957264957264957264957264957265"
+   base_fills                                           int    308
+   base_ladder_ascents                                  int    39
+   base_ladder_deepest_band                             int    2
+   base_ladder_descents                                 int    39
+   base_ladder_final_band                               int    0
+   base_ladder_sessions_in_band                         dict   {"0": 1364, "1": 693, "2": 1219}
+   base_lockout_arms                                    int    39
+   base_lockout_recoveries_blocked                      int    140
+   base_longest_flat_streak_sessions                    int    20
+   base_max_drawdown                                    str    "0.1295592934758244004079160802748568"
+   base_max_gross_fraction_observed                     str    "0.5155229007316111646809504974093780"
+   base_max_gross_fraction_session                      str    "2020-11-09"
+   base_profit_factor                                   str    "2.029490694571700272715363605"
+   base_ranking_digest                                  str    "d516c547fc57939d86b158731e3948ecba4dbddce131292cd2e6ba986bc14ab9"
+   base_reconciliation_mismatches                       int    0
+   base_reconciliation_single_leg_compared              int    61
+   base_reconciliation_vacuous                          bool   false
+   base_research_shutdown_events                        int    0
+   base_risk_state_digest                               str    "afcec8cad51719f561bbcad8e75e3629cb96af37998d605f5e604f57823f645c"
+   base_risk_state_sessions                             int    3276
+   base_scenario                                        str    "BASE"
+   base_scheduled_rebalances                            int    157
+   base_sharpe                                          str    "0.5554718117356955040907093575111659"
+   base_shutdown_session                                NoneType null
+   base_stop_exits                                      list   [{"decision_session": "2008-10-06", "fill_session": "2008-10-07", "sym...
+   base_stops_filled                                    int    9
+   base_stops_preempted_by_signal_exit                  int    0
+   base_stops_triggered                                 int    9
+   base_throttle_legs_below_min_notional                int    1156
+   base_throttle_legs_scheduled                         int    97
+   base_throttle_sessions_breaching_ceiling             int    1253
+   base_total_return                                    str    "0.53412202253939399356"
+   base_trades_digest                                   str    "18cf0ab6abfa42f16d38fe4cee7e96be649cf42d185394c4cde0a4e7c54a4018"
+   base_volatility_scalar_minimum                       str    "0.603156617"
+   base_volatility_scalar_sessions_below_one            int    436
+   base_win_rate                                        str    "0.6"
+   fill_count_both_runs                                 int    614
+   grid_index                                           int    1
+   ladder_descents_both_runs                            int    78
+   lockout_arms_both_runs                               int    78
+   lookback_months                                      int    3
+   rebalance_frequency                                  str    "MONTHLY"
+   research_shutdown_events                             int    0
+   selection_score                                      dict   {"rule_id": "SE100-G2-SEL-2", "instability_score": "0.316981929", "per...
+   stops_filled_both_runs                               int    18
+   stress_attempt_2                                     dict   {"variant_id": "SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY", "matched_...
+   stress_average_loss                                  str    "-1.141329169104622229243407310072435"
+   stress_average_win                                   str    "1.587177128020043349405070157495032"
+   stress_best_trade_removed_return                     dict   {"verdict": "MET", "measured": "min(0.28298668087109866888359165430539...
+   stress_cagr                                          str    "0.032028245761458944830180850307616"
+   stress_closed_episodes                               int    105
+   stress_closed_trades                                 int    105
+   stress_combined_scalar_mean                          str    "0.5862546599548229548229548230"
+   stress_combined_scalar_minimum                       str    "0.250000000"
+   stress_combined_scalar_sessions_below_one            int    2361
+   stress_daily_return_stdev                            str    "0.003947917096918279121831766449255215"
+   stress_distinct_symbols_traded                       int    21
+   stress_distinct_symbols_with_closed_trades           int    21
+   stress_equity_digest                                 str    "dae968dfc23a153a31ce87575b27cffb01fdeb06f8e8c8001998008c1965b547"
+   stress_executed_rebalances                           int    157
+   stress_exposure_fraction                             str    "0.9764957264957264957264957264957265"
+   stress_fills                                         int    306
+   stress_ladder_ascents                                int    39
+   stress_ladder_deepest_band                           int    2
+   stress_ladder_descents                               int    39
+   stress_ladder_final_band                             int    0
+   stress_ladder_sessions_in_band                       dict   {"0": 1356, "1": 642, "2": 1278}
+   stress_lockout_arms                                  int    39
+   stress_lockout_recoveries_blocked                    int    124
+   stress_longest_flat_streak_sessions                  int    20
+   stress_max_drawdown                                  str    "0.1316429102777436539688798312267560"
+   stress_max_gross_fraction_observed                   str    "0.5153968591004960956601271128329439"
+   stress_max_gross_fraction_session                    str    "2020-11-09"
+   stress_profit_factor                                 str    "1.972767293588759823115651954"
+   stress_ranking_digest                                str    "d516c547fc57939d86b158731e3948ecba4dbddce131292cd2e6ba986bc14ab9"
+   stress_reconciliation_mismatches                     int    0
+   stress_reconciliation_single_leg_compared            int    62
+   stress_reconciliation_vacuous                        bool   false
+   stress_research_shutdown_events                      int    0
+   stress_risk_state_digest                             str    "a15506a6e484c0042d146385b7e0e6b8bf8da26c5de7c0e062da4faea91c4176"
+   stress_risk_state_sessions                           int    3276
+   stress_scenario                                      str    "STRESSED"
+   stress_scheduled_rebalances                          int    157
+   stress_sharpe                                        str    "0.5347282145026622408350357920004738"
+   stress_shutdown_session                              NoneType null
+   stress_stop_exits                                    list   [{"decision_session": "2008-10-06", "fill_session": "2008-10-07", "sym...
+   stress_stops_filled                                  int    9
+   stress_stops_preempted_by_signal_exit                int    0
+   stress_stops_triggered                               int    9
+   stress_throttle_legs_below_min_notional              int    1094
+   stress_throttle_legs_scheduled                       int    97
+   stress_throttle_sessions_breaching_ceiling           int    1191
+   stress_total_return                                  str    "0.50680200080542031975"
+   stress_trades_digest                                 str    "e6f2ee5b2e80a3ffdf0f983ebe7cbb804201a87fb3d18fff8a38a787d308944e"
+   stress_volatility_scalar_minimum                     str    "0.603049383"
+   stress_volatility_scalar_sessions_below_one          int    443
+   stress_win_rate                                      str    "0.5809523809523809523809523809523810"
+   top_k                                                int    1
+   variant_id                                           str    "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY"
+----------------------------------------------------------------------------------------------------
+base_total_return                      "0.53412202253939399356"
+base_max_drawdown                      "0.1295592934758244004079160802748568"
+base_profit_factor                     "2.029490694571700272715363605"
+base_closed_episodes                   105
+base_best_trade_removed_return         {"verdict": "MET", "measured": "min(0.305041833321302808684192803663655, 0.305041833321302808684192803663655)", "thresho
+stress_total_return                    "0.50680200080542031975"
+stress_max_drawdown                    "0.1316429102777436539688798312267560"
+base_combined_scalar_minimum           "0.250000000"
+base_research_shutdown_events          0
+research_shutdown_events               0
+----------------------------------------------------------------------------------------------------
+base_total_return        min=0.014778533675865595188 max=0.53412202253939399356  positive=18/18
+stress_total_return      min=-0.015741624220581421392 max=0.50680200080542031975  positive=16/18
+base_max_drawdown        min=0.09706525938679790141447968858056686 max=0.1412931951567434788574705403953710  positive=18/18
+stress_max_drawdown      min=0.09932170282394264800433103176555540 max=0.1435820911922245738361786483326100  positive=18/18
+base_profit_factor       min=1.065215842667363276031179176 max=2.029490694571700272715363605  positive=18/18
+----------------------------------------------------------------------------------------------------
+shutdown sum = 0
+----------------------------------------------------------------------------------------------------
+EV.selection.result keys: ['all_scores', 'decided_at_step', 'eligible_count', 'eligible_variants', 'ineligible_variants', 'ranking', 'rule_id', 'selected_variant_id']
+{
+ "rule_id": "SE100-G2-SEL-2",
+ "selected_variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+ "decided_at_step": 2,
+ "eligible_variants": [
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K3-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K1-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K1-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K3-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K3-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K1-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K1-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K2-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K2-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K3-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K3-QUARTERLY"
+ ],
+ "ineligible_variants": [],
+ "eligible_count": 18,
+ "all_scores": {
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY": {
+   "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY",
+   "instability_score": "0.316981929",
+   "neighbours": [
+    "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY",
+    "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY",
+    "SE100-G2-S3-C3-ROTATION-RA3-L06-K1-MONTHLY"
+   ],
+   "neighbour_count": 3,
+   "per_quantity_mean_dissimilarity": {
+   
+----------------------------------------------------------------------------------------------------
+EV.grid keys: ['all_declared_runs_executed', 'axes', 'grid_widened_from_attempt_1', 'grid_widened_from_attempt_2', 'revisions_after_seeing_a_result', 'runs_executed', 'runs_per_variant', 'variants_declared']
+EV.runs type=list len=36
+EV.prior_attempt_module_verification keys: ['attempt_1_list_source', 'attempt_1_module_count', 'attempt_2_list_source', 'attempt_2_module_count', 'conflict_ref', 'digest_source', 'excluded_and_why', 'module_count', 'modules_that_moved', 'modules_verified', 'requirement']
+EV.window keys: ['development_bound', 'end', 'enforcement', 'generation_1_holdout_read', 'generation_2_holdout_read', 'latest_session_loaded', 'name', 'run_span', 'start', 'validation_read']
+EV.universe keys: ['eligibility_recheck_convention', 'excluded_symbols', 'symbols_declared', 'symbols_loaded', 'symbols_missing', 'unchanged_from_attempt_1', 'universe_identity_sha256', 'universe_version']
+EV.run_span_recheck keys: ['config_keys_compared', 'cross_checked_against', 'differences', 'governance_keys_compared', 'governance_keys_not_a_measurement', 'independent_derivation_keys_compared', 'measured', 'recomputed_from', 'requirement', 'reverification_required', 'written_to']
+EV.sealed_inputs keys: ['charter', 'charter_sha256', 'cost_model', 'cost_model_sha256', 'criteria', 'criteria_artifact_id', 'criteria_sha256', 'criteria_sha256_not_recorded_in_the_protocol', 'declared_before_any_strategy_code', 'declared_before_any_strategy_code_measurement', 'governance_protocol_json', 'governance_protocol_json_sha256', 'governance_protocol_md', 'governance_protocol_md_sha256', 'partition_lock', 'partition_lock_sha256', 'protocol', 'protocol_artifact_id', 'protocol_sha256']
+EV.explicit_non_authorizations type=list
+EV.mechanics_carried_unchanged type=dict
+EV.conflicts_declared_in_the_gate_criteria type=dict len=3
+EV.representative_selection_rule type=dict
+EV.gate keys/val: {"constitution_gate_id": 3, "name": "development_admissibility"}
+EV.stage: "STAGE_3_G2_ATTEMPT_3_ROTATION_RA3_DEVELOPMENT"
+EV.command: "cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.g2_stage3_attempt3_evidence"
+EV.live_trading_authorized: false

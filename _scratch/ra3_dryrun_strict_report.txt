@@ -1,0 +1,75 @@
+
+== gate table parsed from the report ==
+  condition rows: 7   admissible_candidate_exists: 'false'
+
+== assembled gate_conditions (8 keys) ==
+  S3-C1
+  S3-C2
+  S3-C3
+  S3-C4
+  S3-C5
+  S3-C6
+  S3-C7
+  admissible_candidate_exists
+
+== diff: assembled vs the report's table ==
+  S3-C1    report base=MET      stress=MET      | assembled verdict=MET                              satisfied=True
+  S3-C2    report base=MET      stress=MET      | assembled verdict=MET                              satisfied=True
+  S3-C3    report base=MET      stress=MET      | assembled verdict=MET                              satisfied=True
+  S3-C4    report base=MET      stress=MET      | assembled verdict=MET                              satisfied=True
+  S3-C5    report base=MET      stress=MET      | assembled verdict=MET                              satisfied=True
+  S3-C6    report base=NOT_MET  stress=NOT_MET  | assembled verdict=NOT_MET                          satisfied=False
+  S3-C7    report base=MET      stress=MET      | assembled verdict=MET                              satisfied=True
+
+== admissible_candidate_exists ==
+  admitted_candidates                            []
+  candidates_evaluated                           1
+  conditions_not_satisfied_base                  ["S3-C6"]
+  conditions_not_satisfied_stress                ["S3-C6"]
+  determination                                  "This entry, and only this entry, is the gate determination. All 18 declared variants survived step 1 of the frozen selection rule, as in Attempt 2 and unlike Attempt 1 where none did, and SE100-G2-SEL-2 decided at step 2 \u2014 the neighbourhood-instability score, not the turnover tiebreak \u2014 p
+  note                                           "A conditions table that omits this row reads as though the gate were irrelevant rather than decided. The seven rows above settle nothing on their own: gates are conjunctive within a candidate and the stage verdict is a disjunction across candidates, and here the candidate set has one member, which 
+  permissive_base_only_reading_would_give        false
+  predicate                                      "a representative exists AND every hard condition is satisfied on every run that gates it"
+  representative                                 "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"
+  required_verbatim                              "At least one candidate satisfies every hard condition of Gate 3 in development."
+  selection_decided_at_step                      2
+  selection_rule                                 "SE100-G2-SEL-2"
+  value                                          false
+  variants_declared                              18
+  variants_eligible_after_shutdown_screen        18
+  verdict                                        "NOT_MET"
+
+== verdict coherence ==
+  assembled verdict      FAIL <U+2014> STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE
+  evidence token         STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE
+  gate_passed            False
+  admitted_candidates    []
+
+== token emission scan (14 hit(s)) ==
+  ok     _G2_ATTEMPT_3_STRATEGY_ADMITTED_IN_DEVELOPMENT             /body/body/verdict_token_derivation/pass_token
+  ok     STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT                /body/body/verdict_token_derivation/prior_attempt_tokens_are_not_available_here
+  ok     STAGE_3_G2_NO_CANDIDATE                                    /body/body/verdict_token_derivation/prior_attempt_tokens_are_not_available_here
+  ok     _G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT             /body/body/verdict_token_derivation/prior_attempt_tokens_are_not_available_here
+  ok     STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE                          /body/body/verdict_token_derivation/prior_attempt_tokens_are_not_available_here
+  ok     _G2_ATTEMPT_3_STRATEGY_ADMITTED_IN_DEVELOPMENT             /body/body/stage_verdict/pass_token
+  ok     STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT                /body/body/stage_verdict/prior_attempt_tokens_withheld[0]
+  ok     STAGE_3_G2_NO_CANDIDATE                                    /body/body/stage_verdict/prior_attempt_tokens_withheld[1]
+  ok     _G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT             /body/body/stage_verdict/prior_attempt_tokens_withheld[2]
+  ok     STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE                          /body/body/stage_verdict/prior_attempt_tokens_withheld[3]
+  ok     STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT                /body/body/stage_verdict/prior_attempt_tokens_note
+  ok     STAGE_3_G2_NO_CANDIDATE                                    /body/body/stage_verdict/prior_attempt_tokens_note
+  ok     _G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT             /body/body/stage_verdict/prior_attempt_tokens_note
+  ok     STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE                          /body/body/stage_verdict/prior_attempt_tokens_note
+
+== tests / dates / config ==
+  tests              {'collected': 1265, 'passed': 1264, 'failed': 1, 'skipped': 0, 'errors': 0}
+  date_range         ['2008-07-28', '2021-07-30']
+  universe_version   SE100-U1-d4917c2f7f1cd834
+  config_hash        e9e8a8bc58c0ddb04b2b6c702d543b998c2d0a31487986a61e0a28509b5fbd1d
+  holdout_state      LOCKED
+  gate_id            3
+  gate_name          development_admissibility
+  generation         2
+  counts             17 evidence / 10 limitations / 22 conflicts / 8 run_notes
+
+== NO DISAGREEMENT between the assembled conditions and the report's gate table ==

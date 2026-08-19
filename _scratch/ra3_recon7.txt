@@ -1,0 +1,743 @@
+PROTOCOL top-level keys (67):
+   artifact_id                                          'SE100-CFG-3105'
+   title                                                'Generation 2 Stage 3 Attempt 3 strategy protocol - cross-sectional rotation under risk architecture RA3 and r
+   version                                              '1.0.0'
+   project                                              'StockEdge100'
+   generation                                           2
+   generation_id                                        'SE100-GEN2-7394207c543401e2'
+   stage                                                3
+   gate_id                                              3
+   attempt                                              3
+   attempt_1_ref                                        dict ['carried_from', 'decision_json', 'decision_json_sha256', 'disposition', 'disposition_note', 'gate_criteria_config', 'gate_criteria_config_sha256', 'manifest_json', 'manifest_json_sha256', 'protocol_config', 'protocol_config_sha256', 'protocol_json', 'protocol_json_sha256', 'protocol_md', 'protocol_md_sha256', 'protocol_sha256_record', 'protocol_sha256_record_sha256', 'research_json', 'research_json_sha256', 'research_report_md', 'research_report_md_sha256', 'strategy_id', 'verdict']
+   attempt_2_ref                                        dict ['decision_json', 'decision_json_sha256', 'disposition', 'disposition_note', 'fail_route', 'gate_criteria_config', 'gate_criteria_config_sha256', 'manifest_json', 'manifest_json_sha256', 'protocol_config', 'protocol_config_sha256', 'protocol_json', 'protocol_json_sha256', 'protocol_md', 'protocol_md_sha256', 'protocol_sha256_record', 'protocol_sha256_record_sha256', 'research_json', 'research_json_sha256', 'research_report_md', 'research_report_md_sha256', 'run_record', 'run_record_is_not_pinned_by_digest', 'run_record_stage', 'strategy_id', 'verdict', 'verdict_source']
+   constitution_ref                                     'SE100-GOV-0001 sections 3, 4, 5.1, 6.1, 9 gate 3, 11'
+   constitution_md_sha256                               'b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5'
+   constitution_json_sha256                             'af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5'
+   charter_ref                                          'governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md'
+   partition_lock_ref                                   'governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md'
+   partition_lock_md_sha256                             '5ae2408dc318e5b87a054a6014e4439d8c6b1934748617c787720f63356b0773'
+   partition_lock_json_sha256                           'e17ea82c499d51cf23fc9986e7231dce6388f8a3c7394d3dd3c0e3d27fbacbe7'
+   charter_md_sha256                                    '865a2feffe683e0baf71f1ab976e286fbb2d003109ab47cfaffc1fe6a63dbc90'
+   cost_model_derivation_ref                            'config/generation_2/g2_cost_model.json'
+   cost_model_derivation_sha256                         'b9491485b9560b948ec83d3eb86ee4946c1e83b128a368b71473d14ad0f73650'
+   refs_reverified                                      'Every digest in this block, in attempt_1_ref and in attempt_2_ref was recomputed from the file it names at th
+   gate_criteria_ref                                    'config/generation_2/g2_gate_criteria_ra3.json'
+   gate_criteria_sha256_not_recorded_here               'SE100-CFG-3106 is sealed alongside this file and the two are mutually referential: it names this file as prot
+   declared_before_any_strategy_code                    True
+   declaration_note                                     "This protocol, in both of its sealed forms - governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md and 
+   declared_before_any_strategy_code_measurement        dict ['conflict_ref', 'contamination_predicate', 'paired_immutability_check', 'predicate', 'sealer_indirection_note', 'supersedes_in_scope', 'why_not_path_based']
+   prior_attempt_modules_immutable                      dict ['attempt_1_list_source', 'attempt_1_modules', 'attempt_2_list_source', 'attempt_2_modules', 'count', 'digests_not_recorded_here', 'digests_recorded_by', 'g2_partition_lock_excluded']
+   serialisation                                        dict ['dates', 'numbers', 'rounding']
+   currency                                             'USD'
+   strategy_id                                          'SE100-G2-S3-C3-ROTATION-RA3'
+   candidate_index                                      3
+   candidate_index_note                                 "C3, not C2 and not C1. Attempt 3 is a distinct candidate specification, not a re-run of Attempt 2's: it holds
+   family                                               'CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE'
+   hypothesis                                           'Cross-sectional relative strength over a fixed 34-member ETF universe, held in an equally weighted top-k bask
+   what_this_attempt_changes_from_attempt_2             "Exactly two things, and nothing else. (1) The de-risk ladder loses its 5-to-8 percent rung, reverting to the 
+   what_this_attempt_adds_over_attempt_1                'Attempt 1 tested the rotation signal with no mechanism to reduce exposure before a research-shutdown breach: 
+   what_this_attempt_adds_over_attempt_1_carriage       'Copied verbatim from SE100-CFG-3103. It describes the risk architecture Attempt 3 still carries, minus one ru
+   adaptation_disclosure_verbatim                       "This pre-registration was designed after both Attempt 1 and Attempt 2's development results were known. Attem
+   adaptation_disclosure_carriage_requirement           dict ['attempt_3_encoding_addendum', 'encoding_note', 'enforcement', 'must_appear_verbatim_in', 'source']
+   what_makes_this_genuinely_cross_sectional            'The ranking scores all 34 eligible members against each other on one date and takes the top k. It is not k in
+   eligible_universe                                    dict ['eligibility_recheck_convention', 'excluded_symbols', 'member_count', 'members', 'source', 'source_sha256', 'unchanged_from_attempt_1', 'universe_identity_sha256', 'universe_version']
+   ranking_signal                                       dict ['formula', 'implementation_reuse', 'look_ahead_note', 'name', 'unchanged_from_attempt_1', 'undefined_result']
+   ranking_rule                                         dict ['sort_key', 'tie_break', 'unchanged_from_attempt_1']
+   position_count                                       dict ['axis', 'unchanged_from_attempt_1', 'values']
+   rebalance                                            dict ['attempt_2_note', 'axis', 'backward_looking_note', 'measured_counts', 'rule', 'unchanged_from_attempt_1', 'values']
+   execution                                            dict ['entry', 'execution_lag', 'fill_timing', 'no_discretionary_exits_superseded', 'one_order_per_symbol_per_session', 'order_kinds_this_attempt_may_issue', 'signal_exit']
+   position_sizing                                      dict ['attempt_1_formula', 'attempt_1_k1_half_cash_bias_neutralised', 'budget_evaluated_at_the_open', 'changed_from_attempt_1', 'equal_weight_is_an_entry_rule', 'round_down_note', 'target_gross_exposure', 'target_weight_formula', 'target_weights', 'why_changed']
+   concentration_ceiling                                dict ['non_binding_note', 'scope', 'source', 'source_sha256', 'unchanged_from_attempt_1', 'value']
+   mechanics_carried_unchanged                          dict ['blocks', 'method', 'why_this_matters']
+   risk_architecture                                    dict ['combined_scalar', 'components', 'derived_from', 'frozen_before_any_variant_is_run', 'id', 'name', 'not_part_of_the_grid', 'provenance', 'single_difference_from_ra2', 'state_ownership', 'why_not_gridded']
+   window                                               dict ['development', 'enforcement', 'prohibited', 'unchanged_from_attempt_1']
+   run_span                                             dict ['binding_symbol', 'binding_symbol_inception', 'carried_from', 'carried_from_sha256', 'development_union_sessions', 'members_missing_a_bar_at_run_start', 'recheck_requirement', 'reverification_required', 'run_end', 'run_start', 'run_start_weekday', 'sessions', 'symbols_ending_before_run_end', 'why_unchanged']
+   grid                                                 dict ['axes', 'enumeration_order', 'not_widened', 'size', 'unchanged_from_attempt_1', 'unchanged_from_attempt_2', 'variant_id_change_note', 'variant_id_format', 'variants', 'zero_padding_note']
+   runs_per_variant                                     dict ['both_gate', 'count', 'labels', 'scenarios', 'total_runs', 'unchanged_from_attempt_1']
+   multiple_comparisons_disclosure                      dict ['adaptive_design_note', 'cumulative_runs_this_hypothesis_family', 'cumulative_variants_this_hypothesis_family', 'no_correction_applied', 'runs_attempt_1', 'runs_attempt_2', 'runs_this_attempt', 'statement', 'third_attempt_note', 'variants_attempt_1', 'variants_attempt_2', 'variants_this_attempt']
+   representative_selection_rule                        dict ['frozen_before_any_variant_is_run', 'id', 'no_candidate_path', 'no_reselection', 'replaces', 'retrospective_check_disclosure', 'return_blind', 'second_fail_path', 'steps', 'structural_enforcement', 'unchanged_from_attempt_1', 'unchanged_from_attempt_2', 'why_it_changes']
+   gate_evaluation_scope                                dict ['conjunctive', 'criteria_source', 'evaluated_on', 'thresholds_changed_from_attempt_1', 'thresholds_changed_from_attempt_2', 'thresholds_changed_from_generation_1']
+   reported_for_every_variant_but_not_gating            list[18]
+   structural_consequences_declared_before_running      dict ['SC-1', 'SC-2', 'SC-3', 'SC-4', 'SC-5', 'SC-6', 'SC-7', 'SC-8']
+   reproducibility_requirements                         dict ['determinism', 'no_wall_clock_in_payloads', 'risk_state_trace_digest', 'seed', 'seed_note', 'selection_determinism']
+   adversarial_test_requirements                        dict ['AT-A', 'AT-B', 'AT-C', 'AT-D', 'AT-E', 'AT-F', 'AT-G', 'AT-H', 'AT-I', 'AT-J', 'AT-K', 'AT-L', 'AT-M', 'note', 'regression_floor']
+   conflicts_found                                      list[16]
+   conflicts_declared_in_the_gate_criteria              dict ['declared_in_g2_gate_criteria_ra3', 'inherited_and_restated_in_g2_gate_criteria_ra3', 'note']
+   post_seal_defect_rule                                dict ['applies_equally_to', 'rule']
+   explicit_non_authorizations                          list[16]
+   live_trading_authorized                              False
+
+PARTITION LOCK top-level keys (30): ['artifact_id', 'authorized_windows', 'binding_rules', 'charter_ref', 'constitution_ref', 'coverage_measured_from_disk', 'enforcement', 'generation', 'generation_1_holdout_state', 'generation_id', 'generation_identity', 'holdout_read_authorized', 'holdout_state', 'inherited_from_generation_1', 'live_trading_authorized', 'locked_before_any_strategy_result', 'locked_utc', 'partition', 'project', 'repo_state_id_location', 'run_id', 'sealed_data_on_disk_note', 'stage', 'stage_3_authorized', 'stage_4_authorized', 'status', 'title', 'validation_reuse_disclosure', 'validation_reuse_disclosure_sources', 'validation_window_state']
+====================================================================================================
+PROTOCOL.runs_per_variant
+{
+ "count": 2,
+ "labels": [
+  "#BASE",
+  "#STRESS"
+ ],
+ "scenarios": [
+  "BASE",
+  "STRESSED"
+ ],
+ "total_runs": 36,
+ "both_gate": "A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.",
+ "unchanged_from_attempt_1": true
+}
+====================================================================================================
+PROTOCOL.run_span
+{
+ "carried_from": "config/generation_2/g2_rotation_protocol.json",
+ "carried_from_sha256": "1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810",
+ "recheck_requirement": "The runner recomputes every value below from the loaded series and refuses to run if any differs.",
+ "run_start": "2008-07-28",
+ "run_start_weekday": "Monday",
+ "run_end": "2021-07-30",
+ "sessions": 3276,
+ "binding_symbol": "VEA",
+ "binding_symbol_inception": "2007-07-26",
+ "members_missing_a_bar_at_run_start": [],
+ "symbols_ending_before_run_end": [],
+ "development_union_sessions": 7178,
+ "why_unchanged": "Attempt 2 changes the strategy, not the data, the universe or the window. An identical run span is what makes the two attempts comparable at all.",
+ "reverification_required": "The span above is carried f
+====================================================================================================
+PROTOCOL.eligible_universe keys
+[
+ "eligibility_recheck_convention",
+ "excluded_symbols",
+ "member_count",
+ "members",
+ "source",
+ "source_sha256",
+ "unchanged_from_attempt_1",
+ "universe_identity_sha256",
+ "universe_version"
+]
+====================================================================================================
+PROTOCOL.adaptation_disclosure_carriage_requirement
+{
+ "must_appear_verbatim_in": [
+  "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md",
+  "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json",
+  "governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md",
+  "reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json",
+  "reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json"
+ ],
+ "enforcement": "The sealer and the package builder both assert byte-equality of this string against the value in this file. A paraphrase is a failure, not a stylistic choice.",
+ "encoding_note": "The string is stored with the em dashes of the source prose, as UTF-8, matching every other governance artifact in this tree. An earlier draft of this file substituted ASCII hyphen-minus on the stated grounds that the tree was ASCII-only; that was false \u2014 the Attempt 1 protocol Markdown alone carries 49 em dashes \u2014 and it would have made 'verbatim' mean 'verbatim except for two characters'. Byte-equality is checked against this stored form. The consequence is that no diagnostic script may print this string to a cp1252 console; scripts compare it and report a boolean instead.",
+ "attempt_3_encoding_addendum": "This attempt's string carries one character the Attempt 2 string did not: U+2212 MINUS SIGN, in the phrase naming the removed drawdown tier. It is stored as it appears in the source prose, for the same reason the em dashes are. A reader diffing the two strings for a hyphen will not find one and should not add one."
+}
+   must_appear_verbatim_in:
+      governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md                    exists=True
+      governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json                  exists=True
+      governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md             exists=False
+      reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json                exists=False
+      reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json        exists=True
+====================================================================================================
+EVIDENCE.selection.result
+{
+ "rule_id": "SE100-G2-SEL-2",
+ "selected_variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+ "decided_at_step": 2,
+ "eligible_variants": [
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K3-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K1-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K1-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K3-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K3-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K1-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K1-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K2-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K2-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K3-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L12-K3-QUARTERLY"
+ ],
+ "ineligible_variants": [],
+ "eligible_count": 18,
+ "ranking": [
+  {
+   "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+   "eligible": true,
+   "shutdown_events": 0,
+   "instability_score": "0.215471404",
+   "fill_count": 298
+  },
+  {
+   "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY",
+   "eligible": true,
+   "shutdown_events": 0,
+   "instability_score": "0.215520012",
+   "fill_count": 283
+  },
+  {
+   "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L12-K1-QUARTERLY",
+   "eligible": true,
+   "shutdown_events": 0,
+   "instability_score": "0.246609961",
+   "fill_count": 195
+  },
+  {
+   "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY",
+   "eligible": true,
+   "shutdown_events": 0,
+   "instability_score": "0.247419599",
+   "fill_count": 336
+  },
+  {
+   "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L06-K1-QUARTERLY",
+   "eligible": true,
+   "shutdown_events": 0,
+   "instability_score": "0.248621581",
+   "fill_count": 265
+  },
+  {
+   "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-MONTHLY",
+   "eligible": true,
+   "shutdown_events": 0,
+   "instability_score": "0.274579406",
+   "fill_count": 658
+  },
+  {
+   "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L12-K2-QUARTERLY",
+   "eligible": true,
+   "shutdown_events": 0,
+   "instability_score": "0.285600694",
+   "fill_count": 254
+  },
+  {
+   "variant_id": "SE100-G2-S3-C3-ROTA
+   selection top-level keys: ['decided_at_step', 'frozen_before_any_variant_is_run', 'inputs', 'neighbour_scores', 'no_reselection', 'note', 'outcome', 'result', 'return_blind', 'rule_id', 'rule_source', 'scored_quantities', 'selected_score', 'selected_variant_id', 'selection_input_fields', 'steps']
+====================================================================================================
+EVIDENCE.selection.steps
+[
+ {
+  "order": 1,
+  "criterion": "zero_research_shutdown_events",
+  "scope": "across BOTH runs of the variant"
+ },
+ {
+  "order": 2,
+  "criterion": "lowest_neighbourhood_instability_score",
+  "scope": null
+ },
+ {
+  "order": 3,
+  "criterion": "lowest_turnover",
+  "scope": null
+ },
+ {
+  "order": 4,
+  "criterion": "lexicographic_variant_id",
+  "scope": null
+ }
+]
+====================================================================================================
+EVIDENCE.selection.note+no_reselection
+{
+ "note": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) with instability score 0.215471404 over 4 neighbours, from 18 eligible of 18 variants.",
+ "no_reselection": "The representative is selected once, before any gate condition is evaluated. It is not reselected, re-ranked or substituted for any reason.",
+ "rule_id": "SE100-G2-SEL-2",
+ "rule_source": "SE100-CFG-3105 representative_selection_rule",
+ "return_blind": true,
+ "frozen_before_any_variant_is_run": true,
+ "decided_at_step": 2,
+ "outcome": "representative_selected",
+ "selected_variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"
+}
+====================================================================================================
+EVIDENCE.selection.selection_input_fields+scored_quantities
+{
+ "selection_input_fields": [
+  "variant_id",
+  "shutdown_events",
+  "fill_count",
+  "ladder_descents",
+  "lockout_arms",
+  "stops_filled"
+ ],
+ "scored_quantities": [
+  "fill_count",
+  "ladder_descents",
+  "lockout_arms",
+  "stops_filled"
+ ]
+}
+====================================================================================================
+EVIDENCE.stage_verdict
+{
+ "verdict": "FAIL",
+ "verdict_token": "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE",
+ "condition_token": "Either no representative exists, because every one of the eighteen variants recorded at least one research-shutdown event, or a representative exists and does not satisfy every hard condition.",
+ "fail_route": "REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION",
+ "route": "REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION",
+ "pass_token": "STAGE_3_G2_ATTEMPT_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+ "fail_token": "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE",
+ "prior_attempt_tokens_withheld": [
+  "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+  "STAGE_3_G2_NO_CANDIDATE",
+  "STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+  "STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE"
+ ],
+ "prior_attempt_tokens_note": "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_NO_CANDIDATE belong to Attempt 1. STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE belong to Attempt 2. Both attempts are closed. No Attempt 3 artifact may emit any of those four, and the Attempt 3 evaluator and package builder both assert that the verdict token written is one of the two sealed above and is none of the four.",
+ "constitutional_fail_result_equivalent": "STRATEGY_REJECTED_IN_DEVELOPMENT",
+ "token_naming_note": "See G2A3-CONFLICT-21. The fail token names the absence of an admissible candidate; the constitution's names the rejection of one. They denote the same stage outcome and both are recorded in the decision package. The Attempt 3 operating instruction named no token and required that the token be derived from this file, which is what has been done.",
+ "fail_is_a_deliverable": "FAIL \u2014 STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and does not license a nineteenth variant, a re-run with a different grid, a loosened risk constant, a third selection rule, or a promotion of the runner-up. Per SE100-CFG-3105 it closes the attempt: there is no Attempt 4 without a further disclosed adaptation authorised in a later session, and G2A3-CONFLICT-33 records what the cumulative multiplicity of a fourth would be.",
+ "representative_exists": true,
+ "selection_rule_id": "SE100-G2-SEL-2",
+ "selection_note": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) with instability score 0.215471404 over 4 neighbours, from 18 eligible of 18 variants.",
+ "admitted_candidates": [],
+ "candidates_evaluated": 1,
+ "combination_rule": "Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, NOT_EVALUABLE, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Attempt 3 declares one live candidate, so the cross-candidate disjunction is over a set of size one \u2014 see G2-CONFLICT-15 and G2A3-CONFLICT-24."
+}
+====================================================================================================
+EVIDENCE.candidate_results[0].admission_basis
+{
+ "conflict_ref": "G2A2-CONFLICT-25",
+ "conflict_status": "inherited from Attempt 2 and resolved the same way",
+ "resolution": "SE100-CFG-3105 scopes the gate across both runs and states that a condition is satisfied only if both runs satisfy it; SE100-CFG-3106 measures S3-C1 and S3-C4 on the base run and lists the stress run as reported_but_not_gating. Both were sealed in the same session and neither outranks the other, so the more restrictive reading is adopted: all seven conditions on #BASE, and S3-C1..S3-C6 also on #STRESS. S3-C7 is evaluated once, on base runs, because its own what_is_read fixes the neighbour side to base-run total return and gives no sealed basis for a stress-side comparison. Both condition sets are reported in full, so a reader can see exactly what the permissive base-only reading would have given. The Attempt 3 operating instruction states the conjunctive rule as 'all conditions on the base run' and then directs that the restrictive reading also be evaluated and both readings reported, citing this conflict by name; the instruction and the sealed resolution therefore agree.",
+ "evaluated_on": "The selected representative variant only, across both of its runs.",
+ "conjunctive": "All Gate 3 conditions must be satisfied. Constitution section 9.",
+ "both_gate": "A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.",
+ "criteria_source": "config/generation_2/g2_gate_criteria_ra3.json",
+ "neighbour_run_label": "#BASE",
+ "base_all_seven_satisfied": false,
+ "stress_first_six_satisfied": false,
+ "base_conditions_not_satisfied": [
+  "S3-C6"
+ ],
+ "stress_conditions_not_satisfied": [
+  "S3-C6"
+ ],
+ "s3_c7_stress_side_reported_not_gating": {
+  "id": "S3-C7",
+  "required_verbatim": "reasonable neighboring parameter values do not reverse the sign of net return",
+  "verdict": "MET",
+  "satisfied": true,
+  "measured": "4/4 neighbours match",
+  "threshold": "all 4 match, zero matches nothing",
+  "note": "Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's parameterisation is never revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3. It would also destroy the return-blind property of the selection rule, since the promotion would be driven by a return. This prohibition binds with additional force in Attempt 3, because SEL-2 already reads the neighbourhood for its o
+====================================================================================================
+EVIDENCE.window
+{
+ "name": "development",
+ "start": "1993-01-29",
+ "end": "2021-07-31",
+ "development_bound": "2021-07-31",
+ "run_span": {
+  "carried_from": "config/generation_2/g2_rotation_protocol.json",
+  "carried_from_sha256": "1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810",
+  "recheck_requirement": "The runner recomputes every value below from the loaded series and refuses to run if any differs.",
+  "run_start": "2008-07-28",
+  "run_start_weekday": "Monday",
+  "run_end": "2021-07-30",
+  "sessions": 3276,
+  "binding_symbol": "VEA",
+  "binding_symbol_inception": "2007-07-26",
+  "members_missing_a_bar_at_run_start": [],
+  "symbols_ending_before_run_end": [],
+  "development_union_sessions": 7178,
+  "why_unchanged": "Attempt 2 changes the strategy, not the data, the universe or the window. An identical run span is what makes the two attempts comparable at all.",
+  "reverification_required": "The span above is carried from Attempt 2 and must not be assumed. The Attempt 3 runner recomputes it from the loaded data before the first variant runs, asserts equality with every field recorded here, and writes the recomputation to reports/stage3_g2_attempt3/run_span_recheck.json. A mismatch is a blocker, not a value to adopt."
+ },
+ "latest_session_loaded": "2021-07-30",
+ "validation_read": false,
+ "generation_1_holdout_read": false,
+ "generation_2_holdout_read": false,
+ "enforcement": "load_grid_dataset truncates at the development bound and then audits the loaded bars separately, so a session dated 2021-08-01 or later would have to survive both a truncating loader and an independ
+====================================================================================================
+EVIDENCE.grid
+{
+ "axes": {
+  "lookback_months": [
+   3,
+   6,
+   12
+  ],
+  "top_k": [
+   1,
+   2,
+   3
+  ],
+  "rebalance_frequency": [
+   "MONTHLY",
+   "QUARTERLY"
+  ]
+ },
+ "variants_declared": 18,
+ "runs_per_variant": {
+  "count": 2,
+  "labels": [
+   "#BASE",
+   "#STRESS"
+  ],
+  "scenarios": [
+   "BASE",
+   "STRESSED"
+  ],
+  "total_runs": 36,
+  "both_gate": "A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.",
+  "unchanged_from_attempt_1": true
+ },
+ "runs_executed": 36,
+ "all_declared_runs_executed": true,
+ "revisions_after_seeing_a_result": 0,
+ "grid_widened_from_attempt_1": false,
+ "grid_widened_from_attempt_2": false
+}
+====================================================================================================
+EVIDENCE.risk_architecture
+{
+ "sealed": {
+  "id": "RA3",
+  "name": "Generation 2 Attempt 3 risk architecture",
+  "frozen_before_any_variant_is_run": true,
+  "not_part_of_the_grid": true,
+  "derived_from": "RA2, by deleting one ladder band. Four of the five components are identical.",
+  "why_not_gridded": "Every constant below is fixed and applied uniformly to all eighteen variants. Searching them alongside the rotation parameters would cross from a disclosed risk control into curve-fitting to 2008 and 2020 - the two episodes whose observation motivated this attempt in the first place. The grid remains exactly the eighteen rotation parameterisations of Attempt 1 and is not widened.",
+  "single_difference_from_ra2": "RA2-4's band 1 (0.05 <= dd < 0.08, scalar 0.75) is deleted and band 0 is extended to 0.08. No other threshold, scalar, formula, order of operations or code path differs. The engine subclasses Attempt 2's and overrides the band table and the state derived from it; see G2A3-CONFLICT-31.",
+  "provenance": "RA3-1, RA3-2, RA3-3 and RA3-5 are RA2-1, RA2-2, RA2-3 and RA2-5 unchanged, which are in turn the values of the Attempt 2 operating prompt and, for RA2-2 and RA2-3, of Generation 1's RA1. RA3-4 is Generation 1's RA1-5 ladder restored: see components.RA3-4.provenance, which quotes SE100-CFG-3103's own statement that only RA2-4's band 1 was new. Every constant in RA3 was therefore sealed before Attempt 1 ran.",
+  "components": {
+   "RA3-1": {
+    "name": "aggregate_exposure_ceiling",
+    "value": "0.50",
+    "unit": "fraction of equity",
+    "purpose": "Tighter than the base constitutional 95% gross ceiling.",
+    "definition": "gross(t) = sum over held symbols of quantity * close(t). The ceiling in force at session t is ceiling(t) = 0.50 * f(t) * equity(t), where f(t) is the combined risk scalar defined below. gross(t) must not exceed ceiling(t).",
+    "enforcement": {
+     "part_a_entry_clamp": {
+      "name": "AGGREGATE_RA2",
+      "rule": "At the fill open, the budget for an entry is clamped to max(0, 0.50 * f * equity_open - position_value_open), where position_value_open is the gross value of the book as already settled on that open. Because the Attempt 1 engine executes all SELL legs before any BUY leg and re-reads the book between buys, the clamp is evaluated against the settled book and cannot be breached by the ordering of legs within one rebalance.",
+      "why_a_new
+====================================================================================================
+EVIDENCE.gate_scope
+{
+ "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+ "evaluated_on": "The selected representative variant only, across both of its runs.",
+ "conjunctive": "All Gate 3 conditions must be satisfied. Constitution section 9.",
+ "both_gate": "A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.",
+ "criteria_source": "config/generation_2/g2_gate_criteria_ra3.json",
+ "conflict_ref": "G2A2-CONFLICT-25",
+ "conflict_status": "inherited from Attempt 2 and resolved the same way",
+ "scope_resolution": "SE100-CFG-3105 scopes the gate across both runs and states that a condition is satisfied only if both runs satisfy it; SE100-CFG-3106 measures S3-C1 and S3-C4 on the base run and lists the stress run as reported_but_not_gating. Both were sealed in the same session and neither outranks the other, so the more restrictive reading is adopted: all seven conditions on #BASE, and S3-C1..S3-C6 also on #STRESS. S3-C7 is evaluated once, on base runs, because its own what_is_read fixes the neighbour side to base-run total return and gives no sealed basis for a stress-side comparison. Both condition sets are reported in full, so a reader can see exactly what the permissive base-only reading would have given. The Attempt 3 operating instruction states the conjunctive rule as 'all conditions on the base run' and then directs that the restrictive reading also be evaluated and both readings reported, citing this conflict by name; the instruction and the sealed resolution therefore agree.",
+ "neighbour
+====================================================================================================
+EVIDENCE.universe
+{
+ "universe_version": "SE100-U1-d4917c2f7f1cd834",
+ "universe_identity_sha256": "d4917c2f7f1cd8344728a39165929b352766fbe7193b3c64e71a971749dcbf38",
+ "symbols_declared": 34,
+ "symbols_loaded": 34,
+ "symbols_missing": [],
+ "unchanged_from_attempt_1": true,
+ "eligibility_recheck_convention": "Generation 2 re-checks eligibility on development data only and never adds, drops or substitutes a symbol. The membership is Stage 1's and is frozen.",
+ "excluded_symbols": {
+  "AAPL": "Present in the data tree as a Stage 2 single-symbol fixture. Never a member of the eligible universe and never ranked."
+ }
+}
+====================================================================================================
+EVIDENCE.selection_determinism
+{
+ "requirement": "SE100-CFG-3105 reproducibility_requirements.selection_determinism",
+ "method": "SelectionInputV2 objects rebuilt from the recorded six-field JSON and rescored on a fresh call; the selector never sees the run objects on this pass",
+ "inputs_replayed": 18,
+ "selected_variant_id_first_pass": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+ "selected_variant_id_replay": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+ "selected_variant_identical": true,
+ "decided_at_step_identical": true,
+ "eligible_set_identical": true,
+ "ranking_identical": true,
+ "scores_identical": true,
+ "variants_whose_scores_differ": [],
+ "all_identical": true
+}
+====================================================================================================
+EVIDENCE.prior_attempt_module_verification
+{
+ "requirement": "AT-H",
+ "conflict_ref": "G2A3-CONFLICT-34",
+ "digest_source": "SE100-GOV-2007 contamination_measurement.prior_attempt_module_digests",
+ "module_count": 17,
+ "attempt_1_module_count": 9,
+ "attempt_2_module_count": 8,
+ "attempt_1_list_source": "SE100-CFG-3103.attempt_1_modules_immutable.modules, copied unchanged.",
+ "attempt_2_list_source": "The eight Generation 2 modules created by Attempt 2, enumerated by listing src/stockedge100/{strategies,backtest,reporting} and subtracting Attempt 1's nine and the Stage 1 module g2_partition_lock.py, which belongs to neither attempt.",
+ "excluded_and_why": "src/stockedge100/reporting/g2_partition_lock.py is a Generation 2 STAGE 1 module. It is immutable for the ordinary reason that every sealed module is, and it is covered by repo_state_id, but it is not a Stage 3 attempt module and is not listed here.",
+ "modules_that_moved": []
+}
+====================================================================================================
+EVIDENCE.prior_attempt_modules_immutable
+{
+ "count": 17,
+ "attempt_1_modules": [
+  "src/stockedge100/strategies/g2_rotation.py",
+  "src/stockedge100/strategies/g2_gate.py",
+  "src/stockedge100/strategies/g2_runner.py",
+  "src/stockedge100/strategies/g2_window_guard.py",
+  "src/stockedge100/backtest/g2_engine.py",
+  "src/stockedge100/backtest/g2_costs.py",
+  "src/stockedge100/reporting/g2_rotation_preregistration.py",
+  "src/stockedge100/reporting/g2_stage3_evidence.py",
+  "src/stockedge100/reporting/g2_stage3_package.py"
+ ],
+ "attempt_2_modules": [
+  "src/stockedge100/strategies/g2_rotation_ra1.py",
+  "src/stockedge100/strategies/g2_gate_ra1.py",
+  "src/stockedge100/strategies/g2_runner_ra1.py",
+  "src/stockedge100/backtest/g2_engine_ra1.py",
+  "src/stockedge100/backtest/g2_episodes_ra1.py",
+  "src/stockedge100/reporting/g2_rotation_ra1_preregistration.py",
+  "src/stockedge100/reporting/g2_stage3_attempt2_evidence.py",
+  "src/stockedge100/reporting/g2_stage3_attempt2_package.py"
+ ],
+ "attempt_1_list_source": "SE100-CFG-3103.attempt_1_modules_immutable.modules, copied unchanged.",
+ "attempt_2_list_source": "The eight Generation 2 modules created by Attempt 2, enumerated by listing src/stockedge100/{strategies,backtest,reporting} and subtracting Attempt 1's nine and the Stage 1 module g2_partition_lock.py, which belongs to neither attempt.",
+ "g2_partition_lock_excluded": "src/stockedge100/reporting/g2_partition_lock.py is a Generation 2 STAGE 1 module. It is immutable for the ordinary reason that every sealed module is, and it is covered by repo_state_id, but it is not a Stage 3 attempt module and is not listed her
+====================================================================================================
+EVIDENCE.ladder_engagement_comparison keys
+{
+ "requirement": "Operating instruction section 4.3: run the grid fresh under RA3 and verify that at least the ladder-engagement statistics differ from Attempt 2's.",
+ "runs_compared": 36,
+ "attempt_2_source": "reports/stage3_g2_attempt2/grid_results.json",
+ "statistics_compared": [
+  "ladder_descents",
+  "ladder_ascents",
+  "lockout_arms",
+  "lockout_recoveries_blocked",
+  "stops_triggered",
+  "stops_filled"
+ ],
+ "per_statistic": [
+  "ladder_ascents",
+  "ladder_descents",
+  "lockout_arms",
+  "lockout_recoveries_blocked",
+  "stops_filled",
+  "stops_triggered"
+ ],
+ "sessions_at_full_sizing": [
+  "attempt_2_band",
+  "attempt_2_total",
+  "attempt_3_band",
+  "attempt_3_total",
+  "differs",
+  "note",
+  "runs_differing"
+ ],
+ "runs_identical_on_every_compared_statistic": [],
+ "at_least_one_statistic_differs": true,
+ "band_indices_are_not_comparable": "RA2 declares 4 bands and RA3 declares 3, so the same integer index denotes a different drawdown band in each. Compare the sizing scalar an index maps to, or the session count in the full-sizing band; do not compare the index."
+}
+====================================================================================================
+EVIDENCE.adaptation_disclosure_carriage
+{
+ "this_file_is_a_required_carrier": true,
+ "enforcement": "The sealer and the package builder both assert byte-equality of this string against the value in this file. A paraphrase is a failure, not a stylistic choice.",
+ "encoding_note": "The string is stored with the em dashes of the source prose, as UTF-8, matching every other governance artifact in this tree. An earlier draft of this file substituted ASCII hyphen-minus on the stated grounds that the tree was ASCII-only; that was false \u2014 the Attempt 1 protocol Markdown alone carries 49 em dashes \u2014 and it would have made 'verbatim' mean 'verbatim except for two characters'. Byte-equality is checked against this stored form. The consequence is that no diagnostic script may print this string to a cp1252 console; scripts compare it and report a boolean instead.",
+ "attempt_3_encoding_addendum": "This attempt's string carries one character the Attempt 2 string did not: U+2212 MINUS SIGN, in the phrase naming the removed drawdown tier. It is stored as it appears in the source prose, for the same reason the em dashes are. A reader diffing the two strings for a hyphen will not find one and should not add one.",
+ "source": "The Attempt 3 operating instruction, section 1, which requires this paragraph to be carried verbatim in the decision report and everywhere the development result is referenced.",
+ "characters": 1507,
+ "sha256_of_utf8": "ce1d6476f44562310fb059c5817645baa25477cc4f6168b414f3423834c8e925",
+ "sha256_covers": "the UTF-8 encoding of the string carried in this file's adaptation_disclosure_verbatim field, which is the sealed string byte for byte",
+ "carried_byte_identically_from": "config/generation_2/g2_rotation_ra3_protocol.json"
+}
+   evidence carriage must_appear_verbatim_in: ['governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md', 'governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json', 'governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md', 'reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json', 'reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json']
+====================================================================================================
+EVIDENCE.variant_table_is_descriptive_only
+[
+ "net return, both runs",
+ "maximum drawdown, both runs",
+ "profit factor, both runs",
+ "closed trade count, both runs",
+ "best-trade-removed return, both runs",
+ "research-shutdown event count and the session of each, both runs",
+ "total fill count, both runs",
+ "de-risk ladder activations (downward transitions), both runs",
+ "de-risk ladder upward transitions and deepest band reached, both runs",
+ "sessions spent in each ladder band, both runs",
+ "re-entry lockout arms and sessions on which a recovery was blocked by it, both runs",
+ "stop exits and the realized loss at each, both runs",
+ "throttle legs issued and throttle legs skipped below minimum notional, both runs",
+ "maximum observed gross exposure fraction, both runs",
+ "minimum and mean combined risk scalar, and sessions on which it was below 1, both runs",
+ "ranking digest, both runs",
+ "The SE100-G2-SEL-2 stability score, its four per-quantity components, and the identity and score of every neighbour used to compute it.",
+ "The Attempt 2 counterpart of each ladder, lockout and stop statistic, so the required comparison is on the same page as the figure it compares."
+]
+====================================================================================================
+EVIDENCE.reported_for_every_variant_coverage
+{
+ "rule": "each sealed reported-but-not-gating quantity, and the variant_table columns carrying it for each of the two declared runs; verified against every row of the table at build time, not asserted",
+ "quantities": 18,
+ "quantities_sealed": 18,
+ "map": [
+  {
+   "quantity": "net return, both runs",
+   "columns": [
+    "total_return"
+   ],
+   "scope": "per_run"
+  },
+  {
+   "quantity": "maximum drawdown, both runs",
+   "columns": [
+    "max_drawdown"
+   ],
+   "scope": "per_run"
+  },
+  {
+   "quantity": "profit factor, both runs",
+   "columns": [
+    "profit_factor"
+   ],
+   "scope": "per_run"
+  },
+  {
+   "quantity": "closed trade count, both runs",
+   "columns": [
+    "closed_trades",
+    "closed_episodes"
+   ],
+   "scope": "per_run"
+  },
+  {
+   "quantity": "best-trade-removed return, both runs",
+   "columns": [
+    "best_trade_removed_return"
+   ],
+   "scope": "per_run"
+  },
+  {
+   "quantity": "research-shutdown event count and the session of each, both runs",
+   "columns": [
+    "research_shutdown_events",
+    "shutdown_session"
+   ],
+   "scope": "per_run"
+  },
+  {
+   "quantity": "total fill count, both runs",
+   "columns": [
+    "fills"
+   ],
+   "scope": "per_run"
+  },
+  {
+   "quantity": "de-risk ladder activations (downward transitions), both runs",
+   "columns": [
+    "ladder_descents"
+   ],
+   "scope": "per_run"
+  },
+  {
+   "quantity": "de-risk ladder upward transitions 
+====================================================================================================
+EVIDENCE.multiple_comparisons_disclosure
+{
+ "variants_this_attempt": 18,
+ "runs_this_attempt": 36,
+ "variants_attempt_1": 18,
+ "runs_attempt_1": 36,
+ "variants_attempt_2": 18,
+ "runs_attempt_2": 36,
+ "cumulative_variants_this_hypothesis_family": 54,
+ "cumulative_runs_this_hypothesis_family": 108,
+ "no_correction_applied": "No multiplicity correction is applied to the gate thresholds, because the thresholds are constitutional and may not be altered by a stage that would benefit from altering them. The multiplicity is disclosed instead, and it is the reason a development pass is explicitly not evidence of an edge.",
+ "adaptive_design_note": "The 54 cumulative variants are not 54 independent tests. Attempt 2's risk architecture was chosen after seeing where Attempt 1 broke; Attempt 3's ladder change and selection rule were chosen after seeing how Attempt 2 behaved. The effective number of researcher degrees of freedom is larger than 54 and grows faster than the variant count, because each attempt conditions on all preceding results. It is not quantified here because any quantification would itself be a choice made after the fact.",
+ "third_attempt_note": "A third adaptation on one hypothesis family is the point at which a development PASS carries very little evidential weight on its own. This is stated before the run. See G2A3-CONFLICT-33.",
+ "statement": "See adaptation_disclosure_verbatim, which is the binding text and must be carried verbatim wherever this attempt's development result is referenced."
+}
+====================================================================================================
+EVIDENCE.gate_evaluation_scope
+{
+ "evaluated_on": "The selected representative variant only, across both of its runs.",
+ "conjunctive": "All Gate 3 conditions must be satisfied. Constitution section 9.",
+ "criteria_source": "config/generation_2/g2_gate_criteria_ra3.json",
+ "thresholds_changed_from_attempt_1": "none",
+ "thresholds_changed_from_generation_1": "none",
+ "thresholds_changed_from_attempt_2": "none"
+}
+====================================================================================================
+EVIDENCE.refs_reverified
+"Every digest in this block, in attempt_1_ref and in attempt_2_ref was recomputed from the file it names at the moment this file was generated. None was transcribed from SE100-CFG-3103 without being checked against the file itself."
+====================================================================================================
+EVIDENCE.conflicts_declared_in_the_gate_criteria
+{
+ "note": "The Attempt 3 conflict numbering is one space shared by this file and SE100-CFG-3106, exactly as Attempt 2's was shared by SE100-CFG-3103 and SE100-CFG-3104. Ids 18 to 25 were taken by Attempt 2's criteria file; ids 26 to 33 are fresh ids taken by Attempt 3's criteria file; this file takes 34 onward. Four entries in Attempt 3's criteria file reuse a number below 26 on purpose: G2A3-CONFLICT-19, 21, 22 and 24 each supersede in scope the same-numbered G2A2 entry, so a superseding conflict keeps its predecessor's number and changes only its prefix. The prefix makes the two distinct ids. Nothing is duplicated across the two files, so the two cannot drift into disagreeing versions of one conflict.",
+ "declared_in_g2_gate_criteria_ra3": [
+  "G2A3-CONFLICT-19",
+  "G2A3-CONFLICT-21",
+  "G2A3-CONFLICT-22",
+  "G2A3-CONFLICT-24",
+  "G2A3-CONFLICT-26",
+  "G2A3-CONFLICT-27",
+  "G2A3-CONFLICT-28",
+  "G2A3-CONFLICT-29",
+  "G2A3-CONFLICT-30",
+  "G2A3-CONFLICT-31",
+  "G2A3-CONFLICT-32",
+  "G2A3-CONFLICT-33"
+ ],
+ "inherited_and_restated_in_g2_gate_criteria_ra3": [
+  "S3-CONFLICT-1",
+  "S3-CONFLICT-3",
+  "G2-CONFLICT-6",
+  "G2-CONFLICT-7",
+  "G2-CONFLICT-15",
+  "G2A2-CONFLICT-18",
+  "G2A2-CONFLICT-20",
+  "G2A2-CONFLICT-23",
+  "G2A2-CONFLICT-25"
+ ]
+}
+====================================================================================================
+EVIDENCE.mechanics_carried_unchanged
+{
+ "blocks": [
+  "eligible_universe",
+  "ranking_signal",
+  "ranking_rule",
+  "position_count",
+  "rebalance",
+  "execution",
+  "position_sizing",
+  "concentration_ceiling",
+  "window",
+  "run_span",
+  "grid",
+  "runs_per_variant",
+  "gate_evaluation_scope"
+ ],
+ "method": "Each block was copied from SE100-CFG-3103 programmatically, not retyped, so a transcription difference between the two attempts is impossible by construction. Only grid.variant_id_format and grid.variants[].variant_id differ, because a variant id encodes the candidate index and the architecture name.",
+ "why_this_matters": "Attempt 3 changes two things. Any third difference, including an accidental one in a constant nobody re-read, would make the result uninterpretable."
+}
+====================================================================================================
+CRITERIA.conflicts_found (21) ids and first words:
+   S3-CONFLICT-1          {'id': 'S3-CONFLICT-1', 'status': 'inherited from Generation 1 via Attempts 1 and 2, unchanged', 'description': 'The frozen JSON companion for gate 3 
+   S3-CONFLICT-3          {'id': 'S3-CONFLICT-3', 'status': 'inherited, and less load-bearing in Attempt 3 than in Attempt 2 <U+2014> but not by enough to change anything', 'de
+   G2-CONFLICT-6          {'id': 'G2-CONFLICT-6', 'status': 'inherited from Attempts 1 and 2, carried forward, still qualified by G2A2-CONFLICT-23', 'description': "S3-C5's Gen
+   G2-CONFLICT-7          {'id': 'G2-CONFLICT-7', 'status': 'inherited from Attempts 1 and 2, carried forward, and further qualified by G2A3-CONFLICT-22 and G2A3-CONFLICT-27', 
+   G2-CONFLICT-15         {'id': 'G2-CONFLICT-15', 'status': 'inherited from Attempts 1 and 2, carried forward', 'description': 'Generation 1 evaluated Gate 3 as a disjunction 
+   G2A2-CONFLICT-18       {'id': 'G2A2-CONFLICT-18', 'status': 'inherited from Attempt 2 and applies with undiminished force', 'description': "Attempt 2's aggregate throttle an
+   G2A3-CONFLICT-19       {'id': 'G2A3-CONFLICT-19', 'supersedes_in_scope': "G2A2-CONFLICT-19, which described RA2's three-rung ladder and is not edited", 'description': "RA3's
+   G2A2-CONFLICT-20       {'id': 'G2A2-CONFLICT-20', 'status': 'inherited from Attempt 2, and its two opposing effects are unchanged in kind', 'description': 'S3-C4 requires at
+   G2A3-CONFLICT-21       {'id': 'G2A3-CONFLICT-21', 'supersedes_in_scope': "G2A2-CONFLICT-21, which sealed Attempt 2's tokens and is not edited", 'description': 'The Attempt 3
+   G2A3-CONFLICT-22       {'id': 'G2A3-CONFLICT-22', 'supersedes_in_scope': "G2A2-CONFLICT-22, which named RA2's five constants and is not edited", 'description': 'S3-C7 asks w
+   G2A2-CONFLICT-23       {'id': 'G2A2-CONFLICT-23', 'status': 'inherited from Attempt 2, unchanged', 'description': "G2-CONFLICT-6 defines the S3-C5 per-trade multiple as r[i]
+   G2A3-CONFLICT-24       {'id': 'G2A3-CONFLICT-24', 'supersedes_in_scope': "G2A2-CONFLICT-24, which declared Attempt 2's candidate index and is not edited", 'description': "SE
+   G2A2-CONFLICT-25       {'id': 'G2A2-CONFLICT-25', 'status': 'inherited from Attempt 2 and resolved the same way', 'description': "The protocol seal says the gate is evaluate
+   G2A3-CONFLICT-26       {'id': 'G2A3-CONFLICT-26', 'severity': 'material <U+2014> this is the reason Attempt 3 needs its own protocol at all, alongside RA3', 'description': "
+   G2A3-CONFLICT-27       {'id': 'G2A3-CONFLICT-27', 'description': "The Attempt 3 operating instruction describes the one-step neighbour set as 'up to 4 neighbours, fewer at g
+   G2A3-CONFLICT-28       {'id': 'G2A3-CONFLICT-28', 'description': "SE100-CFG-3103's representative_selection_rule.no_candidate_path.attempt_closes states: 'No Attempt 3 is au
+   G2A3-CONFLICT-29       {'id': 'G2A3-CONFLICT-29', 'description': "RA3 is RA2 with one ladder rung deleted. Every rung of a de-risk ladder is a mechanism that reduces exposur
+   G2A3-CONFLICT-30       {'id': 'G2A3-CONFLICT-30', 'status': 'restatement of G2-CONFLICT-4 and G2A2-CONFLICT-10, unchanged and unrepaired', 'description': 'repo_state_id cove
+   G2A3-CONFLICT-31       {'id': 'G2A3-CONFLICT-31', 'description': "stockedge100.backtest.g2_engine_ra3.RotationEngineRA3 subclasses Attempt 2's RotationEngineRA1 and re-deriv
+   G2A3-CONFLICT-32       {'id': 'G2A3-CONFLICT-32', 'description': "SEL-2's per-quantity dissimilarity is abs(a - b) / max(abs(a), abs(b), 1), as specified. When a variant and
+   G2A3-CONFLICT-33       {'id': 'G2A3-CONFLICT-33', 'description': "This is the third disclosed adaptation on one hypothesis family. Across the three attempts the family has c

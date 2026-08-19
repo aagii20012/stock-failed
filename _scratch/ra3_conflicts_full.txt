@@ -1,0 +1,240 @@
+
+
+########## PROTOCOL CFG-3105 conflicts_found: 15
+
+-- G2A2-CONFLICT-1   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  Per-session decision-taking departs from Attempt 1's sealed execution.no_discretionary_exits clause.
+   resolution               The clause is narrowed to entries rather than weakened: Attempt 2 may issue risk-reducing SELL orders between rebalances and may issue no BUY of any kind. The ranking is still consulted only on scheduled rebalance sessions.
+   see                      execution.no_discretionary_exits_superseded
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A2-CONFLICT-2   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  The 50% aggregate exposure ceiling has no cost-model derivation route: g2_costs.derive_mapping permits exactly one JSON-pointer override and it is spent on /account/max_open_risky_positions.
+   resolution               RA2-1 is enforced as a new named engine clamp AGGREGATE_RA2 in the Attempt 2 engine subclass, in addition to the inherited 0.95 AGGREGATE clamp, which stays in place and is never binding. The sealed cost model is not modified.
+   see                      risk_architecture.components.RA2-1.enforcement.part_a_entry_clamp
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A2-CONFLICT-4   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  Target weights change from min(0.95/k, 0.50) to min(0.50/k, 0.50).
+   resolution               Derived from the ceiling that actually binds. Declared here before any run and checked against this table by the candidate.
+   see                      position_sizing
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A2-CONFLICT-5   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  Stop and throttle decisions carry one session of execution lag.
+   resolution               Accepted and measured. It is the constitutional next-open convention, which the research shutdown itself obeys.
+   see                      execution.execution_lag
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A2-CONFLICT-7   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  Attempt 1's declared k=1 half-cash bias (its SC-3) is removed as a side effect of RA2-1.
+   resolution               Recorded so that a reader comparing selection outcomes across the two attempts knows the k axis is no longer confounded with gross exposure.
+   see                      position_sizing.attempt_1_k1_half_cash_bias_neutralised
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A2-CONFLICT-11   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  The per-position concentration ceiling (0.50) now equals the aggregate ceiling, so it is non-binding for k>=2 and coincident with RA2-1 at k=1.
+   resolution               Left in place and still enforced. A clamp that never binds is not a clamp that may be removed.
+   see                      concentration_ceiling.non_binding_note
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A2-CONFLICT-12   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  The sealed 5% minimum cash buffer can never bind at a 50% gross ceiling.
+   resolution               Enforced anyway and reported as never binding.
+   see                      structural_consequences_declared_before_running.SC-5
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A2-CONFLICT-13   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  The RA2-2 volatility measure is taken on an equity curve that RA2-2 itself influences.
+   resolution               The feedback is negative, damped by a 20-session lag, and cannot diverge. Not corrected - correcting it would require a counterfactual unlevered equity curve. The realized distribution of the scalar is reported instead.
+   see                      risk_architecture.components.RA2-2.self_reference
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A2-CONFLICT-14   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  Position carries no entry price, so the 8% stop reference must be defined.
+   resolution               Frozen as cost_basis / quantity, the all-in per-share cost including commission and fees. Marginally conservative and invariant under a partial trim.
+   see                      risk_architecture.components.RA2-3.reference_price_definition
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A2-CONFLICT-16   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  stockedge100.backtest.orders.REASONS is a closed declared set with no entry for an aggregate-ceiling rejection.
+   resolution               An entry clamped to zero by AGGREGATE_RA2 is rejected as INSUFFICIENT_CASH with the clamp named in the detail string. The sealed set is not widened at runtime.
+   see                      risk_architecture.components.RA2-1.enforcement.part_a_entry_clamp
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A2-CONFLICT-17   keys=['carried_from', 'id', 'resolution', 'see', 'summary']
+   summary                  A throttle trim below the sealed minimum order notional is skipped, so the aggregate ceiling can be transiently exceeded by less than one minimum lot.
+   resolution               Skipped legs are counted and reported per variant, and the ceiling assertion admits exactly this slack and no more.
+   see                      risk_architecture.components.RA2-1.enforcement.part_b_continuous_throttle
+   carried_from             SE100-CFG-3103, copied verbatim. The mechanism it describes is inherited by Attempt 3 unchanged, so the conflict is inherited unchanged and keeps its original id.
+
+-- G2A3-CONFLICT-34   keys=['id', 'resolution', 'see', 'summary', 'supersedes_in_scope']
+   supersedes_in_scope      G2A2-CONFLICT-3, which declared a content-based contamination predicate over Attempt 1's nine modules and is not edited.
+   summary                  The paired immutability check must now cover seventeen modules, not nine: Attempt 2's eight became immutable when Attempt 2 closed, and a check that still counted nine would pass while an Attempt 2 module was being rewritten.
+   resolution               prior_attempt_modules_immutable enumerates both lists separately and declares the total. The Attempt 3 sealer refuses to seal unless it measures seventeen, and the count is a literal in the sealer so a silently shortened list fails loudly rather than quietly.
+   see                      prior_attempt_modules_immutable, declared_before_any_strategy_code_measurement
+
+-- G2A3-CONFLICT-35   keys=['id', 'resolution', 'see', 'summary', 'supersedes_in_scope']
+   supersedes_in_scope      G2A2-CONFLICT-6, which disclosed that Attempt 2's pre-registration was written after Attempt 1's results were known, and is not edited.
+   summary                  This pre-registration was written after TWO attempts' development results were known, and both of its changes were chosen in response to the second. Pre-registration constrains what happens after this file is sealed; it cannot undo what was known before.
+   resolution               The adaptation is disclosed in adaptation_disclosure_verbatim, which is carried byte for byte into five artifacts and enforced by both the sealer and the package builder. The multiplicity is disclosed as 54 variants and 108 runs with an explicit statement that the effective degrees of freedom exceed the count. No threshold is adjusted in either direction to compensate.
+   see                      adaptation_disclosure_verbatim, multiple_comparisons_disclosure, G2A3-CONFLICT-33
+
+-- G2A3-CONFLICT-36   keys=['id', 'resolution', 'see', 'summary', 'supersedes_in_scope']
+   supersedes_in_scope      G2A2-CONFLICT-9, which recorded the same collision for Attempt 2's token and is not edited.
+   summary                  Both fail routes \u2014 no eligible representative, and a representative that fails the gate \u2014 emit the same token, STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE, although they are different findings. Under RA3 the two routes are also more nearly equally likely than they were in Attempt 2, where the first was effectively closed.
+   resolution               The route is recorded as an explicit fail_route field in the verdict record, in the gate conditions and in the report prose. The token is not split, because the token vocabulary is sealed in SE100-CFG-3106 and minting a third would be a stage inventing its own verdict space.
+   see                      representative_selection_rule.no_candidate_path, .second_fail_path
+
+-- G2A3-CONFLICT-37   keys=['id', 'resolution', 'see', 'summary', 'supersedes_in_scope']
+   supersedes_in_scope      G2A2-CONFLICT-8, which recorded that the Attempt 2 operating prompt named verdict tokens existing in no artifact, and is not edited.
+   summary                  The Attempt 3 operating instruction names no verdict token at all. It requires a token 'of your own derivation' and directs that the sealed criteria file be grepped for the actual strings rather than inventing one from the prompt.
+   resolution               There is no prompt string to conflict with, so the tokens are minted once, in SE100-CFG-3106's verdict_token_derivation, and every other artifact reads them from there. This is the first attempt in which the prompt and the sealed derivation cannot disagree, which removes the failure mode G2A2-CONFLICT-8 described rather than resolving it a second time. The four tokens belonging to Attempts 1 and 2 are read from those attempts' own files and asserted absent from every Attempt 3 verdict field.
+   see                      SE100-CFG-3106 verdict_token_derivation, G2A3-CONFLICT-21
+
+
+########## CRITERIA CFG-3106 conflicts_found: 21
+
+-- S3-CONFLICT-1   keys=['action_taken', 'description', 'id', 'resolution', 'status']
+   status                   inherited from Generation 1 via Attempts 1 and 2, unchanged
+   description              The frozen JSON companion for gate 3 carries five thresholds. The frozen Markdown carries seven conditions: the same five plus the profit-concentration condition and the neighbouring-parameter sign-stability condition.
+   resolution               The Markdown is authoritative and more restrictive. All seven conditions are evaluated and all seven must pass.
+   action_taken             Reported, not repaired. No frozen artifact is edited.
+
+-- S3-CONFLICT-3   keys=['action_taken', 'attempt_3_note', 'description', 'id', 'resolution', 'status']
+   status                   inherited, and less load-bearing in Attempt 3 than in Attempt 2 \u2014 but not by enough to change anything
+   description              Gate 3 requires maximum drawdown no worse than 15%. Constitution section 5.1 puts the research shutdown at exactly 15% below the running high-water mark. The two thresholds are the same number.
+   resolution               Any variant that trips the shutdown has by construction breached S3-C2, and its equity curve is flat from liquidation onward because entries are permanently blocked.
+   attempt_3_note           See G2A3-CONFLICT-19. RA3's de-risk ladder reduces exposure at 8 and 10 percent drawdown, both of which still sit inside the 15 percent threshold S3-C2 measures. The -5% rung Attempt 2 added is removed, so the ladder now engages later and less often, but the two rungs that remain are still positioned below the gate threshold and were still chosen with that threshold in view. A MET verdict on S3-C2 remains substantially a restatement of the fact that the ladder ran, and must not be read as independent evidence.
+   action_taken             Recorded. No threshold changed.
+
+-- G2-CONFLICT-6   keys=['action_taken', 'description', 'id', 'resolution', 'status']
+   status                   inherited from Attempts 1 and 2, carried forward, still qualified by G2A2-CONFLICT-23
+   description              S3-C5's Generation 1 measurement reconstructs equity sequentially over closed trades in exit order and is exact only because Generation 1 could hold at most one position. Generation 2 holds up to three at once, so trades overlap and the sequential reconstruction is no longer exact.
+   resolution               The per-trade multiple is taken against the equity base that actually existed when the trade was entered: r[i] = 1 + pnl[i] / E_entry[i], with E_entry[i] the account equity at the close of the session immediately preceding that trade's entry fill, or starting equity if there is no such session. Carried into Attempt 3 unchanged in form, with pnl[i] the episode P&L of G2A2-CONFLICT-18.
+   action_taken             Inherited. Generation 1's method is not edited and its file is not touched.
+
+-- G2-CONFLICT-7   keys=['action_taken', 'attempt_3_note', 'description', 'id', 'resolution', 'status']
+   status                   inherited from Attempts 1 and 2, carried forward, and further qualified by G2A3-CONFLICT-22 and G2A3-CONFLICT-27
+   description              S3-C7's Generation 1 implementation raises ConfigViolation unless exactly four robustness neighbours are supplied. A three-axis grid does not produce exactly four.
+   resolution               The neighbour set is defined structurally \u2014 every variant differing from the representative in exactly one axis by exactly one step, on the orderings lookback 3 < 6 < 12, k 1 < 2 < 3, frequency MONTHLY < QUARTERLY \u2014 and the same sign-stability predicate is evaluated over that set. The rule is a function of the representative's grid position and is fixed before the representative is known.
+   attempt_3_note           Attempt 3 gives this definition a second consumer. SE100-G2-SEL-2's stability score is averaged over the SAME neighbour set, computed by the same function from the same sealed axis_orderings. The two consumers cannot drift apart, because there is one implementation and the selection module imports it rather than restating it.
+   action_taken             Inherited unchanged. Generation 1's condition_7 is not modified and is not called.
+
+-- G2-CONFLICT-15   keys=['action_taken', 'description', 'id', 'resolution', 'status']
+   status                   inherited from Attempts 1 and 2, carried forward
+   description              Generation 1 evaluated Gate 3 as a disjunction across six independently declared candidates. Attempt 3 declares one candidate whose parameterisation is fixed by a frozen return-blind selection rule over eighteen variants.
+   resolution               The gate is evaluated on the single selected representative. The disjunction of constitution section 9 is over a candidate set of size one. Evaluating all eighteen and passing the stage if any one of them passes would be the multiplicity abuse the selection rule exists to prevent.
+   action_taken             Inherited. The other seventeen variants are reported descriptively and are never used to reach a verdict.
+
+-- G2A2-CONFLICT-18   keys=['action_taken', 'attempt_3_status', 'description', 'id', 'not_repaired_upstream', 'resolution', 'status']
+   status                   inherited from Attempt 2 and applies with undiminished force
+   description              Attempt 2's aggregate throttle and de-risk ladder both reduce an existing position without closing it. stockedge100.backtest.portfolio.Portfolio.apply_fill appends a Trade only when a sale takes the position to exactly zero; on a partial sale it rewrites the position's cost basis pro rata and appends nothing, so a trim's proceeds are attributed to no trade and the recorded P&L can differ from the episode's true realized P&L in sign.
+   attempt_3_status         RA3 keeps the aggregate throttle unchanged and keeps two of RA2's three ladder rungs, so both trimming mechanisms survive. The conflict is inherited without qualification and its resolution is inherited without modification.
+   resolution               Attempt 3 evaluates the four trade-based conditions on the EPISODE LEDGER built by stockedge100.backtest.g2_episodes_ra1, imported from Attempt 2 unmodified. An episode is one entry fill in a symbol together with every subsequent sale of that symbol up to and including the sale that returns the position to zero; pnl = exit_cash + dividends - entry_cash.
+   not_repaired_upstream    portfolio.py is a frozen Generation 1 module and is not edited. g2_episodes_ra1.py is a closed-attempt module and is not edited either; it is imported.
+   action_taken             Inherited before any Attempt 3 variant is run.
+
+-- G2A3-CONFLICT-19   keys=['action_taken', 'consequence', 'description', 'id', 'resolution', 'supersedes_in_scope', 'what_changed_from_attempt_2']
+   supersedes_in_scope      G2A2-CONFLICT-19, which described RA2's three-rung ladder and is not edited
+   description              RA3's de-risk ladder reduces exposure at 8 and 10 percent drawdown from the equity high-water mark. Gate 3's S3-C2 asks whether maximum drawdown stayed at or below 15 percent, and the representative-selection rule independently requires zero research-shutdown events, which is the same 15 percent measured from the same high-water mark.
+   consequence              A MET verdict on S3-C2 remains substantially mechanical, produced by three overlapping devices \u2014 a ladder designed to fire below the threshold, a selection screen that discards anything reaching it, and the condition itself. It is therefore weak evidence that the rotation hypothesis is true.
+   what_changed_from_attempt_2 One of the three rungs is gone. RA2 began throttling at a 5 percent decline from peak; RA3 holds full sizing until 8 percent. The engineered component of a MET verdict is smaller than Attempt 2's by exactly that rung and no more. It is not absent, and this file does not claim it is.
+   resolution               S3-C2 is evaluated unchanged, at the unchanged threshold, and a MET verdict is recorded with this note attached in the decision package. A NOT_MET verdict is informative in the other direction: it would mean the ladder failed at the job it was kept to do, and \u2014 given that Attempt 2 recorded zero shutdowns across all thirty-six runs \u2014 it would be direct evidence that the removed rung was load-bearing.
+   action_taken             Declared before results. No threshold or predicate changed.
+
+-- G2A2-CONFLICT-20   keys=['action_taken', 'attempt_3_status', 'description', 'id', 'resolution', 'status']
+   status                   inherited from Attempt 2, and its two opposing effects are unchanged in kind
+   description              S3-C4 requires at least 30 closed trades. The risk architecture pushes the trade count in both directions at once and the net sign is not predictable before the run: the 8 percent per-position stop creates exits Attempt 1 had no mechanism to generate, while the 50 percent aggregate ceiling, the volatility scalar, the ladder and the 10-session re-entry lockout all reduce the size and sometimes the existence of entries.
+   attempt_3_status         RA3 weakens only the ladder side of that balance. The stop, the ceiling, the volatility scalar and the lockout are unchanged, so the count-reducing mechanisms are all still present and only one of them fires less often.
+   resolution               The floor of 30 stands. The lower-frequency exception is NOT invoked and could not lower the floor in any case, because it permits a longer evidence requirement rather than a smaller count.
+   action_taken             Declared before results. exception_invoked stays false.
+
+-- G2A3-CONFLICT-21   keys=['action_taken', 'description', 'distinct_from_prior_attempt_tokens', 'id', 'resolution', 'supersedes_in_scope']
+   supersedes_in_scope      G2A2-CONFLICT-21, which sealed Attempt 2's tokens and is not edited
+   description              The Attempt 3 operating instruction does not name verdict tokens at all; it instructs that the tokens be derived from the sealed criteria file rather than from the prompt. There is therefore no prompt-versus-disk conflict of the kind Attempt 2 recorded \u2014 but there is also no file on disk that defines an Attempt 3 token until this one exists.
+   resolution               This file is the disk. Both tokens are sealed here, before any Attempt 3 strategy module runs and before any variant is evaluated, so neither can be shaped by an outcome. They are formed by the same construction Attempt 2 used, with ATTEMPT_2 replaced by ATTEMPT_3, so the naming is a continuation of a recorded convention rather than an invention. The constitutional fail_result is recorded alongside as the equivalent under the constitution's own naming and the decision package states both.
+   distinct_from_prior_attempt_tokens STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_NO_CANDIDATE belong to Attempt 1, whose verdict of FAIL \u2014 STAGE_3_G2_NO_CANDIDATE stands permanently. STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE belong to Attempt 2, whose verdict of FAIL \u2014 STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE stands permanently. No Attempt 3 artifact emits any of those four, and no Attempt 1 or Attempt 2 artifact is edited to mention Attempt 3's.
+   action_taken             Sealed here before results. No sealed Generation 1, Attempt 1 or Attempt 2 derivation is edited to match.
+
+-- G2A3-CONFLICT-22   keys=['action_taken', 'consequence', 'description', 'id', 'resolution', 'sharpened_for_attempt_3', 'supersedes_in_scope']
+   supersedes_in_scope      G2A2-CONFLICT-22, which named RA2's five constants and is not edited
+   description              S3-C7 asks whether reasonable neighbouring parameter values reverse the sign of net return. All eighteen Attempt 3 variants share one risk architecture whose five constants are frozen by SE100-CFG-3105 and are explicitly not part of the grid. The neighbour set therefore varies lookback, k and rebalance frequency only.
+   consequence              S3-C7 says nothing whatever about the robustness of the 50 percent ceiling, the 10 percent volatility target, the 8 percent stop, the 8/10 ladder or the 10-session lockout. Those five values have no neighbours by construction, so a MET verdict on S3-C7 must not be read as evidence that the risk architecture is insensitive to its own parameterisation.
+   sharpened_for_attempt_3  This attempt has, across three sessions, now observed the rotation family under three different ladder geometries: none at all, 5/8/10, and 8/10. That is a comparison of three points in risk-architecture space, chosen sequentially after seeing each previous result \u2014 which is a search, not a robustness test, and its multiplicity is counted in G2A3-CONFLICT-33. It does not become a robustness test by being described as one, and S3-C7 remains silent about it.
+   resolution               S3-C7 is evaluated unchanged over the rotation axes. The gap is disclosed rather than closed, because closing it would mean grid-searching the risk constants, which SE100-CFG-3105 forbids for the stated reason that searching them alongside the rotation parameters would be fitting to 2008 and 2020.
+   action_taken             Declared before results. No risk constant is varied within this attempt.
+
+-- G2A2-CONFLICT-23   keys=['action_taken', 'description', 'id', 'resolution', 'status']
+   status                   inherited from Attempt 2, unchanged
+   description              G2-CONFLICT-6 defines the S3-C5 per-trade multiple as r[i] = 1 + pnl[i] / E_entry[i]. Under a risk architecture that trims, an episode's exposure changes during its life, so the P&L in the numerator was earned at a position size the denominator's entry-time equity does not describe.
+   resolution               The basis is kept exactly as G2-CONFLICT-6 defines it, with pnl[i] taken from the episode ledger. It is not re-based on average exposure or on a time-weighted denominator. Both removals still apply and both must still leave a positive value. The reconstructed return, the equity-curve return and the gap between them are all reported.
+   action_taken             Declared before results. The Generation 1, Attempt 1 and Attempt 2 methods are not edited.
+
+-- G2A3-CONFLICT-24   keys=['action_taken', 'consequence', 'description', 'id', 'resolution', 'supersedes_in_scope']
+   supersedes_in_scope      G2A2-CONFLICT-24, which declared Attempt 2's candidate index and is not edited
+   description              SE100-CFG-3105 declares this attempt's candidate as SE100-G2-S3-C3-ROTATION-RA3, index 3, rather than reusing Attempt 1's SE100-G2-S3-C1-ROTATION or Attempt 2's SE100-G2-S3-C2-ROTATION-RA1. Constitution section 9 makes a gate conjunctive within a candidate, so reusing either prior candidate id would attach that attempt's permanent FAIL to the same candidate and make the conjunction unsatisfiable by construction.
+   consequence              Generation 2 now has three declared candidates at Gate 3, of which the first two are permanently rejected. The stage-level disjunction of section 9 is over a candidate set whose only live member is C3, so it does not widen the number of chances this generation gets \u2014 but it does mean the generation has now spent three Gate 3 evaluations on one hypothesis family, which is exactly the cumulative multiplicity the adaptation disclosure records.
+   resolution               C3 is used. S3-C6's applicability is bound to C3 by name below so that the condition cannot be argued to apply to a different candidate than the one evaluated.
+   action_taken             Declared before results. Attempt 1's and Attempt 2's candidate ids, packages and verdicts are untouched.
+
+-- G2A2-CONFLICT-25   keys=['action_taken', 'attempt_3_note', 'description', 'id', 'resolution', 'status']
+   status                   inherited from Attempt 2 and resolved the same way
+   description              The protocol seal says the gate is evaluated on the representative 'across both of its runs' and that 'a variant satisfies a gate condition only if both of its runs satisfy it', while the criteria seal measures S3-C1 and S3-C4 over 'the representative's base run' and lists the stress run under reported_but_not_gating with the sentence 'the stress cost assumption gates nothing at Gate 3'. Both are sealed in the same session and neither outranks the other.
+   resolution               Generalising CLAUDE.md's precedence rule to two seals of equal rank, the reading that cannot manufacture a pass wins. Admission requires all seven conditions satisfied on #BASE AND S3-C1 through S3-C6 satisfied on #STRESS. S3-C7 is evaluated once, on base runs, because its own what_is_read fixes the neighbour side to 'each neighbour's base-run equity-curve total return and its sign. Nothing else about a neighbour enters this condition.' Both condition sets are reported in full, so a reader can see exactly what the permissive base-only reading would have given.
+   attempt_3_note           The Attempt 3 operating instruction states the conjunctive rule as 'all conditions on the base run' and then directs that the restrictive reading also be evaluated and both readings reported, citing this conflict by name. The instruction and the resolution therefore agree, and both readings appear in the decision package regardless of which way the verdict falls.
+   action_taken             Inherited. The restrictive reading governs admission; the permissive reading is reported beside it.
+
+-- G2A3-CONFLICT-26   keys=['action_taken', 'description', 'honest_statement_of_the_risk', 'id', 'resolution', 'severity', 'what_this_does_not_claim', 'why_this_is_a_conflict_and_not_a_correction']
+   severity                 material \u2014 this is the reason Attempt 3 needs its own protocol at all, alongside RA3
+   description              SE100-CFG-3103's representative_selection_rule contains a field named attempt_2_counters_excluded which states: 'The de-risk ladder activation count and the re-entry lockout trigger count are reported for every variant and are NOT selection inputs. They are descriptive evidence. Admitting them would make the selection a function of how hard the risk architecture worked, which is a performance-adjacent quantity.' SE100-G2-SEL-2 admits exactly those two counters, plus a stop-fill count, as inputs to its stability score.
+   why_this_is_a_conflict_and_not_a_correction Attempt 2's statement was correct about Attempt 2's rule. Attempt 2 would have used those counters as LEVELS \u2014 preferring the variant whose ladder worked least, which is indeed performance-adjacent, because a ladder that never engages is a ladder on an equity curve that never fell. SEL-2 does not read a level. It reads the DISPERSION of each counter across a variant's structural neighbours, normalised, and prefers the variant whose neighbourhood is most homogeneous. A variant with the highest ladder-descent count in the grid scores well if its neighbours have similar counts and badly if they do not. The ordering SEL-2 induces is therefore not monotone in any of the four counters, which is the property that makes it not a level rule.
+   what_this_does_not_claim It does not claim the score is uncorrelated with return. No such claim is made or tested, and testing it against this attempt's returns would itself contaminate the selection. What is claimed and what is structurally enforced is narrower and checkable: no return, drawdown, profit-factor, Sharpe or equity figure can reach the scoring function, because the frozen input dataclass has no field capable of carrying one and the module asserts its field tuple at import.
+   honest_statement_of_the_risk A dispersion statistic over risk-behaviour counters is closer to performance than a raw fill count is. Attempt 2's rule was the more conservative of the two and this file does not pretend otherwise. The change is made because Attempt 2's rule selected a variant earning 0.42 percent over thirteen years and was defended on the grounds that low turnover is a virtue \u2014 which, on that evidence, selected for a variant that barely traded. Trading the extra exposure for a rule that at least prefers a parameter region rather than a corner is a judgement, it is disclosed as one, and it is one of the two changes the adaptation disclosure names.
+   resolution               SEL-2 is sealed in SE100-CFG-3105 before any Attempt 3 variant runs, its four inputs are enumerated there, its structural enforcement is asserted at import time and tested adversarially, and this divergence from Attempt 2's stated position is recorded here rather than being allowed to pass as continuity.
+   action_taken             Declared before results. SE100-CFG-3103 is not edited and its statement stands as Attempt 2's.
+
+-- G2A3-CONFLICT-27   keys=['action_taken', 'description', 'id', 'resolution', 'why_the_instruction_is_internally_inconsistent']
+   description              The Attempt 3 operating instruction describes the one-step neighbour set as 'up to 4 neighbours, fewer at grid edges' and asks for hand verification that 'a corner variant has only 2 neighbours, an edge variant has 3, an interior variant has 4'. The sealed geometry, carried unchanged from G2-CONFLICT-7 and stated in SE100-CFG-3104's S3-C7 measurement.neighbour_count, gives 3, 4 and 5.
+   why_the_instruction_is_internally_inconsistent The instruction's own enumeration of a one-step move is 'lookback up/down one, k up/down one, rebalance frequency flipped'. The frequency axis has exactly two values, so flipping it always yields exactly one neighbour, for every variant, at every grid position. Adding that guaranteed neighbour to the 2/3/4 counts gives 3/4/5. The counts 2/3/4 are what a two-axis grid produces; they are the correct answer to a question about a grid this attempt does not run.
+   resolution               The sealed 3/4/5 geometry governs, for both S3-C7 and SEL-2, and there is exactly one implementation of it. Verification is performed against the sealed rule: the hand-verified cases are one variant of each class \u2014 3 for a both-endpoints variant, 4 for a one-interior variant, 5 for a both-interior variant \u2014 which answers the instruction's request in the geometry that actually applies. The arithmetic identity 2+1=3, 3+1=4, 4+1=5 is recorded here so a reader can see the instruction and the seal are describing the same neighbourhood.
+   action_taken             Reported, not repaired. No sealed axis ordering is changed to match the instruction, and the instruction's count is not silently adopted.
+
+-- G2A3-CONFLICT-28   keys=['action_taken', 'description', 'id', 'resolution', 'what_this_does_not_license']
+   description              SE100-CFG-3103's representative_selection_rule.no_candidate_path.attempt_closes states: 'No Attempt 3 is authorized by this file, and no Attempt 3 may be opened without a further disclosed adaptation and a separate authorization.' Attempt 2 subsequently failed by its second_fail_path rather than its no_candidate_path \u2014 a representative was selected and then failed four conditions \u2014 and the same closure sentence governs both.
+   resolution               The Attempt 3 operating instruction is that separate authorization, and its section 1 carries that further disclosed adaptation, which is reproduced verbatim in SE100-CFG-3105 and in every artifact its carriage requirement names. Both preconditions Attempt 2 set are therefore satisfied, and they are satisfied in the order Attempt 2 required: the adaptation is disclosed in the pre-registration, not justified afterwards.
+   what_this_does_not_license It authorizes one attempt. It does not authorize an Attempt 4, it does not license promoting a runner-up if this attempt's representative fails, and it does not license a nineteenth variant, a re-run with a different grid, or a loosened risk constant. SE100-CFG-3105 carries the same closure sentence for this attempt, with the same force.
+   action_taken             Recorded so the succession is auditable from the files alone. SE100-CFG-3103 is not edited.
+
+-- G2A3-CONFLICT-29   keys=['action_taken', 'consequence', 'description', 'id', 'resolution']
+   description              RA3 is RA2 with one ladder rung deleted. Every rung of a de-risk ladder is a mechanism that reduces exposure during a drawdown, and Attempt 2 recorded zero research-shutdown events across all thirty-six runs where Attempt 1, with no risk architecture at all, recorded thirty-six of thirty-six. Removing a rung moves RA3 strictly toward Attempt 1 on the one axis that produced Attempt 1's failure mode.
+   consequence              The return of research-shutdown events under RA3 is a live and anticipated possibility, and if it happens it is not a defect in the run, a data problem, or an implementation error. It is a measurement: it says the -5% rung Attempt 2 added was load-bearing for shutdown avoidance, which is exactly what an isolation attempt would want to know and is not knowable from Attempt 2's evidence alone.
+   resolution               Nothing in the gate or the selection rule is adjusted to compensate. The eligibility screen still requires zero shutdown events across both runs, so a variant that trips the shutdown is ineligible for selection, and if all eighteen trip it the attempt fails by the no_candidate_path with no representative \u2014 the same route Attempt 1 took. That outcome is recorded as a result, not retried.
+   action_taken             Declared before results, so that a shutdown-driven failure cannot be reattributed after the fact.
+
+-- G2A3-CONFLICT-30   keys=['action_taken', 'consequence', 'description', 'id', 'resolution', 'status']
+   status                   restatement of G2-CONFLICT-4 and G2A2-CONFLICT-10, unchanged and unrepaired
+   description              repo_state_id covers governance/*.{md,json,sha256} at a single directory level and config/**/*.{json,yaml} recursively. A generation subtree therefore splits: config/generation_2/*.json IS covered, while governance/generation_2/*.{md,json,sha256} is NOT.
+   consequence              This file and SE100-CFG-3105 are inside repo_state_id. Attempt 3's governance artifacts are held by their own .sha256 record and the artifact manifest alone, and repo_state_id will not notice if they drift.
+   resolution               Not repaired. The glob patterns are themselves sealed by every earlier stage's digest, so widening them would invalidate every prior package. Both directions are asserted explicitly at build time \u2014 that the governance report is outside the patterns AND that the config JSON is inside \u2014 because a check that only confirms what is expected confirms nothing.
+   action_taken             Disclosed. The checksum record and the manifest are verified to cover every governance/generation_2 Attempt 3 artifact.
+
+-- G2A3-CONFLICT-31   keys=['action_taken', 'description', 'id', 'the_side_effect_is_kept_deliberately', 'why_it_is_done_this_way', 'why_it_is_safe']
+   description              stockedge100.backtest.g2_engine_ra3.RotationEngineRA3 subclasses Attempt 2's RotationEngineRA1 and re-derives exactly two attributes after calling super().__init__: self.risk, and self.sessions_in_band which is the only construction-time attribute computed from it. Attempt 2's constructor therefore loads and validates the RA2 seal as a side effect of every RA3 construction.
+   why_it_is_done_this_way  The alternative is copying eleven hundred lines of engine so that one dataclass differs, which would create a second implementation of the throttle, the volatility scalar, the stop and the lockout \u2014 the four mechanisms the operating instruction requires be kept exactly. A copy that must stay identical and has no mechanism forcing it to is worse than a subclass.
+   why_it_is_safe           Asserted rather than argued. An AST test parses RotationEngineRA1.__init__ and collects every self.<attr> assignment whose value subtree references self.risk; the assertion is that this set, together with risk itself, is exactly {risk, sessions_in_band}. If a future reading of that constructor derived a third attribute from the architecture, the test fails rather than the run silently mixing RA2 and RA3 state. No session has been stepped at construction time, so re-deriving those two attributes is equivalent to constructing under RA3 from the start.
+   the_side_effect_is_kept_deliberately Loading the RA2 seal on every RA3 construction re-verifies that a closed attempt's sealed configuration is intact, thirty-six times per grid run. It is a dependency, and it is disclosed as one, but its failure mode is a governance alarm rather than a wrong number.
+   action_taken             Declared before results. g2_engine_ra1.py is imported and not modified.
+
+-- G2A3-CONFLICT-32   keys=['action_taken', 'consequence', 'description', 'id', 'resolution']
+   description              SEL-2's per-quantity dissimilarity is abs(a - b) / max(abs(a), abs(b), 1), as specified. When a variant and a neighbour both record zero for a quantity the expression evaluates to 0/1 = 0, which the score reads as perfect stability. It is stability in a literal sense \u2014 the two agree exactly \u2014 but it is the stability of a mechanism that never fired, not of a mechanism that fired consistently.
+   consequence              A region of the grid in which the ladder never descends and the lockout never arms scores better on those two quantities than a region in which both fire at similar but nonzero rates. Under RA3, whose ladder engages later than RA2's, that region may be large.
+   resolution               The denominator floor is carried EXACTLY as the operating instruction specifies it and is not replaced by a smoothed, additive or count-aware variant. Inventing a different denominator after reasoning about which regions it would favour is precisely the post-hoc measurement choice a pre-registration exists to prevent, and the reasoning above was available before any variant ran but the counts were not. What is done instead is disclosure: the four raw counter totals for every variant and every neighbour, and the per-quantity contributions to each candidate's score, are reported in full, so a reader can see exactly which quantities were degenerate and how much of the winning score they explain.
+   action_taken             Declared before results. The formula is sealed in SE100-CFG-3105 as written.
+
+-- G2A3-CONFLICT-33   keys=['action_taken', 'bearing_on_a_pass', 'consequence', 'description', 'id', 'resolution']
+   description              This is the third disclosed adaptation on one hypothesis family. Across the three attempts the family has consumed 54 declared variants and 108 runs on the same development window, with each attempt's design informed by the previous attempt's development results.
+   consequence              No multiple-comparisons correction applied at the level of a single attempt is adequate to this. The eighteen-variant grid is searched under a return-blind rule within each attempt, which controls selection multiplicity inside an attempt and controls nothing across attempts. The risk architecture has taken three values chosen sequentially after seeing results; the selection rule has taken two.
+   resolution               The multiplicity is not corrected, because a correction invented at the third attempt would be a post-hoc adjustment of the same kind the pre-registration exists to prevent. It is carried forward as a disclosure that any final assessment of this family must apply, it is stated verbatim in the adaptation disclosure, and it is recorded in SE100-CFG-3105's multiple_comparisons_disclosure with the cumulative counts.
+   bearing_on_a_pass        A PASS at this gate would be a result obtained on the third design of an experiment against the same data. It would not, on its own, distinguish which of the two changes produced it \u2014 see the isolation requirement in the decision package \u2014 and it would carry the cumulative multiplicity of the whole family into validation.
+   action_taken             Declared before results, in the pre-registration, with the counts stated.

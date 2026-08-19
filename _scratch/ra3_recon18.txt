@@ -1,0 +1,174 @@
+EV top-level keys:
+['adaptation_disclosure_carriage', 'adaptation_disclosure_verbatim', 'artifact_id', 'attempt', 'attempt_1_ref', 'attempt_2_ref', 'candidate_index', 'candidate_results', 'command', 'conflicts_declared_in_the_gate_criteria', 'determinism', 'evidence_digest', 'evidence_digest_covers', 'explicit_non_authorizations', 'family', 'gate', 'gate_evaluation_scope', 'gate_scope', 'generated_utc', 'generation', 'generation_id', 'grid', 'hypothesis', 'ladder_engagement_comparison', 'live_trading_authorized', 'mechanics_carried_unchanged', 'multiple_comparisons_disclosure', 'prior_attempt_module_verification', 'prior_attempt_modules_immutable', 'project', 'reconciliation', 'refs_reverified', 'reported_for_every_variant_coverage', 'representative_selection_rule', 'risk_architecture', 'run_span_recheck', 'runs', 'sealed_inputs', 'selection', 'selection_determinism', 'stage', 'stage_verdict', 'strategy_id', 'structural_consequences_declared_before_running', 'universe', 'variant_table', 'variant_table_is_descriptive_only', 'what_this_attempt_adds_over_attempt_1', 'what_this_attempt_adds_over_attempt_1_carriage', 'what_this_attempt_changes_from_attempt_2', 'window']
+----------------------------------------------------------------------------------------------------
+EV.risk_architecture keys: ['as_loaded', 'attempt_2_counterparts', 'attributes_derived_from_risk', 'frozen_before_any_variant_is_run', 'generation_1_provenance', 'gridded', 'not_part_of_the_grid', 'sealed', 'single_difference_from_ra2', 'tuned_after_seeing_a_result']
+----------------------------------------------------------------------------------------------------
+PROT.risk_architecture keys: ['combined_scalar', 'components', 'derived_from', 'frozen_before_any_variant_is_run', 'id', 'name', 'not_part_of_the_grid', 'provenance', 'single_difference_from_ra2', 'state_ownership', 'why_not_gridded']
+----------------------------------------------------------------------------------------------------
+CRIT.verdict_token_derivation keys: ['conjunctive_note', 'constitutional_fail_result_equivalent', 'fail_condition', 'fail_is_a_deliverable', 'fail_token', 'neither_token_is_a_stage_verdict_for_any_other_stage', 'other_tokens_available', 'pass_condition', 'pass_token', 'prior_attempt_tokens_are_not_available_here', 'token_naming_note']
+{
+ "pass_token": "STAGE_3_G2_ATTEMPT_3_STRATEGY_ADMITTED_IN_DEVELOPMENT",
+ "fail_token": "STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE",
+ "pass_condition": "The representative selected by the frozen return-blind rule SE100-G2-SEL-2 in SE100-CFG-3105 satisfies EVERY hard condition of Gate 3, on its base-cost development run and \u2014 under the restrictive reading of G2A2-CONFLICT-25 \u2014 on its stressed-cost run for S3-C1 through S3-C6.",
+ "fail_condition": "Either no representative exists, because every one of the eighteen variants recorded at least one research-shutdown event, or a representative exists and does not satisfy every hard condition.",
+ "conjunctive_note": "Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, NOT_EVALUABLE, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Attempt 3 declares one live candidate, so the cross-candidate disjunction is over a set of size one \u2014 see G2-CONFLICT-15 and G2A3-CONFLICT-24.",
+ "constitutional_fail_result_equivalent": "STRATEGY_REJECTED_IN_DEVELOPMENT",
+ "token_naming_note": "See G2A3-CONFLICT-21. The fail token names the absence of an admissible candidate; the constitution's names the rejection of one. They denote the same stage outcome and both are recorded in the decision package. The Attempt 3 operating instruction named no token and required that the token be derived from this file, which is what has been done.",
+ "prior_attempt_tokens_are_not_available_here": "STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_NO_CANDIDATE belong to Attempt 1. STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE belong to Attempt 2. Both attempts are closed. No Attempt 3 artifact may emit any of those four, and the Attempt 3 evaluator and package builder both assert that the verdict token written is one of the two sealed above and is none of the four.",
+ "other_tokens_available": "BLOCKED_BY_DATA, BLOCKED_BY_INFRASTRUCTURE, INSUFFICIENT_EVIDENCE, INVALIDATED, NOT_RUN, per constitution section 10. Missing evidence may never be converted to PASS or NOT_APPLICABLE for convenience.",
+ "fail_is_a_deliverable": "FAIL \u2014 STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and does not license a nineteenth variant, a re-run with a different grid, a loosened risk constant, a third selection rule, or a promotion of the runner-up. Per SE100-CFG-3105 it closes the attempt: there is no Attempt 4 without a further disclosed adaptation authorised in a later session, and G2A3-CONFLICT-33 records what the cumulative multiplicity of a fourth would be.",
+ "neither_token_is_a_stage_verdict_for_any_other_stage": "These two tokens belong to Generation 2 Stage 3 Attempt 3 alone. No artifact at any other stage, and no artifact of any other attempt, may emit either."
+}
+----------------------------------------------------------------------------------------------------
+EV.selection.rule_source: "SE100-CFG-3105 representative_selection_rule"
+EV.selection.no_reselection: "The representative is selected once, before any gate condition is evaluated. It is not reselected, re-ranked or substituted for any reason."
+EV.selection.scored_quantities: ["fill_count", "ladder_descents", "lockout_arms", "stops_filled"]
+EV.selection.steps:
+[
+ {
+  "order": 1,
+  "criterion": "zero_research_shutdown_events",
+  "scope": "across BOTH runs of the variant"
+ },
+ {
+  "order": 2,
+  "criterion": "lowest_neighbourhood_instability_score",
+  "scope": null
+ },
+ {
+  "order": 3,
+  "criterion": "lowest_turnover",
+  "scope": null
+ },
+ {
+  "order": 4,
+  "criterion": "lexicographic_variant_id",
+  "scope": null
+ }
+]
+EV.selection.note:
+SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) with instability score 0.215471404 over 4 neighbours, from 18 eligible of 18 variants.
+----------------------------------------------------------------------------------------------------
+EV.selection.inputs type=list
+   len=18 first={"variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY", "shutdown_events": 0, "fill_count": 614, "ladder_descents": 78, "lockout_arms": 78, "stops_filled": 18}
+----------------------------------------------------------------------------------------------------
+EV.selection.neighbour_scores len=4
+{
+ "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY",
+ "instability_score": "0.215520012",
+ "neighbours": [
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K1-QUARTERLY"
+ ],
+ "neighbour_count": 3,
+ "per_quantity_mean_dissimilarity": {
+  "fill_count": "0.217675920",
+  "ladder_descents": "0.224979842",
+  "lockout_arms": "0.224979842",
+  "stops_filled": "0.194444444"
+ },
+ "per_quantity_pairs_zero_on_both_sides": {
+  "fill_count": 0,
+  "ladder_descents": 0,
+  "lockout_arms": 0,
+  "stops_filled": 0
+ },
+ "own_quantities": {
+  "fill_count": 283,
+  "ladder_descents": 53,
+  "lockout_arms": 53,
+  "stops_filled": 24
+ }
+}
+----------------------------------------------------------------------------------------------------
+PROT.structural_consequences SC keys: ['SC-1', 'SC-2', 'SC-3', 'SC-4', 'SC-5', 'SC-6', 'SC-7', 'SC-8']
+   SC-6: {
+ "statement": "The risk architecture reduces exposure and can only reduce it. Every one of RA3-1, RA3-2, RA3-4 and RA3-5 scales sizing down or holds it, and RA3-3 exits.",
+ "consequence": "Attempt 2's expected gross return is lower than Attempt 1's would have been on the same signal, mechanically, before any question of whether the drawdown protection is worth it. Gate 3's first condition is that net return is positive, and halving exposure roughly halves the return while the fixed costs of trading do not halve. A FAIL on net return would be a predictable consequence of the architecture and not a new fact about the signal.",
+ "why_declared_now": "So that a FAIL on S3-C1 cannot be presented afterwards as a surprising discovery, and so that a PASS cannot be presented as evidence the architecture is free.",
+ "attempt_3_amendment": "RA3 reduces exposure strictly less than RA2 did, and neve
+   SC-7: {
+ "statement": "SE100-G2-SEL-2 scores a variant using four quantities the risk architecture produces: ladder descents, lockout arms, stop fills and total fills. On a grid where the architecture rarely engages, three of the four are small integers and the score is dominated by fill_count.",
+ "consequence": "If RA3 turns out to engage rarely, SEL-2 degenerates toward a fill-count dispersion rule and is closer to Attempt 2's turnover rule than its description suggests. The per-quantity components are reported so this is visible in the evidence rather than inferred.",
+ "not_corrected": "The rule is not reweighted to compensate. It is sealed before the run and the degenerate case is declared before the run."
+}
+   SC-8: {
+ "statement": "RA3 holds full sizing across the whole of [0, 0.08) drawdown, where RA2 throttled to 75 percent from 0.05.",
+ "consequence": "Every drawdown episode that reached 5 percent but not 8 percent \u2014 which on thirteen years of equity-index history is the common case \u2014 is now traversed at full sizing. This is the intended effect. It also means the maximum drawdown condition S3-C2 is under more pressure than in Attempt 2, and the research shutdown is closer than it was.",
+ "why_declared_now": "So that a larger drawdown under RA3 is read as the declared cost of the change and not as a defect, and so that a S3-C2 failure cannot be presented afterwards as unforeseen."
+}
+----------------------------------------------------------------------------------------------------
+EV.risk_architecture.generation_1_provenance:
+{
+ "generation_1_protocol": "stage3_attempt2_strategy_protocol.json",
+ "generation_1_ladder_from_ra1_5_prose": [
+  [
+   "0",
+   "0.08",
+   "0.5"
+  ],
+  [
+   "0.08",
+   "0.1",
+   "0.25"
+  ],
+  [
+   "0.1",
+   null,
+   "0.125"
+  ]
+ ],
+ "generation_1_ladder_rungs_per_experiment": {
+  "SE100-S3A2-C1-PULLBACK-RA1": [
+   [
+    "0.08",
+    "0.25"
+   ],
+   [
+    "0.1",
+    "0.125"
+   ]
+  ],
+  "SE100-S3A2-C2-MEANREV-RA1": [
+   [
+    "0.08",
+    "0.25"
+   ],
+   [
+    "0.1",
+    "0.125"
+   ]
+  ],
+  "SE100-S3A2-C3-DEFENSIVE-RA1": [
+   [
+    "0.08",
+    "0.25"
+   ],
+   [
+    "0.1",
+    "0.125"
+   ]
+  ]
+ },
+ "generation_1_states_it_twice_and_they_agree": true,
+ "ra3_bands_as_absolute_caps": [
+  [
+   "0",
+   "0.08",
+   "0.5"
+  ],
+  [
+   "0.08",
+   "0.1",
+   "0.25"
+  ],
+  [
+   "0.1",
+   null,
+   "0.125"
+  ]
+ ],
+ "exposure_ceiling_used_to_convert": "0.5",
+ "ladders_are_identical": true
+}

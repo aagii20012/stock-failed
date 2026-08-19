@@ -1,0 +1,457 @@
+
+====================================================================================================
+Generation 2 / Stage 3 / Attempt 3 -- post-build verification
+tree: D:\Product\stock-trade-alpaca\stockedge100
+====================================================================================================
+
+--- 1. repo_state_id recomputes, and the patterns behave as the record claims
+OK   [01] repo_state_id recomputes to the value the package recorded :: live=30cadd00c89fc09cbbcd37ae98ec69546c5992a652f3556e29d07a5a2d2d94a2
+OK   [02] the decision record's repo_state_id equals the live digest
+OK   [03] the run record's repo_state_id equals the live digest
+OK   [04] the manifest's repo_state_id equals the live digest
+OK   [05] the covered path count is 165 :: live=165
+OK   [06] the manifest's repo_state_files is the same set of paths :: sym.diff=0
+OK   [07] and the same digests
+OK   [08] the run record's code_hashes is the same mapping
+OK   [09] outside the digest (governance/* is single-level): STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md
+OK   [10] outside the digest (governance/* is single-level): STAGE_3_G2_ROTATION_RA3_PROTOCOL.md
+OK   [11] outside the digest (governance/* is single-level): STAGE_3_G2_ROTATION_RA3_PROTOCOL.json
+OK   [12] outside the digest (governance/* is single-level): STAGE_3_G2_ROTATION_RA3_PROTOCOL.sha256
+OK   [13] inside the digest (config/** is recursive): g2_rotation_ra3_protocol.json
+OK   [14] inside the digest (config/** is recursive): g2_gate_criteria_ra3.json
+OK   [15] inside the digest (config/** is recursive): README.md
+OK   [16] the record's expected_outside all hold
+OK   [17] the record's expected_inside all hold
+OK   [18] the record's covered_path_count agrees with the live count
+OK   [19] no file covered by repo_state_id carries repo_state_id :: []
+OK   [20] no governance markdown carries the tree digest :: []
+OK   [21] the digest is recorded in the decision record and the runs/ record
+
+--- 2. every checksum record on the tree verifies from its own convention's directory
+OK   [22] record inventory is the expected size :: found 22
+OK   [23] verifies (2 entries): STAGE_0_FREEZE.sha256 :: {}
+OK   [24] verifies (2 entries): STAGE_1_FREEZE.sha256 :: {}
+OK   [25] verifies (4 entries): STAGE_1_PREREGISTRATION.sha256 :: {}
+OK   [26] verifies (4 entries): STAGE_2_PREREGISTRATION.sha256 :: {}
+OK   [27] verifies (4 entries): STAGE_3_ATTEMPT_2_PREREGISTRATION.sha256 :: {}
+OK   [28] verifies (4 entries): STAGE_3_PREREGISTRATION.sha256 :: {}
+OK   [29] verifies (5 entries): STAGE_4_PREREGISTRATION.sha256 :: {}
+OK   [30] verifies (3 entries): STAGE_1_G2_PARTITION_LOCK.sha256 :: {}
+OK   [31] verifies (5 entries): STAGE_3_G2_ROTATION_PROTOCOL.sha256 :: {}
+OK   [32] verifies (5 entries): STAGE_3_G2_ROTATION_RA1_PROTOCOL.sha256 :: {}
+OK   [33] verifies (5 entries): STAGE_3_G2_ROTATION_RA3_PROTOCOL.sha256 :: {}
+OK   [34] verifies (8 entries): STAGE_0_VERIFICATION.sha256 :: {}
+OK   [35] verifies (19 entries): STAGE_1_DATA_READINESS.sha256 :: {}
+OK   [36] verifies (20 entries): STAGE_2_BACKTEST_ENGINE.sha256 :: {}
+OK   [37] verifies (26 entries): STAGE_3_STRATEGY_RESEARCH.sha256 :: {}
+OK   [38] verifies (31 entries): STAGE_3_ATTEMPT_2_DESIGN.sha256 :: {}
+OK   [39] verifies (37 entries): STAGE_3_ATTEMPT_2_STRATEGY_RESEARCH.sha256 :: {}
+OK   [40] verifies (19 entries): STAGE_3_G2_ROTATION_RESEARCH.sha256 :: {}
+OK   [41] verifies (32 entries): STAGE_3_G2_A2_ROTATION_RESEARCH.sha256 :: {}
+OK   [42] verifies (33 entries): STAGE_3_G2_A3_ROTATION_RESEARCH.sha256 :: {}
+OK   [43] verifies (44 entries): STAGE_4_VALIDATION.sha256 :: {}
+OK   [44] verifies (26 entries): STAGE_4_VALIDATION_PREREGISTRATION.sha256 :: {}
+OK   [45] the 22 records cover a substantial number of entries :: 338 entries
+OK   [46] STAGE_0_FREEZE.sha256 does not also verify from stockedge100/ (the conventions are really distinct) :: all 2 entries resolved from the wrong base
+OK   [47] STAGE_1_FREEZE.sha256 does not also verify from stockedge100/ (the conventions are really distinct) :: all 2 entries resolved from the wrong base
+
+--- 3. the 26 frozen inputs are unchanged on disk and all marked read-only
+OK   [48] the manifest lists 26 frozen inputs :: found 26
+OK   [49] the decision record lists the same 26 paths :: record=26
+OK   [50] every disposition is READ_ONLY_NOT_MODIFIED :: {}
+OK   [51] every frozen input re-hashes to its recorded digest
+OK   [52] the constitution is among them and unmoved
+OK   [53] frozen-input list includes g2_rotation_ra3_protocol.json
+OK   [54] frozen-input list includes g2_gate_criteria_ra3.json
+OK   [55] frozen-input list includes STAGE_1_G2_PARTITION_LOCK.json
+
+--- 4. the report and the decision record agree, and the report carries no forward digest
+OK   [56] the report is on disk at its manifest digest
+OK   [57] the report has no CRLF
+OK   [58] the report carries the verdict token :: STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE
+OK   [59] the report carries the representative :: SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY
+OK   [60] the report carries the selection rule id :: SE100-G2-SEL-2
+OK   [61] the report carries the risk architecture id :: RA3
+OK   [62] the report carries the evidence artifact id :: SE100-EVID-3103
+OK   [63] the report carries the report artifact id :: SE100-GOV-2008
+OK   [64] the report carries the protocol artifact id :: SE100-CFG-3105
+OK   [65] the report carries the criteria artifact id :: SE100-CFG-3106
+OK   [66] the report states the same verdict as the record :: FAIL \u2014 STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE
+OK   [67] the report states FAIL, not PASS
+OK   [68] the report carries the sole NOT_MET condition id
+OK   [69] the report carries the test counts the record does
+OK   [70] the report names the permanent red test
+OK   [71] the report carries no digest written at or after its own seal
+OK   [72] every 64-hex string in the report resolves to a real artifact digest :: 0 unresolved: []
+OK   [73] the report actually carries digests (the check above is not vacuous) :: 10 distinct
+OK   [74] the report's identity digest is the sealed universe identity :: d4917c2f7f1cd834...
+OK   [75] the sealed protocol echoes the same universe identity
+OK   [76] Attempt 3 therefore ran on the same universe as Attempts 1 and 2
+
+--- 5. eighteen variants, and they are the sealed eighteen
+OK   [77] lookback axis is the sealed {3,6,12} :: [3, 6, 12]
+OK   [78] top_k axis is the sealed {1,2,3} :: [1, 2, 3]
+OK   [79] frequency axis is the sealed {MONTHLY,QUARTERLY} :: ['MONTHLY', 'QUARTERLY']
+OK   [80] the sealed grid size is 18
+OK   [81] the sealed variants list holds 18 distinct ids :: 18/18
+OK   [82] the sealed ids are exactly the cartesian product of the sealed axes :: sym.diff=0
+OK   [83] the grid that ran is 18 variants
+OK   [84] the grid that ran is the sealed grid :: sym.diff=0
+OK   [85] two runs per variant, 36 total
+OK   [86] the selection inputs cover all 18
+OK   [87] zero research-shutdown events across the grid
+OK   [88] the representative is a member of the sealed grid
+OK   [89] the record states the representative is not the best performer
+
+--- 6. SEL-2 was return-blind and its arithmetic recomputes from the recorded inputs
+OK   [90] the rule id is the sealed SE100-G2-SEL-2
+OK   [91] the record asserts return-blindness
+OK   [92] the rule was frozen before any variant ran
+OK   [93] four ordered steps
+OK   [94] the module's rule id matches the record
+OK   [95] the module's field tuple matches the record :: ('variant_id', 'shutdown_events', 'fill_count', 'ladder_descents', 'lockout_arms', 'stops_filled') vs ['variant_id', 'shutdown_events', 'fill_count', 'ladder_descents', 'lockout_arms', 'stops_filled']
+OK   [96] the module's scored quantities match the record
+OK   [97] the module's step criteria match the record
+OK   [98] no selection field name contains a return-flavoured substring :: []
+OK   [99] the forbidden-substring list is not empty (the check above is not vacuous)
+OK   [100] SelectionInputV2 refuses a float in a counter slot
+OK   [101] SelectionInputV2 refuses a bool in a counter slot
+OK   [102] recomputed selection picks the recorded representative :: recomputed=SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY
+OK   [103] recomputed selection decides at the recorded step :: recomputed=2
+OK   [104] all 18 passed the zero-shutdown screen :: 18 eligible
+OK   [105] the recomputed result is byte-identical to the recorded result block :: differing keys=[]
+OK   [106] all eighteen instability scores are recorded :: 18
+OK   [107] every recorded instability score recomputes :: mismatch on []
+OK   [108] the winner holds the minimum instability score :: [(0.215471404, 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY'), (0.215520012, 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY')]
+OK   [109] that minimum is strictly unique :: (0.215471404, 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY') then (0.215520012, 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY')
+OK   [110] the recorded selected_score is the winner's own score
+OK   [111] the ranking's first row is the winner :: SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY
+OK   [112] the ranking is ordered by instability score
+OK   [113] no ranking row carries a return quantity :: ['eligible', 'fill_count', 'instability_score', 'shutdown_events', 'variant_id']
+OK   [114] the winner has four neighbours and four neighbour scores are recorded
+OK   [115] the recorded neighbours are the winner's structural neighbours :: ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY']
+OK   [116] each recorded neighbour score belongs to a recorded neighbour
+OK   [117] the selection block mentions no return quantity :: []
+
+--- 7. seven conditions, aggregated on satisfaction, with the rollup row present
+OK   [118] eight rows are reported: the seven sealed conditions plus the rollup :: found 8
+OK   [119] the rollup row is present rather than silently dropped
+OK   [120] seven sealed conditions are reported :: found 7
+OK   [121] their ids are the sealed ids :: ['S3-C1', 'S3-C2', 'S3-C3', 'S3-C4', 'S3-C5', 'S3-C6', 'S3-C7']
+OK   [122] S3-C1 carries its sealed text verbatim :: 'total return is positive'
+OK   [123] S3-C1 satisfaction recomputes from its own lists :: recorded=True derived=True
+OK   [124] S3-C1 accounts for every gating run :: unaccounted=[]
+OK   [125] S3-C1 never reports a run as both met and not met
+OK   [126] S3-C2 carries its sealed text verbatim :: 'maximum drawdown is no worse than 15%'
+OK   [127] S3-C2 satisfaction recomputes from its own lists :: recorded=True derived=True
+OK   [128] S3-C2 accounts for every gating run :: unaccounted=[]
+OK   [129] S3-C2 never reports a run as both met and not met
+OK   [130] S3-C3 carries its sealed text verbatim :: 'profit factor is at least 1.10'
+OK   [131] S3-C3 satisfaction recomputes from its own lists :: recorded=True derived=True
+OK   [132] S3-C3 accounts for every gating run :: unaccounted=[]
+OK   [133] S3-C3 never reports a run as both met and not met
+OK   [134] S3-C4 carries its sealed text verbatim :: 'at least 30 closed trades exist, unless a lower-frequency protocol pr
+OK   [135] S3-C4 satisfaction recomputes from its own lists :: recorded=True derived=True
+OK   [136] S3-C4 accounts for every gating run :: unaccounted=[]
+OK   [137] S3-C4 never reports a run as both met and not met
+OK   [138] S3-C5 carries its sealed text verbatim :: 'performance is not dependent on one trade: removing the single best t
+OK   [139] S3-C5 satisfaction recomputes from its own lists :: recorded=True derived=True
+OK   [140] S3-C5 accounts for every gating run :: unaccounted=[]
+OK   [141] S3-C5 never reports a run as both met and not met
+OK   [142] S3-C6 carries its sealed text verbatim :: 'no single instrument contributes more than 50% of total strategy prof
+OK   [143] S3-C6 satisfaction recomputes from its own lists :: recorded=False derived=False
+OK   [144] S3-C6 accounts for every gating run :: unaccounted=[]
+OK   [145] S3-C6 never reports a run as both met and not met
+OK   [146] S3-C7 carries its sealed text verbatim :: 'reasonable neighboring parameter values do not reverse the sign of ne
+OK   [147] S3-C7 satisfaction recomputes from its own lists :: recorded=True derived=True
+OK   [148] S3-C7 accounts for every gating run :: unaccounted=[]
+OK   [149] S3-C7 never reports a run as both met and not met
+OK   [150] six conditions are MET :: ['S3-C1', 'S3-C2', 'S3-C3', 'S3-C4', 'S3-C5', 'S3-C7']
+OK   [151] S3-C6 is the sole NOT_MET :: ['S3-C6']
+OK   [152] no condition is NOT_RUN, UNKNOWN or NOT_EVALUABLE
+OK   [153] S3-C6 fails on both runs :: ['#BASE', '#STRESS']
+OK   [154] S3-C6's measured values exceed its threshold :: 0.7505 / 0.9771 vs <= 0.50
+OK   [155] S3-C7 is the only row with a reported-not-gating column :: ['S3-C7']
+OK   [156] S3-C7 gates on #BASE alone, per the resolved G2A2-CONFLICT-25 :: ['#BASE']
+OK   [157] the package carries an admissible_candidate_exists row
+OK   [158] the rollup row is NOT_MET :: NOT_MET
+OK   [159] the rollup row's value is false :: False
+OK   [160] 18 variants declared and 18 eligible after the shutdown screen
+OK   [161] one candidate evaluated, none admitted
+OK   [162] the rollup names the same representative
+OK   [163] the rollup's base failure list recomputes from the conditions :: ['S3-C6']
+OK   [164] the rollup's stress failure list recomputes from the conditions :: ['S3-C6']
+OK   [165] the permissive base-only reading also fails
+OK   [166] both readings therefore agree, so no reading admits a candidate
+OK   [167] gate_passed is False
+OK   [168] the sole candidate is not admitted
+OK   [169] the candidate is the representative
+OK   [170] no blockers were recorded :: []
+
+--- 8. the verdict token came off disk, and no prior attempt's token is loose
+OK   [171] the sealed criteria define the pass token used :: STAGE_3_G2_ATTEMPT_3_STRATEGY_ADMITTED_IN_DEVELOPMENT
+OK   [172] the sealed criteria define the fail token used :: STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE
+OK   [173] the record's stage verdict token is the sealed fail token
+OK   [174] the record's pass/fail tokens are the sealed pair
+OK   [175] the verdict line is FAIL followed by the fail token :: FAIL \u2014 STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE
+OK   [176] the verdict is not the gate's own pass token
+OK   [177] the constitutional equivalent is recorded
+OK   [178] the fail route is the representative-failed route
+OK   [179] a representative does exist, so the no-representative route is not claimed
+OK   [180] all four prior-attempt tokens are named as withheld :: ['STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT', 'STAGE_3_G2_NO_CANDIDATE', 'STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT', 'STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE']
+OK   [181] no withheld token is this attempt's verdict
+OK   [182] no prior attempt's token appears unattributed in the report
+OK   [183] the report carries this attempt's fail token
+OK   [184] the run record carries no verdict field (verdicts live in the decision record) :: ['code_hashes', 'command', 'config_hash', 'dataset_hashes', 'date_range', 'dependency_versions', 'exit_status', 'holdout_state', 'notes', 'output_artifact_hashes', 'platform', 'python_version', 'random_seed', 'repo_state_id', 'run_id', 'stage', 'strategy_id', 'timestamp_utc', 'universe_version']
+OK   [185] the evidence's stage verdict token matches the decision record
+
+--- 9. no observation at or after 2021-08-01 was read
+OK   [186] the sealed development end is 2021-07-31
+OK   [187] the declared boundary set is the six sealed dates :: ['2021-08-01', '2024-07-31', '2024-08-01', '2026-07-31', '2026-08-01', '2028-07-31']
+OK   [188] STAGE_3_G2_A3_ROTATION_RESEARCH.json: every post-bound date is a declared boundary :: {}
+OK   [189] STAGE_3_G2_A3_ROTATION_RESEARCH.json: the sweep found dates at all (not vacuous) :: 236 distinct dates
+OK   [190] STAGE_3_G2_A3_ROTATION_RESEARCH.json: 2021-08-01 appears only in declarative prose :: ['.partition.window.enforcement', '.authorization.explicit_non_authorizations[0]']
+OK   [191] STAGE_3_G2_A3_ROTATION_RESEARCH.json: 2024-07-31 appears only in declarative prose :: ['.limitations[1]']
+OK   [192] STAGE_3_G2_A3_ROTATION_RESEARCH.json: 2024-08-01 appears only in declarative prose :: ['.authorization.explicit_non_authorizations[1]']
+OK   [193] STAGE_3_G2_A3_ROTATION_RESEARCH.json: 2026-07-31 appears only in declarative prose :: ['.authorization.explicit_non_authorizations[1]']
+OK   [194] STAGE_3_G2_A3_ROTATION_RESEARCH.json: 2026-08-01 appears only in declarative prose :: ['.authorization.explicit_non_authorizations[2]']
+OK   [195] STAGE_3_G2_A3_ROTATION_RESEARCH.json: 2028-07-31 appears only in declarative prose :: ['.authorization.explicit_non_authorizations[2]']
+OK   [196] STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json: every post-bound date is a declared boundary :: {}
+OK   [197] STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json: the sweep found dates at all (not vacuous) :: 235 distinct dates
+OK   [198] STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json: 2021-08-01 appears only in declarative prose :: ['.window.enforcement', '.explicit_non_authorizations[0]']
+OK   [199] STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json: 2024-08-01 appears only in declarative prose :: ['.explicit_non_authorizations[1]']
+OK   [200] STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json: 2026-07-31 appears only in declarative prose :: ['.explicit_non_authorizations[1]']
+OK   [201] STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json: 2026-08-01 appears only in declarative prose :: ['.explicit_non_authorizations[2]']
+OK   [202] STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json: 2028-07-31 appears only in declarative prose :: ['.explicit_non_authorizations[2]']
+OK   [203] run_span_recheck.json: every post-bound date is a declared boundary :: {}
+OK   [204] run_span_recheck.json: the sweep found dates at all (not vacuous) :: 14 distinct dates
+OK   [205] the run-span recheck's latest date is at or before the bound :: max=2021-07-30
+OK   [206] the run record's date_range ends at or before the bound :: ['2008-07-28', '2021-07-30']
+OK   [207] the run record declares the holdout LOCKED :: LOCKED
+OK   [208] the decision record's window is the development window :: {"name": "development", "start": "1993-01-29", "end": "2021-07-31", "development_bound": "2021-07-31", "run_span": {"car
+
+--- 10. both holdout windows remain sealed and unread
+OK   [209] Generation 2's holdout is the sealed 2026-08-01..2028-07-31
+OK   [210] Generation 1's holdout is the sealed 2024-08-01..2026-07-31
+OK   [211] the window guard declares both holdouts prohibited :: ['generation_1_holdout', 'holdout']
+OK   [212] the guard's development bound is the sealed bound :: 2021-07-31
+OK   [213] the guard refuses a window inside holdout :: ('2026-08-01', '2026-09-01')
+OK   [214] the guard refuses a window inside generation_1_holdout :: ('2024-08-01', '2024-09-01')
+OK   [215] .gitignore still excludes data/raw
+OK   [216] .gitignore still excludes data/normalized
+OK   [217] .gitignore still excludes data/reference
+
+--- 11. determinism and reconciliation held, and neither check was vacuous
+OK   [218] all 36 runs reproduced identically
+OK   [219] no mismatched runs :: []
+OK   [220] eight fields were compared per run, including the risk-state trace :: ['trades_digest', 'equity_digest', 'ranking_digest', 'risk_state_digest', 'fills', 'closed_trades', 'total_return', 'shutdown_session']
+OK   [221] no wall-clock value enters a digested payload
+OK   [222] all 36 runs were reconciled
+OK   [223] zero reconciliation mismatches
+OK   [224] the reconciliation compared a non-zero number of single legs :: 2804
+OK   [225] no run was vacuous :: []
+OK   [226] the vacuity rule is stated as implemented, not asserted
+OK   [227] the selection recomputed identically :: {}
+OK   [228] 36 runs were compared against Attempt 2's ladder statistics
+OK   [229] at least one statistic differs
+OK   [230] no run is identical on every compared statistic :: []
+OK   [231] RA3 spends more sessions at full sizing than RA2 did :: 53671 vs 36886
+OK   [232] all 36 runs differ on sessions at full sizing
+
+--- 12. AST sweep of the new modules -- no network, no broker, no holdout
+OK   [233] exists: g2_rotation_ra3.py
+OK   [234] g2_rotation_ra3.py imports nothing that can reach a network :: []
+OK   [235] g2_rotation_ra3.py contains no broker or credential idiom :: []
+OK   [236] g2_rotation_ra3.py spawns no subprocess :: []
+OK   [237] exists: g2_gate_ra3.py
+OK   [238] g2_gate_ra3.py imports nothing that can reach a network :: []
+OK   [239] g2_gate_ra3.py contains no broker or credential idiom :: []
+OK   [240] g2_gate_ra3.py spawns no subprocess :: []
+OK   [241] exists: g2_runner_ra3.py
+OK   [242] g2_runner_ra3.py imports nothing that can reach a network :: []
+OK   [243] g2_runner_ra3.py contains no broker or credential idiom :: []
+OK   [244] g2_runner_ra3.py spawns no subprocess :: []
+OK   [245] exists: g2_selection_v2.py
+OK   [246] g2_selection_v2.py imports nothing that can reach a network :: []
+OK   [247] g2_selection_v2.py contains no broker or credential idiom :: []
+OK   [248] g2_selection_v2.py spawns no subprocess :: []
+OK   [249] exists: g2_engine_ra3.py
+OK   [250] g2_engine_ra3.py imports nothing that can reach a network :: []
+OK   [251] g2_engine_ra3.py contains no broker or credential idiom :: []
+OK   [252] g2_engine_ra3.py spawns no subprocess :: []
+OK   [253] exists: g2_stage3_attempt3_evidence.py
+OK   [254] g2_stage3_attempt3_evidence.py imports nothing that can reach a network :: []
+OK   [255] g2_stage3_attempt3_evidence.py contains no broker or credential idiom :: []
+OK   [256] g2_stage3_attempt3_evidence.py spawns no subprocess :: []
+OK   [257] exists: g2_stage3_attempt3_package.py
+OK   [258] g2_stage3_attempt3_package.py imports nothing that can reach a network :: []
+OK   [259] g2_stage3_attempt3_package.py contains no broker or credential idiom :: []
+OK   [260] g2_stage3_attempt3_package.py spawns no subprocess :: []
+OK   [261] exists: test_g2_ra3_risk_architecture.py
+OK   [262] test_g2_ra3_risk_architecture.py imports nothing that can reach a network :: []
+OK   [263] test_g2_ra3_risk_architecture.py contains no broker or credential idiom :: []
+OK   [264] test_g2_ra3_risk_architecture.py spawns no subprocess :: []
+OK   [265] exists: test_g2_sel2_selection_rule.py
+OK   [266] test_g2_sel2_selection_rule.py imports nothing that can reach a network :: []
+OK   [267] test_g2_sel2_selection_rule.py contains no broker or credential idiom :: []
+OK   [268] test_g2_sel2_selection_rule.py spawns no subprocess :: []
+OK   [269] the sweep reached all nine new modules :: 9 swept
+OK   [270] the sweep reached the RA3 engine specifically
+OK   [271] the sweep reached the SEL-2 module specifically
+OK   [272] g2_rotation_ra3.py names no post-bound date but the exclusive bound :: []
+OK   [273] g2_gate_ra3.py names no post-bound date but the exclusive bound :: []
+OK   [274] g2_runner_ra3.py names no post-bound date but the exclusive bound :: ['2021-08-01']
+OK   [275] g2_selection_v2.py names no post-bound date but the exclusive bound :: []
+OK   [276] g2_engine_ra3.py names no post-bound date but the exclusive bound :: []
+OK   [277] g2_stage3_attempt3_evidence.py names no post-bound date but the exclusive bound :: ['2021-08-01']
+OK   [278] g2_stage3_attempt3_package.py names no post-bound date but the exclusive bound :: ['2021-08-01']
+OK   [279] every post-bound date in executable code sits in a function that asserts a refusal :: []
+OK   [280] the excluded occurrences really are prose, and they are enumerated not waved past :: ['L30 2021-08-01 in <module level>', 'L1174 2021-08-01 in <module level>']
+OK   [281] the post-bound dates in that test are not merely absent (the check is not vacuous) :: 5 guarded occurrences
+OK   [282] that test asserts both holdouts are refused, by their sealed start dates
+OK   [283] and it asserts the window object alone does not enforce the bound
+OK   [284] no Attempt 3 module names a broker API at all :: []
+OK   [285] tree-wide, the only occurrences are the two declared Generation 1 deny-lists :: ['src/stockedge100/reporting/stage4_evaluation_package.py', 'src/stockedge100/reporting/stage4_preregistration.py']
+OK   [286] stage4_evaluation_package.py:180 carries the string only as a NETWORK_MODULES element :: lines [180] owner_ok=True
+OK   [287] stage4_preregistration.py:127 carries the string only as a NETWORK_IMPORT_ROOTS element :: lines [127] owner_ok=True
+OK   [288] S4-CONFLICT-7 is the conflict that already records this scanner shape
+
+--- 13. the manifest excludes itself and the checksum record does not name itself
+OK   [289] the manifest does not list itself in produced_artifacts
+OK   [290] the manifest does not list itself in frozen_inputs
+OK   [291] the manifest lists six produced artifacts :: 6
+OK   [292] every produced artifact re-hashes to its manifest digest
+OK   [293] the checksum record does not cover itself
+OK   [294] the checksum record does cover the manifest
+OK   [295] the checksum record covers the decision record
+OK   [296] the checksum record covers the report
+OK   [297] the checksum record covers the evidence file
+OK   [298] every path the record names re-hashes correctly (33 paths)
+OK   [299] the manifest is covered by the record rather than by itself
+OK   [300] the record's own digest is recorded in the runs/ record :: record sha=68abc22ae53388b0
+OK   [301] the decision record's artifacts list has 8 entries :: 8
+OK   [302] every artifact the record lists exists on disk :: []
+
+--- 14. Generation 1, Attempt 1 and Attempt 2 are byte-identical
+OK   [303] Generation 1 (Stage 4 manifest): nothing it recorded has been deleted (129 paths) :: []
+OK   [304] Generation 1 (Stage 4 manifest): nothing it recorded has changed :: []
+OK   [305] Generation 1 (Stage 4 manifest): the check is not vacuous :: 129 paths
+     note: expected-to-move under Generation 1 (Stage 4 manifest): ['README.md', 'src/stockedge100/reporting/stage_package.py']
+OK   [306] Attempt 1 (A1 manifest): nothing it recorded has been deleted (154 paths) :: []
+OK   [307] Attempt 1 (A1 manifest): nothing it recorded has changed :: []
+OK   [308] Attempt 1 (A1 manifest): the check is not vacuous :: 154 paths
+     note: expected-to-move under Attempt 1 (A1 manifest): ['README.md']
+OK   [309] Attempt 2 (A2 manifest): nothing it recorded has been deleted (176 paths) :: []
+OK   [310] Attempt 2 (A2 manifest): nothing it recorded has changed :: []
+OK   [311] Attempt 2 (A2 manifest): the check is not vacuous :: 176 paths
+     note: expected-to-move under Attempt 2 (A2 manifest): ['README.md']
+OK   [312] the record verifies 17 prior-attempt modules
+OK   [313] nine from Attempt 1, eight from Attempt 2
+OK   [314] the record reports no module moved :: []
+OK   [315] seventeen digests are recorded :: 17
+OK   [316] all seventeen re-hash to their recorded digests now :: []
+OK   [317] the immutable list agrees with the verified set :: sym.diff=9
+OK   [318] the prompt's named module is among the seventeen: g2_rotation.py
+OK   [319] the prompt's named module is among the seventeen: g2_engine.py
+OK   [320] the prompt's named module is among the seventeen: g2_gate.py
+OK   [321] the prompt's named module is among the seventeen: g2_runner.py
+OK   [322] the prompt's named module is among the seventeen: g2_rotation_ra1.py
+OK   [323] the prompt's named module is among the seventeen: g2_engine_ra1.py
+OK   [324] the prompt's named module is among the seventeen: g2_gate_ra1.py
+OK   [325] the prompt's named module is among the seventeen: g2_runner_ra1.py
+OK   [326] new module does not collide with a prior name: g2_rotation_ra3.py
+OK   [327] new module does not collide with a prior name: g2_gate_ra3.py
+OK   [328] new module does not collide with a prior name: g2_runner_ra3.py
+OK   [329] new module does not collide with a prior name: g2_selection_v2.py
+OK   [330] new module does not collide with a prior name: g2_engine_ra3.py
+OK   [331] new module does not collide with a prior name: g2_stage3_attempt3_evidence.py
+OK   [332] new module does not collide with a prior name: g2_stage3_attempt3_package.py
+OK   [333] reports/stage3_g2: its own artifacts are unchanged (4) :: []
+OK   [334] reports/stage3_g2_attempt2: its own artifacts are unchanged (11) :: []
+
+--- 15. exactly nine additions and one modification since the pre-registration seal
+OK   [335] the prior run record is the Attempt 3 pre-registration seal :: stage_3_generation_2_rotation_attempt_3_preregistration
+OK   [336] the seal covered 156 paths :: 156
+OK   [337] nine paths were added :: 9: ['src/stockedge100/backtest/g2_engine_ra3.py', 'src/stockedge100/reporting/g2_stage3_attempt3_evidence.py', 'src/stockedge100/reporting/g2_stage3_attempt3_package.py', 'src/stockedge100/strategies/g2_gate_ra3.py', 'src/stockedge100/strategies/g2_rotation_ra3.py', 'src/stockedge100/strategies/g2_runner_ra3.py', 'src/stockedge100/strategies/g2_selection_v2.py', 'tests/adversarial/test_g2_ra3_risk_architecture.py', 'tests/adversarial/test_g2_sel2_selection_rule.py']
+OK   [338] the nine are the expected new modules and tests :: unexpected=[] missing=[]
+OK   [339] nothing was removed :: []
+OK   [340] exactly one path was modified :: ['README.md']
+OK   [341] the modified path is README.md :: ['README.md']
+OK   [342] the live tree matches the run record exactly (nothing touched after the build)
+OK   [343] the pre-registration seal's digest differs from this build's (the tree did move)
+OK   [344] this build's run record is the newest on disk :: SE100-R-20260819T104543Z
+OK   [345] the pre-registration run record is still present
+OK   [346] run records are append-only (25 on disk) :: 25
+OK   [347] the run record's stage names this attempt :: STAGE_3_G2_ATTEMPT_3_ROTATION_RA3_DEVELOPMENT
+
+--- 16. the captured suite is the record, 1264 pass and the one permanent red is named
+OK   [348] the capture's collected count matches the record :: collected=1265
+OK   [349] the capture's summary line matches the record :: ['1 failed, 1264 passed in 32.14s']
+OK   [350] exactly one failure
+OK   [351] 1265 collected = 1264 passed + 1 failed
+OK   [352] the capture names the expected permanent red
+OK   [353] the capture names its file
+OK   [354] no other test is reported as failed :: ['FAILED tests/unit/test_stage4_preregistration.py::test_no_stage_4_module_can_reach_restricted_data_or_a_broker']
+OK   [355] the capture holds one summary line, not an appended second run :: 1 summary lines
+OK   [356] the test summary document is on disk at its manifest digest
+OK   [357] the summary names S4-CONFLICT-7 as the reason for the red
+OK   [358] the summary carries the same counts
+OK   [359] the suite is far above the Stage 0 floor of 27
+OK   [360] the two new adversarial test files are collected :: ('tests/adversarial/test_g2_ra3_risk_architecture.py', 'tests/adversarial/test_g2_sel2_selection_rule.py')
+
+--- 17. the 1507-character adaptation disclosure is byte-exact in all five carriers
+OK   [361] the decision record's copy is 1507 characters :: 1507
+OK   [362] its sha256 is the sealed digest
+OK   [363] it carries no newline
+OK   [364] it carries the em dash U+2014
+OK   [365] it carries the minus sign U+2212 that Attempt 2's string did not
+OK   [366] the evidence file carries the identical string
+OK   [367] the sealed protocol carries the identical string
+OK   [368] five carriers are required by the seal :: 5
+OK   [369] the record measured every required carrier :: sym.diff=[]
+OK   [370] the record's character count agrees
+OK   [371] the record's digest agrees with the evidence
+OK   [372] the builder self-exempted only the then-unwritten decision record :: ['reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json']
+OK   [373] no carrier needed prose normalisation
+OK   [374] Markdown carrier holds the literal 1507 characters: STAGE_3_G2_ROTATION_RA3_PROTOCOL.md :: BYTE_EXACT
+OK   [375] JSON carrier stores it as one decoded field: STAGE_3_G2_ROTATION_RA3_PROTOCOL.json -> adaptation_disclosure :: ['adaptation_disclosure']
+OK   [376] its escaping convention is internally consistent: STAGE_3_G2_ROTATION_RA3_PROTOCOL.json is ensure_ascii=False :: raw=15 escaped=0
+OK   [377] Markdown carrier holds the literal 1507 characters: STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md :: BYTE_EXACT
+OK   [378] JSON carrier stores it as one decoded field: STAGE_3_G2_A3_ROTATION_RESEARCH.json -> adaptation_disclosure_verbatim :: ['adaptation_disclosure_verbatim']
+OK   [379] its escaping convention is internally consistent: STAGE_3_G2_A3_ROTATION_RESEARCH.json is ensure_ascii=True :: raw=0 escaped=62
+OK   [380] a raw-substring probe would indeed have failed on STAGE_3_G2_A3_ROTATION_RESEARCH.json :: escaped=62
+OK   [381] JSON carrier stores it as one decoded field: STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json -> adaptation_disclosure_verbatim :: ['adaptation_disclosure_verbatim']
+OK   [382] its escaping convention is internally consistent: STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json is ensure_ascii=True :: raw=0 escaped=31
+OK   [383] a raw-substring probe would indeed have failed on STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json :: escaped=31
+OK   [384] all five carriers carry it verbatim post-build :: {"governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md": "BYTE_EXACT", "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json": "BYTE_EXACT", "governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md": "BYTE_EXACT", "reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json": "BYTE_EXACT", "reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json": "BYTE_EXACT"}
+OK   [385] both probes were exercised (the format split is real, not assumed) :: {"governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md": "literal-substring", "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json": "decoded-field", "governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md": "literal-substring", "reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json": "decoded-field", "reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json": "decoded-field"}
+OK   [386] the two report-directory carriers are the escaped ones, the governance protocol is not :: {"governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json": "ensure_ascii=False", "reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json": "ensure_ascii=True", "reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json": "ensure_ascii=True"}
+OK   [387] the recorded file digests for the four measured carriers still hold :: []
+OK   [388] the evidence self-digest recomputes from the file on disk :: file=462c13d2e07e25be recomputed=462c13d2e07e25be
+OK   [389] the decision record recorded the same recomputation
+OK   [390] the digest excludes exactly the two volatile fields :: ('generated_utc', 'evidence_digest')
+OK   [391] the evidence artifact id is SE100-EVID-3103
+OK   [392] cumulative multiplicity counts all three attempts :: {"variants_this_attempt": 18, "runs_this_attempt": 36, "variants_attempt_1": 18, "runs_attempt_1": 36, "variants_attempt_2": 18, "runs_attempt_2": 36, "cumulative_variants_this_hypothesis_family": 54,
+OK   [393] a third-attempt note is present
+OK   [394] the report carries the multiplicity figures
+OK   [395] 22 conflicts are recorded :: 22
+OK   [396] every id normalises to a bare CONFLICT token :: []
+OK   [397] every conflict has a distinct id :: []
+OK   [398] G2A2-CONFLICT-25 is inherited by id :: ['G2A3-CONFLICT-19', 'G2A3-CONFLICT-21', 'G2A3-CONFLICT-22', 'G2A3-CONFLICT-24', 'G2A2-CONFLICT-25', 'G2A3-CONFLICT-26']
+OK   [399] the glob-depth asymmetry is disclosed as a numbered conflict :: ['G2A3-CONFLICT-19', 'G2A3-CONFLICT-21', 'G2A3-CONFLICT-22', 'G2A3-CONFLICT-24', 'G2A2-CONFLICT-25', 'G2A3-CONFLICT-26', 'G2A3-CONFLICT-27', 'G2A3-CONFLICT-28', 'G2A3-CONFLICT-29', 'G2A3-CONFLICT-30', 'G2A3-CONFLICT-31', 'G2A3-CONFLICT-32', 'G2A3-CONFLICT-33', 'G2A3-CONFLICT-34', 'G2A3-CONFLICT-35', 'G2A3-CONFLICT-36', 'G2A3-CONFLICT-37', 'G2A3-CONFLICT-38', 'G2A3-CONFLICT-39', 'G2A3-CONFLICT-40', 'G2A3-CONFLICT-41', 'G2A3-CONFLICT-42']
+OK   [400] Attempt 3 raised its own numbered conflicts, not only inherited ones :: 21 of 22 are G2A3-
+OK   [401] ten limitations are recorded :: 10
+OK   [402] seventeen evidence items are recorded :: 17
+OK   [403] live_trading_authorized is false
+OK   [404] every authorization_state entry is the string false :: {'live_trading_authorized': 'false', 'broker_access_attempted': 'false', 'credential_read': 'false', 'order_placed_cancelled_or_replaced': 'false', 'unattended_scheduling_configured': 'false', 'validation_window_read': 'false', 'generation_1_holdout_read': 'false', 'generation_2_holdout_read': 'false'}
+OK   [405] sixteen explicit non-authorizations are recorded :: 16
+OK   [406] the next authorized stage begins with the literal None. :: None. Generation 2 Stage 3 has now failed three times and th
+OK   [407] it is a substantive statement, not a token :: 603 chars
+OK   [408] it states in words that Stage 4 is not authorized :: None. Generation 2 Stage 3 has now failed three times and this attempt closes on the same terms as the previous two: the sealed criteria state that a FAIL does not license a nineteenth variant, a re-r
+OK   [409] it does not license an Attempt 4 by itself but defers to a human in a later session :: d and was not run. Any Attempt 4 requires a further adaptation, disclosed in writing and authorised by a human in a later session, and would carry forward the cumulative multiplicity recorded here (54 variants, 108 runs). live_trading_authorized remains false.
+OK   [410] and it restates that live trading is not authorized ::  variants, 108 runs). live_trading_authorized remains false.
+
+====================================================================================================
+ALL CHECKS PASS
+====================================================================================================
+410 ok / 0 failed

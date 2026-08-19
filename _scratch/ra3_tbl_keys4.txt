@@ -1,0 +1,367 @@
+=== EV.candidate_results[0]
+  experiment_id                                  str         SE100-G2-S3-C3-ROTATION-RA3
+  family                                         str         CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE
+  variant_id                                     str         SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY
+  variant                                        dict(7)     {'index': 4, 'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY', 'lookback_months': 3, 'top_k': 2, 'rebalance_frequency': 'QUARTERLY', 'targ
+  plan                                           dict(11)    {'experiment_id': 'SE100-G2-S3-C3-ROTATION-RA3', 'family': 'CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE', 'declared_universe': ['AGG', 'BND', 
+  scenario                                       str         BASE
+  admitted                                       bool        False
+  conditions                                     list(7)     [{'id': 'S3-C1', 'required_verbatim': 'total return is positive', 'verdict': 'MET', 'satisfied': True, 'measured': '0.10337843028513874006', 'threshol
+  conditions_met                                 int         6
+  conditions_not_met                             list(1)     ['S3-C6']
+  conditions_not_evaluable                       list(0)     []
+  conditions_not_applicable                      list(0)     []
+  reconciliation                                 dict(15)    {'closed_episodes': 62, 'closed_trades': 62, 'counts_agree': True, 'single_leg_compared': 51, 'multi_leg_episodes': 11, 'multi_entry_episodes': 0, 'ma
+  non_vacuity_check                              dict(14)    {'rule': 'evaluation_integrity_rules[9]', 'ledger_id': 'SE100-G2-S3-C2-EPISODE-LEDGER', 'conflict_id': 'G2A2-CONFLICT-18', 'reconciled_fields': ['entr
+  prose_alias_adapter                            dict(12)    {'conflict_id': 'G2A3-CONFLICT-40', 'criteria_id': 'SE100-CFG-3106', 'pointers_added': ['/conditions[2]/attempt_2_note', '/conditions[5]/scope_interpr
+  redefined_for_generation_2                     list(2)     ['S3-C5', 'S3-C7']
+  carried_over_unchanged                         list(5)     ['S3-C1', 'S3-C2', 'S3-C3', 'S3-C4', 'S3-C6']
+  measurement_basis_changed_from_attempt_1       list(4)     ['S3-C3', 'S3-C4', 'S3-C5', 'S3-C6']
+  measurement_basis_unchanged_from_attempt_1     list(3)     ['S3-C1', 'S3-C2', 'S3-C7']
+  measurement_basis_changed_from_attempt_2       list(0)     []
+  measurement_basis_unchanged_from_attempt_2     list(7)     ['S3-C1', 'S3-C2', 'S3-C3', 'S3-C4', 'S3-C5', 'S3-C6', 'S3-C7']
+  episode_ledger_inherited                       str         The episode ledger of G2A2-CONFLICT-18 is inherited unchanged and is built by the Attempt 2 module stockedge100.backtest.g2_episodes_ra1, which is imp
+  admission_basis                                dict(15)    {'conflict_ref': 'G2A2-CONFLICT-25', 'conflict_status': 'inherited from Attempt 2 and resolved the same way', 'resolution': "SE100-CFG-3105 scopes the
+  stress_evaluation                              dict(22)    {'experiment_id': 'SE100-G2-S3-C3-ROTATION-RA3', 'family': 'CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE', 'variant_id': 'SE100-G2-S3-C3-ROTATI
+
+--- cand['conditions'] list(7), [0] keys: ['evidence', 'id', 'measured', 'note', 'required_verbatim', 'satisfied', 'threshold', 'verdict']
+
+=== EV.gate_scope
+  variant_id                                     str         SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY
+  evaluated_on                                   str         The selected representative variant only, across both of its runs.
+  conjunctive                                    str         All Gate 3 conditions must be satisfied. Constitution section 9.
+  both_gate                                      str         A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.
+  criteria_source                                str         config/generation_2/g2_gate_criteria_ra3.json
+  conflict_ref                                   str         G2A2-CONFLICT-25
+  conflict_status                                str         inherited from Attempt 2 and resolved the same way
+  scope_resolution                               str         SE100-CFG-3105 scopes the gate across both runs and states that a condition is satisfied only if both runs satisfy it; SE100-CFG-3106 measures S3-C1 a
+  neighbour_run_label                            str         #BASE
+  neighbours                                     list(4)     ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY', 'SE100-
+
+=== EV.ladder_engagement_comparison
+  requirement                                    str         Operating instruction section 4.3: run the grid fresh under RA3 and verify that at least the ladder-engagement statistics differ from Attempt 2's.
+  runs_compared                                  int         36
+  attempt_2_source                               str         reports/stage3_g2_attempt2/grid_results.json
+  statistics_compared                            list(6)     ['ladder_descents', 'ladder_ascents', 'lockout_arms', 'lockout_recoveries_blocked', 'stops_triggered', 'stops_filled']
+  per_statistic                                  dict(6)     {'ladder_descents': {'attempt_3_total': 1008, 'attempt_2_total': 1605, 'runs_differing': 36, 'differs': True}, 'ladder_ascents': {'attempt_3_total': 988, 'attempt_2_total': 1571, 'runs_differing': 35,
+  sessions_at_full_sizing                        dict(7)     {'attempt_3_total': 53671, 'attempt_2_total': 36886, 'runs_differing': 36, 'differs': True, 'attempt_3_band': '0', 'attempt_2_band': '0', 'note': 'The band index differs between the two architectures;
+  runs_identical_on_every_compared_statistic     list(0)     []
+  at_least_one_statistic_differs                 bool        True
+  band_indices_are_not_comparable                str         RA2 declares 4 bands and RA3 declares 3, so the same integer index denotes a different drawdown band in each. Compare the sizing scalar an index maps to, or the session count in the full-sizing band; 
+
+=== EV.risk_architecture (evidence copy)
+  sealed                                         dict(11)    {'id': 'RA3', 'name': 'Generation 2 Attempt 3 risk architecture', 'frozen_before_any_variant_is_run': True, 'not_part_of_the_grid': True, 'derived_from': 'RA2, by deleting one ladder band. Four of the
+  as_loaded                                      dict(11)    {'architecture_id': 'RA3', 'exposure_ceiling': '0.50', 'volatility_target': '0.10', 'volatility_window_bars': 21, 'volatility_returns': 20, 'volatility_variance_denominator': 19, 'annualisation_sessio
+  frozen_before_any_variant_is_run               bool        True
+  not_part_of_the_grid                           bool        True
+  gridded                                        bool        False
+  tuned_after_seeing_a_result                    bool        False
+  generation_1_provenance                        dict(7)     {'generation_1_protocol': 'stage3_attempt2_strategy_protocol.json', 'generation_1_ladder_from_ra1_5_prose': [['0', '0.08', '0.5'], ['0.08', '0.1', '0.25'], ['0.1', None, '0.125']], 'generation_1_ladde
+  single_difference_from_ra2                     dict(7)     {'attempt_2_protocol': 'g2_rotation_ra1_protocol.json', 'ra2_bands': [['0.00', '0.05', '1.00'], ['0.05', '0.08', '0.75'], ['0.08', '0.10', '0.50'], ['0.10', None, '0.25']], 'ra3_bands': [['0.00', '0.0
+  attributes_derived_from_risk                   list(2)     ['risk', 'sessions_in_band']
+  attempt_2_counterparts                         dict(8)     {'attempt_2_architecture_id': 'RA2', 'attempt_3_architecture_id': 'RA3', 'attempt_2_band_scalars': {'0': '1.00', '1': '0.75', '2': '0.50', '3': '0.25'}, 'attempt_3_band_scalars': {'0': '1.00', '1': '0
+
+=== EV.representative_selection_rule
+  id                                             str         SE100-G2-SEL-2
+  frozen_before_any_variant_is_run               bool        True
+  return_blind                                   bool        True
+  unchanged_from_attempt_1                       bool        False
+  unchanged_from_attempt_2                       bool        False
+  replaces                                       str         The unnamed lowest-turnover rule of SE100-CFG-3103, which selected SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY.
+  why_it_changes                                 str         Attempt 2's rule preferred the variant that traded least. On a grid where every variant survived the eligibility screen, 'traded least' selected the quarterly k=1 corner <U+2014> the parameterisation 
+  structural_enforcement                         dict(5)     {'mechanism': 'The scoring function accepts a frozen SelectionInputV2 dataclass whose fields are exactly (variant_id, shutdown_events, fill_count, ladder_descents, lockout_arms, stops_filled). No retu
+  steps                                          list(4)     [{'order': 1, 'criterion': 'zero_research_shutdown_events', 'scope': 'across BOTH runs of the variant', 'eliminates': 'any variant with one or more shutdown events in either run', 'unchanged_from_atte
+  retrospective_check_disclosure                 dict(3)     {'statement': "SEL-2 was checked against Attempt 2's frozen recorded statistics before being sealed, to confirm it computes and produces a total order on real data rather than only on fixtures.", 'wha
+  no_candidate_path                              dict(4)     {'condition': 'If all eighteen variants record at least one research-shutdown event, no variant is eligible and no representative exists.', 'verdict': 'FAIL - STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE', 'atte
+  second_fail_path                               dict(5)     {'condition': 'If a representative is selected and then fails one or more Gate 3 conditions.', 'verdict': 'FAIL - STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE', 'same_token_note': "The same FAIL token is emitted
+  no_reselection                                 str         The representative is selected once, before any gate condition is evaluated. It is not reselected, re-ranked or substituted for any reason.
+
+=== EV.gate_evaluation_scope
+  evaluated_on                                   str         The selected representative variant only, across both of its runs.
+  conjunctive                                    str         All Gate 3 conditions must be satisfied. Constitution section 9.
+  criteria_source                                str         config/generation_2/g2_gate_criteria_ra3.json
+  thresholds_changed_from_attempt_1              str         none
+  thresholds_changed_from_generation_1           str         none
+  thresholds_changed_from_attempt_2              str         none
+
+=== EV.structural_consequences_declared_before_running
+  SC-1                                           dict(4)     {'statement': 'A quarterly k=1 variant has 53 scheduled rebalances over the run and can therefore close at most 52 positions by signal exit. Gate 3 requires at least 30 closed trades.', 'attempt_2_ame
+  SC-2                                           dict(4)     {'statement': 'Starting equity is $100.00 and the sealed minimum order notional is $1.00. At k=3 and a 50% aggregate ceiling the per-position budget is about $16.67, sixteen times the minimum.', 'atte
+  SC-3                                           dict(2)     {'statement': "Attempt 1's k=1 half-cash bias is removed. All three k values now target the same 50% gross exposure, so the k axis is no longer confounded with exposure and the zero-shutdown screen is
+  SC-4                                           dict(4)     {'statement': 'The continuous throttle adds SELL fills that Attempt 1 could not produce, and total fill count is the representative-selection tiebreak.', 'consequence': "The tiebreak now partly measur
+  SC-5                                           dict(3)     {'statement': 'The 5% minimum cash buffer of the sealed cost model can never bind at a 50% aggregate exposure ceiling, because cash is at least 50% of equity at all times.', 'consequence': 'The CASH_F
+  SC-6                                           dict(4)     {'statement': 'The risk architecture reduces exposure and can only reduce it. Every one of RA3-1, RA3-2, RA3-4 and RA3-5 scales sizing down or holds it, and RA3-3 exits.', 'consequence': "Attempt 2's 
+  SC-7                                           dict(3)     {'statement': 'SE100-G2-SEL-2 scores a variant using four quantities the risk architecture produces: ladder descents, lockout arms, stop fills and total fills. On a grid where the architecture rarely 
+  SC-8                                           dict(3)     {'statement': 'RA3 holds full sizing across the whole of [0, 0.08) drawdown, where RA2 throttled to 75 percent from 0.05.', 'consequence': 'Every drawdown episode that reached 5 percent but not 8 perc
+
+=== EV.prior_attempt_modules_immutable
+  count                                          int         17
+  attempt_1_modules                              list(9)     ['src/stockedge100/strategies/g2_rotation.py', 'src/stockedge100/strategies/g2_gate.py', 'src/stockedge100/strategies/g2_runner.py', 'src/stockedge100/strategies/g2_window_guard.py', 'src/stockedge100
+  attempt_2_modules                              list(8)     ['src/stockedge100/strategies/g2_rotation_ra1.py', 'src/stockedge100/strategies/g2_gate_ra1.py', 'src/stockedge100/strategies/g2_runner_ra1.py', 'src/stockedge100/backtest/g2_engine_ra1.py', 'src/stoc
+  attempt_1_list_source                          str         SE100-CFG-3103.attempt_1_modules_immutable.modules, copied unchanged.
+  attempt_2_list_source                          str         The eight Generation 2 modules created by Attempt 2, enumerated by listing src/stockedge100/{strategies,backtest,reporting} and subtracting Attempt 1's nine and the Stage 1 module g2_partition_lock.py
+  g2_partition_lock_excluded                     str         src/stockedge100/reporting/g2_partition_lock.py is a Generation 2 STAGE 1 module. It is immutable for the ordinary reason that every sealed module is, and it is covered by repo_state_id, but it is not
+  digests_recorded_by                            str         governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json at seal time
+  digests_not_recorded_here                      str         This file is a config/ artifact covered by repo_state_id. The measured digests belong in the sealed governance JSON and the runs/ record, not here, so that this file does not have to be rewritten to r
+
+=== EV.what_this_attempt_adds_over_attempt_1_carriage-ish
+  what_this_attempt_adds_over_attempt_1          str         Attempt 1 tested the rotation signal with no mechanism to reduce exposure before a research-shutdown breach: between scheduled rebalances it issued no orders at all. Attempt 2 holds the signal, the universe, the calendar, the grid, the cost model and the gate thresholds fixed and adds only risk arch
+  what_this_attempt_changes_from_attempt_2       str         Exactly two things, and nothing else. (1) The de-risk ladder loses its 5-to-8 percent rung, reverting to the three-band spacing Generation 1's RA1-5 sealed before Attempt 1 was ever run. (2) The representative-selection rule changes from lowest turnover to SE100-G2-SEL-2, a neighbourhood-stability s
+  refs_reverified                                str         Every digest in this block, in attempt_1_ref and in attempt_2_ref was recomputed from the file it names at the moment this file was generated. None was transcribed from SE100-CFG-3103 without being checked against the file itself.
+  hypothesis                                     str         Cross-sectional relative strength over a fixed 34-member ETF universe, held in an equally weighted top-k basket and refreshed on a fixed calendar, produces a positive net return over the Generation 2 development window while remaining inside the constitutional research-shutdown ceiling, WHEN exposur
+  evidence_digest_covers                         str         every field of this file except generated_utc and evidence_digest, as canonical JSON
+  command                                        str         cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.g2_stage3_attempt3_evidence
+
+=== EV.variant_table[0] keys (115)
+  grid_index                                         int         1
+  variant_id                                         str         SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY
+  lookback_months                                    int         3
+  top_k                                              int         1
+  rebalance_frequency                                str         MONTHLY
+  research_shutdown_events                           int         0
+  fill_count_both_runs                               int         614
+  ladder_descents_both_runs                          int         78
+  lockout_arms_both_runs                             int         78
+  stops_filled_both_runs                             int         18
+  selection_score                                    dict        {'rule_id': 'SE100-G2-SEL-2', 'instability_score': '0.316981929', 'per
+  base_scenario                                      str         BASE
+  base_total_return                                  str         0.53412202253939399356
+  base_max_drawdown                                  str         0.1295592934758244004079160802748568
+  base_profit_factor                                 str         2.029490694571700272715363605
+  base_closed_trades                                 int         105
+  base_closed_episodes                               int         105
+  base_research_shutdown_events                      int         0
+  base_shutdown_session                              NoneType    None
+  base_fills                                         int         308
+  base_ladder_descents                               int         39
+  base_ladder_ascents                                int         39
+  base_ladder_deepest_band                           int         2
+  base_ladder_final_band                             int         0
+  base_ladder_sessions_in_band                       dict        {'0': 1364, '1': 693, '2': 1219}
+  base_lockout_arms                                  int         39
+  base_lockout_recoveries_blocked                    int         140
+  base_stops_triggered                               int         9
+  base_stops_filled                                  int         9
+  base_stops_preempted_by_signal_exit                int         0
+  base_throttle_legs_scheduled                       int         97
+  base_throttle_legs_below_min_notional              int         1156
+  base_throttle_sessions_breaching_ceiling           int         1253
+  base_max_gross_fraction_observed                   str         0.5155229007316111646809504974093780
+  base_max_gross_fraction_session                    str         2020-11-09
+  base_combined_scalar_minimum                       str         0.250000000
+  base_combined_scalar_mean                          str         0.5920316639499389499389499389
+  base_combined_scalar_sessions_below_one            int         2346
+  base_volatility_scalar_minimum                     str         0.603156617
+  base_volatility_scalar_sessions_below_one          int         436
+  base_attempt_2                                     dict        {'variant_id': 'SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY', 'matched_
+  base_cagr                                          str         0.033455184792084559364445596119954
+  base_sharpe                                        str         0.5554718117356955040907093575111659
+  base_daily_return_stdev                            str         0.003958497810173047373818081332669743
+  base_exposure_fraction                             str         0.9764957264957264957264957264957265
+  base_win_rate                                      str         0.6
+  base_average_win                                   str         1.600237296970658732937840957141294
+  base_average_loss                                  str         -1.211585359319546400552303999410049
+  base_longest_flat_streak_sessions                  int         20
+  base_distinct_symbols_traded                       int         21
+  base_distinct_symbols_with_closed_trades           int         21
+  base_trades_digest                                 str         18cf0ab6abfa42f16d38fe4cee7e96be649cf42d185394c4cde0a4e7c54a4018
+  base_equity_digest                                 str         51f7d84cf81cfbcd128dbd1f1b12b1862e59f7b9acde1fc8b0d74dae2af253ba
+  base_ranking_digest                                str         d516c547fc57939d86b158731e3948ecba4dbddce131292cd2e6ba986bc14ab9
+  base_risk_state_digest                             str         afcec8cad51719f561bbcad8e75e3629cb96af37998d605f5e604f57823f645c
+  base_risk_state_sessions                           int         3276
+  base_scheduled_rebalances                          int         157
+  base_executed_rebalances                           int         157
+  base_reconciliation_single_leg_compared            int         61
+  base_reconciliation_mismatches                     int         0
+  base_reconciliation_vacuous                        bool        False
+  base_best_trade_removed_return                     dict        {'verdict': 'MET', 'measured': 'min(0.30504183332130280868419280366365
+  base_stop_exits                                    list        [{'decision_session': '2008-10-06', 'fill_session': '2008-10-07', 'sym
+  stress_scenario                                    str         STRESSED
+  stress_total_return                                str         0.50680200080542031975
+  stress_max_drawdown                                str         0.1316429102777436539688798312267560
+  stress_profit_factor                               str         1.972767293588759823115651954
+  stress_closed_trades                               int         105
+  stress_closed_episodes                             int         105
+  stress_research_shutdown_events                    int         0
+  stress_shutdown_session                            NoneType    None
+  stress_fills                                       int         306
+  stress_ladder_descents                             int         39
+  stress_ladder_ascents                              int         39
+  stress_ladder_deepest_band                         int         2
+  stress_ladder_final_band                           int         0
+  stress_ladder_sessions_in_band                     dict        {'0': 1356, '1': 642, '2': 1278}
+  stress_lockout_arms                                int         39
+  stress_lockout_recoveries_blocked                  int         124
+  stress_stops_triggered                             int         9
+  stress_stops_filled                                int         9
+  stress_stops_preempted_by_signal_exit              int         0
+  stress_throttle_legs_scheduled                     int         97
+  stress_throttle_legs_below_min_notional            int         1094
+  stress_throttle_sessions_breaching_ceiling         int         1191
+  stress_max_gross_fraction_observed                 str         0.5153968591004960956601271128329439
+  stress_max_gross_fraction_session                  str         2020-11-09
+  stress_combined_scalar_minimum                     str         0.250000000
+  stress_combined_scalar_mean                        str         0.5862546599548229548229548230
+  stress_combined_scalar_sessions_below_one          int         2361
+  stress_volatility_scalar_minimum                   str         0.603049383
+  stress_volatility_scalar_sessions_below_one        int         443
+  stress_attempt_2                                   dict        {'variant_id': 'SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY', 'matched_
+  stress_cagr                                        str         0.032028245761458944830180850307616
+  stress_sharpe                                      str         0.5347282145026622408350357920004738
+  stress_daily_return_stdev                          str         0.003947917096918279121831766449255215
+  stress_exposure_fraction                           str         0.9764957264957264957264957264957265
+  stress_win_rate                                    str         0.5809523809523809523809523809523810
+  stress_average_win                                 str         1.587177128020043349405070157495032
+  stress_average_loss                                str         -1.141329169104622229243407310072435
+  stress_longest_flat_streak_sessions                int         20
+  stress_distinct_symbols_traded                     int         21
+  stress_distinct_symbols_with_closed_trades         int         21
+  stress_trades_digest                               str         e6f2ee5b2e80a3ffdf0f983ebe7cbb804201a87fb3d18fff8a38a787d308944e
+  stress_equity_digest                               str         dae968dfc23a153a31ce87575b27cffb01fdeb06f8e8c8001998008c1965b547
+  stress_ranking_digest                              str         d516c547fc57939d86b158731e3948ecba4dbddce131292cd2e6ba986bc14ab9
+  stress_risk_state_digest                           str         a15506a6e484c0042d146385b7e0e6b8bf8da26c5de7c0e062da4faea91c4176
+  stress_risk_state_sessions                         int         3276
+  stress_scheduled_rebalances                        int         157
+  stress_executed_rebalances                         int         157
+  stress_reconciliation_single_leg_compared          int         62
+  stress_reconciliation_mismatches                   int         0
+  stress_reconciliation_vacuous                      bool        False
+  stress_best_trade_removed_return                   dict        {'verdict': 'MET', 'measured': 'min(0.28298668087109866888359165430539
+  stress_stop_exits                                  list        [{'decision_session': '2008-10-06', 'fill_session': '2008-10-07', 'sym
+
+=== A2.variant_table[0] keys (80)
+  grid_index                                         int         1
+  variant_id                                         str         SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY
+  lookback_months                                    int         3
+  top_k                                              int         1
+  rebalance_frequency                                str         MONTHLY
+  research_shutdown_events                           int         0
+  fill_count_both_runs                               int         647
+  ladder_descents_both_runs                          int         121
+  lockout_arms_both_runs                             int         121
+  stops_filled_both_runs                             int         18
+  base_total_return                                  str         0.631462289893305023555
+  base_max_drawdown                                  str         0.1116420305479441094684710637822694
+  base_profit_factor                                 str         1.934106893626847307444942574
+  base_closed_trades                                 int         105
+  base_closed_episodes                               int         105
+  base_fills                                         int         328
+  base_research_shutdown_events                      int         0
+  base_shutdown_session                              NoneType    None
+  base_ladder_descents                               int         64
+  base_ladder_ascents                                int         64
+  base_ladder_deepest_band                           int         3
+  base_ladder_final_band                             int         0
+  base_ladder_sessions_in_band                       dict        {'0': 1297, '1': 1316, '2': 375, '3': 288}
+  base_lockout_arms                                  int         64
+  base_lockout_recoveries_blocked                    int         276
+  base_stops_triggered                               int         9
+  base_stops_filled                                  int         9
+  base_stops_preempted_by_signal_exit                int         0
+  base_throttle_legs_scheduled                       int         117
+  base_throttle_legs_below_min_notional              int         960
+  base_throttle_sessions_breaching_ceiling           int         1077
+  base_max_gross_fraction_observed                   str         0.5155463571243270334747080073382534
+  base_max_gross_fraction_session                    str         2020-11-09
+  base_combined_scalar_minimum                       str         0.250000000
+  base_combined_scalar_mean                          str         0.7533369327823565323565323565
+  base_combined_scalar_sessions_below_one            int         2355
+  base_volatility_scalar_minimum                     str         0.603134525
+  base_ranking_digest                                str         d516c547fc57939d86b158731e3948ecba4dbddce131292cd2e6ba986bc14ab9
+  base_cagr                                          str         0.038355471080648857142313681960913
+  base_sharpe                                        str         0.5799880630195707200472713524647129
+  base_exposure_fraction                             str         0.9764957264957264957264957264957265
+  base_win_rate                                      str         0.6190476190476190476190476190476190
+  base_distinct_symbols_traded                       int         21
+  base_best_trade_removed_return                     dict        {'verdict': 'MET', 'measured': 'min(0.38735609708368539734147696177403
+  base_stop_exits                                    list        [{'decision_session': '2008-10-06', 'fill_session': '2008-10-07', 'sym
+  stress_total_return                                str         0.57150209692728973121
+  stress_max_drawdown                                str         0.1141404073714592835164534344996816
+  stress_profit_factor                               str         1.834603051835659167864826501
+  stress_closed_trades                               int         105
+  stress_closed_episodes                             int         105
+  stress_fills                                       int         319
+  stress_research_shutdown_events                    int         0
+  stress_shutdown_session                            NoneType    None
+  stress_ladder_descents                             int         57
+  stress_ladder_ascents                              int         57
+  stress_ladder_deepest_band                         int         3
+  stress_ladder_final_band                           int         0
+  stress_ladder_sessions_in_band                     dict        {'0': 1105, '1': 1277, '2': 583, '3': 311}
+  stress_lockout_arms                                int         57
+  stress_lockout_recoveries_blocked                  int         193
+  stress_stops_triggered                             int         9
+  stress_stops_filled                                int         9
+  stress_stops_preempted_by_signal_exit              int         0
+  stress_throttle_legs_scheduled                     int         109
+  stress_throttle_legs_below_min_notional            int         952
+  stress_throttle_sessions_breaching_ceiling         int         1061
+  stress_max_gross_fraction_observed                 str         0.5154195729003708941652085829556360
+  stress_max_gross_fraction_session                  str         2020-11-09
+  stress_combined_scalar_minimum                     str         0.250000000
+  stress_combined_scalar_mean                        str         0.7212081159032356532356532357
+  stress_combined_scalar_sessions_below_one          int         2515
+  stress_volatility_scalar_minimum                   str         0.603015204
+  stress_ranking_digest                              str         d516c547fc57939d86b158731e3948ecba4dbddce131292cd2e6ba986bc14ab9
+  stress_cagr                                        str         0.035370024983925123570848314475705
+  stress_sharpe                                      str         0.5520926040057818470113476677809408
+  stress_exposure_fraction                           str         0.9764957264957264957264957264957265
+  stress_win_rate                                    str         0.6095238095238095238095238095238095
+  stress_distinct_symbols_traded                     int         21
+  stress_best_trade_removed_return                   dict        {'verdict': 'MET', 'measured': 'min(0.33759491507589175947256686861119
+  stress_stop_exits                                  list        [{'decision_session': '2008-10-06', 'fill_session': '2008-10-07', 'sym
+
+=== A1 shutdown months (from A1.variant_table)
+  2008-10  4
+  2008-11  2
+  2009-03  2
+  2009-05  6
+  2010-02  2
+  2010-06  2
+  2010-07  4
+  2010-08  4
+  2010-12  2
+  2011-08  2
+  2011-10  2
+  2016-01  2
+  2020-03  2
+  total runs with a shutdown session: 36
+
+=== A1.stage_verdict
+=== A1.stage_verdict
+  verdict                                        str         FAIL
+  verdict_token                                  str         STAGE_3_G2_NO_CANDIDATE
+  condition_token                                str         Either no representative exists, because every one of the eighteen variants recorded at least one research-shutdown event, or a representative exists and does not satisfy every hard condition.
+  fail_route                                     str         NO_REPRESENTATIVE_EXISTS
+  route                                          str         NO_REPRESENTATIVE_EXISTS
+  pass_token                                     str         STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT
+  fail_token                                     str         STAGE_3_G2_NO_CANDIDATE
+  constitutional_fail_result_equivalent          str         STRATEGY_REJECTED_IN_DEVELOPMENT
+  token_naming_note                              str         See G2-CONFLICT-12. The instruction's fail token names the absence of an admissible candidate; the constitution's names the rejection of one. They denote the same stage outcome and both are recorded i
+  fail_is_a_deliverable                          str         FAIL <U+2014> STAGE_3_G2_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and does not license a nineteenth variant, a re-run with a different grid, or a promo
+  representative_exists                          bool        False
+  selection_note                                 str         All 18 declared variants recorded at least one research-shutdown event across their two declared runs, so no variant is eligible under step 1. The sealed no_candidate_path applies: the grid is not loo
+  admitted_candidates                            list(0)     []
+  candidates_evaluated                           int         0
+  combination_rule                               str         Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, NOT_EVALUABLE, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Generatio
+
+=== A2.stage_verdict
+=== A2.stage_verdict
+  verdict                                        str         FAIL
+  verdict_token                                  str         STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE
+  condition_token                                str         Either no representative exists, because every one of the eighteen variants recorded at least one research-shutdown event, or a representative exists and does not satisfy every hard condition.
+  fail_route                                     str         REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION
+  route                                          str         REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION
+  pass_token                                     str         STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT
+  fail_token                                     str         STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE
+  attempt_1_tokens_withheld                      list(2)     ['STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT', 'STAGE_3_G2_NO_CANDIDATE']
+  attempt_1_tokens_note                          str         STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT and STAGE_3_G2_NO_CANDIDATE belong to Attempt 1. No Attempt 2 artifact may emit either, and the Attempt 2 package builder asserts that the verdict token it 
+  constitutional_fail_result_equivalent          str         STRATEGY_REJECTED_IN_DEVELOPMENT
+  token_naming_note                              str         See G2A2-CONFLICT-21. The instruction's fail token names the absence of an admissible candidate; the constitution's names the rejection of one. They denote the same stage outcome and both are recorded
+  fail_is_a_deliverable                          str         FAIL <U+2014> STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE is a legitimate and fully anticipated outcome. It is recorded, kept on disk, and does not license a nineteenth variant, a re-run with a different grid, 
+  representative_exists                          bool        True
+  selection_note                                 str         18 variants recorded zero research-shutdown events across both declared runs. Among them SE100-G2-S3-C2-ROTATION-RA1-L12-K1-QUARTERLY had the lowest turnover, 189 fills summed over its two runs, and n
+  admitted_candidates                            list(0)     []
+  candidates_evaluated                           int         1
+  combination_rule                               str         Constitution section 9: gates are conjunctive; every hard condition must pass, and NOT_RUN, UNKNOWN, NOT_EVALUABLE, or missing evidence is not a pass. Conjunction applies WITHIN a candidate. Attempt 2
+

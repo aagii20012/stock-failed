@@ -1,0 +1,392 @@
+
+===== document
+"<<ABSENT>>"
+
+===== strategy_id
+"SE100-G2-S3-C3-ROTATION-RA3"
+
+===== candidate_index
+3
+
+===== attempt
+3
+
+===== family
+"CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE"
+
+===== live_trading_authorized
+false
+
+===== declaration_note
+"This file and its Markdown counterpart governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md were written and sealed before any Attempt 3 strategy, engine, selection, gate or runner module existed, and before any Attempt 3 variant was run. That claim is machine-checked by the sealer, which measures contamination before it writes: no module under src/stockedge100 or tests may name this attempt's strategy_id, and every one of the seventeen Attempt 1 and Attempt 2 modules must still match the digest its own run record recorded. See declared_before_any_strategy_code_measurement. What this file cannot claim, and does not claim, is that the *development window* is pristine for this hypothesis family. It is not, and it is now less pristine than it was when SE100-CFG-3103 said the same thing: two full eighteen-variant grids have been run on this window and both results are known. See adaptation_disclosure_verbatim."
+
+===== hypothesis
+"Cross-sectional relative strength over a fixed 34-member ETF universe, held in an equally weighted top-k basket and refreshed on a fixed calendar, produces a positive net return over the Generation 2 development window while remaining inside the constitutional research-shutdown ceiling, WHEN exposure is capped at half of equity, scaled down by realized portfolio volatility, staged down further once the equity drawdown reaches 8 percent, and cut at the position level by a fixed stop."
+
+===== candidate_index_note
+"C3, not C2 and not C1. Attempt 3 is a distinct candidate specification, not a re-run of Attempt 2's: it holds full sizing through a band in which Attempt 2's candidate was throttled to 75 percent, and it is selected by a different frozen rule. Constitution section 9 makes a gate conjunctive *within a candidate*, so reusing C2 would attach Attempt 2's already-recorded FAIL to the same candidate id and make two results look like one candidate evaluated twice. They are three candidates, evaluated once each, in a family whose development window is no longer pristine and has now been read twice. See G2A3-CONFLICT-24 in SE100-CFG-3106."
+
+===== what_this_attempt_changes_from_attempt_2
+"Exactly two things, and nothing else. (1) The de-risk ladder loses its 5-to-8 percent rung, reverting to the three-band spacing Generation 1's RA1-5 sealed before Attempt 1 was ever run. (2) The representative-selection rule changes from lowest turnover to SE100-G2-SEL-2, a neighbourhood-stability score over four risk-behaviour counters. The signal, the universe, the calendar, the grid, the cost model, the gate thresholds, the aggregate ceiling, the volatility target, the stop, the lockout, the throttle and the episode ledger are all held fixed. Because two things change rather than one, this attempt cannot by itself attribute an outcome to either. That is stated here, before the run, rather than discovered afterwards."
+
+===== what_this_attempt_adds_over_attempt_1
+"Attempt 1 tested the rotation signal with no mechanism to reduce exposure before a research-shutdown breach: between scheduled rebalances it issued no orders at all. Attempt 2 holds the signal, the universe, the calendar, the grid, the cost model and the gate thresholds fixed and adds only risk architecture. Any difference in outcome is therefore attributable to the risk architecture rather than to a re-tuned signal - which is the only reason a second attempt on a contaminated window is worth running at all."
+
+===== what_makes_this_genuinely_cross_sectional
+"The ranking scores all 34 eligible members against each other on one date and takes the top k. It is not k independent single-symbol rules run side by side: a symbol is held because it outranked the other 33, not because it cleared an absolute threshold. The risk architecture added in Attempt 2 is portfolio-level (aggregate ceiling, portfolio volatility, portfolio drawdown ladder) with one position-level component (the stop), and none of it re-scores a symbol against anything but the basket it is already in."
+
+===== attempt_1_ref
+{
+  "strategy_id": "SE100-G2-S3-C1-ROTATION",
+  "protocol_config": "config/generation_2/g2_rotation_protocol.json",
+  "protocol_config_sha256": "1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810",
+  "gate_criteria_config": "config/generation_2/g2_gate_criteria.json",
+  "gate_criteria_config_sha256": "a1ac96f98dcbe9e5ce975f2eb27914fcbc7728cad6355a1650dc1ec137ad0d31",
+  "protocol_md": "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md",
+  "protocol_md_sha256": "be8f9320036de8eb4503a111e77f99f337832229898de185a0b8e6f6d0cd8a63",
+  "protocol_json": "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.json",
+  "protocol_json_sha256": "f805129dba90bc9e7877d62547c27dcfd599cd9ccd75046cd643d676a8c4a547",
+  "protocol_sha256_record": "governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256",
+  "protocol_sha256_record_sha256": "64d1377705dd3ae6ffc710f39a2616e2285c5610b593f7223f4e8ce7fde026b1",
+  "research_report_md": "governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md",
+  "research_report_md_sha256": "07a1ec202060de83820e284bd110486fd9e38f8e7ccaff3f3e4b97ec0fffc939",
+  "research_json": "reports/stage3_g2/STAGE_3_G2_ROTATION_RESEARCH.json",
+  "research_json_sha256": "5c46393b69b1048a045c8401f5ea40edc82039a9cd319d0980a39a2efbea5955",
+  "decision_json": "reports/stage3_g2/STAGE_3_G2_DEVELOPMENT_ADMISSIBILITY.json",
+  "decision_json_sha256": "5c7d3238f51965cdff37fec0a1b4ec27bc261288ab5cfbd65485e4a820b9bbb1",
+  "manifest_json": "reports/stage3_g2/STAGE_3_G2_ARTIFACT_MANIFEST.json",
+  "manifest_json_sha256": "8d0510d7aadce4ffecc871c71941729e7ca8dc3f563b3fcaeb888a2dc0bdc99f",
+  "verdict": "FAIL - STAGE_3_G2_NO_CANDIDATE",
+  "disposition": "CLOSED_READ_ONLY",
+  "disposition_note": "Attempt 1 is closed permanently. Its verdict stands. Nothing in this attempt edits, deletes, reopens, re-runs, loosens or supersedes any Attempt 1 artifact or module. Every file listed above is pinned here so that a change to any of them is detectable, not so that any of them may be changed.",
+  "carried_from": "SE100-CFG-3103.attempt_1_ref, copied field for field. Every digest in it was recomputed from the file it names before this file was written and all nine matched."
+}
+
+===== attempt_2_ref
+{
+  "strategy_id": "SE100-G2-S3-C2-ROTATION-RA1",
+  "protocol_config": "config/generation_2/g2_rotation_ra1_protocol.json",
+  "protocol_config_sha256": "0054edce91a8a49dc39f4f53529969902e318ddc3d67e9cc0307e2c015ca6880",
+  "gate_criteria_config": "config/generation_2/g2_gate_criteria_ra1.json",
+  "gate_criteria_config_sha256": "3b9626214db6a6f6183384456489338ea19a277866e35a1aa6c09b0bacb3e625",
+  "protocol_md": "governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.md",
+  "protocol_md_sha256": "40e39f13e85574dc15cdb11ae57bc8bb45a16c62164a08e6d545f4924c95553a",
+  "protocol_json": "governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.json",
+  "protocol_json_sha256": "c1a4742b93ca1e34e6e119012f756720446ac9a125441c6ab4b802259858a2dc",
+  "protocol_sha256_record": "governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.sha256",
+  "protocol_sha256_record_sha256": "ee96a4678ff2770c60a59b783625e4a165991bf7948ce5f30daaf2820f70f148",
+  "research_report_md": "governance/generation_2/STAGE_3_G2_ROTATION_RA1_RESEARCH_REPORT.md",
+  "research_report_md_sha256": "96db0e2f809fefc8ef7e9248524d8a7465cfd0dfeb7b1a6835e1a8f7291e0169",
+  "research_json": "reports/stage3_g2_attempt2/STAGE_3_G2_A2_ROTATION_RESEARCH.json",
+  "research_json_sha256": "b0d90cf5dd70dad113b747312f462ba4f54151bf24bcf3e5ec668f2ce344bfdb",
+  "decision_json": "reports/stage3_g2_attempt2/STAGE_3_G2_A2_DEVELOPMENT_ADMISSIBILITY.json",
+  "decision_json_sha256": "6f0c8f861541cb38cf9769658a72dc28994c1763f844db164beed4355ce00b91",
+  "manifest_json": "reports/stage3_g2_attempt2/STAGE_3_G2_A2_ARTIFACT_MANIFEST.json",
+  "manifest_json_sha256": "468643612dcf9e7b08d5ad6810085c011a9eb79f15ae93738734f0d9f55551d2",
+  "run_record": "runs/SE100-R-20260816T030122Z.json",
+  "run_record_stage": "STAGE_3_G2_ATTEMPT_2_ROTATION_RA1_DEVELOPMENT",
+  "verdict": "FAIL - STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE",
+  "verdict_source": "reports/stage3_g2_attempt2/stage_verdict.json, field verdict_token, read at the time this file was written rather than transcribed from the operating instruction.",
+  "fail_route": "REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION",
+  "disposition": "CLOSED_READ_ONLY",
+  "disposition_note": "Attempt 2 is closed permanently. Its verdict stands. Nothing in this attempt edits, deletes, reopens, re-runs, loosens or supersedes any Attempt 2 artifact or module. Every file listed above is pinned here so that a change to any of them is detectable, not so that any of them may be changed. Attempt 3 disagrees with two of Attempt 2's stated positions \u2014 its exclusion of the risk counters from selection, and its statement that no Attempt 3 is authorized \u2014 and records both disagreements as numbered conflicts (G2A3-CONFLICT-26 and G2A3-CONFLICT-28 in SE100-CFG-3106) instead of editing the sentences it disagrees with.",
+  "run_record_is_not_pinned_by_digest": "runs/ is append-only and outside every repo_state_id pattern, and a later stage appends to the directory rather than to the file. The record is pinned by id and stage string, which is what the Attempt 3 sealer looks it up by, and its module digests are re-read from it at seal time."
+}
+
+===== mechanics_carried_unchanged
+{
+  "blocks": [
+    "eligible_universe",
+    "ranking_signal",
+    "ranking_rule",
+    "position_count",
+    "rebalance",
+    "execution",
+    "position_sizing",
+    "concentration_ceiling",
+    "window",
+    "run_span",
+    "grid",
+    "runs_per_variant",
+    "gate_evaluation_scope"
+  ],
+  "method": "Each block was copied from SE100-CFG-3103 programmatically, not retyped, so a transcription difference between the two attempts is impossible by construction. Only grid.variant_id_format and grid.variants[].variant_id differ, because a variant id encodes the candidate index and the architecture name.",
+  "why_this_matters": "Attempt 3 changes two things. Any third difference, including an accidental one in a constant nobody re-read, would make the result uninterpretable."
+}
+
+===== eligible_universe
+{
+  "source": "governance/STAGE_1_UNIVERSE.json",
+  "source_sha256": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+  "universe_version": "SE100-U1-d4917c2f7f1cd834",
+  "universe_identity_sha256": "d4917c2f7f1cd8344728a39165929b352766fbe7193b3c64e71a971749dcbf38",
+  "member_count": 34,
+  "members": [
+    "AGG",
+    "BND",
+    "DIA",
+    "DVY",
+    "EEM",
+    "EFA",
+    "HYG",
+    "IEF",
+    "IVV",
+    "IWM",
+    "IYR",
+    "LQD",
+    "MDY",
+    "QQQ",
+    "SHY",
+    "SPY",
+    "TIP",
+    "TLT",
+    "VEA",
+    "VGK",
+    "VIG",
+    "VNQ",
+    "VTI",
+    "VWO",
+    "VYM",
+    "XLB",
+    "XLE",
+    "XLF",
+    "XLI",
+    "XLK",
+    "XLP",
+    "XLU",
+    "XLV",
+    "XLY"
+  ],
+  "unchanged_from_attempt_1": true,
+  "eligibility_recheck_convention": "Generation 2 re-checks eligibility on development data only and never adds, drops or substitutes a symbol. The membership is Stage 1's and is frozen.",
+  "excluded_symbols": {
+    "AAPL": "Present in the data tree as a Stage 2 single-symbol fixture. Never a member of the eligible universe and never ranked."
+  }
+}
+
+===== ranking_signal
+{
+  "name": "N_MONTH_TOTAL_RETURN_BACKWARD_DIVIDEND_CHAIN",
+  "unchanged_from_attempt_1": true,
+  "implementation_reuse": "stockedge100.strategies.g2_rotation.total_return is imported and called unmodified. Reimplementing a sealed formula for a second attempt would create two definitions of one signal and a place for them to diverge; importing it keeps the signal literally identical and makes 'the signal did not change' checkable rather than asserted.",
+  "formula": "TR(t0 -> t1) = (close[t1] / close[t0]) / product over sessions s in (t0, t1] of (1 - D[s] / close[s-1]) - 1",
+  "look_ahead_note": "An adjusted-close read at t1 would be a look-ahead: adj_close[t1] is a function of every dividend paid after t1. The product form above touches only sessions inside the interval. adj_close is never read by the ranking signal, in either attempt.",
+  "undefined_result": "None means excluded from this date's ranking, recorded as an exclusion event. It never means zero."
+}
+
+===== ranking_rule
+{
+  "sort_key": "(-signal, symbol)",
+  "tie_break": "Ascending ticker, applied to exactly equal Decimal signals, so the result cannot depend on dict insertion order or file load order.",
+  "unchanged_from_attempt_1": true
+}
+
+===== position_count
+{
+  "axis": "top_k",
+  "values": [
+    1,
+    2,
+    3
+  ],
+  "unchanged_from_attempt_1": true
+}
+
+===== position_sizing
+{
+  "target_weight_formula": "w(k) = min(A / k, C), quantized to nine decimal places with ROUND_DOWN, where A = 0.50 is the Attempt 2 aggregate exposure ceiling (RA2-1) and C = 0.50 is the sealed per-position concentration ceiling.",
+  "changed_from_attempt_1": true,
+  "attempt_1_formula": "w(k) = min(0.95 / k, 0.50)",
+  "why_changed": "Attempt 1 sized against the constitutional 95% gross ceiling. RA2-1 caps aggregate exposure at 50% of equity, so sizing k positions at 0.95/k each would demand 95% gross and be clamped down to 50% on every rebalance - the strategy would be defined by its clamp rather than by its weights. The weight is derived from the ceiling that actually binds.",
+  "target_weights": {
+    "1": "0.500000000",
+    "2": "0.250000000",
+    "3": "0.166666666"
+  },
+  "target_gross_exposure": {
+    "1": "0.500000000",
+    "2": "0.500000000",
+    "3": "0.499999998"
+  },
+  "round_down_note": "ROUND_DOWN is load-bearing. At prec=34 and ROUND_HALF_EVEN, 0.50 / 3 rounds up and three such weights exceed the ceiling by one ulp, which would make the aggregate clamp bind on the last buy of every k=3 rebalance for a pure representation reason. The 0.499999998 above is that ulp, taken deliberately on the safe side.",
+  "equal_weight_is_an_entry_rule": "A symbol that survives a rebalance is left exactly as it is - never trimmed to target, never topped up. Carried unchanged from Attempt 1's G2-CONFLICT-10. The Attempt 2 throttle is not an exception to this: it trims toward the aggregate ceiling, never toward a per-position target, and it fires only when the ceiling is breached.",
+  "budget_evaluated_at_the_open": {
+    "statement": "The entry budget recorded on the OrderRequest is w(k) * equity at the decision close. The engine re-evaluates w(k) * f(t) * equity at the fill session's open, where f(t) is the combined risk scalar measured at the decision close.",
+    "why": "A frozen Order has nowhere to carry a weight, so the recorded budget is the record of the intent rather than the number that sizes the fill. Carried from Attempt 1's G2-CONFLICT-16.",
+    "scalar_timing": "f(t) is measured at the close of the decision session t and is the value in force when the order fills at the open of t+1. This is not a choice: the engine's session loop records equity and updates risk state at step 6 and takes decisions at step 7, and fills happen at step 2 of the following session, so the scalar read at fill time is necessarily the decision session's. Using t+1's scalar would require measuring a close that has not happened."
+  },
+  "attempt_1_k1_half_cash_bias_neutralised": {
+    "attempt_1_condition": "Under w(k) = min(0.95/k, 0.50), k=1 targeted 50% gross while k=2 and k=3 targeted 95%. Attempt 1 declared this as SC-3: the k=1 variants were structurally half in cash and so were structurally less likely to breach the shutdown screen than their k=2 and k=3 siblings, which biases a selection rule whose first criterion is zero shutdown events.",
+    "attempt_2_condition": "Under w(k) = min(0.50/k, 0.50) all three k values target the same 50% gross. The bias is removed, not by adjusting the selection rule, but because the ceiling that produced it now applies uniformly.",
+    "honesty_note": "This is a genuine improvement in the comparability of the eighteen variants and it was not the reason RA2-1 was chosen; RA2-1 was specified in the operating prompt as a risk control. It is recorded because a reader comparing the two attempts' selection outcomes needs to know that the k axis is no longer confounded with gross exposure.",
+    "conflict_ref": "G2A2-CONFLICT-7"
+  }
+}
+
+===== concentration_ceiling
+{
+  "value": "0.50",
+  "source": "config/stage3_attempt2_strategy_protocol.json risk_architecture.RA1-1.rule, f_base = 0.50",
+  "source_sha256": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+  "scope": "Per position, as a fraction of equity, evaluated at the fill open.",
+  "unchanged_from_attempt_1": true,
+  "non_binding_note": {
+    "statement": "With the aggregate ceiling at 0.50, the per-position concentration ceiling is non-binding for k = 2 and k = 3 (targets 0.25 and 0.1666...) and exactly coincident with the aggregate ceiling for k = 1 (target 0.50).",
+    "why_it_is_still_enforced": "It is a sealed clamp of the Generation 2 engine and is left in place and still checked. A clamp that never binds is not a clamp that may be removed - removing it would mean that a future change to the aggregate ceiling silently removed the per-position bound too.",
+    "conflict_ref": "G2A2-CONFLICT-11"
+  }
+}
+
+===== rebalance
+{
+  "axis": "rebalance_frequency",
+  "values": [
+    "MONTHLY",
+    "QUARTERLY"
+  ],
+  "rule": "A session is a scheduled rebalance if it is the run's first session, or if its calendar month differs from that of the previous session the strategy saw. A quarterly variant additionally requires that month to be one of January, April, July and October.",
+  "backward_looking_note": "The calendar looks strictly backwards. Month-end would need tomorrow's date to be decidable today. See Attempt 1's G2-CONFLICT-8, carried unchanged.",
+  "unchanged_from_attempt_1": true,
+  "measured_counts": {
+    "carried_from": "config/generation_2/g2_rotation_protocol.json",
+    "carried_from_sha256": "1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810",
+    "recheck_requirement": "The runner recomputes both counts on the actual session list and refuses to run if either differs. A carried measurement that is not re-measured is a restated constant, and a restated constant can drift.",
+    "monthly": 157,
+    "quarterly": 53,
+    "monthly_first_three": [
+      "2008-07-28",
+      "2008-08-01",
+      "2008-09-02"
+    ],
+    "quarterly_first_three": [
+      "2008-07-28",
+      "2008-10-01",
+      "2009-01-02"
+    ],
+    "monthly_last": "2021-07-01",
+    "quarterly_last": "2021-07-01"
+  },
+  "attempt_2_note": "The rebalance calendar governs entries and signal-driven exits only. The stop, the throttle and the ladder are evaluated at every session close, not only on rebalance sessions. That is the departure from Attempt 1 recorded as G2A2-CONFLICT-1."
+}
+
+===== runs_per_variant
+{
+  "count": 2,
+  "labels": [
+    "#BASE",
+    "#STRESS"
+  ],
+  "scenarios": [
+    "BASE",
+    "STRESSED"
+  ],
+  "total_runs": 36,
+  "both_gate": "A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.",
+  "unchanged_from_attempt_1": true
+}
+
+===== execution
+{
+  "fill_timing": "Orders are decided at a session close and filled at the next session's open. Unchanged from Attempt 1 and from the Generation 1 engine.",
+  "entry": "A symbol entering the top k at a scheduled rebalance is bought at the next session's open.",
+  "signal_exit": "A symbol dropping out of the top k at a scheduled rebalance is sold in full at the next session's open.",
+  "no_discretionary_exits_superseded": {
+    "attempt_1_text": "Between scheduled rebalances the strategy issues no orders at all. There is no stop, no trailing stop, no profit target, and no intra-period re-rank.",
+    "attempt_1_source": "config/generation_2/g2_rotation_protocol.json -> execution.no_discretionary_exits",
+    "attempt_2_position": "Attempt 2 departs from this clause deliberately and only in the direction of reducing exposure. Between scheduled rebalances Attempt 2 may issue SELL orders - a stop exit or a throttle trim - and may issue no BUY order of any kind. There is still no profit target and still no intra-period re-rank: the ranking is consulted only on scheduled rebalance sessions, exactly as before. The clause is not weakened for entries; it is narrowed to entries.",
+    "conflict_ref": "G2A2-CONFLICT-1"
+  },
+  "order_kinds_this_attempt_may_issue": [
+    {
+      "tag": "ENTRY",
+      "side": "BUY",
+      "when": "scheduled rebalance only",
+      "quantity": "sized by the budget rule below"
+    },
+    {
+      "tag": "EXIT",
+      "side": "SELL",
+      "when": "scheduled rebalance only",
+      "quantity": "the whole position"
+    },
+    {
+      "tag": "STOP",
+      "side": "SELL",
+      "when": "any session close at which the stop condition holds",
+      "quantity": "the whole position"
+    },
+    {
+      "tag": "THROTTLE",
+      "side": "SELL",
+      "when": "any session close at which projected gross exposure exceeds the scaled ceiling",
+      "quantity": "partial, largest position first"
+    },
+    {
+      "tag": "SHUTDOWN",
+      "side": "SELL",
+      "when": "the session a research shutdown triggers",
+      "quantity": "the whole position",
+      "issued_by": "the engine, unchanged from Generation 1"
+    }
+  ],
+  "one_order_per_symbol_per_session": {
+    "constraint": "stockedge100.backtest.orders.OrderBook.submit refuses two orders in one symbol on one decision session whatever the sides are, raising DuplicateOrderError.",
+    "resolution": "Order kinds are merged by symbol under a frozen precedence before scheduling: STOP > EXIT > THROTTLE > ENTRY. At most one request per symbol reaches the book. An ENTRY can never collide with a STOP, an EXIT or a THROTTLE because all three apply only to currently held symbols and an ENTRY is issued only for symbols not currently held; the precedence is nonetheless applied unconditionally and the merged list is asserted to have unique symbols, because 'cannot happen' is a claim and not a guarantee.",
+    "coincidence_recorded": "A session on which a STOP suppresses an EXIT for the same symbol is counted and reported as stop_preempted_signal_exit. Both are full sells, so the fill is identical; the count exists so the report can say how often the stop was the binding reason rather than a redundant one."
+  },
+  "execution_lag": {
+    "statement": "A stop condition observed at the close of session t is exited at the open of session t+1, not at the close of t. A throttle computed at the close of t is trimmed at the open of t+1. The strategy therefore carries one session of exposure past every risk signal it observes.",
+    "why_it_is_not_a_defect": "It is the direct consequence of next-session-open execution, which the constitution requires and which both generations use everywhere. The research shutdown itself has exactly the same lag: constitution section 5.1 liquidates at the *next* open, not at the close that triggered it. Attempt 2 does not get a tighter execution convention than the shutdown it is trying to avoid.",
+    "measurement": "The gap between the close that triggered each stop and the open that filled it is recorded per fill, so the report can state the realized slippage of the lag rather than assert it is small.",
+    "conflict_ref": "G2A2-CONFLICT-5"
+  }
+}
+
+===== window
+{
+  "development": {
+    "from": "1993-01-29",
+    "to": "2021-07-31",
+    "last_session": "2021-07-30"
+  },
+  "prohibited": [
+    {
+      "from": "2021-08-01",
+      "to": "2024-07-31",
+      "state": "LOCKED",
+      "note": "Generation 2 validation window. Not read by this attempt."
+    },
+    {
+      "from": "2024-08-01",
+      "to": "2026-07-31",
+      "state": "SPENT_AND_PROHIBITED",
+      "note": "Generation 1's holdout. Sealed and off-limits regardless of generation."
+    },
+    {
+      "from": "2026-08-01",
+      "to": "2028-07-31",
+      "state": "SEALED",
+      "note": "Generation 2's holdout. Never to be read, by any code, at any stage, before that period exists in real calendar time."
+    }
+  ],
+  "enforcement": "stockedge100.strategies.g2_window_guard, imported unmodified from Attempt 1. Every series is truncated while parsing, not after, and the bound is re-asserted after loading. Reusing the guard rather than re-deriving the bound is deliberate: a second derivation of the same bound is a second place for it to be wrong.",
+  "unchanged_from_attempt_1": true
+}
+
+===== run_span
+{
+  "carried_from": "config/generation_2/g2_rotation_protocol.json",
+  "carried_from_sha256": "1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810",
+  "recheck_requirement": "The runner recomputes every value below from the loaded series and refuses to run if any differs.",
+  "run_start": "2008-07-28",
+  "run_start_weekday": "Monday",
+  "run_end": "2021-07-30",
+  "sessions": 3276,
+  "binding_symbol": "VEA",
+  "binding_symbol_inception": "2007-07-26",
+  "members_missing_a_bar_at_run_start": [],
+  "symbols_ending_before_run_end": [],
+  "development_union_sessions": 7178,
+  "why_unchanged": "Attempt 2 changes the strategy, not the data, the universe or the window. An identical run span is what makes the two attempts comparable at all.",
+  "reverification_required": "The span above is carried from Attempt 2 and must not be assumed. The Attempt 3 runner recomputes it from the loaded data before the first variant runs, asserts equality with every field recorded here, and writes the recomputation to reports/stage3_g2_attempt3/run_span_recheck.json. A mismatch is a blocker, not a value to adopt."
+}

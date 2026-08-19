@@ -1,0 +1,163 @@
+====================================================================================================
+CRIT.conflicts_found  type=list len=21
+   {"id": "S3-CONFLICT-1", "status": "inherited from Generation 1 via Attempts 1 and 2, unchanged", "description": "The frozen JSON companion for gate 3 carries five thresholds. The frozen Markdown carries seven conditions: the same five plus the profit-concentra
+   {"id": "S3-CONFLICT-3", "status": "inherited, and less load-bearing in Attempt 3 than in Attempt 2 \u2014 but not by enough to change anything", "description": "Gate 3 requires maximum drawdown no worse than 15%. Constitution section 5.1 puts the research shut
+   {"id": "G2-CONFLICT-6", "status": "inherited from Attempts 1 and 2, carried forward, still qualified by G2A2-CONFLICT-23", "description": "S3-C5's Generation 1 measurement reconstructs equity sequentially over closed trades in exit order and is exact only beca
+   {"id": "G2-CONFLICT-7", "status": "inherited from Attempts 1 and 2, carried forward, and further qualified by G2A3-CONFLICT-22 and G2A3-CONFLICT-27", "description": "S3-C7's Generation 1 implementation raises ConfigViolation unless exactly four robustness neig
+   {"id": "G2-CONFLICT-15", "status": "inherited from Attempts 1 and 2, carried forward", "description": "Generation 1 evaluated Gate 3 as a disjunction across six independently declared candidates. Attempt 3 declares one candidate whose parameterisation is fixed
+   {"id": "G2A2-CONFLICT-18", "status": "inherited from Attempt 2 and applies with undiminished force", "description": "Attempt 2's aggregate throttle and de-risk ladder both reduce an existing position without closing it. stockedge100.backtest.portfolio.Portfoli
+   {"id": "G2A3-CONFLICT-19", "supersedes_in_scope": "G2A2-CONFLICT-19, which described RA2's three-rung ladder and is not edited", "description": "RA3's de-risk ladder reduces exposure at 8 and 10 percent drawdown from the equity high-water mark. Gate 3's S3-C2 
+   {"id": "G2A2-CONFLICT-20", "status": "inherited from Attempt 2, and its two opposing effects are unchanged in kind", "description": "S3-C4 requires at least 30 closed trades. The risk architecture pushes the trade count in both directions at once and the net s
+   {"id": "G2A3-CONFLICT-21", "supersedes_in_scope": "G2A2-CONFLICT-21, which sealed Attempt 2's tokens and is not edited", "description": "The Attempt 3 operating instruction does not name verdict tokens at all; it instructs that the tokens be derived from the s
+   {"id": "G2A3-CONFLICT-22", "supersedes_in_scope": "G2A2-CONFLICT-22, which named RA2's five constants and is not edited", "description": "S3-C7 asks whether reasonable neighbouring parameter values reverse the sign of net return. All eighteen Attempt 3 variant
+   {"id": "G2A2-CONFLICT-23", "status": "inherited from Attempt 2, unchanged", "description": "G2-CONFLICT-6 defines the S3-C5 per-trade multiple as r[i] = 1 + pnl[i] / E_entry[i]. Under a risk architecture that trims, an episode's exposure changes during its lif
+   {"id": "G2A3-CONFLICT-24", "supersedes_in_scope": "G2A2-CONFLICT-24, which declared Attempt 2's candidate index and is not edited", "description": "SE100-CFG-3105 declares this attempt's candidate as SE100-G2-S3-C3-ROTATION-RA3, index 3, rather than reusing At
+   {"id": "G2A2-CONFLICT-25", "status": "inherited from Attempt 2 and resolved the same way", "description": "The protocol seal says the gate is evaluated on the representative 'across both of its runs' and that 'a variant satisfies a gate condition only if both 
+   {"id": "G2A3-CONFLICT-26", "severity": "material \u2014 this is the reason Attempt 3 needs its own protocol at all, alongside RA3", "description": "SE100-CFG-3103's representative_selection_rule contains a field named attempt_2_counters_excluded which states: 
+   {"id": "G2A3-CONFLICT-27", "description": "The Attempt 3 operating instruction describes the one-step neighbour set as 'up to 4 neighbours, fewer at grid edges' and asks for hand verification that 'a corner variant has only 2 neighbours, an edge variant has 3,
+   {"id": "G2A3-CONFLICT-28", "description": "SE100-CFG-3103's representative_selection_rule.no_candidate_path.attempt_closes states: 'No Attempt 3 is authorized by this file, and no Attempt 3 may be opened without a further disclosed adaptation and a separate au
+   {"id": "G2A3-CONFLICT-29", "description": "RA3 is RA2 with one ladder rung deleted. Every rung of a de-risk ladder is a mechanism that reduces exposure during a drawdown, and Attempt 2 recorded zero research-shutdown events across all thirty-six runs where Att
+   {"id": "G2A3-CONFLICT-30", "status": "restatement of G2-CONFLICT-4 and G2A2-CONFLICT-10, unchanged and unrepaired", "description": "repo_state_id covers governance/*.{md,json,sha256} at a single directory level and config/**/*.{json,yaml} recursively. A genera
+   {"id": "G2A3-CONFLICT-31", "description": "stockedge100.backtest.g2_engine_ra3.RotationEngineRA3 subclasses Attempt 2's RotationEngineRA1 and re-derives exactly two attributes after calling super().__init__: self.risk, and self.sessions_in_band which is the on
+   {"id": "G2A3-CONFLICT-32", "description": "SEL-2's per-quantity dissimilarity is abs(a - b) / max(abs(a), abs(b), 1), as specified. When a variant and a neighbour both record zero for a quantity the expression evaluates to 0/1 = 0, which the score reads as per
+   {"id": "G2A3-CONFLICT-33", "description": "This is the third disclosed adaptation on one hypothesis family. Across the three attempts the family has consumed 54 declared variants and 108 runs on the same development window, with each attempt's design informed 
+====================================================================================================
+PROT.conflicts_found  type=list len=16
+   {"id": "G2A2-CONFLICT-1", "summary": "Per-session decision-taking departs from Attempt 1's sealed execution.no_discretionary_exits clause.", "resolution": "The clause is narrowed to entries rather than weakened: Attempt 2 may issue risk-reducing SELL orders be
+   {"id": "G2A2-CONFLICT-2", "summary": "The 50% aggregate exposure ceiling has no cost-model derivation route: g2_costs.derive_mapping permits exactly one JSON-pointer override and it is spent on /account/max_open_risky_positions.", "resolution": "RA2-1 is enfor
+   {"id": "G2A2-CONFLICT-4", "summary": "Target weights change from min(0.95/k, 0.50) to min(0.50/k, 0.50).", "resolution": "Derived from the ceiling that actually binds. Declared here before any run and checked against this table by the candidate.", "see": "posi
+   {"id": "G2A2-CONFLICT-5", "summary": "Stop and throttle decisions carry one session of execution lag.", "resolution": "Accepted and measured. It is the constitutional next-open convention, which the research shutdown itself obeys.", "see": "execution.execution
+   {"id": "G2A2-CONFLICT-7", "summary": "Attempt 1's declared k=1 half-cash bias (its SC-3) is removed as a side effect of RA2-1.", "resolution": "Recorded so that a reader comparing selection outcomes across the two attempts knows the k axis is no longer confoun
+   {"id": "G2A2-CONFLICT-11", "summary": "The per-position concentration ceiling (0.50) now equals the aggregate ceiling, so it is non-binding for k>=2 and coincident with RA2-1 at k=1.", "resolution": "Left in place and still enforced. A clamp that never binds i
+   {"id": "G2A2-CONFLICT-12", "summary": "The sealed 5% minimum cash buffer can never bind at a 50% gross ceiling.", "resolution": "Enforced anyway and reported as never binding.", "see": "structural_consequences_declared_before_running.SC-5", "carried_from": "SE
+   {"id": "G2A2-CONFLICT-13", "summary": "The RA2-2 volatility measure is taken on an equity curve that RA2-2 itself influences.", "resolution": "The feedback is negative, damped by a 20-session lag, and cannot diverge. Not corrected - correcting it would require
+   {"id": "G2A2-CONFLICT-14", "summary": "Position carries no entry price, so the 8% stop reference must be defined.", "resolution": "Frozen as cost_basis / quantity, the all-in per-share cost including commission and fees. Marginally conservative and invariant u
+   {"id": "G2A2-CONFLICT-16", "summary": "stockedge100.backtest.orders.REASONS is a closed declared set with no entry for an aggregate-ceiling rejection.", "resolution": "An entry clamped to zero by AGGREGATE_RA2 is rejected as INSUFFICIENT_CASH with the clamp na
+   {"id": "G2A2-CONFLICT-17", "summary": "A throttle trim below the sealed minimum order notional is skipped, so the aggregate ceiling can be transiently exceeded by less than one minimum lot.", "resolution": "Skipped legs are counted and reported per variant, an
+   {"id": "G2A3-CONFLICT-34", "supersedes_in_scope": "G2A2-CONFLICT-3, which declared a content-based contamination predicate over Attempt 1's nine modules and is not edited.", "summary": "The paired immutability check must now cover seventeen modules, not nine: 
+   {"id": "G2A3-CONFLICT-35", "supersedes_in_scope": "G2A2-CONFLICT-6, which disclosed that Attempt 2's pre-registration was written after Attempt 1's results were known, and is not edited.", "summary": "This pre-registration was written after TWO attempts' devel
+   {"id": "G2A3-CONFLICT-36", "supersedes_in_scope": "G2A2-CONFLICT-9, which recorded the same collision for Attempt 2's token and is not edited.", "summary": "Both fail routes \u2014 no eligible representative, and a representative that fails the gate \u2014 emi
+   {"id": "G2A3-CONFLICT-37", "supersedes_in_scope": "G2A2-CONFLICT-8, which recorded that the Attempt 2 operating prompt named verdict tokens existing in no artifact, and is not edited.", "summary": "The Attempt 3 operating instruction names no verdict token at 
+   {"id": "G2A3-CONFLICT-38", "summary": "Attempt 2's sealed pre-registration forbids this attempt. Binding rule 7 of SE100-GOV-2005 section 17 reads 'No Attempt 3 is authorized. If Attempt 2 fails, the attempt closes.' Attempt 2 failed and this attempt is nevert
+====================================================================================================
+EV.conflicts_declared_in_the_gate_criteria:
+{
+ "note": "The Attempt 3 conflict numbering is one space shared by this file and SE100-CFG-3106, exactly as Attempt 2's was shared by SE100-CFG-3103 and SE100-CFG-3104. Ids 18 to 25 were taken by Attempt 2's criteria file; ids 26 to 33 are fresh ids taken by Attempt 3's criteria file; this file takes 34 onward. Four entries in Attempt 3's criteria file reuse a number below 26 on purpose: G2A3-CONFLICT-19, 21, 22 and 24 each supersede in scope the same-numbered G2A2 entry, so a superseding conflict keeps its predecessor's number and changes only its prefix. The prefix makes the two distinct ids. Nothing is duplicated across the two files, so the two cannot drift into disagreeing versions of one conflict.",
+ "declared_in_g2_gate_criteria_ra3": [
+  "G2A3-CONFLICT-19",
+  "G2A3-CONFLICT-21",
+  "G2A3-CONFLICT-22",
+  "G2A3-CONFLICT-24",
+  "G2A3-CONFLICT-26",
+  "G2A3-CONFLICT-27",
+  "G2A3-CONFLICT-28",
+  "G2A3-CONFLICT-29",
+  "G2A3-CONFLICT-30",
+  "G2A3-CONFLICT-31",
+  "G2A3-CONFLICT-32",
+  "G2A3-CONFLICT-33"
+ ],
+ "inherited_and_restated_in_g2_gate_criteria_ra3": [
+  "S3-CONFLICT-1",
+  "S3-CONFLICT-3",
+  "G2-CONFLICT-6",
+  "G2-CONFLICT-7",
+  "G2-CONFLICT-15",
+  "G2A2-CONFLICT-18",
+  "G2A2-CONFLICT-20",
+  "G2A2-CONFLICT-23",
+  "G2A2-CONFLICT-25"
+ ]
+}
+====================================================================================================
+EV.prior_attempt_modules_immutable:
+{
+ "count": 17,
+ "attempt_1_modules": [
+  "src/stockedge100/strategies/g2_rotation.py",
+  "src/stockedge100/strategies/g2_gate.py",
+  "src/stockedge100/strategies/g2_runner.py",
+  "src/stockedge100/strategies/g2_window_guard.py",
+  "src/stockedge100/backtest/g2_engine.py",
+  "src/stockedge100/backtest/g2_costs.py",
+  "src/stockedge100/reporting/g2_rotation_preregistration.py",
+  "src/stockedge100/reporting/g2_stage3_evidence.py",
+  "src/stockedge100/reporting/g2_stage3_package.py"
+ ],
+ "attempt_2_modules": [
+  "src/stockedge100/strategies/g2_rotation_ra1.py",
+  "src/stockedge100/strategies/g2_gate_ra1.py",
+  "src/stockedge100/strategies/g2_runner_ra1.py",
+  "src/stockedge100/backtest/g2_engine_ra1.py",
+  "src/stockedge100/backtest/g2_episodes_ra1.py",
+  "src/stockedge100/reporting/g2_rotation_ra1_preregistration.py",
+  "src/stockedge100/reporting/g2_stage3_attempt2_evidence.py",
+  "src/stockedge100/reporting/g2_stage3_attempt2_package.py"
+ ],
+ "attempt_1_list_source": "SE100-CFG-3103.attempt_1_modules_immutable.modules, copied unchanged.",
+ "attempt_2_list_source": "The eight Generation 2 modules created by Attempt 2, enumerated by listing src/stockedge100/{strategies,backtest,reporting} and subtracting Attempt 1's nine and the Stage 1 module g2_partition_lock.py, which belongs to neither attempt.",
+ "g2_partition_lock_excluded": "src/stockedge100/reporting/g2_partition_lock.py is a Generation 2 STAGE 1 module. It is immutable for the ordinary reason that every sealed module is, and it is covered by repo_state_id, but it is not a Stage 3 attempt module and is not listed here.",
+ "digests_recorded_by": "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json at seal time",
+ "digests_not_recorded_here": "This file is a config/ artifact covered by repo_state_id. The 
+====================================================================================================
+PROT.explicit_non_authorizations (16):
+   - This file does not authorize reading any session at or after 2021-08-01, in this or any later stage.
+   - This file does not authorize reading Generation 1's holdout (2024-08-01 to 2026-07-31), which is spent and prohibited regardless of generation.
+   - This file does not authorize reading Generation 2's holdout (2026-08-01 to 2028-07-31), which is sealed and must never be read before that period exists in real
+   - This file does not authorize Stage 4 validation. Stage 4 requires an explicit human go-ahead recorded in a later session.
+   - This file does not authorize live trading, order placement, order cancellation, order replacement, liquidation, or unattended scheduling. live_trading_authorize
+   - This file does not authorize reading, writing, printing or logging any broker credential, and no module of this attempt may import a network client.
+   - This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 1 artifact or module.
+   - This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 2 Attempt 1 artifact or module. Attempt 1's verdict stands per
+   - This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 2 Attempt 2 artifact or module. Attempt 2's verdict stands per
+   - This file does not authorize widening, narrowing or re-centring the eighteen-variant grid.
+   - This file does not authorize grid-searching, tuning or adjusting any RA3 constant, or any SE100-G2-SEL-2 quantity, weight or threshold, before or after seeing a
+   - This file does not authorize promoting a runner-up if the representative fails the gate.
+   - This file does not authorize an Attempt 4. If Attempt 3 fails, the attempt closes and any further work requires a further disclosed adaptation and a separate au
+   - This file does not authorize weakening, skipping or deleting any existing test.
+   - This file does not authorize a fourth selection rule, a reweighting of SE100-G2-SEL-2's four quantities, or the addition of a fifth, at any point after this fil
+   - This file does not authorize isolating the two changes by re-running either of them alone. An isolation attempt is a further attempt and requires its own author
+====================================================================================================
+PROT.runs_per_variant:
+{
+ "count": 2,
+ "labels": [
+  "#BASE",
+  "#STRESS"
+ ],
+ "scenarios": [
+  "BASE",
+  "STRESSED"
+ ],
+ "total_runs": 36,
+ "both_gate": "A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.",
+ "unchanged_from_attempt_1": true
+}
+====================================================================================================
+PROT.what_makes_this_genuinely_cross_sectional:
+"The ranking scores all 34 eligible members against each other on one date and takes the top k. It is not k independent single-symbol rules run side by side: a symbol is held because it outranked the other 33, not because it cleared an absolute threshold. The risk architecture added in Attempt 2 is portfolio-level (aggregate ceiling, portfolio volatility, portfolio drawdown ladder) with one position-level component (the stop), and none of it re-scores a symbol against anything but the basket it is already in."
+====================================================================================================
+PROT.concentration_ceiling:
+{
+ "value": "0.50",
+ "source": "config/stage3_attempt2_strategy_protocol.json risk_architecture.RA1-1.rule, f_base = 0.50",
+ "source_sha256": "77f1451c20e37640bd2843ff86d69eb54cbc0ebb592a696972fbdea6e05b5433",
+ "scope": "Per position, as a fraction of equity, evaluated at the fill open.",
+ "unchanged_from_attempt_1": true,
+ "non_binding_note": {
+  "statement": "With the aggregate ceiling at 0.50, the per-position concentration ceiling is non-binding for k = 2 and k = 3 (targets 0.25 and 0.1666...) and exactly coincident with the aggregate ceiling for k = 1 (target 0.50).",
+  "why_it_is_still_enforced": "It is a sealed clamp of the Generation 2 engine and is left in place and still checked. A clamp that never binds is not a clamp that may be removed - removing it would mean that a future change to the aggregate ceiling silently removed the per-position bound too.",
+  "conflict_ref": "G2A2-CONFLICT-11"
+ }
+}
+====================================================================================================
+CRIT.evaluation_integrity_rules keys/type: list
+[
+ "Conditions are evaluated by a program that reads the engine's own outputs. No condition verdict is typed by hand into a report.",
+ "Every condition verdict is one of MET, NOT_MET, NOT_EVALUABLE, or NOT_APPLICABLE_BY_CONDITION_TEXT. There is no fifth value and no borderline value.",
+ "The candidate's admissibility is the conjunction of its applicable conditions. NOT_EVALUABLE never counts as MET.",
+ "Thresholds are compared as exact Decimals. No comparison is made in floating point, and no result is rounded before comparison.",
+ "The evidence file records the measured value alongside every verdict, so a reader can recompute the comparison without rerunning the engine.",
+ "The representative is selected before any condition is evaluated, by the return-blind rule SE100-G2-SEL-2 in SE100-CFG-3105. Condition evaluation cannot feed back into selection, because selection has already happened and is not repeated.",
+ "If the representative fails any condition, the stage fails. No other variant is evaluated against the gate.",
+ "The episode ledger is reconciled against the frozen Portfolio.trades on every run, not only on the representative's. For every episode with exactly one sale leg, entry_cash, exit_cash, dividends and pnl are asserted equal to the corresponding Trade, and the closed episode count is asserted equal to the closed trade count. A failure of either assertion halts e

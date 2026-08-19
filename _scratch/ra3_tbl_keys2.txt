@@ -1,0 +1,349 @@
+=== grid.axes
+  lookback_months                                list(3) [3, 6, 12]
+  top_k                                          list(3) [1, 2, 3]
+  rebalance_frequency                            list(2) ['MONTHLY', 'QUARTERLY']
+
+=== grid.runs_per_variant
+  count                                          2
+  labels                                         list(2) ['#BASE', '#STRESS']
+  scenarios                                      list(2) ['BASE', 'STRESSED']
+  total_runs                                     36
+  both_gate                                      A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.
+  unchanged_from_attempt_1                       True
+
+=== universe.excluded_symbols
+  AAPL                                           Present in the data tree as a Stage 2 single-symbol fixture. Never a member of the eligible universe and never ranked.
+
+=== sealed_inputs.declared_before_any_strategy_code_measurement
+  contamination_predicate                        CONTENT_BASED
+  predicate                                      No .py file under src/stockedge100 or tests contains the string SE100-G2-S3-C3-ROTATION-RA3 at seal time.
+  why_not_path_based                             Attempt 1's predicate was path-based: it refused to seal if any module basename under strategies/ or backtest/ contained 'g2_'. That predicate was correct when strategies/ held no Generation 2 code and is now vacuously false - Attempt 1's own six modules live there and are supposed to. A path test would either refuse to seal forever or have to be loosened until it tested nothing. The honest form i
+  paired_immutability_check                      Every module listed in prior_attempt_modules_immutable is re-hashed at seal time and must equal the digest recorded for it. The list is now seventeen modules, not Attempt 2's nine: Attempt 1's nine plus Attempt 2's own eight, which became immutable the moment Attempt 2 closed. A content-based predicate alone would pass while a prior attempt's module was being quietly rewritten; the pair does not.
+  sealer_indirection_note                        The sealing program is itself a .py file under src/stockedge100 and would falsify the predicate if it hard-coded the candidate id as a literal. It does not: it loads strategy_id from this file at run time, so the predicate above is literally true rather than true-with-a-named-exception. That is disclosed here rather than left to be discovered, because a predicate satisfied by an indirection the re
+  conflict_ref                                   G2A3-CONFLICT-34
+  supersedes_in_scope                            G2A2-CONFLICT-3, which declared the same predicate over nine modules and is not edited.
+
+=== risk_architecture.sealed
+  id                                             RA3
+  name                                           Generation 2 Attempt 3 risk architecture
+  frozen_before_any_variant_is_run               True
+  not_part_of_the_grid                           True
+  derived_from                                   RA2, by deleting one ladder band. Four of the five components are identical.
+  why_not_gridded                                Every constant below is fixed and applied uniformly to all eighteen variants. Searching them alongside the rotation parameters would cross from a disclosed risk control into curve-fitting to 2008 and 2020 - the two episodes whose observation motivated this attempt in the first place. The grid remains exactly the eighteen rotation parameterisations of Attempt 1 and is not widened.
+  single_difference_from_ra2                     RA2-4's band 1 (0.05 <= dd < 0.08, scalar 0.75) is deleted and band 0 is extended to 0.08. No other threshold, scalar, formula, order of operations or code path differs. The engine subclasses Attempt 2's and overrides the band table and the state derived from it; see G2A3-CONFLICT-31.
+  provenance                                     RA3-1, RA3-2, RA3-3 and RA3-5 are RA2-1, RA2-2, RA2-3 and RA2-5 unchanged, which are in turn the values of the Attempt 2 operating prompt and, for RA2-2 and RA2-3, of Generation 1's RA1. RA3-4 is Generation 1's RA1-5 ladder restored: see components.RA3-4.provenance, which quotes SE100-CFG-3103's own statement that only RA2-4's band 1 was new. Every constant in RA3 was therefore sealed before Attem
+  components                                     dict(5) {'RA3-1': {'name': 'aggregate_exposure_ceiling', 'value': '0.50', 'unit': 'fraction of equity', 'purpose': 'Tighter than the base constitutional 95% gross ceiling.', 'definition': 'gross(t) = sum over held symbols of quantity * close(t). The ceiling in force at session t is ceiling(t) = 0.50 * f(t) * equity(t), where f(t) is the combined risk scalar defined below. gross(t) must not exceed ceiling(
+  combined_scalar                                dict(5) {'formula': 'f(t) = f_vol(t) * f_ladder(t), quantized to nine decimal places, ROUND_DOWN.', 'multiplicative_not_minimum': 'The two terms answer different questions - how violent is the market, and how much have we already lost - and a portfolio in a violent drawdown should be smaller than one in either condition alone. min() would discard whichever answer was less extreme.', 'range': "(0, 1]. f(t)
+  state_ownership                                dict(4) {'owner': 'The Attempt 3 engine subclass.', 'why_not_the_candidate': 'The candidate sees only DecisionContext, which carries (session, cash, equity, open_symbols, shutdown_active). It carries no per-position cost basis - needed for the stop - and no high-water mark - needed for the ladder. Extending DecisionContext would mean editing stockedge100/backtest/engine.py, a Generation 1 file that is fro
+
+=== risk_architecture.as_loaded
+  architecture_id                                RA3
+  exposure_ceiling                               0.50
+  volatility_target                              0.10
+  volatility_window_bars                         21
+  volatility_returns                             20
+  volatility_variance_denominator                19
+  annualisation_sessions                         252
+  stop_fraction                                  0.08
+  bands                                          list(3) [{'band': 0, 'dd_from': '0.00', 'dd_to_exclusive': '0.08', 'scalar': '1.00'}, {'band': 1, 'dd_from': '0.08', 'dd_to_exclusive': '0.10', 'scalar': '0.50'}, {'band': 2, 'dd_from': '0.10', 'dd_to_exclusive': None, 'scalar': '0.25'}]
+  lockout_sessions                               10
+  scalar_decimals                                9
+
+=== risk_architecture.generation_1_provenance
+  generation_1_protocol                          stage3_attempt2_strategy_protocol.json
+  generation_1_ladder_from_ra1_5_prose           list(3) [['0', '0.08', '0.5'], ['0.08', '0.1', '0.25'], ['0.1', None, '0.125']]
+  generation_1_ladder_rungs_per_experiment       dict(3) {'SE100-S3A2-C1-PULLBACK-RA1': [['0.08', '0.25'], ['0.1', '0.125']], 'SE100-S3A2-C2-MEANREV-RA1': [['0.08', '0.25'], ['0.1', '0.125']], 'SE100-S3A2-C3-DEFENSIVE-RA1': [['0.08', '0.25'], ['0.1', '0.125']]}
+  generation_1_states_it_twice_and_they_agree    True
+  ra3_bands_as_absolute_caps                     list(3) [['0', '0.08', '0.5'], ['0.08', '0.1', '0.25'], ['0.1', None, '0.125']]
+  exposure_ceiling_used_to_convert               0.5
+  ladders_are_identical                          True
+
+=== risk_architecture.single_difference_from_ra2
+  attempt_2_protocol                             g2_rotation_ra1_protocol.json
+  ra2_bands                                      list(4) [['0.00', '0.05', '1.00'], ['0.05', '0.08', '0.75'], ['0.08', '0.10', '0.50'], ['0.10', None, '0.25']]
+  ra3_bands                                      list(3) [['0.00', '0.08', '1.00'], ['0.08', '0.10', '0.50'], ['0.10', None, '0.25']]
+  bands_removed_from_ra2                         list(2) [['0.00', '0.05', '1.00'], ['0.05', '0.08', '0.75']]
+  bands_added_by_ra3                             list(1) [['0.00', '0.08', '1.00']]
+  deleted_tier                                   list(3) ['0.05', '0.08', '0.75']
+  bands_at_or_beyond_the_deleted_tier_unchanged  True
+
+=== risk_architecture.attempt_2_counterparts
+  attempt_2_architecture_id                      RA2
+  attempt_3_architecture_id                      RA3
+  attempt_2_band_scalars                         dict(4) {'0': '1.00', '1': '0.75', '2': '0.50', '3': '0.25'}
+  attempt_3_band_scalars                         dict(3) {'0': '1.00', '1': '0.50', '2': '0.25'}
+  attempt_2_full_sizing_band                     0
+  attempt_3_full_sizing_band                     0
+  band_indices_are_not_comparable                RA2 declares 4 bands and RA3 declares 3, so the same integer index denotes a different drawdown band in each. Compare the sizing scalar an index maps to, or the session count in the full-sizing band; do not compare the index.
+  source                                         config/generation_2/g2_rotation_ra1_protocol.json (read-only, Attempt 2 closed)
+
+=== risk_architecture.attributes_derived_from_risk
+  ['risk', 'sessions_in_band']
+
+=== ladder.per_statistic.ladder_descents
+  attempt_3_total                                1008
+  attempt_2_total                                1605
+  runs_differing                                 36
+  differs                                        True
+
+=== ladder.sessions_at_full_sizing
+  attempt_3_total                                53671
+  attempt_2_total                                36886
+  runs_differing                                 36
+  differs                                        True
+  attempt_3_band                                 0
+  attempt_2_band                                 0
+  note                                           The band index differs between the two architectures; the comparison is between the sessions spent at sizing scalar 1.00 on each side, which is the same quantity.
+
+=== ladder.statistics_compared
+  ['ladder_descents', 'ladder_ascents', 'lockout_arms', 'lockout_recoveries_blocked', 'stops_triggered', 'stops_filled']
+
+=== vt0.base_ladder_sessions_in_band
+  0                                              1364
+  1                                              693
+  2                                              1219
+
+=== vt0.base_best_trade_removed_return
+  verdict                                        MET
+  measured                                       min(0.305041833321302808684192803663655, 0.305041833321302808684192803663655)
+  threshold                                      best_trade_removed_return > 0 for BOTH removals
+  note                                           The reconstruction is NOT expected to equal the equity-curve total return, and no attempt is made to make it equal. Concurrent positions mean the products do not telescope; dividends credited outside an episode and positions still open on the final session also contribute; and under RA3, as under RA
+  removals                                       dict(15) {'basis': "Closed episodes only. Each episode's multiple is taken against the equity that actually existed when that episode was entered, which is well defined whether or not other positions were open at the time and whether or not the position was later trimmed.", 'closed_episodes': 105, 'multi_leg
+  gating_for_this_variant                        False
+
+=== vt0.selection_score
+  rule_id                                        SE100-G2-SEL-2
+  instability_score                              0.316981929
+  per_quantity_mean_dissimilarity                dict(4) {'fill_count': '0.344377481', 'ladder_descents': '0.334522865', 'lockout_arms': '0.334522865', 'stops_filled': '0.254504505'}
+  per_quantity_pairs_zero_on_both_sides          dict(4) {'fill_count': 0, 'ladder_descents': 0, 'lockout_arms': 0, 'stops_filled': 0}
+  own_quantities_summed_across_runs              dict(4) {'fill_count': 614, 'ladder_descents': 78, 'lockout_arms': 78, 'stops_filled': 18}
+  neighbours                                     list(3) [{'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'instability_score': '0.215520012'}, {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY', 'instability_score': '0.299993984'}, {'variant_id': 'SE100-G2-S3-C3-ROTATION-RA3-L06-K1-MONTHLY', 'instability_score': '0.291302167'}]
+  is_selected_representative                     False
+
+=== vt0.base_attempt_2
+  variant_id                                     SE100-G2-S3-C2-ROTATION-RA1-L03-K1-MONTHLY
+  matched_on                                     list(4) ['lookback_months', 'top_k', 'rebalance_frequency', 'label']
+  ladder_descents                                64
+  ladder_ascents                                 64
+  ladder_deepest_band                            3
+  ladder_final_band                              0
+  ladder_sessions_in_band                        dict(4) {'0': 1297, '1': 1316, '2': 375, '3': 288}
+  lockout_arms                                   64
+  lockout_recoveries_blocked                     276
+  stops_triggered                                9
+  stops_filled                                   9
+  stops_preempted_by_signal_exit                 0
+  combined_scalar_minimum                        0.250000000
+  combined_scalar_sessions_below_one             2355
+  columns_that_are_not_comparable_as_integers    list(3) ['ladder_deepest_band', 'ladder_final_band', 'ladder_sessions_in_band']
+
+=== vt0.base_stop_exits[0]
+  decision_session                               2008-10-06
+  fill_session                                   2008-10-07
+  symbol                                         DVY
+  close_at_trigger                               51.0000000000
+  reference_price                                55.45837976176454862919876004849626
+  drop_at_trigger                                -0.0803914535714285714285714285714286
+  fill_reference_price                           50.6800003052
+  drop_at_fill                                   -0.0861615409085386594117647059
+
+=== cand.variant
+  index                                          4
+  variant_id                                     SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY
+  lookback_months                                3
+  top_k                                          2
+  rebalance_frequency                            QUARTERLY
+  target_weight_per_position                     0.250000000
+  scheduled_rebalance_sessions                   53
+
+=== cand.plan
+  experiment_id                                  SE100-G2-S3-C3-ROTATION-RA3
+  family                                         CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE
+  declared_universe                              list(34) ['AGG', 'BND', 'DIA', 'DVY', 'EEM', 'EFA', 'HYG', 'IEF', 'IVV', 'IWM', 'IYR', 'LQD', 'MDY', 'QQQ', 'SHY', 'SPY', 'TIP', 'TLT', 'VEA', 'VGK', 'VIG', 'VNQ', 'VTI', 'VWO', 'VYM', 'XLB', 'XLE', 'XLF', 'XLI', 'XLK', 'XLP', 'XLU', 'XLV', 'XLY']
+  declared_instrument_count                      34
+  run_start                                      2008-07-28
+  run_end                                        2021-07-30
+  binding_symbol                                 VEA
+  sessions                                       3276
+  span_recheck_requirement                       The runner recomputes every value below from the loaded series and refuses to run if any differs.
+  span_reverification_requirement                The span above is carried from Attempt 2 and must not be assumed. The Attempt 3 runner recomputes it from the loaded data before the first variant runs, asserts equality with every field recorded here, and writes the recomputation to reports/stage3_g2_attempt3/run_span_recheck.json. A mismatch is a 
+  risk_architecture_id                           RA3
+
+=== cand.admission_basis
+  conflict_ref                                   G2A2-CONFLICT-25
+  conflict_status                                inherited from Attempt 2 and resolved the same way
+  resolution                                     SE100-CFG-3105 scopes the gate across both runs and states that a condition is satisfied only if both runs satisfy it; SE100-CFG-3106 measures S3-C1 and S3-C4 on the base run and lists the stress run as reported_but_not_gating. Both were sealed in the same session and neither outranks the other, so the more restrictive reading is adopted: all seven conditions on #BASE, and S3-C1..S3-C6 also on #ST
+  evaluated_on                                   The selected representative variant only, across both of its runs.
+  conjunctive                                    All Gate 3 conditions must be satisfied. Constitution section 9.
+  both_gate                                      A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.
+  criteria_source                                config/generation_2/g2_gate_criteria_ra3.json
+  neighbour_run_label                            #BASE
+  base_all_seven_satisfied                       False
+  stress_first_six_satisfied                     False
+  base_conditions_not_satisfied                  list(1) ['S3-C6']
+  stress_conditions_not_satisfied                list(1) ['S3-C6']
+  s3_c7_stress_side_reported_not_gating          dict(8) {'id': 'S3-C7', 'required_verbatim': 'reasonable neighboring parameter values do not reverse the sign of net return', 'verdict': 'MET', 'satisfied': True, 'measured': '4/4 neighbours match', 'threshold': 'all 4 match, zero matches nothing', 'note': "Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's paramet
+  permissive_base_only_reading_would_give        False
+  aggregated_on                                  satisfied, not verdict == MET; NOT_APPLICABLE_BY_CONDITION_TEXT is satisfied without being met
+
+=== cand.non_vacuity_check
+  rule                                           evaluation_integrity_rules[9]
+  ledger_id                                      SE100-G2-S3-C2-EPISODE-LEDGER
+  conflict_id                                    G2A2-CONFLICT-18
+  reconciled_fields                              list(4) ['entry_cash', 'exit_cash', 'dividends', 'pnl']
+  single_leg_compared                            51
+  mismatch_count                                 0
+  closed_episodes                                62
+  closed_trades                                  62
+  counts_agree                                   True
+  vacuous                                        False
+  reconciled                                     True
+  nothing_closed                                 False
+  total_trimmed_proceeds                         52.98
+  pnl_discrepancy                                1.21653177055365426119093861776002
+
+=== cand.prose_alias_adapter
+  conflict_id                                    G2A3-CONFLICT-40
+  criteria_id                                    SE100-CFG-3106
+  pointers_added                                 list(2) ['/conditions[2]/attempt_2_note', '/conditions[5]/scope_interpretation/attempt_2_significance']
+  pointers_changed                               list(0) []
+  pointers_removed                               list(0) []
+  sealed_object_unmutated                        True
+  conditions_using_the_adapter                   list(2) ['S3-C3', 'S3-C6']
+  conditions_using_the_seal_directly             list(5) ['S3-C1', 'S3-C2', 'S3-C4', 'S3-C5', 'S3-C7']
+  aliases                                        list(2) [{'condition': 'S3-C3', 'sealed_field': 'attempt_3_note', 'alias_supplied': 'attempt_2_note', 'pointer': '/conditions[2]/attempt_2_note', 'values_identical': True, 'value_sha256_prefix': '6df20960bc560d7f', 'read_by': "g2_gate_ra1.py:432, inside condition_3_ra1's evidence['reconciliation']['note']"}
+  affects_a_predicate                            False
+  affects_a_threshold                            False
+  affects_a_verdict                              False
+
+=== cand.reconciliation
+  closed_episodes                                62
+  closed_trades                                  62
+  counts_agree                                   True
+  single_leg_compared                            51
+  multi_leg_episodes                             11
+  multi_entry_episodes                           0
+  max_sale_legs                                  5
+  mismatches                                     list(0) []
+  vacuous                                        False
+  reconciled                                     True
+  reconciled_fields                              list(4) ['entry_cash', 'exit_cash', 'dividends', 'pnl']
+  total_trimmed_proceeds                         52.98
+  episode_pnl_total                              9.94
+  frozen_trade_pnl_total                         8.72346822944634573880906138223998
+  pnl_discrepancy                                1.21653177055365426119093861776002
+
+=== cand.conditions full
+  S3-C1
+    required_verbatim    total return is positive
+    measured             0.10337843028513874006
+    threshold            > 0
+    verdict              MET
+    satisfied            True
+    evidence             {'starting_equity': '100.00', 'final_equity': '110.3378430285138740060'}
+    note                 None
+
+  S3-C2
+    required_verbatim    maximum drawdown is no worse than 15%
+    measured             0.09941232925528737112297704174156968
+    threshold            <= 0.15
+    verdict              MET
+    satisfied            True
+    evidence             {'granularity': 'session close', 'research_shutdown_session': None}
+    note                 Inclusive. 'No worse than 15%' admits exactly 15%.
+
+  S3-C3
+    required_verbatim    profit factor is at least 1.10
+    measured             1.270402611534276387377584330794342
+    threshold            >= 1.1
+    verdict              MET
+    satisfied            True
+    evidence             {'basis': "Gross profit divided by gross loss over CLOSED EPISODES, where an episode's P&L is exit_cash plus dividends received while held minus entry_cash, with both legs' costs already inside those cash figures, and exit_cash is summed across every sale leg of the episode rather than only the leg that closed it. On any episode with exactly one sale leg this is numerically identical to stockedge1
+    note                 None
+
+  S3-C4
+    required_verbatim    at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results
+    measured             62
+    threshold            >= 30
+    verdict              MET
+    satisfied            True
+    evidence             {'basis': "Count of closed episodes in the representative's base run. An episode is closed when a sale returns the position to zero. A position still open on the final session is not closed and is not counted; at k = 3 up to three positions may be open on the final session and none of them counts. A position that has been trimmed but not closed is still open and is not counted.", 'exception_invoke
+    note                 No Attempt 3 variant invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly and before results so that a quarterly variant cannot be argued into it once its count is known. See G2A2-CONFLICT-20 for the two opposing effects the risk architecture has on this count.
+
+  S3-C5
+    required_verbatim    performance is not dependent on one trade: removing the single best trade leaves total return above 0%
+    measured             min(0.055666171814245462689982570080576, 0.055666171814245462689982570080576)
+    threshold            best_trade_removed_return > 0 for BOTH removals
+    verdict              MET
+    satisfied            True
+    evidence             {'basis': "Closed episodes only. Each episode's multiple is taken against the equity that actually existed when that episode was entered, which is well defined whether or not other positions were open at the time and whether or not the position was later trimmed.", 'closed_episodes': 62, 'multi_leg_episodes': 11, 'reconstructed_total_return': '0.101082234883550132737123302860624', 'equity_curve_to
+    note                 The reconstruction is NOT expected to equal the equity-curve total return, and no attempt is made to make it equal. Concurrent positions mean the products do not telescope; dividends credited outside an episode and positions still open on the final session also contribute; and under RA3, as under RA2, the exposure scalar changes within an episode's life. Both figures are reported side by side, tog
+
+  S3-C6
+    required_verbatim    no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy
+    measured             0.7505030181086519114688128772635815
+    threshold            <= 0.50
+    verdict              NOT_MET
+    satisfied            False
+    evidence             {'basis': "For each instrument, contribution = sum of pnl over that instrument's closed EPISODES, divided by the sum of pnl over all closed episodes. Evaluated only when total closed-episode P&L is strictly positive; when total P&L is zero or negative the share is not a meaningful proportion and the case is recorded as NOT_EVALUABLE <U+2014> which is moot, because S3-C1 has already failed such a c
+    note                 None
+
+  S3-C7
+    required_verbatim    reasonable neighboring parameter values do not reverse the sign of net return
+    measured             4/4 neighbours match
+    threshold            all 4 match, zero matches nothing
+    verdict              MET
+    satisfied            True
+    evidence             {'neighbour_definition': 'Every variant in the eighteen-variant Attempt 3 grid that differs from the representative in exactly one axis by exactly one step.', 'neighbour_count': 4, 'neighbour_count_rule': "3 when the representative is at an endpoint of both the lookback and the k axis; 5 when it is interior on both; 4 otherwise. The count is a function of the representative's grid position and is 
+    note                 Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's parameterisation is never revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3. It would also destroy the return-blind property of the selection rule,
+
+=== cand.stress_evaluation.conditions measured/verdict
+  S3-C1    verdict=MET          satisfied=True
+    measured  0.08107210940706772465
+    threshold > 0
+  S3-C2    verdict=MET          satisfied=True
+    measured  0.09932170282394264800433103176555540
+    threshold <= 0.15
+  S3-C3    verdict=MET          satisfied=True
+    measured  1.200539083557951482479784366576819
+    threshold >= 1.1
+  S3-C4    verdict=MET          satisfied=True
+    measured  62
+    threshold >= 30
+  S3-C5    verdict=MET          satisfied=True
+    measured  min(0.031717505233078233394772524945014, 0.031717505233078233394772524945014)
+    threshold best_trade_removed_return > 0 for BOTH removals
+  S3-C6    verdict=NOT_MET      satisfied=False
+    measured  0.9771505376344086021505376344086022
+    threshold <= 0.50
+  S3-C7    verdict=MET          satisfied=True
+    measured  4/4 neighbours match
+    threshold all 4 match, zero matches nothing
+
+=== cand.redefined_for_generation_2
+  v                                              list(2) ['S3-C5', 'S3-C7']
+
+=== cand.carried_over_unchanged
+  v                                              list(5) ['S3-C1', 'S3-C2', 'S3-C3', 'S3-C4', 'S3-C6']
+
+=== gate_scope.neighbours
+  v                                              list(4) ['SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY', 'SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY', 'SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY']
+
+=== stage_verdict.prior_attempt_tokens_withheld
+  v                                              list(4) ['STAGE_3_G2_STRATEGY_ADMITTED_IN_DEVELOPMENT', 'STAGE_3_G2_NO_CANDIDATE', 'STAGE_3_G2_ATTEMPT_2_STRATEGY_ADMITTED_IN_DEVELOPMENT', 'STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE']
+
+=== determinism.fields_compared
+  v                                              list(8) ['trades_digest', 'equity_digest', 'ranking_digest', 'risk_state_digest', 'fills', 'closed_trades', 'total_return', 'shutdown_session']
+
+=== reported_for_every_variant_coverage.map
+  v                                              list(2) [{'quantity': 'net return, both runs', 'columns': ['total_return'], 'scope': 'per_run'}, {'quantity': 'maximum drawdown, both runs', 'columns': ['max_drawdown'], 'scope': 'per_run'}]
+
+=== reported_for_every_variant_coverage.new_since_attempt_2
+  v                                              list(2) [{'quantity': 'The SE100-G2-SEL-2 stability score, its four per-quantity components, and the identity and score of every neighbour used to compute it.', 'columns': ['selection_score'], 'scope': 'per_variant'}, {'quantity': 'The Attempt 2 counterpart of each ladder, lockout and stop statistic, so the required comparison is on the same page as the figure it compares.', 'columns': ['attempt_2'], 'sco
+
+=== reported_for_every_variant_coverage.not_supplied_by_grid_report
+  columns                                        list(2) ['best_trade_removed_return', 'stop_exits']
+  reason                                         grid_report reports stop counts but not the realized loss at each stop, and reports no best-trade-removed return for any variant because that figure is a gate measurement the gate runs only for the representative; both are required for every variant, so both are computed for all thirty-six runs afte
+  source                                         stop_exits is risk_summary()['stops']['fills'] verbatim; best_trade_removed_return is condition_5_ra1 called per run, because RA3 changed a band table and not a measurement and there is no condition_5_ra3
+  gating_for_any_variant_other_than_the_representative False
+

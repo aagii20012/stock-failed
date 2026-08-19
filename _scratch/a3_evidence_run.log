@@ -1,0 +1,42 @@
+generated_utc     2026-08-16T09:25:05Z
+evidence_digest   462c13d2e07e25bec46713fe0165bcc00d9e8568d2fad403a48f1d30e412711c
+runs_executed     36
+determinism       True
+sel2_determinism  True
+disclosure_chars  1507
+disclosure_sha    ce1d6476f44562310fb059c5817645baa25477cc4f6168b414f3423834c8e925
+representative    SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY
+decided_at_step   2
+ladder_differs    True
+  ladder_ascents                     ra3=988      ra2=1571     runs_differing=35
+  ladder_descents                    ra3=1008     ra2=1605     runs_differing=36
+  lockout_arms                       ra3=1008     ra2=1605     runs_differing=36
+  lockout_recoveries_blocked         ra3=3719     ra2=6133     runs_differing=36
+  stops_filled                       ra3=624      ra2=608      runs_differing=21
+  stops_triggered                    ra3=3312     ra2=1911     runs_differing=25
+  sessions_at_full_sizing            ra3=53671    ra2=36886    runs_differing=36
+  SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY           shut=0 fills=614   ladder=78    lock=78   stops=18   score=0.316981929  base_ret=0.53412202253939399356
+  SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY         shut=0 fills=283   ladder=53    lock=53   stops=24   score=0.215520012  base_ret=0.061579640278206373295
+  SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY           shut=0 fills=801   ladder=40    lock=40   stops=37   score=0.299993984  base_ret=0.476528113403347423047
+  SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY         shut=0 fills=298   ladder=44    lock=44   stops=32   score=0.215471404  base_ret=0.10337843028513874006
+  SE100-G2-S3-C3-ROTATION-RA3-L03-K3-MONTHLY           shut=0 fills=1035  ladder=23    lock=23   stops=47   score=0.347840893  base_ret=0.349933553578734474343
+  SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY         shut=0 fills=610   ladder=60    lock=60   stops=60   score=0.423540495  base_ret=0.296632860643638832908
+  SE100-G2-S3-C3-ROTATION-RA3-L06-K1-MONTHLY           shut=0 fills=454   ladder=97    lock=97   stops=18   score=0.291302167  base_ret=0.1270049155141383069
+  SE100-G2-S3-C3-ROTATION-RA3-L06-K1-QUARTERLY         shut=0 fills=265   ladder=65    lock=65   stops=22   score=0.248621581  base_ret=0.133756784486161006484
+  SE100-G2-S3-C3-ROTATION-RA3-L06-K2-MONTHLY           shut=0 fills=658   ladder=46    lock=46   stops=22   score=0.274579406  base_ret=0.264904304532987415232
+  SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY         shut=0 fills=336   ladder=44    lock=44   stops=42   score=0.247419599  base_ret=0.06637933772044650955
+  SE100-G2-S3-C3-ROTATION-RA3-L06-K3-MONTHLY           shut=0 fills=955   ladder=42    lock=42   stops=45   score=0.290149221  base_ret=0.167076014649257944986
+  SE100-G2-S3-C3-ROTATION-RA3-L06-K3-QUARTERLY         shut=0 fills=441   ladder=26    lock=26   stops=42   score=0.339590681  base_ret=0.046747253255730867274
+  SE100-G2-S3-C3-ROTATION-RA3-L12-K1-MONTHLY           shut=0 fills=359   ladder=68    lock=68   stops=30   score=0.292941999  base_ret=0.0212
+  SE100-G2-S3-C3-ROTATION-RA3-L12-K1-QUARTERLY         shut=0 fills=195   ladder=88    lock=88   stops=24   score=0.246609961  base_ret=0.014778533675865595188
+  SE100-G2-S3-C3-ROTATION-RA3-L12-K2-MONTHLY           shut=0 fills=294   ladder=38    lock=38   stops=26   score=0.338753489  base_ret=0.158454088318416345864
+  SE100-G2-S3-C3-ROTATION-RA3-L12-K2-QUARTERLY         shut=0 fills=254   ladder=64    lock=64   stops=30   score=0.285600694  base_ret=0.106453749304213480182
+  SE100-G2-S3-C3-ROTATION-RA3-L12-K3-MONTHLY           shut=0 fills=700   ladder=83    lock=83   stops=45   score=0.401614635  base_ret=0.08430510437360804102
+  SE100-G2-S3-C3-ROTATION-RA3-L12-K3-QUARTERLY         shut=0 fills=414   ladder=49    lock=49   stops=60   score=0.344422664  base_ret=0.079496943212955127194
+base_not_satisfied   ['S3-C6']
+stress_not_satisfied ['S3-C6']
+permissive_reading   False
+admitted             False
+stage_verdict     FAIL STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE
+route             REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION
+wrote             reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json

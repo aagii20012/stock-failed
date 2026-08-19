@@ -1,0 +1,11 @@
+verdict          FAIL — STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE
+run_id           SE100-R-20260819T104543Z
+repo_state_id    30cadd00c89fc09cbbcd37ae98ec69546c5992a652f3556e29d07a5a2d2d94a2
+timestamp_utc    2026-08-19T10:45:43Z
+stage0 freeze    True
+tests            {'collected': 1265, 'passed': 1264, 'failed': 1, 'skipped': 0, 'errors': 0}
+decision         reports\stage3_g2_attempt3\STAGE_3_G2_A3_ROTATION_RESEARCH.json
+manifest         reports\stage3_g2_attempt3\STAGE_3_G2_A3_ARTIFACT_MANIFEST.json
+checksums        reports\stage3_g2_attempt3\STAGE_3_G2_A3_ROTATION_RESEARCH.sha256
+checksum_digest  68abc22ae53388b057c4a6d8668f017d5a1ceee94d5ab7d66d20904e82d2694e
+run record       runs\SE100-R-20260819T104543Z.json

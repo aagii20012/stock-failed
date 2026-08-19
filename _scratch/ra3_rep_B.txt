@@ -1,0 +1,529 @@
+=== CRIT scalars ===
+adaptation_disclosure_carried                            This file is part of an attempt whose pre-registration was written after BOTH Attempt 1's and Attempt 2's development results were known. The full disclosure text is carried verbatim in SE100-CFG-3105 field adaptation_disclosure_verbatim and in every downstream artifact listed in its adaptation_disclosure_carriage_requirement. It is not restated here in paraphrase, because a paraphrased disclosure
+artifact_id                                              SE100-CFG-3106
+attempt                                                  3
+attempt_1_counterpart                                    config/generation_2/g2_gate_criteria.json (SE100-CFG-3102)
+attempt_1_counterpart_sha256                             a1ac96f98dcbe9e5ce975f2eb27914fcbc7728cad6355a1650dc1ec137ad0d31
+attempt_2_counterpart                                    config/generation_2/g2_gate_criteria_ra1.json (SE100-CFG-3104)
+attempt_2_counterpart_sha256                             3b9626214db6a6f6183384456489338ea19a277866e35a1aa6c09b0bacb3e625
+charter_ref                                              governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md (SE100-GOV-2001)
+constitution_ref                                         SE100-GOV-0001 section 9 gate 3, sections 4, 5.1, 10, 11
+declaration_note                                         Attempt 3 inherits Attempt 2's Gate 3 criteria in full. Every threshold, every predicate string, every undefined-case rule, the treatment of NOT_EVALUABLE, and the episode-ledger measurement basis established by G2A2-CONFLICT-18 are carried over unchanged, so a reader comparing SE100-CFG-3104 with this file sees a bounded set of differences and can check that each one is declared here. NO measurem
+declared_before_any_strategy_code                        True
+frozen_gate_text_verbatim                                This gate rejects obviously weak or fitted candidates before sealed evaluation. Pass only if, on development data after base costs: total return is positive; maximum drawdown is no worse than 15%; profit factor is at least 1.10; at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results; performance is not dependent on one trade: rem
+gate_id                                                  3
+gate_name                                                development_admissibility
+generation                                               2
+generation_1_counterpart                                 config/stage3_gate_criteria.json (SE100-CFG-3002)
+generation_1_counterpart_sha256                          310f1c978380f4a1d6b98b8c368975b1515476b032c123afb06f1dd597e3e18d
+generation_id                                            SE100-GEN2-7394207c543401e2
+live_trading_authorized                                  False
+project                                                  StockEdge100
+protocol_ref                                             config/generation_2/g2_rotation_ra3_protocol.json (SE100-CFG-3105)
+stage                                                    3
+title                                                    Generation 2 Stage 3 Attempt 3 gate criteria <U+2014> Gate 3 development admissibility under the RA3 risk architecture and the SE100-G2-SEL-2 selection rule, evaluation methods fixed before results
+version                                                  1.0.0
+
+=== CRIT.conditions ===
+  --- S3-C1 ---
+      attempt_3_note                           "Unaffected by G2A2-CONFLICT-18: the equity curve reflects every cash movement including partial sales. This is the condition Attempt 2's representative failed by the widest margin in relative terms, at +0.42 percent base and -0.08 percent stress over thirteen years. RA3 can only increase exposure relative to RA2 \u2014 it removes a throttle rung and adds nothing \u2014 so an improvement here is a predictable consequence of the architecture change and is NOT evidence about the rotation signal. A FAIL here under RA3 would say the signal is weak independently of how hard the ladder throttled it, which is a stronger statement than Attempt 2's evidence supported."
+      attempt_3_status                         "unchanged from Attempt 2 in threshold, predicate and measurement basis"
+      costs                                    "base cost model, all costs already charged inside the equity curve"
+      id                                       "S3-C1"
+      measurement                              "total_return over the representative's base run, from stockedge100.backtest.metrics.total_return on the engine equity curve: final equity / starting equity - 1, exact Decimal. Under G2A2-CONFLICT-25 the same measurement is also required on the stress run."
+      not_evaluable_treatment                  "An equity curve with fewer than two points is NOT_EVALUABLE and fails."
+      predicate                                "total_return > 0"
+      required_verbatim                        "total return is positive"
+  --- S3-C2 ---
+      attempt_3_status                         "unchanged from Attempt 2 in threshold, predicate and measurement basis"
+      boundary                                 "Inclusive. 'No worse than 15%' admits exactly 15%."
+      id                                       "S3-C2"
+      interaction                              "See S3-CONFLICT-3 and G2A3-CONFLICT-19. A MET verdict here is produced by three overlapping devices and is not independent evidence about the hypothesis. A NOT_MET verdict, by contrast, is informative: under RA3 it means the two remaining rungs were not enough where the three-rung ladder was, which is direct evidence that the removed rung was load-bearing."
+      measurement                              "max_drawdown from stockedge100.backtest.metrics: the largest peak-to-trough decline of the daily closing equity curve, expressed as a non-negative fraction of the running peak. Session-close granularity; the project holds no intraday data and none is imputed."
+      not_evaluable_treatment                  "An equity curve with fewer than two points is NOT_EVALUABLE and fails, on the same guard as S3-C1. Otherwise this condition is always evaluable: a run that never declined has a maximum drawdown of exactly zero, which is a measured value and not absent evidence."
+      predicate                                "max_drawdown <= 0.15"
+      required_verbatim                        "maximum drawdown is no worse than 15%"
+  --- S3-C3 ---
+      attempt_3_note                           "The frozen metrics function is not modified and is still called for the reconciliation figure. Both numbers are reported: profit factor over the episode ledger, which gates, and profit factor over Portfolio.trades, which does not. Where they differ, the difference is the trimmed proceeds the frozen recorder drops. Under RA3 that difference is expected to be SMALLER than Attempt 2's, because one of the two trimming mechanisms fires less often; the size of the reduction is direct evidence of how much of Attempt 2's trimming the removed rung caused, and is reported for that reason."
+      attempt_3_status                         "unchanged from Attempt 2 in threshold, predicate and measurement basis; the episode ledger of G2A2-CONFLICT-18 is inherited"
+      id                                       "S3-C3"
+      measurement                              "Gross profit divided by gross loss over CLOSED EPISODES, where an episode's P&L is exit_cash plus dividends received while held minus entry_cash, with both legs' costs already inside those cash figures, and exit_cash is summed across every sale leg of the episode rather than only the leg that closed it. On any episode with exactly one sale leg this is numerically identical to stockedge100.backtest.metrics.profit_factor over Portfolio.trades."
+      predicate                                "profit_factor >= 1.10"
+      required_verbatim                        "profit factor is at least 1.10"
+      undefined_cases                          {"no_closed_episodes": "profit_factor is null. Recorded as NOT_EVALUABLE and the condition FAILS. It is not passed by default and not marked not-applicable.", "no_losing_episodes": "profit_factor is null because gross loss is zero. If closed episodes exist and gross profit is positive, this is recorded as UNDEFINED_NO_LOSSES_TREATED_AS_MET, with the raw null preserved in the evidence rather than replaced by a number. The sealed cost model requires profit factor undefined when there are no losses to be reported as null, never as infinity."}
+  --- S3-C4 ---
+      attempt_3_status                         "unchanged from Attempt 2 in threshold, predicate and measurement basis; the episode ledger of G2A2-CONFLICT-18 is inherited"
+      counting_identity                        "A closed episode and a closed Portfolio.Trade are the same event: both are the moment a position returns to zero. The episode ledger changes what P&L is attributed to that event, not when the event occurs, so this count is identical to the count over Portfolio.trades. It is asserted equal at evaluation time rather than assumed."
+      exception_invoked                        false
+      exception_note                           "No Attempt 3 variant invokes the lower-frequency exception. The exception permits a LONGER evidence requirement, not a smaller trade count, so it could not lower this floor in any case. Recorded explicitly and before results so that a quarterly variant cannot be argued into it once its count is known. See G2A2-CONFLICT-20 for the two opposing effects the risk architecture has on this count."
+      id                                       "S3-C4"
+      measurement                              "Count of closed episodes in the representative's base run. An episode is closed when a sale returns the position to zero. A position still open on the final session is not closed and is not counted; at k = 3 up to three positions may be open on the final session and none of them counts. A position that has been trimmed but not closed is still open and is not counted."
+      not_evaluable_treatment                  "This condition is always evaluable. A count is defined for every run, and a run with no closed episodes has a count of zero, which is a measured value that fails the predicate rather than absent evidence."
+      predicate                                "closed_episodes >= 30"
+      required_verbatim                        "at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results"
+  --- S3-C5 ---
+      attempt_3_status                         "unchanged from Attempt 2: REDEFINED for Generation 2 by G2-CONFLICT-6, carried with the episode-ledger P&L of G2A2-CONFLICT-18 and the qualification of G2A2-CONFLICT-23"
+      id                                       "S3-C5"
+      implementation                           "The Attempt 3 gate module, which imports Attempt 2's condition_5_ra1 unmodified rather than restating it. Generation 1's stockedge100.strategies.gate.condition_5 and Attempt 1's stockedge100.strategies.g2_gate are not called and neither is modified."
+      measurement                              {"basis": "Closed episodes only. Each episode's multiple is taken against the equity that actually existed when that episode was entered, which is well defined whether or not other positions were open at the time and whether or not the position was later trimmed.", "procedure": ["For the i-th closed episode, E_entry[i] = account equity at the CLOSE of the session immediately preceding that episode's entry fill, read from the engine's own equity curve. If the entry fill is on the first session of the run, E_entry[i] = starting equity = 100.00.", "Per-episode equity multiple r[i] = 1 + pnl[i] / E_entry[i], with pnl[i] the episode P&L defined in S3-C3.", "Reconstructed total return = product of
+      not_evaluable_treatment                  "Fewer than two closed episodes is NOT_EVALUABLE and fails; a result that is one episode is the exact dependence this condition tests for."
+      predicate                                "best_trade_removed_return > 0 for BOTH removals"
+      required_verbatim                        "performance is not dependent on one trade: removing the single best trade leaves total return above 0%"
+  --- S3-C6 ---
+      attempt_3_status                         "unchanged from Attempt 2 in threshold, predicate and measurement basis; the episode ledger of G2A2-CONFLICT-18 is inherited"
+      id                                       "S3-C6"
+      measurement                              "For each instrument, contribution = sum of pnl over that instrument's closed EPISODES, divided by the sum of pnl over all closed episodes. Evaluated only when total closed-episode P&L is strictly positive; when total P&L is zero or negative the share is not a meaningful proportion and the case is recorded as NOT_EVALUABLE \u2014 which is moot, because S3-C1 has already failed such a candidate."
+      predicate                                "max instrument contribution <= 0.50"
+      required_verbatim                        "no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy"
+      scope_interpretation                     {"applies_to": "SE100-G2-S3-C3-ROTATION-RA3, unconditionally.", "rationale": "Applicability is decided by the DECLARED universe, never by the realized symbol count. A candidate that declares one instrument cannot have a concentration problem the condition could detect, so it is NOT_APPLICABLE_BY_CONDITION_TEXT. A candidate that declares many and then trades one is exactly the case this condition exists to catch, so it remains applicable and fails.", "why_it_always_applies": "Attempt 3's declared universe is the full 34-member frozen list at every rebalance, so the strategy is multi-instrument by declaration regardless of how many symbols it turns out to trade. Deciding applicability from the
+      why_the_basis_matters_here               "This is the condition G2A2-CONFLICT-18 distorts most. Attribution is a ratio of one symbol's P&L to the total, so dropping a trim's proceeds corrupts both the numerator and the denominator. Computing the ratio over episodes is what makes the answer a fact about the strategy rather than about which positions happened to be trimmed."
+  --- S3-C7 ---
+      attempt_3_status                         "unchanged from Attempt 2: REDEFINED for Generation 2 by G2-CONFLICT-7, qualified by G2A3-CONFLICT-22, and now with a second consumer per G2A3-CONFLICT-27"
+      id                                       "S3-C7"
+      implementation                           "The Attempt 3 gate module. Generation 1's condition_7 raises ConfigViolation on a neighbour count other than four and is not called; it is not modified. Attempt 1's g2_gate and Attempt 2's g2_gate_ra1.condition_7_ra1 are not called for Attempt 3, because both resolve the neighbour set against their own attempt's grid, and neither is modified."
+      measurement                              {"neighbour_definition": "Every variant in the eighteen-variant Attempt 3 grid that differs from the representative in exactly one axis by exactly one step.", "axis_orderings": {"lookback_months": [3, 6, 12], "top_k": [1, 2, 3], "rebalance_frequency": ["MONTHLY", "QUARTERLY"]}, "one_step_note": "A step is to an adjacent value in the ordering above. From lookback 3 the only neighbour is 6, not 12. From k = 2 both 1 and 3 are neighbours. The frequency axis has two values, so its single neighbour is always the other one.", "neighbour_count": "3 when the representative is at an endpoint of both the lookback and the k axis; 5 when it is interior on both; 4 otherwise. The count is a function of th
+      not_evaluable_treatment                  "A neighbour that fails to run is NOT_RUN, which is not a pass; the condition fails."
+      predicate                                "sign(neighbour total_return) == sign(representative total_return) for EVERY neighbour, where sign is positive, negative, or zero and zero matches nothing"
+      required_verbatim                        "reasonable neighboring parameter values do not reverse the sign of net return"
+      selection_prohibition                    "Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's parameterisation is never revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3. It would also destroy the return-blind property of the selection rule, since the promotion would be driven by a return. This prohibition binds with additional force in Attempt 3, because SEL-2 already reads the neighbourhood for its own purposes and a reader could mistake that for licence to read returns there. It is not: SEL-2's inputs are four counters, structurall
+
+=== CRIT.windows ===
+{
+ "authorized": [
+  "development"
+ ],
+ "development_window": [
+  "1993-01-29",
+  "2021-07-31"
+ ],
+ "validation_window_state": "LOCKED",
+ "generation_1_holdout_state": "SPENT_AND_PROHIBITED",
+ "holdout_window_state": "SEALED",
+ "enforcement": "ResearchWindow raises WindowViolation on any session outside the development window, MarketView raises LookAheadError on any read past the decision session, and stockedge100.strategies.g2_window_guard adds the three Generation 2 checks sealed in STAGE_1_G2_PARTITION_LOCK.md section 4. Attempt 3 reuses that guard unmodified, exactly as Attempt 2 did, rather than re-deriving its bounds. All are structural; none depends on a strategy behaving well.",
+ "disclosed_limitation_reference": "Any Generation 2 report that references the validation window reproduces the disclosure text of STAGE_1_G2_PARTITION_LOCK.md section 2 verbatim. This stage does not read the validation window at all.",
+ "generation_1_holdout": "2024-08-01 to 2026-07-31. Spent by Generation 1 and prohibited. Never read by this stage or any code it runs.",
+ "generation_2_holdout": "2026-08-01 to 2028-07-31. Never read, by this stage or any code it runs, and not readable before that period exists in real calendar time."
+}
+
+=== CRIT.frozen_gate_text_verbatim ===
+"This gate rejects obviously weak or fitted candidates before sealed evaluation. Pass only if, on development data after base costs: total return is positive; maximum drawdown is no worse than 15%; profit factor is at least 1.10; at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results; performance is not dependent on one trade: removing the single best trade leaves total return above 0%; no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy; reasonable neighboring parameter values do not reverse the sign of net return. Fail verdict: STRATEGY_REJECTED_IN_DEVELOPMENT."
+
+=== CRIT.frozen_gate_json_companion_verbatim ===
+{
+ "id": 3,
+ "name": "development_admissibility",
+ "fail_result": "STRATEGY_REJECTED_IN_DEVELOPMENT",
+ "thresholds": {
+  "net_return_positive": true,
+  "max_drawdown_pct": 15,
+  "profit_factor_min": 1.1,
+  "closed_trades_min": 30,
+  "best_trade_removed_return_positive": true
+ }
+}
+
+=== CRIT.evaluation_integrity_rules ===
+[
+ "Conditions are evaluated by a program that reads the engine's own outputs. No condition verdict is typed by hand into a report.",
+ "Every condition verdict is one of MET, NOT_MET, NOT_EVALUABLE, or NOT_APPLICABLE_BY_CONDITION_TEXT. There is no fifth value and no borderline value.",
+ "The candidate's admissibility is the conjunction of its applicable conditions. NOT_EVALUABLE never counts as MET.",
+ "Thresholds are compared as exact Decimals. No comparison is made in floating point, and no result is rounded before comparison.",
+ "The evidence file records the measured value alongside every verdict, so a reader can recompute the comparison without rerunning the engine.",
+ "The representative is selected before any condition is evaluated, by the return-blind rule SE100-G2-SEL-2 in SE100-CFG-3105. Condition evaluation cannot feed back into selection, because selection has already happened and is not repeated.",
+ "If the representative fails any condition, the stage fails. No other variant is evaluated against the gate.",
+ "The episode ledger is reconciled against the frozen Portfolio.trades on every run, not only on the representative's. For every episode with exactly one sale leg, entry_cash, exit_cash, dividends and pnl are asserted equal to the corresponding Trade, and the closed episode count is asserted equal to the closed trade count. A failure of either assertion halts evaluation rather than being reported as a discrepancy.",
+ "That reconciliation must not be allowed to pass vacuously. The evaluator asserts that the number of single-leg episodes compared is greater than zero before asserting that they agree, and reports the compared count alongside the mismatch count.",
+ "The gate threshold seal check runs before any condition is evaluated: the five frozen thresholds, the S3-C6 predicate text and the S3-C4 exception flag are asserted unchanged against the constitution. A file that has drifted from the seal cannot be used to evaluate anything, whatever its conditions say.",
+ "The verdict token emitted is asserted to be one of the two sealed in verdict_token_derivation and to be none of the four belonging to Attempts 1 and 2. Those four are read from the two closed attempts' own sealed criteria files, whose digests are recomputed against the pins above, rather than being restated here as literals: two files agreeing is evidence, one file quoting itself is not.",
+ "The selection score is computed by a module whose only input is a frozen dataclass carrying (variant_id, shutdown_events, fill_count, ladder_descents, lockout_arms, stops_filled) and nothing else, asserted at import time. A field added later \u2014 including a return, a drawdown or a profit factor \u2014 fails the import rather than silently widening what the selector can see."
+]
+
+=== CRIT.reported_but_not_gating ===
+[
+ "The representative's stress run, in full. Under G2A2-CONFLICT-25's restrictive reading S3-C1 through S3-C6 are additionally required to be satisfied on it; the permissive base-only reading is also reported, and the two readings are stated separately so a reader can see which one the verdict rests on.",
+ "All eighteen variants' return, maximum drawdown, profit factor, closed episode count, and shutdown event count, for both runs. Descriptive record only.",
+ "The RA3 risk-architecture counters, for all eighteen variants and both runs: de-risk ladder activations by band, re-entry lockout triggers, aggregate-throttle trim events, per-position stop exits, the combined sizing scalar's minimum and mean, and the maximum gross exposure fraction observed at any session. Four of these \u2014 fill count, ladder descent count, lockout arm count and stop fill count \u2014 ARE inputs to SE100-G2-SEL-2's stability score and are therefore selection inputs as well as descriptive evidence. None of them gates anything, and no threshold anywhere in this file is expressed in terms of them.",
+ "The comparison of every RA3 ladder statistic against Attempt 2's corresponding figure, required by the operating instruction, which requires in particular that at least the ladder-engagement statistics be shown to differ. Descriptive; it gates nothing.",
+ "The full SE100-G2-SEL-2 computation for every eligible variant: the four raw counters, each neighbour's counters, the per-quantity dissimilarities, the per-neighbour averages and the final score, together with the scores of the selected variant's own neighbours. Required by the operating instruction to be traced to the actual computation rather than asserted.",
+ "The reconciliation between the episode ledger and Portfolio.trades: episode count, trade count, the per-symbol P&L difference, and the total trimmed proceeds the frozen recorder attributes to no trade. Descriptive, and the direct evidence for G2A2-CONFLICT-18.",
+ "CAGR, annualised volatility, Sharpe ratio at a 0.00% risk-free rate, exposure fraction, win rate, average win, average loss, longest flat streak, distinct symbols traded, and per-symbol contribution.",
+ "SPY total return and SPY tradable buy-and-hold over the representative's own window, with the research shutdown both enforced and disabled, the latter explicitly labelled a benchmark reference account; the cash benchmark at 0.00% annual; and the do-nothing benchmark.",
+ "The comparison of Attempt 3 shutdown-trigger dates, if any, against Attempt 1's and Attempt 2's. Descriptive; it gates nothing and cannot change a condition verdict.",
+ "Constitution section 4 requires better risk-adjusted performance than cash for a strategy to pass overall, and beating SPY is not mandatory where drawdown is materially reduced. Neither is among the seven hard conditions of Gate 3, so neither gates this stage."
+]
+
+=== CRIT.adaptation_disclosure_carried ===
+"This file is part of an attempt whose pre-registration was written after BOTH Attempt 1's and Attempt 2's development results were known. The full disclosure text is carried verbatim in SE100-CFG-3105 field adaptation_disclosure_verbatim and in every downstream artifact listed in its adaptation_disclosure_carriage_requirement. It is not restated here in paraphrase, because a paraphrased disclosure is a weakened disclosure. This is the third disclosed adaptation on one hypothesis family; see multiple_comparisons_disclosure in SE100-CFG-3105 and G2A3-CONFLICT-33 below."
+
+=== CRIT.relationship_to_attempt_1_criteria ===
+{
+ "thresholds_changed": "none",
+ "predicates_changed": "No relation and no threshold changed. As in Attempt 2, six of the seven predicate strings are character-identical to SE100-CFG-3102's and the seventh differs by one operand name.",
+ "measurement_basis_changed": [
+  "S3-C3",
+  "S3-C4",
+  "S3-C5",
+  "S3-C6"
+ ],
+ "measurement_basis_unchanged": [
+  "S3-C1",
+  "S3-C2",
+  "S3-C7"
+ ],
+ "note": "These two lists are reproduced from SE100-CFG-3104 because the evaluator reads them by name to populate the decision record. They describe the change Attempt 2 made against Attempt 1, and Attempt 3 inherits both the change and the description. Attempt 3 makes no further change of measurement basis against Attempt 2; see relationship_to_attempt_2_criteria."
+}
+
+=== CRIT.relationship_to_attempt_2_criteria ===
+{
+ "thresholds_changed": "none",
+ "predicates_changed": "none. All seven predicate strings are character-identical to SE100-CFG-3104's.",
+ "measurement_basis_changed": [],
+ "measurement_basis_unchanged": [
+  "S3-C1",
+  "S3-C2",
+  "S3-C3",
+  "S3-C4",
+  "S3-C5",
+  "S3-C6",
+  "S3-C7"
+ ],
+ "episode_ledger_inherited": "The episode ledger of G2A2-CONFLICT-18 is inherited unchanged and is built by the Attempt 2 module stockedge100.backtest.g2_episodes_ra1, which is imported and NOT modified, NOT copied and NOT subclassed. RA3 trims positions for exactly the same two reasons RA2 does \u2014 the aggregate throttle and the de-risk ladder \u2014 so the conflict that made the ledger necessary applies with undiminished force. Removing the -5% rung reduces how often a trim happens; it does not remove the mechanism, and a ledger that was necessary at a thousand descents is still necessary at one.",
+ "what_actually_differs": [
+  "The two verdict tokens, which are Attempt 3's and are checked against all four tokens belonging to the two closed attempts.",
+  "The candidate id named in S3-C6 scope_interpretation.applies_to, which is SE100-G2-S3-C3-ROTATION-RA3.",
+  "The grid named in S3-C7 measurement.neighbour_definition, which is the eighteen-variant Attempt 3 grid.",
+  "Three prose passages that described RA2's three-rung 5/8/10 ladder and now describe RA3's two-rung 8/10 ladder: S3-CONFLICT-3.attempt_3_note, G2A3-CONFLICT-19 and G2A3-CONFLICT-22 (the successors of Attempt 2's G2A2-CONFLICT-19 and G2A2-CONFLICT-22).",
+  "Eight new conflict entries, G2A3-CONFLICT-26 through G2A3-CONFLICT-33, recording what is new in this attempt."
+ ],
+ "why_a_new_file_at_all": "Because the tokens must differ and a verdict token may never be shared across attempts, and because three of Attempt 2's prose fields state a ladder geometry Attempt 3 does not run. Editing SE100-CFG-3104 in place was not available: Attempt 2 is closed and its file is read-only, its digest is pinned by its own governance record, and its verdict of FAIL stands permanently against the figures that file describes."
+}
+
+=== CRIT.relationship_to_generation_1_criteria ===
+{
+ "carried_over_unchanged": [
+  "S3-C1",
+  "S3-C2",
+  "S3-C3",
+  "S3-C4",
+  "S3-C6"
+ ],
+ "redefined_for_generation_2": [
+  "S3-C5",
+  "S3-C7"
+ ],
+ "thresholds_changed": "none",
+ "note": "This row describes the relationship to Generation 1 and is identical to the rows in SE100-CFG-3102 and SE100-CFG-3104. Attempt 3 changes no threshold either."
+}
+
+=== CRIT.declaration_note ===
+"Attempt 3 inherits Attempt 2's Gate 3 criteria in full. Every threshold, every predicate string, every undefined-case rule, the treatment of NOT_EVALUABLE, and the episode-ledger measurement basis established by G2A2-CONFLICT-18 are carried over unchanged, so a reader comparing SE100-CFG-3104 with this file sees a bounded set of differences and can check that each one is declared here. NO measurement basis changes and no threshold changes. The differences are of three kinds and three only: the two verdict tokens are Attempt 3's, the identifiers naming the candidate and the grid are Attempt 3's, and the prose describing the de-risk ladder is restated for RA3's two rungs because Attempt 2's text hard-codes a three-rung ladder that this attempt does not run. A prose field left saying '5, 8 and 10 percent' under an architecture whose ladder starts at 8 would be a false statement in a sealed file, which is worse than a difference that has to be declared."
+
+=== CRIT.conflicts_found ===
+[
+ {
+  "id": "S3-CONFLICT-1",
+  "status": "inherited from Generation 1 via Attempts 1 and 2, unchanged",
+  "description": "The frozen JSON companion for gate 3 carries five thresholds. The frozen Markdown carries seven conditions: the same five plus the profit-concentration condition and the neighbouring-parameter sign-stability condition.",
+  "resolution": "The Markdown is authoritative and more restrictive. All seven conditions are evaluated and all seven must pass.",
+  "action_taken": "Reported, not repaired. No frozen artifact is edited."
+ },
+ {
+  "id": "S3-CONFLICT-3",
+  "status": "inherited, and less load-bearing in Attempt 3 than in Attempt 2 \u2014 but not by enough to change anything",
+  "description": "Gate 3 requires maximum drawdown no worse than 15%. Constitution section 5.1 puts the research shutdown at exactly 15% below the running high-water mark. The two thresholds are the same number.",
+  "resolution": "Any variant that trips the shutdown has by construction breached S3-C2, and its equity curve is flat from liquidation onward because entries are permanently blocked.",
+  "attempt_3_note": "See G2A3-CONFLICT-19. RA3's de-risk ladder reduces exposure at 8 and 10 percent drawdown, both of which still sit inside the 15 percent threshold S3-C2 measures. The -5% rung Attempt 2 added is removed, so the ladder now engages later and less often, but the two rungs that remain are still positioned below the gate threshold and were still chosen with that threshold in view. A MET verdict on S3-C2 remains substantially a restatement of the fact that the ladder ran, and must not be read as independent evidence.",
+  "action_taken": "Recorded. No threshold changed."
+ },
+ {
+  "id": "G2-CONFLICT-6",
+  "status": "inherited from Attempts 1 and 2, carried forward, still qualified by G2A2-CONFLICT-23",
+  "description": "S3-C5's Generation 1 measurement reconstructs equity sequentially over closed trades in exit order and is exact only because Generation 1 could hold at most one position. Generation 2 holds up to three at once, so trades overlap and the sequential reconstruction is no longer exact.",
+  "resolution": "The per-trade multiple is taken against the equity base that actually existed when the trade was entered: r[i] = 1 + pnl[i] / E_entry[i], with E_entry[i] the account equity at the close of the session immediately preceding that trade's entry fill, or starting equity if there is no such session. Carried into Attempt 3 unchanged in form, with pnl[i] the episode P&L of G2A2-CONFLICT-18.",
+  "action_taken": "Inherited. Generation 1's method is not edited and its file is not touched."
+ },
+ {
+  "id": "G2-CONFLICT-7",
+  "status": "inherited from Attempts 1 and 2, carried forward, and further qualified by G2A3-CONFLICT-22 and G2A3-CONFLICT-27",
+  "description": "S3-C7's Generation 1 implementation raises ConfigViolation unless exactly four robustness neighbours are supplied. A three-axis grid does not produce exactly four.",
+  "resolution": "The neighbour set is defined structurally \u2014 every variant differing from the representative in exactly one axis by exactly one step, on the orderings lookback 3 < 6 < 12, k 1 < 2 < 3, frequency MONTHLY < QUARTERLY \u2014 and the same sign-stability predicate is evaluated over that set. The rule is a function of the representative's grid position and is fixed before the representative is known.",
+  "attempt_3_note": "Attempt 3 gives this definition a second consumer. SE100-G2-SEL-2's stability score is averaged over the SAME neighbour set, computed by the same function from the same sealed axis_orderings. The two consumers cannot drift apart, because there is one implementation and the selection module imports it rather than restating it.",
+  "action_taken": "Inherited unchanged. Generation 1's condition_7 is not modified and is not called."
+ },
+ {
+  "id": "G2-CONFLICT-15",
+  "status": "inherited from Attempts 1 and 2, carried forward",
+  "description": "Generation 1 evaluated Gate 3 as a disjunction across six independently declared candidates. Attempt 3 declares one candidate whose parameterisation is fixed by a frozen return-blind selection rule over eighteen variants.",
+  "resolution": "The gate is evaluated on the single selected representative. The disjunction of constitution section 9 is over a candidate set of size one. Evaluating all eighteen and passing the stage if any one of them passes would be the multiplicity abuse the selection rule exists to prevent.",
+  "action_taken": "Inherited. The other seventeen variants are reported descriptively and are never used to reach a verdict."
+ },
+ {
+  "id": "G2A2-CONFLICT-18",
+  "status": "inherited from Attempt 2 and applies with undiminished force",
+  "description": "Attempt 2's aggregate throttle and de-risk ladder both reduce an existing position without closing it. stockedge100.backtest.portfolio.Portfolio.apply_fill appends a Trade only when a sale takes the position to exactly zero; on a partial sale it rewrites the position's cost basis pro rata and appends nothing, so a trim's proceeds are attributed to no trade and the recorded P&L can differ from the episode's true realized P&L in sign.",
+  "attempt_3_status": "RA3 keeps the aggregate throttle unchanged and keeps two of RA2's three ladder rungs, so both trimming mechanisms survive. The conflict is inherited without qualification and its resolution is inherited without modification.",
+  "resolution": "Attempt 3 evaluates the four trade-based conditions on the EPISODE LEDGER built by stockedge100.backtest.g2_episodes_ra1, imported from Attempt 2 unmodified. An episode is one entry fill in a symbol together with every subsequent sale of that symbol up to and including the sale that returns the position to zero; pnl = exit_cash + dividends - entry_cash.",
+  "not_repaired_upstream": "portfolio.py is a frozen Generation 1 module and is not edited. g2_episodes_ra1.py is a closed-attempt module and is not edited either; it is imported.",
+  "action_taken": "Inherited before any Attempt 3 variant is run."
+ },
+ {
+  "id": "G2A3-CONFLICT-19",
+  "supersedes_in_scope": "G2A2-CONFLICT-19, which described RA2's three-rung ladder and is not edited",
+  "description": "RA3's de-risk ladder reduces exposure at 8 and 10 percent drawdown from the equity high-water mark. Gate 3's S3-C2 asks whether maximum drawdown stayed at or below 15 percent, and the representative-selection rule independently requires zero research-shutdown events, which is the same 15 percent measured from the same high-water mark.",
+  "consequence": "A MET verdict on S3-C2 remains substantially mechanical, produced by three overlapping devices \u2014 a ladder designed to fire below the threshold, a selection screen that discards anything reaching it, and the condition itself. It is therefore weak evidence that the rotation hypothesis is true.",
+  "what_changed_from_attempt_2": "One of the three rungs is gone. RA2 began throttling at a 5 percent decline from peak; RA3 holds full sizing until 8 percent. The engineered component of a MET verdict is smaller than Attempt 2's by exactly that rung and no more. It is not absent, and this file does not claim it is.",
+  "resolution": "S3-C2 is evaluated unchanged, at the unchanged threshold, and a MET verdict is recorded with this note attached in the decision package. A NOT_MET verdict is informative in the other direction: it would mean the ladder failed at the job it was kept to do, and \u2014 given that Attempt 2 recorded zero shutdowns across all thirty-six runs \u2014 it would be direct evidence that the removed rung was load-bearing.",
+  "action_taken": "Declared before results. No threshold or predicate changed."
+ },
+ {
+  "id": "G2A2-CONFLICT-20",
+  "status": "inherited from Attempt 2, and its two opposing effects are unchanged in kind",
+  "description": "S3-C4 requires at least 30 closed trades. The risk architecture pushes the trade count in both directions at once and the net sign is not predictable before the run: the 8 percent per-position stop creates exits Attempt 1 had no mechanism to generate, while the 50 percent aggregate ceiling, the volatility scalar, the ladder and the 10-session re-entry lockout all reduce the size and sometimes the existence of entries.",
+  "attempt_3_status": "RA3 weakens only the ladder side of that balance. The stop, the ceiling, the volatility scalar and the lockout are unchanged, so the count-reducing mechanisms are all still present and only one of them fires less often.",
+  "resolution": "The floor of 30 stands. The lower-frequency exception is NOT invoked and could not lower the floor in any case, because it permits a longer evidence requirement rather than a smaller count.",
+  "action_taken": "Declared before results. exception_invoked stays false."
+ },
+ {
+  "id": "G2A3-CONFLICT-21",
+  "supersedes_in_scope": "G2A2-CONFLICT-21, which sealed Attempt 2's tokens and is not edited",
+  "description": "The Attempt 3 operating instruction does not n
+
+=== LOCK.validation_reuse_disclosure ===
+"Generation 2's validation window (2021-08-01 \u2192 2024-07-31) overlaps the exact period Generation 1 used for its own Gate 4 validation read. The researcher therefore already knows, from Generation 1's published report, approximately how SPY (and by extension the broad market) behaved in this window \u2014 including its Sharpe ratio (\u22480.20), total return (\u22482.15%), and fold-by-fold sign pattern (7 of 12 positive). Generation 2 tests a different hypothesis (cross-sectional multi-asset selection vs. single-symbol mean reversion) over the same calendar period, which limits but does not eliminate the concern. This is a real multiplicity cost, disclosed and not minimized, and it is the reason Generation 2's validation result alone \u2014 without a clean holdout confirmation \u2014 cannot be treated as sufficient evidence of an edge."
+
+=== LOCK.validation_reuse_disclosure_sources ===
+{
+ "sharpe": {
+  "value": "0.2025294206503088680547420121230750",
+  "field": "reports/stage4/STAGE_4_VALIDATION.json run_evidence.base.sharpe"
+ },
+ "total_return": {
+  "value": "0.0215",
+  "field": "reports/stage4/STAGE_4_VALIDATION.json run_evidence.base.total_return"
+ },
+ "positive_folds": {
+  "value": "7 of 12",
+  "field": "reports/stage4/STAGE_4_VALIDATION.json gate_conditions.S4-C6.evidence.condition_evidence"
+ },
+ "symbols_traded": {
+  "value": "['SPY']",
+  "field": "reports/stage4/STAGE_4_VALIDATION.json run_evidence.runs[0].measure.symbols_loaded"
+ }
+}
+
+=== LOCK.authorized_windows ===
+[
+ "development"
+]
+
+=== LOCK.partition ===
+{
+ "development_start": "1993-01-29",
+ "development_end": "2021-07-31",
+ "validation_start": "2021-08-01",
+ "validation_end": "2024-07-31",
+ "generation_1_holdout_start": "2024-08-01",
+ "generation_1_holdout_end": "2026-07-31",
+ "holdout_start": "2026-08-01",
+ "holdout_end": "2028-07-31",
+ "boundaries_inclusive": true,
+ "development_years": 28.501,
+ "validation_months": 36,
+ "generation_1_holdout_months": 24,
+ "holdout_months": 24,
+ "minimum_development_years": 5,
+ "meets_minimum_development": true
+}
+
+=== LOCK.holdout_state ===
+"SEALED"
+
+=== LOCK.holdout_read_authorized ===
+false
+
+=== LOCK.generation_1_holdout_state ===
+"SPENT_AND_PROHIBITED"
+
+=== LOCK.validation_window_state ===
+"LOCKED"
+
+=== LOCK.stage_3_authorized ===
+true
+
+=== LOCK.stage_4_authorized ===
+false
+
+=== LOCK.locked_utc ===
+"2026-08-15T03:52:13Z"
+
+=== LOCK.run_id ===
+"SE100-R-20260815T035213Z"
+
+=== LOCK.artifact_id ===
+"SE100-GOV-2002"
+
+=== LOCK.generation_identity ===
+{
+ "inputs": {
+  "project": "StockEdge100",
+  "generation": 2,
+  "constitution_ref": "SE100-GOV-0001",
+  "constitution_sha256": "b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5",
+  "universe_version": "SE100-U1-d4917c2f7f1cd834",
+  "universe_sha256": "01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a",
+  "cost_model_sha256": "f62d98436445cfc436463765ff6006dd234a3082ddf429992296645e697586e2",
+  "generation_1_terminal_verdict": "FAIL - STAGE_4_STRATEGY_REJECTED_IN_VALIDATION",
+  "single_variable_changed": "PORTFOLIO_BREADTH_AND_CROSS_SECTIONAL_SELECTION",
+  "development_window": [
+   "1993-01-29",
+   "2021-07-31"
+  ],
+  "validation_window": [
+   "2021-08-01",
+   "2024-07-31"
+  ],
+  "holdout_window": [
+   "2026-08-01",
+   "2028-07-31"
+  ]
+ },
+ "identity_sha256": "7394207c543401e20fc80f3550c8a6a5aae4de622f2c28eb81dfa116f8b4ae52",
+ "generation_id": "SE100-GEN2-7394207c543401e2"
+}
+
+=== LOCK.repo_state_id_location ===
+"Deliberately omitted here. governance/generation_2/ is not reached by the repo_state_id patterns (governance/*.md is single-level), so this file is covered by STAGE_1_G2_PARTITION_LOCK.sha256 instead. The binding repo_state_id for this seal is the repo_state_id field of runs/SE100-R-20260815T035213Z.json."
+
+=== LOCK.enforcement ===
+{
+ "mechanism": "stockedge100.backtest.window.ResearchWindow plus a Generation 2 guard",
+ "development_bound": "2021-07-31",
+ "prohibited_windows": [
+  [
+   "2024-08-01",
+   "2026-07-31"
+  ],
+  [
+   "2026-08-01",
+   "2028-07-31"
+  ]
+ ],
+ "note": "The prohibition on both holdout windows is broader than Stage 3 requires. It is written to survive into stages this lock does not authorize."
+}
+
+=== LOCK.sealed_data_on_disk_note ===
+"The acquired dataset already contains 5 session(s) inside the Generation 2 holdout window, and all 24 months of Generation 1's holdout window. Nothing is deleted; enforcement is a window bound applied in code. See section 3 of the Markdown counterpart."
+
+=== LOCK.coverage_measured_from_disk ===
+{
+ "member_count": 34,
+ "development_sessions": 7178,
+ "development_first_session": "1993-01-29",
+ "development_last_session": "2021-07-30",
+ "earliest_inception": "1993-01-29",
+ "earliest_inception_symbols": [
+  "SPY"
+ ],
+ "latest_inception": "2007-07-26",
+ "latest_inception_symbols": [
+  "VEA"
+ ],
+ "dataset_last_session": "2026-08-07",
+ "sealed_generation_2_sessions_present_on_disk": [
+  "2026-08-03",
+  "2026-08-04",
+  "2026-08-05",
+  "2026-08-06",
+  "2026-08-07"
+ ],
+ "sealed_generation_2_session_count_on_disk": 5,
+ "per_symbol": {
+  "AGG": {
+   "first_session": "2003-09-29",
+   "last_session": "2026-08-07",
+   "development_sessions": 4491
+  },
+  "BND": {
+   "first_session": "2007-04-10",
+   "last_session": "2026-08-07",
+   "development_sessions": 3604
+  },
+  "DIA": {
+   "first_session": "1998-01-20",
+   "last_session": "2026-08-07",
+   "development_sessions": 5922
+  },
+  "DVY": {
+   "first_session": "2003-11-07",
+   "last_session": "2026-08-07",
+   "development_sessions": 4462
+  },
+  "EEM": {
+   "first_session": "2003-04-14",
+   "last_session": "2026-08-07",
+   "development_sessions": 4607
+  },
+  "EFA": {
+   "first_session": "2001-08-27",
+   "last_session": "2026-08-07",
+   "development_sessions": 5013
+  },
+  "HYG": {
+   "first_session": "2007-04-11",
+   "last_session": "2026-08-07",
+   "development_sessions": 3603
+  },
+  "IEF": {
+   "first_session": "2002-07-30",
+   "last_session": "2026-08-07",
+   "development_sessions": 4785
+  },
+  "IVV": {
+   "first_session": "2000-05-19",
+   "last_session": "2026-08-07",
+   "development_sessions": 5333
+  },
+  "IWM": {
+   "first_session": "2000-05-26",
+   "last_session": "2026-08-07",
+   "development_sessions": 5328
+  },
+  "IYR": {
+   "first_session": "2000-06-19",
+   "last_session": "2026-08-07",
+   "development_sessions": 5313
+  },
+  "LQD": {
+   "first_session": "2002-07-30",
+   "last_session": "2026-08-07",
+   "development_sessions": 4785
+  },
+  "MDY": {
+   "first_session": "1995-05-04",
+   "last_session": "2026-08-07",
+   "development_sessions": 6607
+  },
+  "QQQ": {
+   "first_session": "1999-03-10",
+   "last_session": "2026-08-07",
+   "development_sessions": 5636
+  },
+  "SHY": {
+   "first_session": "2002-07-30",
+   "last_session": "2026-08-07",
+   "development_sessions": 4785
+  },
+  "SPY": {
+   "first_session": "1993-01-29",
+   "last_session": "2026-08-07",
+   "development_sessions": 7178
+  },
+  "TIP": {
+   "first_session": "2003-12-05",
+   "last_session": "2026-08-07",
+   "development_sessions": 4443
+  },
+  "TL
+
+=== LOCK.status ===
+"LOCKED"

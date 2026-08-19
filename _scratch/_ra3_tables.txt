@@ -1,0 +1,485 @@
+### three-way aggregate
+
+| Measure, `#BASE` runs unless stated | Attempt 1 (no risk architecture) | Attempt 2 (`RA2`) | Attempt 3 (`RA3`) |
+|---|---:|---:|---:|
+| Variants | 18 | 18 | 18 |
+| Runs | 36 | 36 | 36 |
+| Research-shutdown events, summed | 36 | 0 | 0 |
+| Runs recording a shutdown | 36 of 36 | 0 of 36 | 0 of 36 |
+| Worst max drawdown | 0.1759 | 0.1397 | 0.1413 |
+| Best max drawdown | 0.1505 | 0.0910 | 0.0971 |
+| Lowest total return | -0.1636 | +0.0042 | +0.0148 |
+| Highest total return | +0.2869 | +0.6315 | +0.5341 |
+| Variants positive on `#BASE` | 10 of 18 | 18 of 18 | 18 of 18 |
+| Variants positive on `#STRESS` | not reached | 17 of 18 | 16 of 18 |
+| Ladder descents, summed over 36 runs | none (no ladder) | 1605 | 1008 |
+| Sessions at full sizing, summed | every session (no throttle) | 36886 | 53671 |
+| Representative | none — step 1 eliminated all 18 | `L12-K1-QUARTERLY` | `L03-K2-QUARTERLY` |
+| Representative `#BASE` return | n/a | +0.0042 | +0.1034 |
+| Representative `#STRESS` return | n/a | -0.0008 | +0.0811 |
+| Gate 3 reached | no | yes | yes |
+| Conditions not satisfied, `#BASE` | gate never reached | `S3-C3`, `S3-C5`, `S3-C6` | `S3-C6` |
+| Verdict | `FAIL` | `FAIL` | `FAIL` |
+| Verdict token | withheld, on record in `reports/stage3_g2/` | withheld, on record in `reports/stage3_g2_attempt2/` | `STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE` |
+
+### three-way per variant
+
+| Variant (lookback / k / frequency) | A1 `#BASE` return | A1 max DD | A1 shutdowns | A2 `#BASE` return | A2 max DD | A3 `#BASE` return | A3 max DD |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `L03-K1-MONTHLY` | +0.2534 | 0.1505 | 2 | +0.6315 | 0.1116 | +0.5341 | 0.1296 |
+| `L03-K1-QUARTERLY` | -0.1636 | 0.1708 | 2 | +0.0691 | 0.1330 | +0.0616 | 0.1355 |
+| `L03-K2-MONTHLY` | -0.0526 | 0.1590 | 2 | +0.4203 | 0.1045 | +0.4765 | 0.1022 |
+| `L03-K2-QUARTERLY` | +0.1872 | 0.1604 | 2 | +0.0419 | 0.1052 | +0.1034 | 0.0994 |
+| `L03-K3-MONTHLY` | -0.1450 | 0.1619 | 2 | +0.2869 | 0.1195 | +0.3499 | 0.1217 |
+| `L03-K3-QUARTERLY` | -0.1125 | 0.1538 | 2 | +0.2811 | 0.0910 | +0.2966 | 0.0971 |
+| `L06-K1-MONTHLY` | +0.2193 | 0.1759 | 2 | +0.1986 | 0.1263 | +0.1270 | 0.1354 |
+| `L06-K1-QUARTERLY` | +0.0102 | 0.1618 | 2 | +0.0834 | 0.1382 | +0.1338 | 0.1413 |
+| `L06-K2-MONTHLY` | +0.2869 | 0.1686 | 2 | +0.1927 | 0.1160 | +0.2649 | 0.1102 |
+| `L06-K2-QUARTERLY` | -0.1153 | 0.1581 | 2 | +0.0448 | 0.1298 | +0.0664 | 0.1383 |
+| `L06-K3-MONTHLY` | +0.2263 | 0.1551 | 2 | +0.1066 | 0.1188 | +0.1671 | 0.1270 |
+| `L06-K3-QUARTERLY` | +0.2403 | 0.1552 | 2 | +0.0365 | 0.1160 | +0.0467 | 0.1189 |
+| `L12-K1-MONTHLY` | +0.0044 | 0.1653 | 2 | +0.0633 | 0.1193 | +0.0212 | 0.1202 |
+| `L12-K1-QUARTERLY` | -0.0465 | 0.1551 | 2 | +0.0042 | 0.1397 | +0.0148 | 0.1397 |
+| `L12-K2-MONTHLY` | -0.0465 | 0.1604 | 2 | +0.1792 | 0.1154 | +0.1585 | 0.1125 |
+| `L12-K2-QUARTERLY` | +0.0153 | 0.1519 | 2 | +0.1954 | 0.1031 | +0.1065 | 0.1095 |
+| `L12-K3-MONTHLY` | +0.1029 | 0.1572 | 2 | +0.0892 | 0.1162 | +0.0843 | 0.1157 |
+| `L12-K3-QUARTERLY` | -0.0302 | 0.1508 | 2 | +0.0709 | 0.0978 | +0.0795 | 0.1052 |
+
+### A1 shutdown months
+
+| Month of first shutdown | Attempt 1 runs | Attempt 2 runs | Attempt 3 runs |
+|---|---:|---:|---:|
+| 2008-10 | 4 | 0 | 0 |
+| 2008-11 | 2 | 0 | 0 |
+| 2009-03 | 2 | 0 | 0 |
+| 2009-05 | 6 | 0 | 0 |
+| 2010-02 | 2 | 0 | 0 |
+| 2010-06 | 2 | 0 | 0 |
+| 2010-07 | 4 | 0 | 0 |
+| 2010-08 | 4 | 0 | 0 |
+| 2010-12 | 2 | 0 | 0 |
+| 2011-08 | 2 | 0 | 0 |
+| 2011-10 | 2 | 0 | 0 |
+| 2016-01 | 2 | 0 | 0 |
+| 2020-03 | 2 | 0 | 0 |
+| **Total** | **36** | **0** | **0** |
+
+### ladder engagement A3 vs A2
+
+| Statistic | Attempt 3 (`RA3`), 36 runs | Attempt 2 (`RA2`), 36 runs | Runs differing | Differs |
+|---|---:|---:|---:|---|
+| `ladder_descents` | 1008 | 1605 | 36 of 36 | `true` |
+| `ladder_ascents` | 988 | 1571 | 35 of 36 | `true` |
+| `lockout_arms` | 1008 | 1605 | 36 of 36 | `true` |
+| `lockout_recoveries_blocked` | 3719 | 6133 | 36 of 36 | `true` |
+| `stops_triggered` | 3312 | 1911 | 25 of 36 | `true` |
+| `stops_filled` | 624 | 608 | 21 of 36 | `true` |
+| sessions at sizing scalar `1.00` | 53671 | 36886 | 36 of 36 | `true` |
+
+### selection ranking
+
+| Rank | Variant | Eligible | Shutdowns | Instability score | Fills (both runs) |
+|---:|---|---|---:|---:|---:|
+| 1 | `L03-K2-QUARTERLY` **(selected)** | `true` | 0 | 0.215471404 | 298 |
+| 2 | `L03-K1-QUARTERLY` | `true` | 0 | 0.215520012 | 283 |
+| 3 | `L12-K1-QUARTERLY` | `true` | 0 | 0.246609961 | 195 |
+| 4 | `L06-K2-QUARTERLY` | `true` | 0 | 0.247419599 | 336 |
+| 5 | `L06-K1-QUARTERLY` | `true` | 0 | 0.248621581 | 265 |
+| 6 | `L06-K2-MONTHLY` | `true` | 0 | 0.274579406 | 658 |
+| 7 | `L12-K2-QUARTERLY` | `true` | 0 | 0.285600694 | 254 |
+| 8 | `L06-K3-MONTHLY` | `true` | 0 | 0.290149221 | 955 |
+| 9 | `L06-K1-MONTHLY` | `true` | 0 | 0.291302167 | 454 |
+| 10 | `L12-K1-MONTHLY` | `true` | 0 | 0.292941999 | 359 |
+| 11 | `L03-K2-MONTHLY` | `true` | 0 | 0.299993984 | 801 |
+| 12 | `L03-K1-MONTHLY` | `true` | 0 | 0.316981929 | 614 |
+| 13 | `L12-K2-MONTHLY` | `true` | 0 | 0.338753489 | 294 |
+| 14 | `L06-K3-QUARTERLY` | `true` | 0 | 0.339590681 | 441 |
+| 15 | `L12-K3-QUARTERLY` | `true` | 0 | 0.344422664 | 414 |
+| 16 | `L03-K3-MONTHLY` | `true` | 0 | 0.347840893 | 1035 |
+| 17 | `L12-K3-MONTHLY` | `true` | 0 | 0.401614635 | 700 |
+| 18 | `L03-K3-QUARTERLY` | `true` | 0 | 0.423540495 | 610 |
+
+### neighbour scores
+
+| Variant | Role | Neighbours | Instability score | mean dissimilarity, `fill_count` | mean dissimilarity, `ladder_descents` | mean dissimilarity, `lockout_arms` | mean dissimilarity, `stops_filled` |
+|---|---|---:|---:|---:|---:|---:|---:|
+| `L03-K2-QUARTERLY` | **representative** | 4 | 0.215471404 | 0.325717816 | 0.131846770 | 0.131846770 | 0.272474260 |
+| `L03-K1-QUARTERLY` | neighbour | 3 | 0.215520012 | 0.217675920 | 0.224979842 | 0.224979842 | 0.194444444 |
+| `L03-K2-MONTHLY` | neighbour | 4 | 0.299993984 | 0.316509255 | 0.283380840 | 0.283380840 | 0.316705003 |
+| `L03-K3-QUARTERLY` | neighbour | 3 | 0.423540495 | 0.399717536 | 0.483333333 | 0.483333333 | 0.327777778 |
+| `L06-K2-QUARTERLY` | neighbour | 5 | 0.247419599 | 0.259181864 | 0.217629219 | 0.217629219 | 0.295238095 |
+
+### own quantities
+
+| Variant | Role | `fill_count` | `ladder_descents` | `lockout_arms` | `stops_filled` |
+|---|---|---:|---:|---:|---:|
+| `L03-K2-QUARTERLY` | **representative** | 298 | 44 | 44 | 32 |
+| `L03-K1-QUARTERLY` | neighbour | 283 | 53 | 53 | 24 |
+| `L03-K2-MONTHLY` | neighbour | 801 | 40 | 40 | 37 |
+| `L03-K3-QUARTERLY` | neighbour | 610 | 60 | 60 | 60 |
+| `L06-K2-QUARTERLY` | neighbour | 336 | 44 | 44 | 42 |
+
+### gate conditions
+
+| Condition | Required (verbatim) | `#BASE` verdict | measured | threshold | `#STRESS` verdict | measured |
+|---|---|---|---|---|---|---|
+| `S3-C1` | total return is positive | `MET` | 0.10337843028513874006 | > 0 | `MET` | 0.08107210940706772465 |
+| `S3-C2` | maximum drawdown is no worse than 15% | `MET` | 0.09941232925528737112297704174156968 | <= 0.15 | `MET` | 0.09932170282394264800433103176555540 |
+| `S3-C3` | profit factor is at least 1.10 | `MET` | 1.270402611534276387377584330794342 | >= 1.1 | `MET` | 1.200539083557951482479784366576819 |
+| `S3-C4` | at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results | `MET` | 62 | >= 30 | `MET` | 62 |
+| `S3-C5` | performance is not dependent on one trade: removing the single best trade leaves total return above 0% | `MET` | min(0.055666171814245462689982570080576, 0.055666171814245462689982570080576) | best_trade_removed_return > 0 for BOTH removals | `MET` | min(0.031717505233078233394772524945014, 0.031717505233078233394772524945014) |
+| `S3-C6` | no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy | `NOT_MET` | 0.7505030181086519114688128772635815 | <= 0.50 | `NOT_MET` | 0.9771505376344086021505376344086022 |
+| `S3-C7` | reasonable neighboring parameter values do not reverse the sign of net return | `MET` | 4/4 neighbours match | all 4 match, zero matches nothing | `MET` | 4/4 neighbours match |
+
+### base runs
+
+| # | Variant | Return | Max DD | Profit factor | Closed trades | Closed episodes | Distinct symbols | Shutdowns |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | `L03-K1-MONTHLY` | +0.5341 | 0.1296 | 2.0295 | 105 | 105 | 21 | 0 |
+| 2 | `L03-K1-QUARTERLY` | +0.0616 | 0.1355 | 1.3492 | 49 | 49 | 17 | 0 |
+| 3 | `L03-K2-MONTHLY` | +0.4765 | 0.1022 | 1.6251 | 156 | 156 | 27 | 0 |
+| 4 | `L03-K2-QUARTERLY` | +0.1034 | 0.0994 | 1.2397 | 62 | 62 | 24 | 0 |
+| 5 | `L03-K3-MONTHLY` | +0.3499 | 0.1217 | 1.5262 | 234 | 234 | 29 | 0 |
+| 6 | `L03-K3-QUARTERLY` | +0.2966 | 0.0971 | 1.5319 | 124 | 124 | 27 | 0 |
+| 7 | `L06-K1-MONTHLY` | +0.1270 | 0.1354 | 1.3967 | 81 | 81 | 19 | 0 |
+| 8 | `L06-K1-QUARTERLY` | +0.1338 | 0.1413 | 1.4949 | 40 | 40 | 15 | 0 |
+| 9 | `L06-K2-MONTHLY` | +0.2649 | 0.1102 | 1.4499 | 144 | 144 | 25 | 0 |
+| 10 | `L06-K2-QUARTERLY` | +0.0664 | 0.1383 | 1.2328 | 72 | 72 | 22 | 0 |
+| 11 | `L06-K3-MONTHLY` | +0.1671 | 0.1270 | 1.2766 | 209 | 209 | 28 | 0 |
+| 12 | `L06-K3-QUARTERLY` | +0.0467 | 0.1189 | 1.0652 | 95 | 95 | 26 | 0 |
+| 13 | `L12-K1-MONTHLY` | +0.0212 | 0.1202 | 1.2616 | 66 | 66 | 18 | 0 |
+| 14 | `L12-K1-QUARTERLY` | +0.0148 | 0.1397 | 1.3875 | 36 | 36 | 15 | 0 |
+| 15 | `L12-K2-MONTHLY` | +0.1585 | 0.1125 | 1.4840 | 63 | 63 | 25 | 0 |
+| 16 | `L12-K2-QUARTERLY` | +0.1065 | 0.1095 | 1.4305 | 46 | 46 | 21 | 0 |
+| 17 | `L12-K3-MONTHLY` | +0.0843 | 0.1157 | 1.2726 | 156 | 156 | 29 | 0 |
+| 18 | `L12-K3-QUARTERLY` | +0.0795 | 0.1052 | 1.1828 | 93 | 93 | 27 | 0 |
+
+### stress runs
+
+| # | Variant | Return | Max DD | Profit factor | Closed trades | Closed episodes | Fills | Shutdowns |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | `L03-K1-MONTHLY` | +0.5068 | 0.1316 | 1.9728 | 105 | 105 | 306 | 0 |
+| 2 | `L03-K1-QUARTERLY` | +0.0434 | 0.1337 | 1.2817 | 49 | 49 | 141 | 0 |
+| 3 | `L03-K2-MONTHLY` | +0.4612 | 0.1110 | 1.5582 | 181 | 181 | 434 | 0 |
+| 4 | `L03-K2-QUARTERLY` | +0.0811 | 0.0993 | 1.1690 | 62 | 62 | 148 | 0 |
+| 5 | `L03-K3-MONTHLY` | +0.3015 | 0.1245 | 1.4479 | 230 | 230 | 511 | 0 |
+| 6 | `L03-K3-QUARTERLY` | +0.1323 | 0.1119 | 1.1595 | 139 | 139 | 323 | 0 |
+| 7 | `L06-K1-MONTHLY` | +0.1197 | 0.1434 | 1.4466 | 81 | 81 | 227 | 0 |
+| 8 | `L06-K1-QUARTERLY` | -0.0157 | 0.1436 | 1.1529 | 40 | 40 | 119 | 0 |
+| 9 | `L06-K2-MONTHLY` | +0.1556 | 0.1218 | 1.2430 | 123 | 123 | 299 | 0 |
+| 10 | `L06-K2-QUARTERLY` | +0.0074 | 0.1398 | 0.9890 | 72 | 72 | 168 | 0 |
+| 11 | `L06-K3-MONTHLY` | +0.1526 | 0.1409 | 1.2448 | 222 | 222 | 491 | 0 |
+| 12 | `L06-K3-QUARTERLY` | +0.0530 | 0.1183 | 1.0777 | 95 | 95 | 220 | 0 |
+| 13 | `L12-K1-MONTHLY` | +0.0180 | 0.1226 | 1.2189 | 66 | 66 | 179 | 0 |
+| 14 | `L12-K1-QUARTERLY` | -0.0008 | 0.1420 | 1.1709 | 36 | 36 | 92 | 0 |
+| 15 | `L12-K2-MONTHLY` | +0.1513 | 0.1120 | 1.4878 | 64 | 64 | 148 | 0 |
+| 16 | `L12-K2-QUARTERLY` | +0.1254 | 0.1069 | 1.5782 | 52 | 52 | 142 | 0 |
+| 17 | `L12-K3-MONTHLY` | +0.0757 | 0.1175 | 1.2589 | 152 | 152 | 345 | 0 |
+| 18 | `L12-K3-QUARTERLY` | +0.0318 | 0.1086 | 1.0581 | 83 | 83 | 188 | 0 |
+
+### risk base
+
+| # | Variant | Ladder descents | Ladder ascents | Deepest band | Lockout arms | Recoveries blocked | Stops triggered | Stops filled | Stops pre-empted |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | `L03-K1-MONTHLY` | 39 | 39 | 2 | 39 | 140 | 9 | 9 | 0 |
+| 2 | `L03-K1-QUARTERLY` | 25 | 25 | 2 | 25 | 74 | 12 | 12 | 0 |
+| 3 | `L03-K2-MONTHLY` | 22 | 22 | 2 | 22 | 79 | 54 | 17 | 3 |
+| 4 | `L03-K2-QUARTERLY` | 25 | 25 | 1 | 25 | 101 | 16 | 16 | 0 |
+| 5 | `L03-K3-MONTHLY` | 13 | 13 | 2 | 13 | 49 | 238 | 24 | 10 |
+| 6 | `L03-K3-QUARTERLY` | 20 | 20 | 1 | 20 | 65 | 576 | 29 | 6 |
+| 7 | `L06-K1-MONTHLY` | 50 | 48 | 2 | 50 | 184 | 9 | 9 | 0 |
+| 8 | `L06-K1-QUARTERLY` | 29 | 29 | 2 | 29 | 118 | 11 | 11 | 0 |
+| 9 | `L06-K2-MONTHLY` | 30 | 30 | 2 | 30 | 134 | 28 | 11 | 2 |
+| 10 | `L06-K2-QUARTERLY` | 20 | 20 | 2 | 20 | 85 | 21 | 21 | 0 |
+| 11 | `L06-K3-MONTHLY` | 24 | 22 | 2 | 24 | 76 | 87 | 22 | 4 |
+| 12 | `L06-K3-QUARTERLY` | 14 | 13 | 2 | 14 | 40 | 153 | 21 | 3 |
+| 13 | `L12-K1-MONTHLY` | 37 | 35 | 2 | 37 | 128 | 15 | 15 | 1 |
+| 14 | `L12-K1-QUARTERLY` | 44 | 43 | 2 | 44 | 142 | 12 | 12 | 0 |
+| 15 | `L12-K2-MONTHLY` | 16 | 16 | 2 | 16 | 62 | 13 | 13 | 0 |
+| 16 | `L12-K2-QUARTERLY` | 23 | 23 | 2 | 23 | 75 | 15 | 15 | 0 |
+| 17 | `L12-K3-MONTHLY` | 38 | 37 | 2 | 38 | 157 | 24 | 24 | 0 |
+| 18 | `L12-K3-QUARTERLY` | 25 | 25 | 2 | 25 | 84 | 29 | 29 | 0 |
+
+### risk stress
+
+| # | Variant | Ladder descents | Ladder ascents | Deepest band | Lockout arms | Recoveries blocked | Stops triggered | Stops filled | Stops pre-empted |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | `L03-K1-MONTHLY` | 39 | 39 | 2 | 39 | 124 | 9 | 9 | 0 |
+| 2 | `L03-K1-QUARTERLY` | 28 | 28 | 2 | 28 | 74 | 12 | 12 | 0 |
+| 3 | `L03-K2-MONTHLY` | 18 | 18 | 2 | 18 | 66 | 78 | 20 | 3 |
+| 4 | `L03-K2-QUARTERLY` | 19 | 19 | 1 | 19 | 71 | 16 | 16 | 0 |
+| 5 | `L03-K3-MONTHLY` | 10 | 10 | 2 | 10 | 49 | 32 | 23 | 0 |
+| 6 | `L03-K3-QUARTERLY` | 40 | 40 | 2 | 40 | 153 | 31 | 31 | 0 |
+| 7 | `L06-K1-MONTHLY` | 47 | 46 | 2 | 47 | 202 | 9 | 9 | 0 |
+| 8 | `L06-K1-QUARTERLY` | 36 | 35 | 2 | 36 | 137 | 11 | 11 | 0 |
+| 9 | `L06-K2-MONTHLY` | 16 | 15 | 2 | 16 | 58 | 111 | 11 | 6 |
+| 10 | `L06-K2-QUARTERLY` | 24 | 23 | 2 | 24 | 85 | 21 | 21 | 0 |
+| 11 | `L06-K3-MONTHLY` | 18 | 16 | 2 | 18 | 60 | 23 | 23 | 1 |
+| 12 | `L06-K3-QUARTERLY` | 12 | 11 | 2 | 12 | 38 | 156 | 21 | 3 |
+| 13 | `L12-K1-MONTHLY` | 31 | 29 | 2 | 31 | 110 | 15 | 15 | 1 |
+| 14 | `L12-K1-QUARTERLY` | 44 | 43 | 2 | 44 | 173 | 12 | 12 | 0 |
+| 15 | `L12-K2-MONTHLY` | 22 | 22 | 2 | 22 | 83 | 595 | 13 | 30 |
+| 16 | `L12-K2-QUARTERLY` | 41 | 41 | 2 | 41 | 166 | 155 | 15 | 2 |
+| 17 | `L12-K3-MONTHLY` | 45 | 44 | 2 | 45 | 181 | 21 | 21 | 0 |
+| 18 | `L12-K3-QUARTERLY` | 24 | 24 | 2 | 24 | 96 | 683 | 31 | 10 |
+
+### throttle base
+
+| # | Variant | Throttle legs | Legs below min notional | Sessions breaching ceiling | Max gross fraction | On session | Combined scalar min | Combined scalar mean | Sessions scalar < 1 |
+| --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: |
+| 1 | `L03-K1-MONTHLY` | 97 | 1156 | 1253 | 0.5155 | 2020-11-09 | 0.2500 | 0.5920 | 2346 |
+| 2 | `L03-K1-QUARTERLY` | 43 | 1111 | 1154 | 0.5137 | 2011-01-31 | 0.2500 | 0.4861 | 2617 |
+| 3 | `L03-K2-MONTHLY` | 53 | 1154 | 634 | 0.5160 | 2008-11-20 | 0.2500 | 0.8558 | 1051 |
+| 4 | `L03-K2-QUARTERLY` | 24 | 372 | 210 | 0.5112 | 2009-10-14 | 0.3305 | 0.7677 | 1570 |
+| 5 | `L03-K3-MONTHLY` | 55 | 1723 | 630 | 0.5164 | 2008-11-20 | 0.2500 | 0.7010 | 1560 |
+| 6 | `L03-K3-QUARTERLY` | 41 | 1650 | 599 | 0.5110 | 2009-10-05 | 0.2966 | 0.9047 | 768 |
+| 7 | `L06-K1-MONTHLY` | 64 | 850 | 914 | 0.5184 | 2008-11-20 | 0.2500 | 0.6153 | 2205 |
+| 8 | `L06-K1-QUARTERLY` | 65 | 916 | 981 | 0.5184 | 2008-11-20 | 0.2500 | 0.6138 | 2118 |
+| 9 | `L06-K2-MONTHLY` | 69 | 1287 | 715 | 0.5113 | 2009-05-06 | 0.2500 | 0.7866 | 1401 |
+| 10 | `L06-K2-QUARTERLY` | 24 | 1760 | 904 | 0.5112 | 2009-10-14 | 0.2377 | 0.5402 | 2295 |
+| 11 | `L06-K3-MONTHLY` | 47 | 2092 | 768 | 0.5114 | 2009-05-18 | 0.1911 | 0.7218 | 1601 |
+| 12 | `L06-K3-QUARTERLY` | 32 | 1230 | 451 | 0.5131 | 2008-12-16 | 0.2500 | 0.4850 | 2623 |
+| 13 | `L12-K1-MONTHLY` | 48 | 968 | 1016 | 0.5128 | 2008-12-17 | 0.1639 | 0.6046 | 2079 |
+| 14 | `L12-K1-QUARTERLY` | 30 | 932 | 962 | 0.5184 | 2008-11-20 | 0.1818 | 0.4330 | 2849 |
+| 15 | `L12-K2-MONTHLY` | 18 | 202 | 120 | 0.5143 | 2009-11-05 | 0.2500 | 0.7304 | 1688 |
+| 16 | `L12-K2-QUARTERLY` | 18 | 244 | 141 | 0.5146 | 2008-11-20 | 0.2500 | 0.8092 | 1133 |
+| 17 | `L12-K3-MONTHLY` | 48 | 2214 | 807 | 0.5116 | 2008-12-17 | 0.2500 | 0.6956 | 1763 |
+| 18 | `L12-K3-QUARTERLY` | 43 | 1696 | 623 | 0.5122 | 2010-04-14 | 0.2500 | 0.8266 | 1194 |
+
+### turnover
+
+| Variant | Fills (both runs) | Ladder descents (both runs) | Lockout arms (both runs) | Stop fills (both runs) | Instability score |
+|---|---:|---:|---:|---:|---:|
+| `L12-K1-QUARTERLY` | 195 | 88 | 88 | 24 | 0.246609961 |
+| `L12-K2-QUARTERLY` | 254 | 64 | 64 | 30 | 0.285600694 |
+| `L06-K1-QUARTERLY` | 265 | 65 | 65 | 22 | 0.248621581 |
+| `L03-K1-QUARTERLY` | 283 | 53 | 53 | 24 | 0.215520012 |
+| `L12-K2-MONTHLY` | 294 | 38 | 38 | 26 | 0.338753489 |
+| `L03-K2-QUARTERLY` | 298 | 44 | 44 | 32 | 0.215471404 |
+| `L06-K2-QUARTERLY` | 336 | 44 | 44 | 42 | 0.247419599 |
+| `L12-K1-MONTHLY` | 359 | 68 | 68 | 30 | 0.292941999 |
+| `L12-K3-QUARTERLY` | 414 | 49 | 49 | 60 | 0.344422664 |
+| `L06-K3-QUARTERLY` | 441 | 26 | 26 | 42 | 0.339590681 |
+| `L06-K1-MONTHLY` | 454 | 97 | 97 | 18 | 0.291302167 |
+| `L03-K3-QUARTERLY` | 610 | 60 | 60 | 60 | 0.423540495 |
+| `L03-K1-MONTHLY` | 614 | 78 | 78 | 18 | 0.316981929 |
+| `L06-K2-MONTHLY` | 658 | 46 | 46 | 22 | 0.274579406 |
+| `L12-K3-MONTHLY` | 700 | 83 | 83 | 45 | 0.401614635 |
+| `L03-K2-MONTHLY` | 801 | 40 | 40 | 37 | 0.299993984 |
+| `L06-K3-MONTHLY` | 955 | 42 | 42 | 45 | 0.290149221 |
+| `L03-K3-MONTHLY` | 1035 | 23 | 23 | 47 | 0.347840893 |
+
+### band depth
+
+| Deepest ladder band reached | `#BASE` variants | `#STRESS` variants |
+|---|---:|---:|
+| band 1 | 2 | 1 |
+| band 2 | 16 | 17 |
+
+### scalars
+
+A1_DD_MAX = 0.1759
+A1_DD_MAX_PCT = 17.59%
+A1_DD_MIN = 0.1505
+A1_DD_MIN_PCT = 15.05%
+A1_POS_BASE = 10
+A1_RET_MAX = +0.2869
+A1_RET_MAX_PCT = +28.69%
+A1_RET_MIN = -0.1636
+A1_RET_MIN_PCT = −16.36%
+A1_RUNS_SHUTDOWN = 36
+A1_SHUTDOWN_EVENTS = 36
+A2_C6_BASE = 2.7176
+A2_C6_STRESS = 6.8824
+A2_C7_STRESS_MEASURED = 0/3 neighbours match
+A2_DD_MAX = 0.1397
+A2_DD_MAX_PCT = 13.97%
+A2_DD_MIN = 0.0910
+A2_DD_MIN_PCT = 9.10%
+A2_POS_BASE = 18
+A2_POS_STRESS = 17
+A2_REPRESENTATIVE = L12-K1-QUARTERLY
+A2_REP_FILLS = 189
+A2_REP_FILLS_RANK = 1
+A2_REP_IS_LEAST_ACTIVE = true
+A2_REP_IS_WORST = true
+A2_REP_NOT_SATISFIED = `S3-C3`, `S3-C5`, `S3-C6`
+A2_REP_NOT_SATISFIED_COUNT = 3
+A2_REP_RANK_BY_RETURN = 18
+A2_REP_RET = +0.0042
+A2_REP_RET_PCT = +0.42%
+A2_REP_RET_STRESS = -0.0008
+A2_REP_RET_STRESS_PCT = −0.08%
+A2_RET_MAX = +0.6315
+A2_RET_MAX_PCT = +63.15%
+A2_RET_MEDIAN = +0.0979
+A2_RET_MEDIAN_PCT = +9.79%
+A2_RET_MIN = +0.0042
+A2_RET_MIN_PCT = +0.42%
+A2_SCALAR_MEAN_MAX = 0.8652
+A2_SCALAR_MEAN_MIN = 0.3990
+A2_STRESS_NOT_SATISFIED = `S3-C1`, `S3-C3`, `S3-C5`, `S3-C6`
+A2_UNION_NOT_SATISFIED = `S3-C1`, `S3-C3`, `S3-C5`, `S3-C6`
+A3_C7_STRESS_MEASURED = 4/4 neighbours match
+A3_DD_MAX = 0.1413
+A3_DD_MAX_PCT = 14.13%
+A3_DD_MAX_STRESS = 0.1436
+A3_DD_MAX_STRESS_PCT = 14.36%
+A3_DD_MIN = 0.0971
+A3_DD_MIN_PCT = 9.71%
+A3_DD_MIN_STRESS = 0.0993
+A3_DD_MIN_STRESS_PCT = 9.93%
+A3_FILLS_MAX = 1035
+A3_FILLS_MIN = 195
+A3_LOWEST_TURNOVER_RET = +0.0148
+A3_LOWEST_TURNOVER_RET_PCT = +1.48%
+A3_LOWEST_TURNOVER_VARIANT = L12-K1-QUARTERLY
+A3_POS_BASE = 18
+A3_POS_STRESS = 16
+A3_REP_FILLS_RANK = 6
+A3_REP_IS_WORST = false
+A3_REP_RANK_BY_RETURN = 11
+A3_RET_MAX = +0.5341
+A3_RET_MAX_PCT = +53.41%
+A3_RET_MAX_STRESS = +0.5068
+A3_RET_MAX_STRESS_PCT = +50.68%
+A3_RET_MEDIAN = +0.1167
+A3_RET_MEDIAN_PCT = +11.67%
+A3_RET_MIN = +0.0148
+A3_RET_MIN_PCT = +1.48%
+A3_RET_MIN_STRESS = -0.0157
+A3_RET_MIN_STRESS_PCT = −1.57%
+A3_SCALAR_MEAN_MAX_BASE = 0.9047
+A3_SCALAR_MEAN_MIN_BASE = 0.4330
+BAND0_COUNT = 0
+BAND1_COUNT = 2
+BAND2_COUNT = 16
+BASE_NOT_SATISFIED = `S3-C6`
+BEST_DD = 0.1296
+BEST_DD_PCT = 12.96%
+BEST_PF = 2.0295
+BEST_RANK = 12
+BEST_RET = +0.5341
+BEST_RET_PCT = +53.41%
+BEST_SCORE = 0.316981929
+BEST_TRADES = 105
+BEST_VARIANT = L03-K1-MONTHLY
+CONDITIONS_MET = 6
+DESCENTS_MAX = 50
+DESCENTS_MIN = 13
+GROSS_EXCESS_MAX = 0.018426
+GROSS_EXCESS_MAX_PCT = 1.84%
+GROSS_EXCESS_MIN = 0.010963
+GROSS_EXCESS_MIN_PCT = 1.10%
+GROSS_MAX = 0.5184
+GROSS_MAX_PCT = 51.84%
+GROSS_MIN = 0.5110
+GROSS_MIN_BASE = 0.5110
+GROSS_MIN_PCT = 51.10%
+LAD_FULLSIZE_A2 = 36886
+LAD_FULLSIZE_A3 = 53671
+LAD_FULLSIZE_DIFFERING = 36
+LAD_LADDER_ASCENTS_A2 = 1571
+LAD_LADDER_ASCENTS_A3 = 988
+LAD_LADDER_ASCENTS_DIFFERING = 35
+LAD_LADDER_DESCENTS_A2 = 1605
+LAD_LADDER_DESCENTS_A3 = 1008
+LAD_LADDER_DESCENTS_DIFFERING = 36
+LAD_LOCKOUT_ARMS_A2 = 1605
+LAD_LOCKOUT_ARMS_A3 = 1008
+LAD_LOCKOUT_ARMS_DIFFERING = 36
+LAD_LOCKOUT_RECOVERIES_BLOCKED_A2 = 6133
+LAD_LOCKOUT_RECOVERIES_BLOCKED_A3 = 3719
+LAD_LOCKOUT_RECOVERIES_BLOCKED_DIFFERING = 36
+LAD_STOPS_FILLED_A2 = 608
+LAD_STOPS_FILLED_A3 = 624
+LAD_STOPS_FILLED_DIFFERING = 21
+LAD_STOPS_TRIGGERED_A2 = 1911
+LAD_STOPS_TRIGGERED_A3 = 3312
+LAD_STOPS_TRIGGERED_DIFFERING = 25
+LOCKOUT_MAX = 184
+LOCKOUT_MIN = 40
+REPRESENTATIVE = SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY
+REPRESENTATIVE_SHORT = L03-K2-QUARTERLY
+REP_BASE_RET = +0.1034
+REP_BASE_RET_PCT = +10.34%
+REP_CAGR = 0.0076
+REP_CAGR_PCT = +0.76%
+REP_DD_BASE = 0.0994
+REP_DD_BASE_PCT = 9.94%
+REP_DD_STRESS = 0.0993
+REP_DD_STRESS_PCT = 9.93%
+REP_FILLS = 298
+REP_LADDER_DESCENTS = 25
+REP_LOCKOUT_ARMS = 25
+REP_NEIGHBOURS = 4
+REP_PF_RECORDER = 1.2397
+REP_PF_RECORDER_STRESS = 1.1690
+REP_SCALAR_BELOW_ONE = 1570
+REP_SCALAR_MEAN = 0.7677
+REP_SCALAR_MIN = 0.330469784
+REP_SCHEDULED_REBALANCES = 53
+REP_SCORE = 0.215471404
+REP_SHARPE = 0.1926
+REP_STOPS_FILLED = 16
+REP_STRESS_RET = +0.0811
+REP_STRESS_RET_PCT = +8.11%
+REP_SYMBOLS = 24
+REP_TRADES = 62
+RUNNER_UP = L03-K1-QUARTERLY
+RUNNER_UP_SCORE = 0.215520012
+S3_C1_BASE_MEASURED = 0.10337843028513874006
+S3_C1_BASE_VERDICT = MET
+S3_C1_STRESS_MEASURED = 0.08107210940706772465
+S3_C1_STRESS_VERDICT = MET
+S3_C1_THRESHOLD = > 0
+S3_C2_BASE_MEASURED = 0.09941232925528737112297704174156968
+S3_C2_BASE_VERDICT = MET
+S3_C2_STRESS_MEASURED = 0.09932170282394264800433103176555540
+S3_C2_STRESS_VERDICT = MET
+S3_C2_THRESHOLD = <= 0.15
+S3_C3_BASE_MEASURED = 1.270402611534276387377584330794342
+S3_C3_BASE_PF = 1.2704
+S3_C3_BASE_VERDICT = MET
+S3_C3_STRESS_MEASURED = 1.200539083557951482479784366576819
+S3_C3_STRESS_PF = 1.2005
+S3_C3_STRESS_VERDICT = MET
+S3_C3_THRESHOLD = >= 1.1
+S3_C4_BASE_MEASURED = 62
+S3_C4_BASE_VERDICT = MET
+S3_C4_STRESS_MEASURED = 62
+S3_C4_STRESS_VERDICT = MET
+S3_C4_THRESHOLD = >= 30
+S3_C5_BASE_MEASURED = min(0.055666171814245462689982570080576, 0.055666171814245462689982570080576)
+S3_C5_BASE_VERDICT = MET
+S3_C5_STRESS_MEASURED = min(0.031717505233078233394772524945014, 0.031717505233078233394772524945014)
+S3_C5_STRESS_VERDICT = MET
+S3_C5_THRESHOLD = best_trade_removed_return > 0 for BOTH removals
+S3_C6_BASE_MEASURED = 0.7505030181086519114688128772635815
+S3_C6_BASE_PCT = 75.05
+S3_C6_BASE_VERDICT = NOT_MET
+S3_C6_REQUIRED = no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy
+S3_C6_STRESS_MEASURED = 0.9771505376344086021505376344086022
+S3_C6_STRESS_PCT = 97.72
+S3_C6_STRESS_VERDICT = NOT_MET
+S3_C6_THRESHOLD = <= 0.50
+S3_C6_THRESHOLD_PCT = 50.00
+S3_C7_BASE_MEASURED = 4/4 neighbours match
+S3_C7_BASE_VERDICT = MET
+S3_C7_STRESS_MEASURED = 4/4 neighbours match
+S3_C7_STRESS_VERDICT = MET
+S3_C7_THRESHOLD = all 4 match, zero matches nothing
+SCALAR_MEAN_MAX = 0.9047
+SCALAR_MEAN_MIN = 0.3838
+SCALAR_MIN_OBSERVED = 0.1638
+SCALAR_SESS_MAX = 3039
+SCALAR_SESS_MIN = 768
+SEL_MARGIN = 0.000048608
+STOPS_FILLED = 624
+STOPS_PREEMPTED = 85
+STOPS_TRIGGERED = 3312
+STOP_FILL_RATIO = 0.1884
+STOP_OUTLIER_COUNT = 11
+STOP_OUTLIER_MAX = 683 triggered against 31 filled on `L12-K3-QUARTERLY` #STRESS
+STRESS_NOT_SATISFIED = `S3-C6`
+

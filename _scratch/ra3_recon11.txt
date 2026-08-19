@@ -1,0 +1,228 @@
+====================================================================================================
+must_appear_verbatim_in (the five carriers):
+   governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md
+   governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json
+   governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md
+   reports/stage3_g2_attempt3/STAGE_3_G2_A3_ROTATION_RESEARCH.json
+   reports/stage3_g2_attempt3/STAGE_3_G2_A3_DEVELOPMENT_ADMISSIBILITY.json
+====================================================================================================
+PROT.what_this_attempt_adds_over_attempt_1_carriage
+"Copied verbatim from SE100-CFG-3103. It describes the risk architecture Attempt 3 still carries, minus one rung, and is retained so the lineage statement is not silently reworded."
+   PROT.what_this_attempt_adds_over_attempt_1 length=513
+====================================================================================================
+EV.what_this_attempt_adds_over_attempt_1_carriage
+"Copied verbatim from SE100-CFG-3103. It describes the risk architecture Attempt 3 still carries, minus one rung, and is retained so the lineage statement is not silently reworded."
+====================================================================================================
+CRIT.adaptation_disclosure_carried
+"This file is part of an attempt whose pre-registration was written after BOTH Attempt 1's and Attempt 2's development results were known. The full disclosure text is carried verbatim in SE100-CFG-3105 field adaptation_disclosure_verbatim and in every downstream artifact listed in its adaptation_disclosure_carriage_requirement. It is not restated here in paraphrase, because a paraphrased disclosure is a weakened disclosure. This is the third disclosed adaptation on one hypothesis family; see multiple_comparisons_disclosure in SE100-CFG-3105 and G2A3-CONFLICT-33 below."
+====================================================================================================
+PROT.representative_selection_rule.id = SE100-G2-SEL-2
+PROT.representative_selection_rule.return_blind =
+true
+PROT.representative_selection_rule.no_reselection =
+"The representative is selected once, before any gate condition is evaluated. It is not reselected, re-ranked or substituted for any reason."
+====================================================================================================
+EV.gate
+{
+ "constitution_gate_id": 3,
+ "name": "development_admissibility"
+}
+====================================================================================================
+EV.gate_evaluation_scope
+{
+ "evaluated_on": "The selected representative variant only, across both of its runs.",
+ "conjunctive": "All Gate 3 conditions must be satisfied. Constitution section 9.",
+ "criteria_source": "config/generation_2/g2_gate_criteria_ra3.json",
+ "thresholds_changed_from_attempt_1": "none",
+ "thresholds_changed_from_generation_1": "none",
+ "thresholds_changed_from_attempt_2": "none"
+}
+====================================================================================================
+EV.sealed_inputs keys: ['charter', 'charter_sha256', 'cost_model', 'cost_model_sha256', 'criteria', 'criteria_artifact_id', 'criteria_sha256', 'criteria_sha256_not_recorded_in_the_protocol', 'declared_before_any_strategy_code', 'declared_before_any_strategy_code_measurement', 'governance_protocol_json', 'governance_protocol_json_sha256', 'governance_protocol_md', 'governance_protocol_md_sha256', 'partition_lock', 'partition_lock_sha256', 'protocol', 'protocol_artifact_id', 'protocol_sha256']
+{
+ "protocol": "config/generation_2/g2_rotation_ra3_protocol.json",
+ "protocol_artifact_id": "SE100-CFG-3105",
+ "protocol_sha256": "e9e8a8bc58c0ddb04b2b6c702d543b998c2d0a31487986a61e0a28509b5fbd1d",
+ "criteria": "config/generation_2/g2_gate_criteria_ra3.json",
+ "criteria_artifact_id": "SE100-CFG-3106",
+ "criteria_sha256": "4fa3103862786e889668221ad7009fe4ead5cac999bc0d2f7d1aa0135cbb0ac0",
+ "criteria_sha256_not_recorded_in_the_protocol": "SE100-CFG-3106 is sealed alongside this file and the two are mutually referential: it names this file as protocol_ref and this file names it as gate_criteria_ref. Recording either digest inside the other would make the pair unwritable. Both are covered by repo_state_id (config/**/*.json is recursive) and both are listed in the Attempt 3 artifact manifest.",
+ "governance_protocol_json": "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json",
+ "governance_protocol_json_sha256": "c938dcd8dd3c7099c9db6145f92165d2758796f07a90be4804c5137e47a07e34",
+ "governance_protocol_md": "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md",
+ "governance_protocol_md_sha256": "37ed2ca25d30a4f14736f573053eb50c883c79f7c9ab0b62c181fddeb31f7a7d",
+ "cost_model": "config/generation_2/g2_cost_model.json",
+ "cost_model_sha256": "b9491485b9560b948ec83d3eb86ee4946c1e83b128a368b71473d14ad0f73650",
+ "partition_lock": "governance/generation_2/STAGE_1_G2_PARTITION_LOCK.json",
+ "partition_lock_sha256": "e17ea82c499d51cf23fc9986e7231dce6388f8a3c7394d3dd3c0e3d27fbacbe7",
+ "charter": "governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md",
+ "charter_sha256": "865a2feffe683e0baf71f1ab976e286fbb2d003109ab47cfaffc1fe6a63dbc90",
+ "declared_before_any_strategy_code": true,
+ "declared_before_any_strategy_code_measurement": {
+  "contamination_predicate": "CONTENT_BASED",
+  "predicate": "No .py file under src/stockedge100 or tests contains the string SE100-G2-S3-C3-ROTATION-RA3 at seal time.",
+  "why_not_path_based": "Attempt 1's predicate was path-based: it refused to seal if any module basename under strategies/ or backtest/ contained 'g2_'. That predicate was correct when strategies/ held no Generation 2 code and is now vacuously false - Attempt 1's own six modules live there and are supposed to. A path test would either refuse to seal forever or have to be loosened until it tested nothing. The honest form is content-based: this attempt's candidat
+====================================================================================================
+EV.mechanics_carried_unchanged keys: ['blocks', 'method', 'why_this_matters']
+EV.runs type=list
+[
+ {
+  "grid_index": 1,
+  "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY",
+  "lookback_months": 3,
+  "top_k": 1,
+  "rebalance_frequency": "MONTHLY",
+  "label": "#BASE",
+  "scenario": "BASE",
+  "total_return": "0.53412202253939399356",
+  "max_drawdown": "0.1295592934758244004079160802748568",
+  "profit_factor": "2.029490694571700272715363605",
+  "closed_trades": 105,
+  "closed_episodes": 105,
+  "research_shutdown_events": 0,
+  "shutdown_session": null,
+  "fills": 308,
+  "ladder_descents": 39,
+  "ladder_ascents": 39,
+  "ladder_deepest_band": 2,
+  "ladder_final_band": 0,
+  "ladder_sessions_in_band": {
+   "0": 1364,
+   "1": 693,
+   "2": 1219
+  },
+  "lockout_arms": 39,
+  "lockout_recoveries_blocked": 140,
+  "stops_triggered": 9,
+  "stops_filled": 9,
+  "stops_preempted_by_signal_exit": 0,
+  "throttle_legs_scheduled": 97,
+  "throttle_legs_below_min_notional": 1156,
+  "throttle_sessio
+====================================================================================================
+EV.selection keys: ['decided_at_step', 'frozen_before_any_variant_is_run', 'inputs', 'neighbour_scores', 'no_reselection', 'note', 'outcome', 'result', 'return_blind', 'rule_id', 'rule_source', 'scored_quantities', 'selected_score', 'selected_variant_id', 'selection_input_fields', 'steps']
+EV.selection.outcome =
+"representative_selected"
+EV.selection.return_blind =
+true
+EV.selection.note =
+"SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) with instability score 0.215471404 over 4 neighbours, from 18 eligible of 18 variants."
+====================================================================================================
+EV.selection.inputs type=list len=18
+{
+ "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY",
+ "shutdown_events": 0,
+ "fill_count": 614,
+ "ladder_descents": 78,
+ "lockout_arms": 78,
+ "stops_filled": 18
+}
+====================================================================================================
+EV.risk_architecture.attempt_2_counterparts =
+{
+ "attempt_2_architecture_id": "RA2",
+ "attempt_3_architecture_id": "RA3",
+ "attempt_2_band_scalars": {
+  "0": "1.00",
+  "1": "0.75",
+  "2": "0.50",
+  "3": "0.25"
+ },
+ "attempt_3_band_scalars": {
+  "0": "1.00",
+  "1": "0.50",
+  "2": "0.25"
+ },
+ "attempt_2_full_sizing_band": "0",
+ "attempt_3_full_sizing_band": "0",
+ "band_indices_are_not_comparable": "RA2 declares 4 bands and RA3 declares 3, so the same integer index denotes a different drawdown band in each. Compare the sizing scalar an index maps to, or the session count in the full-sizing band; do not compare the index.",
+ "source": "config/generation_2/g2_rotation_ra1_protocol.json (read-only, Attempt 2 closed)"
+}
+EV.risk_architecture.generation_1_provenance =
+{
+ "generation_1_protocol": "stage3_attempt2_strategy_protocol.json",
+ "generation_1_ladder_from_ra1_5_prose": [
+  [
+   "0",
+   "0.08",
+   "0.5"
+  ],
+  [
+   "0.08",
+   "0.1",
+   "0.25"
+  ],
+  [
+   "0.1",
+   null,
+   "0.125"
+  ]
+ ],
+ "generation_1_ladder_rungs_per_experiment": {
+  "SE100-S3A2-C1-PULLBACK-RA1": [
+   [
+    "0.08",
+    "0.25"
+   ],
+   [
+    "0.1",
+    "0.125"
+   ]
+  ],
+  "SE100-S3A2-C2-MEANREV-RA1": [
+   [
+    "0.08",
+    "0.25"
+   ],
+   [
+    "0.1",
+    "0.125"
+   ]
+  ],
+  "SE100-S3A2-C3-DEFENSIVE-RA1": [
+   [
+    "0.08",
+    "0.25"
+   ],
+   [
+    "0.1",
+    "0.125"
+   ]
+  ]
+ },
+ "generation_1_states_it_twice_and_they_agree": true,
+ "ra3_bands_as_absolute_caps": [
+  [
+   "0",
+   "0.08",
+   "0.5"
+  ],
+  [
+   "0.08",
+   "0.1",
+   "0.25"
+  ],
+  [
+   "0.1",
+   null,
+   "0.125"
+  ]
+ ],
+ "exposure_ceiling_used_to_convert": "0.5",
+ "ladders_are_identical": true
+}
+====================================================================================================
+EV.ladder_engagement_comparison.sessions_at_full_sizing =
+{
+ "attempt_3_total": 53671,
+ "attempt_2_total": 36886,
+ "runs_differing": 36,
+ "differs": true,
+ "attempt_3_band": "0",
+ "attempt_2_band": "0",
+ "note": "The band index differs between the two architectures; the comparison is between the sessions spent at sizing scalar 1.00 on each side, which is the same quantity."
+}
+EV.ladder_engagement_comparison.requirement = Operating instruction section 4.3: run the grid fresh under RA3 and verify that at least the ladder-engagement statistics differ from Attempt 2's.
+EV.ladder_engagement_comparison.at_least_one_statistic_differs = True
+====================================================================================================
+variant_table[0] keys: ['base_attempt_2', 'base_average_loss', 'base_average_win', 'base_best_trade_removed_return', 'base_cagr', 'base_closed_episodes', 'base_closed_trades', 'base_combined_scalar_mean', 'base_combined_scalar_minimum', 'base_combined_scalar_sessions_below_one', 'base_daily_return_stdev', 'base_distinct_symbols_traded', 'base_distinct_symbols_with_closed_trades', 'base_equity_digest', 'base_executed_rebalances', 'base_exposure_fraction', 'base_fills', 'base_ladder_ascents', 'base_ladder_deepest_band', 'base_ladder_descents', 'base_ladder_final_band', 'base_ladder_sessions_in_band', 'base_lockout_arms', 'base_lockout_recoveries_blocked', 'base_longest_flat_streak_sessions', 'base_max_drawdown', 'base_max_gross_fraction_observed', 'base_max_gross_fraction_session', 'base_profit_factor', 'base_ranking_digest', 'base_reconciliation_mismatches', 'base_reconciliation_single_leg_compared', 'base_reconciliation_vacuous', 'base_research_shutdown_events', 'base_risk_state_digest', 'base_risk_state_sessions', 'base_scenario', 'base_scheduled_rebalances', 'base_sharpe', 'base_shutdown_session', 'base_stop_exits', 'base_stops_filled', 'base_stops_preempted_by_signal_exit', 'base_stops_triggered', 'base_throttle_legs_below_min_notional', 'base_throttle_legs_scheduled', 'base_throttle_sessions_breaching_ceiling', 'base_total_return', 'base_trades_digest', 'base_volatility_scalar_minimum', 'base_volatility_scalar_sessions_below_one', 'base_win_rate', 'fill_count_both_runs', 'grid_index', 'ladder_descents_both_runs', 'lockout_arms_both_runs', 'lookback_months', 'rebalance_frequency', 'research_shutdown_events', 'selection_score', 'stops_filled_both_runs', 'stress_attempt_2', 'stress_average_loss', 'stress_average_win', 'stress_best_trade_removed_return', 'stress_cagr', 'stress_closed_episodes', 'stress_closed_trades', 'stress_combined_scalar_mean', 'stress_combined_scalar_minimum', 'stress_combined_scalar_sessions_below_one', 'stress_daily_return_stdev', 'stress_distinct_symbols_traded', 'stress_distinct_symbols_with_closed_trades', 'stress_equity_digest', 'stress_executed_rebalances', 'stress_exposure_fraction', 'stress_fills', 'stress_ladder_ascents', 'stress_ladder_deepest_band', 'stress_ladder_descents', 'stress_ladder_final_band', 'stress_ladder_sessions_in_band', 'stress_lockout_arms', 'stress_lockout_recoveries_blocked', 'stress_longest_flat_streak_sessions', 'stress_max_drawdown', 'stress_max_gross_fraction_observed', 'stress_max_gross_fraction_session', 'stress_profit_factor', 'stress_ranking_digest', 'stress_reconciliation_mismatches', 'stress_reconciliation_single_leg_compared', 'stress_reconciliation_vacuous', 'stress_research_shutdown_events', 'stress_risk_state_digest', 'stress_risk_state_sessions', 'stress_scenario', 'stress_scheduled_rebalances', 'stress_sharpe', 'stress_shutdown_session', 'stress_stop_exits', 'stress_stops_filled', 'stress_stops_preempted_by_signal_exit', 'stress_stops_triggered', 'stress_throttle_legs_below_min_notional', 'stress_throttle_legs_scheduled', 'stress_throttle_sessions_breaching_ceiling', 'stress_total_return', 'stress_trades_digest', 'stress_volatility_scalar_minimum', 'stress_volatility_scalar_sessions_below_one', 'stress_win_rate', 'top_k', 'variant_id']

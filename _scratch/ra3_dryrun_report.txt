@@ -1,0 +1,328 @@
+=== StageDecision scalars ===
+authorization_state          <dict len=8>
+blockers                     <list len=0>
+body                         <dict len=29>
+command                      cd stockedge100 && PYTHONPATH=src python -m stockedge100.reporting.g2_stage3_attempt3_package
+config_hash                  e9e8a8bc58c0ddb04b2b6c702d543b998c2d0a31487986a61e0a28509b5fbd1d
+conflicts_found              <list len=22>
+dataset_hashes               <dict len=0>
+date_range                   <list len=2>
+decision_basename            STAGE_3_G2_A3_ROTATION_RESEARCH
+evidence                     <list len=17>
+frozen_inputs                <list len=26>
+gate_conditions              <dict len=8>
+gate_id                      3
+gate_name                    development_admissibility
+gate_passed                  False
+generation                   2
+holdout_state                LOCKED
+limitations                  <list len=10>
+manifest_basename            STAGE_3_G2_A3_ARTIFACT_MANIFEST
+next_authorized_stage        None. Generation 2 Stage 3 has now failed three times and this attempt closes on the same terms as the previous two: the sealed criteria state that a FAIL does not license a nineteenth variant, a re-run under a different grid, a loosened risk constant, a third selection rule, or promotion of the runner-up. Stage 4 validation is not authorized and was not run. Any Attempt 4 requires a further adapt
+produced                     <list len=8>
+random_seed                  None
+run_notes                    <list len=8>
+stage                        STAGE_3_G2_ATTEMPT_3_ROTATION_RA3_DEVELOPMENT
+stage_slug                   stage3_g2_attempt3
+tests                        <dict len=5>
+universe_version             SE100-U1-d4917c2f7f1cd834
+verdict                      FAIL <U+2014> STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE
+
+=== gate_conditions: keys in order ===
+  S3-C1
+  S3-C2
+  S3-C3
+  S3-C4
+  S3-C5
+  S3-C6
+  S3-C7
+  admissible_candidate_exists
+
+=== gate_conditions: the seven hard rows ===
+  --- S3-C1 ---
+      verdict                "MET"
+      satisfied              true
+      gating_runs            ["#BASE", "#STRESS"]
+      satisfied_by           ["#BASE", "#STRESS"]
+      met_by                 ["#BASE", "#STRESS"]
+      not_met_by             []
+      not_evaluable_for      []
+      not_applicable_for     []
+      measured               {"#BASE": "0.10337843028513874006", "#STRESS": "0.08107210940706772465"}
+      threshold              "> 0"
+      reported_not_gating    {}
+      predicate              "total_return > 0"
+      required_verbatim      total return is positive
+  --- S3-C2 ---
+      verdict                "MET"
+      satisfied              true
+      gating_runs            ["#BASE", "#STRESS"]
+      satisfied_by           ["#BASE", "#STRESS"]
+      met_by                 ["#BASE", "#STRESS"]
+      not_met_by             []
+      not_evaluable_for      []
+      not_applicable_for     []
+      measured               {"#BASE": "0.09941232925528737112297704174156968", "#STRESS": "0.09932170282394264800433103176555540"}
+      threshold              "<= 0.15"
+      reported_not_gating    {}
+      predicate              "max_drawdown <= 0.15"
+      required_verbatim      maximum drawdown is no worse than 15%
+  --- S3-C3 ---
+      verdict                "MET"
+      satisfied              true
+      gating_runs            ["#BASE", "#STRESS"]
+      satisfied_by           ["#BASE", "#STRESS"]
+      met_by                 ["#BASE", "#STRESS"]
+      not_met_by             []
+      not_evaluable_for      []
+      not_applicable_for     []
+      measured               {"#BASE": "1.270402611534276387377584330794342", "#STRESS": "1.200539083557951482479784366576819"}
+      threshold              ">= 1.1"
+      reported_not_gating    {}
+      predicate              "profit_factor >= 1.10"
+      required_verbatim      profit factor is at least 1.10
+  --- S3-C4 ---
+      verdict                "MET"
+      satisfied              true
+      gating_runs            ["#BASE", "#STRESS"]
+      satisfied_by           ["#BASE", "#STRESS"]
+      met_by                 ["#BASE", "#STRESS"]
+      not_met_by             []
+      not_evaluable_for      []
+      not_applicable_for     []
+      measured               {"#BASE": "62", "#STRESS": "62"}
+      threshold              ">= 30"
+      reported_not_gating    {}
+      predicate              "closed_episodes >= 30"
+      required_verbatim      at least 30 closed trades exist, unless a lower-frequency protocol predeclared a longer evidence requirement before results
+  --- S3-C5 ---
+      verdict                "MET"
+      satisfied              true
+      gating_runs            ["#BASE", "#STRESS"]
+      satisfied_by           ["#BASE", "#STRESS"]
+      met_by                 ["#BASE", "#STRESS"]
+      not_met_by             []
+      not_evaluable_for      []
+      not_applicable_for     []
+      measured               {"#BASE": "min(0.055666171814245462689982570080576, 0.055666171814245462689982570080576)", "#STRESS": "min(0.031717505233078233394772524945014, 0.031717505233078233394772524945014)"}
+      threshold              "best_trade_removed_return > 0 for BOTH removals"
+      reported_not_gating    {}
+      predicate              "best_trade_removed_return > 0 for BOTH removals"
+      required_verbatim      performance is not dependent on one trade: removing the single best trade leaves total return above 0%
+  --- S3-C6 ---
+      verdict                "NOT_MET"
+      satisfied              false
+      gating_runs            ["#BASE", "#STRESS"]
+      satisfied_by           []
+      met_by                 []
+      not_met_by             ["#BASE", "#STRESS"]
+      not_evaluable_for      []
+      not_applicable_for     []
+      measured               {"#BASE": "0.7505030181086519114688128772635815", "#STRESS": "0.9771505376344086021505376344086022"}
+      threshold              "<= 0.50"
+      reported_not_gating    {}
+      predicate              "max instrument contribution <= 0.50"
+      required_verbatim      no single instrument contributes more than 50% of total strategy profit for a multi-instrument strategy
+  --- S3-C7 ---
+      verdict                "MET"
+      satisfied              true
+      gating_runs            ["#BASE"]
+      satisfied_by           ["#BASE"]
+      met_by                 ["#BASE"]
+      not_met_by             []
+      not_evaluable_for      []
+      not_applicable_for     []
+      measured               {"#BASE": "4/4 neighbours match"}
+      threshold              "all 4 match, zero matches nothing"
+      reported_not_gating    {"#STRESS": {"verdict": "MET", "measured": "4/4 neighbours match"}}
+      predicate              "sign(neighbour total_return) == sign(representative total_return) for EVERY neighbour, where sign is positive, negative, or zero and zero matches nothing"
+      required_verbatim      reasonable neighboring parameter values do not reverse the sign of net return
+
+=== gate_conditions.admissible_candidate_exists ===
+  admitted_candidates                          []
+  candidates_evaluated                         1
+  conditions_not_satisfied_base                ["S3-C6"]
+  conditions_not_satisfied_stress              ["S3-C6"]
+  determination                                "This entry, and only this entry, is the gate determination. All 18 declared variants survived step 1 of the frozen selection rule, as in Attempt 2 and unlike Attempt 1 where none did, and SE100-G2-SEL-2 decided at step 2 \u2014 the neighbourhood-instability score, not the turnover tiebreak \u2014 producing SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY with an instability score of 0.215471404 over 4 neighbours. Gate 3 was reached, evaluated, and not satisfied: S3-C6 failed on #BASE and S3-C6 on #STRESS. The restrictive reading of G2A2-CONFLICT-25 did not decide this outcome \u2014 the permissive base-only reading would have given False."
+  note                                         "A conditions table that omits this row reads as though the gate were irrelevant rather than decided. The seven rows above settle nothing on their own: gates are conjunctive within a candidate and the stage verdict is a disjunction across candidates, and here the candidate set has one member, which failed \u2014 see G2A3-CONFLICT-24. Promoting a runner-up would convert a return-blind selection into a search over eighteen candidates for one that passes; the seal forbids it and so does this package. The runner-up's instability score was within 0.000048608 of the selected variant's, which makes the prohibition matter more here than in Attempt 2, not less."
+  permissive_base_only_reading_would_give      false
+  predicate                                    "a representative exists AND every hard condition is satisfied on every run that gates it"
+  representative                               "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"
+  required_verbatim                            "At least one candidate satisfies every hard condition of Gate 3 in development."
+  selection_decided_at_step                    2
+  selection_rule                               "SE100-G2-SEL-2"
+  value                                        false
+  variants_declared                            18
+  variants_eligible_after_shutdown_screen      18
+  verdict                                      "NOT_MET"
+
+=== evidence bullets (17) ===
+  [01] Grid, run in full and unrevised: 18 declared variants x 2 cost scenarios (#BASE, #STRESS) = 36 runs executed, all_declared_runs_executed=True, grid_widened_from_attempt_1=False, grid_widened_from_attempt_2=False, revisions_after_seeing_a_result=0. The axes are Attempt 2's unchanged: lookback in {3, 6, 12} months, k in {1, 2, 3}, rebalance in {monthly, quarterly}.
+
+  [02] Risk architecture RA3, loaded from SE100-CFG-3105 and frozen before the first variant ran: exposure ceiling 0.50 of equity, volatility target 0.10 annualised over 21 bars, per-position stop 0.08, re-entry lockout 10 sessions, de-risk ladder with bands [0.00, 0.08) -> scalar 1.00; [0.08, 0.10) -> scalar 0.50; [0.10, inf) -> scalar 0.25. The single difference from RA2 is the removal of one ladder rung: bands_removed_from_ra2=[['0.00', '0.05', '1.00'], ['0.05', '0.08', '0.75']], bands_added_by_ra3=[['0.00', '0.08', '1.00']]. The four other mechanisms are byte-identical constants.
+
+  [03] RA3's ladder is Generation 1's own RA1-5 spacing, not a third invented geometry. The evidence records the reversion as read out of stage3_attempt2_strategy_protocol.json, with generation_1_states_it_twice_and_they_agree=True and ladders_are_identical=True after converting Generation 1's absolute caps by the 0.5 exposure ceiling.
+
+  [04] The ladder change is measurable, not nominal. Across all 36 runs, compared against reports/stage3_g2_attempt2/grid_results.json: ladder_descents 1008 vs 1605 (36 runs differ); ladder_ascents 988 vs 1571 (35 runs differ); lockout_arms 1008 vs 1605 (36 runs differ); lockout_recoveries_blocked 3719 vs 6133 (36 runs differ); stops_triggered 3312 vs 1911 (25 runs differ); stops_filled 624 vs 608 (21 runs differ). runs_identical_on_every_compared_statistic=[]. Sessions at full sizing rose and every throttling statistic fell, which is the declared direction of the change.
+
+  [05] Selection: SE100-G2-SEL-2, sourced from SE100-CFG-3105 representative_selection_rule, return_blind=True. Its inputs are exactly the six fields ['variant_id', 'shutdown_events', 'fill_count', 'ladder_descents', 'lockout_arms', 'stops_filled'], structurally enforced by a frozen dataclass asserted at import time; no return, drawdown, profit factor or Sharpe figure is reachable from the scorer. Step 1 (zero research-shutdown events across both runs) admitted 18 of 18 variants, with ineligible_variants=[]. The decision was made at step 2 (lowest_neighbourhood_instability_score), so the turnover tiebreak that decided Attempt 2 was never reached.
+
+  [06] Representative: SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY, instability score 0.215471404 over 4 neighbours, from own quantities {'fill_count': 298, 'ladder_descents': 44, 'lockout_arms': 44, 'stops_filled': 32} and per-quantity mean dissimilarities {'fill_count': '0.325717816', 'ladder_descents': '0.131846770', 'lockout_arms': '0.131846770', 'stops_filled': '0.272474260'}. The runner-up, taken from position 2 of the ranking rather than from the neighbour list, is SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY at 0.215520012 <U+2014> a margin of 0.000048608, which is disclosed rather than smoothed over. per_quantity_pairs_zero_on_both_sides={'fill_count': 0, 'ladder_descents': 0, 'lockout_arms': 0, 'stops_filled': 0} for the representative, so the G2A3-CONFLICT-32 denominator-floor degeneracy did not bear on this selection.
+
+  [07] Selection determinism, new in this attempt: 18 recorded six-field inputs were rebuilt from JSON and rescored on a fresh call with the run objects withheld <U+2014> selected_variant_identical=True, decided_at_step_identical=True, eligible_set_identical=True, ranking_identical=True, scores_identical=True, variants_whose_scores_differ=[].
+
+  [08] Gate 3 on the representative, both runs, restrictive reading of G2A2-CONFLICT-25: base_all_seven_satisfied=False, stress_first_six_satisfied=False, base_conditions_not_satisfied=['S3-C6'], stress_conditions_not_satisfied=['S3-C6'], aggregated_on=satisfied, not verdict == MET; NOT_APPLICABLE_BY_CONDITION_TEXT is satisfied without being met. The sole miss on both runs is S3-C6, single-instrument concentration: 0.7505030181086519114688128772635815 on #BASE and 0.9771505376344086021505376344086022 on #STRESS against a ceiling of <= 0.50. The permissive base-only reading would have given False, so the conflict resolution did not decide the verdict.
+
+  [09] The representative's measured figures, all six satisfied conditions included: total return +10.34% base and +8.11% stressed; maximum drawdown 9.94% base and 9.93% stressed against a 15% limit; profit factor 1.270402611534276387377584330794342 base and 1.200539083557951482479784366576819 stressed against 1.10; closed trades 62 against 30; best-trade-removed return min(0.055666171814245462689982570080576, 0.055666171814245462689982570080576) base; neighbour sign agreement 4/4 neighbours match.
+
+  [10] Grid-wide, descriptive only and no input to any decision: 18 of 18 variants returned positive on the base run and 16 of 18 on the stressed run; base total return ranged +1.48% to +53.41% and stressed -1.57% to +50.68%; deepest maximum drawdown 14.13% base and 14.36% stressed, both inside the 15% limit; research_shutdown_events summed to 0 across all 18 variants. The best base return was +53.41% at SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY, which is not the representative and was never eligible to become one.
+
+  [11] Window guard: latest session loaded 2021-07-30, development bound 2021-07-31, run span 2008-07-28 to 2021-07-30 over 3276 sessions, binding symbol VEA (inception 2007-07-26). validation_read=False, generation_1_holdout_read=False, generation_2_holdout_read=False. The run span was recomputed from the loaded series before the first variant ran and asserted equal to the sealed value, written to reports/stage3_g2_attempt3/run_span_recheck.json with differences=[].
+
+  [12] Reconciliation: 36 runs, 2804 single legs compared, mismatches_total=0, vacuous_runs=[]. Determinism: 36 runs re-executed and compared on 8 fields including four content digests, all_identical=True.
+
+  [13] Immutability of the two closed attempts, re-hashed rather than asserted: 17 modules verified (9 from Attempt 1, 8 from Attempt 2), modules_that_moved=[], digest source SE100-GOV-2007 contamination_measurement.prior_attempt_module_digests. src/stockedge100/reporting/g2_partition_lock.py is a Generation 2 STAGE 1 module. It is immutable for the ordinary reason that every sealed module is, and it is covered by repo_state_id, but it is not a Stage 3 attempt module and is not listed here.
+
+  [14] Adaptation disclosure carriage: the sealed paragraph is 1507 characters with sha256 ce1d6476f44562310fb059c5817645baa25477cc4f6168b414f3423834c8e925, agreeing with the evidence (True). all_carriers_verbatim=True, carriers_requiring_normalisation=[] <U+2014> empty, unlike Attempt 2, because every Markdown carrier of this attempt stores the paragraph unwrapped. The decision record this build writes is the fifth carrier and is necessarily absent at check time.
+
+  [15] Evidence self-digest 462c13d2e07e25bec46713fe0165bcc00d9e8568d2fad403a48f1d30e412711c recomputed from the written file before the build, over every field of this file except generated_utc and evidence_digest, as canonical JSON. The four Generation 2 checksum records that this attempt stands on <U+2014> the partition lock, the RA3 protocol, and both closed attempts' protocols <U+2014> re-verified to OK on every listed path.
+
+  [16] G2A3-CONFLICT-30, asserted in both directions: of 165 paths inside the repo_state_id patterns, this attempt's governance artifacts are absent (True) and its config artifacts are present (True). The governance subtree is therefore held by its own checksum record and this package's manifest alone.
+
+  [17] Tests: 1266 collected, 1265 passed, 1 failed, 0 skipped, 0 errors, parsed from reports/stage3_g2_attempt3/pytest_stage3_g2_attempt3_output.txt at build time. The single failure is Generation 1's permanent S4-CONFLICT-7 marker, tests/unit/test_stage4_preregistration.py::test_no_stage_4_module_can_reach_restricted_data_or_a_broker, which is designed to stay red and was not touched.
+
+=== limitations (10) ===
+  [01] This pre-registration was designed after both Attempt 1 and Attempt 2's development results were known. Attempt 1 (no risk architecture) failed via research-shutdown on all 18 variants, clustered around the 2008 financial crisis. Attempt 2 (RA2 risk architecture) survived every variant without a shutdown, but its representative <U+2014> selected by a rule blind to return <U+2014> earned approximately 0.4% over thirteen years, indicating the risk architecture suppressed ordinary-market returns as well as crisis losses. Attempt 3 makes two disclosed, evidence-informed changes: (1) a new represen
+
+  [02] Generation 2's validation window (2021-08-01 <U+2192> 2024-07-31) overlaps the exact period Generation 1 used for its own Gate 4 validation read. The researcher therefore already knows, from Generation 1's published report, approximately how SPY (and by extension the broad market) behaved in this window <U+2014> including its Sharpe ratio (<U+2248>0.20), total return (<U+2248>2.15%), and fold-by-fold sign pattern (7 of 12 positive). Generation 2 tests a different hypothesis (cross-sectional multi-asset selection vs. single-symbol mean reversion) over the same calendar period, which limits but 
+
+  [03] The 54 cumulative variants are not 54 independent tests. Attempt 2's risk architecture was chosen after seeing where Attempt 1 broke; Attempt 3's ladder change and selection rule were chosen after seeing how Attempt 2 behaved. The effective number of researcher degrees of freedom is larger than 54 and grows faster than the variant count, because each attempt conditions on all preceding results. It is not quantified here because any quantification would itself be a choice made after the fact.
+
+  [04] Cumulative multiplicity across the hypothesis family now stands at 54 variants and 108 runs over three attempts, with no multiplicity correction applied at any of them. Any final assessment of this family must carry that figure, and it is large enough that a marginal pass at a later attempt would not be interpretable.
+
+  [05] This attempt cannot isolate cause even though it failed. Two things changed at once <U+2014> the ladder reverted to Generation 1's spacing and the selection rule was replaced <U+2014> so the observed recovery of ordinary-market return (18 of 18 variants positive on base, against Attempt 2's representative at about 0.4%) is attributable to the pair and not to either change alone. The ladder statistics establish that RA3 throttled less; they do not establish that the throttle was the whole of Attempt 2's problem.
+
+  [06] The failing condition is one no risk-architecture change addresses. S3-C6 measures how concentrated the profit is in a single instrument, and a top-k relative-strength rotation over 34 ETFs with k=2 will concentrate whenever one instrument dominates the ranking for long stretches. Nothing in RA3 or SEL-2 was designed to affect it, and nothing in this attempt's evidence suggests a variant that would satisfy it exists in this grid.
+
+  [07] The representative was selected by a margin of 0.000048608 in instability score over the runner-up. The rule is deterministic and the margin is real, but a difference that small means the selection is sensitive to any future change in how the four counters are computed. It is recorded here so a later reader does not treat the choice as robustly separated.
+
+  [08] SEL-2's degenerate case, declared before the run as SC-7, partly obtained: three of the four scored quantities are small integers on this grid and fill_count dominates the score, which makes SEL-2 closer to Attempt 2's turnover rule than its description suggests. The per-quantity components are reported so this is visible rather than inferred, and the rule was not reweighted after the fact.
+
+  [09] Development-window evidence only. Nothing here has been validated, and the Generation 2 validation window has never been read by this attempt. Generation 1's validation read is spent, Generation 1's holdout is spent and prohibited, and Generation 2's holdout is sealed. A development FAIL says nothing about out-of-sample behaviour because there is no out-of-sample evidence to say it with.
+
+  [10] Costs, slippage and the minimum-notional throttle are modelled, not observed. No order was ever placed, no broker or credential was reachable from any module in this attempt, and the fills are the engine's own simulation under a frozen cost model.
+
+=== conflicts_found (22) ===
+  [01] G2A3-CONFLICT-19 (supersedes G2A2-CONFLICT-18's scope): one of RA2's three ladder rungs is gone, so the engineered component of any MET verdict here is smaller than Attempt 2's by exactly that rung and no more. Recorded in the sealed criteria before the run.
+
+  [02] G2A3-CONFLICT-21: the Attempt 3 operating instruction names no verdict token at all, which is a change from both prior attempts. The token was therefore derived from config/generation_2/g2_gate_criteria_ra3.json's verdict_token_derivation, which is the disk, and this builder asserts the derived string against the evidence's own rather than restating a literal.
+
+  [03] G2A3-CONFLICT-22: across three attempts the same hypothesis family has now been run under three ladder geometries <U+2014> none at all, 5/8/10, and 8/10 <U+2014> which is a search over risk architectures and not a robustness test of one. Disclosed, not repaired.
+
+  [04] G2A3-CONFLICT-24: candidate index 3 is the only live candidate, so the constitution's cross-candidate disjunction is taken over a one-member set. The gate is decided by the admissible_candidate_exists row alone and the seven condition rows settle nothing on their own.
+
+  [05] G2A2-CONFLICT-25, inherited and resolved the same way: SE100-CFG-3105 scopes the gate across both runs while SE100-CFG-3106 lists the stress run as reported-but-not-gating for S3-C1 and S3-C4. Neither outranks the other, so the more restrictive reading governs and both readings are reported in full. Here the readings agree <U+2014> permissive_base_only_reading_would_give=False.
+
+  [06] G2A3-CONFLICT-26: SEL-2 reads dispersion across a neighbourhood where Attempt 2's rule read a level, and the sealed protocol states plainly that Attempt 2's rule was the more conservative of the two. This is the reason Attempt 3 required its own pre-registration rather than a re-run.
+
+  [07] G2A3-CONFLICT-27: the operating instruction describes neighbourhoods of 2, 3 or 4 variants; the sealed geometry on this grid gives 3, 4 or 5, and the representative has 4. The sealed geometry governs and the instruction's counts are not repeated as fact anywhere in this package.
+
+  [08] G2A3-CONFLICT-28: SE100-CFG-3103's closure sentence is satisfied by the operating instruction, which authorizes one attempt and no more.
+
+  [09] G2A3-CONFLICT-29: removing a rung moves RA3 strictly toward Attempt 1 on the one axis that produced Attempt 1's failure mode, so a larger drawdown was the declared cost of the change. The outcome was that no variant breached the research shutdown and the deepest maximum drawdown was 14.36% against a 15% limit <U+2014> the declared risk did not materialise, which is a result and not a vindication of the reasoning.
+
+  [10] G2A3-CONFLICT-30: governance/* is single-level and config/** is recursive, so this attempt's subtree splits down the middle. Both directions are asserted at build time and both hold; widening the patterns is not available because the patterns are themselves sealed by every earlier stage's digest.
+
+  [11] G2A3-CONFLICT-31: RotationEngineRA3 subclasses RotationEngineRA1 and re-derives exactly the risk and sessions-in-band state, which an AST test enforces. The subclassing reads the closed module without modifying it.
+
+  [12] G2A3-CONFLICT-32: the dissimilarity denominator carries a floor of 1, so a pair that is zero on both sides scores 0 rather than dividing by zero. Disclosed, not repaired; for the selected representative no pair was zero on both sides.
+
+  [13] G2A3-CONFLICT-33: this is the third disclosed adaptation on one hypothesis family, and a PASS here would not on its own have distinguished which of the two changes produced it. The attempt failed, so the question is moot for this result and remains live for the family.
+
+  [14] G2A3-CONFLICT-34: seventeen prior-attempt modules are held immutable, not the nine the operating instruction implies. The count is read from the seal (17) rather than typed here, so a silently shortened list fails loudly.
+
+  [15] G2A3-CONFLICT-35 (supersedes G2A2-CONFLICT-6's scope): this pre-registration was written after TWO attempts' development results were known, and both of its changes were chosen in response to the second. Pre-registration constrains what happens after the seal; it cannot undo what was known before. The adaptation is disclosed verbatim in five carriers and the multiplicity is quantified as 54 variants and 108 runs on one hypothesis family, with no threshold adjusted in either direction to compensate.
+
+  [16] G2A3-CONFLICT-36: both fail routes of this attempt emit the same token, so the route is recorded separately <U+2014> fail_route=REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION, which is the gate-reached-and-missed route and not Attempt 1's no-representative route.
+
+  [17] G2A3-CONFLICT-37 (supersedes G2A2-CONFLICT-8's scope): Attempt 2's operating prompt named verdict tokens that existed in no artifact. Attempt 3's names none at all and directs that the sealed criteria file be grepped instead, so the prompt and the sealed derivation cannot disagree - the failure mode is removed rather than resolved a second time. The tokens are minted once, in config/generation_2/g2_gate_criteria_ra3.json's verdict_token_derivation, and the four belonging to Attempts 1 and 2 are asserted absent from every Attempt 3 verdict field.
+
+  [18] G2A3-CONFLICT-38: Attempt 2's sealed pre-registration states that no Attempt 3 is authorized. A stage artifact's self-imposed closure rule is not a constitutional provision and does not outrank the operator; what it does outrank is a silent reopening, which is not what happened <U+2014> the adaptation is disclosed verbatim in five carriers and this package carries it in the sixth.
+
+  [19] G2A3-CONFLICT-39: the sealed mechanics_carried_unchanged.method states that only the variant id format and the variant ids themselves differ from Attempt 2's. Compared pointer by pointer, four further pointers differ - three additive provenance notes and one changed pointer that could not have been otherwise, gate_evaluation_scope.criteria_source, which must name this attempt's own criteria file. None of the four is a mechanic. The seal is not edited; check_mechanics_carried_unchanged implements the true predicate - no pointer removed, none changed outside a declared list, none added outside a declared list - and reports the unused entries of both allow-lists, so a list that only ever widens shows up as evidence rather than passing quietly.
+
+  [20] G2A3-CONFLICT-40: two prose pointers were renamed between Attempt 2's criteria seal and Attempt 3's (S3-C3 attempt_2_note to attempt_3_note, and S3-C6 scope_interpretation.attempt_2_significance to attempt_3_significance). Both are evidence text read by no predicate. Rather than fork Attempt 2's evaluators, they are called unmodified against an adapted view binding the old names to the new values, and check_prose_alias_adapter proves the view differs from the seal in exactly those two pointers, that both aliases carry byte-identical values to their RA3 originals, and that the sealed object itself is unmutated.
+
+  [21] G2A3-CONFLICT-41: three lists of banned selection-input substrings exist and no two are equal - the seal's AT-I prose names eight words, g2_selection_v2.FORBIDDEN_FIELD_SUBSTRINGS enforces fourteen, and the runner's _assert_selection_surface enforces seven. 'ratio' and 'factor' are named in the prose and enforced by neither, so a field named information_ratio would pass every substring check. Widening an implemented list to match a prompt's prose is the one repair this project forbids, so the gap is asserted rather than closed; the frozen dataclass makes it moot on this attempt, because the selection surface carries exactly six fields and no return field can reach it whatever the substring lists say.
+
+  [22] G2A3-CONFLICT-42: the sealed adaptation disclosure reasons that the removed rung had suppressed ordinary-market returns as well as crisis losses. Half of that reasoning is confirmed by this attempt's own measurement and half is refuted. The throttle did loosen - ladder descents fell from 1605 to 1008 across the same 36 runs - but grid returns did not improve: Attempt 2's grid was already positive on every base run and its maximum exceeded this attempt's (18 of 18 positive here, best +53.41%), and the representative moved off the grid floor because SEL-2 replaced the lowest-turnover rule, not because a rung was removed - the lowest-turnover variant under RA3 is still the weakest-returning one in the grid. Section 12 of the research report carries the three-way measurement against both prior attempts. The sealed text is not edited; its reasoning is recorded as partly refuted, and the attribution of the representative's improvement to the selection rule rather than to the risk architecture is what this conflict exists to preserve.
+
+=== run_notes (8) ===
+  [01] Built last, after the research report, the README update, the test summary and the pytest capture were all final. This module lives in src/, which repo_state_id covers, so any later edit to it <U+2014> including a prose-only edit to one evidence bullet <U+2014> would invalidate both the digest recorded here and the pytest capture parsed above.
+
+  [02] The produced list carries eight entries where Attempt 2's carried fifteen. This is a structural difference in how the attempt was written, not missing work: Attempt 3's evidence writer inlines the grid table, selection inputs, selection record, gate record, stage verdict and prior-attempt module verification into the single 977-kilobyte evidence document rather than emitting six side files. Everything Attempt 2 recorded separately is present here, inside one artifact that the manifest and checksum record cover.
+
+  [03] The verdict token was derived from the sealed verdict_token_derivation and asserted against the evidence's own, never restated as a literal. All four tokens belonging to Attempts 1 and 2 are refused, and the refusal list is cross-checked against both the seal's prose and the evidence's withheld list so that shortening it fails the build.
+
+  [04] The adaptation disclosure was required byte-exact from every carrier. Attempt 2 needed a normalisation allowance for one hard-wrapped Markdown carrier (G2A2-CONFLICT-29); this build's allowance is empty and the guard refuses any carrier that needs normalisation, which is a strictly tighter check than the one it was copied from.
+
+  [05] Four Generation 2 checksum records were re-verified from project-root-relative paths: the partition lock, the RA3 protocol, and the frozen protocols of both closed attempts. Neither closed attempt's artifacts were opened for writing at any point, and the seventeen prior-attempt modules were re-hashed and none moved.
+
+  [06] G2A3-CONFLICT-30 was checked in both directions at build time rather than argued in prose <U+2014> the governance artifacts of this attempt are outside the repo_state_id patterns and its config artifacts are inside them. The tree digest itself is recorded only in this decision record and the appended runs/ record, never in a governance document that would then be part of the tree it digests.
+
+  [07] No data at or after 2021-08-01 was read by any module in this attempt. The Generation 1 validation window, the Generation 1 holdout and the Generation 2 holdout were all untouched, and the window guard recomputed the run span from the loaded series before the first variant ran.
+
+  [08] No broker endpoint, credential or order path was reachable. No secret value was printed, logged or written, and the adaptation disclosure was never written to the cp1252 console, which would have raised UnicodeEncodeError on its minus sign.
+
+=== body keys ===
+  adaptation_disclosure_carriage                 <dict len=12>
+  adaptation_disclosure_verbatim                 This pre-registration was designed after both Attempt 1 and Attempt 2's development results were known. Attempt 1 (no risk architecture) failed via research-shutdown on all 18 variants, clustered arou
+  attempt                                        3
+  authorization                                  <dict len=2>
+  candidate_results                              <list len=1>
+  conflicts_declared_in_the_gate_criteria        <dict len=3>
+  determinism                                    <dict len=10>
+  evidence_file                                  <dict len=8>
+  gate_evaluation_scope                          <dict len=6>
+  gate_scope                                     <dict len=10>
+  generation                                     2
+  grid_results_descriptive_only                  <dict len=16>
+  ladder_engagement_comparison                   <dict len=9>
+  multiple_comparisons_disclosure                <dict len=12>
+  partition                                      <dict len=4>
+  preregistration                                <dict len=12>
+  prior_attempt_module_verification              <dict len=11>
+  prior_attempt_modules_immutable                <dict len=8>
+  reconciliation                                 <dict len=9>
+  refs_reverified                                Every digest in this block, in attempt_1_ref and in attempt_2_ref was recomputed from the file it names at the moment this file was generated. None was transcribed from SE100-CFG-3103 without being ch
+  repo_state_pattern_membership                  <dict len=9>
+  representative_selection_rule                  <dict len=13>
+  risk_architecture                              <dict len=10>
+  selection                                      <dict len=16>
+  selection_determinism                          <dict len=12>
+  stage_verdict                                  <dict len=18>
+  universe                                       <dict len=8>
+  verdict_semantics                              FAIL <U+2014> STAGE_3_G2_ATTEMPT_3_NO_CANDIDATE is the second of the two fail routes the sealed rule anticipated in writing before any variant was run. It is the same route Attempt 2 took and not the 
+  verdict_token_derivation                       <dict len=11>
+
+=== lint: a dict or a Python repr rendered into prose ===
+  (some are deliberate - own_quantities, bands_removed_from_ra2 - so each is judged,
+   not merely counted; what this catches is a scalar field name that is really a node)
+  evidence         [06] "{'" ... ty score 0.215471404 over 4 neighbours, from own quantities {'fill_count': 298, 'ladder_descents': 44, 'lockout_arms': 44, 'stops_filled': 32} and per-quantity mean dissimilarities {'fill_count': '0.3
+  total flagged: 1
+
+=== lint: every 64-hex string in the prose fields ===
+  evidence         [14] ce1d6476f44562310fb059c5817645baa25477cc4f6168b414f3423834c8e925
+  evidence         [15] 462c13d2e07e25bec46713fe0165bcc00d9e8568d2fad403a48f1d30e412711c
+
+=== tests / dates / config ===
+  tests            {'collected': 1266, 'passed': 1265, 'failed': 1, 'skipped': 0, 'errors': 0}
+  date_range       ['2008-07-28', '2021-07-30']
+  universe_version SE100-U1-d4917c2f7f1cd834
+  config_hash      e9e8a8bc58c0ddb04b2b6c702d543b998c2d0a31487986a61e0a28509b5fbd1d
+  holdout_state    LOCKED
+  gate_id          3
+  gate_name        development_admissibility
+  gate_passed      False
+  generation       2
+  return_code      0

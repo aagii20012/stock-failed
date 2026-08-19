@@ -1,0 +1,466 @@
+====================================================================================================
+PROTOCOL top-level keys (67):
+   artifact_id                                          str
+   title                                                str
+   version                                              str
+   project                                              str
+   generation                                           int
+   generation_id                                        str
+   stage                                                int
+   gate_id                                              int
+   attempt                                              int
+   attempt_1_ref                                        dict[23]
+   attempt_2_ref                                        dict[27]
+   constitution_ref                                     str
+   constitution_md_sha256                               str
+   constitution_json_sha256                             str
+   charter_ref                                          str
+   partition_lock_ref                                   str
+   partition_lock_md_sha256                             str
+   partition_lock_json_sha256                           str
+   charter_md_sha256                                    str
+   cost_model_derivation_ref                            str
+   cost_model_derivation_sha256                         str
+   refs_reverified                                      str
+   gate_criteria_ref                                    str
+   gate_criteria_sha256_not_recorded_here               str
+   declared_before_any_strategy_code                    bool
+   declaration_note                                     str
+   declared_before_any_strategy_code_measurement        dict[7]
+   prior_attempt_modules_immutable                      dict[8]
+   serialisation                                        dict[3]
+   currency                                             str
+   strategy_id                                          str
+   candidate_index                                      int
+   candidate_index_note                                 str
+   family                                               str
+   hypothesis                                           str
+   what_this_attempt_changes_from_attempt_2             str
+   what_this_attempt_adds_over_attempt_1                str
+   what_this_attempt_adds_over_attempt_1_carriage       str
+   adaptation_disclosure_verbatim                       str
+   adaptation_disclosure_carriage_requirement           dict[5]
+   what_makes_this_genuinely_cross_sectional            str
+   eligible_universe                                    dict[9]
+   ranking_signal                                       dict[6]
+   ranking_rule                                         dict[3]
+   position_count                                       dict[3]
+   rebalance                                            dict[7]
+   execution                                            dict[7]
+   position_sizing                                      dict[10]
+   concentration_ceiling                                dict[6]
+   mechanics_carried_unchanged                          dict[3]
+   risk_architecture                                    dict[11]
+   window                                               dict[4]
+   run_span                                             dict[14]
+   grid                                                 dict[10]
+   runs_per_variant                                     dict[6]
+   multiple_comparisons_disclosure                      dict[12]
+   representative_selection_rule                        dict[13]
+   gate_evaluation_scope                                dict[6]
+   reported_for_every_variant_but_not_gating            list[18]
+   structural_consequences_declared_before_running      dict[8]
+   reproducibility_requirements                         dict[6]
+   adversarial_test_requirements                        dict[15]
+   conflicts_found                                      list[16]
+   conflicts_declared_in_the_gate_criteria              dict[3]
+   post_seal_defect_rule                                dict[2]
+   explicit_non_authorizations                          list[16]
+   live_trading_authorized                              bool
+====================================================================================================
+-- PROTOCOL.adaptation_disclosure_carriage_requirement
+   must_appear_verbatim_in                        list[5] ["governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md", "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json", "governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md", "
+   enforcement                                    'The sealer and the package builder both assert byte-equality of this string against the value in this file. A paraphrase is a failure, not a stylistic choice.'
+   encoding_note                                  "The string is stored with the em dashes of the source prose, as UTF-8, matching every other governance artifact in this tree. An earlier draft of this file substituted ASCII hyphen-minus on the state
+   attempt_3_encoding_addendum                    "This attempt's string carries one character the Attempt 2 string did not: U+2212 MINUS SIGN, in the phrase naming the removed drawdown tier. It is stored as it appears in the source prose, for the sa
+   source                                         'The Attempt 3 operating instruction, section 1, which requires this paragraph to be carried verbatim in the decision report and everywhere the development result is referenced.'
+====================================================================================================
+-- PROTOCOL.runs_per_variant
+   count                                          2
+   labels                                         list[2] ["#BASE", "#STRESS"]
+   scenarios                                      list[2] ["BASE", "STRESSED"]
+   total_runs                                     36
+   both_gate                                      'A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.'
+   unchanged_from_attempt_1                       True
+====================================================================================================
+-- PROTOCOL.run_span
+   carried_from                                   'config/generation_2/g2_rotation_protocol.json'
+   carried_from_sha256                            '1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810'
+   recheck_requirement                            'The runner recomputes every value below from the loaded series and refuses to run if any differs.'
+   run_start                                      '2008-07-28'
+   run_start_weekday                              'Monday'
+   run_end                                        '2021-07-30'
+   sessions                                       3276
+   binding_symbol                                 'VEA'
+   binding_symbol_inception                       '2007-07-26'
+   members_missing_a_bar_at_run_start             list[0] []
+   symbols_ending_before_run_end                  list[0] []
+   development_union_sessions                     7178
+   why_unchanged                                  'Attempt 2 changes the strategy, not the data, the universe or the window. An identical run span is what makes the two attempts comparable at all.'
+   reverification_required                        'The span above is carried from Attempt 2 and must not be assumed. The Attempt 3 runner recomputes it from the loaded data before the first variant runs, asserts equality with every field recorded her
+====================================================================================================
+-- PROTOCOL.eligible_universe
+   source                                         'governance/STAGE_1_UNIVERSE.json'
+   source_sha256                                  '01601a60fa950a2429f72a2e9f627ec5af4c1853d1b47ffab35e81debc7eb67a'
+   universe_version                               'SE100-U1-d4917c2f7f1cd834'
+   universe_identity_sha256                       'd4917c2f7f1cd8344728a39165929b352766fbe7193b3c64e71a971749dcbf38'
+   member_count                                   34
+   members                                        list[34] ["AGG", "BND", "DIA", "DVY", "EEM", "EFA", "HYG", "IEF", "IVV", "IWM", "IYR", "LQD", "MDY", "QQQ", "SHY", "SPY", "TIP", "TLT", "VEA", "VGK", "VIG", "VNQ", "VTI", "VWO", "VYM", "XLB", "XLE", "XLF", "XL
+   unchanged_from_attempt_1                       True
+   eligibility_recheck_convention                 "Generation 2 re-checks eligibility on development data only and never adds, drops or substitutes a symbol. The membership is Stage 1's and is frozen."
+   excluded_symbols                               dict[1] ['AAPL']
+====================================================================================================
+-- PROTOCOL.attempt_1_ref
+   strategy_id                                    'SE100-G2-S3-C1-ROTATION'
+   protocol_config                                'config/generation_2/g2_rotation_protocol.json'
+   protocol_config_sha256                         '1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810'
+   gate_criteria_config                           'config/generation_2/g2_gate_criteria.json'
+   gate_criteria_config_sha256                    'a1ac96f98dcbe9e5ce975f2eb27914fcbc7728cad6355a1650dc1ec137ad0d31'
+   protocol_md                                    'governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md'
+   protocol_md_sha256                             'be8f9320036de8eb4503a111e77f99f337832229898de185a0b8e6f6d0cd8a63'
+   protocol_json                                  'governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.json'
+   protocol_json_sha256                           'f805129dba90bc9e7877d62547c27dcfd599cd9ccd75046cd643d676a8c4a547'
+   protocol_sha256_record                         'governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256'
+   protocol_sha256_record_sha256                  '64d1377705dd3ae6ffc710f39a2616e2285c5610b593f7223f4e8ce7fde026b1'
+   research_report_md                             'governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md'
+   research_report_md_sha256                      '07a1ec202060de83820e284bd110486fd9e38f8e7ccaff3f3e4b97ec0fffc939'
+   research_json                                  'reports/stage3_g2/STAGE_3_G2_ROTATION_RESEARCH.json'
+   research_json_sha256                           '5c46393b69b1048a045c8401f5ea40edc82039a9cd319d0980a39a2efbea5955'
+   decision_json                                  'reports/stage3_g2/STAGE_3_G2_DEVELOPMENT_ADMISSIBILITY.json'
+   decision_json_sha256                           '5c7d3238f51965cdff37fec0a1b4ec27bc261288ab5cfbd65485e4a820b9bbb1'
+   manifest_json                                  'reports/stage3_g2/STAGE_3_G2_ARTIFACT_MANIFEST.json'
+   manifest_json_sha256                           '8d0510d7aadce4ffecc871c71941729e7ca8dc3f563b3fcaeb888a2dc0bdc99f'
+   verdict                                        'FAIL - STAGE_3_G2_NO_CANDIDATE'
+   disposition                                    'CLOSED_READ_ONLY'
+   disposition_note                               'Attempt 1 is closed permanently. Its verdict stands. Nothing in this attempt edits, deletes, reopens, re-runs, loosens or supersedes any Attempt 1 artifact or module. Every file listed above is pinne
+   carried_from                                   'SE100-CFG-3103.attempt_1_ref, copied field for field. Every digest in it was recomputed from the file it names before this file was written and all nine matched.'
+====================================================================================================
+-- PROTOCOL.attempt_2_ref
+   strategy_id                                    'SE100-G2-S3-C2-ROTATION-RA1'
+   protocol_config                                'config/generation_2/g2_rotation_ra1_protocol.json'
+   protocol_config_sha256                         '0054edce91a8a49dc39f4f53529969902e318ddc3d67e9cc0307e2c015ca6880'
+   gate_criteria_config                           'config/generation_2/g2_gate_criteria_ra1.json'
+   gate_criteria_config_sha256                    '3b9626214db6a6f6183384456489338ea19a277866e35a1aa6c09b0bacb3e625'
+   protocol_md                                    'governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.md'
+   protocol_md_sha256                             '40e39f13e85574dc15cdb11ae57bc8bb45a16c62164a08e6d545f4924c95553a'
+   protocol_json                                  'governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.json'
+   protocol_json_sha256                           'c1a4742b93ca1e34e6e119012f756720446ac9a125441c6ab4b802259858a2dc'
+   protocol_sha256_record                         'governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.sha256'
+   protocol_sha256_record_sha256                  'ee96a4678ff2770c60a59b783625e4a165991bf7948ce5f30daaf2820f70f148'
+   research_report_md                             'governance/generation_2/STAGE_3_G2_ROTATION_RA1_RESEARCH_REPORT.md'
+   research_report_md_sha256                      '96db0e2f809fefc8ef7e9248524d8a7465cfd0dfeb7b1a6835e1a8f7291e0169'
+   research_json                                  'reports/stage3_g2_attempt2/STAGE_3_G2_A2_ROTATION_RESEARCH.json'
+   research_json_sha256                           'b0d90cf5dd70dad113b747312f462ba4f54151bf24bcf3e5ec668f2ce344bfdb'
+   decision_json                                  'reports/stage3_g2_attempt2/STAGE_3_G2_A2_DEVELOPMENT_ADMISSIBILITY.json'
+   decision_json_sha256                           '6f0c8f861541cb38cf9769658a72dc28994c1763f844db164beed4355ce00b91'
+   manifest_json                                  'reports/stage3_g2_attempt2/STAGE_3_G2_A2_ARTIFACT_MANIFEST.json'
+   manifest_json_sha256                           '468643612dcf9e7b08d5ad6810085c011a9eb79f15ae93738734f0d9f55551d2'
+   run_record                                     'runs/SE100-R-20260816T030122Z.json'
+   run_record_stage                               'STAGE_3_G2_ATTEMPT_2_ROTATION_RA1_DEVELOPMENT'
+   verdict                                        'FAIL - STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE'
+   verdict_source                                 'reports/stage3_g2_attempt2/stage_verdict.json, field verdict_token, read at the time this file was written rather than transcribed from the operating instruction.'
+   fail_route                                     'REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION'
+   disposition                                    'CLOSED_READ_ONLY'
+   disposition_note                               "Attempt 2 is closed permanently. Its verdict stands. Nothing in this attempt edits, deletes, reopens, re-runs, loosens or supersedes any Attempt 2 artifact or module. Every file listed above is pinne
+   run_record_is_not_pinned_by_digest             'runs/ is append-only and outside every repo_state_id pattern, and a later stage appends to the directory rather than to the file. The record is pinned by id and stage string, which is what the Attemp
+====================================================================================================
+-- PROTOCOL.multiple_comparisons_disclosure
+   variants_this_attempt                          18
+   runs_this_attempt                              36
+   variants_attempt_1                             18
+   runs_attempt_1                                 36
+   variants_attempt_2                             18
+   runs_attempt_2                                 36
+   cumulative_variants_this_hypothesis_family     54
+   cumulative_runs_this_hypothesis_family         108
+   no_correction_applied                          'No multiplicity correction is applied to the gate thresholds, because the thresholds are constitutional and may not be altered by a stage that would benefit from altering them. The multiplicity is di
+   adaptive_design_note                           "The 54 cumulative variants are not 54 independent tests. Attempt 2's risk architecture was chosen after seeing where Attempt 1 broke; Attempt 3's ladder change and selection rule were chosen after se
+   third_attempt_note                             'A third adaptation on one hypothesis family is the point at which a development PASS carries very little evidential weight on its own. This is stated before the run. See G2A3-CONFLICT-33.'
+   statement                                      "See adaptation_disclosure_verbatim, which is the binding text and must be carried verbatim wherever this attempt's development result is referenced."
+====================================================================================================
+-- PROTOCOL.risk_architecture
+   id                                             'RA3'
+   name                                           'Generation 2 Attempt 3 risk architecture'
+   frozen_before_any_variant_is_run               True
+   not_part_of_the_grid                           True
+   derived_from                                   'RA2, by deleting one ladder band. Four of the five components are identical.'
+   why_not_gridded                                'Every constant below is fixed and applied uniformly to all eighteen variants. Searching them alongside the rotation parameters would cross from a disclosed risk control into curve-fitting to 2008 and
+   single_difference_from_ra2                     "RA2-4's band 1 (0.05 <= dd < 0.08, scalar 0.75) is deleted and band 0 is extended to 0.08. No other threshold, scalar, formula, order of operations or code path differs. The engine subclasses Attempt
+   provenance                                     "RA3-1, RA3-2, RA3-3 and RA3-5 are RA2-1, RA2-2, RA2-3 and RA2-5 unchanged, which are in turn the values of the Attempt 2 operating prompt and, for RA2-2 and RA2-3, of Generation 1's RA1. RA3-4 is Gen
+   components                                     dict[5] ['RA3-1', 'RA3-2', 'RA3-3', 'RA3-4', 'RA3-5']
+   combined_scalar                                dict[5] ['applies_to', 'does_not_apply_to', 'formula', 'multiplicative_not_minimum', 'range']
+   state_ownership                                dict[4] ['no_generation_1_or_prior_attempt_file_is_edited', 'owner', 'why_not_the_candidate', 'why_this_works']
+====================================================================================================
+-- PROTOCOL.selection_rule
+   "<ABSENT>"
+====================================================================================================
+-- PROTOCOL.structural_consequences_declared_before_running
+   SC-1                                           dict[4] ['attempt_2_amendment', 'attempt_3_amendment', 'risk', 'statement']
+   SC-2                                           dict[4] ['attempt_2_amendment', 'attempt_3_amendment', 'statement', 'throttle_interaction']
+   SC-3                                           dict[2] ['see', 'statement']
+   SC-4                                           dict[4] ['attempt_3_amendment', 'consequence', 'not_corrected', 'statement']
+   SC-5                                           dict[3] ['conflict_ref', 'consequence', 'statement']
+   SC-6                                           dict[4] ['attempt_3_amendment', 'consequence', 'statement', 'why_declared_now']
+   SC-7                                           dict[3] ['consequence', 'not_corrected', 'statement']
+   SC-8                                           dict[3] ['consequence', 'statement', 'why_declared_now']
+====================================================================================================
+PROTOCOL scalars:
+   adaptation_disclosure_verbatim                       = "This pre-registration was designed after both Attempt 1 and Attempt 2's development results were known. Attempt 1 (no risk architecture) failed via research-shutdown on all 18 var
+   artifact_id                                          = 'SE100-CFG-3105'
+   attempt                                              = 3
+   candidate_index                                      = 3
+   candidate_index_note                                 = "C3, not C2 and not C1. Attempt 3 is a distinct candidate specification, not a re-run of Attempt 2's: it holds full sizing through a band in which Attempt 2's candidate was throttl
+   charter_md_sha256                                    = '865a2feffe683e0baf71f1ab976e286fbb2d003109ab47cfaffc1fe6a63dbc90'
+   charter_ref                                          = 'governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md'
+   constitution_json_sha256                             = 'af45fda6b37bed50768d5f3d01d4a91175da93e708c9daf1b630e35a981e2ff5'
+   constitution_md_sha256                               = 'b6f20176b6538722e45ae34e6f8b55a818a6e50057a23e9ddd097e0ce73ce1e5'
+   constitution_ref                                     = 'SE100-GOV-0001 sections 3, 4, 5.1, 6.1, 9 gate 3, 11'
+   cost_model_derivation_ref                            = 'config/generation_2/g2_cost_model.json'
+   cost_model_derivation_sha256                         = 'b9491485b9560b948ec83d3eb86ee4946c1e83b128a368b71473d14ad0f73650'
+   currency                                             = 'USD'
+   declaration_note                                     = "This protocol, in both of its sealed forms - governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md and its JSON companion, of which config/generation_2/g2_rotation_ra3_proto
+   declared_before_any_strategy_code                    = True
+   family                                               = 'CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE'
+   gate_criteria_ref                                    = 'config/generation_2/g2_gate_criteria_ra3.json'
+   gate_criteria_sha256_not_recorded_here               = 'SE100-CFG-3106 is sealed alongside this file and the two are mutually referential: it names this file as protocol_ref and this file names it as gate_criteria_ref. Recording either
+   gate_id                                              = 3
+   generation                                           = 2
+   generation_id                                        = 'SE100-GEN2-7394207c543401e2'
+   hypothesis                                           = 'Cross-sectional relative strength over a fixed 34-member ETF universe, held in an equally weighted top-k basket and refreshed on a fixed calendar, produces a positive net return o
+   live_trading_authorized                              = False
+   partition_lock_json_sha256                           = 'e17ea82c499d51cf23fc9986e7231dce6388f8a3c7394d3dd3c0e3d27fbacbe7'
+   partition_lock_md_sha256                             = '5ae2408dc318e5b87a054a6014e4439d8c6b1934748617c787720f63356b0773'
+   partition_lock_ref                                   = 'governance/generation_2/STAGE_1_G2_PARTITION_LOCK.md'
+   project                                              = 'StockEdge100'
+   refs_reverified                                      = 'Every digest in this block, in attempt_1_ref and in attempt_2_ref was recomputed from the file it names at the moment this file was generated. None was transcribed from SE100-CFG-
+   stage                                                = 3
+   strategy_id                                          = 'SE100-G2-S3-C3-ROTATION-RA3'
+   title                                                = 'Generation 2 Stage 3 Attempt 3 strategy protocol - cross-sectional rotation under risk architecture RA3 and representative-selection rule SE100-G2-SEL-2'
+   version                                              = '1.0.0'
+   what_makes_this_genuinely_cross_sectional            = 'The ranking scores all 34 eligible members against each other on one date and takes the top k. It is not k independent single-symbol rules run side by side: a symbol is held becau
+   what_this_attempt_adds_over_attempt_1                = 'Attempt 1 tested the rotation signal with no mechanism to reduce exposure before a research-shutdown breach: between scheduled rebalances it issued no orders at all. Attempt 2 hol
+   what_this_attempt_adds_over_attempt_1_carriage       = 'Copied verbatim from SE100-CFG-3103. It describes the risk architecture Attempt 3 still carries, minus one rung, and is retained so the lineage statement is not silently reworded.
+   what_this_attempt_changes_from_attempt_2             = "Exactly two things, and nothing else. (1) The de-risk ladder loses its 5-to-8 percent rung, reverting to the three-band spacing Generation 1's RA1-5 sealed before Attempt 1 was ev
+====================================================================================================
+PROTOCOL.explicit_non_authorizations:
+   - This file does not authorize reading any session at or after 2021-08-01, in this or any later stage.
+   - This file does not authorize reading Generation 1's holdout (2024-08-01 to 2026-07-31), which is spent and prohibited regardless of generation.
+   - This file does not authorize reading Generation 2's holdout (2026-08-01 to 2028-07-31), which is sealed and must never be read before that period exists in real
+   - This file does not authorize Stage 4 validation. Stage 4 requires an explicit human go-ahead recorded in a later session.
+   - This file does not authorize live trading, order placement, order cancellation, order replacement, liquidation, or unattended scheduling. live_trading_authorize
+   - This file does not authorize reading, writing, printing or logging any broker credential, and no module of this attempt may import a network client.
+   - This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 1 artifact or module.
+   - This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 2 Attempt 1 artifact or module. Attempt 1's verdict stands per
+   - This file does not authorize editing, deleting, re-running, reopening or loosening any Generation 2 Attempt 2 artifact or module. Attempt 2's verdict stands per
+   - This file does not authorize widening, narrowing or re-centring the eighteen-variant grid.
+   - This file does not authorize grid-searching, tuning or adjusting any RA3 constant, or any SE100-G2-SEL-2 quantity, weight or threshold, before or after seeing a
+   - This file does not authorize promoting a runner-up if the representative fails the gate.
+   - This file does not authorize an Attempt 4. If Attempt 3 fails, the attempt closes and any further work requires a further disclosed adaptation and a separate au
+   - This file does not authorize weakening, skipping or deleting any existing test.
+   - This file does not authorize a fourth selection rule, a reweighting of SE100-G2-SEL-2's four quantities, or the addition of a fifth, at any point after this fil
+   - This file does not authorize isolating the two changes by re-running either of them alone. An isolation attempt is a further attempt and requires its own author
+====================================================================================================
+-- EVIDENCE.gate_scope
+   variant_id                                     'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY'
+   evaluated_on                                   'The selected representative variant only, across both of its runs.'
+   conjunctive                                    'All Gate 3 conditions must be satisfied. Constitution section 9.'
+   both_gate                                      'A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.'
+   criteria_source                                'config/generation_2/g2_gate_criteria_ra3.json'
+   conflict_ref                                   'G2A2-CONFLICT-25'
+   conflict_status                                'inherited from Attempt 2 and resolved the same way'
+   scope_resolution                               "SE100-CFG-3105 scopes the gate across both runs and states that a condition is satisfied only if both runs satisfy it; SE100-CFG-3106 measures S3-C1 and S3-C4 on the base run and lists the stress run
+   neighbour_run_label                            '#BASE'
+   neighbours                                     list[4] ["SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY", "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY", "SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY", "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY"]
+====================================================================================================
+-- EVIDENCE.attempt_1_ref
+   strategy_id                                    'SE100-G2-S3-C1-ROTATION'
+   protocol_config                                'config/generation_2/g2_rotation_protocol.json'
+   protocol_config_sha256                         '1cc5f94ffa70d66e059182a6330bffab2a72f7e4f46db07e50c2924f42799810'
+   gate_criteria_config                           'config/generation_2/g2_gate_criteria.json'
+   gate_criteria_config_sha256                    'a1ac96f98dcbe9e5ce975f2eb27914fcbc7728cad6355a1650dc1ec137ad0d31'
+   protocol_md                                    'governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.md'
+   protocol_md_sha256                             'be8f9320036de8eb4503a111e77f99f337832229898de185a0b8e6f6d0cd8a63'
+   protocol_json                                  'governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.json'
+   protocol_json_sha256                           'f805129dba90bc9e7877d62547c27dcfd599cd9ccd75046cd643d676a8c4a547'
+   protocol_sha256_record                         'governance/generation_2/STAGE_3_G2_ROTATION_PROTOCOL.sha256'
+   protocol_sha256_record_sha256                  '64d1377705dd3ae6ffc710f39a2616e2285c5610b593f7223f4e8ce7fde026b1'
+   research_report_md                             'governance/generation_2/STAGE_3_G2_ROTATION_RESEARCH_REPORT.md'
+   research_report_md_sha256                      '07a1ec202060de83820e284bd110486fd9e38f8e7ccaff3f3e4b97ec0fffc939'
+   research_json                                  'reports/stage3_g2/STAGE_3_G2_ROTATION_RESEARCH.json'
+   research_json_sha256                           '5c46393b69b1048a045c8401f5ea40edc82039a9cd319d0980a39a2efbea5955'
+   decision_json                                  'reports/stage3_g2/STAGE_3_G2_DEVELOPMENT_ADMISSIBILITY.json'
+   decision_json_sha256                           '5c7d3238f51965cdff37fec0a1b4ec27bc261288ab5cfbd65485e4a820b9bbb1'
+   manifest_json                                  'reports/stage3_g2/STAGE_3_G2_ARTIFACT_MANIFEST.json'
+   manifest_json_sha256                           '8d0510d7aadce4ffecc871c71941729e7ca8dc3f563b3fcaeb888a2dc0bdc99f'
+   verdict                                        'FAIL - STAGE_3_G2_NO_CANDIDATE'
+   disposition                                    'CLOSED_READ_ONLY'
+   disposition_note                               'Attempt 1 is closed permanently. Its verdict stands. Nothing in this attempt edits, deletes, reopens, re-runs, loosens or supersedes any Attempt 1 artifact or module. Every file listed above is pinne
+   carried_from                                   'SE100-CFG-3103.attempt_1_ref, copied field for field. Every digest in it was recomputed from the file it names before this file was written and all nine matched.'
+====================================================================================================
+-- EVIDENCE.attempt_2_ref
+   strategy_id                                    'SE100-G2-S3-C2-ROTATION-RA1'
+   protocol_config                                'config/generation_2/g2_rotation_ra1_protocol.json'
+   protocol_config_sha256                         '0054edce91a8a49dc39f4f53529969902e318ddc3d67e9cc0307e2c015ca6880'
+   gate_criteria_config                           'config/generation_2/g2_gate_criteria_ra1.json'
+   gate_criteria_config_sha256                    '3b9626214db6a6f6183384456489338ea19a277866e35a1aa6c09b0bacb3e625'
+   protocol_md                                    'governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.md'
+   protocol_md_sha256                             '40e39f13e85574dc15cdb11ae57bc8bb45a16c62164a08e6d545f4924c95553a'
+   protocol_json                                  'governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.json'
+   protocol_json_sha256                           'c1a4742b93ca1e34e6e119012f756720446ac9a125441c6ab4b802259858a2dc'
+   protocol_sha256_record                         'governance/generation_2/STAGE_3_G2_ROTATION_RA1_PROTOCOL.sha256'
+   protocol_sha256_record_sha256                  'ee96a4678ff2770c60a59b783625e4a165991bf7948ce5f30daaf2820f70f148'
+   research_report_md                             'governance/generation_2/STAGE_3_G2_ROTATION_RA1_RESEARCH_REPORT.md'
+   research_report_md_sha256                      '96db0e2f809fefc8ef7e9248524d8a7465cfd0dfeb7b1a6835e1a8f7291e0169'
+   research_json                                  'reports/stage3_g2_attempt2/STAGE_3_G2_A2_ROTATION_RESEARCH.json'
+   research_json_sha256                           'b0d90cf5dd70dad113b747312f462ba4f54151bf24bcf3e5ec668f2ce344bfdb'
+   decision_json                                  'reports/stage3_g2_attempt2/STAGE_3_G2_A2_DEVELOPMENT_ADMISSIBILITY.json'
+   decision_json_sha256                           '6f0c8f861541cb38cf9769658a72dc28994c1763f844db164beed4355ce00b91'
+   manifest_json                                  'reports/stage3_g2_attempt2/STAGE_3_G2_A2_ARTIFACT_MANIFEST.json'
+   manifest_json_sha256                           '468643612dcf9e7b08d5ad6810085c011a9eb79f15ae93738734f0d9f55551d2'
+   run_record                                     'runs/SE100-R-20260816T030122Z.json'
+   run_record_stage                               'STAGE_3_G2_ATTEMPT_2_ROTATION_RA1_DEVELOPMENT'
+   verdict                                        'FAIL - STAGE_3_G2_ATTEMPT_2_NO_CANDIDATE'
+   verdict_source                                 'reports/stage3_g2_attempt2/stage_verdict.json, field verdict_token, read at the time this file was written rather than transcribed from the operating instruction.'
+   fail_route                                     'REPRESENTATIVE_FAILED_AT_LEAST_ONE_CONDITION'
+   disposition                                    'CLOSED_READ_ONLY'
+   disposition_note                               "Attempt 2 is closed permanently. Its verdict stands. Nothing in this attempt edits, deletes, reopens, re-runs, loosens or supersedes any Attempt 2 artifact or module. Every file listed above is pinne
+   run_record_is_not_pinned_by_digest             'runs/ is append-only and outside every repo_state_id pattern, and a later stage appends to the directory rather than to the file. The record is pinned by id and stage string, which is what the Attemp
+====================================================================================================
+-- EVIDENCE.refs_reverified
+   "Every digest in this block, in attempt_1_ref and in attempt_2_ref was recomputed from the file it names at the moment this file was generated. None was transcribed from SE100-CFG-3103 without being checked against the file itself."
+====================================================================================================
+-- EVIDENCE.prior_attempt_module_verification
+   requirement                                    'AT-H'
+   conflict_ref                                   'G2A3-CONFLICT-34'
+   digest_source                                  'SE100-GOV-2007 contamination_measurement.prior_attempt_module_digests'
+   module_count                                   17
+   attempt_1_module_count                         9
+   attempt_2_module_count                         8
+   attempt_1_list_source                          'SE100-CFG-3103.attempt_1_modules_immutable.modules, copied unchanged.'
+   attempt_2_list_source                          "The eight Generation 2 modules created by Attempt 2, enumerated by listing src/stockedge100/{strategies,backtest,reporting} and subtracting Attempt 1's nine and the Stage 1 module g2_partition_lock.p
+   excluded_and_why                               'src/stockedge100/reporting/g2_partition_lock.py is a Generation 2 STAGE 1 module. It is immutable for the ordinary reason that every sealed module is, and it is covered by repo_state_id, but it is no
+   modules_verified                               '<elided 17>'
+   modules_that_moved                             list[0] []
+====================================================================================================
+-- EVIDENCE.ladder_engagement_comparison
+   requirement                                    "Operating instruction section 4.3: run the grid fresh under RA3 and verify that at least the ladder-engagement statistics differ from Attempt 2's."
+   runs_compared                                  36
+   attempt_2_source                               'reports/stage3_g2_attempt2/grid_results.json'
+   statistics_compared                            list[6] ["ladder_descents", "ladder_ascents", "lockout_arms", "lockout_recoveries_blocked", "stops_triggered", "stops_filled"]
+   per_statistic                                  dict[6] ['ladder_ascents', 'ladder_descents', 'lockout_arms', 'lockout_recoveries_blocked', 'stops_filled', 'stops_triggered']
+   sessions_at_full_sizing                        dict[7] ['attempt_2_band', 'attempt_2_total', 'attempt_3_band', 'attempt_3_total', 'differs', 'note', 'runs_differing']
+   runs_identical_on_every_compared_statistic     list[0] []
+   at_least_one_statistic_differs                 True
+   band_indices_are_not_comparable                'RA2 declares 4 bands and RA3 declares 3, so the same integer index denotes a different drawdown band in each. Compare the sizing scalar an index maps to, or the session count in the full-sizing band;
+====================================================================================================
+-- EVIDENCE.adaptation_disclosure_carriage
+   must_appear_verbatim_in                        list[5] ["governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md", "governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json", "governance/generation_2/STAGE_3_G2_ROTATION_RA3_RESEARCH_REPORT.md", "
+   this_file_is_a_required_carrier                True
+   enforcement                                    'The sealer and the package builder both assert byte-equality of this string against the value in this file. A paraphrase is a failure, not a stylistic choice.'
+   encoding_note                                  "The string is stored with the em dashes of the source prose, as UTF-8, matching every other governance artifact in this tree. An earlier draft of this file substituted ASCII hyphen-minus on the state
+   attempt_3_encoding_addendum                    "This attempt's string carries one character the Attempt 2 string did not: U+2212 MINUS SIGN, in the phrase naming the removed drawdown tier. It is stored as it appears in the source prose, for the sa
+   source                                         'The Attempt 3 operating instruction, section 1, which requires this paragraph to be carried verbatim in the decision report and everywhere the development result is referenced.'
+   characters                                     1507
+   sha256_of_utf8                                 'ce1d6476f44562310fb059c5817645baa25477cc4f6168b414f3423834c8e925'
+   sha256_covers                                  "the UTF-8 encoding of the string carried in this file's adaptation_disclosure_verbatim field, which is the sealed string byte for byte"
+   carried_byte_identically_from                  'config/generation_2/g2_rotation_ra3_protocol.json'
+====================================================================================================
+-- EVIDENCE.risk_architecture
+   sealed                                         dict[11] ['combined_scalar', 'components', 'derived_from', 'frozen_before_any_variant_is_run', 'id', 'name', 'not_part_of_the_grid', 'provenance', 'single_difference_from_ra2', 'state_ownership', 'why_not_gridded']
+   as_loaded                                      dict[11] ['annualisation_sessions', 'architecture_id', 'bands', 'exposure_ceiling', 'lockout_sessions', 'scalar_decimals', 'stop_fraction', 'volatility_returns', 'volatility_target', 'volatility_variance_denominator', 'volatility_window_bars']
+   frozen_before_any_variant_is_run               True
+   not_part_of_the_grid                           True
+   gridded                                        False
+   tuned_after_seeing_a_result                    False
+   generation_1_provenance                        dict[7] ['exposure_ceiling_used_to_convert', 'generation_1_ladder_from_ra1_5_prose', 'generation_1_ladder_rungs_per_experiment', 'generation_1_protocol', 'generation_1_states_it_twice_and_they_agree', 'ladders_are_identical', 'ra3_bands_as_absolute_caps']
+   single_difference_from_ra2                     dict[7] ['attempt_2_protocol', 'bands_added_by_ra3', 'bands_at_or_beyond_the_deleted_tier_unchanged', 'bands_removed_from_ra2', 'deleted_tier', 'ra2_bands', 'ra3_bands']
+   attributes_derived_from_risk                   list[2] ["risk", "sessions_in_band"]
+   attempt_2_counterparts                         dict[8] ['attempt_2_architecture_id', 'attempt_2_band_scalars', 'attempt_2_full_sizing_band', 'attempt_3_architecture_id', 'attempt_3_band_scalars', 'attempt_3_full_sizing_band', 'band_indices_are_not_comparable', 'source']
+====================================================================================================
+-- EVIDENCE.sealed_inputs
+   protocol                                       'config/generation_2/g2_rotation_ra3_protocol.json'
+   protocol_artifact_id                           'SE100-CFG-3105'
+   protocol_sha256                                'e9e8a8bc58c0ddb04b2b6c702d543b998c2d0a31487986a61e0a28509b5fbd1d'
+   criteria                                       'config/generation_2/g2_gate_criteria_ra3.json'
+   criteria_artifact_id                           'SE100-CFG-3106'
+   criteria_sha256                                '4fa3103862786e889668221ad7009fe4ead5cac999bc0d2f7d1aa0135cbb0ac0'
+   criteria_sha256_not_recorded_in_the_protocol   'SE100-CFG-3106 is sealed alongside this file and the two are mutually referential: it names this file as protocol_ref and this file names it as gate_criteria_ref. Recording either digest inside the o
+   governance_protocol_json                       'governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.json'
+   governance_protocol_json_sha256                'c938dcd8dd3c7099c9db6145f92165d2758796f07a90be4804c5137e47a07e34'
+   governance_protocol_md                         'governance/generation_2/STAGE_3_G2_ROTATION_RA3_PROTOCOL.md'
+   governance_protocol_md_sha256                  '37ed2ca25d30a4f14736f573053eb50c883c79f7c9ab0b62c181fddeb31f7a7d'
+   cost_model                                     'config/generation_2/g2_cost_model.json'
+   cost_model_sha256                              'b9491485b9560b948ec83d3eb86ee4946c1e83b128a368b71473d14ad0f73650'
+   partition_lock                                 'governance/generation_2/STAGE_1_G2_PARTITION_LOCK.json'
+   partition_lock_sha256                          'e17ea82c499d51cf23fc9986e7231dce6388f8a3c7394d3dd3c0e3d27fbacbe7'
+   charter                                        'governance/generation_2/STAGE_10_GENERATION_2_CHARTER.md'
+   charter_sha256                                 '865a2feffe683e0baf71f1ab976e286fbb2d003109ab47cfaffc1fe6a63dbc90'
+   declared_before_any_strategy_code              True
+   declared_before_any_strategy_code_measurement  dict[7] ['conflict_ref', 'contamination_predicate', 'paired_immutability_check', 'predicate', 'sealer_indirection_note', 'supersedes_in_scope', 'why_not_path_based']
+====================================================================================================
+-- EVIDENCE.window
+   name                                           'development'
+   start                                          '1993-01-29'
+   end                                            '2021-07-31'
+   development_bound                              '2021-07-31'
+   run_span                                       dict[14] ['binding_symbol', 'binding_symbol_inception', 'carried_from', 'carried_from_sha256', 'development_union_sessions', 'members_missing_a_bar_at_run_start', 'recheck_requirement', 'reverification_required', 'run_end', 'run_start', 'run_start_weekday', 'sessions', 'symbols_ending_before_run_end', 'why_unchanged']
+   latest_session_loaded                          '2021-07-30'
+   validation_read                                False
+   generation_1_holdout_read                      False
+   generation_2_holdout_read                      False
+   enforcement                                    'load_grid_dataset truncates at the development bound and then audits the loaded bars separately, so a session dated 2021-08-01 or later would have to survive both a truncating loader and an independe
+====================================================================================================
+-- EVIDENCE.grid
+   axes                                           dict[3] ['lookback_months', 'rebalance_frequency', 'top_k']
+   variants_declared                              18
+   runs_per_variant                               dict[6] ['both_gate', 'count', 'labels', 'scenarios', 'total_runs', 'unchanged_from_attempt_1']
+   runs_executed                                  36
+   all_declared_runs_executed                     True
+   revisions_after_seeing_a_result                0
+   grid_widened_from_attempt_1                    False
+   grid_widened_from_attempt_2                    False
+====================================================================================================
+-- EVIDENCE.selection_determinism
+   requirement                                    'SE100-CFG-3105 reproducibility_requirements.selection_determinism'
+   method                                         'SelectionInputV2 objects rebuilt from the recorded six-field JSON and rescored on a fresh call; the selector never sees the run objects on this pass'
+   inputs_replayed                                18
+   selected_variant_id_first_pass                 'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY'
+   selected_variant_id_replay                     'SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY'
+   selected_variant_identical                     True
+   decided_at_step_identical                      True
+   eligible_set_identical                         True
+   ranking_identical                              True
+   scores_identical                               True
+   variants_whose_scores_differ                   list[0] []
+   all_identical                                  True
+====================================================================================================
+-- EVIDENCE.run_span_recheck
+   requirement                                    'The runner recomputes every value below from the loaded series and refuses to run if any differs.'
+   reverification_required                        'The span above is carried from Attempt 2 and must not be assumed. The Attempt 3 runner recomputes it from the loaded data before the first variant runs, asserts equality with every field recorded her
+   recomputed_from                                'the guard-loaded PriceSeries in memory'
+   cross_checked_against                          list[3] ["SE100-CFG-3105 run_span", "SE100-GOV-2007 run_span_measured_from_disk", "reporting.g2_rotation_preregistration.measure_span()"]
+   config_keys_compared                           list[9] ["binding_symbol", "binding_symbol_inception", "development_union_sessions", "members_missing_a_bar_at_run_start", "run_end", "run_start", "run_start_weekday", "sessions", "symbols_ending_before_run_e
+   governance_keys_compared                       list[25] ["member_count", "run_start", "run_start_weekday", "run_start_lookback_reference", "session_before_run_start", "session_before_run_start_lookback_reference", "run_end", "run_sessions", "exchange_calen
+   governance_keys_not_a_measurement              list[1] ["measurement_basis"]
+   independent_derivation_keys_compared           list[25] ["binding_symbol", "binding_symbol_inception", "binding_symbols", "development_union_sessions", "development_union_span", "earliest_inception", "earliest_inception_symbols", "exchange_calendar_session
+   differences                                    list[0] []
+   measured                                       dict[25] ['binding_symbol', 'binding_symbol_inception', 'binding_symbols', 'development_union_sessions', 'development_union_span', 'earliest_inception', 'earliest_inception_symbols', 'exchange_calendar_sessions', 'member_count', 'members_missing_a_bar_at_run_start', 'monthly_first_three', 'monthly_last_two', 'monthly_rebalance_sessions', 'quarterly_first_three', 'quarterly_last_two', 'quarterly_rebalance_sessions', 'run_end', 'run_sessions', 'run_start', 'run_start_lookback_reference', 'run_start_weekday', 'session_before_run_start', 'session_before_run_start_lookback_reference', 'session_lists_agree', 'symbols_ending_before_run_end']
+   written_to                                     'reports/stage3_g2_attempt3/run_span_recheck.json'
+====================================================================================================
+EVIDENCE.selection (short):
+   rule_id                                "SE100-G2-SEL-2"
+   rule_source                            "SE100-CFG-3105 representative_selection_rule"
+   return_blind                           true
+   frozen_before_any_variant_is_run       true
+   steps                                  [{"order": 1, "criterion": "zero_research_shutdown_events", "scope": "across BOTH runs of the variant"}, {"order": 2, "criterion": "lowest_neighbourhood_instability_score", "scope": null}, {"order": 3, "criterion": "lowest_turnover", "scope": null}, {"order": 4, "criterion": "lexicographic_variant_id", "scope": null}]
+   selection_input_fields                 ["variant_id", "shutdown_events", "fill_count", "ladder_descents", "lockout_arms", "stops_filled"]
+   scored_quantities                      ["fill_count", "ladder_descents", "lockout_arms", "stops_filled"]
+   inputs                                 <elided, 18 entries>
+   result                                 {"rule_id": "SE100-G2-SEL-2", "selected_variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY", "decided_at_step": 2, "eligible_variants": ["SE100-G2-S3-C3-ROTATION-RA3-L03-K1-MONTHLY", "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY", "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY", "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY", "SE100-G2-S3-C3-ROTATION-RA3-L03-K3-MONTHLY", "SE100-G2-S3-C3-ROTAT
+   selected_variant_id                    "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"
+   decided_at_step                        2
+   outcome                                "representative_selected"
+   selected_score                         {"variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY", "instability_score": "0.215471404", "neighbours": ["SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY", "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY", "SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY", "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY"], "neighbour_count": 4, "per_quantity_mean_dissimilarity": {"fill_count": "0.325717816", "ladder_
+   neighbour_scores                       <elided, 4 entries>
+   note                                   "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY was selected at step 2 (lowest_neighbourhood_instability_score) with instability score 0.215471404 over 4 neighbours, from 18 eligible of 18 variants."
+   no_reselection                         "The representative is selected once, before any gate condition is evaluated. It is not reselected, re-ranked or substituted for any reason."

@@ -1,0 +1,144 @@
+candidate_results len: 1
+candidate keys: ['admission_basis', 'admitted', 'carried_over_unchanged', 'conditions', 'conditions_met', 'conditions_not_applicable', 'conditions_not_evaluable', 'conditions_not_met', 'episode_ledger_inherited', 'experiment_id', 'family', 'measurement_basis_changed_from_attempt_1', 'measurement_basis_changed_from_attempt_2', 'measurement_basis_unchanged_from_attempt_1', 'measurement_basis_unchanged_from_attempt_2', 'non_vacuity_check', 'plan', 'prose_alias_adapter', 'reconciliation', 'redefined_for_generation_2', 'scenario', 'stress_evaluation', 'variant', 'variant_id']
+----------------------------------------------------------------------------------------------------
+admission_basis keys: ['aggregated_on', 'base_all_seven_satisfied', 'base_conditions_not_satisfied', 'both_gate', 'conflict_ref', 'conflict_status', 'conjunctive', 'criteria_source', 'evaluated_on', 'neighbour_run_label', 'permissive_base_only_reading_would_give', 'resolution', 's3_c7_stress_side_reported_not_gating', 'stress_conditions_not_satisfied', 'stress_first_six_satisfied']
+{
+ "conflict_ref": "G2A2-CONFLICT-25",
+ "conflict_status": "inherited from Attempt 2 and resolved the same way",
+ "resolution": "SE100-CFG-3105 scopes the gate across both runs and states that a condition is satisfied only if both runs satisfy it; SE100-CFG-3106 measures S3-C1 and S3-C4 on the base run and lists the stress run as reported_but_not_gating. Both were sealed in the same session and neither outranks the other, so the more restrictive reading is adopted: all seven conditions on #BASE, and S3-C1..S3-C6 also on #STRESS. S3-C7 is evaluated once, on base runs, because its own what_is_read fixes the neighbour side to base-run total return and gives no sealed basis for a stress-side comparison. Both condition sets are reported in full, so a reader can see exactly what the permissive base-only reading would have given. The Attempt 3 operating instruction states the conjunctive rule as 'all conditions on the base run' and then directs that the restrictive reading also be evaluated and both readings reported, citing this conflict by name; the instruction and the sealed resolution therefore agree.",
+ "evaluated_on": "The selected representative variant only, across both of its runs.",
+ "conjunctive": "All Gate 3 conditions must be satisfied. Constitution section 9.",
+ "both_gate": "A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.",
+ "criteria_source": "config/generation_2/g2_gate_criteria_ra3.json",
+ "neighbour_run_label": "#BASE",
+ "base_all_seven_satisfied": false,
+ "stress_first_six_satisfied": false,
+ "base_conditions_not_satisfied": [
+  "S3-C6"
+ ],
+ "stress_conditions_not_satisfied": [
+  "S3-C6"
+ ],
+ "s3_c7_stress_side_reported_not_gating": {
+  "id": "S3-C7",
+  "required_verbatim": "reasonable neighboring parameter values do not reverse the sign of net return",
+  "verdict": "MET",
+  "satisfied": true,
+  "measured": "4/4 neighbours match",
+  "threshold": "all 4 match, zero matches nothing",
+  "note": "Neighbour runs are read for the sign of net return and nothing else. No neighbour is ever promoted to representative, and the representative's parameterisation is never revised because a neighbour did better. Doing so would be a material change under constitution section 11 and would create a new candidate restarting at Gate 3. It would also destroy the return-blind property of the selection rule, since the promotion would be driven by a return. This prohibition binds with additional force in Attempt 3, because SEL-2 already reads the neighbourhood for its own purposes and a reader could mistake that for licence to read returns there. It is not: SEL-2's inputs are four counters, structurally enforced, and the returns this condition reads are never available to it.",
+  "evidence": {
+   "neighbour_definition": "Every variant in the eighteen-variant Attempt 3 grid that differs from the representative in exactly one axis by exactly one step.",
+   "neighb
+----------------------------------------------------------------------------------------------------
+stress_evaluation keys: ['admitted', 'carried_over_unchanged', 'conditions', 'conditions_met', 'conditions_not_applicable', 'conditions_not_evaluable', 'conditions_not_met', 'episode_ledger_inherited', 'experiment_id', 'family', 'measurement_basis_changed_from_attempt_1', 'measurement_basis_changed_from_attempt_2', 'measurement_basis_unchanged_from_attempt_1', 'measurement_basis_unchanged_from_attempt_2', 'non_vacuity_check', 'plan', 'prose_alias_adapter', 'reconciliation', 'redefined_for_generation_2', 'scenario', 'variant', 'variant_id']
+{
+ "experiment_id": "SE100-G2-S3-C3-ROTATION-RA3",
+ "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+ "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+ "variant": {
+  "index": 4,
+  "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+  "lookback_months": 3,
+  "top_k": 2,
+  "rebalance_frequency": "QUARTERLY",
+  "target_weight_per_position": "0.250000000",
+  "scheduled_rebalance_sessions": 53
+ },
+ "plan": {
+  "experiment_id": "SE100-G2-S3-C3-ROTATION-RA3",
+  "family": "CROSS_SECTIONAL_RELATIVE_STRENGTH_RISK_ARCHITECTURE",
+  "declared_universe": [
+   "AGG",
+   "BND",
+   "DIA",
+   "DVY",
+   "EEM",
+   "EFA",
+   "HYG",
+   "IEF",
+   "IVV",
+   "IWM",
+   "IYR",
+   "LQD",
+   "MDY",
+   "QQQ",
+   "SHY",
+   "SPY",
+   "TIP",
+   "TLT",
+   "VEA",
+   "VGK",
+   "VIG",
+   "VNQ",
+   "VTI",
+   "VWO",
+   "VYM",
+   "XLB",
+   "XLE",
+   "XLF",
+   "XLI",
+   "XLK",
+   "XLP",
+   "XLU",
+   "XLV",
+   "XLY"
+  ],
+  "declared_instrument_count": 34,
+  "run_start": "2008-07-28",
+  "run_end": "2021-07-30",
+  "binding_symbol": "VEA",
+  "sessions": 3276,
+  "span_recheck_requirement": "The runner recomputes every value below from the loaded series and refuses to run if any differs.",
+  "span_reverification_requirement": "The span above is carried from Attempt 2 and must not be assumed. The Attempt 3 runner recomputes it from the loaded data before the first variant runs, asserts equality with every field recorded here, and writes the recomputation to reports/stage3_g2_attempt3/run_span_recheck.json. A mismatch is a blocker, not a value to adopt.",
+  "risk_architecture_id": "RA3"
+ },
+ "scenario": "STRESSED",
+ "admitted": false,
+ "conditions_met": 6,
+ "conditions_not_met": [
+  "S3-C6"
+ ],
+ "conditions_not_evaluable": [],
+ "conditions_not_applicable": [],
+ "reconciliation":
+----------------------------------------------------------------------------------------------------
+cand.variant_id                     "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY"
+cand.candidate_id                   "<absent>"
+cand.strategy_id                    "<absent>"
+cand.admitted                       false
+cand.verdict                        "<absent>"
+cand.conditions_not_satisfied       "<absent>"
+cand.gate_verdict                   "<absent>"
+----------------------------------------------------------------------------------------------------
+base row ids:   ['S3-C1', 'S3-C2', 'S3-C3', 'S3-C4', 'S3-C5', 'S3-C6', 'S3-C7']
+stress row ids: ['S3-C1', 'S3-C2', 'S3-C3', 'S3-C4', 'S3-C5', 'S3-C6', 'S3-C7']
+----------------------------------------------------------------------------------------------------
+EV.gate_scope:
+{
+ "variant_id": "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-QUARTERLY",
+ "evaluated_on": "The selected representative variant only, across both of its runs.",
+ "conjunctive": "All Gate 3 conditions must be satisfied. Constitution section 9.",
+ "both_gate": "A variant satisfies a gate condition only if both of its runs satisfy it. The stressed cost model is not a sensitivity check that may be waived.",
+ "criteria_source": "config/generation_2/g2_gate_criteria_ra3.json",
+ "conflict_ref": "G2A2-CONFLICT-25",
+ "conflict_status": "inherited from Attempt 2 and resolved the same way",
+ "scope_resolution": "SE100-CFG-3105 scopes the gate across both runs and states that a condition is satisfied only if both runs satisfy it; SE100-CFG-3106 measures S3-C1 and S3-C4 on the base run and lists the stress run as reported_but_not_gating. Both were sealed in the same session and neither outranks the other, so the more restrictive reading is adopted: all seven conditions on #BASE, and S3-C1..S3-C6 also on #STRESS. S3-C7 is evaluated once, on base runs, because its own what_is_read fixes the neighbour side to base-run total return and gives no sealed basis for a stress-side comparison. Both condition sets are reported in full, so a reader can see exactly what the permissive base-only reading would have given. The Attempt 3 operating instruction states the conjunctive rule as 'all conditions on the base run' and then directs that the restrictive reading also be evaluated and both readings reported, citing this conflict by name; the instruction and the sealed resolution therefore agree.",
+ "neighbour_run_label": "#BASE",
+ "neighbours": [
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K1-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K2-MONTHLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L03-K3-QUARTERLY",
+  "SE100-G2-S3-C3-ROTATION-RA3-L06-K2-QUARTERLY"
+ ]
+}
+----------------------------------------------------------------------------------------------------
+EV.gate_evaluation_scope:
+{
+ "evaluated_on": "The selected representative variant only, across both of its runs.",
+ "conjunctive": "All Gate 3 conditions must be satisfied. Constitution section 9.",
+ "criteria_source": "config/generation_2/g2_gate_criteria_ra3.json",
+ "thresholds_changed_from_attempt_1": "none",
+ "thresholds_changed_from_generation_1": "none",
+ "thresholds_changed_from_attempt_2": "none"
+}

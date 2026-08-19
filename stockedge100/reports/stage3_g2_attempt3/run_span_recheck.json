@@ -1,0 +1,127 @@
+{
+  "config_keys_compared": [
+    "binding_symbol",
+    "binding_symbol_inception",
+    "development_union_sessions",
+    "members_missing_a_bar_at_run_start",
+    "run_end",
+    "run_start",
+    "run_start_weekday",
+    "sessions",
+    "symbols_ending_before_run_end"
+  ],
+  "cross_checked_against": [
+    "SE100-CFG-3105 run_span",
+    "SE100-GOV-2007 run_span_measured_from_disk",
+    "reporting.g2_rotation_preregistration.measure_span()"
+  ],
+  "differences": [],
+  "governance_keys_compared": [
+    "member_count",
+    "run_start",
+    "run_start_weekday",
+    "run_start_lookback_reference",
+    "session_before_run_start",
+    "session_before_run_start_lookback_reference",
+    "run_end",
+    "run_sessions",
+    "exchange_calendar_sessions",
+    "session_lists_agree",
+    "binding_symbol",
+    "binding_symbols",
+    "binding_symbol_inception",
+    "earliest_inception",
+    "earliest_inception_symbols",
+    "members_missing_a_bar_at_run_start",
+    "symbols_ending_before_run_end",
+    "development_union_sessions",
+    "development_union_span",
+    "monthly_rebalance_sessions",
+    "quarterly_rebalance_sessions",
+    "monthly_first_three",
+    "monthly_last_two",
+    "quarterly_first_three",
+    "quarterly_last_two"
+  ],
+  "governance_keys_not_a_measurement": [
+    "measurement_basis"
+  ],
+  "independent_derivation_keys_compared": [
+    "binding_symbol",
+    "binding_symbol_inception",
+    "binding_symbols",
+    "development_union_sessions",
+    "development_union_span",
+    "earliest_inception",
+    "earliest_inception_symbols",
+    "exchange_calendar_sessions",
+    "member_count",
+    "members_missing_a_bar_at_run_start",
+    "monthly_first_three",
+    "monthly_last_two",
+    "monthly_rebalance_sessions",
+    "quarterly_first_three",
+    "quarterly_last_two",
+    "quarterly_rebalance_sessions",
+    "run_end",
+    "run_sessions",
+    "run_start",
+    "run_start_lookback_reference",
+    "run_start_weekday",
+    "session_before_run_start",
+    "session_before_run_start_lookback_reference",
+    "session_lists_agree",
+    "symbols_ending_before_run_end"
+  ],
+  "measured": {
+    "binding_symbol": "VEA",
+    "binding_symbol_inception": "2007-07-26",
+    "binding_symbols": [
+      "VEA"
+    ],
+    "development_union_sessions": 7178,
+    "development_union_span": [
+      "1993-01-29",
+      "2021-07-30"
+    ],
+    "earliest_inception": "1993-01-29",
+    "earliest_inception_symbols": [
+      "SPY"
+    ],
+    "exchange_calendar_sessions": 3276,
+    "member_count": 34,
+    "members_missing_a_bar_at_run_start": [],
+    "monthly_first_three": [
+      "2008-07-28",
+      "2008-08-01",
+      "2008-09-02"
+    ],
+    "monthly_last_two": [
+      "2021-06-01",
+      "2021-07-01"
+    ],
+    "monthly_rebalance_sessions": 157,
+    "quarterly_first_three": [
+      "2008-07-28",
+      "2008-10-01",
+      "2009-01-02"
+    ],
+    "quarterly_last_two": [
+      "2021-04-01",
+      "2021-07-01"
+    ],
+    "quarterly_rebalance_sessions": 53,
+    "run_end": "2021-07-30",
+    "run_sessions": 3276,
+    "run_start": "2008-07-28",
+    "run_start_lookback_reference": "2007-07-28",
+    "run_start_weekday": "Monday",
+    "session_before_run_start": "2008-07-25",
+    "session_before_run_start_lookback_reference": "2007-07-25",
+    "session_lists_agree": true,
+    "symbols_ending_before_run_end": []
+  },
+  "recomputed_from": "the guard-loaded PriceSeries in memory",
+  "requirement": "The runner recomputes every value below from the loaded series and refuses to run if any differs.",
+  "reverification_required": "The span above is carried from Attempt 2 and must not be assumed. The Attempt 3 runner recomputes it from the loaded data before the first variant runs, asserts equality with every field recorded here, and writes the recomputation to reports/stage3_g2_attempt3/run_span_recheck.json. A mismatch is a blocker, not a value to adopt."
+}
