@@ -56,11 +56,19 @@ The one that bites: **prompt Stage 4 must clear two constitutional gates — 4 (
   Attempt 3's report says the concentration condition measures a share of "**gross profit**". The sealed
   text — byte-identical in `config/generation_2/g2_gate_criteria_ra1.json` and `..._ra3.json`, and
   implemented as `total = sum(contributions.values())` at `g2_gate_ra1.py:697` — divides by the **net**
-  sum over all closed episodes. The two are not close: the same run measures `0.7505` of net and
-  `0.2413` of gross, so the misreading is the difference between the recorded `FAIL` and a `PASS`. The
-  gate followed the seal, so the verdict is right and only two sentences are wrong — but they were
-  already hashed into the manifest, so the repair was disclosure in the session report, not an edit.
-  Extract the `measurement` string and quote it, or restate it and diff your restatement against it.
+  sum over all closed episodes. The two are not close: the same run measures `0.7505` of net against
+  `0.1597` of `gross_profit` (`7.46 / 46.70`), so the misreading is the difference between the recorded
+  `FAIL` and a `PASS`. The gate followed the seal, so the verdict is right and only two sentences are
+  wrong — but they were already hashed into the manifest, so the repair was disclosure in the session
+  report, not an edit. Extract the `measurement` string and quote it, or restate it and diff your
+  restatement against it.
+  - **"Gross" named three different quantities in this one paragraph, which is the whole point.** Until
+    2026-08-19 the line above read `0.2413` "of gross". That figure is real but is neither of the two
+    above: it is IWM over the **sum of positive per-symbol contributions** (`7.46 / 30.92` =
+    `0.2412677878395860284605433376455369`), while `gross_profit` over closed episodes is `46.70` and
+    gives `0.1597430406852248394004282655246253`. All three were computed from the same reproduced run
+    by `reports/diagnostics/attempt3_iwm_trace/`. None changes the sealed `FAIL`. Write the arithmetic
+    (`numerator / denominator`) beside any share you quote, because "gross" alone does not identify one.
 - **Never embed a tree digest inside a file that is part of that tree.** `repo_state_id` covers
   `governance/*.md`, so writing the digest into a governance report invalidates it on write. Put
   such values only in the JSON decision record and the `runs/` record, and have the prose point

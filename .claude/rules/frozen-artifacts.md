@@ -214,6 +214,28 @@ for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
     elif isinstance(node, ast.ImportFrom): roots = {(node.module or "").split(".")[0]}
 ```
 
+**Three things make the textual half of that sweep useless if you keep it anyway, and they are all
+about scope.** A no-broker/no-holdout sweep over `_scratch/` reported 9 failures and then 67, none real:
+
+- **The workspace directory is literally named `stock-trade-alpaca`.** Every script that hardcodes an
+  absolute path therefore contains `alpaca`. If a textual check survives at all, it must require each
+  hit resolve *into* that path token and assert the residual count is zero — `1 total hits, 0 residual`,
+  never a bare "no hits".
+- **Scope the sweep to the session's own scripts, by name.** Widening the glob from `a3_*.py` to `*.py`
+  swept 60+ scripts from earlier stages that reference the holdout locks **because verifying those locks
+  was their job**. A sweep whose scope is wrong reports the repository's own history as a violation.
+- **A `holdout` mention is usually a denial.** The single hit in the report generator was the sentence
+  *"Neither holdout partition was read"*. Require every matching line to carry `neither|no|not|never`,
+  which fails loudly on an actual read and passes on the disclaimer. Same family as the
+  `"repo_state_id" not in text` mistake above.
+
+And the checker cannot check itself: any file holding a forbidden-word list matches its own list, and
+one holding the `http://` predicate contains that literal. Exclude the sweep **by name and say which
+name**, then close the hole with non-vacuity assertions — `alpaca predicate was exercised: 7 hits`,
+`holdout predicate was exercised: 1 line` — so a sweep that silently matched nothing cannot pass.
+`_scratch/a3_diag_noharm5.py` is the corrected form; `_scratch/a3_diag_noharm.py` keeps the wrong one
+beside it, since the two together are the lesson.
+
 Two more predicates that cost a false `FAIL` on a package that was fine: the declared-variant set must
 include the **non-gating** run labels (the three `#PRIMARY#STRESS` runs are declared, just not gating),
 and a manifest's group values are `{"sha256": …}` dicts in `frozen_inputs`/`produced_artifacts` but bare
