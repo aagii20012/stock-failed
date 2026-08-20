@@ -31,6 +31,18 @@ Only two hard constraints survive:
 - Report **Sharpe against the actual cash instrument** (SHY), not rf=0. A strategy that
   parks in T-bills is flattered by rf=0 — 0.700 vs 0.560 on the same equity curve.
 - Report **max drawdown on daily marks**. Monthly marks understated it by 2.3pp here.
+- **Do not charge 10 bps per unit of turnover.** That was a placeholder and it is
+  ~6.7x too harsh for nine large SPDR ETFs traded monthly. LEAN's IB fee model charged
+  $4,248 on $28,304,842 of traded notional over 19.6 years -- **1.50 bps of notional** --
+  against $73,306 of terminal wealth removed by the 10 bps model. Quote ~2 bps as the
+  realistic figure and say "conservative floor" out loud if quoting 10 bps. Note LEAN
+  runs *no* slippage model, so it is the optimistic bound, not the truth.
+- **Bracket a comparison instead of point-matching it.** Run the harness at 0 bps and at
+  the cost assumption, and ask whether the other implementation's metric lands inside the
+  interval. CAGR 9.32% between 9.64% and 8.91% is instantly interpretable where "off by
+  0.37 pp" is not. The contrapositive is what earns its place: a metric landing *outside*
+  the bracket cannot be a cost-model artifact, so it points at a different mechanism --
+  that is how max drawdown was traced to fill timing rather than fees.
 - **Never report a single-config backtest.** Sweep the free parameters first; a result that
   exists only at one setting is a fit to the window. See the top-N gradient test.
 - Generated data (`data/`, `prices.csv`) is gitignored and reproducible from
