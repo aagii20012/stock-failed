@@ -3,5 +3,7 @@
     "algorithm-language": "Python",
     "engine-image": "quantconnect/lean:latest",
     "organization-id": "local-offline",
-    "file-database-last-update": "08/20/2026 20:04:28"
+    "file-database-last-update": "08/20/2026 20:04:28",
+    "data-provider": "QuantConnect.Lean.Engine.DataFeeds.DefaultDataProvider",
+    "id": "Local"
 }

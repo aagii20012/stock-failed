@@ -1,0 +1,7 @@
+amd64 layers: 35   compressed total: 14.05 GB
+    10620.1 MB  sha256:ac85f4ab528160e4ce73ad6
+      804.8 MB  sha256:f0009b7b7ef1ae7c4186e90
+      334.6 MB  sha256:2d3340ab62a3a4e343aa091
+      324.2 MB  sha256:051ad4c8721ccde503ad928
+      317.7 MB  sha256:fa33a5c25ce348b04d7d264
+LARGEST_DIGEST=sha256:ac85f4ab528160e4ce73ad61b594c52a7029e2840df5b58b97edabf3beec2946

@@ -1,0 +1,33 @@
+latest: Pulling from quantconnect/lean
+4f4fb700ef54: Pulling fs layer
+b1e58c74b9da: Pulling fs layer
+557102c7b457: Pulling fs layer
+f0d68c7d4ee2: Pulling fs layer
+8fc8718b09b3: Pulling fs layer
+61c230e61fb7: Pulling fs layer
+73298029f1bf: Pulling fs layer
+80083f0f1b07: Pulling fs layer
+eb54ec45309b: Pulling fs layer
+3dc65eb25e0b: Pulling fs layer
+892dce12f8ad: Pulling fs layer
+c91556d7d9df: Pulling fs layer
+05477f577c1a: Pulling fs layer
+69b61718e9d5: Pulling fs layer
+f06d7a05f6e7: Pulling fs layer
+456d65ddba5f: Pulling fs layer
+faf2d191b7ba: Pulling fs layer
+36fa0aff5b49: Pulling fs layer
+e8e1164c963a: Pulling fs layer
+d2275ceaf082: Pulling fs layer
+2d3340ab62a3: Pulling fs layer
+f92906f0ffea: Pulling fs layer
+f80fad9c1875: Pulling fs layer
+ac85f4ab5281: Pulling fs layer
+051ad4c8721c: Pulling fs layer
+1d82a971bb75: Pulling fs layer
+84345bc5a055: Pulling fs layer
+befc02687970: Pulling fs layer
+f0009b7b7ef1: Pulling fs layer
+Digest: sha256:c4e7cfdedf942fa1a51ac4faebfc155a322151d9559b00277c64c304bda3dcf0
+Status: Downloaded newer image for quantconnect/lean:latest
+docker.io/quantconnect/lean:latest

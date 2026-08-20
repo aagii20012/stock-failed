@@ -66,6 +66,37 @@ survivorship- and corporate-action-correct, unlike the local shim above.
 | `fetch_reference_data.py` | downloads LEAN's market-hours + symbol-properties DBs |
 | `rebalance_log.csv` | generated: per-month picks, weights, skips |
 
+## LEAN vs harness cross-check (2026-08-20)
+
+Both implementations were run over 2007-01-03..2026-08-19 and reconciled.
+
+| | harness | LEAN | |
+|---|---|---|---|
+| rebalances / slots / skips / full-SHY months | 236 / 708 / 83 / 11 | 236 / 708 / 83 / 11 | identical |
+| skips by sector | XLP 21, XLV 15, XLU 12, XLY 10, XLE 6, XLK 6, XLI 6, XLB 5, XLF 2 | same | identical |
+| net profit | 512.23% gross, 437.92% at 10bps | 470.57% (real fees $4,248.04) | reconciles |
+| CAGR | 9.67% gross, 8.95% at 10bps | 9.27% | reconciles |
+| annualised vol | 14.78% daily-ann, 12.13% monthly-ann | 12.30% | convention, not a gap |
+| max drawdown | -22.58% | **-24.70%** | LEAN 2.1pp deeper |
+
+Every signal decision matches exactly across two independent implementations, which is
+the useful result -- the strategy logic is verified, not just plausible.
+
+Two things the cross-check surfaced:
+
+- **The harness understates drawdown by 2.1pp.** LEAN trades ~30 min after the next
+  month's open; the harness trades at the signal month's close. LEAN is therefore late
+  into every de-risking move, and -24.70% is the more honest figure. Execution lag is a
+  real cost, not a rounding difference.
+- **LEAN's Sharpe of 0.497 is not comparable to the harness numbers.** LEAN logged a
+  failed data request for `/alternative/interest-rate/usa/interest-rate.csv`, so it had
+  no risk-free curve to work with. Use the harness's SHY-relative Sharpe instead.
+  The other failed request, `/equity/usa/hour/spy.zip`, is harmless -- only daily bars
+  were generated and LEAN fell back cleanly.
+
+LEAN also recorded 726 orders and 1.84% portfolio turnover, consistent with 3 slots
+over 236 rebalances.
+
 ## Known caveats
 
 See the flags list in the session notes. The short version:

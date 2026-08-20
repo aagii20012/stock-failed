@@ -1,0 +1,212 @@
+20260820 12:53:30.132 TRACE:: Composer(): Loading Assemblies from 
+/Lean/Launcher/bin/Debug
+20260820 12:53:30.217 TRACE:: Python for .NET Assembly: Python.Runtime, 
+Version=2.0.65.0, Culture=neutral, PublicKeyToken=5000fea6cba702dd
+20260820 12:53:30.350 TRACE:: 
+Composer.LoadPartsSafely(/Lean/Launcher/bin/Debug/System.Private.ServiceModel.d
+ll): Skipping FileLoadException: Could not load file or assembly 
+'/Lean/Launcher/bin/Debug/System.Private.ServiceModel.dll'. The located 
+assembly's manifest definition does not match the assembly reference. 
+(0x80131040)
+20260820 12:53:31.810 TRACE:: Engine.Main(): LEAN ALGORITHMIC TRADING ENGINE 
+v2.5.0.0 Mode: DEBUG (64bit) Host: aagii
+20260820 12:53:31.821 TRACE:: Engine.Main(): Started 12:53 PM
+20260820 12:53:31.852 TRACE:: JobQueue.NextJob(): Selected /LeanCLI/main.py
+20260820 12:53:31.930 TRACE:: AlgorithmManager.CreateTokenBucket(): 
+Initializing LeakyBucket: Capacity: 120 RefillAmount: 18 TimeInterval: 1440
+20260820 12:53:31.939 TRACE:: Engine.Run(): Resource limits '0' CPUs. 
+2147483647 MB RAM.
+20260820 12:53:31.940 TRACE:: TextSubscriptionDataSourceReader.SetCacheSize(): 
+Setting cache size to 71582788 items
+20260820 12:53:32.832 TRACE:: PythonInitializer.Initialize(): start...
+PythonEngine.Initialize(): clr GetManifestResourceStream...
+20260820 12:53:33.074 TRACE:: PythonInitializer.Initialize(): ended
+20260820 12:53:33.077 TRACE:: AlgorithmPythonWrapper(): Python version 3.11.14 
+(main, Oct 21 2025, 18:40:40) [GCC 11.2.0]: Importing python module main
+20260820 12:53:36.605 TRACE:: AlgorithmPythonWrapper(): main successfully 
+imported.
+20260820 12:53:36.613 TRACE:: AlgorithmPythonWrapper(): Creating IAlgorithm 
+instance.
+20260820 12:53:36.834 TRACE:: LocalObjectStore.Initialize(): Storage Root: 
+/Storage. StorageFileCount 9999999. StorageLimit 10240MB. StoragePermissions 
+Read=True Write=True Delete=True
+20260820 12:53:36.852 TRACE:: HistoryProviderManager.Initialize(): history 
+providers [SubscriptionDataReaderHistoryProvider]
+20260820 12:53:36.857 TRACE:: BaseSetupHandler.Setup(LocalPlatform): UID: 0, 
+PID: -1, Version: 2.5.0.0, Source: WebIDE
+20260820 12:53:37.020 TRACE:: Event Name "SPY: MonthStart: SPY: 30 min after 
+MarketOpen", scheduled to run.
+20260820 12:53:37.044 TRACE:: WeightedWorkScheduler(): will use 12 workers and 
+MaxWorkWeight is 400
+20260820 12:53:37.055 TRACE:: BaseSetupHandler.SetupCurrencyConversions():
+Account Type: Margin
+
+Symbol      Quantity    Conversion = Value in USD
+USD: $      100000.00 @       1.00 = $100000
+-------------------------------------------------
+CashBook Total Value:                $100000
+
+20260820 12:53:37.058 TRACE:: Total margin information: TotalMarginUsed: 0.00, 
+MarginRemaining: 100000.00
+20260820 12:53:37.059 TRACE:: SetUp Backtesting: User: 0 ProjectId: -1 AlgoId: 
+1733785326
+20260820 12:53:37.062 TRACE:: Dates: Start: 01/01/2007 End: 08/19/2026 Cash: 
+¤100,000.00 MaximumRuntime: 100.00:00:00 MaxOrders: 2147483647
+20260820 12:53:37.068 TRACE:: BacktestingResultHandler(): Sample Period Set: 
+2581.56
+20260820 12:53:37.070 TRACE:: JOB HANDLERS:
+         DataFeed:             
+QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed
+         Setup:                
+QuantConnect.Lean.Engine.Setup.ConsoleSetupHandler
+         RealTime:             
+QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler
+         Results:              
+QuantConnect.Lean.Engine.Results.BacktestingResultHandler
+         Transactions:         
+QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler
+         Object Store:         
+QuantConnect.Lean.Engine.Storage.LocalObjectStore
+         History Provider:     
+QuantConnect.Lean.Engine.HistoricalData.HistoryProviderManager
+         Brokerage:            
+QuantConnect.Brokerages.Backtesting.BacktestingBrokerage
+         Data Provider:        
+QuantConnect.Lean.Engine.DataFeeds.DefaultDataProvider
+
+20260820 12:53:37.098 TRACE:: Event Name "Daily Sampling", scheduled to run.
+20260820 12:53:37.101 TRACE:: AlgorithmManager.Run(): Begin DataStream - Start:
+1/1/2007 12:00:00 AM Stop: 8/19/2026 11:59:59 PM Time: 1/1/2007 12:00:00 AM 
+Warmup: False
+20260820 12:53:37.359 TRACE:: Debug: 2007-01-01 00:00:00 Launching analysis for
+1733785326 with LEAN Engine v2.5.0.0
+20260820 12:53:37.455 TRACE:: UniverseSelection.AddPendingInternalDataFeeds(): 
+Adding internal benchmark data feed 
+SPY,#0,SPY,Hour,TradeBar,Trade,Adjusted,OpenInterest,Internal
+20260820 12:53:37.863 ERROR:: 2007-01-03 10:00:00 XLU: The security does not 
+have an accurate price as it has not yet received a bar of data. Before placing
+a trade (or using set_holdings) warm up your algorithm with set_warmup, or use 
+slice.contains(symbol) to confirm the Slice object has price before using the 
+data. Data does not necessarily all arrive at the same time so your algorithm 
+should confirm the data is ready before using it. In live trading this can mean
+you do not have an active subscription to the asset class you're trying to 
+trade. If using custom data make sure you've set the 'Value' property.
+20260820 12:53:37.865 ERROR:: 2007-01-03 10:00:00 XLF: The security does not 
+have an accurate price as it has not yet received a bar of data. Before placing
+a trade (or using set_holdings) warm up your algorithm with set_warmup, or use 
+slice.contains(symbol) to confirm the Slice object has price before using the 
+data. Data does not necessarily all arrive at the same time so your algorithm 
+should confirm the data is ready before using it. In live trading this can mean
+you do not have an active subscription to the asset class you're trying to 
+trade. If using custom data make sure you've set the 'Value' property.
+20260820 12:53:37.866 ERROR:: 2007-01-03 10:00:00 XLY: The security does not 
+have an accurate price as it has not yet received a bar of data. Before placing
+a trade (or using set_holdings) warm up your algorithm with set_warmup, or use 
+slice.contains(symbol) to confirm the Slice object has price before using the 
+data. Data does not necessarily all arrive at the same time so your algorithm 
+should confirm the data is ready before using it. In live trading this can mean
+you do not have an active subscription to the asset class you're trying to 
+trade. If using custom data make sure you've set the 'Value' property.
+20260820 12:53:38.017 TRACE:: Debug: 2007-02-01 10:00:00 Warning: market orders
+on daily resolution data sent during market hours are automatically converted 
+into MarketOnClose orders (or MarketOnOpen near the close) to avoid filling at 
+the stale previous close. Note: in live trading this conversion is not applied,
+as the order fills at the current market price.
+20260820 12:53:38.219 TRACE:: Debug: 2007-04-02 10:00:00 Warning: Portfolio 
+rebalance result ignored as it resulted in a single share trade recommendation 
+which can generate high fees. To disable minimum order size checks please set 
+self.settings.minimum_order_margin_portfolio_percentage = 0.
+20260820 12:53:40.463 ERROR:: InterestRateProvider.FromCsvFile(): no interest 
+rates were loaded, please make sure the file is present 
+'/Lean/Data/alternative/interest-rate/usa/interest-rate.csv'
+20260820 12:53:58.393 TRACE:: Synchronizer.GetEnumerator(): Exited thread.
+20260820 12:53:58.396 TRACE:: AlgorithmManager.Run(): Firing On End Of 
+Algorithm...
+20260820 12:53:58.399 TRACE:: Engine.Run(): Exiting Algorithm Manager
+20260820 12:53:58.403 TRACE:: StopSafely(): Waiting for 'Isolator Thread' 
+thread to stop...
+20260820 12:53:58.404 TRACE:: FileSystemDataFeed.Exit(): Start. Setting 
+cancellation token...
+20260820 12:53:58.406 TRACE:: FileSystemDataFeed.Exit(): Exit Finished.
+20260820 12:53:58.407 TRACE:: BacktestingResultHandler.Exit(): starting...
+20260820 12:53:58.408 TRACE:: BacktestingResultHandler.Exit(): Saving logs...
+20260820 12:53:58.416 TRACE:: Log: 2026-08-19 16:00:00 rebalances=236 slots=708
+skipped=83 (11.7%) fully_defensive_months=11
+20260820 12:53:58.416 TRACE:: StopSafely(): Waiting for 'Result Thread' thread 
+to stop...
+20260820 12:53:58.417 TRACE:: Log: 2026-08-19 16:00:00 skips_by_sector={'XLK': 
+6, 'XLF': 2, 'XLE': 6, 'XLV': 15, 'XLI': 6, 'XLY': 10, 'XLP': 21, 'XLU': 12, 
+'XLB': 5}
+20260820 12:53:58.419 TRACE:: Debug: 2026-08-19 16:00:00 Algorithm 
+Id:(1733785326) completed in 21.33 seconds at 45k data points per second. 
+Processing total of 964,109 data points.
+20260820 12:53:58.419 TRACE:: Debug: 2026-08-19 16:00:00 Your log was 
+successfully created and can be retrieved from: /Results/1733785326-log.txt
+20260820 12:53:58.420 TRACE:: BacktestingResultHandler.Run(): Ending Thread...
+20260820 12:54:00.455 TRACE::
+STATISTICS:: Total Orders 726
+STATISTICS:: Average Win 0.93%
+STATISTICS:: Average Loss -1.17%
+STATISTICS:: Compounding Annual Return 9.269%
+STATISTICS:: Drawdown 24.700%
+STATISTICS:: Expectancy 0.365
+STATISTICS:: Start Equity 100000
+STATISTICS:: End Equity 570569.38
+STATISTICS:: Net Profit 470.569%
+STATISTICS:: Sharpe Ratio 0.497
+STATISTICS:: Sortino Ratio 0.527
+STATISTICS:: Probabilistic Sharpe Ratio 0.286%
+STATISTICS:: Loss Rate 24%
+STATISTICS:: Win Rate 76%
+STATISTICS:: Profit-Loss Ratio 0.79
+STATISTICS:: Alpha 0
+STATISTICS:: Beta 0
+STATISTICS:: Annual Standard Deviation 0.123
+STATISTICS:: Annual Variance 0.015
+STATISTICS:: Information Ratio 0.579
+STATISTICS:: Tracking Error 0.123
+STATISTICS:: Treynor Ratio 0
+STATISTICS:: Total Fees $4248.04
+STATISTICS:: Estimated Strategy Capacity $220000000.00
+STATISTICS:: Lowest Capacity Asset XLE T94KVWR61NQD
+STATISTICS:: Portfolio Turnover 1.84%
+STATISTICS:: Drawdown Recovery 984
+STATISTICS:: OrderListHash 3aa5afacf44b4954895f51c3de0e72e0
+20260820 12:54:00.456 TRACE:: BacktestingResultHandler.SendAnalysisResult(): 
+Processed final packet
+20260820 12:54:00.458 TRACE:: Engine.Run(): Disconnecting from brokerage...
+20260820 12:54:00.459 TRACE:: Engine.Run(): Disposing of setup handler...
+20260820 12:54:00.460 TRACE:: Engine.Main(): Analysis Completed and Results 
+Posted.
+20260820 12:54:00.461 TRACE:: DataMonitor.Exit(): start...
+20260820 12:54:00.461 TRACE:: StopSafely(): Waiting for '' thread to stop...
+20260820 12:54:00.468 TRACE:: DataMonitor.GenerateReport():
+DATA USAGE:: Total data requests 13
+DATA USAGE:: Succeeded data requests 11
+DATA USAGE:: Failed data requests 2
+DATA USAGE:: Failed data requests percentage 15%
+DATA USAGE:: Total universe data requests 0
+DATA USAGE:: Succeeded universe data requests 0
+DATA USAGE:: Failed universe data requests 0
+DATA USAGE:: Failed universe data requests percentage 0%
+20260820 12:54:00.478 TRACE:: DataMonitor.Exit(): end
+Engine.Main(): Analysis Complete.
+20260820 12:54:00.486 TRACE:: Engine.Main(): Packet removed from queue: 
+1733785326
+20260820 12:54:00.487 TRACE:: LeanEngineSystemHandlers.Dispose(): start...
+20260820 12:54:00.489 TRACE:: LeanEngineSystemHandlers.Dispose(): Disposed of 
+system handlers.
+20260820 12:54:00.490 TRACE:: LeanEngineAlgorithmHandlers.Dispose(): start...
+20260820 12:54:00.491 TRACE:: LocalObjectStore.Dispose(): start...
+20260820 12:54:00.491 TRACE:: LocalObjectStore.Dispose(): end
+20260820 12:54:00.492 TRACE:: LeanEngineAlgorithmHandlers.Dispose(): Disposed 
+of algorithm handlers.
+20260820 12:54:00.493 TRACE:: StopSafely(): Waiting for 'CpuPerformance' thread
+to stop...
+20260820 12:54:00.494 TRACE:: PythonInitializer.Shutdown(): start
+20260820 12:54:00.496 TRACE:: PythonInitializer.Shutdown(): calling engine 
+shutdown...
+20260820 12:54:05.957 TRACE:: PythonInitializer.Shutdown(): ended
+20260820 12:54:05.958 TRACE:: Program.Main(): Exiting Lean...
+Successfully ran 'FaberSectorRotation' in the 'backtesting' environment and 
+stored the output in 'FaberSectorRotation\backtests\2026-08-20_20-53-28'
