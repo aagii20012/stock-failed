@@ -600,13 +600,26 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
     from alpaca.data.historical import StockHistoricalDataClient
     from alpaca.trading.client import TradingClient
 
-    key = os.environ.get("ALPACA_API_KEY_ID")
-    secret = os.environ.get("ALPACA_API_SECRET_KEY")
+    key = os.environ.get("ALPACA_API_KEY_ID", "")
+    secret = os.environ.get("ALPACA_API_SECRET_KEY", "")
     if not key or not secret:
         raise RuntimeError(
             "ALPACA_API_KEY_ID and/or ALPACA_API_SECRET_KEY are not set. "
             "Presence is checked by name only; values are never printed."
         )
+
+    # A trailing newline or space pasted into a GitHub Secret is stored verbatim
+    # and goes straight into the auth header, where Alpaca answers a bare
+    # "unauthorized." with no hint that the value is merely dirty. Strip it, then
+    # report the *shape* of what arrived -- lengths only, never the values -- so
+    # the next rejection can be diagnosed from the log instead of by pasting a
+    # key somewhere it should not go.
+    raw_lengths = (len(key), len(secret))
+    key, secret = key.strip(), secret.strip()
+    print(f"[auth] key id {len(key)} chars (paper keys are 20), "
+          f"secret {len(secret)} chars (expected 40)"
+          + ("; stripped surrounding whitespace"
+             if raw_lengths != (len(key), len(secret)) else ""))
 
     # Paper is not a flag. It is hardcoded, and asserted before any request.
     trading = TradingClient(api_key=key, secret_key=secret, paper=True)
