@@ -16,3 +16,6 @@ __pycache__/
 *.key
 credentials*
 .alpaca/
+
+# Private per-project notes, never committed
+CLAUDE.local.md
