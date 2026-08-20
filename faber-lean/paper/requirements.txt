@@ -1,0 +1,5 @@
+# Pinned so a scheduled job cannot change behaviour on its own.
+alpaca-py==0.44.0
+pandas==2.3.3
+requests==2.34.2
+pytest==8.4.2

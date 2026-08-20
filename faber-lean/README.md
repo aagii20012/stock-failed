@@ -15,7 +15,7 @@ Both implementations compute signals on **completed monthly closes** (not
 252/210-day daily proxies) and drop the in-progress month, so there is no
 look-ahead in the signal.
 
-## Three ways to run it
+## Three ways to backtest it, one way to trade it
 
 ### 1. Standalone pandas harness (fastest, no Docker, no account)
 
@@ -54,6 +54,14 @@ Notes on why this folder looks hand-built:
 Paste `faber_sector_rotation.py` into a new Python algorithm. Cloud data is
 survivorship- and corporate-action-correct, unlike the local shim above.
 
+### 4. Paper trading, hosted free (Alpaca + GitHub Actions)
+
+`paper/` runs the same signal forward against Alpaca's paper API on a GitHub Actions
+cron -- no Docker, no server, no real money. The signal module is replayed against
+`rebalance_log.csv` and matches all 236 rebalances exactly. See
+[paper/README.md](paper/README.md) for the setup steps and the execution differences
+against LEAN.
+
 ## Files
 
 | file | what it is |
@@ -65,6 +73,7 @@ survivorship- and corporate-action-correct, unlike the local shim above.
 | `make_lean_data.py` | yfinance -> LEAN local data format |
 | `fetch_reference_data.py` | downloads LEAN's market-hours + symbol-properties DBs |
 | `rebalance_log.csv` | generated: per-month picks, weights, skips |
+| `paper/` | forward paper trading via Alpaca + GitHub Actions |
 
 ## LEAN vs harness cross-check (2026-08-20)
 

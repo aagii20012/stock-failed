@@ -1,0 +1,6 @@
+# Per-run scratch, rebuilt every run. paper_log.csv and state.json ARE committed:
+# they are the persistent record the workflow appends to.
+run_result.json
+run_body.md
+__pycache__/
+.pytest_cache/
