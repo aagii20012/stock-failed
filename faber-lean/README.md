@@ -68,34 +68,78 @@ survivorship- and corporate-action-correct, unlike the local shim above.
 
 ## LEAN vs harness cross-check (2026-08-20)
 
-Both implementations were run over 2007-01-03..2026-08-19 and reconciled.
+Both implementations were run over 2007-2026 and reconciled down to the cent.
 
-| | harness | LEAN | |
+**Do not read LEAN's Strategy Equity chart directly.** At daily resolution it is not a
+clean close series: it carries two stamps per day (midnight ET, which is the *previous*
+close, and 16:00 ET) and only ~2,899 of ~4,938 trading days have the 16:00 point.
+Everything below is instead computed on a curve reconstructed from LEAN's own 726 fills
+plus the daily bars, which reproduces LEAN's reported final equity exactly --
+$570,569.38 against $570,569.38, delta $0.00 -- so it *is* LEAN's curve.
+
+Identical formulas, same 4,918 common trading days, same invested window:
+
+| | LEAN actual | harness 0bps | harness 10bps |
 |---|---|---|---|
-| rebalances / slots / skips / full-SHY months | 236 / 708 / 83 / 11 | 236 / 708 / 83 / 11 | identical |
-| skips by sector | XLP 21, XLV 15, XLU 12, XLY 10, XLE 6, XLK 6, XLI 6, XLB 5, XLF 2 | same | identical |
-| net profit | 512.23% gross, 437.92% at 10bps | 470.57% (real fees $4,248.04) | reconciles |
-| CAGR | 9.67% gross, 8.95% at 10bps | 9.27% | reconciles |
-| annualised vol | 14.78% daily-ann, 12.13% monthly-ann | 12.30% | convention, not a gap |
-| max drawdown | -22.58% | **-24.70%** | LEAN 2.1pp deeper |
+| CAGR | **9.32%** | 9.64% | 8.91% |
+| annualised vol | 14.86% | 14.80% | 14.80% |
+| Sharpe (rf=0) | 0.675 | 0.697 | 0.652 |
+| Sharpe (vs SHY) | 0.537 | 0.557 | 0.513 |
+| max drawdown (daily) | **-24.75%** | -22.58% | -22.94% |
+| total return | 470.78% | 503.95% | 430.65% |
 
-Every signal decision matches exactly across two independent implementations, which is
-the useful result -- the strategy logic is verified, not just plausible.
+Signal decisions are **identical**: 236 rebalances, 708 slots, 83 skips (11.7%), 11
+fully-defensive months, and the same skip count in every one of the nine sectors.
+Daily returns agree at corr 0.9919, mean |difference| 0.0154 pp, with only 31 of 4,917
+days differing by more than 0.5 pp. Two independent implementations agreeing that
+closely means the strategy logic is verified, not merely plausible.
 
-Two things the cross-check surfaced:
+What the cross-check actually established:
 
-- **The harness understates drawdown by 2.1pp.** LEAN trades ~30 min after the next
-  month's open; the harness trades at the signal month's close. LEAN is therefore late
-  into every de-risking move, and -24.70% is the more honest figure. Execution lag is a
-  real cost, not a rounding difference.
-- **LEAN's Sharpe of 0.497 is not comparable to the harness numbers.** LEAN logged a
-  failed data request for `/alternative/interest-rate/usa/interest-rate.csv`, so it had
-  no risk-free curve to work with. Use the harness's SHY-relative Sharpe instead.
-  The other failed request, `/equity/usa/hour/spy.zip`, is harmless -- only daily bars
-  were generated and LEAN fell back cleanly.
+- **The 10 bps cost model is ~6.7x too harsh, so "8.95% net" was too pessimistic.**
+  LEAN's real commissions over 19.6 years total $4,248 on $28.3M of traded notional --
+  an effective **1.50 bps of notional**. The harness's 10 bps charge costs $73,306 of
+  terminal wealth. Decomposed: harness 10bps 8.914% -> remove its cost model (+0.723 pp)
+  -> 9.637% frictionless, against LEAN's actual 9.321%. Treat ~9.3% as the realistic
+  figure and 8.9% as a deliberately conservative floor.
+- **LEAN's drawdown is ~2.2 pp deeper, and that is real.** -24.75% against the harness's
+  -22.58%. Cause, measured from the order events rather than inferred: all 726 fills land
+  on the **close of their own trading day** (726/726 exact, median |fill/close(D)-1| =
+  0.0e+00), because LEAN converts market orders to MarketOnClose on daily data. The
+  schedule fires on the first trading day of the month, so LEAN trades one trading day
+  after the harness's signal-month close and is late into every de-risking move. Note
+  `time_rules.after_market_open` sets when the scheduled *method* runs, not when the
+  order fills.
 
-LEAN also recorded 726 orders and 1.84% portfolio turnover, consistent with 3 slots
-over 236 rebalances.
+  Confirmed by a controlled rerun that changes **only** the fill bar and holds the
+  whole-share quantization, 0.25% cash buffer and IB fee model fixed: filling at
+  close(D-1) (harness timing) gives -22.63%, filling at close(D) (LEAN timing) gives
+  -24.55%. Timing alone is worth -1.92 pp of drawdown and -0.158 pp of CAGR, which
+  accounts for the observed -1.81 pp gap. It is the same episode in every variant
+  (peak 2010-04-23 -> trough 2010-08-26), so the comparison is apples to apples.
+- **LEAN sat out January 2007.** Its first fill is 2007-02-01 while the harness invests
+  from 2007-01-03, worth a one-off +1.146% (+0.058 pp of CAGR). The table above already
+  starts both on LEAN's invested window. The other 8 months with no LEAN fill are months
+  where it already held the target, and there are zero months LEAN traded that the
+  harness did not.
+- **Whole-share rounding never changed which assets were held** -- realized holdings
+  match intent in 227/227 rebalances, with L1 weight error median 0.45% and worst 2.53%
+  (2020-03), the expected floor from whole shares plus the 0.25% cash buffer.
+- **LEAN's own reported Sharpe of 0.497 is unusable.** It logged a failed request for
+  `/alternative/interest-rate/usa/interest-rate.csv`, so it had no risk-free curve. The
+  0.675 / 0.537 above are recomputed on the reconstructed curve and are comparable. The
+  other failed request, `/equity/usa/hour/spy.zip`, is harmless -- only daily bars were
+  generated and LEAN fell back cleanly.
+
+Two earlier claims in this section were wrong and are corrected above, both because they
+were computed on the ragged raw equity stamps rather than the reconstruction: that the
+volatility difference was a daily-vs-monthly annualisation convention (it is not -- on
+identical formulas the two agree at 14.8%), and that the one-day handover explained 43.9%
+of the month-to-month *return* difference (that figure fell to -2.4% under a one-day
+re-alignment, so no attribution figure is quoted).
+
+LEAN also recorded 726 orders and 1.84% portfolio turnover, consistent with 3 slots over
+236 rebalances.
 
 ## Known caveats
 
@@ -115,4 +159,5 @@ See the flags list in the session notes. The short version:
    SHY-relative Sharpe is the honest one. SHY is also not risk-free -- it is a
    1-3yr Treasury fund with duration risk.
 6. Max drawdown on monthly marks understates the daily figure.
-7. 10 bps of turnover cost is worth ~72 bps/yr of CAGR here.
+7. 10 bps of turnover cost is worth ~72 bps/yr of CAGR here -- confirmed by the
+   cross-check, which also shows LEAN's actual cost is only ~1.5 bps of notional.

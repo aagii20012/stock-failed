@@ -43,3 +43,22 @@ hand-built. `lean.json` needs an `organization-id` key or the CLI rejects the fo
 "an old Lean CLI root folder". The free sample data has no 2007-2026 history for these
 ETFs. `quantconnect/lean:latest` is a multi-GB pull — run it as a background task, it
 exceeds a 10-minute foreground timeout.
+
+Two that cost real time:
+
+- **A `docker pull` can report exit code 0 with no image on disk.** Verify with
+  `docker image inspect quantconnect/lean:latest`, never the exit code.
+- **On daily data LEAN fills market orders at that day's CLOSE**, not at the scheduled
+  time. `time_rules.after_market_open` sets when the scheduled *method* runs; the order
+  becomes MarketOnClose. Measured across 726 fills: 726/726 match close(D) exactly,
+  while open(D) is off by 56 bps median. So a `month_start` schedule trades one trading
+  day later than a harness that trades on the signal month's close, which makes LEAN
+  late into every de-risking move and its drawdown the more honest number. Attribute
+  such a gap from the order events, not by reading the schedule.
+- **Never compare against LEAN's Strategy Equity chart directly.** At daily resolution it
+  carries two stamps per day (midnight ET = the *previous* close, and 16:00 ET) and only
+  ~2,899 of ~4,938 trading days have the 16:00 point. Reading it raw, then "fixing" it by
+  shifting to maximise correlation, produced two wrong conclusions in one session. Instead
+  reconstruct the curve from the fills plus the daily bars and prove it by matching
+  reported final equity to the cent; only then compare with identical formulas over the
+  common trading days.

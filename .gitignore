@@ -22,3 +22,9 @@ CLAUDE.local.md
 
 # Unpublished drafts, personal
 Drafts/
+
+# Vendor price cache, derived - never publish
+_scratch/prices.csv
+
+# Vendor price cache at workspace root, derived - never publish
+/prices.csv
