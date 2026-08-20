@@ -1,0 +1,10 @@
+# Generated. Reproduce with fetch_reference_data.py + make_lean_data.py.
+data/
+prices.csv
+__pycache__/
+*.pyc
+
+# LEAN backtest output
+FaberSectorRotation/backtests/
+FaberSectorRotation/.idea/
+FaberSectorRotation/.vscode/

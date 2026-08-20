@@ -1,0 +1,6 @@
+{
+    "algorithm-language": "Python",
+    "parameters": {},
+    "description": "Faber-style 9-sector SPDR rotation: top 3 by 12m momentum, gated by each sector's own 10m SMA, failing slots to SHY.",
+    "local-id": 1
+}
