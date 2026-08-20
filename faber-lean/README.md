@@ -131,12 +131,21 @@ What the cross-check actually established:
   other failed request, `/equity/usa/hour/spy.zip`, is harmless -- only daily bars were
   generated and LEAN fell back cleanly.
 
-Two earlier claims in this section were wrong and are corrected above, both because they
-were computed on the ragged raw equity stamps rather than the reconstruction: that the
-volatility difference was a daily-vs-monthly annualisation convention (it is not -- on
-identical formulas the two agree at 14.8%), and that the one-day handover explained 43.9%
-of the month-to-month *return* difference (that figure fell to -2.4% under a one-day
-re-alignment, so no attribution figure is quoted).
+### Retracted from the first pass
+
+Three conclusions reached before the reconstruction are **withdrawn**, and none of their
+numbers should be quoted anywhere. Two of them came from comparing against the raw
+Strategy Equity stamps described above; the third came from reading the schedule instead
+of the order events:
+
+| retracted claim | why it was wrong | what stands instead |
+|---|---|---|
+| The volatility gap is a daily-vs-monthly annualisation convention. | An artifact of the ragged sampling, not a convention difference. | On identical formulas the two agree: 14.86% vs 14.80%. |
+| The one-day handover explains **43.9%** of the month-to-month return difference. | Measured against mis-aligned stamps; re-aligning by one day collapses it to -2.4%. | No attribution figure is quoted for the *return* difference. The *drawdown* gap is attributed, from the order events, above. |
+| LEAN fills at the **next month's open + 30 min**. | Inferred from reading `time_rules.after_market_open` instead of from the order events. | All 726 fills are at close(D) of their own trading day, because market orders become MarketOnClose on daily data. |
+
+The 43.9% and the open+30min fill are the two most likely to resurface from an old note
+or an earlier draft. Neither is a measurement of anything.
 
 LEAN also recorded 726 orders and 1.84% portfolio turnover, consistent with 3 slots over
 236 rebalances.
@@ -148,11 +157,16 @@ See the flags list in the session notes. The short version:
 1. Local data is yfinance `auto_adjust=True` back-adjusted closes fed through
    identity factor files. Not tradeable prices; LEAN emits no split/dividend
    events; the SMA is computed on adjusted rather than raw prices.
-2. The harness trades at the signal month's close; LEAN trades one trading day
-   later, at the close of the first trading day of the next month (market orders
-   on daily data become MarketOnClose regardless of the scheduled time). Measured
-   at -1.92 pp of max drawdown and -0.158 pp of CAGR, so LEAN is the more honest
-   side of this one.
+2. **Quote LEAN's -24.75% max drawdown, not the harness's -22.58%.** The harness
+   trades at the signal month's close; LEAN trades one trading day later, at the
+   close of the first trading day of the next month (market orders on daily data
+   become MarketOnClose regardless of the scheduled time), so it is late into
+   every de-risking move. A controlled rerun changing **only** the fill bar moves
+   max drawdown by -1.92 pp (-22.63% -> -24.55%) and CAGR by -0.158 pp: that
+   covers the -1.81 pp gap against the harness at 10 bps (-24.75% vs -22.94%) and
+   most of the -2.17 pp gap against it at 0 bps (-24.75% vs -22.58%). The harness
+   figure is optimistic by construction rather than more accurate, so LEAN is the
+   honest side of this one and -24.75% is this strategy's max drawdown.
 3. The 9-sector universe stopped spanning the S&P 500 when XLRE was carved out
    of XLF (2015) and XLC out of XLK/XLY (2018). Post-2018 there is no
    communication-services exposure at all.
