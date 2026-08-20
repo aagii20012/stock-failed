@@ -148,9 +148,11 @@ See the flags list in the session notes. The short version:
 1. Local data is yfinance `auto_adjust=True` back-adjusted closes fed through
    identity factor files. Not tradeable prices; LEAN emits no split/dividend
    events; the SMA is computed on adjusted rather than raw prices.
-2. The harness trades at the signal month's close; the LEAN algorithm trades
-   ~30 min after the open on the first trading day of the next month. The two
-   will not agree to the basis point.
+2. The harness trades at the signal month's close; LEAN trades one trading day
+   later, at the close of the first trading day of the next month (market orders
+   on daily data become MarketOnClose regardless of the scheduled time). Measured
+   at -1.92 pp of max drawdown and -0.158 pp of CAGR, so LEAN is the more honest
+   side of this one.
 3. The 9-sector universe stopped spanning the S&P 500 when XLRE was carved out
    of XLF (2015) and XLC out of XLK/XLY (2018). Post-2018 there is no
    communication-services exposure at all.
