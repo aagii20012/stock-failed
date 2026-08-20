@@ -1,0 +1,3 @@
+ts_utc,ts_et,action,detail,trading_day,rebalance_day,signal_month,ranked,skipped,target_weights,equity,cash,positions_before,orders,data_feed,notes
+2026-08-20T14:29:31Z,2026-08-20 10:29:31 EDT,ERROR,"APIError: {""message"": ""unauthorized.""}
+",False,False,,,,{},0.00,0.00,{},[],,
