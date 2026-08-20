@@ -616,10 +616,19 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
     # key somewhere it should not go.
     raw_lengths = (len(key), len(secret))
     key, secret = key.strip(), secret.strip()
-    print(f"[auth] key id {len(key)} chars (paper keys are 20), "
-          f"secret {len(secret)} chars (expected 40)"
-          + ("; stripped surrounding whitespace"
-             if raw_lengths != (len(key), len(secret)) else ""))
+    shape = (f"key id {len(key)} chars, PK-prefixed: {key.startswith('PK')}; "
+             f"secret {len(secret)} chars")
+    if raw_lengths != (len(key), len(secret)):
+        shape += "; stripped surrounding whitespace"
+    if secret.startswith("PK") and not key.startswith("PK"):
+        shape += "; SWAPPED -- the secret holds the key id"
+    print("[auth] " + shape)
+    # Also record it on the result, so it reaches the committed log and the run
+    # artifact. stdout only survives in the job log, which needs a GitHub token
+    # to download -- three rejections in a row went undiagnosed for exactly that
+    # reason. Lengths and a prefix boolean carry no key material: every Alpaca
+    # paper key id starts "PK", so that bit is a constant, not a secret.
+    result.note("auth shape: " + shape)
 
     # Paper is not a flag. It is hardcoded, and asserted before any request.
     trading = TradingClient(api_key=key, secret_key=secret, paper=True)
