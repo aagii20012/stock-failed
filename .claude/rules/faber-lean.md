@@ -47,6 +47,14 @@ Only two hard constraints survive:
   exists only at one setting is a fit to the window. See the top-N gradient test.
 - Generated data (`data/`, `prices.csv`) is gitignored and reproducible from
   `fetch_reference_data.py` + `make_lean_data.py`. Do not commit vendor price data.
+- **The algorithm exists in two byte-identical copies** -- `faber_sector_rotation.py`
+  (readable) and `FaberSectorRotation/main.py` (LEAN entry point). Patch both in the
+  same edit and `diff` them afterwards to prove they still match. Fixing only the
+  readable copy feels like fixing the thing and does not change what LEAN runs.
+- **Retract in code, not just in prose.** A claim disproved by the order events
+  ("fills ~30 min after the open") survived two rounds of README correction inside
+  the schedule comment of both copies, because the greps were scoped to `*.md`.
+  Sweep source and config for the claim's distinctive tokens too.
 
 ## Local LEAN gotchas
 
