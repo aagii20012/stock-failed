@@ -136,10 +136,40 @@ Three places, deliberately overlapping:
 
 - **`paper_log.csv`** — one committed row per run, every run. This is the durable history.
   Columns include the action, the signal month, the ranking, the skips, target weights,
-  equity, cash, positions at run start, the orders, and which data feed answered.
+  per-sector momentum, the per-sector trend test, equity, cash, positions at run start,
+  the orders, and which data feed answered.
 - **`state.json`** — committed. What the next run needs to know: the last traded signal
   month, the orders it submitted (so the following run can confirm the fills), and any
   deferral.
+
+### The signal is recorded every run, not only on rebalance days
+
+The strategy trades once a month, so for roughly twenty of every twenty-one runs there is
+nothing to do. Those runs still fetch the bars and compute the full decision — the
+momentum of all nine sectors, each one's trend test, the resulting top-3 and target
+weights — and write it to the log without acting on it. `rebalance_day` stays `False`
+and no order is ever built, so this changes what is recorded and nothing about what is
+traded.
+
+The reason is that the outcome columns are silent when the strategy is idle. Between a
+cold start and the first trading day of the next month the account is flat, and `equity`
+repeats the same opening balance every day; that stretch of rows says only "still
+waiting". The signal columns turn the same rows into a daily series that can be diffed
+against the backtest's decision log before a single fill exists, and a ranking that drifts
+from the reference shows up on the day it drifts rather than at the next rebalance.
+
+Two properties keep this from touching the trading path. The bars are fetched **once** and
+the rebalance, when there is one, is computed from that same read — so the row records
+the decision that was executed, not a second look at the data taken moments later. And an
+observation is allowed to fail: if the data feed is unavailable on a non-rebalance day the
+run notes `signal not observed: …` and reports the action it actually took, because a
+day with nothing to trade must not be able to go red over telemetry. On a rebalance day
+the same failure is still a hard `ERROR`.
+
+`momentum` and `trend_ok` were added to `LOG_FIELDS` after the log already had rows in it,
+so `append_log()` rewrites a file whose header is narrower than the current one, padding
+the earlier rows. Appending wide rows under a narrow header would still parse — which
+is exactly why it would have gone unnoticed until someone read the series back.
 - **The run summary** — rendered into the Actions run page (`$GITHUB_STEP_SUMMARY`), the
   notification issue, and a 90-day artifact with the raw `run_result.json`.
 

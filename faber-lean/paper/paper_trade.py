@@ -69,8 +69,9 @@ CASH_BUFFER = 0.0025
 
 LOG_FIELDS = [
     "ts_utc", "ts_et", "action", "detail", "trading_day", "rebalance_day",
-    "signal_month", "ranked", "skipped", "target_weights", "equity", "cash",
-    "positions_before", "orders", "data_feed", "notes",
+    "signal_month", "ranked", "skipped", "target_weights", "momentum",
+    "trend_ok", "equity", "cash", "positions_before", "orders", "data_feed",
+    "notes",
 ]
 
 
@@ -84,6 +85,8 @@ class RunResult:
     ranked: list = field(default_factory=list)
     skipped: list = field(default_factory=list)
     target_weights: dict = field(default_factory=dict)
+    momentum: dict = field(default_factory=dict)
+    trend_ok: dict = field(default_factory=dict)
     orders: list = field(default_factory=list)
     fills: list = field(default_factory=list)
     equity: float = 0.0
@@ -119,9 +122,15 @@ def save_state(path: str, state: dict) -> None:
 
 
 def append_log(path: str, result: RunResult, now_utc: datetime) -> None:
-    """Append one row per run. Header is written only when the file is new."""
+    """Append one row per run. Header is written only when the file is new.
+
+    A log written under an older LOG_FIELDS is rewritten once under the current
+    header with the old rows padded, rather than appended to. Appending wider
+    rows beneath a narrower header produces a file that still parses -- every
+    row simply gains an unnamed tail -- which is exactly why it would go
+    unnoticed until someone tried to read the series months later.
+    """
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
-    new = not os.path.exists(path) or os.path.getsize(path) == 0
     row = {
         "ts_utc": now_utc.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "ts_et": now_utc.astimezone(ET).strftime("%Y-%m-%d %H:%M:%S %Z"),
@@ -135,6 +144,10 @@ def append_log(path: str, result: RunResult, now_utc: datetime) -> None:
         "target_weights": json.dumps(
             {k: round(v, 6) for k, v in sorted(result.target_weights.items())}
         ),
+        "momentum": json.dumps(
+            {k: round(v, 6) for k, v in sorted(result.momentum.items())}
+        ),
+        "trend_ok": json.dumps(dict(sorted(result.trend_ok.items()))),
         "equity": f"{result.equity:.2f}",
         "cash": f"{result.cash:.2f}",
         "positions_before": json.dumps(dict(sorted(result.positions_before.items()))),
@@ -142,9 +155,26 @@ def append_log(path: str, result: RunResult, now_utc: datetime) -> None:
         "data_feed": result.data_feed,
         "notes": " | ".join(result.notes),
     }
+    header, existing = None, []
+    if os.path.exists(path) and os.path.getsize(path) > 0:
+        with open(path, encoding="utf-8", newline="") as fh:
+            reader = csv.DictReader(fh)
+            header, existing = reader.fieldnames, list(reader)
+
+    if header is not None and header != LOG_FIELDS:
+        with open(path, "w", encoding="utf-8", newline="") as fh:
+            w = csv.DictWriter(fh, fieldnames=LOG_FIELDS)
+            w.writeheader()
+            for old in existing:
+                w.writerow({k: (old.get(k) or "") for k in LOG_FIELDS})
+            w.writerow(row)
+        print(f"log header changed; rewrote {len(existing)} earlier row(s) "
+              f"under the {len(LOG_FIELDS)}-column header")
+        return
+
     with open(path, "a", encoding="utf-8", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=LOG_FIELDS)
-        if new:
+        if header is None:
             w.writeheader()
         w.writerow(row)
 
@@ -210,6 +240,51 @@ def fetch_daily_closes(data_client, now_utc: datetime, result: RunResult):
         return closes
 
     raise RuntimeError(f"no usable data feed for {UNIVERSE}: {last_error}")
+
+
+def observe_signal(data_client, now_utc: datetime, today_et: date,
+                   result: RunResult, required: bool):
+    """Fetch the bars and compute today's signal, whether or not we trade it.
+
+    The signal reads only completed monthly closes, so on all but one day a
+    month it restates a decision already made -- which is the reason to record
+    it rather than a reason not to. A daily row carrying the momentum ranking
+    and the per-sector trend test makes the live series comparable against the
+    backtest's decision log during the weeks before the first fill, when the
+    account is flat and the equity column says nothing at all. It also means a
+    ranking that drifts away from the backtest is visible on the day it drifts
+    instead of at the next rebalance.
+
+    ``required`` separates the two callers. On a rebalance day the signal is
+    load-bearing and a data failure must surface as an ERROR. On an observation
+    day it is telemetry: record the failure as a note and let the run report the
+    action it actually took. Observing must never be able to fail a run that
+    was not going to trade anyway.
+
+    Returns ``(closes, decision)``, or ``(None, None)`` when an unrequired
+    observation could not be made.
+    """
+    try:
+        closes = fetch_daily_closes(data_client, now_utc, result)
+    except Exception as exc:  # noqa: BLE001 - see ``required`` above
+        if required:
+            raise
+        result.note(f"signal not observed: {type(exc).__name__}: {exc}")
+        return None, None
+
+    missing = [s for s in UNIVERSE if s not in closes.columns]
+    if missing:
+        result.note(f"no bars returned for {','.join(missing)}")
+    print(f"bars: {closes.shape[0]} days, {closes.index.min().date()} -> "
+          f"{closes.index.max().date()}, {closes.shape[1]} symbols")
+
+    d: Decision = decide(closes, pd.Timestamp(today_et))
+    result.signal_month, result.ranked, result.skipped = (
+        d.signal_month, d.ranked, d.skipped)
+    result.target_weights = d.weights
+    result.momentum, result.trend_ok = d.momentum, d.trend_ok
+    print(f"signal month {d.signal_month}: ranked={d.ranked} skipped={d.skipped}")
+    return closes, d
 
 
 def sizing_prices(data_client, symbols, closes, result: RunResult) -> dict:
@@ -488,7 +563,9 @@ def render_summary(result: RunResult, now_utc: datetime) -> str:
         lines += [f"**Equity** ${result.equity:,.2f} · **Cash** ${result.cash:,.2f}", ""]
 
     if result.target_weights:
-        lines += ["### Target (signal month " + result.signal_month + ")", "",
+        heading = ("Target" if result.rebalance_day
+                   else "Signal only \u2014 not a rebalance day, nothing traded")
+        lines += [f"### {heading} (signal month {result.signal_month})", "",
                   "| symbol | weight | note |", "|---|---|---|"]
         for sym, w in sorted(result.target_weights.items(),
                              key=lambda kv: -kv[1]):
@@ -588,6 +665,7 @@ def offline_run(args, result: RunResult, now_utc: datetime) -> RunResult:
     result.signal_month, result.ranked, result.skipped = (
         d.signal_month, d.ranked, d.skipped)
     result.target_weights = d.weights
+    result.momentum, result.trend_ok = d.momentum, d.trend_ok
     result.data_feed = f"offline:{os.path.basename(args.offline)}"
     if d.reason:
         result.note(d.reason)
@@ -669,6 +747,14 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
 
     trigger = rebalance_trigger(state, today_et, is_month_start, first_td,
                                 args.force_rebalance)
+
+    # Observe first, act second -- and act on the same read. Computing the
+    # signal once, before the branch, is what puts a ranking in the log on the
+    # days we do not trade; reusing it below is what guarantees the row records
+    # the decision that was actually executed rather than a second look at the
+    # data taken moments later.
+    closes, d = observe_signal(data, now_utc, today_et, result, trigger.due)
+
     if not trigger.due:
         result.action = trigger.action
         result.detail = f"{trigger.reason}; holding {len(current)} position(s)"
@@ -683,18 +769,6 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
                     "verified one")
         result.notify = True
 
-    closes = fetch_daily_closes(data, now_utc, result)
-    missing = [s for s in UNIVERSE if s not in closes.columns]
-    if missing:
-        result.note(f"no bars returned for {','.join(missing)}")
-    print(f"bars: {closes.shape[0]} days, {closes.index.min().date()} -> "
-          f"{closes.index.max().date()}, {closes.shape[1]} symbols")
-
-    d: Decision = decide(closes, pd.Timestamp(today_et))
-    result.signal_month, result.ranked, result.skipped = (
-        d.signal_month, d.ranked, d.skipped)
-    result.target_weights = d.weights
-
     if not d.weights:
         result.action = "SKIPPED"
         result.detail = f"no tradeable signal: {d.reason}"
@@ -702,8 +776,6 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
         result.notify = True
         result.note(d.reason)
         return result
-
-    print(f"signal month {d.signal_month}: ranked={d.ranked} skipped={d.skipped}")
 
     prices = sizing_prices(data, sorted(d.weights), closes, result)
     targets = whole_share_targets(d.weights, result.equity, prices, args.cash_buffer)

@@ -7,9 +7,12 @@ runs locally.
 
 from __future__ import annotations
 
+import csv
+import io
+import json
 import os
 import sys
-from datetime import date
+from datetime import date, datetime, timezone
 
 import pytest
 
@@ -21,6 +24,7 @@ from paper_trade import (  # noqa: E402
     CLS_CUTOFF_ET,
     LOG_FIELDS,
     RunResult,
+    append_log,
     plan_orders,
     rebalance_trigger,
     render_summary,
@@ -95,6 +99,92 @@ def test_log_fields_cover_every_written_key():
     assert len(LOG_FIELDS) == len(set(LOG_FIELDS))
     for required in ("ts_utc", "action", "signal_month", "orders", "equity"):
         assert required in LOG_FIELDS
+
+
+def test_log_carries_the_signal_not_just_the_outcome():
+    """The daily row has to be readable as a signal series on its own.
+
+    Before the observation change the log recorded only what the account did,
+    which on a non-rebalance day is nothing. These two columns are what make a
+    month of idle rows worth keeping.
+    """
+    for required in ("momentum", "trend_ok"):
+        assert required in LOG_FIELDS
+
+
+def _write_row(path, **overrides):
+    result = RunResult()
+    for k, v in overrides.items():
+        setattr(result, k, v)
+    append_log(path, result, datetime(2026, 8, 25, 15, 0, tzinfo=timezone.utc))
+
+
+def _read(path):
+    with io.open(path, encoding="utf-8", newline="") as fh:
+        reader = csv.DictReader(fh)
+        return reader.fieldnames, list(reader)
+
+
+def test_append_log_writes_a_header_once(tmp_path):
+    log = str(tmp_path / "paper_log.csv")
+    _write_row(log, action="SKIPPED")
+    _write_row(log, action="HELD")
+    header, rows = _read(log)
+    assert header == LOG_FIELDS
+    assert [r["action"] for r in rows] == ["SKIPPED", "HELD"]
+
+
+def test_append_log_migrates_a_log_written_under_an_older_header(tmp_path):
+    """A widened LOG_FIELDS must rewrite the file, not append ragged rows.
+
+    Appending an 18-column row under a 16-column header still *parses* -- the
+    extra values land in DictReader's restkey -- so nothing would fail until
+    someone read the series back months later and found the columns misaligned.
+    """
+    log = str(tmp_path / "paper_log.csv")
+    old_fields = [f for f in LOG_FIELDS if f not in ("momentum", "trend_ok")]
+    with io.open(log, "w", encoding="utf-8", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=old_fields)
+        w.writeheader()
+        w.writerow({f: "" for f in old_fields}
+                   | {"ts_utc": "2026-08-24T15:41:43Z", "action": "SKIPPED",
+                      "detail": "cold start, comma, and \"quotes\" preserved"})
+
+    _write_row(log, action="HELD", momentum={"XLK": 0.34}, trend_ok={"XLK": True})
+
+    header, rows = _read(log)
+    assert header == LOG_FIELDS
+    assert len(rows) == 2
+    # the earlier row survives verbatim and is padded, not dropped
+    assert rows[0]["ts_utc"] == "2026-08-24T15:41:43Z"
+    assert rows[0]["detail"] == 'cold start, comma, and "quotes" preserved'
+    assert rows[0]["momentum"] == "" and rows[0]["trend_ok"] == ""
+    # and the new row actually carries the new columns
+    assert json.loads(rows[1]["momentum"]) == {"XLK": 0.34}
+    assert json.loads(rows[1]["trend_ok"]) == {"XLK": True}
+
+    # a subsequent append is a plain append, not a second rewrite
+    _write_row(log, action="REBALANCED")
+    header, rows = _read(log)
+    assert header == LOG_FIELDS
+    assert [r["action"] for r in rows] == ["SKIPPED", "HELD", "REBALANCED"]
+
+
+def test_summary_does_not_read_as_a_trade_on_an_observation_day():
+    """The same target table appears whether or not we traded; say which."""
+    now = datetime(2026, 8, 25, 15, 0, tzinfo=timezone.utc)
+    weights = {"XLE": 1 / 3, "XLK": 1 / 3, "XLV": 1 / 3}
+
+    observed = render_summary(
+        RunResult(action="SKIPPED", rebalance_day=False, signal_month="2026-07",
+                  ranked=["XLE", "XLK", "XLV"], target_weights=weights), now)
+    traded = render_summary(
+        RunResult(action="REBALANCED", rebalance_day=True, signal_month="2026-08",
+                  ranked=["XLE", "XLK", "XLV"], target_weights=weights), now)
+
+    assert "nothing traded" in observed
+    assert "nothing traded" not in traded
+    assert "### Target (signal month 2026-08)" in traded
 
 
 def test_summary_renders_for_every_action():
