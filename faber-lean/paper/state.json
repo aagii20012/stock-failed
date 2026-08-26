@@ -1,5 +1,47 @@
 {
-  "last_action": "SKIPPED",
-  "last_run_utc": "2026-08-25T15:44:55Z",
+  "last_action": "REBALANCED",
+  "last_rebalance_date": "2026-08-26",
+  "last_rebalance_signal_month": "2026-07",
+  "last_run_utc": "2026-08-26T14:42:01Z",
+  "last_target_weights": {
+    "XLE": 0.3333333333333333,
+    "XLK": 0.3333333333333333,
+    "XLV": 0.3333333333333333
+  },
+  "submitted_orders": [
+    {
+      "client_order_id": "faber-2026-08-26-XLE-buy",
+      "have": 0,
+      "order_id": "71476dcc-c1e6-451d-ac0b-cd87bcefea48",
+      "qty": 531,
+      "side": "buy",
+      "status": "pending_new",
+      "symbol": "XLE",
+      "tif": "cls",
+      "want": 531
+    },
+    {
+      "client_order_id": "faber-2026-08-26-XLK-buy",
+      "have": 0,
+      "order_id": "56e167f6-53da-4c0f-b1e8-27c9d6ba26b4",
+      "qty": 182,
+      "side": "buy",
+      "status": "pending_new",
+      "symbol": "XLK",
+      "tif": "cls",
+      "want": 182
+    },
+    {
+      "client_order_id": "faber-2026-08-26-XLV-buy",
+      "have": 0,
+      "order_id": "211318a7-1e28-48b8-8af1-1d316e3a2102",
+      "qty": 190,
+      "side": "buy",
+      "status": "pending_new",
+      "symbol": "XLV",
+      "tif": "cls",
+      "want": 190
+    }
+  ],
   "version": 1
 }
