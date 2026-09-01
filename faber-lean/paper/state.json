@@ -1,8 +1,8 @@
 {
-  "last_action": "HELD",
-  "last_rebalance_date": "2026-08-26",
-  "last_rebalance_signal_month": "2026-07",
-  "last_run_utc": "2026-08-31T20:42:41Z",
+  "last_action": "REBALANCED",
+  "last_rebalance_date": "2026-09-01",
+  "last_rebalance_signal_month": "2026-08",
+  "last_run_utc": "2026-09-01T18:14:57Z",
   "last_target_weights": {
     "XLE": 0.3333333333333333,
     "XLK": 0.3333333333333333,
@@ -10,37 +10,37 @@
   },
   "submitted_orders": [
     {
-      "client_order_id": "faber-2026-08-26-XLE-buy",
+      "client_order_id": "faber-2026-09-01-XLE-buy",
       "have": 0,
-      "order_id": "71476dcc-c1e6-451d-ac0b-cd87bcefea48",
-      "qty": 531,
+      "order_id": "f6e9cfb2-d044-4133-8075-4a43444a44a9",
+      "qty": 513,
       "side": "buy",
       "status": "pending_new",
       "symbol": "XLE",
       "tif": "cls",
-      "want": 531
+      "want": 513
     },
     {
-      "client_order_id": "faber-2026-08-26-XLK-buy",
+      "client_order_id": "faber-2026-09-01-XLK-buy",
       "have": 0,
-      "order_id": "56e167f6-53da-4c0f-b1e8-27c9d6ba26b4",
-      "qty": 182,
+      "order_id": "41be23b3-3636-4289-ab44-8e0a32e20164",
+      "qty": 180,
       "side": "buy",
       "status": "pending_new",
       "symbol": "XLK",
       "tif": "cls",
-      "want": 182
+      "want": 180
     },
     {
-      "client_order_id": "faber-2026-08-26-XLV-buy",
-      "have": 0,
-      "order_id": "211318a7-1e28-48b8-8af1-1d316e3a2102",
-      "qty": 190,
+      "client_order_id": "faber-2026-09-01-XLV-buy",
+      "have": 143,
+      "order_id": "dc33dcaf-2ade-4b9c-afc1-f9bbdaef3713",
+      "qty": 50,
       "side": "buy",
       "status": "pending_new",
       "symbol": "XLV",
       "tif": "cls",
-      "want": 190
+      "want": 193
     }
   ],
   "version": 1
