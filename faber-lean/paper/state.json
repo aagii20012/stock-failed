@@ -2,7 +2,7 @@
   "last_action": "HELD",
   "last_rebalance_date": "2026-09-01",
   "last_rebalance_signal_month": "2026-08",
-  "last_run_utc": "2026-09-09T18:22:43Z",
+  "last_run_utc": "2026-09-10T18:12:14Z",
   "last_target_weights": {
     "XLE": 0.3333333333333333,
     "XLK": 0.3333333333333333,
