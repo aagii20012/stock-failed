@@ -1,46 +1,83 @@
 {
-  "last_action": "HELD",
-  "last_rebalance_date": "2026-09-01",
+  "last_action": "REBALANCED",
+  "last_fills": [
+    {
+      "filled_at": "2026-09-01T19:59:57.959616+00:00",
+      "filled_avg_price": "64.79",
+      "filled_qty": "485",
+      "qty": 513,
+      "side": "buy",
+      "status": "expired",
+      "symbol": "XLE"
+    },
+    {
+      "filled_at": "2026-09-01T19:59:57.129461+00:00",
+      "filled_avg_price": "183.63",
+      "filled_qty": "49",
+      "qty": 180,
+      "side": "buy",
+      "status": "expired",
+      "symbol": "XLK"
+    },
+    {
+      "filled_at": "",
+      "filled_avg_price": "",
+      "filled_qty": "0",
+      "qty": 50,
+      "side": "buy",
+      "status": "expired",
+      "symbol": "XLV"
+    }
+  ],
+  "last_rebalance_date": "2026-09-11",
   "last_rebalance_signal_month": "2026-08",
-  "last_run_utc": "2026-09-10T18:12:14Z",
+  "last_run_utc": "2026-09-11T18:15:44Z",
+  "last_share_targets": {
+    "XLE": 506,
+    "XLK": 173,
+    "XLV": 198
+  },
   "last_target_weights": {
     "XLE": 0.3333333333333333,
     "XLK": 0.3333333333333333,
     "XLV": 0.3333333333333333
   },
+  "repair_attempts": {
+    "2026-08": 1
+  },
   "submitted_orders": [
     {
-      "client_order_id": "faber-2026-09-01-XLE-buy",
-      "have": 0,
-      "order_id": "f6e9cfb2-d044-4133-8075-4a43444a44a9",
-      "qty": 513,
+      "client_order_id": "faber-2026-09-11-XLE-buy",
+      "have": 485,
+      "order_id": "faf95416-440f-45a9-8bbe-d97b7e2006c9",
+      "qty": 21,
       "side": "buy",
       "status": "pending_new",
       "symbol": "XLE",
       "tif": "cls",
-      "want": 513
+      "want": 506
     },
     {
-      "client_order_id": "faber-2026-09-01-XLK-buy",
-      "have": 0,
-      "order_id": "41be23b3-3636-4289-ab44-8e0a32e20164",
-      "qty": 180,
+      "client_order_id": "faber-2026-09-11-XLK-buy",
+      "have": 49,
+      "order_id": "4e4c680a-5c2a-4d13-b4db-053b59603232",
+      "qty": 124,
       "side": "buy",
       "status": "pending_new",
       "symbol": "XLK",
       "tif": "cls",
-      "want": 180
+      "want": 173
     },
     {
-      "client_order_id": "faber-2026-09-01-XLV-buy",
+      "client_order_id": "faber-2026-09-11-XLV-buy",
       "have": 143,
-      "order_id": "dc33dcaf-2ade-4b9c-afc1-f9bbdaef3713",
-      "qty": 50,
+      "order_id": "5ed28352-55bd-4808-b951-b21b4721349b",
+      "qty": 55,
       "side": "buy",
       "status": "pending_new",
       "symbol": "XLV",
       "tif": "cls",
-      "want": 193
+      "want": 198
     }
   ],
   "version": 1
