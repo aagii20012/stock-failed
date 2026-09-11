@@ -67,11 +67,33 @@ CLS_CUTOFF_ET = (15, 45)
 # LEAN's Settings.FreePortfolioValuePercentage default, kept for parity.
 CASH_BUFFER = 0.0025
 
+# Held back from *available funds* at submission time, on top of CASH_BUFFER.
+# The two guard different things and neither substitutes for the other.
+# CASH_BUFFER shapes the target: it is a property of the strategy and matches
+# LEAN, so it must not move. This one shapes the order: sizing happens off a
+# midday IEX print and the order fills at a close nobody has seen yet, so a
+# basket sized to 99.9% of cash is unfundable the moment the close ticks up.
+# The 2026-09-01 rebalance submitted $75,087 of buys against $75,180.91 of
+# cash -- $94 of headroom, 0.125% -- and all three orders expired partly
+# filled.
+SUBMIT_CASH_MARGIN = 0.02
+
+# An unfinished rebalance is one where the position we hold is not the position
+# we sized. Expressed as a share-count miss relative to target so it does not
+# need prices: whole-share flooring alone can miss by a share, and a symbol at
+# 98% of its target is not worth a round trip.
+REPAIR_DRIFT = 0.02
+
+# ...but a residual that cannot fill will not fill on the fifth attempt either,
+# and re-submitting it daily would be a rejection loop that also drags the fill
+# bar further from the backtest's every day. Give up, and say so loudly.
+MAX_REPAIR_ATTEMPTS = 3
+
 LOG_FIELDS = [
     "ts_utc", "ts_et", "action", "detail", "trading_day", "rebalance_day",
     "signal_month", "ranked", "skipped", "target_weights", "momentum",
-    "trend_ok", "equity", "cash", "positions_before", "orders", "data_feed",
-    "notes",
+    "trend_ok", "equity", "cash", "buying_power", "positions_before", "orders",
+    "fills", "data_feed", "notes",
 ]
 
 
@@ -91,6 +113,7 @@ class RunResult:
     fills: list = field(default_factory=list)
     equity: float = 0.0
     cash: float = 0.0
+    buying_power: float = 0.0
     positions_before: dict = field(default_factory=dict)
     trading_day: bool = False
     rebalance_day: bool = False
@@ -150,8 +173,14 @@ def append_log(path: str, result: RunResult, now_utc: datetime) -> None:
         "trend_ok": json.dumps(dict(sorted(result.trend_ok.items()))),
         "equity": f"{result.equity:.2f}",
         "cash": f"{result.cash:.2f}",
+        "buying_power": f"{result.buying_power:.2f}",
         "positions_before": json.dumps(dict(sorted(result.positions_before.items()))),
         "orders": json.dumps(result.orders),
+        # What the *previous* run's orders actually did. This is looked up on
+        # every run and used to be rendered into the issue body and nowhere
+        # else -- and a HELD day posts no issue, so the fill detail for the
+        # 2026-09-01 rebalance was resolved on 2026-09-02 and discarded.
+        "fills": json.dumps(result.fills),
         "data_feed": result.data_feed,
         "notes": " | ".join(result.notes),
     }
@@ -347,10 +376,59 @@ class Trigger:
     action: str = ""        # set only when not due: HELD or SKIPPED
     headline: str = ""      # set only when not due
     catch_up: bool = False  # due, but later than the backtest's rebalance day
+    repair: bool = False    # due only to finish an incomplete rebalance
+    exhausted: bool = False # not due: the repair gave up, needs a human
+
+
+def unfinished_rebalance(state: dict, positions) -> dict:
+    """Symbols where the position we hold is not the position we sized.
+
+    ``last_share_targets`` is the integer basket the last rebalance computed
+    and submitted for; ``positions`` is what the account holds now. Absent a
+    broker rejection the two agree, because the orders were exactly their
+    difference -- so a disagreement means an order did not do what it said.
+
+    Both 2026 rebalances disagreed. On 2026-09-01 the account ended XLE
+    485/513, XLK 49/180 and XLV 143/193 with a third of the book in cash, and
+    nothing noticed, because the trigger keys on *whether we traded* rather
+    than on *what we hold*.
+
+    A symbol counts as missed when the gap clears ``REPAIR_DRIFT`` of the
+    larger side. Whole-share flooring alone can miss by a share, and a holding
+    at 99% of target is not worth a round trip. Anything held that the target
+    does not name is missed outright: the target is the whole portfolio, not a
+    shortlist, so a leftover position is a miss of its entire size.
+    """
+    if positions is None:
+        return {}
+
+    targets = state.get("last_share_targets")
+    if targets:
+        symbols = set(targets) | set(positions)
+    else:
+        # A state written before ``last_share_targets`` existed -- which is the
+        # state in flight right now, and the one holding the broken position.
+        # ``submitted_orders`` already carries a ``want`` per symbol, so the
+        # shortfall is recoverable without hand-editing the file. What is not
+        # recoverable is the symbols that needed no order and so were never
+        # written down, so this narrower form checks only the names it has and
+        # cannot conclude anything about a leftover position.
+        targets = {o["symbol"]: int(o.get("want", 0))
+                   for o in (state.get("submitted_orders") or []) if o.get("symbol")}
+        symbols = set(targets)
+    if not targets:
+        return {}
+
+    missed = {}
+    for symbol in sorted(symbols):
+        want, have = int(targets.get(symbol, 0)), int(positions.get(symbol, 0))
+        if abs(have - want) > max(want, have) * REPAIR_DRIFT:
+            missed[symbol] = {"have": have, "want": want}
+    return missed
 
 
 def rebalance_trigger(state: dict, today_et: date, is_month_start: bool,
-                      first_td, force: bool) -> Trigger:
+                      first_td, force: bool, positions=None) -> Trigger:
     """Pure trigger decision -- no broker, no clock, no network.
 
     Keyed on the *signal month* (the last completed month) rather than on the
@@ -369,6 +447,33 @@ def rebalance_trigger(state: dict, today_et: date, is_month_start: bool,
         return Trigger(True, "forced by workflow input")
 
     if last_traded == signal_month_due:
+        # Traded is not the same as filled. Check what we hold before calling
+        # the month done -- this branch used to return HELD unconditionally,
+        # which is what let a rebalance that filled a quarter of its basket sit
+        # untouched until the next month's first trading day.
+        missed = unfinished_rebalance(state, positions)
+        gaps = ", ".join(f"{s} {m['have']}/{m['want']}" for s, m in missed.items())
+        attempts = int((state.get("repair_attempts") or {}).get(signal_month_due, 0))
+
+        if missed and attempts < MAX_REPAIR_ATTEMPTS:
+            return Trigger(
+                True,
+                f"repair: the {signal_month_due} rebalance on "
+                f"{state.get('last_rebalance_date')} did not reach its target "
+                f"({gaps}); attempt {attempts + 1} of {MAX_REPAIR_ATTEMPTS}",
+                catch_up=True,
+                repair=True,
+            )
+        if missed:
+            return Trigger(
+                False,
+                f"the {signal_month_due} rebalance is still off target ({gaps}) "
+                f"after {attempts} repair attempt(s); giving up until the next "
+                f"rebalance -- the broker is not filling these orders",
+                action="HELD",
+                headline=f"Faber: {signal_month_due} rebalance STALLED off target",
+                exhausted=True,
+            )
         return Trigger(
             False,
             f"the {signal_month_due} signal was already traded on "
@@ -448,6 +553,68 @@ def plan_orders(targets: dict, current: dict) -> list:
         })
     orders.sort(key=lambda o: (o["side"] != "sell", o["symbol"]))
     return orders
+
+
+def fit_orders_to_cash(orders: list, prices: dict, cash: float, margin: float,
+                       result: RunResult = None) -> list:
+    """Trim buys so the basket cannot outrun the money behind it.
+
+    ``whole_share_targets`` sizes against *equity*, which is the right basis --
+    the target is a whole portfolio and a position about to be sold is part of
+    it. But the orders are funded out of *cash plus whatever the sells raise*,
+    and nothing was checking that. On 2026-09-01 it sent $75,087 of buys
+    against $75,180.91 of cash: arithmetically fine, and $94 of headroom
+    against a close price nobody had seen yet.
+
+    So this is not the strategy's cash buffer -- ``CASH_BUFFER`` is that, it
+    belongs to the target, and it stays at LEAN's value. This is a submission
+    guard, and it only ever binds when the basket is within ``margin`` of the
+    available funds.
+
+    Trimming is proportional, so an equal-weight basket stays equal-weight
+    rather than filling the alphabetically-first name and starving the last.
+    ``want`` is rewritten on every order it touches: the trimmed basket is the
+    one that gets recorded as the target, or ``unfinished_rebalance`` would
+    spend the rest of the month chasing shares that were never affordable.
+    """
+    buys = [o for o in orders if o["side"] == "buy"]
+    if not buys:
+        return orders
+
+    def notional(order):
+        return order["qty"] * float(prices.get(order["symbol"], 0.0) or 0.0)
+
+    unpriced = sorted({o["symbol"] for o in orders if not prices.get(o["symbol"])})
+    if unpriced and result is not None:
+        result.note(f"no sizing price for {','.join(unpriced)}; counted as $0 "
+                    "when fitting the basket to available cash")
+
+    proceeds = sum(notional(o) for o in orders if o["side"] == "sell")
+    wanted = sum(notional(o) for o in buys)
+    allowed = (cash + proceeds) * (1.0 - margin)
+
+    if wanted <= allowed or wanted <= 0:
+        return orders
+
+    scale = allowed / wanted
+    fitted = []
+    for order in orders:
+        if order["side"] != "buy":
+            fitted.append(order)
+            continue
+        qty = int(math.floor(order["qty"] * scale))
+        if qty <= 0:
+            continue
+        fitted.append(dict(order, qty=qty, want=order["have"] + qty))
+
+    if result is not None:
+        result.note(
+            f"trimmed buys from ${wanted:,.0f} to ${sum(notional(o) for o in fitted if o['side'] == 'buy'):,.0f} "
+            f"to fit ${cash:,.0f} cash + ${proceeds:,.0f} of sells less a "
+            f"{margin:.1%} margin; sized targets needed more than the account "
+            "can fund"
+        )
+    return fitted
 
 
 def submit_orders(trading_client, orders: list, today_et: date, tif_name: str,
@@ -531,10 +698,16 @@ def check_previous_orders(trading_client, state: dict, result: RunResult) -> lis
 
     unfilled = [f for f in fills if f["status"] not in ("filled",)]
     if unfilled:
+        # Say *how much* filled, not just that something did not. "XLK expired"
+        # and "XLK expired 49/180" are the same event and only one of them is a
+        # diagnosis; the run that first read the 2026-09-01 fills logged the
+        # former and threw the quantities away.
         result.note(
             f"{len(unfilled)}/{len(fills)} order(s) from "
             f"{state.get('last_rebalance_date')} are not filled: "
-            + ", ".join(f"{f['symbol']} {f['status']}" for f in unfilled)
+            + ", ".join(f"{f['symbol']} {f['status']} "
+                        f"{f.get('filled_qty', '?')}/{f['qty']}"
+                        for f in unfilled)
         )
     else:
         result.note(f"all {len(fills)} order(s) from "
@@ -590,9 +763,11 @@ def render_summary(result: RunResult, now_utc: datetime) -> str:
 
     if result.fills:
         lines += ["### Previous orders", "",
-                  "| symbol | side | qty | status | filled @ |", "|---|---|---|---|---|"]
+                  "| symbol | side | filled | status | filled @ |",
+                  "|---|---|---|---|---|"]
         for f in result.fills:
-            lines.append(f"| {f['symbol']} | {f['side']} | {f['qty']} | "
+            lines.append(f"| {f['symbol']} | {f['side']} | "
+                         f"{f.get('filled_qty', '?')}/{f['qty']} | "
                          f"{f['status']} | {f.get('filled_avg_price', '')} |")
         lines.append("")
 
@@ -718,6 +893,12 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
     account = trading.get_account()
     result.equity = float(account.equity)
     result.cash = float(account.cash)
+    # Buying power is the number the broker actually checks an order against,
+    # and it is not cash: pending orders reserve against it. Logging it is what
+    # will settle whether the expiring market-on-close orders are a funding
+    # problem or a fill-simulation one -- from the log alone, today, it is not
+    # decidable either way.
+    result.buying_power = float(getattr(account, "buying_power", 0) or 0)
     print(f"account {account.account_number[-4:].rjust(8, '*')} "
           f"status={account.status} equity=${result.equity:,.2f}")
 
@@ -734,6 +915,8 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
 
     # Confirm what last run's orders did before deciding anything new.
     result.fills = check_previous_orders(trading, state, result)
+    if result.fills:
+        state["last_fills"] = result.fills
 
     today_et = now_utc.astimezone(ET).date()
     is_trading_day, is_month_start, first_td = calendar_facts(trading, today_et)
@@ -746,7 +929,7 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
         return result
 
     trigger = rebalance_trigger(state, today_et, is_month_start, first_td,
-                                args.force_rebalance)
+                                args.force_rebalance, current)
 
     # Observe first, act second -- and act on the same read. Computing the
     # signal once, before the branch, is what puts a ranking in the log on the
@@ -759,6 +942,12 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
         result.action = trigger.action
         result.detail = f"{trigger.reason}; holding {len(current)} position(s)"
         result.headline = trigger.headline
+        # A stalled repair needs a human, so it has to reach one -- but once,
+        # not once a day for the rest of the month. HELD posts no issue on its
+        # own, which is exactly why the condition went unseen the first time.
+        if trigger.exhausted and state.get("repair_stalled_month") != d.signal_month:
+            result.notify = True
+            state["repair_stalled_month"] = d.signal_month
         return result
 
     result.rebalance_day = True
@@ -777,9 +966,17 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
         result.note(d.reason)
         return result
 
-    prices = sizing_prices(data, sorted(d.weights), closes, result)
+    # Price what is held as well as what is wanted: a rotation is funded by its
+    # own sells, so fitting the buys to available cash needs a value for the
+    # positions being liquidated, not just for the ones being bought.
+    prices = sizing_prices(data, sorted(set(d.weights) | set(current)), closes, result)
     targets = whole_share_targets(d.weights, result.equity, prices, args.cash_buffer)
-    orders = plan_orders(targets, current)
+    orders = fit_orders_to_cash(plan_orders(targets, current), prices, result.cash,
+                                args.submit_cash_margin, result)
+    # The basket we can actually pay for is the basket we are aiming at, so it
+    # is the one recorded as the target and the one the repair check measures
+    # against tomorrow.
+    targets = {**targets, **{o["symbol"]: o["want"] for o in orders}}
 
     if not orders:
         result.action = "HELD"
@@ -791,8 +988,10 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
         state["last_rebalance_date"] = today_et.isoformat()
         state["last_rebalance_signal_month"] = d.signal_month
         state["last_target_weights"] = d.weights
+        state["last_share_targets"] = targets
         state["submitted_orders"] = []
         state.pop("pending_rebalance", None)
+        state.pop("repair_attempts", None)
         return result
 
     now_et = now_utc.astimezone(ET)
@@ -846,11 +1045,28 @@ def live_run(args, result: RunResult, now_utc: datetime, state: dict) -> RunResu
     state["last_rebalance_date"] = today_et.isoformat()
     state["last_rebalance_signal_month"] = d.signal_month
     state["last_target_weights"] = d.weights
+    state["last_share_targets"] = targets
     state["submitted_orders"] = accepted
     state.pop("pending_rebalance", None)
+    if trigger.repair:
+        # Count the attempt, not the day: a repair that submits nothing never
+        # got a chance to fail, and one that submits and misses again must not
+        # be free to retry forever.
+        attempts = dict(state.get("repair_attempts") or {})
+        attempts[d.signal_month] = attempts.get(d.signal_month, 0) + 1
+        state["repair_attempts"] = {d.signal_month: attempts[d.signal_month]}
+    else:
+        state.pop("repair_attempts", None)
+        state.pop("repair_stalled_month", None)
     if rejected:
+        # This used to say "the next rebalance will re-diff toward target",
+        # which was true and useless: the next rebalance is up to a month away,
+        # and a basket rejected on the 1st spent September a third in cash on
+        # the strength of that sentence. The repair check now closes the gap in
+        # a day, so say which mechanism is actually going to do it.
         result.note(f"{len(rejected)} order(s) were rejected and are NOT part of "
-                    "the position; the next rebalance will re-diff toward target")
+                    "the position; the next run will see the shortfall against "
+                    "the recorded target and repair it")
     return result
 
 
@@ -867,6 +1083,9 @@ def main() -> int:
                     help="pretend this is the rebalance date (offline mode only)")
     ap.add_argument("--cash-buffer", type=float, default=CASH_BUFFER,
                     help=f"fraction of equity left uninvested (default {CASH_BUFFER})")
+    ap.add_argument("--submit-cash-margin", type=float, default=SUBMIT_CASH_MARGIN,
+                    help="fraction of available funds held back when fitting the "
+                         f"basket to cash (default {SUBMIT_CASH_MARGIN})")
     ap.add_argument("--log", default=os.path.join(HERE, "paper_log.csv"))
     ap.add_argument("--state", default=os.path.join(HERE, "state.json"))
     ap.add_argument("--result", default=os.path.join(HERE, "run_result.json"))

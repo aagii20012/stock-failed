@@ -136,11 +136,24 @@ Three places, deliberately overlapping:
 
 - **`paper_log.csv`** — one committed row per run, every run. This is the durable history.
   Columns include the action, the signal month, the ranking, the skips, target weights,
-  per-sector momentum, the per-sector trend test, equity, cash, positions at run start,
-  the orders, and which data feed answered.
+  per-sector momentum, the per-sector trend test, equity, cash, buying power, positions at
+  run start, the orders submitted, **what the previous run's orders actually filled**, and
+  which data feed answered.
 - **`state.json`** — committed. What the next run needs to know: the last traded signal
-  month, the orders it submitted (so the following run can confirm the fills), and any
-  deferral.
+  month, the integer share basket it sized (`last_share_targets`), the orders it submitted
+  (so the following run can confirm the fills), those fills, any deferral, and the count of
+  repair attempts against the current signal month.
+
+### Fills are a column, not just a sentence in an issue
+
+Every run looks up what the previous run's orders did. For the first two months that
+lookup was rendered into the notification issue and dropped on the floor — and a `HELD`
+run posts no issue, so the answer for the 2026-09-01 rebalance was resolved by the
+2026-09-02 run and written nowhere. The `fills` column now carries the per-order status,
+filled quantity and average price into the committed log, and the notes say `XLK expired
+49/180` rather than `XLK expired`. The `buying_power` column is there for the same reason:
+it is the number the broker checks an order against, it is not cash, and without it the
+question below is not answerable from the record.
 
 ### The signal is recorded every run, not only on rebalance days
 
@@ -182,7 +195,7 @@ blanket add here has swept unreviewed files into a commit before.
 | Action | Meaning | Notifies |
 |---|---|---|
 | `REBALANCED` | Orders computed and submitted (or, under `--dry-run`, computed only) | yes |
-| `HELD` | Rebalance day, but the target is already held — or this month's signal was already traded | on a rebalance day |
+| `HELD` | Rebalance day, but the target is already held — or this month's signal was already traded *and* the position matches what it sized | on a rebalance day, or once when a repair gives up |
 | `SKIPPED` | Not a trading day, not a rebalance day, or no usable signal | only when a rebalance day yielded no signal |
 | `DEFERRED` | Rebalance was due but the run fired after the market-on-close window closed | yes |
 | `ERROR` | Anything raised. The job also fails, so the Actions run shows red | yes |
@@ -203,6 +216,32 @@ a whole month, which the backtest never does. `rebalance_trigger()` instead asks
 - **Cold start, mid-month** → do nothing. Entering on whatever date you happened to deploy
   is an arbitrary entry the backtest never takes, so it is opt-in: dispatch with
   `force_rebalance`, or wait for the 1st.
+
+### ...but traded is not the same as filled
+
+The bullets above were the whole trigger, and between them they contain a hole big enough
+to lose a month in. "Already traded this month's signal → hold" assumed that submitting an
+order and owning the shares were the same event. Twice they were not, and the second time
+cost most of September (see *Auction risk* below).
+
+So the already-traded branch now checks the position before it agrees the month is done.
+`unfinished_rebalance()` compares what is held against `last_share_targets` — the integer
+basket the rebalance actually sized — and anything off by more than `REPAIR_DRIFT` (2%,
+loose enough to ignore whole-share flooring) makes the rebalance due again as a **repair**.
+The repair re-diffs at current prices, so it submits the residual rather than the basket.
+
+Two guards, because a repair loop is its own failure mode:
+
+- **`MAX_REPAIR_ATTEMPTS` (3).** A residual that will not fill on the third try will not
+  fill on the thirtieth, and each attempt drags the fill bar further from the backtest's.
+  After the cap the run holds, reports `STALLED off target`, and notifies **once** — not
+  once a day — so a human sees it without the mailbox becoming noise.
+- **The trimmed basket is the recorded basket.** If the cash fit below cuts an order, the
+  target written to `last_share_targets` is the cut one. Recording the untrimmed number
+  would set the repair chasing shares the account could never afford.
+
+A new month's signal still outranks last month's unfinished business: the month-start
+branch is reached first.
 
 Three independent layers stop a double trade: the `concurrency` group in the workflow, the
 signal-month check above, and a deterministic `client_order_id`
@@ -252,13 +291,49 @@ Scale-dependent: on a $100k paper account a one-third slot is thousands of dolla
 rounding is noise. On a small account it is not — a $2k account cannot express a third of
 itself in whole shares of a $290 ETF without meaningful error.
 
-### 4. Auction risk that the backtest does not model
+**That buffer sizes the target; a second one sizes the order.** `CASH_BUFFER` is applied to
+*equity*, which is the right basis — the target is a whole portfolio, and a position about
+to be sold is part of it. But the orders are paid for out of *cash plus whatever that day's
+sells raise*, and for the first two months nothing reconciled the two. The 2026-09-01 run
+sent $75,087 of buys against $75,180.91 of cash: arithmetically fine, $94 of headroom, and
+a close price nobody had seen yet. `fit_orders_to_cash()` now holds back
+`SUBMIT_CASH_MARGIN` (2%) of available funds and trims the buys proportionally if the
+basket does not fit — proportionally, so an equal-weight basket stays equal-weight instead
+of filling the alphabetically-first name and starving the last. It counts sell proceeds,
+without which a fully-invested account could never rotate again.
 
-LEAN filled every order, always. A real closing-auction order can be rejected, or in
-principle go unfilled, if the symbol is halted or the auction is unbalanced. Alpaca also
-will not let you cancel an MOC order after 15:50 ET. The script records each rejection
-with its reason, keeps going with the rest, and the next rebalance re-diffs toward target
-— so a rejection costs tracking error, not correctness.
+### 4. Auction risk that the backtest does not model — and it is not hypothetical
+
+LEAN filled every order, always. This section used to say that a live MOC order could
+"in principle" go unfilled, and that a rejection therefore "costs tracking error, not
+correctness". Both halves were wrong, and the record says so:
+
+| rebalance | submitted | filled | outcome |
+|---|---|---|---|
+| 2026-08-26 | XLE 531, XLK 182, XLV 190 | XLE 0, XLK 0, XLV 143 @ 173.56 | all three **expired** |
+| 2026-09-01 | XLE 513, XLK 180, XLV 50 | XLE 485, XLK 49, XLV 0 | all three **expired** |
+
+Two for two. After the second, the account held XLE 485/513, XLK **49/180** and XLV
+143/193 with **~35% of equity in cash** against a target of none — and because "already
+traded" meant "done", it sat that way from 2026-09-02 with nothing scheduled to touch it
+before October.
+
+**Why they expire is not yet established.** The obvious explanation does not survive the
+data: buying power was not exhausted, since $34,759.88 went unspent on 2026-09-01. Nor is
+the pattern consistent — the fills degrade in submission order on 2026-09-01
+(94% → 27% → 0%) and in the opposite order on 2026-08-26. The record could not settle it
+either way, because it stored a status string and not a quantity. That is now fixed
+(`fills` and `buying_power` columns above), and the question stays open pending a run that
+reproduces it with the detail captured. Nothing here is premised on an answer:
+
+- The **repair trigger** is cause-agnostic. Whatever expired the order, a portfolio a third
+  in cash should not wait three weeks for the next rebalance.
+- The **cash fit** is a defensive guard, not a diagnosis. It happens to bind: the
+  2026-09-01 basket committed 99.87% of available cash.
+
+If a future run shows the residual failing repeatedly with ample buying power, the answer
+is Alpaca's paper MOC simulation and the fix is a different order type — a `DAY` market
+order near the close, at a small cost in fill-bar fidelity (§1).
 
 ### 5. Dividends and splits are real now
 
@@ -326,7 +401,8 @@ python -m pytest -q                  # both suites
 python test_signal_parity.py         # parity, with the summary report
 ```
 
-Other flags: `--force-rebalance`, `--cash-buffer`, `--log`, `--state`, `--result`.
+Other flags: `--force-rebalance`, `--cash-buffer`, `--submit-cash-margin`, `--log`,
+`--state`, `--result`.
 
 Environment variables read: `ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`, `WEBHOOK_URL`,
 and Actions' own `GITHUB_STEP_SUMMARY`. Presence is checked by name; values are never
