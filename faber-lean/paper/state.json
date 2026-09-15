@@ -1,37 +1,37 @@
 {
-  "last_action": "REBALANCED",
+  "last_action": "HELD",
   "last_fills": [
     {
-      "filled_at": "",
-      "filled_avg_price": "",
-      "filled_qty": "0",
-      "qty": 21,
+      "filled_at": "2026-09-14T19:45:41.983494+00:00",
+      "filled_avg_price": "64.4176",
+      "filled_qty": "25",
+      "qty": 25,
       "side": "buy",
-      "status": "expired",
+      "status": "filled",
       "symbol": "XLE"
     },
     {
-      "filled_at": "",
-      "filled_avg_price": "",
-      "filled_qty": "0",
-      "qty": 124,
+      "filled_at": "2026-09-14T19:45:43.631153+00:00",
+      "filled_avg_price": "184.835591",
+      "filled_qty": "127",
+      "qty": 127,
       "side": "buy",
-      "status": "expired",
+      "status": "filled",
       "symbol": "XLK"
     },
     {
-      "filled_at": "",
-      "filled_avg_price": "",
-      "filled_qty": "0",
-      "qty": 55,
+      "filled_at": "2026-09-14T19:45:41.524408+00:00",
+      "filled_avg_price": "167.762692",
+      "filled_qty": "52",
+      "qty": 52,
       "side": "buy",
-      "status": "expired",
+      "status": "filled",
       "symbol": "XLV"
     }
   ],
   "last_rebalance_date": "2026-09-14",
   "last_rebalance_signal_month": "2026-08",
-  "last_run_utc": "2026-09-14T19:45:38Z",
+  "last_run_utc": "2026-09-15T18:45:40Z",
   "last_share_targets": {
     "XLE": 510,
     "XLK": 176,
