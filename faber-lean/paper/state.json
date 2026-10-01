@@ -1,5 +1,5 @@
 {
-  "last_action": "HELD",
+  "last_action": "DEFERRED",
   "last_fills": [
     {
       "filled_at": "2026-09-14T19:45:41.983494+00:00",
@@ -31,7 +31,7 @@
   ],
   "last_rebalance_date": "2026-09-14",
   "last_rebalance_signal_month": "2026-08",
-  "last_run_utc": "2026-09-30T19:53:17Z",
+  "last_run_utc": "2026-10-01T20:12:13Z",
   "last_share_targets": {
     "XLE": 510,
     "XLK": 176,
@@ -41,6 +41,10 @@
     "XLE": 0.3333333333333333,
     "XLK": 0.3333333333333333,
     "XLV": 0.3333333333333333
+  },
+  "pending_rebalance": {
+    "date": "2026-10-01",
+    "reason": "run fired outside the market-on-close window"
   },
   "repair_attempts": {
     "2026-08": 2
