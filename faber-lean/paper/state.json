@@ -2,7 +2,7 @@
   "last_action": "HELD",
   "last_fills": [
     {
-      "filled_at": "2026-11-02T20:47:27.169604+00:00",
+      "filled_at": "2026-11-02T20:47:27.169605+00:00",
       "filled_avg_price": "67.57",
       "filled_qty": "26",
       "qty": 26,
@@ -11,7 +11,7 @@
       "symbol": "XLE"
     },
     {
-      "filled_at": "2026-11-02T20:47:28.828634+00:00",
+      "filled_at": "2026-11-02T20:47:28.828635+00:00",
       "filled_avg_price": "174.639761",
       "filled_qty": "167",
       "qty": 167,
@@ -40,7 +40,7 @@
   ],
   "last_rebalance_date": "2026-11-02",
   "last_rebalance_signal_month": "2026-10",
-  "last_run_utc": "2026-11-02T23:00:53Z",
+  "last_run_utc": "2026-11-03T20:47:28Z",
   "last_share_targets": {
     "XLB": 630,
     "XLE": 505,
